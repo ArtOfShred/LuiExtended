@@ -5,7 +5,8 @@
 
 -- Main LUI Extended localization
 -- Translation by: <default>
-local strings = {
+local strings =
+{
 
     -- LuiExtended
     LUIE_STRING_ERROR_FONT = "LUI Extended: There was a problem with selecting required font. Falling back to default.",
@@ -207,18 +208,18 @@ local strings = {
     LUIE_STRING_SCB_WINDOWTITLE_PROMINENTDEBUFFS = "Prominent Debuffs",
 
     -- ChatAnnouncements
-    LUIE_STRING_CA_CURRENCY_GOLD = " <<1[Gold/Gold]>>",                                         -- Have to create singular strings here to use to prevent plural quantities from being double s
-    LUIE_STRING_CA_CURRENCY_ALLIANCE_POINT = " <<1[Alliance Point/Alliance Points]>>",          -- Have to create singular strings here to use to prevent plural quantities from being double s
-    LUIE_STRING_CA_CURRENCY_TELVAR_STONE = " <<1[Tel Var Stone/Tel Var Stones]>>",              -- Have to create singular strings here to use to prevent plural quantities from being double s
-    LUIE_STRING_CA_CURRENCY_WRIT_VOUCHER = " <<1[Writ Voucher/Writ Vouchers]>>",                -- Have to create singular strings here to use to prevent plural quantities from being double s
+    LUIE_STRING_CA_CURRENCY_GOLD = " <<1[Gold/Gold]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    LUIE_STRING_CA_CURRENCY_ALLIANCE_POINT = " <<1[Alliance Point/Alliance Points]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    LUIE_STRING_CA_CURRENCY_TELVAR_STONE = " <<1[Tel Var Stone/Tel Var Stones]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    LUIE_STRING_CA_CURRENCY_WRIT_VOUCHER = " <<1[Writ Voucher/Writ Vouchers]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     LUIE_STRING_CA_CURRENCY_TRANSMUTE_CRYSTAL = " <<1[Transmute Crystal/Transmute Crystals]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
-    LUIE_STRING_CA_CURRENCY_EVENT_TICKET = " <<1[Event Ticket/Event Tickets]>>",                -- Have to create singular strings here to use to prevent plural quantities from being double s
-    LUIE_STRING_CA_CURRENCY_CROWN = " <<1[Crown/Crowns]>>",                                     -- Have to create singular strings here to use to prevent plural quantities from being double s
-    LUIE_STRING_CA_CURRENCY_CROWN_GEM = " <<1[Crown Gem/Crown Gems]>>",                         -- Have to create singular strings here to use to prevent plural quantities from being double s
-    LUIE_STRING_CA_CURRENCY_ENDEAVOR = " <<1[Seal of Endeavor/Seals of Endeavor]>>",            -- Have to create singular strings here to use to prevent plural quantities from being double s
+    LUIE_STRING_CA_CURRENCY_EVENT_TICKET = " <<1[Event Ticket/Event Tickets]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    LUIE_STRING_CA_CURRENCY_CROWN = " <<1[Crown/Crowns]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    LUIE_STRING_CA_CURRENCY_CROWN_GEM = " <<1[Crown Gem/Crown Gems]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    LUIE_STRING_CA_CURRENCY_ENDEAVOR = " <<1[Seal of Endeavor/Seals of Endeavor]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     LUIE_STRING_CA_CURRENCY_OUTFIT_TOKENS = " <<1[Outfit Change Token/Outfit Change Tokens]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
-    LUIE_STRING_CA_CURRENCY_UNDAUNTED = " <<1[Undaunted Key/Undaunted Keys]>>",                 -- Have to create singular strings here to use to prevent plural quantities from being double s
-    LUIE_STRING_CA_CURRENCY_ENDLESS = " <<1[Archival Fortune/Archival Fortunes]>>",             -- Have to create singular strings here to use to prevent plural quantities from being double s
+    LUIE_STRING_CA_CURRENCY_UNDAUNTED = " <<1[Undaunted Key/Undaunted Keys]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
+    LUIE_STRING_CA_CURRENCY_ENDLESS = " <<1[Archival Fortune/Archival Fortunes]>>", -- Have to create singular strings here to use to prevent plural quantities from being double s
     LUIE_STRING_CA_DEBUG_MSG_CURRENCY = "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!",
     LUIE_STRING_CA_DUEL_INVITE_ACCEPTED = "Duel challenge accepted.",
     LUIE_STRING_CA_DUEL_INVITE_CANCELED = "Duel challenge canceled.",
@@ -377,7 +378,7 @@ local strings = {
     LUIE_STRING_CA_MAIL_SENT = "Mail sent!",
     LUIE_STRING_CA_MAIL_SENT_COD = "COD sent!",
     LUIE_STRING_CA_MAIL_ERROR_NO_COD_VALUE = "You must set the Cash on Delivery amount.",
-    LUIE_STRING_CA_MAIL_SENDMAILRESULT2 = "Unknown player.",            -- Fixing missing periods on default strings
+    LUIE_STRING_CA_MAIL_SENDMAILRESULT2 = "Unknown player.", -- Fixing missing periods on default strings
     LUIE_STRING_CA_MAIL_SENDMAILRESULT3 = "Recipient's Inbox is full.", -- Fixing missing periods on default strings
     LUIE_STRING_CA_MARA_PLEDGEOFMARARESULT0 = "|cFFFFFF<<1>>|r is too busy to pledge with.",
     LUIE_STRING_CA_MARA_PLEDGEOFMARARESULT1 = "You can't join in the Ritual of Mara with a player who is dead.",

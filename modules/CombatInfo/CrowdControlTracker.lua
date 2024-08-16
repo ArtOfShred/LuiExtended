@@ -4,6 +4,7 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 local CombatInfo = LUIE.CombatInfo
 CombatInfo.CrowdControlTracker = {}
@@ -42,14 +43,16 @@ local GENERIC_ROOT_ABILITY_ID = 146956
 local ICON_MISSING = "icon_missing"
 
 local ACTION_RESULT_AREA_EFFECT = 669966
-local negateValidNames = {
+local negateValidNames =
+{
     ["Negate Magic"] = true,
     ["Absorption Field"] = true,
     ["Suppression Field"] = true,
     ["Antimagic Field"] = true,
 }
 
-CrowdControlTracker.controlTypes = {
+CrowdControlTracker.controlTypes =
+{
     ACTION_RESULT_STUNNED,
     ACTION_RESULT_FEARED,
     ACTION_RESULT_DISORIENTED,
@@ -61,7 +64,8 @@ CrowdControlTracker.controlTypes = {
     ACTION_RESULT_SNARED,
 }
 
-CrowdControlTracker.actionResults = {
+CrowdControlTracker.actionResults =
+{
     [ACTION_RESULT_STUNNED] = true,
     [ACTION_RESULT_DISORIENTED] = true,
     [ACTION_RESULT_FEARED] = true,
@@ -70,7 +74,8 @@ CrowdControlTracker.actionResults = {
     [ACTION_RESULT_SNARED] = true,
 }
 
-CrowdControlTracker.controlText = {
+CrowdControlTracker.controlText =
+{
     [ACTION_RESULT_STUNNED] = "STUNNED",
     [ACTION_RESULT_FEARED] = "FEARED",
     [ACTION_RESULT_DISORIENTED] = "DISORIENTED",
@@ -86,7 +91,8 @@ CrowdControlTracker.controlText = {
     [ACTION_RESULT_SNARED] = "SNARED",
 }
 
-CrowdControlTracker.aoeHitTypes = {
+CrowdControlTracker.aoeHitTypes =
+{
     [ACTION_RESULT_BLOCKED] = true,
     [ACTION_RESULT_BLOCKED_DAMAGE] = true,
     [ACTION_RESULT_CRITICAL_DAMAGE] = true,
@@ -457,7 +463,8 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
         end
     end
 
-    local validResults = {
+    local validResults =
+    {
         [ACTION_RESULT_EFFECT_GAINED_DURATION] = true,
         [ACTION_RESULT_STUNNED] = true,
         [ACTION_RESULT_FEARED] = true,
@@ -513,7 +520,8 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
             if hitValue < negateDuration then hitValue = negateDuration end
             local currentEndTimeSilence = GetFrameTimeMilliseconds() + hitValue
             table_insert(self.negatesQueue, abilityId)
-            PriorityFour = {
+            PriorityFour =
+            {
                 endTime = currentEndTimeSilence,
                 abilityId = abilityId,
                 abilityIcon = abilityIcon,
@@ -544,7 +552,8 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                     end
                     return
                 end
-                PriorityOne = {
+                PriorityOne =
+                {
                     endTime = (GetFrameTimeMilliseconds() + hitValue),
                     abilityId = abilityId,
                     abilityIcon = abilityIcon,
@@ -562,7 +571,8 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                 self.incomingCC = {}
             elseif abilityId == self.incomingCC[ACTION_RESULT_FEARED] and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime then
                 table_insert(self.fearsQueue, abilityId)
-                PriorityTwo = {
+                PriorityTwo =
+                {
                     endTime = currentEndTime,
                     abilityId = abilityId,
                     abilityIcon = abilityIcon,
@@ -580,7 +590,8 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                 self.incomingCC = {}
             elseif abilityId == self.incomingCC[ACTION_RESULT_CHARMED] and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime then
                 table_insert(self.fearsQueue, abilityId)
-                PriorityTwo = {
+                PriorityTwo =
+                {
                     endTime = currentEndTime,
                     abilityId = abilityId,
                     abilityIcon = abilityIcon,
@@ -599,7 +610,8 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
             elseif abilityId == self.incomingCC[ACTION_RESULT_DISORIENTED] and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime and currentEndTime > PriorityThree.endTime then
                 -- self.incomingCC[ACTION_RESULT_DISORIENTED] == nil
                 table_insert(self.disorientsQueue, abilityId)
-                PriorityThree = {
+                PriorityThree =
+                {
                     endTime = currentEndTime,
                     abilityId = abilityId,
                     abilityIcon = abilityIcon,
@@ -639,12 +651,13 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
                 end
                 self.incomingCC = {}
             else
-                table_insert(self.effectsGained, {
-                    abilityId = abilityId,
-                    hitValue = hitValue,
-                    sourceUnitId = sourceUnitId,
-                    abilityGraphic = abilityGraphic,
-                })
+                table_insert(self.effectsGained,
+                    {
+                        abilityId = abilityId,
+                        hitValue = hitValue,
+                        sourceUnitId = sourceUnitId,
+                        abilityGraphic = abilityGraphic,
+                    })
             end
         end
     elseif #self.effectsGained > 0 then
@@ -657,7 +670,8 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
 
             if (result == ACTION_RESULT_FEARED or result == ACTION_RESULT_CHARMED) and (currentEndTime + 200) > PriorityOne.endTime and (currentEndTime + 200) > PriorityTwo.endTime then
                 table_insert(self.fearsQueue, abilityId)
-                PriorityTwo = {
+                PriorityTwo =
+                {
                     endTime = currentEndTime,
                     abilityId = abilityId,
                     abilityIcon = abilityIcon,

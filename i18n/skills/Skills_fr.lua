@@ -5,7 +5,8 @@
 
 -- Skill names & Tooltips localization
 -- Translation by: <default>
-local strings = {
+local strings =
+{
 
     ----------------------------------------------------------------
     -- INNATE SKILLS -----------------------------------------------

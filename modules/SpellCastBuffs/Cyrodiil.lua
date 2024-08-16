@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 
 local SpellCastBuffs = LUIE.SpellCastBuffs
@@ -46,7 +47,8 @@ function SpellCastBuffs.LoadBattleSpiritTarget()
         else
             tooltip = Tooltips.Innate_Battle_Spirit
         end
-        SpellCastBuffs.EffectsList["reticleover1"][abilityId] = {
+        SpellCastBuffs.EffectsList["reticleover1"][abilityId] =
+        {
             type = 1,
             id = abilityId,
             name = Abilities.Skill_Battle_Spirit,

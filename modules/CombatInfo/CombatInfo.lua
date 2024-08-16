@@ -4,9 +4,10 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 -- CombatInfo namespace
----@class LUIE.CombatInfo : LUIE
+---@class LUIE.CombatInfo : LuiExtended
 LUIE.CombatInfo = {}
 
 ---@class CombatInfo : LUIE.CombatInfo
@@ -31,7 +32,8 @@ local moduleName = LUIE.name .. "CombatInfo"
 local ACTION_RESULT_AREA_EFFECT = 669966
 
 CombatInfo.Enabled = false
-CombatInfo.Defaults = {
+CombatInfo.Defaults =
+{
     blacklist = {},
     GlobalShowGCD = false,
     GlobalPotion = false,
@@ -86,8 +88,10 @@ CombatInfo.Defaults = {
     CastBarGradientC1 = { 0, 47 / 255, 130 / 255 },
     CastBarGradientC2 = { 82 / 255, 215 / 255, 1 },
     CastBarHeavy = false,
-    alerts = {
-        toggles = {
+    alerts =
+    {
+        toggles =
+        {
             alertEnable = true,
             alertFontFace = "Univers 67",
             alertFontStyle = "soft-shadow-thick",
@@ -139,7 +143,8 @@ CombatInfo.Defaults = {
             sound_destroyEnable = true,
             sound_healEnable = false,
         },
-        colors = {
+        colors =
+        {
             alertShared = { 1, 1, 1, 1 },
             alertTimer = { 1, 1, 1, 1 },
             alertBlockA = { 1, 0, 0, 1 },
@@ -162,7 +167,8 @@ CombatInfo.Defaults = {
             snareColor = { 1, 242 / 255, 32 / 255, 1 },
             rootColor = { 1, 165 / 255, 0, 1 },
         },
-        formats = {
+        formats =
+        {
             alertBlock = GetString(LUIE_STRING_CI_BLOCK_DEFAULT),
             alertBlockStagger = GetString(LUIE_STRING_CI_BLOCKSTAGGER_DEFAULT),
             alertInterrupt = GetString(LUIE_STRING_CI_INTERRUPT_DEFAULT),
@@ -174,7 +180,8 @@ CombatInfo.Defaults = {
             alertDestroy = GetString(LUIE_STRING_CI_DESTROY_DEFAULT),
             alertSummon = GetString(LUIE_STRING_CI_SUMMON_DEFAULT),
         },
-        sounds = {
+        sounds =
+        {
             --[[ Old Sounds here for reference
             sound3                      = "Champion Damage Taken",
             sound3CC                    = "Champion Points Committed",
@@ -210,7 +217,8 @@ CombatInfo.Defaults = {
             sound_heal = "Console Game Enter",
         },
     },
-    cct = {
+    cct =
+    {
         enabled = false,
         enabledOnlyInCyro = false,
         unlock = false,
@@ -256,14 +264,15 @@ CombatInfo.Defaults = {
         showOptions = "all",
         offsetX = 0,
         offsetY = 0,
-        colors = {
+        colors =
+        {
             [ACTION_RESULT_AREA_EFFECT] = { 1, 242 / 255, 32 / 255, 1 },
             [ACTION_RESULT_BLOCKED_DAMAGE] = { 1, 1, 1, 1 },
             [ACTION_RESULT_BLOCKED] = { 1, 1, 1, 1 },
             [ACTION_RESULT_CHARMED] = { 64 / 255, 255 / 255, 32 / 255, 1 },
             [ACTION_RESULT_DISORIENTED] = { 0, 127 / 255, 1, 1 },
             [ACTION_RESULT_DODGED] = { 1, 1, 1, 1 },
-            [ACTION_RESULT_EFFECT_GAINED_DURATION] = {0.5, 0.5, 0.5, 1},
+            [ACTION_RESULT_EFFECT_GAINED_DURATION] = { 0.5, 0.5, 0.5, 1 },
             [ACTION_RESULT_FEARED] = { 143 / 255, 9 / 255, 236 / 255, 1 },
             [ACTION_RESULT_IMMUNE] = { 1, 1, 1, 1 },
             [ACTION_RESULT_KNOCKBACK] = { 1, 0, 0, 1 },
@@ -282,41 +291,41 @@ CombatInfo.SV = nil
 CombatInfo.CastBarUnlocked = false
 CombatInfo.AlertFrameUnlocked = false
 
-local uiTlw = {}                                          -- GUI
-local castbar = {}                                        -- castbar
-local g_casting = false                                   -- Toggled when casting - prevents additional events from creating a cast bar until finished
-local g_ultimateCost = 0                                  -- Cost of ultimate Ability in Slot
-local g_ultimateCurrent = 0                               -- Current ultimate value
+local uiTlw = {} -- GUI
+local castbar = {} -- castbar
+local g_casting = false -- Toggled when casting - prevents additional events from creating a cast bar until finished
+local g_ultimateCost = 0 -- Cost of ultimate Ability in Slot
+local g_ultimateCurrent = 0 -- Current ultimate value
 local g_ultimateSlot = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 -- Ultimate slot number
-local g_uiProcAnimation = {}                              -- Animation for bar slots
-local g_uiCustomToggle = {}                               -- Toggle slots for bar Slots
-local g_triggeredSlotsFront = {}                          -- Triggered bar highlight slots
-local g_triggeredSlotsBack = {}                           -- Triggered bar highlight slots
-local g_triggeredSlotsRemain = {}                         -- Table of remaining durations on proc abilities
-local g_toggledSlotsBack = {}                             -- Toggled bar highlight slots
-local g_toggledSlotsFront = {}                            -- Toggled bar highlight slots
-local g_toggledSlotsRemain = {}                           -- Table of remaining durations on active abilities
-local g_toggledSlotsStack = {}                            -- Table of stacks for active abilities
-local g_toggledSlotsPlayer = {}                           -- Table of abilities that target the player (bar highlight doesn't fade on reticleover change)
-local g_potionUsed = false                                -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
-local g_barOverrideCI = {}                                -- Table for storing abilityId's from Effects.BarHighlightOverride that should show as an aura
-local g_barFakeAura = {}                                  -- Table for storing abilityId's that only display a fakeaura
-local g_barDurationOverride = {}                          -- Table for storing abilitiyId's that ignore ending event
-local g_barNoRemove = {}                                  -- Table of abilities we don't remove from bar highlight
-local g_protectAbilityRemoval = {}                        -- AbilityId's set to a timestamp here to prevent removal of bar highlight when refreshing ground auras from causing the highlight to fade.
-local g_mineStacks = {}                                   -- Individual AbilityId ground mine stack information
-local g_mineNoTurnOff = {}                                -- When this variable is true for an abilityId - don't remove the bar highlight for a mine (We we have reticleover target and the mine effect applies on the enemy)
-local g_barFont                                           -- Font for Ability Highlight Label
-local g_potionFont                                        -- Font for Potion Timer Label
-local g_ultimateFont                                      -- Font for Ultimate Percentage Label
-local g_castbarFont                                       -- Font for Castbar Label & Timer
-local g_ProcSound                                         -- Proc Sound
-local g_boundArmamentsPlayed = false                      -- Specific variable to lockout Bound Armaments/Grim Focus from playing a proc sound at 5 stacks to only once per 5 seconds.
-local g_disableProcSound = {}                             -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
-local g_hotbarCategory = GetActiveHotbarCategory()        -- Set on initialization and when we swap weapons to determine the current hotbar category
-local g_backbarButtons = {}                               -- Table to hold backbar buttons
-local g_activeWeaponSwapInProgress = false                -- Toggled on when weapon swapping, TODO: maybe not needed
-local g_castbarWorldMapFix = false                        -- Fix for viewing the World Map changing the player coordinates for some reason
+local g_uiProcAnimation = {} -- Animation for bar slots
+local g_uiCustomToggle = {} -- Toggle slots for bar Slots
+local g_triggeredSlotsFront = {} -- Triggered bar highlight slots
+local g_triggeredSlotsBack = {} -- Triggered bar highlight slots
+local g_triggeredSlotsRemain = {} -- Table of remaining durations on proc abilities
+local g_toggledSlotsBack = {} -- Toggled bar highlight slots
+local g_toggledSlotsFront = {} -- Toggled bar highlight slots
+local g_toggledSlotsRemain = {} -- Table of remaining durations on active abilities
+local g_toggledSlotsStack = {} -- Table of stacks for active abilities
+local g_toggledSlotsPlayer = {} -- Table of abilities that target the player (bar highlight doesn't fade on reticleover change)
+local g_potionUsed = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
+local g_barOverrideCI = {} -- Table for storing abilityId's from Effects.BarHighlightOverride that should show as an aura
+local g_barFakeAura = {} -- Table for storing abilityId's that only display a fakeaura
+local g_barDurationOverride = {} -- Table for storing abilitiyId's that ignore ending event
+local g_barNoRemove = {} -- Table of abilities we don't remove from bar highlight
+local g_protectAbilityRemoval = {} -- AbilityId's set to a timestamp here to prevent removal of bar highlight when refreshing ground auras from causing the highlight to fade.
+local g_mineStacks = {} -- Individual AbilityId ground mine stack information
+local g_mineNoTurnOff = {} -- When this variable is true for an abilityId - don't remove the bar highlight for a mine (We we have reticleover target and the mine effect applies on the enemy)
+local g_barFont -- Font for Ability Highlight Label
+local g_potionFont -- Font for Potion Timer Label
+local g_ultimateFont -- Font for Ultimate Percentage Label
+local g_castbarFont -- Font for Castbar Label & Timer
+local g_ProcSound -- Proc Sound
+local g_boundArmamentsPlayed = false -- Specific variable to lockout Bound Armaments/Grim Focus from playing a proc sound at 5 stacks to only once per 5 seconds.
+local g_disableProcSound = {} -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
+local g_hotbarCategory = GetActiveHotbarCategory() -- Set on initialization and when we swap weapons to determine the current hotbar category
+local g_backbarButtons = {} -- Table to hold backbar buttons
+local g_activeWeaponSwapInProgress = false -- Toggled on when weapon swapping, TODO: maybe not needed
+local g_castbarWorldMapFix = false -- Fix for viewing the World Map changing the player coordinates for some reason
 
 local ACTION_BAR = _G["ZO_ActionBar1"]
 local BAR_INDEX_START = 3
@@ -325,18 +334,22 @@ local BACKBAR_INDEX_END = 7 -- Separate index for backbar as long as we're not u
 local BACKBAR_INDEX_OFFSET = 50
 
 -- Quickslot
-local uiQuickSlot = {
+local uiQuickSlot =
+{
     color = { 0.941, 0.565, 0.251 },
-    timeColors = {
+    timeColors =
+    {
         [1] = { remain = 15000, color = { 0.878, 0.941, 0.251 } },
         [2] = { remain = 5000, color = { 0.251, 0.941, 0.125 } },
     },
 }
 
 -- Ultimate slot
-local uiUltimate = {
+local uiUltimate =
+{
     color = { 0.941, 0.973, 0.957 },
-    pctColors = {
+    pctColors =
+    {
         [1] = { pct = 100, color = { 0.878, 0.941, 0.251 } },
         [2] = { pct = 80, color = { 0.941, 0.565, 0.251 } },
         [3] = { pct = 50, color = { 0.941, 0.251, 0.125 } },
@@ -346,18 +359,21 @@ local uiUltimate = {
 }
 
 -- Cooldown Animation Types for GCD Tracking
-local CooldownMethod = {
+local CooldownMethod =
+{
     [1] = CD_TYPE_VERTICAL_REVEAL,
     [2] = CD_TYPE_VERTICAL,
     [3] = CD_TYPE_RADIAL,
 }
 
 -- Constants from actionbar.lua with only the information we need
-local GAMEPAD_CONSTANTS = {
+local GAMEPAD_CONSTANTS =
+{
     abilitySlotOffsetX = 10,
     ultimateSlotOffsetX = 65,
 }
-local KEYBOARD_CONSTANTS = {
+local KEYBOARD_CONSTANTS =
+{
     abilitySlotOffsetX = 2,
     ultimateSlotOffsetX = 62,
 }
@@ -558,10 +574,11 @@ function CombatInfo.SetupBackBarIcons(button, flip)
     end
 
     -- Special case for certain skills, so the proc icon doesn't get stuck.
-    local specialCases = {
+    local specialCases =
+    {
         [114716] = 46324, -- Crystal Fragments --> Crystal Fragments
-        [20824] = 20816,  -- Power Lash --> Flame Lash
-        [35445] = 35441,  -- Shadow Image Teleport --> Shadow Image
+        [20824] = 20816, -- Power Lash --> Flame Lash
+        [35445] = 35441, -- Shadow Image Teleport --> Shadow Image
         [126659] = 38910, -- Flying Blade --> Flying Blade
     }
 
@@ -604,6 +621,7 @@ end
 
 function CombatInfo.HookGCD()
     -- Hook to update GCD support
+    ---@diagnostic disable-next-line: duplicate-set-field
     ActionButton.UpdateUsable = function (self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
@@ -1845,7 +1863,8 @@ function CombatInfo.CreateCastBar()
     castbar.icon:SetAnchor(TOPLEFT, castbar, TOPLEFT, 3, 3)
     castbar.icon:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT, -3, -3)
 
-    castbar.bar = {
+    castbar.bar =
+    {
         ["backdrop"] = UI.Backdrop(castbar, nil, { CombatInfo.SV.CastBarSizeW, CombatInfo.SV.CastBarSizeH }, nil, nil, false),
         ["bar"] = UI.StatusBar(castbar, nil, { CombatInfo.SV.CastBarSizeW - 4, CombatInfo.SV.CastBarSizeH - 4 }, nil, false),
         ["name"] = UI.Label(castbar, nil, nil, nil, nil, g_castbarFont, false),
@@ -2114,10 +2133,10 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     -- Bail out past here if the cast bar is disabled or
     if
-    not CombatInfo.SV.CastBarEnable or (
-        (sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not Castbar.CastOverride[abilityId]) -- source isn't the player and the ability is not on the list of abilities to show the cast bar for
-        and (targetType ~= COMBAT_UNIT_TYPE_PLAYER or result ~= ACTION_RESULT_EFFECT_FADED)
-    )                                                                                   -- target isn't the player with effect faded
+        not CombatInfo.SV.CastBarEnable or (
+            (sourceType ~= COMBAT_UNIT_TYPE_PLAYER and not Castbar.CastOverride[abilityId]) -- source isn't the player and the ability is not on the list of abilities to show the cast bar for
+            and (targetType ~= COMBAT_UNIT_TYPE_PLAYER or result ~= ACTION_RESULT_EFFECT_FADED)
+        ) -- target isn't the player with effect faded
     then
         return
     end

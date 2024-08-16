@@ -4,7 +4,9 @@
 ]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
+
 local zo_strformat = zo_strformat
 local eventManager = EVENT_MANAGER
 

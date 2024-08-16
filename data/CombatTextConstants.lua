@@ -3,42 +3,55 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 
-local CombatTextConstants = {
+local CombatTextConstants =
+{
     -- Damage & Healing
-    isDamage = {
+    isDamage =
+    {
         [ACTION_RESULT_DAMAGE] = true,
         [ACTION_RESULT_FALL_DAMAGE] = true,
     },
-    isDamageCritical = {
+    isDamageCritical =
+    {
         [ACTION_RESULT_CRITICAL_DAMAGE] = true,
     },
-    isHealing = {
+    isHealing =
+    {
         [ACTION_RESULT_HEAL] = true,
     },
-    isHealingCritical = {
+    isHealingCritical =
+    {
         [ACTION_RESULT_CRITICAL_HEAL] = true,
     },
-    isEnergize = {
+    isEnergize =
+    {
         [ACTION_RESULT_POWER_ENERGIZE] = true,
     },
-    isDrain = {
+    isDrain =
+    {
         [ACTION_RESULT_POWER_DRAIN] = true,
     },
-    isDot = {
+    isDot =
+    {
         [ACTION_RESULT_DOT_TICK] = true,
     },
-    isDotCritical = {
+    isDotCritical =
+    {
         [ACTION_RESULT_DOT_TICK_CRITICAL] = true,
     },
-    isHot = {
+    isHot =
+    {
         [ACTION_RESULT_HOT_TICK] = true,
     },
-    isHotCritical = {
+    isHotCritical =
+    {
         [ACTION_RESULT_HOT_TICK_CRITICAL] = true,
     },
-    damageType = {
+    damageType =
+    {
         [DAMAGE_TYPE_NONE] = true,
         [DAMAGE_TYPE_GENERIC] = true,
         [DAMAGE_TYPE_PHYSICAL] = true,
@@ -54,56 +67,72 @@ local CombatTextConstants = {
         [DAMAGE_TYPE_BLEED] = true,
     },
     -- Mitigation
-    isMiss = {
+    isMiss =
+    {
         [ACTION_RESULT_MISS] = true,
     },
-    isImmune = {
+    isImmune =
+    {
         [ACTION_RESULT_IMMUNE] = true,
     },
-    isParried = {
+    isParried =
+    {
         [ACTION_RESULT_PARRIED] = true,
     },
-    isReflected = {
+    isReflected =
+    {
         [ACTION_RESULT_REFLECTED] = true,
     },
-    isDamageShield = {
+    isDamageShield =
+    {
         [ACTION_RESULT_DAMAGE_SHIELDED] = true,
     },
-    isDodged = {
+    isDodged =
+    {
         [ACTION_RESULT_DODGED] = true,
     },
-    isBlocked = {
+    isBlocked =
+    {
         [ACTION_RESULT_BLOCKED_DAMAGE] = true,
     },
-    isInterrupted = {
+    isInterrupted =
+    {
         [ACTION_RESULT_INTERRUPT] = true,
     },
     -- Crowd Control
-    isDisoriented = {
+    isDisoriented =
+    {
         [ACTION_RESULT_DISORIENTED] = true,
     },
-    isFeared = {
+    isFeared =
+    {
         [ACTION_RESULT_FEARED] = true,
     },
-    isOffBalanced = {
+    isOffBalanced =
+    {
         [ACTION_RESULT_OFFBALANCE] = true,
     },
-    isSilenced = {
+    isSilenced =
+    {
         [ACTION_RESULT_SILENCED] = true,
     },
-    isStunned = {
+    isStunned =
+    {
         [ACTION_RESULT_STUNNED] = true,
     },
-    isCharmed = {
+    isCharmed =
+    {
         [ACTION_RESULT_CHARMED] = true,
     },
     -- Player Checks
-    isPlayer = {
+    isPlayer =
+    {
         [COMBAT_UNIT_TYPE_PLAYER] = true,
         [COMBAT_UNIT_TYPE_PLAYER_PET] = true,
     },
     -- Event Types
-    eventType = {
+    eventType =
+    {
         ALERT = "LUIE_CombatText_EVENT_ALERT",
         COMBAT = "LUIE_CombatText_EVENT_COMBAT",
         POINT = "LUIE_CombatText_EVENT_POINT",
@@ -111,11 +140,13 @@ local CombatTextConstants = {
         RESOURCE = "LUIE_CombatText_EVENT_RESOURCE",
         DEATH = "LUIE_CombatText_EVENT_DEATH",
     },
-    combatType = {
+    combatType =
+    {
         INCOMING = "LUIE_CombatText_COMBAT_TYPE_INCOMING",
         OUTGOING = "LUIE_CombatText_COMBAT_TYPE_OUTGOING",
     },
-    crowdControlType = {
+    crowdControlType =
+    {
         DISORIENTED = "LUIE_CombatText_CROWDCONTROL_TYPE_DISORIENTED",
         FEARED = "LUIE_CombatText_CROWDCONTROL_TYPE_FEARED",
         OFFBALANCED = "LUIE_CombatText_CROWDCONTROL_TYPE_OFFBALANCED",
@@ -123,21 +154,24 @@ local CombatTextConstants = {
         STUNNED = "LUIE_CombatText_CROWDCONTROL_TYPE_STUNNED",
         CHARMED = "LUIE_CombatText_CROWDCONTROL_TYPE_CHARMED",
     },
-    pointType = {
+    pointType =
+    {
         ALLIANCE_POINTS = "LUIE_CombatText_Point_TYPE_ALLIANCE_POINTS",
         EXPERIENCE_POINTS = "LUIE_CombatText_Point_TYPE_EXPERIENCE_POINTS",
         CHAMPION_POINTS = "LUIE_CombatText_Point_TYPE_CHAMPION_POINTS",
         IN_COMBAT = "LUIE_CombatText_Point_TYPE_IN_COMBAT",
         OUT_COMBAT = "LUIE_CombatText_Point_TYPE_OUT_COMBAT",
     },
-    resourceType = {
+    resourceType =
+    {
         LOW_HEALTH = "LUIE_CombatText_Resource_TYPE_LOW_HEALTH",
         LOW_MAGICKA = "LUIE_CombatText_Resource_TYPE_LOW_MAGICKA",
         LOW_STAMINA = "LUIE_CombatText_Resource_TYPE_LOW_STAMINA",
         ULTIMATE = "LUIE_CombatText_Resource_TYPE_ULTIMATE",
         POTION = "LUIE_CombatText_Resource_TYPE_POTION",
     },
-    poolType = {
+    poolType =
+    {
         CONTROL = "LUIE_CombatText_POOL_TYPE_CONTROL",
         ANIMATION_CLOUD = "LUIE_CombatText_POOL_TYPE_ANIMATION_CLOUD",
         ANIMATION_CLOUD_CRITICAL = "LUIE_CombatText_POOL_TYPE_ANIMATION_CLOUD_CRITICAL",
@@ -156,7 +190,8 @@ local CombatTextConstants = {
     },
 
     -- Animation & Fonts
-    outlineType = {
+    outlineType =
+    {
         "none",
         "outline",
         "thin-outline",

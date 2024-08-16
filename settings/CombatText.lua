@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 local CombatText = LUIE.CombatText
 local CombatTextConstants = LUIE.Data.CombatTextConstants
@@ -37,8 +38,10 @@ local function GenerateCustomList(input)
     return options, values
 end
 
-local dialogs = {
-    [1] = { -- Clear Blacklist
+local dialogs =
+{
+    [1] =
+    { -- Clear Blacklist
         identifier = "LUIE_CLEAR_CT_BLACKLIST",
         title = GetString(LUIE_STRING_LAM_UF_BLACKLIST_CLEAR),
         text = zo_strformat(GetString(LUIE_STRING_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(LUIE_STRING_LAM_CT_BLACKLIST_HEADER)),
@@ -81,7 +84,8 @@ function CombatText.CreateSettings()
     -- Load Dialog Buttons
     loadDialogButtons()
 
-    local panelDataCombatText = {
+    local panelDataCombatText =
+    {
         type = "panel",
         name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_CT)),
         displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_CT)),
@@ -99,13 +103,15 @@ function CombatText.CreateSettings()
     local optionsDataCombatText = {}
 
     -- Combat Text Description
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "description",
         text = GetString(LUIE_STRING_LAM_CT_DESCRIPTION),
     }
 
     -- ReloadUI Button
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "button",
         name = GetString(LUIE_STRING_LAM_RELOADUI),
         tooltip = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
@@ -116,7 +122,8 @@ function CombatText.CreateSettings()
     }
 
     -- Unlock Panels
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "checkbox",
         width = "half",
         name = GetString(LUIE_STRING_LAM_CT_UNLOCK),
@@ -137,10 +144,12 @@ function CombatText.CreateSettings()
     }
 
     -- Combat Text - Common Options
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_COMMON_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- In Combat Only
                 type = "checkbox",
@@ -246,10 +255,12 @@ function CombatText.CreateSettings()
         },
     }
 
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CT_BLACKLIST_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Combat Text Blacklist Description
                 type = "description",
@@ -354,10 +365,12 @@ function CombatText.CreateSettings()
     }
 
     -- Combat Text - Damage & Healing Options
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "submenu",
         name = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_LAM_CT_HEADER_DAMAGE_AND_HEALING), GetString(LUIE_STRING_LAM_CT_SHARED_OPTIONS)),
-        controls = {
+        controls =
+        {
             {
                 type = "description",
                 text = GetString(LUIE_STRING_LAM_CT_FORMAT_DESCRIPTION),
@@ -573,7 +586,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damage[0] = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damage[0][1],
                     g = Defaults.colors.damage[0][2],
                     b = Defaults.colors.damage[0][3],
@@ -590,7 +604,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damage[1] = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damage[1][1],
                     g = Defaults.colors.damage[1][2],
                     b = Defaults.colors.damage[1][3],
@@ -607,7 +622,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damage[2] = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damage[2][1],
                     g = Defaults.colors.damage[2][2],
                     b = Defaults.colors.damage[2][3],
@@ -624,7 +640,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damage[12] = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damage[12][1],
                     g = Defaults.colors.damage[12][2],
                     b = Defaults.colors.damage[12][3],
@@ -641,7 +658,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damage[3] = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damage[3][1],
                     g = Defaults.colors.damage[3][2],
                     b = Defaults.colors.damage[3][3],
@@ -658,7 +676,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damage[4] = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damage[4][1],
                     g = Defaults.colors.damage[4][2],
                     b = Defaults.colors.damage[4][3],
@@ -675,7 +694,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damage[5] = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damage[5][1],
                     g = Defaults.colors.damage[5][2],
                     b = Defaults.colors.damage[5][3],
@@ -692,7 +712,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damage[6] = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damage[6][1],
                     g = Defaults.colors.damage[6][2],
                     b = Defaults.colors.damage[6][3],
@@ -709,7 +730,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damage[7] = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damage[7][1],
                     g = Defaults.colors.damage[7][2],
                     b = Defaults.colors.damage[7][3],
@@ -726,7 +748,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damage[8] = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damage[8][1],
                     g = Defaults.colors.damage[8][2],
                     b = Defaults.colors.damage[8][3],
@@ -743,7 +766,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damage[9] = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damage[9][1],
                     g = Defaults.colors.damage[9][2],
                     b = Defaults.colors.damage[9][3],
@@ -760,7 +784,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damage[10] = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damage[10][1],
                     g = Defaults.colors.damage[10][2],
                     b = Defaults.colors.damage[10][3],
@@ -777,7 +802,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damage[11] = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damage[11][1],
                     g = Defaults.colors.damage[11][2],
                     b = Defaults.colors.damage[11][3],
@@ -807,7 +833,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.criticalDamageOverride = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.criticalDamageOverride[1],
                     g = Defaults.colors.criticalDamageOverride[2],
                     b = Defaults.colors.criticalDamageOverride[3],
@@ -837,7 +864,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.incomingDamageOverride = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.incomingDamageOverride[1],
                     g = Defaults.colors.incomingDamageOverride[2],
                     b = Defaults.colors.incomingDamageOverride[3],
@@ -1054,7 +1082,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.healing = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.healing[1],
                     g = Defaults.colors.healing[2],
                     b = Defaults.colors.healing[3],
@@ -1084,7 +1113,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.criticalHealingOverride = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.criticalHealingOverride[1],
                     g = Defaults.colors.criticalHealingOverride[2],
                     b = Defaults.colors.criticalHealingOverride[3],
@@ -1094,10 +1124,12 @@ function CombatText.CreateSettings()
     }
 
     -- Combat Text - Resource Gain & Drain Options
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "submenu",
         name = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_LAM_CT_HEADER_RESOURCE_GAIN_DRAIN), GetString(LUIE_STRING_LAM_CT_SHARED_OPTIONS)),
-        controls = {
+        controls =
+        {
             {
                 type = "description",
                 text = GetString(LUIE_STRING_LAM_CT_FORMAT_DESCRIPTION),
@@ -1182,7 +1214,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.energizeMagicka = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.energizeMagicka[1],
                     g = Defaults.colors.energizeMagicka[2],
                     b = Defaults.colors.energizeMagicka[3],
@@ -1200,7 +1233,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.energizeStamina = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.energizeStamina[1],
                     g = Defaults.colors.energizeStamina[2],
                     b = Defaults.colors.energizeStamina[3],
@@ -1264,7 +1298,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.energizeUltimate = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.energizeUltimate[1],
                     g = Defaults.colors.energizeUltimate[2],
                     b = Defaults.colors.energizeUltimate[3],
@@ -1329,7 +1364,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.drainMagicka = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.drainMagicka[1],
                     g = Defaults.colors.drainMagicka[2],
                     b = Defaults.colors.drainMagicka[3],
@@ -1347,7 +1383,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.drainStamina = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.drainStamina[1],
                     g = Defaults.colors.drainStamina[2],
                     b = Defaults.colors.drainStamina[3],
@@ -1357,10 +1394,12 @@ function CombatText.CreateSettings()
     }
 
     -- Combat Text - Mitigation Options
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "submenu",
         name = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_LAM_CT_HEADER_MITIGATION), GetString(LUIE_STRING_LAM_CT_SHARED_OPTIONS)),
-        controls = {
+        controls =
+        {
             {
                 type = "description",
                 text = GetString(LUIE_STRING_LAM_CT_FORMAT_DESCRIPTION),
@@ -1504,7 +1543,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.immune = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.immune[1],
                     g = Defaults.colors.immune[2],
                     b = Defaults.colors.immune[3],
@@ -1568,7 +1608,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.parried = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.parried[1],
                     g = Defaults.colors.parried[2],
                     b = Defaults.colors.parried[3],
@@ -1632,7 +1673,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.reflected = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.reflected[1],
                     g = Defaults.colors.reflected[2],
                     b = Defaults.colors.reflected[3],
@@ -1696,7 +1738,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.damageShield = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.damageShield[1],
                     g = Defaults.colors.damageShield[2],
                     b = Defaults.colors.damageShield[3],
@@ -1760,7 +1803,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.dodged = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.dodged[1],
                     g = Defaults.colors.dodged[2],
                     b = Defaults.colors.dodged[3],
@@ -1824,7 +1868,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.blocked = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.blocked[1],
                     g = Defaults.colors.blocked[2],
                     b = Defaults.colors.blocked[3],
@@ -1888,7 +1933,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.interrupted = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.interrupted[1],
                     g = Defaults.colors.interrupted[2],
                     b = Defaults.colors.interrupted[3],
@@ -1898,10 +1944,12 @@ function CombatText.CreateSettings()
     }
 
     -- Combat Text - Crowd Control Options
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "submenu",
         name = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_LAM_CT_HEADER_CROWD_CONTROL), GetString(LUIE_STRING_LAM_CT_SHARED_OPTIONS)),
-        controls = {
+        controls =
+        {
             {
                 type = "description",
                 text = GetString(LUIE_STRING_LAM_CT_FORMAT_DESCRIPTION),
@@ -1985,7 +2033,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.disoriented = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.disoriented[1],
                     g = Defaults.colors.disoriented[2],
                     b = Defaults.colors.disoriented[3],
@@ -2049,7 +2098,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.feared = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.feared[1],
                     g = Defaults.colors.feared[2],
                     b = Defaults.colors.feared[3],
@@ -2113,7 +2163,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.offBalanced = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.offBalanced[1],
                     g = Defaults.colors.offBalanced[2],
                     b = Defaults.colors.offBalanced[3],
@@ -2177,7 +2228,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.silenced = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.silenced[1],
                     g = Defaults.colors.silenced[2],
                     b = Defaults.colors.silenced[3],
@@ -2241,7 +2293,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.stunned = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.stunned[1],
                     g = Defaults.colors.stunned[2],
                     b = Defaults.colors.stunned[3],
@@ -2305,7 +2358,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.charmed = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.charmed[1],
                     g = Defaults.colors.charmed[2],
                     b = Defaults.colors.charmed[3],
@@ -2315,10 +2369,12 @@ function CombatText.CreateSettings()
     }
 
     -- Combat Text -- Notification Options
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "submenu",
         name = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_LAM_CT_HEADER_NOTIFICATION), GetString(LUIE_STRING_LAM_CT_SHARED_OPTIONS)),
-        controls = {
+        controls =
+        {
             {
                 type = "description",
                 text = GetString(LUIE_STRING_LAM_CT_FORMAT_DESCRIPTION),
@@ -2414,7 +2470,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.inCombat = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.inCombat[1],
                     g = Defaults.colors.inCombat[2],
                     b = Defaults.colors.inCombat[3],
@@ -2432,7 +2489,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.outCombat = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.outCombat[1],
                     g = Defaults.colors.outCombat[2],
                     b = Defaults.colors.outCombat[3],
@@ -2563,7 +2621,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.pointsAlliance = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.pointsAlliance[1],
                     g = Defaults.colors.pointsAlliance[2],
                     b = Defaults.colors.pointsAlliance[3],
@@ -2612,7 +2671,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.pointsExperience = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.pointsExperience[1],
                     g = Defaults.colors.pointsExperience[2],
                     b = Defaults.colors.pointsExperience[3],
@@ -2661,7 +2721,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.pointsChampion = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.pointsChampion[1],
                     g = Defaults.colors.pointsChampion[2],
                     b = Defaults.colors.pointsChampion[3],
@@ -2758,7 +2819,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.ultimateReady = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.ultimateReady[1],
                     g = Defaults.colors.ultimateReady[2],
                     b = Defaults.colors.ultimateReady[3],
@@ -2776,7 +2838,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.potionReady = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.potionReady[1],
                     g = Defaults.colors.potionReady[2],
                     b = Defaults.colors.potionReady[3],
@@ -2786,10 +2849,12 @@ function CombatText.CreateSettings()
     }
 
     -- Combat Text - Low Resource Options
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "submenu",
         name = zo_strformat("<<1>> <<2>>", GetString(LUIE_STRING_LAM_CT_HEADER_LOW_RESOURCE), GetString(LUIE_STRING_LAM_CT_SHARED_OPTIONS)),
-        controls = {
+        controls =
+        {
             {
                 type = "description",
                 text = GetString(LUIE_STRING_LAM_CT_FORMAT_DESCRIPTION),
@@ -2893,7 +2958,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.lowHealth = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.lowHealth[1],
                     g = Defaults.colors.lowHealth[2],
                     b = Defaults.colors.lowHealth[3],
@@ -2961,7 +3027,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.lowMagicka = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.lowMagicka[1],
                     g = Defaults.colors.lowMagicka[2],
                     b = Defaults.colors.lowMagicka[3],
@@ -3029,7 +3096,8 @@ function CombatText.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.lowStamina = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.lowStamina[1],
                     g = Defaults.colors.lowStamina[2],
                     b = Defaults.colors.lowStamina[3],
@@ -3039,10 +3107,12 @@ function CombatText.CreateSettings()
     }
 
     -- Combat Text - Font Format Options Submenu
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CT_FONT_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Font Face Dropdown
                 type = "dropdown",
@@ -3088,10 +3158,12 @@ function CombatText.CreateSettings()
     }
 
     -- Combat Text - Animation Options Submenu
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CT_ANIMATION_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Animation Type
                 type = "dropdown",
@@ -3193,10 +3265,12 @@ function CombatText.CreateSettings()
     }
 
     -- Combat Text - Throttle Options (Combat) Options Submenu
-    optionsDataCombatText[#optionsDataCombatText+1] = {
+    optionsDataCombatText[#optionsDataCombatText + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CT_THROTTLE_HEADER),
-        controls = {
+        controls =
+        {
             {
                 type = "description",
                 text = GetString(LUIE_STRING_LAM_CT_THROTTLE_DESCRIPTION),

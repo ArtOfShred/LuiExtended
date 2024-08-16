@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 LUIE.CombatTextDeathViewer = LUIE.CombatTextEventViewer:Subclass()
 local CombatTextDeathViewer = LUIE.CombatTextDeathViewer

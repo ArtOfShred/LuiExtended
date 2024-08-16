@@ -4,6 +4,7 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 LUIE.CombatTextAnimation = ZO_InitializingObject:Subclass()
 local CombatTextAnimation = LUIE.CombatTextAnimation

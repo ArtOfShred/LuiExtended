@@ -5,7 +5,8 @@
 
 -- Addon Settings Menu localization
 -- Translation by: KiriX
-local strings = {
+local strings =
+{
 
     -- Settings
     LUIE_STRING_LAM_COMPATIBILITY_WARNING = "Отключите эту настройку, если у вас наблюдаются проблемы совместимости с другими аддонами.",

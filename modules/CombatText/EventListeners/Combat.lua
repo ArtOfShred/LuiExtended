@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 LUIE.CombatTextCombatEventListener = LUIE.CombatTextEventListener:Subclass()
 local CombatTextCombatEventListener = LUIE.CombatTextCombatEventListener
@@ -10,7 +11,8 @@ local CombatTextCombatEventListener = LUIE.CombatTextCombatEventListener
 local Effects = LUIE.Data.Effects
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 
-local isWarned = {
+local isWarned =
+{
     combat = false,
     disoriented = false,
     feared = false,
@@ -115,30 +117,30 @@ function CombatTextCombatEventListener:OnCombatIn(...)
     --//COMBAT TRIGGERS//--
     ---------------------------------------------------------------------------------------------------------------------------------------
     if
-       (isDodged and togglesInOut.showDodged)
-    or (isMiss and togglesInOut.showMiss)
-    or (isImmune and togglesInOut.showImmune)
-    or (isReflected and togglesInOut.showReflected)
-    or (isDamageShield and togglesInOut.showDamageShield)
-    or (isParried and togglesInOut.showParried)
-    or (isBlocked and togglesInOut.showBlocked)
-    or (isInterrupted and togglesInOut.showInterrupted)
-    or (isDot and togglesInOut.showDot and (hitValue > 0 or overkill))
-    or (isDotCritical and togglesInOut.showDot and (hitValue > 0 or overkill))
-    or (isHot and togglesInOut.showHot and (hitValue > 0 or overheal))
-    or (isHotCritical and togglesInOut.showHot and (hitValue > 0 or overheal))
-    or (isHealing and togglesInOut.showHealing and (hitValue > 0 or overheal))
-    or (isHealingCritical and togglesInOut.showHealing and (hitValue > 0 or overheal))
-    or (isDamage and togglesInOut.showDamage and (hitValue > 0 or overkill))
-    or (isDamageCritical and togglesInOut.showDamage and (hitValue > 0 or overkill))
-    or (isEnergize and togglesInOut.showEnergize and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
-    or (isEnergize and togglesInOut.showUltimateEnergize and powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE)
-    or (isDrain and togglesInOut.showDrain and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
+        (isDodged and togglesInOut.showDodged)
+        or (isMiss and togglesInOut.showMiss)
+        or (isImmune and togglesInOut.showImmune)
+        or (isReflected and togglesInOut.showReflected)
+        or (isDamageShield and togglesInOut.showDamageShield)
+        or (isParried and togglesInOut.showParried)
+        or (isBlocked and togglesInOut.showBlocked)
+        or (isInterrupted and togglesInOut.showInterrupted)
+        or (isDot and togglesInOut.showDot and (hitValue > 0 or overkill))
+        or (isDotCritical and togglesInOut.showDot and (hitValue > 0 or overkill))
+        or (isHot and togglesInOut.showHot and (hitValue > 0 or overheal))
+        or (isHotCritical and togglesInOut.showHot and (hitValue > 0 or overheal))
+        or (isHealing and togglesInOut.showHealing and (hitValue > 0 or overheal))
+        or (isHealingCritical and togglesInOut.showHealing and (hitValue > 0 or overheal))
+        or (isDamage and togglesInOut.showDamage and (hitValue > 0 or overkill))
+        or (isDamageCritical and togglesInOut.showDamage and (hitValue > 0 or overkill))
+        or (isEnergize and togglesInOut.showEnergize and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
+        or (isEnergize and togglesInOut.showUltimateEnergize and powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE)
+        or (isDrain and togglesInOut.showDrain and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
     then
         if overkill or overheal then
             hitValue = hitValue + overflow
         end
-        if not Effects.EffectHideSCT[abilityId] then                                                         -- Check if ability is on the hide list
+        if not Effects.EffectHideSCT[abilityId] then -- Check if ability is on the hide list
             if (Settings.toggles.inCombatOnly and isWarned.combat) or not Settings.toggles.inCombatOnly then -- Check if 'in combat only' is ticked
                 self:TriggerEvent(CombatTextConstants.eventType.COMBAT, combatType, powerType, hitValue, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
             end
@@ -260,30 +262,30 @@ function CombatTextCombatEventListener:OnCombatOut(...)
     ---------------------------------------------------------------------------------------------------------------------------------------
 
     if
-       (isDodged and togglesInOut.showDodged)
-    or (isMiss and togglesInOut.showMiss)
-    or (isImmune and togglesInOut.showImmune)
-    or (isReflected and togglesInOut.showReflected)
-    or (isDamageShield and togglesInOut.showDamageShield)
-    or (isParried and togglesInOut.showParried)
-    or (isBlocked and togglesInOut.showBlocked)
-    or (isInterrupted and togglesInOut.showInterrupted)
-    or (isDot and togglesInOut.showDot and (hitValue > 0 or overkill))
-    or (isDotCritical and togglesInOut.showDot and (hitValue > 0 or overkill))
-    or (isHot and togglesInOut.showHot and (hitValue > 0 or overheal))
-    or (isHotCritical and togglesInOut.showHot and (hitValue > 0 or overheal))
-    or (isHealing and togglesInOut.showHealing and (hitValue > 0 or overheal))
-    or (isHealingCritical and togglesInOut.showHealing and (hitValue > 0 or overheal))
-    or (isDamage and togglesInOut.showDamage and (hitValue > 0 or overkill))
-    or (isDamageCritical and togglesInOut.showDamage and (hitValue > 0 or overkill))
-    or (isEnergize and togglesInOut.showEnergize and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
-    or (isEnergize and togglesInOut.showUltimateEnergize and powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE)
-    or (isDrain and togglesInOut.showDrain and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
+        (isDodged and togglesInOut.showDodged)
+        or (isMiss and togglesInOut.showMiss)
+        or (isImmune and togglesInOut.showImmune)
+        or (isReflected and togglesInOut.showReflected)
+        or (isDamageShield and togglesInOut.showDamageShield)
+        or (isParried and togglesInOut.showParried)
+        or (isBlocked and togglesInOut.showBlocked)
+        or (isInterrupted and togglesInOut.showInterrupted)
+        or (isDot and togglesInOut.showDot and (hitValue > 0 or overkill))
+        or (isDotCritical and togglesInOut.showDot and (hitValue > 0 or overkill))
+        or (isHot and togglesInOut.showHot and (hitValue > 0 or overheal))
+        or (isHotCritical and togglesInOut.showHot and (hitValue > 0 or overheal))
+        or (isHealing and togglesInOut.showHealing and (hitValue > 0 or overheal))
+        or (isHealingCritical and togglesInOut.showHealing and (hitValue > 0 or overheal))
+        or (isDamage and togglesInOut.showDamage and (hitValue > 0 or overkill))
+        or (isDamageCritical and togglesInOut.showDamage and (hitValue > 0 or overkill))
+        or (isEnergize and togglesInOut.showEnergize and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
+        or (isEnergize and togglesInOut.showUltimateEnergize and powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE)
+        or (isDrain and togglesInOut.showDrain and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA))
     then
         if overkill or overheal then
             hitValue = hitValue + overflow
         end
-        if not Effects.EffectHideSCT[abilityId] then                                                         -- Check if ability is on the hide list
+        if not Effects.EffectHideSCT[abilityId] then -- Check if ability is on the hide list
             if (Settings.toggles.inCombatOnly and isWarned.combat) or not Settings.toggles.inCombatOnly then --Check if 'in combat only' is ticked
                 self:TriggerEvent(CombatTextConstants.eventType.COMBAT, combatType, powerType, hitValue, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
             end

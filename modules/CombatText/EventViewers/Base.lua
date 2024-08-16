@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 
 ---@class CombatTextEventViewer : ZO_InitializingObject
@@ -14,18 +15,20 @@ local CombatTextConstants = LUIE.Data.CombatTextConstants
 
 local callbackManager = CALLBACK_MANAGER
 
-CombatTextEventViewer.resourceNames = setmetatable({}, {
-    __index = function (t, k)
-        t[k] = GetString("SI_COMBATMECHANICTYPE", k)
-        return t[k]
-    end,
-})
-CombatTextEventViewer.damageTypes = setmetatable({}, {
-    __index = function (t, k)
-        t[k] = GetString("SI_DAMAGETYPE", k)
-        return t[k]
-    end,
-})
+CombatTextEventViewer.resourceNames = setmetatable({},
+    {
+        __index = function (t, k)
+            t[k] = GetString("SI_COMBATMECHANICTYPE", k)
+            return t[k]
+        end,
+    })
+CombatTextEventViewer.damageTypes = setmetatable({},
+    {
+        __index = function (t, k)
+            t[k] = GetString("SI_DAMAGETYPE", k)
+            return t[k]
+        end,
+    })
 
 function CombatTextEventViewer:New(poolManager, LMP)
     local obj = setmetatable({}, self)

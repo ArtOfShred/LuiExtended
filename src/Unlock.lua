@@ -3,6 +3,9 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
+local LUIE = LUIE
+
 local UI = LUIE.UI
 
 local sceneManager = SCENE_MANAGER
@@ -12,7 +15,8 @@ local savedHiddenStates = {}
 
 -- Table of UI elements to unlock for moving.
 -- Constraints for some of these elements need to be adjusted - using values from Azurah.
-local defaultPanels = {
+local defaultPanels =
+{
     [ZO_HUDInfamyMeter] = { GetString(LUIE_STRING_DEFAULT_FRAME_INFAMY_METER) },
     [ZO_HUDTelvarMeter] = { GetString(LUIE_STRING_DEFAULT_FRAME_TEL_VAR_METER) },
     [ZO_HUDDaedricEnergyMeter] = { GetString(LUIE_STRING_DEFAULT_FRAME_VOLENDRUNG_METER) },
@@ -27,9 +31,9 @@ local defaultPanels = {
     [ZO_PlayerToPlayerAreaPromptContainer] = { GetString(LUIE_STRING_DEFAULT_FRAME_PLAYER_INTERACTION), nil, 30 },
     [ZO_SynergyTopLevelContainer] = { GetString(LUIE_STRING_DEFAULT_FRAME_SYNERGY) },
     [ZO_AlertTextNotification] = { GetString(LUIE_STRING_DEFAULT_FRAME_ALERTS), 600, 56 },
-    [ZO_CompassFrame] = { GetString(LUIE_STRING_DEFAULT_FRAME_COMPASS) },                                        -- Needs custom template applied
-    [ZO_ActiveCombatTipsTip] = { GetString(LUIE_STRING_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS), 250, 20 },             -- Needs custom template applied
-    [ZO_PlayerProgress] = { GetString(LUIE_STRING_DEFAULT_FRAME_PLAYER_PROGRESS) },                              -- Needs custom template applied
+    [ZO_CompassFrame] = { GetString(LUIE_STRING_DEFAULT_FRAME_COMPASS) }, -- Needs custom template applied
+    [ZO_ActiveCombatTipsTip] = { GetString(LUIE_STRING_DEFAULT_FRAME_ACTIVE_COMBAT_TIPS), 250, 20 }, -- Needs custom template applied
+    [ZO_PlayerProgress] = { GetString(LUIE_STRING_DEFAULT_FRAME_PLAYER_PROGRESS) }, -- Needs custom template applied
     --[ZO_CenterScreenAnnounce] = { GetString(LUIE_STRING_DEFAULT_FRAME_CSA), nil, 100 }, -- Needs custom template applied
     [ZO_EndDunHUDTrackerContainer] = { GetString(LUIE_STRING_DEFAULT_FRAME_ENDLESS_DUNGEON_TRACKER), 230, 100 }, -- Needs custom template applied
 }
@@ -46,7 +50,7 @@ local function ReplaceDefaultTemplate(object, functionName, frameName)
     ---@type function
     local zos_function = object[functionName]
     object[functionName] = function (self)
-        local result = zos_function(self)    -- Get Original Function results
+        local result = zos_function(self) -- Get Original Function results
         local frameData = LUIE.SV[frameName] -- Get LUIE Saved Frame Data
         -- Apply positional setup
         if frameData then

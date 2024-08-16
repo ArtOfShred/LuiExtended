@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
-
+---@class (partial) LuiExtended
 local LUIE = LUIE
 local type, pairs, ipairs = type, pairs, ipairs
 local zo_strformat = zo_strformat
@@ -16,7 +16,8 @@ local HIDE_COUNT = 0
 
 function LUIE.InitializeHooks()
     -- TODO: Localize
-    local buffTypes = {
+    local buffTypes =
+    {
         [LUIE_BUFF_TYPE_BUFF] = "Buff",
         [LUIE_BUFF_TYPE_DEBUFF] = "Debuff",
         [LUIE_BUFF_TYPE_UB_BUFF] = "Cosmetic Buff",
@@ -401,7 +402,8 @@ Override function for GetKillingAttackInfo.
                 local trackBuffs = {}
                 for i = 1, GetNumBuffs("player") do
                     local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId = GetUnitBuffInfo("player", i)
-                    trackBuffs[counter] = {
+                    trackBuffs[counter] =
+                    {
                         buffName = buffName,
                         startTime = startTime,
                         endTime = endTime,
@@ -575,7 +577,8 @@ Override function for GetKillingAttackInfo.
         container:SetHandler("OnEffectivelyShown", UpdateEffects)
     end
 
-    local GAMEPAD_STATS_DISPLAY_MODE = {
+    local GAMEPAD_STATS_DISPLAY_MODE =
+    {
         CHARACTER = 1,
         ATTRIBUTES = 2,
         EFFECTS = 3,
@@ -1020,7 +1023,7 @@ Override function for GetKillingAttackInfo.
         else
             detailedName = skillProgressionData:GetFormattedName()
         end
-        detailedName = zo_strgsub(detailedName, "With", "with")               -- Easiest way to fix the capitalization of the skill "Bond With Nature"
+        detailedName = zo_strgsub(detailedName, "With", "with") -- Easiest way to fix the capitalization of the skill "Bond With Nature"
         detailedName = zo_strgsub(detailedName, "Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
         control.nameLabel:SetText(detailedName)
         control.nameLabel:SetColor(PURCHASED_COLOR:UnpackRGBA())
@@ -1028,7 +1031,8 @@ Override function for GetKillingAttackInfo.
 
     -- Hook Action Slots
     local ACTION_BUTTON_BGS = { ability = "EsoUI/Art/ActionBar/abilityInset.dds", item = "EsoUI/Art/ActionBar/quickslotBG.dds" }
-    local ACTION_BUTTON_BORDERS = {
+    local ACTION_BUTTON_BORDERS =
+    {
         normal = "EsoUI/Art/ActionBar/abilityFrame64_up.dds",
         mouseDown = "EsoUI/Art/ActionBar/abilityFrame64_down.dds",
     }
@@ -1095,14 +1099,14 @@ Override function for GetKillingAttackInfo.
 
     SetupSlotHandlers =
     {
-        [ACTION_TYPE_ABILITY]         = SetupAbilitySlot,
-        [ACTION_TYPE_ITEM]            = SetupItemSlot,
+        [ACTION_TYPE_ABILITY] = SetupAbilitySlot,
+        [ACTION_TYPE_ITEM] = SetupItemSlot,
         [ACTION_TYPE_CRAFTED_ABILITY] = SetupAbilitySlot,
-        [ACTION_TYPE_COLLECTIBLE]     = SetupCollectibleActionSlot,
-        [ACTION_TYPE_QUEST_ITEM]      = SetupQuestItemActionSlot,
-        [ACTION_TYPE_EMOTE]           = SetupEmoteActionSlot,
-        [ACTION_TYPE_QUICK_CHAT]      = SetupQuickChatActionSlot,
-        [ACTION_TYPE_NOTHING]         = SetupEmptyActionSlot,
+        [ACTION_TYPE_COLLECTIBLE] = SetupCollectibleActionSlot,
+        [ACTION_TYPE_QUEST_ITEM] = SetupQuestItemActionSlot,
+        [ACTION_TYPE_EMOTE] = SetupEmoteActionSlot,
+        [ACTION_TYPE_QUICK_CHAT] = SetupQuickChatActionSlot,
+        [ACTION_TYPE_NOTHING] = SetupEmptyActionSlot,
     }
 
 
@@ -1444,7 +1448,7 @@ Override function for GetKillingAttackInfo.
                 bonusType = bonusType,
             }
 
-            self.masterList[#self.masterList+1] = headerData
+            self.masterList[#self.masterList + 1] = headerData
 
             local startIndex = info.startIndex or 1
             local score = info.scoreFunction(self.campaignId)
@@ -1457,7 +1461,7 @@ Override function for GetKillingAttackInfo.
             local countText = scoreIndex
             local abilityId = info.abilityFunction(index, self.campaignId)
             local name = GetAbilityName(abilityId)
-            local icon = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId)       -- Get Updated LUIE AbilityIcon here
+            local icon = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId) -- Get Updated LUIE AbilityIcon here
             local description = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip) and LUIE.Data.Effects.EffectOverride[abilityId].tooltip or GetAbilityDescription(abilityId) -- Get Updated LUIE Tooltip here
 
             if info.countText then
@@ -1484,7 +1488,7 @@ Override function for GetKillingAttackInfo.
                 detailsText = detailsText or "",
             }
 
-            self.masterList[#self.masterList+1] = data
+            self.masterList[#self.masterList + 1] = data
         end
 
         return self.masterList
@@ -1524,8 +1528,8 @@ Override function for GetKillingAttackInfo.
         control.nameLabel = control:GetNamedChild("Name")
         control.ability.index = data.index
         control.ability.bonusType = data.bonusType
-        control.ability.abilityId = data.abilityId     -- Add AbilityId here to carry over to OnMouseEnter tooltip function
-        control.ability.name = data.name               -- Add AbilityName here to carry over to OnMouseEnter tooltip function
+        control.ability.abilityId = data.abilityId -- Add AbilityId here to carry over to OnMouseEnter tooltip function
+        control.ability.name = data.name -- Add AbilityName here to carry over to OnMouseEnter tooltip function
         control.ability.description = data.description -- Add Tooltip here to carry over to OnMouseEnter tooltip function
 
         control.ability:SetEnabled(data.active)
@@ -1659,7 +1663,8 @@ Override function for GetKillingAttackInfo.
                         name = LUIE.Data.Effects.KeepUpgradeNameFix[name]
                     end
 
-                    local data = {
+                    local data =
+                    {
                         index = i,
                         gridHeaderName = levelHeaderText,
                         level = currentLevel,
@@ -1702,20 +1707,24 @@ Override function for GetKillingAttackInfo.
     end
 
     -- Variables for Skill Window Hook
-    local INCREASE_BUTTON_TEXTURES = {
-        PLUS = {
+    local INCREASE_BUTTON_TEXTURES =
+    {
+        PLUS =
+        {
             normal = "EsoUI/Art/Progression/addPoints_up.dds",
             mouseDown = "EsoUI/Art/Progression/addPoints_down.dds",
             mouseover = "EsoUI/Art/Progression/addPoints_over.dds",
             disabled = "EsoUI/Art/Progression/addPoints_disabled.dds",
         },
-        MORPH = {
+        MORPH =
+        {
             normal = "EsoUI/Art/Progression/morph_up.dds",
             mouseDown = "EsoUI/Art/Progression/morph_down.dds",
             mouseover = "EsoUI/Art/Progression/morph_over.dds",
             disabled = "EsoUI/Art/Progression/morph_disabled.dds",
         },
-        REMORPH = {
+        REMORPH =
+        {
             normal = "EsoUI/Art/Progression/remorph_up.dds",
             mouseDown = "EsoUI/Art/Progression/remorph_down.dds",
             mouseover = "EsoUI/Art/Progression/remorph_over.dds",
@@ -1787,7 +1796,7 @@ Override function for GetKillingAttackInfo.
 
         -- name
         local detailedName = skillProgressionData:GetDetailedName()
-        detailedName = zo_strgsub(detailedName, "With", "with")               -- Easiest way to fix the capitalization of the skill "Bond With Nature"
+        detailedName = zo_strgsub(detailedName, "With", "with") -- Easiest way to fix the capitalization of the skill "Bond With Nature"
         detailedName = zo_strgsub(detailedName, "Blessing Of", "Blessing of") -- Easiest way to fix the capitalization of the skill "Blessing of Restoration"
         control.nameLabel:SetText(detailedName)
         local offsetY = showXPBar and -10 or 0
@@ -1916,29 +1925,34 @@ Override function for GetKillingAttackInfo.
             end
         end
 
-        ZO_Dialogs_RegisterCustomDialog("PURCHASE_ABILITY_CONFIRM", {
-            customControl = confirmDialogControl,
-            setup = SetupPurchaseAbilityConfirmDialog,
-            title = {
-                text = SI_SKILLS_CONFIRM_PURCHASE_ABILITY,
-            },
-            buttons = {
-                [1] = {
-                    control = confirmDialogControl:GetNamedChild("Confirm"),
-                    text = SI_SKILLS_UNLOCK_CONFIRM,
-                    callback = function (dialog)
-                        local skillProgressionData = dialog.data
-                        local skillPointAllocator = skillProgressionData:GetSkillData():GetPointAllocator()
-                        skillPointAllocator:Purchase()
-                    end,
+        ZO_Dialogs_RegisterCustomDialog("PURCHASE_ABILITY_CONFIRM",
+            {
+                customControl = confirmDialogControl,
+                setup = SetupPurchaseAbilityConfirmDialog,
+                title =
+                {
+                    text = SI_SKILLS_CONFIRM_PURCHASE_ABILITY,
                 },
+                buttons =
+                {
+                    [1] =
+                    {
+                        control = confirmDialogControl:GetNamedChild("Confirm"),
+                        text = SI_SKILLS_UNLOCK_CONFIRM,
+                        callback = function (dialog)
+                            local skillProgressionData = dialog.data
+                            local skillPointAllocator = skillProgressionData:GetSkillData():GetPointAllocator()
+                            skillPointAllocator:Purchase()
+                        end,
+                    },
 
-                [2] = {
-                    control = confirmDialogControl:GetNamedChild("Cancel"),
-                    text = SI_CANCEL,
+                    [2] =
+                    {
+                        control = confirmDialogControl:GetNamedChild("Cancel"),
+                        text = SI_CANCEL,
+                    },
                 },
-            },
-        })
+            })
     end
 
     -- Overwrite default Upgrade menu for Skills with Custom Icons (Keyboard)
@@ -1985,28 +1999,33 @@ Override function for GetKillingAttackInfo.
             end
         end
 
-        ZO_Dialogs_RegisterCustomDialog("UPGRADE_ABILITY_CONFIRM", {
-            customControl = upgradeDialogControl,
-            setup = SetupUpgradeAbilityDialog,
-            title = {
-                text = SI_SKILLS_UPGRADE_ABILITY,
-            },
-            buttons = {
-                [1] = {
-                    control = upgradeDialogControl:GetNamedChild("Confirm"),
-                    text = SI_SKILLS_UPGRADE_CONFIRM,
-                    callback = function (dialog)
-                        local skillData = dialog.data
-                        local skillPointAllocator = skillData:GetPointAllocator()
-                        skillPointAllocator:IncreaseRank()
-                    end,
+        ZO_Dialogs_RegisterCustomDialog("UPGRADE_ABILITY_CONFIRM",
+            {
+                customControl = upgradeDialogControl,
+                setup = SetupUpgradeAbilityDialog,
+                title =
+                {
+                    text = SI_SKILLS_UPGRADE_ABILITY,
                 },
-                [2] = {
-                    control = upgradeDialogControl:GetNamedChild("Cancel"),
-                    text = SI_CANCEL,
+                buttons =
+                {
+                    [1] =
+                    {
+                        control = upgradeDialogControl:GetNamedChild("Confirm"),
+                        text = SI_SKILLS_UPGRADE_CONFIRM,
+                        callback = function (dialog)
+                            local skillData = dialog.data
+                            local skillPointAllocator = skillData:GetPointAllocator()
+                            skillPointAllocator:IncreaseRank()
+                        end,
+                    },
+                    [2] =
+                    {
+                        control = upgradeDialogControl:GetNamedChild("Cancel"),
+                        text = SI_CANCEL,
+                    },
                 },
-            },
-        })
+            })
     end
 
     InitializeKeyboardConfirmDialog()
@@ -2075,7 +2094,7 @@ Override function for GetKillingAttackInfo.
 
                 local keybindWidth = 50 -- width assuming a single keybind
                 if ACTION_BAR_ASSIGNMENT_MANAGER:IsUltimateSlot(actionSlotIndex) then
-                    keybindWidth = 90   -- double keybind width (RB+LB)
+                    keybindWidth = 90 -- double keybind width (RB+LB)
                 end
 
                 keybindLabel:SetHidden(false)

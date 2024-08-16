@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 
 -- Just a copy of esoui/ingame/skillsadvisor/gamepad/skillsadvisor_suggestions_gamepad.lua, this is the easiest way to override for custom ability icons.
@@ -88,7 +89,8 @@ function LUIE.InitializeHooksSkillAdvisor()
     end
 
     function SkillsAdvisorSuggestions_Gamepad:InitializeKeybinds()
-        self.keybindStripDescriptor = {
+        self.keybindStripDescriptor =
+        {
             alignment = KEYBIND_STRIP_ALIGN_LEFT,
             {
                 name = GetString(SI_GAMEPAD_SELECT_OPTION),
@@ -132,7 +134,8 @@ function LUIE.InitializeHooksSkillAdvisor()
         local keybindCount = #self.keybindStripDescriptor
         ZO_Gamepad_AddBackNavigationKeybindDescriptors(self.keybindStripDescriptor, GAME_NAVIGATION_TYPE_BUTTON, Back)
 
-        self.keybindStripRightDescriptor = {
+        self.keybindStripRightDescriptor =
+        {
             alignment = KEYBIND_STRIP_ALIGN_RIGHT,
             {
                 name = GetString(SI_SKILLS_ADVISOR_GAMEPAD_OPEN_ADVISOR_SETTINGS),

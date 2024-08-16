@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 local ChatAnnouncements = LUIE.ChatAnnouncements
 
@@ -32,7 +33,8 @@ function ChatAnnouncements.CreateSettings()
     local Defaults = ChatAnnouncements.Defaults
     local Settings = ChatAnnouncements.SV
 
-    local panelDataChatAnnouncements = {
+    local panelDataChatAnnouncements =
+    {
         type = "panel",
         name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_CA)),
         displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_CA)),
@@ -50,13 +52,15 @@ function ChatAnnouncements.CreateSettings()
     local optionsDataChatAnnouncements = {}
 
     -- Chat Announcements Module Description
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "description",
         text = GetString(LUIE_STRING_LAM_CA_DESCRIPTION),
     }
 
     -- ReloadUI Button
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "button",
         name = GetString(LUIE_STRING_LAM_RELOADUI),
         tooltip = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
@@ -67,10 +71,12 @@ function ChatAnnouncements.CreateSettings()
     }
 
     -- Chat Announcements - Chat Message Settings Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CA_CHATHEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Player Name Display Method
                 type = "dropdown",
@@ -296,7 +302,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not Settings.TimeStamp
                 end,
-                default = {
+                default =
+                {
                     r = Settings.TimeStampColor[1],
                     g = Settings.TimeStampColor[2],
                     b = Settings.TimeStampColor[3],
@@ -306,10 +313,12 @@ function ChatAnnouncements.CreateSettings()
     }
 
     -- Chat Announcements - Currency Announcements Options Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CA_CURRENCY_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Show Currency Icons
                 type = "checkbox",
@@ -360,7 +369,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyGoldChange and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyGoldColor[1],
                     g = Defaults.Currency.CurrencyGoldColor[2],
                     b = Defaults.Currency.CurrencyGoldColor[3],
@@ -520,7 +530,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyAPShowChange and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyAPColor[1],
                     g = Defaults.Currency.CurrencyAPColor[2],
                     b = Defaults.Currency.CurrencyAPColor[3],
@@ -649,7 +660,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyTVChange and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyTVColor[1],
                     g = Defaults.Currency.CurrencyTVColor[2],
                     b = Defaults.Currency.CurrencyTVColor[3],
@@ -778,7 +790,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyWVChange and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyWVColor[1],
                     g = Defaults.Currency.CurrencyWVColor[2],
                     b = Defaults.Currency.CurrencyWVColor[3],
@@ -867,7 +880,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyUndauntedChange and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyUndauntedColor[1],
                     g = Defaults.Currency.CurrencyUndauntedColor[2],
                     b = Defaults.Currency.CurrencyUndauntedColor[3],
@@ -956,7 +970,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyEndlessChange and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyEndlessColor[1],
                     g = Defaults.Currency.CurrencyEndlessColor[2],
                     b = Defaults.Currency.CurrencyEndlessColor[3],
@@ -1045,7 +1060,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyOutfitTokenChange and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyOutfitTokenColor[1],
                     g = Defaults.Currency.CurrencyOutfitTokenColor[2],
                     b = Defaults.Currency.CurrencyOutfitTokenColor[3],
@@ -1134,7 +1150,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyTransmuteChange and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyTransmuteColor[1],
                     g = Defaults.Currency.CurrencyTransmuteColor[2],
                     b = Defaults.Currency.CurrencyTransmuteColor[3],
@@ -1223,7 +1240,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyEventChange and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyEventColor[1],
                     g = Defaults.Currency.CurrencyEventColor[2],
                     b = Defaults.Currency.CurrencyEventColor[3],
@@ -1312,7 +1330,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyCrownsChange and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyCrownsColor[1],
                     g = Defaults.Currency.CurrencyCrownsColor[2],
                     b = Defaults.Currency.CurrencyCrownsColor[3],
@@ -1401,7 +1420,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyCrownGemsChange and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyCrownGemsColor[1],
                     g = Defaults.Currency.CurrencyCrownGemsColor[2],
                     b = Defaults.Currency.CurrencyCrownGemsColor[3],
@@ -1491,7 +1511,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyEndeavorsChange and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyEndeavorsColor[1],
                     g = Defaults.Currency.CurrencyEndeavorsColor[2],
                     b = Defaults.Currency.CurrencyEndeavorsColor[3],
@@ -1552,10 +1573,12 @@ function ChatAnnouncements.CreateSettings()
     }
 
     -- Chat Announcements - Loot Announcements Options Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CA_LOOT_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Item Link Bracket
                 type = "dropdown",
@@ -2340,10 +2363,12 @@ function ChatAnnouncements.CreateSettings()
     }
 
     -- Chat Announcements - Shared Currency/Loot Options Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CA_CURRENCY_CONTEXT_MENU),
-        controls = {
+        controls =
+        {
             {
                 -- Currency/Loot Message Color
                 type = "colorpicker",
@@ -2359,7 +2384,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyColor[1],
                     g = Defaults.Currency.CurrencyColor[2],
                     b = Defaults.Currency.CurrencyColor[3],
@@ -2397,7 +2423,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyContextColor and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyColorUp[1],
                     g = Defaults.Currency.CurrencyColorUp[2],
                     b = Defaults.Currency.CurrencyColorUp[3],
@@ -2418,7 +2445,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Currency.CurrencyContextColor and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Currency.CurrencyColorDown[1],
                     g = Defaults.Currency.CurrencyColorDown[2],
                     b = Defaults.Currency.CurrencyColorDown[3],
@@ -3937,10 +3965,12 @@ function ChatAnnouncements.CreateSettings()
     }
 
     -- Chat Announcements - Experience Announcements Options Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CA_EXP_HEADER),
-        controls = {
+        controls =
+        {
             {
                 type = "header",
                 name = GetString(LUIE_STRING_LAM_CA_EXP_HEADER_ENLIGHTENED),
@@ -4109,7 +4139,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.XP.ExperienceLevelUpCA or Settings.XP.ExperienceLevelUpCSA or Settings.XP.ExperienceLevelUpAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.XP.ExperienceLevelUpColor[1],
                     g = Defaults.XP.ExperienceLevelUpColor[2],
                     b = Defaults.XP.ExperienceLevelUpColor[3],
@@ -4189,7 +4220,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.XP.Experience and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.XP.ExperienceColorMessage[1],
                     g = Defaults.XP.ExperienceColorMessage[2],
                     b = Defaults.XP.ExperienceColorMessage[3],
@@ -4210,7 +4242,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.XP.Experience and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.XP.ExperienceColorName[1],
                     g = Defaults.XP.ExperienceColorName[2],
                     b = Defaults.XP.ExperienceColorName[3],
@@ -4383,7 +4416,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Skills.SkillPointCA or Settings.Skills.SkillPointCSA or Settings.Skills.SkillPointAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Skills.SkillPointColor1[1],
                     g = Defaults.Skills.SkillPointColor1[2],
                     b = Defaults.Skills.SkillPointColor1[3],
@@ -4404,7 +4438,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Skills.SkillPointCA or Settings.Skills.SkillPointCSA or Settings.Skills.SkillPointAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Skills.SkillPointColor2[1],
                     g = Defaults.Skills.SkillPointColor2[2],
                     b = Defaults.Skills.SkillPointColor2[3],
@@ -4655,7 +4690,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Skills.SkillLineUnlockCA or Settings.Skills.SkillLineUnlockCSA or Settings.Skills.SkillLineUnlockAlert or Settings.Skills.SkillLineAlertCA or Settings.Skills.SkillLineAlertCSA or Settings.Skills.SkillLineAlertAlert or Settings.Skills.SkillAbilityCA or Settings.Skills.SkillAbilityCSA or Settings.Skills.SkillAbilityAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Skills.SkillLineColor[1],
                     g = Defaults.Skills.SkillLineColor[2],
                     b = Defaults.Skills.SkillLineColor[3],
@@ -4699,7 +4735,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Skills.SkillGuildColor[1],
                     g = Defaults.Skills.SkillGuildColor[2],
                     b = Defaults.Skills.SkillGuildColor[3],
@@ -4773,7 +4810,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (LUIE.SV.ChatAnnouncements_Enable and Settings.Skills.SkillGuildFighters)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Skills.SkillGuildColorFG[1],
                     g = Defaults.Skills.SkillGuildColorFG[2],
                     b = Defaults.Skills.SkillGuildColorFG[3],
@@ -4851,7 +4889,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (LUIE.SV.ChatAnnouncements_Enable and Settings.Skills.SkillGuildMages)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Skills.SkillGuildColorMG[1],
                     g = Defaults.Skills.SkillGuildColorMG[2],
                     b = Defaults.Skills.SkillGuildColorMG[3],
@@ -4889,7 +4928,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (LUIE.SV.ChatAnnouncements_Enable and Settings.Skills.SkillGuildUndaunted)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Skills.SkillGuildColorUD[1],
                     g = Defaults.Skills.SkillGuildColorUD[2],
                     b = Defaults.Skills.SkillGuildColorUD[3],
@@ -4927,7 +4967,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (LUIE.SV.ChatAnnouncements_Enable and Settings.Skills.SkillGuildThieves)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Skills.SkillGuildColorTG[1],
                     g = Defaults.Skills.SkillGuildColorTG[2],
                     b = Defaults.Skills.SkillGuildColorTG[3],
@@ -4965,7 +5006,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (LUIE.SV.ChatAnnouncements_Enable and Settings.Skills.SkillGuildDarkBrotherhood)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Skills.SkillGuildColorDB[1],
                     g = Defaults.Skills.SkillGuildColorDB[2],
                     b = Defaults.Skills.SkillGuildColorDB[3],
@@ -5003,7 +5045,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (LUIE.SV.ChatAnnouncements_Enable and Settings.Skills.SkillGuildDarkBrotherhood)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Skills.SkillGuildColorPO[1],
                     g = Defaults.Skills.SkillGuildColorPO[2],
                     b = Defaults.Skills.SkillGuildColorPO[3],
@@ -5030,10 +5073,12 @@ function ChatAnnouncements.CreateSettings()
     }
 
     -- Chat Announcements - Collectible/Lorebooks Announcements Options Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CA_COLLECTIBLE_HEADER),
-        controls = {
+        controls =
+        {
             {
                 --
                 type = "header",
@@ -5141,7 +5186,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Collectibles.CollectibleCA or Settings.Collectibles.CollectibleCSA or Settings.Collectibles.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Collectibles.CollectibleColor1[1],
                     g = Defaults.Collectibles.CollectibleColor1[2],
                     b = Defaults.Collectibles.CollectibleColor1[3],
@@ -5162,7 +5208,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Collectibles.CollectibleCA or Settings.Collectibles.CollectibleCSA or Settings.Collectibles.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Collectibles.CollectibleColor2[1],
                     g = Defaults.Collectibles.CollectibleColor2[2],
                     b = Defaults.Collectibles.CollectibleColor2[3],
@@ -5344,7 +5391,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Collectibles.CollectibleUseCA or Settings.Collectibles.CollectibleUseAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Collectibles.CollectibleUseColor[1],
                     g = Defaults.Collectibles.CollectibleUseColor[2],
                     b = Defaults.Collectibles.CollectibleUseColor[3],
@@ -5612,7 +5660,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Lorebooks.LorebookCA or Settings.Lorebooks.LorebookCSA or Settings.Lorebooks.LorebookAlert or Settings.Lorebooks.LorebookCollectionCA or Settings.Lorebooks.LorebookCollectionCSA or Settings.Lorebooks.LorebookCollectionAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Lorebooks.LorebookColor1[1],
                     g = Defaults.Lorebooks.LorebookColor1[2],
                     b = Defaults.Lorebooks.LorebookColor1[3],
@@ -5633,7 +5682,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Lorebooks.LorebookCA or Settings.Lorebooks.LorebookCSA or Settings.Lorebooks.LorebookAlert or Settings.Lorebooks.LorebookCollectionCA or Settings.Lorebooks.LorebookCollectionCSA or Settings.Lorebooks.LorebookCollectionAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Lorebooks.LorebookColor2[1],
                     g = Defaults.Lorebooks.LorebookColor2[2],
                     b = Defaults.Lorebooks.LorebookColor2[3],
@@ -5746,10 +5796,12 @@ function ChatAnnouncements.CreateSettings()
     }
 
     -- Chat Announcements - Antiquities Announcements Options Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CA_ANTIQUITY_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Sub Header Antiquity Leads
                 type = "header",
@@ -5857,7 +5909,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Antiquities.AntiquityCA or Settings.Antiquities.AntiquityCSA or Settings.Antiquities.AntiquityAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Antiquities.AntiquityColor[1],
                     g = Defaults.Antiquities.AntiquityColor[2],
                     b = Defaults.Antiquities.AntiquityColor[3],
@@ -5919,10 +5972,12 @@ function ChatAnnouncements.CreateSettings()
     }
 
     -- Chat Announcements - Achievements Announcements Options Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CA_ACHIEVE_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Show Achievement Update ChatAnnouncements
                 type = "checkbox",
@@ -6135,7 +6190,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Achievement.AchievementCompleteCA or Settings.Achievement.AchievementCompleteCSA or Settings.Achievement.AchievementCompleteAlert or Settings.Achievement.AchievementUpdateCA or Settings.Achievement.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Achievement.AchievementColor1[1],
                     g = Defaults.Achievement.AchievementColor1[2],
                     b = Defaults.Achievement.AchievementColor1[3],
@@ -6156,7 +6212,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Achievement.AchievementCompleteCA or Settings.Achievement.AchievementCompleteCSA or Settings.Achievement.AchievementCompleteAlert or Settings.Achievement.AchievementUpdateCA or Settings.Achievement.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Achievement.AchievementColor2[1],
                     g = Defaults.Achievement.AchievementColor2[2],
                     b = Defaults.Achievement.AchievementColor2[3],
@@ -6294,7 +6351,8 @@ function ChatAnnouncements.CreateSettings()
     for i = 1, GetNumAchievementCategories() do
         local name = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(i))
         local tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(i))
-        local checkbox = {
+        local checkbox =
+        {
             type = "checkbox",
             name = name,
             tooltip = tooltip,
@@ -6319,10 +6377,12 @@ function ChatAnnouncements.CreateSettings()
     end
 
     -- Chat Announcements - Quest Announcements Options Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CA_QUEST_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Show Quest Share ChatAnnouncements
                 type = "checkbox",
@@ -6848,7 +6908,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Quests.QuestColorLocName[1],
                     g = Defaults.Quests.QuestColorLocName[2],
                     b = Defaults.Quests.QuestColorLocName[3],
@@ -6869,7 +6930,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Quests.QuestColorLocDescription[1],
                     g = Defaults.Quests.QuestColorLocDescription[2],
                     b = Defaults.Quests.QuestColorLocDescription[3],
@@ -6890,7 +6952,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Quests.QuestColorName[1],
                     g = Defaults.Quests.QuestColorName[2],
                     b = Defaults.Quests.QuestColorName[3],
@@ -6911,7 +6974,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not LUIE.SV.ChatAnnouncements_Enable
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Quests.QuestColorDescription[1],
                     g = Defaults.Quests.QuestColorDescription[2],
                     b = Defaults.Quests.QuestColorDescription[3],
@@ -6955,10 +7019,12 @@ function ChatAnnouncements.CreateSettings()
     }
 
     -- Chat Announcements - Social Announcements Options Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CA_SOCIAL_HEADER),
-        controls = {
+        controls =
+        {
             {
                 type = "header",
                 name = GetString(LUIE_STRING_LAM_CA_SOCIAL_FRIENDS_HEADER),
@@ -7189,7 +7255,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Social.GuildCA or Settings.Social.GuildAlert or Settings.Social.GuildRankCA or Settings.Social.GuildRankAlert or Settings.Social.GuildManageCA or Settings.Social.GuildManageAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Social.GuildColor[1],
                     g = Defaults.Social.GuildColor[2],
                     b = Defaults.Social.GuildColor[3],
@@ -7538,10 +7605,12 @@ function ChatAnnouncements.CreateSettings()
     }
 
     -- Chat Announcements - Group Announcements Options Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CA_GROUP_HEADER),
-        controls = {
+        controls =
+        {
             {
                 type = "header",
                 name = GetString(LUIE_STRING_LAM_CA_GROUP_BASE_HEADER),
@@ -7952,10 +8021,12 @@ function ChatAnnouncements.CreateSettings()
     }
 
     -- Chat Announcements - Display Announcements Options Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CA_DISPLAY_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Display Announcements Header
                 type = "description",
@@ -8431,10 +8502,12 @@ function ChatAnnouncements.CreateSettings()
     }
 
     -- Chat Announcements - Miscellaneous Announcements Options Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements+1] = {
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CA_MISC_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Mail (Send/Recieve - CA)
                 type = "checkbox",
@@ -8647,7 +8720,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Notify.StorageBagCA or Settings.Notify.StorageBagCSA or Settings.Notify.StorageBagAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Notify.StorageBagColor[1],
                     g = Defaults.Notify.StorageBagColor[2],
                     b = Defaults.Notify.StorageBagColor[3],
@@ -8719,7 +8793,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Notify.StorageRidingCA or Settings.Notify.StorageRidingCSA or Settings.Notify.StorageRidingAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Notify.StorageRidingColor[1],
                     g = Defaults.Notify.StorageRidingColor[2],
                     b = Defaults.Notify.StorageRidingColor[3],
@@ -8740,7 +8815,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Notify.StorageRidingCA or Settings.Notify.StorageRidingCSA or Settings.Notify.StorageRidingAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Notify.StorageRidingBookColor[1],
                     g = Defaults.Notify.StorageRidingBookColor[2],
                     b = Defaults.Notify.StorageRidingBookColor[3],
@@ -8867,7 +8943,8 @@ function ChatAnnouncements.CreateSettings()
                 disabled = function ()
                     return not (Settings.Notify.DisguiseWarnCA or Settings.Notify.DisguiseWarnCSA or Settings.Notify.DisguiseWarnAlert and LUIE.SV.ChatAnnouncements_Enable)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.Notify.DisguiseAlertColor[1],
                     g = Defaults.Notify.DisguiseAlertColor[2],
                     b = Defaults.Notify.DisguiseAlertColor[3],

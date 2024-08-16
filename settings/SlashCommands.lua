@@ -3,11 +3,12 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 local SlashCommands = LUIE.SlashCommands
 local CollectibleTables = LUIE.Data.CollectibleTables
 
-local pairs =pairs
+local pairs = pairs
 local table_insert = table.insert
 local zo_strformat = zo_strformat
 
@@ -94,7 +95,8 @@ function SlashCommands.CreateSettings()
     local Defaults = SlashCommands.Defaults
     local Settings = SlashCommands.SV
 
-    local panelDataSlashCommands = {
+    local panelDataSlashCommands =
+    {
         type = "panel",
         name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_SLASHCMDS)),
         displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_SLASHCMDS)),
@@ -112,13 +114,15 @@ function SlashCommands.CreateSettings()
     local optionsDataSlashCommands = {}
 
     -- Slash Commands description
-    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] =
+    {
         type = "description",
         text = GetString(LUIE_STRING_LAM_SLASHCMDS_DESCRIPTION),
     }
 
     -- ReloadUI Button
-    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] =
+    {
         type = "button",
         name = GetString(LUIE_STRING_LAM_RELOADUI),
         tooltip = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
@@ -129,10 +133,12 @@ function SlashCommands.CreateSettings()
     }
 
     -- Slash Commands - General Commands Submenu
-    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_SLASHCMDSHEADER_GENERAL),
-        controls = {
+        controls =
+        {
             {
                 -- SlashTrade
                 type = "checkbox",
@@ -534,10 +540,12 @@ function SlashCommands.CreateSettings()
     }
 
     -- Slash Commands - Group Commands Options Submenu
-    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_SLASHCMDSHEADER_GROUP),
-        controls = {
+        controls =
+        {
             {
                 -- SlashReadyCheck
                 type = "checkbox",
@@ -654,10 +662,12 @@ function SlashCommands.CreateSettings()
     }
 
     -- Slash Commands - Guild Commands Options Submenu
-    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_SLASHCMDSHEADER_GUILD),
-        controls = {
+        controls =
+        {
             {
                 -- SlashGuildInvite
                 type = "checkbox",
@@ -710,10 +720,12 @@ function SlashCommands.CreateSettings()
     }
 
     -- Slash Commands - Social Commands Options Submenu
-    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_SLASHCMDSHEADER_SOCIAL),
-        controls = {
+        controls =
+        {
             {
                 -- SlashFriend
                 type = "checkbox",
@@ -782,10 +794,12 @@ function SlashCommands.CreateSettings()
     }
 
     -- Slash Commands - Holiday XP Events Commands Options Submenu
-    optionsDataSlashCommands[#optionsDataSlashCommands+1] = {
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_SLASHCMDSHEADER_HOLIDAY),
-        controls = {
+        controls =
+        {
             {
                 -- SlashCake
                 type = "checkbox",

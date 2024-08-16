@@ -3,12 +3,14 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 
 local CollectibleTables =
 {
     -- Banker
-    Banker = {
+    Banker =
+    {
         [267] = "Tythis",
         [6376] = "Ezabi",
         [8994] = "Crow",
@@ -17,7 +19,8 @@ local CollectibleTables =
     },
 
     -- Merchants
-    Merchants = {
+    Merchants =
+    {
         [301] = "Nuzimeh",
         [6378] = "Fezez",
         [8995] = "Crow",
@@ -26,26 +29,30 @@ local CollectibleTables =
     },
 
     -- Armory Assistants
-    Armory = {
+    Armory =
+    {
         [9745] = "Ghrasharog",
         [10618] = "Zhuqoth",
         [11876] = "Drinweth",
     },
 
     -- Deconstruction
-    Decon = {
+    Decon =
+    {
         [10184] = "Giladil",
         [10617] = "Aderene",
     },
 
     -- Fence
-    Fence = {
+    Fence =
+    {
         [300] = "Pirharri",
     },
 
     -- Companions
     -- LUI will generate SlashCommands from the lowercase names e.g. Bastian becomes /bastian.
-    Companions = {
+    Companions =
+    {
         [9245] = "Bastian",
         [9353] = "Mirri",
         [9911] = "Ember",

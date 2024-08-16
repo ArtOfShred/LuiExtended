@@ -4,6 +4,7 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 -- ChatAnnouncements namespace
 local ChatAnnouncements = LUIE.ChatAnnouncements
@@ -28,8 +29,8 @@ local moduleName = LUIE.name .. "ChatAnnouncements"
 ------------------------------------------------
 
 -- Experience
-local g_xpCombatBufferValue = 0      -- Buffered XP Value
-local g_guildSkillThrottle = 0       -- Buffered Fighter's Guild Reputation Value
+local g_xpCombatBufferValue = 0 -- Buffered XP Value
+local g_guildSkillThrottle = 0 -- Buffered Fighter's Guild Reputation Value
 local g_guildSkillThrottleLine = nil -- Grab the name for Fighter's Guild reputation (since index isn't always the same) to pass over to Buffered Printer Function
 
 ------------------------------------------------
@@ -158,7 +159,8 @@ end
 
 -- Helper function to get the color for the Guild
 local function GetGuildColor(lineId)
-    local GUILD_SKILL_COLOR_TABLE = {
+    local GUILD_SKILL_COLOR_TABLE =
+    {
         [45] = ColorizeColors.SkillGuildColorizeFG,
         [44] = ColorizeColors.SkillGuildColorizeMG,
         [55] = ColorizeColors.SkillGuildColorizeUD,
@@ -170,7 +172,8 @@ local function GetGuildColor(lineId)
 end
 
 -- TODO: Check if there is an equivalency in one of the handlers for this
-local GUILD_SKILL_ICONS = {
+local GUILD_SKILL_ICONS =
+{
     [45] = "esoui/art/icons/mapkey/mapkey_fightersguild.dds",
     [44] = "esoui/art/icons/mapkey/mapkey_magesguild.dds",
     [55] = "esoui/art/icons/mapkey/mapkey_undaunted.dds",

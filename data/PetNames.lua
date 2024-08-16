@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@type LUIE
+---@class (partial) LuiExtended
 local LUIE = LUIE
 
 --- @class PetNames
@@ -15,7 +15,8 @@ local LUIE = LUIE
 local PetNames =
 {
     -- Pet Names (Sorcerer)
-    Sorcerer = {
+    Sorcerer =
+    {
         [GetString(LUIE_STRING_PET_NAME_UNSTABLE_FAMILIAR)] = true,
         [GetString(LUIE_STRING_PET_NAME_CLANNFEAR)] = true,
         [GetString(LUIE_STRING_PET_NAME_VOLATILE_FAMILIAR)] = true,
@@ -28,14 +29,16 @@ local PetNames =
     },
 
     -- Pet Names (Warden)
-    Warden = {
+    Warden =
+    {
         [GetString(LUIE_STRING_PET_NAME_FERAL_GUARDIAN)] = true,
         [GetString(LUIE_STRING_PET_NAME_ETERNAL_GUARDIAN)] = true,
         [GetString(LUIE_STRING_PET_NAME_WILD_GUARDIAN)] = true,
     },
 
     -- Pet Names (Necromancer)
-    Necromancer = {
+    Necromancer =
+    {
         [GetString(LUIE_STRING_PET_NAME_SKELETAL_MAGE)] = true,
         [GetString(LUIE_STRING_PET_NAME_SKELETAL_ARCHER)] = true,
         [GetString(LUIE_STRING_PET_NAME_SKELETAL_ARCANIST)] = true,
@@ -45,7 +48,8 @@ local PetNames =
     },
 
     -- Pet Names (Sets)
-    Sets = {
+    Sets =
+    {
         [GetString(LUIE_STRING_PET_NAME_ENGINE_GUARDIAN)] = true,
         [GetString(LUIE_STRING_PET_NAME_MAW_OF_THE_INFERNAL)] = true,
         [GetString(LUIE_STRING_PET_NAME_SHADOWREND)] = true,
@@ -54,7 +58,8 @@ local PetNames =
     },
 
     -- Pet Names (Assistants)
-    Assistants = {
+    Assistants =
+    {
         [GetString(LUIE_STRING_PET_NAME_ASSISTANT_EZABI)] = true,
         [GetString(LUIE_STRING_PET_NAME_ASSISTANT_FEZEZ)] = true,
         [GetString(LUIE_STRING_PET_NAME_ASSISTANT_PIRHARRI)] = true,

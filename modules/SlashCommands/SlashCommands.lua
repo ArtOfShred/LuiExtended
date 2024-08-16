@@ -4,6 +4,7 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 -- SlashCommands namespace
 LUIE.SlashCommands = {}
@@ -12,7 +13,8 @@ local SlashCommands = LUIE.SlashCommands
 local pairs = pairs
 
 SlashCommands.Enabled = false
-SlashCommands.Defaults = {
+SlashCommands.Defaults =
+{
     SlashHome = true,
     SlashHomeChoice = 1,
     SlashSetPrimaryHome = true,
@@ -55,7 +57,7 @@ SlashCommands.Defaults = {
 }
 SlashCommands.SV = nil
 
-LUIE.LastMementoUsed = 0              -- Set by the SlashCollectible function, passes this value to CA to display the Memento we used if a slash command is used
+LUIE.LastMementoUsed = 0 -- Set by the SlashCollectible function, passes this value to CA to display the Memento we used if a slash command is used
 LUIE.SlashCollectibleOverride = false -- Set by the SlashCollectible function, flags the CA function to display info on the collectible used even if the CA option are DISABLED.
 
 function SlashCommands.Initialize(enabled)
@@ -80,8 +82,8 @@ function SlashCommands.RegisterSlashCommands()
     CHAT_SYSTEM.textEntry.slashCommandAutoComplete:InvalidateSlashCommandCache()
 
     -- Register commands that replace default functions
-    SLASH_COMMANDS["/kick"] = SlashCommands.SlashKick             -- This command is always registered since it is also a default emote
-    SLASH_COMMANDS["/invite"] = SlashCommands.SlashInvite         -- This command is always registered since it is also a default command
+    SLASH_COMMANDS["/kick"] = SlashCommands.SlashKick -- This command is always registered since it is also a default emote
+    SLASH_COMMANDS["/invite"] = SlashCommands.SlashInvite -- This command is always registered since it is also a default command
     SLASH_COMMANDS["/readycheck"] = SlashCommands.SlashReadyCheck -- This command is always registered since it is also a default command
 
     -- Add commands based off menu options

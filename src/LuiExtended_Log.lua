@@ -1,3 +1,6 @@
+---@class (partial) LuiExtended
+local LUIE = LUIE
+
 --[[
     If Sirinsidiator's LibDebugLogger is installed, then return a logger from that. If not, return a NOP replacement.
     How To Use: Insert anywhere you would use d or error

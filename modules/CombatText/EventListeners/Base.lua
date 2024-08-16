@@ -4,6 +4,7 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 
 ---@class CombatTextEventListener : ZO_InitializingObject

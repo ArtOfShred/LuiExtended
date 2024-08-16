@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 local UnitFrames = LUIE.UnitFrames
 local PetNames = LUIE.Data.PetNames
@@ -13,14 +14,16 @@ local g_FramesMovingEnabled = false -- Helper local flag
 
 local nameDisplayOptions = { "@UserID", "Character Name", "Character Name @UserID" }
 local nameDisplayOptionsKeys = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
-local raidIconOptions = {
+local raidIconOptions =
+{
     "No Icons",
     "Class Icons Only",
     "Role Icons Only",
     "Class Icon in PVP, Role in PVE",
     "Class Icon in PVE, Role in PVP",
 }
-local raidIconOptionsKeys = {
+local raidIconOptionsKeys =
+{
     ["No Icons"] = 1,
     ["Class Icons Only"] = 2,
     ["Role Icons Only"] = 3,
@@ -34,7 +37,8 @@ local resolutionOptionsKeys = { ["1080p"] = 1, ["1440p"] = 2, ["4K"] = 3 }
 local alignmentOptions = { "Left to Right (Default)", "Right to Left", "Center" }
 local alignmentOptionsKeys = { ["Left to Right (Default)"] = 1, ["Right to Left"] = 2, ["Center"] = 3 }
 
-local formatOptions = {
+local formatOptions =
+{
     "Nothing",
     "Current",
     "Current + Shield",
@@ -70,8 +74,10 @@ local function GenerateCustomList(input)
     return options, values
 end
 
-local dialogs = {
-    [1] = { -- Clear Whitelist
+local dialogs =
+{
+    [1] =
+    { -- Clear Whitelist
         identifier = "LUIE_CLEAR_PET_WHITELIST",
         title = GetString(LUIE_STRING_LAM_UF_WHITELIST_CLEAR),
         text = zo_strformat(GetString(LUIE_STRING_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(LUIE_STRING_CUSTOM_LIST_UF_WHITELIST)),
@@ -115,7 +121,8 @@ function UnitFrames.CreateSettings()
         table_insert(StatusbarTexturesList, key)
     end
 
-    local panelDataUnitFrames = {
+    local panelDataUnitFrames =
+    {
         type = "panel",
         name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_UF)),
         displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_UF)),
@@ -133,13 +140,15 @@ function UnitFrames.CreateSettings()
     local optionsDataUnitFrames = {}
 
     -- Unit Frames module description
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "description",
         text = GetString(LUIE_STRING_LAM_UF_DESCRIPTION),
     }
 
     -- ReloadUI Button
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "button",
         name = GetString(LUIE_STRING_LAM_RELOADUI),
         tooltip = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
@@ -150,7 +159,8 @@ function UnitFrames.CreateSettings()
     }
 
     -- Resolution Options
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "dropdown",
         name = GetString(LUIE_STRING_LAM_UF_RESOLUTION),
         tooltip = GetString(LUIE_STRING_LAM_UF_RESOLUTION_TP),
@@ -170,7 +180,8 @@ function UnitFrames.CreateSettings()
     }
 
     -- Custom Unit Frames Unlock
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_UF_CFRAMES_UNLOCK),
         tooltip = GetString(LUIE_STRING_LAM_UF_CFRAMES_UNLOCK_TP),
@@ -189,7 +200,8 @@ function UnitFrames.CreateSettings()
     }
 
     -- Custom Unit Frames Reset position
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "button",
         name = GetString(LUIE_STRING_LAM_RESETPOSITION),
         tooltip = GetString(LUIE_STRING_LAM_UF_CFRAMES_RESETPOSIT_TP),
@@ -200,10 +212,12 @@ function UnitFrames.CreateSettings()
     }
 
     -- Unit Frames - Default Unit Frames Options Submenu
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_DFRAMES_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Default PLAYER frame
                 type = "dropdown",
@@ -449,7 +463,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.DefaultFramesApplyColor()
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.DefaultTextColour[1],
                     g = Defaults.DefaultTextColour[2],
                     b = Defaults.DefaultTextColour[3],
@@ -511,10 +526,12 @@ function UnitFrames.CreateSettings()
     }
 
     -- Unit Frames - Custom Unit Frames Options Submenu
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_CFRAMES_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Custom Unit Frames Font
                 type = "dropdown",
@@ -719,10 +736,12 @@ function UnitFrames.CreateSettings()
         },
     }
     -- Unit Frames - Custom Unit Frame Color Options Submenu
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_CFRAMES_COLOR_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Custom Unit Frames Health Bar Color
                 type = "colorpicker",
@@ -735,7 +754,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourHealth[1],
                     g = Defaults.CustomColourHealth[2],
                     b = Defaults.CustomColourHealth[3],
@@ -756,7 +776,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourShield[1],
                     g = Defaults.CustomColourShield[2],
                     b = Defaults.CustomColourShield[3],
@@ -777,7 +798,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourTrauma[1],
                     g = Defaults.CustomColourTrauma[2],
                     b = Defaults.CustomColourTrauma[3],
@@ -798,7 +820,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourMagicka[1],
                     g = Defaults.CustomColourMagicka[2],
                     b = Defaults.CustomColourMagicka[3],
@@ -819,7 +842,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourStamina[1],
                     g = Defaults.CustomColourStamina[2],
                     b = Defaults.CustomColourStamina[3],
@@ -840,7 +864,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourInvulnerable[1],
                     g = Defaults.CustomColourInvulnerable[2],
                     b = Defaults.CustomColourInvulnerable[3],
@@ -861,7 +886,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourDPS[1],
                     g = Defaults.CustomColourDPS[2],
                     b = Defaults.CustomColourDPS[3],
@@ -882,7 +908,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourHealer[1],
                     g = Defaults.CustomColourHealer[2],
                     b = Defaults.CustomColourHealer[3],
@@ -903,7 +930,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourTank[1],
                     g = Defaults.CustomColourTank[2],
                     b = Defaults.CustomColourTank[3],
@@ -924,7 +952,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourDragonknight[1],
                     g = Defaults.CustomColourDragonknight[2],
                     b = Defaults.CustomColourDragonknight[3],
@@ -945,7 +974,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourNightblade[1],
                     g = Defaults.CustomColourNightblade[2],
                     b = Defaults.CustomColourNightblade[3],
@@ -966,7 +996,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourSorcerer[1],
                     g = Defaults.CustomColourSorcerer[2],
                     b = Defaults.CustomColourSorcerer[3],
@@ -987,7 +1018,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourTemplar[1],
                     g = Defaults.CustomColourTemplar[2],
                     b = Defaults.CustomColourTemplar[3],
@@ -1008,7 +1040,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourWarden[1],
                     g = Defaults.CustomColourWarden[2],
                     b = Defaults.CustomColourWarden[3],
@@ -1029,7 +1062,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourNecromancer[1],
                     g = Defaults.CustomColourNecromancer[2],
                     b = Defaults.CustomColourNecromancer[3],
@@ -1050,7 +1084,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourArcanist[1],
                     g = Defaults.CustomColourArcanist[2],
                     b = Defaults.CustomColourArcanist[3],
@@ -1072,7 +1107,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourPlayer[1],
                     g = Defaults.CustomColourPlayer[2],
                     b = Defaults.CustomColourPlayer[3],
@@ -1093,7 +1129,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourFriendly[1],
                     g = Defaults.CustomColourFriendly[2],
                     b = Defaults.CustomColourFriendly[3],
@@ -1114,7 +1151,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourCompanion[1],
                     g = Defaults.CustomColourCompanion[2],
                     b = Defaults.CustomColourCompanion[3],
@@ -1135,7 +1173,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourHostile[1],
                     g = Defaults.CustomColourHostile[2],
                     b = Defaults.CustomColourHostile[3],
@@ -1156,7 +1195,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourNeutral[1],
                     g = Defaults.CustomColourNeutral[2],
                     b = Defaults.CustomColourNeutral[3],
@@ -1177,7 +1217,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourGuard[1],
                     g = Defaults.CustomColourGuard[2],
                     b = Defaults.CustomColourGuard[3],
@@ -1198,7 +1239,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourPet[1],
                     g = Defaults.CustomColourPet[2],
                     b = Defaults.CustomColourPet[3],
@@ -1220,7 +1262,8 @@ function UnitFrames.CreateSettings()
                     UnitFrames.CustomFramesApplyColors(true)
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.CustomColourCompanionFrame[1],
                     g = Defaults.CustomColourCompanionFrame[2],
                     b = Defaults.CustomColourCompanionFrame[3],
@@ -1233,10 +1276,12 @@ function UnitFrames.CreateSettings()
     }
 
     -- Unit Frames - Custom Unit Frames (Player & Target) Options Submenu
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_CFRAMESPT_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Enable LUIE PLAYER frame
                 type = "checkbox",
@@ -1978,10 +2023,12 @@ function UnitFrames.CreateSettings()
     }
 
     -- Unit Frames -- Custom Unit Frames Bar Alignment
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_CFRAMES_ALIGN_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Alignment Player Health Bar
                 type = "dropdown",
@@ -2121,10 +2168,12 @@ function UnitFrames.CreateSettings()
     }
 
     -- Unit Frames - Additional Player Frame Display Options Submenu
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_CFRAMESPT_OPTIONS_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Player Frames Display Method
                 type = "dropdown",
@@ -2383,10 +2432,12 @@ function UnitFrames.CreateSettings()
     }
 
     -- Unit Frames - Custom Unit Frames (Group) Options Submenu
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_CFRAMESG_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Enable Group Frames
                 type = "checkbox",
@@ -2678,10 +2729,12 @@ function UnitFrames.CreateSettings()
     }
 
     -- Unit Frames - Custom Unit Frames (Raid) Options Submenu
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_CFRAMESR_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Enable Raid Frames
                 type = "checkbox",
@@ -2991,10 +3044,12 @@ function UnitFrames.CreateSettings()
     }
 
     -- Unit Frames - Custom Unit Frames (Companion) Options Submenu
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_CFRAMESCOMPANION_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Enable Companion Frames
                 type = "checkbox",
@@ -3160,10 +3215,12 @@ function UnitFrames.CreateSettings()
     }
 
     -- Unit Frames - Custom Unit Frames (Pet) Options Submenu
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_CFRAMESPET_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Enable Pet Frames
                 type = "checkbox",
@@ -3455,10 +3512,12 @@ function UnitFrames.CreateSettings()
     }
 
     -- Unit Frames - Custom Unit Frames (Boss) Options Submenu
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_CFRAMESB_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Enable This Addon BOSS frames
                 type = "checkbox",
@@ -3636,10 +3695,12 @@ function UnitFrames.CreateSettings()
     }
 
     -- Unit Frames - Custom Unit Frames (PvP Target Frame) Options Submenu
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_CFRAMESPVP_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Enable additional PvP Target frame
                 type = "checkbox",
@@ -3702,10 +3763,12 @@ function UnitFrames.CreateSettings()
     }
 
     -- Unit Frames - Common Options Submenu
-    optionsDataUnitFrames[#optionsDataUnitFrames+1] = {
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_UF_COMMON_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Shorten numbers
                 type = "checkbox",
@@ -3735,7 +3798,8 @@ function UnitFrames.CreateSettings()
                     Settings.Target_FontColour = { r, g, b }
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.Target_FontColour[1],
                     g = Defaults.Target_FontColour[2],
                     b = Defaults.Target_FontColour[3],
@@ -3755,7 +3819,8 @@ function UnitFrames.CreateSettings()
                     Settings.Target_FontColour_FriendlyNPC = { r, g, b }
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.Target_FontColour_FriendlyNPC[1],
                     g = Defaults.Target_FontColour_FriendlyNPC[2],
                     b = Defaults.Target_FontColour_FriendlyNPC[3],
@@ -3775,7 +3840,8 @@ function UnitFrames.CreateSettings()
                     Settings.Target_FontColour_FriendlyPlayer = { r, g, b }
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.Target_FontColour_FriendlyPlayer[1],
                     g = Defaults.Target_FontColour_FriendlyPlayer[2],
                     b = Defaults.Target_FontColour_FriendlyPlayer[3],
@@ -3795,7 +3861,8 @@ function UnitFrames.CreateSettings()
                     Settings.Target_FontColour_Hostile = { r, g, b }
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.Target_FontColour_Hostile[1],
                     g = Defaults.Target_FontColour_Hostile[2],
                     b = Defaults.Target_FontColour_Hostile[3],
@@ -3830,7 +3897,8 @@ function UnitFrames.CreateSettings()
                     Settings.ReticleColour_Interact = { r, g, b }
                 end,
                 width = "full",
-                default = {
+                default =
+                {
                     r = Defaults.ReticleColour_Interact[1],
                     g = Defaults.ReticleColour_Interact[2],
                     b = Defaults.ReticleColour_Interact[3],

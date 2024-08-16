@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 
 --local Abilities = LUIE.Data.Abilities --unused local
@@ -12,7 +13,8 @@ local CastBarTable =
     --------------------------------------------------------------------------------------------------------------------------------
     -- Id's for Heavy Attacks to ignore if the menu setting is off
     --------------------------------------------------------------------------------------------------------------------------------
-    IsHeavy = {
+    IsHeavy =
+    {
         -- Weapon Attacks
         [15279] = true, -- One Handed
         [16420] = true, -- Dual Wield
@@ -28,7 +30,8 @@ local CastBarTable =
     --------------------------------------------------------------------------------------------------------------------------------
     -- When a hard CC effect is successfully applied to the player, instantly stop any in progress Casts
     --------------------------------------------------------------------------------------------------------------------------------
-    CastBreakingStatus = {
+    CastBreakingStatus =
+    {
         [ACTION_RESULT_STAGGERED] = true,
         [ACTION_RESULT_STUNNED] = true,
         [ACTION_RESULT_KNOCKBACK] = true,
@@ -41,61 +44,63 @@ local CastBarTable =
     --------------------------------------------------------------------------------------------------------------------------------
     -- List of abilityId's that should immediately cancel the Cast Bar if detected
     --------------------------------------------------------------------------------------------------------------------------------
-    CastBreakingActions = {
+    CastBreakingActions =
+    {
         [28549] = true, -- Roll Dodge
         [55146] = true, -- Interrupt Bonus (when player bashes it can interrupt a channel - note that it won't successfully go off until after the cast if it can't be stopped by bashing so this is safe to apply to everything)
     },
 
     -- Used to break Siege Weapon deployment/stoy when the player opens their inventory or another window or tabs out of the game.
-    BreakSiegeOnWindowOpen = {
+    BreakSiegeOnWindowOpen =
+    {
 
-        [29673] = true,  -- Create Ballista Bolt... (Ballista)
-        [29672] = true,  -- Create Ballista Bolt... (Ballista)
-        [29671] = true,  -- Create Ballista Bolt... (Ballista)
+        [29673] = true, -- Create Ballista Bolt... (Ballista)
+        [29672] = true, -- Create Ballista Bolt... (Ballista)
+        [29671] = true, -- Create Ballista Bolt... (Ballista)
 
-        [30611] = true,  -- Create Ballista Fire Bolt... (Fire Ballista)
-        [30607] = true,  -- Create Ballista Fire Bolt... (Fire Ballista)
-        [16751] = true,  -- Create Ballista Fire Bolt... (Fire Ballista)
+        [30611] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
+        [30607] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
+        [16751] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
 
-        [30612] = true,  -- Create Ballista Lightning Bolt ... (Lightning Ballista)
-        [30608] = true,  -- Create Ballista Lightning Bolt ... (Lightning Ballista)
-        [16752] = true,  -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+        [30612] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+        [30608] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+        [16752] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
 
-        [39914] = true,  -- Create Trebuchet... (Stone Trebuchet)
-        [39917] = true,  -- Create Trebuchet... (Stone Trebuchet)
-        [39910] = true,  -- Create Trebuchet... (Stone Trebuchet)
+        [39914] = true, -- Create Trebuchet... (Stone Trebuchet)
+        [39917] = true, -- Create Trebuchet... (Stone Trebuchet)
+        [39910] = true, -- Create Trebuchet... (Stone Trebuchet)
 
-        [39913] = true,  -- Create Trebuchet... (Iceball Trebuchet)
-        [39916] = true,  -- Create Trebuchet... (Iceball Trebuchet)
-        [39909] = true,  -- Create Trebuchet... (Iceball Trebuchet)
+        [39913] = true, -- Create Trebuchet... (Iceball Trebuchet)
+        [39916] = true, -- Create Trebuchet... (Iceball Trebuchet)
+        [39909] = true, -- Create Trebuchet... (Iceball Trebuchet)
 
-        [13665] = true,  -- Create Trebuchet... (Firepot Trebuchet)
-        [13664] = true,  -- Create Trebuchet... (Firepot Trebuchet)
-        [13663] = true,  -- Create Trebuchet... (Firepot Trebuchet)
+        [13665] = true, -- Create Trebuchet... (Firepot Trebuchet)
+        [13664] = true, -- Create Trebuchet... (Firepot Trebuchet)
+        [13663] = true, -- Create Trebuchet... (Firepot Trebuchet)
 
-        [30613] = true,  -- Create Catapult Meatbag (Meatbag Catapult)
-        [30609] = true,  -- Create Catapult Meatbag (Meatbag Catapult)
-        [16755] = true,  -- Create Catapult Meatbag (Meatbag Catapult)
+        [30613] = true, -- Create Catapult Meatbag (Meatbag Catapult)
+        [30609] = true, -- Create Catapult Meatbag (Meatbag Catapult)
+        [16755] = true, -- Create Catapult Meatbag (Meatbag Catapult)
 
-        [30614] = true,  -- Create Catapult Oil Jar... (Oil Catapult)
-        [30610] = true,  -- Create Catapult Oil Jar... (Oil Catapult)
-        [16754] = true,  -- Create Catapult Oil Jar... (Oil Catapult)
+        [30614] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+        [30610] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+        [16754] = true, -- Create Catapult Oil Jar... (Oil Catapult)
 
-        [39915] = true,  -- Create Catapult Meatbag (Scattershot Catapult)
-        [39918] = true,  -- Create Catapult Oil Jar... (Scattershot Catapult)
-        [39911] = true,  -- Create Trebuchet... (Scattershot Catapult)
+        [39915] = true, -- Create Catapult Meatbag (Scattershot Catapult)
+        [39918] = true, -- Create Catapult Oil Jar... (Scattershot Catapult)
+        [39911] = true, -- Create Trebuchet... (Scattershot Catapult)
 
-        [66438] = true,  -- Create Trebuchet... (Cold Stone Trebuchet)
-        [66439] = true,  -- Create Trebuchet... (Cold Stone Trebuchet)
-        [66440] = true,  -- Create Trebuchet... (Cold Stone Trebuchet)
+        [66438] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+        [66439] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+        [66440] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
 
-        [66434] = true,  -- Create Trebuchet... (Cold Fire Trebuchet)
-        [66388] = true,  -- Create Trebuchet... (Cold Fire Trebuchet)
-        [66387] = true,  -- Create Trebuchet... (Cold Fire Trebuchet)
+        [66434] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+        [66388] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+        [66387] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
 
-        [66437] = true,  -- Create Ballista... (Cold Fire Ballista)
-        [66436] = true,  -- Create Ballista... (Cold Fire Ballista)
-        [66435] = true,  -- Create Ballista... (Cold Fire Ballista)
+        [66437] = true, -- Create Ballista... (Cold Fire Ballista)
+        [66436] = true, -- Create Ballista... (Cold Fire Ballista)
+        [66435] = true, -- Create Ballista... (Cold Fire Ballista)
 
         [135862] = true, -- Create Lance Cannon... (Shock Lancer)
         [135861] = true, -- Create Lance Cannon... (Shock Lancer)
@@ -109,22 +114,23 @@ local CastBarTable =
         [135867] = true, -- Create Lance Cannon... (Frost Lancer)
         [135866] = true, -- Create Lance Cannon... (Frost Lancer)
 
-        [22570] = true,  -- Create Boiling Oil... (Flaming Oil)
-        [15876] = true,  -- Create Large Ram... (Battering Ram)
-        [16171] = true,  -- Create Large Ram... (Battering Ram)
-        [16170] = true,  -- Create Large Ram... (Battering Ram)
+        [22570] = true, -- Create Boiling Oil... (Flaming Oil)
+        [15876] = true, -- Create Large Ram... (Battering Ram)
+        [16171] = true, -- Create Large Ram... (Battering Ram)
+        [16170] = true, -- Create Large Ram... (Battering Ram)
 
-        [19039] = true,  -- Ebonheart Forward Camp
-        [19040] = true,  -- Aldmeri Forward Camp
-        [19041] = true,  -- Daggerfall Forward Camp
+        [19039] = true, -- Ebonheart Forward Camp
+        [19040] = true, -- Aldmeri Forward Camp
+        [19041] = true, -- Daggerfall Forward Camp
     },
 
-    BreakCastOnMove = {
+    BreakCastOnMove =
+    {
         -- Fake
         --[999999] = true, -- Used for any interact based casts
 
         -- Innate
-        [6811] = true,  -- Recall
+        [6811] = true, -- Recall
         [69293] = true, -- Sigil of Imperial Retreat
 
         -- Misc Items
@@ -149,55 +155,55 @@ local CastBarTable =
         -- CYRODIIL ----------------------------------------------------
         ----------------------------------------------------------------
 
-        [12256] = true,  -- Pack Siege (Siege Weapons)
+        [12256] = true, -- Pack Siege (Siege Weapons)
 
-        [29673] = true,  -- Create Ballista Bolt... (Ballista)
-        [29672] = true,  -- Create Ballista Bolt... (Ballista)
-        [29671] = true,  -- Create Ballista Bolt... (Ballista)
+        [29673] = true, -- Create Ballista Bolt... (Ballista)
+        [29672] = true, -- Create Ballista Bolt... (Ballista)
+        [29671] = true, -- Create Ballista Bolt... (Ballista)
 
-        [30611] = true,  -- Create Ballista Fire Bolt... (Fire Ballista)
-        [30607] = true,  -- Create Ballista Fire Bolt... (Fire Ballista)
-        [16751] = true,  -- Create Ballista Fire Bolt... (Fire Ballista)
+        [30611] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
+        [30607] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
+        [16751] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
 
-        [30612] = true,  -- Create Ballista Lightning Bolt ... (Lightning Ballista)
-        [30608] = true,  -- Create Ballista Lightning Bolt ... (Lightning Ballista)
-        [16752] = true,  -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+        [30612] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+        [30608] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+        [16752] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
 
-        [39914] = true,  -- Create Trebuchet... (Stone Trebuchet)
-        [39917] = true,  -- Create Trebuchet... (Stone Trebuchet)
-        [39910] = true,  -- Create Trebuchet... (Stone Trebuchet)
+        [39914] = true, -- Create Trebuchet... (Stone Trebuchet)
+        [39917] = true, -- Create Trebuchet... (Stone Trebuchet)
+        [39910] = true, -- Create Trebuchet... (Stone Trebuchet)
 
-        [39913] = true,  -- Create Trebuchet... (Iceball Trebuchet)
-        [39916] = true,  -- Create Trebuchet... (Iceball Trebuchet)
-        [39909] = true,  -- Create Trebuchet... (Iceball Trebuchet)
+        [39913] = true, -- Create Trebuchet... (Iceball Trebuchet)
+        [39916] = true, -- Create Trebuchet... (Iceball Trebuchet)
+        [39909] = true, -- Create Trebuchet... (Iceball Trebuchet)
 
-        [13665] = true,  -- Create Trebuchet... (Firepot Trebuchet)
-        [13664] = true,  -- Create Trebuchet... (Firepot Trebuchet)
-        [13663] = true,  -- Create Trebuchet... (Firepot Trebuchet)
+        [13665] = true, -- Create Trebuchet... (Firepot Trebuchet)
+        [13664] = true, -- Create Trebuchet... (Firepot Trebuchet)
+        [13663] = true, -- Create Trebuchet... (Firepot Trebuchet)
 
-        [30613] = true,  -- Create Catapult Meatbag (Meatbag Catapult)
-        [30609] = true,  -- Create Catapult Meatbag (Meatbag Catapult)
-        [16755] = true,  -- Create Catapult Meatbag (Meatbag Catapult)
+        [30613] = true, -- Create Catapult Meatbag (Meatbag Catapult)
+        [30609] = true, -- Create Catapult Meatbag (Meatbag Catapult)
+        [16755] = true, -- Create Catapult Meatbag (Meatbag Catapult)
 
-        [30614] = true,  -- Create Catapult Oil Jar... (Oil Catapult)
-        [30610] = true,  -- Create Catapult Oil Jar... (Oil Catapult)
-        [16754] = true,  -- Create Catapult Oil Jar... (Oil Catapult)
+        [30614] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+        [30610] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+        [16754] = true, -- Create Catapult Oil Jar... (Oil Catapult)
 
-        [39915] = true,  -- Create Catapult Meatbag (Scattershot Catapult)
-        [39918] = true,  -- Create Catapult Oil Jar... (Scattershot Catapult)
-        [39911] = true,  -- Create Trebuchet... (Scattershot Catapult)
+        [39915] = true, -- Create Catapult Meatbag (Scattershot Catapult)
+        [39918] = true, -- Create Catapult Oil Jar... (Scattershot Catapult)
+        [39911] = true, -- Create Trebuchet... (Scattershot Catapult)
 
-        [66438] = true,  -- Create Trebuchet... (Cold Stone Trebuchet)
-        [66439] = true,  -- Create Trebuchet... (Cold Stone Trebuchet)
-        [66440] = true,  -- Create Trebuchet... (Cold Stone Trebuchet)
+        [66438] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+        [66439] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+        [66440] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
 
-        [66434] = true,  -- Create Trebuchet... (Cold Fire Trebuchet)
-        [66388] = true,  -- Create Trebuchet... (Cold Fire Trebuchet)
-        [66387] = true,  -- Create Trebuchet... (Cold Fire Trebuchet)
+        [66434] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+        [66388] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+        [66387] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
 
-        [66437] = true,  -- Create Ballista... (Cold Fire Ballista)
-        [66436] = true,  -- Create Ballista... (Cold Fire Ballista)
-        [66435] = true,  -- Create Ballista... (Cold Fire Ballista)
+        [66437] = true, -- Create Ballista... (Cold Fire Ballista)
+        [66436] = true, -- Create Ballista... (Cold Fire Ballista)
+        [66435] = true, -- Create Ballista... (Cold Fire Ballista)
 
         [135862] = true, -- Create Lance Cannon... (Shock Lancer)
         [135861] = true, -- Create Lance Cannon... (Shock Lancer)
@@ -211,19 +217,19 @@ local CastBarTable =
         [135867] = true, -- Create Lance Cannon... (Frost Lancer)
         [135866] = true, -- Create Lance Cannon... (Frost Lancer)
 
-        [22570] = true,  -- Create Boiling Oil... (Flaming Oil)
-        [15876] = true,  -- Create Large Ram... (Battering Ram)
-        [16171] = true,  -- Create Large Ram... (Battering Ram)
-        [16170] = true,  -- Create Large Ram... (Battering Ram)
+        [22570] = true, -- Create Boiling Oil... (Flaming Oil)
+        [15876] = true, -- Create Large Ram... (Battering Ram)
+        [16171] = true, -- Create Large Ram... (Battering Ram)
+        [16170] = true, -- Create Large Ram... (Battering Ram)
 
-        [13853] = true,  -- Wall Repair Kit
-        [16723] = true,  -- Door Repair Kit
-        [13601] = true,  -- Advanced Siege Repair Kit
+        [13853] = true, -- Wall Repair Kit
+        [16723] = true, -- Door Repair Kit
+        [13601] = true, -- Advanced Siege Repair Kit
         [112975] = true, -- Wall Repair Kit (Bridge and Milegate Repair Kit)
 
-        [19039] = true,  -- Ebonheart Forward Camp
-        [19040] = true,  -- Aldmeri Forward Camp
-        [19041] = true,  -- Daggerfall Forward Camp
+        [19039] = true, -- Ebonheart Forward Camp
+        [19040] = true, -- Aldmeri Forward Camp
+        [19041] = true, -- Daggerfall Forward Camp
 
         -- [12355] = true, -- Destroy Siege Weapon (Doesn't show up due to Cyrodiil Limitations)
 
@@ -242,7 +248,8 @@ local CastBarTable =
         [21968] = true, -- Binding Bear... (Silent Village)
     },
 
-    IgnoreCastBreakingActions = {
+    IgnoreCastBreakingActions =
+    {
         [86792] = true, -- Eating (High Hrothgar Festival Mints)
         [43700] = true, -- Wand of Finding (Lena's Wand of Finding)
         [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
@@ -255,22 +262,23 @@ local CastBarTable =
     --------------------------------------------------------------------------------------------------------------------------------
     --  List of abilities flagged for CombatInfo to show as a Channel on the Cast Bar
     --------------------------------------------------------------------------------------------------------------------------------
-    CastChannelOverride = {
+    CastChannelOverride =
+    {
         ----------------------------------------------------------------
         -- PLAYER ABILITIES --------------------------------------------
         ----------------------------------------------------------------
 
         -- Innate
-        [32346] = true,  -- Skyshard Collect
+        [32346] = true, -- Skyshard Collect
         [151928] = true, -- Aetherial Well (Aetherial Well)
-        [47270] = true,  -- Ritual of Mara
-        [14031] = true,  -- Mundus Use
-        [4197] = true,   -- Recovering (NPC Duel)
+        [47270] = true, -- Ritual of Mara
+        [14031] = true, -- Mundus Use
+        [4197] = true, -- Recovering (NPC Duel)
 
         -- Seasonal Mementos & Items
-        [85355] = true,  -- Flame Juggling (Consumable Version)
-        [85354] = true,  -- Dagger Juggling (Consumable Verison)
-        [85353] = true,  -- Sword Swallowing (Consumable Version)
+        [85355] = true, -- Flame Juggling (Consumable Version)
+        [85354] = true, -- Dagger Juggling (Consumable Verison)
+        [85353] = true, -- Sword Swallowing (Consumable Version)
         [146657] = true, -- Memento Cliff Racer (Thetys Ramary's Bait Kit)
 
         [115681] = true, -- Party Noise Maker (Festive Noise Maker)
@@ -284,10 +292,10 @@ local CastBarTable =
         [144791] = true, -- Throw Bones (Throwing Bones)
 
         -- Memento (Crown)
-        [85347] = true,  -- Storm Orb Juggle (Atronach Juggling)
-        [97273] = true,  -- TROPHY Death Crate Mem 1 (Crow's Calling)
-        [99318] = true,  -- TROPHY Flame Crate Mem 1 (Fiery Orb)
-        [99319] = true,  -- Flame Crate Memento 2 (Flame Pixie)
+        [85347] = true, -- Storm Orb Juggle (Atronach Juggling)
+        [97273] = true, -- TROPHY Death Crate Mem 1 (Crow's Calling)
+        [99318] = true, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
+        [99319] = true, -- Flame Crate Memento 2 (Flame Pixie)
         [101874] = true, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
         [101877] = true, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
         [101872] = true, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
@@ -312,8 +320,8 @@ local CastBarTable =
 
         -- Memento (DLC)
         [143495] = true, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
-        [89550] = true,  -- TROPHY Azura's Light (Twilight Shard)
-        [79510] = true,  -- TROPHY Blood Oath (Blade of the Blood Oath)
+        [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
+        [79510] = true, -- TROPHY Blood Oath (Blade of the Blood Oath)
         [119099] = true, -- Brittle Burial Urn (Brittle Burial Urn)
         [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
         [137919] = true, -- Juggling Potion Bottles (Mostly Stable Juggling Potions)
@@ -387,7 +395,8 @@ local CastBarTable =
     --------------------------------------------------------------------------------------------------------------------------------
     --  Duration update for any effects that are converted to casts (A lot of stun effects in PVE Quests with casting animations)
     --------------------------------------------------------------------------------------------------------------------------------
-    CastDurationFix = {
+    CastDurationFix =
+    {
         ----------------------------------------------------------------
         -- PLAYER ABILITIES --------------------------------------------
         ----------------------------------------------------------------
@@ -398,56 +407,56 @@ local CastBarTable =
         [118287] = 1200, -- Ravenous Goliath Self Snare (Ravenous Goliath)
 
         -- Innate
-        [37059] = 1165,  -- Mount Up (Mount)
+        [37059] = 1165, -- Mount Up (Mount)
         [141013] = 1165, -- Mount Up (Passenger Mount)
-        [14644] = 4000,  -- Revive (Death Dialogue)
-        [32346] = 5800,  -- Skyshard Collect
+        [14644] = 4000, -- Revive (Death Dialogue)
+        [32346] = 5800, -- Skyshard Collect
         [151928] = 3000, -- Aetherial Well (Aetherial Well)
-        [47270] = 5600,  -- Ritual of Mara
-        [14031] = 5000,  -- Mundus Use
-        [4197] = 4000,   -- Recovering (NPC Duel)
+        [47270] = 5600, -- Ritual of Mara
+        [14031] = 5000, -- Mundus Use
+        [4197] = 4000, -- Recovering (NPC Duel)
 
         -- Misc Items
         [206063] = 11000, -- CreateAttunableStation (Attunable Crafting Station)
-        [113432] = 8000,  -- 68235 Stun (Nascent Indrik)
-        [130394] = 5000,  -- 68235 Stun (Spectral Indrik)
-        [131536] = 5000,  -- Generic Stun & Combine (Sovereign Sow)
-        [151843] = 5000,  -- 68235 Stun (Deadlands Firewalker)
-        [148079] = 8000,  -- 68235 Stun (Unstable Morpholith)
+        [113432] = 8000, -- 68235 Stun (Nascent Indrik)
+        [130394] = 5000, -- 68235 Stun (Spectral Indrik)
+        [131536] = 5000, -- Generic Stun & Combine (Sovereign Sow)
+        [151843] = 5000, -- 68235 Stun (Deadlands Firewalker)
+        [148079] = 8000, -- 68235 Stun (Unstable Morpholith)
 
-        [68259] = 5000,   -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I)
-        [68263] = 5000,   -- 68235 Stun (Psijic Ambrosia Recipe, Fragment II)
-        [68267] = 5000,   -- 68235 Stun (Psijic Ambrosia Recipe, Fragment III)
-        [68271] = 5000,   -- 68235 Stun (Psijic Ambrosia Recipe, Fragment IV)
-        [68275] = 5000,   -- 68235 Stun (Psijic Ambrosia Recipe, Fragment V)
-        [68279] = 5000,   -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VI)
-        [68283] = 5000,   -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VII)
-        [70584] = 5000,   -- 68235 Stun (Merethic Restorative Resin)
-        [88451] = 5000,   -- 88449 Stun (Aetheric Cipher)
-        [110890] = 5000,  -- 68235 Stun (Welkynar Binding)
+        [68259] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I)
+        [68263] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment II)
+        [68267] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment III)
+        [68271] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment IV)
+        [68275] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment V)
+        [68279] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VI)
+        [68283] = 5000, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VII)
+        [70584] = 5000, -- 68235 Stun (Merethic Restorative Resin)
+        [88451] = 5000, -- 88449 Stun (Aetheric Cipher)
+        [110890] = 5000, -- 68235 Stun (Welkynar Binding)
 
-        [147795] = 5000,  -- 88449 Stun (Chef Arquitius's Torte Dissertation)
-        [147850] = 5000,  -- 88449 Stun (Chef Arquitius's Lost Thesis)
-        [148052] = 5000,  -- 68235 Stun (Breton Terrier Mammoth Bone)
-        [123110] = 5000,  -- 68235 Stun (Mummified Alfiq Parts)
-        [123115] = 5000,  -- 68235 Stun (Plague-Drenched Fabric)
-        [140544] = 5000,  -- 68235 Stun (Stone Husk Fragment)
+        [147795] = 5000, -- 88449 Stun (Chef Arquitius's Torte Dissertation)
+        [147850] = 5000, -- 88449 Stun (Chef Arquitius's Lost Thesis)
+        [148052] = 5000, -- 68235 Stun (Breton Terrier Mammoth Bone)
+        [123110] = 5000, -- 68235 Stun (Mummified Alfiq Parts)
+        [123115] = 5000, -- 68235 Stun (Plague-Drenched Fabric)
+        [140544] = 5000, -- 68235 Stun (Stone Husk Fragment)
 
-        [111141] = 5000,  -- 68235 Stun (Swamp Jelly Carrying Jar)
-        [111129] = 5000,  -- 68235 Stun (Swamp Jelly Fine-Mesh Net)
-        [111153] = 5000,  -- 68235 Stun (Swamp Jelly Hunter's Lense)
-        [111133] = 5000,  -- 68235 Stun (Swamp Jelly Luminous Fishmeal)
-        [111137] = 5000,  -- 68235 Stun (Swamp Jelly Luring Flute)
-        [111149] = 5000,  -- 68235 Stun (Swamp Jelly Moss Bedding)
-        [111145] = 5000,  -- 68235 Stun (Swamp Jelly Spawning Mud)
+        [111141] = 5000, -- 68235 Stun (Swamp Jelly Carrying Jar)
+        [111129] = 5000, -- 68235 Stun (Swamp Jelly Fine-Mesh Net)
+        [111153] = 5000, -- 68235 Stun (Swamp Jelly Hunter's Lense)
+        [111133] = 5000, -- 68235 Stun (Swamp Jelly Luminous Fishmeal)
+        [111137] = 5000, -- 68235 Stun (Swamp Jelly Luring Flute)
+        [111149] = 5000, -- 68235 Stun (Swamp Jelly Moss Bedding)
+        [111145] = 5000, -- 68235 Stun (Swamp Jelly Spawning Mud)
 
-        [117532] = 5000,  -- 68235 Stun (Guar Stomp Elucidating Hand-Sculpture)
-        [117558] = 5000,  -- 68235 Stun (Guar Stomp History in Street Theatre)
-        [117554] = 5000,  -- 68235 Stun (Guar Stomp Illustrated Reports)
-        [117550] = 5000,  -- 68235 Stun (Guar Stomp Noise Reports)
-        [117545] = 5000,  -- 68235 Stun (Guar Stomp Rehearsal Tuning Fork)
-        [117562] = 5000,  -- 68235 Stun (Guar Stomp Skeletal Reconstruction)
-        [117541] = 5000,  -- 68235 Stun (Guar Stomp Steps-Practice Rug)
+        [117532] = 5000, -- 68235 Stun (Guar Stomp Elucidating Hand-Sculpture)
+        [117558] = 5000, -- 68235 Stun (Guar Stomp History in Street Theatre)
+        [117554] = 5000, -- 68235 Stun (Guar Stomp Illustrated Reports)
+        [117550] = 5000, -- 68235 Stun (Guar Stomp Noise Reports)
+        [117545] = 5000, -- 68235 Stun (Guar Stomp Rehearsal Tuning Fork)
+        [117562] = 5000, -- 68235 Stun (Guar Stomp Skeletal Reconstruction)
+        [117541] = 5000, -- 68235 Stun (Guar Stomp Steps-Practice Rug)
 
         -- TODO: Big-Eared Ginger Kitten Casts replaced - check later
 
@@ -471,39 +480,39 @@ local CastBarTable =
         [148421] = 5000, -- 68235 Stun (Siege of Cyrodiil Commendation)
 
         -- Seasonal Mementos and Items
-        [86792] = 3000,   -- Eating (High Hrothgar Festival Mints)
-        [86739] = 3000,   -- Drinking (Sailor's Warning Festival Grog)
-        [85355] = 12000,  -- Flame Juggling (Consumable Version)
-        [85354] = 12000,  -- Dagger Juggling (Consumable Verison)
-        [85353] = 12000,  -- Sword Swallowing (Consumable Version)
+        [86792] = 3000, -- Eating (High Hrothgar Festival Mints)
+        [86739] = 3000, -- Drinking (Sailor's Warning Festival Grog)
+        [85355] = 12000, -- Flame Juggling (Consumable Version)
+        [85354] = 12000, -- Dagger Juggling (Consumable Verison)
+        [85353] = 12000, -- Sword Swallowing (Consumable Version)
         [146657] = 19000, -- Memento Cliff Racer (Thetys Ramary's Bait Kit)
 
-        [115681] = 3250,  -- Party Noise Maker (Festive Noise Maker)
-        [129550] = 6540,  -- Stunned (Jester's Festival Joke Popper)
+        [115681] = 3250, -- Party Noise Maker (Festive Noise Maker)
+        [129550] = 6540, -- Stunned (Jester's Festival Joke Popper)
         [149874] = 10000, -- Playful Prankster's Surprise Box (Playful Prankster's Surprise Box)
-        [102077] = 2000,  -- Jester's Festival Scintillator (Jester's Scintillator)
-        [81575] = 2000,   -- Event - WitchFest Cauldron (Witchmother's Whistle)
-        [111458] = 9000,  -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
-        [111459] = 9000,  -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
-        [125820] = 7500,  -- Witches Festival 2019 Marionette (Skeletal Marionette)
+        [102077] = 2000, -- Jester's Festival Scintillator (Jester's Scintillator)
+        [81575] = 2000, -- Event - WitchFest Cauldron (Witchmother's Whistle)
+        [111458] = 9000, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
+        [111459] = 9000, -- Apple-Bobbing Cauldron (Apple-Bobbing Cauldron)
+        [125820] = 7500, -- Witches Festival 2019 Marionette (Skeletal Marionette)
         [144790] = 13000, -- Throw Bones (Throwing Bones)
         [144791] = 13000, -- Throw Bones (Throwing Bones)
 
         -- Memento (Crown)
-        [85347] = 12000,  -- Storm Orb Juggle (Atronach Juggling)
-        [97273] = 9000,   -- TROPHY Death Crate Mem 1 (Crow's Calling)
-        [99318] = 9000,   -- TROPHY Flame Crate Mem 1 (Fiery Orb)
-        [99319] = 8000,   -- Flame Crate Memento 2 (Flame Pixie)
-        [99320] = 2000,   -- TROPHY Flame Crate Mem 3 (Flame Eruption)
+        [85347] = 12000, -- Storm Orb Juggle (Atronach Juggling)
+        [97273] = 9000, -- TROPHY Death Crate Mem 1 (Crow's Calling)
+        [99318] = 9000, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
+        [99319] = 8000, -- Flame Crate Memento 2 (Flame Pixie)
+        [99320] = 2000, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
         [101874] = 10000, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
-        [101877] = 9000,  -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
-        [101872] = 5000,  -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
-        [104324] = 7500,  -- Psijic Pearl Summon (Psijic Celestial Orb)
-        [104323] = 6000,  -- Psijic Hourglass (Psijic Tautology Glass)
-        [104325] = 6500,  -- Psijic Disintegrate (Sapiarchic Discorporation Lens)
-        [110482] = 9000,  -- Rind-Renewing Pumpkin (Rind-Renewing Pumpkin)
-        [116543] = 1500,  -- Gourd-Gallows Stump (Gourd-Gallows Stump)
-        [110481] = 1500,  -- Gourd-Gallows Stump (Gourd-Gallows Stump)
+        [101877] = 9000, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
+        [101872] = 5000, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
+        [104324] = 7500, -- Psijic Pearl Summon (Psijic Celestial Orb)
+        [104323] = 6000, -- Psijic Hourglass (Psijic Tautology Glass)
+        [104325] = 6500, -- Psijic Disintegrate (Sapiarchic Discorporation Lens)
+        [110482] = 9000, -- Rind-Renewing Pumpkin (Rind-Renewing Pumpkin)
+        [116543] = 1500, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
+        [110481] = 1500, -- Gourd-Gallows Stump (Gourd-Gallows Stump)
         [113288] = 10000, -- U20 Crown Memento 1 (Mire Drum)
         [113291] = 13000, --  U20 Crown Memento 2 (Vossa-satl)
         [151489] = 21000, -- Painter's Easel and Canvas (Painter's Easel and Canvas)
@@ -512,27 +521,27 @@ local CastBarTable =
         [146752] = 15000, -- Phial of Clockwork Lubricant (Phial of Clockwork Lubricant)
 
         -- Memento (Base)
-        [42076] = 8000,  -- Tear (Mezha-dro's Sealing Amulet)
-        [34578] = 8000,  -- Nirnroot Wine (Nirnroot Wine)
+        [42076] = 8000, -- Tear (Mezha-dro's Sealing Amulet)
+        [34578] = 8000, -- Nirnroot Wine (Nirnroot Wine)
         [42053] = 10000, -- Yokudan Salute (Yokudan Totem)
 
         -- Memento (DLC)
-        [143495] = 7000,  -- Reliquary of Dark Designs (Reliquary of Dark Designs)
-        [89550] = 9000,   -- TROPHY Azura's Light (Twilight Shard)
-        [79510] = 6500,   -- TROPHY Blood Oath (Blade of the Blood Oath)
-        [74151] = 2500,   -- Stun (Hidden Pressure Vent)
-        [92862] = 4500,   -- Ringing Bell (Dreamer's Chime)
-        [119099] = 4000,  -- Brittle Burial Urn (Brittle Burial Urn)
+        [143495] = 7000, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
+        [89550] = 9000, -- TROPHY Azura's Light (Twilight Shard)
+        [79510] = 6500, -- TROPHY Blood Oath (Blade of the Blood Oath)
+        [74151] = 2500, -- Stun (Hidden Pressure Vent)
+        [92862] = 4500, -- Ringing Bell (Dreamer's Chime)
+        [119099] = 4000, -- Brittle Burial Urn (Brittle Burial Urn)
         [125816] = 10000, -- Maarselok Corruption Memento (Corruption of Maarselok)
-        [136120] = 4000,  -- Ritual Circle Totem (Ritual Circle Totem)
-        [137919] = 8000,  -- Juggling Potion Bottles (Mostly Stable Juggling Potions)
+        [136120] = 4000, -- Ritual Circle Totem (Ritual Circle Totem)
+        [137919] = 8000, -- Juggling Potion Bottles (Mostly Stable Juggling Potions)
         [147598] = 15250, --  Void Shard (Void Shard)
-        [149881] = 8000,  -- Illusory Salamander Stone (Illusory Salamander Stone)
+        [149881] = 8000, -- Illusory Salamander Stone (Illusory Salamander Stone)
         [153758] = 11500, -- Golden Anvil Replica (Full-Scale Golden Anvil Replica)
         [146744] = 12000, -- Temperamental Grimoire (Temperamental Grimoire)
         [153760] = 10000, -- Wilting Weed Killer Phial (Wilting Weed Killer Phial)
-        [149879] = 3500,  -- Daedric Unwarding Amulet (Daedric Unwarding Amulet)
-        [125817] = 5000,  -- U24 Teaser Dragon Horn (Dragonhorn Curio)
+        [149879] = 3500, -- Daedric Unwarding Amulet (Daedric Unwarding Amulet)
+        [125817] = 5000, -- U24 Teaser Dragon Horn (Dragonhorn Curio)
 
         -- Vampire
         [40350] = 22500, -- Feed (Vampire - Bite Player)
@@ -559,7 +568,7 @@ local CastBarTable =
 
         -- Main Story Quest
         [39367] = 10000, -- Altar Use (Shadow of Sancre Tor)
-        [36421] = 3000,  -- Drink with Lyris (Council of the Five Companions)
+        [36421] = 3000, -- Drink with Lyris (Council of the Five Companions)
 
         -- Aldmeri Dominion Quests
         [33233] = 2000, -- 4625 Stun for Beckon 1.5s (Tears of the Two Moons)
@@ -578,7 +587,7 @@ local CastBarTable =
         [36841] = 4000, -- Q4833 Apply Wolf Buff (Bosmer Insight)
         [36824] = 4000, -- Q4833 Apply Tiger Buff (Bosmer Insight)
         [33701] = 1000, -- BurrowEND (Throne of the Wilderking)
-        [33727] = 500,  -- BurrowEND (Throne of the Wilderking)
+        [33727] = 500, -- BurrowEND (Throne of the Wilderking)
         [34499] = 3000, -- Corruption Beam (The Blight of the Bosmer)
 
         -- Daggerfall Covenant Quests
@@ -592,7 +601,7 @@ local CastBarTable =
         ----------------------------------------------------------------
 
         -- New Life Festival
-        [84847] = 5000,  -- Celebratory Belch (Stonetooth Bash)
+        [84847] = 5000, -- Celebratory Belch (Stonetooth Bash)
         [84125] = 10000, -- Breton Male Dance (Lava Foot Stomp)
         [84126] = 10000, -- Breton Female Dance (Lava Foot Stomp)
         [84127] = 10000, -- Dunmer Male Dance (Lava Foot Stomp)
@@ -603,27 +612,28 @@ local CastBarTable =
         [84528] = 12000, -- Flame Juggling (Castle Charm Challenge)
         [84506] = 12000, -- Dagger Juggling (Castle Charm Challenge)
         [84533] = 12000, -- Sword Swallowing (Castle Charm Challenge)
-        [83775] = 2000,  -- Event - Q5742 WitchFest Intro (The Witchmother's Bargain)
+        [83775] = 2000, -- Event - Q5742 WitchFest Intro (The Witchmother's Bargain)
     },
 
     --------------------------------------------------------------------------------------------------------------------------------
     --  List of abilities flagged for CombatInfo to show on the Cast Bar
     --------------------------------------------------------------------------------------------------------------------------------
-    IsCast = {
+    IsCast =
+    {
         ----------------------------------------------------------------
         -- PLAYER ABILITIES --------------------------------------------
         ----------------------------------------------------------------
 
         -- Innate
-        [6811] = true,   -- Recall
-        [69293] = true,  -- Sigil of Imperial Retreat
-        [37059] = true,  -- Mount Up (Mount)
+        [6811] = true, -- Recall
+        [69293] = true, -- Sigil of Imperial Retreat
+        [37059] = true, -- Mount Up (Mount)
         [141013] = true, -- Mount Up (Passenger Mount)
-        [14031] = true,  -- Mundus Use
-        [14644] = true,  -- Revive (Death Dialogue)
-        [32346] = true,  -- Skyshard Collect
+        [14031] = true, -- Mundus Use
+        [14644] = true, -- Revive (Death Dialogue)
+        [32346] = true, -- Skyshard Collect
         [151928] = true, -- Aetherial Well (Aetherial Well)
-        [47270] = true,  -- Ritual of Mara
+        [47270] = true, -- Ritual of Mara
 
         -- Weapon Attacks
         [15279] = true, -- One Handed
@@ -644,21 +654,21 @@ local CastBarTable =
         [151843] = true, -- 68235 Stun (Deadlands Firewalker)
         [148079] = true, -- 68235 Stun (Unstable Morpholith)
 
-        [68259] = true,  -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I)
-        [68263] = true,  -- 68235 Stun (Psijic Ambrosia Recipe, Fragment II)
-        [68267] = true,  -- 68235 Stun (Psijic Ambrosia Recipe, Fragment III)
-        [68271] = true,  -- 68235 Stun (Psijic Ambrosia Recipe, Fragment IV)
-        [68275] = true,  -- 68235 Stun (Psijic Ambrosia Recipe, Fragment V)
-        [68279] = true,  -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VI)
-        [68283] = true,  -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VII)
-        [70584] = true,  -- 68235 Stun (Merethic Restorative Resin)
-        [88451] = true,  -- 88449 Stun (Aetheric Cipher)
+        [68259] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment I)
+        [68263] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment II)
+        [68267] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment III)
+        [68271] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment IV)
+        [68275] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment V)
+        [68279] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VI)
+        [68283] = true, -- 68235 Stun (Psijic Ambrosia Recipe, Fragment VII)
+        [70584] = true, -- 68235 Stun (Merethic Restorative Resin)
+        [88451] = true, -- 88449 Stun (Aetheric Cipher)
         [110890] = true, -- 68235 Stun (Welkynar Binding)
 
-        [63427] = true,  -- Clean Fish (Filet Fish)
-        [78052] = true,  -- Minor Pardon (Counterfeit Pardon Edict)
-        [76350] = true,  -- Moderate Pardon (Leniency Edict)
-        [76349] = true,  -- Full Pardon (Grand Amnesty Edict)
+        [63427] = true, -- Clean Fish (Filet Fish)
+        [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
+        [76350] = true, -- Moderate Pardon (Leniency Edict)
+        [76349] = true, -- Full Pardon (Grand Amnesty Edict)
 
         [147795] = true, -- 88449 Stun (Chef Arquitius's Torte Dissertation)
         [147850] = true, -- 88449 Stun (Chef Arquitius's Lost Thesis)
@@ -709,24 +719,24 @@ local CastBarTable =
         [86739] = true, -- Drinking (Sailor's Warning Festival Grog)
 
         -- Memento (Seasonal)
-        [85355] = true,  -- Flame Juggling (Consumable Version)
-        [85354] = true,  -- Dagger Juggling (Consumable Verison)
-        [85353] = true,  -- Sword Swallowing (Consumable Version)
+        [85355] = true, -- Flame Juggling (Consumable Version)
+        [85354] = true, -- Dagger Juggling (Consumable Verison)
+        [85353] = true, -- Sword Swallowing (Consumable Version)
         [146657] = true, -- Memento Cliff Racer (Thetys Ramary's Bait Kit)
-        [87964] = true,  -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
-        [87965] = true,  -- Jester's Festival Illusion Daz (Plume Dazzler)
-        [87966] = true,  -- Jester's Festival Illusion Daz (Spiral Dazzler)
-        [88374] = true,  -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
-        [86774] = true,  -- Mudball (Mud Ball Pouch)
-        [84330] = true,  -- Mudball (Mud Ball Merriment)
+        [87964] = true, -- Jester's Festival Illusion Daz (Sparkwreath Dazzler)
+        [87965] = true, -- Jester's Festival Illusion Daz (Plume Dazzler)
+        [87966] = true, -- Jester's Festival Illusion Daz (Spiral Dazzler)
+        [88374] = true, -- Jester's Festival Illusion Daz (Sparkly Hat Dazzler)
+        [86774] = true, -- Mudball (Mud Ball Pouch)
+        [84330] = true, -- Mudball (Mud Ball Merriment)
         [116879] = true, -- Alliance Pie (Revelry Pie)
-        [87963] = true,  -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
+        [87963] = true, -- Bestowed Cherry Blossoms (Cherry Blossom Branch)
 
         [115681] = true, -- Party Noise Maker (Festive Noise Maker)
         [129550] = true, -- Stunned (Jester's Festival Joke Popper)
         [149874] = true, -- Playful Prankster's Surprise Box (Playful Prankster's Surprise Box)
         [102077] = true, -- Jester's Festival Scintillator (Jester's Scintillator)
-        [81575] = true,  -- Event - WitchFest Cauldron (Witchmother's Whistle)
+        [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
         [104324] = true, -- Psijic Pearl Summon (Psijic Celestial Orb)
         [104323] = true, -- Psijic Hourglass (Psijic Tautology Glass)
         [104325] = true, -- Psijic Disintegrate (Sapiarchic Discorporation Lens)
@@ -746,11 +756,11 @@ local CastBarTable =
         [144791] = true, -- Throw Bones (Throwing Bones)
 
         -- Memento (Crown)
-        [85347] = true,  -- Storm Orb Juggle (Atronach Juggling)
-        [97273] = true,  -- TROPHY Death Crate Mem 1 (Crow's Calling)
-        [99318] = true,  -- TROPHY Flame Crate Mem 1 (Fiery Orb)
-        [99319] = true,  -- Flame Crate Memento 2 (Flame Pixie)
-        [99320] = true,  -- TROPHY Flame Crate Mem 3 (Flame Eruption)
+        [85347] = true, -- Storm Orb Juggle (Atronach Juggling)
+        [97273] = true, -- TROPHY Death Crate Mem 1 (Crow's Calling)
+        [99318] = true, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
+        [99319] = true, -- Flame Crate Memento 2 (Flame Pixie)
+        [99320] = true, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
         [101874] = true, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
         [101877] = true, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
         [101872] = true, -- _CRWN Dragon Priest Memento3 (Bone Dragon Summons Focus)
@@ -769,11 +779,11 @@ local CastBarTable =
 
         -- Memento (DLC)
         [143495] = true, -- Reliquary of Dark Designs (Reliquary of Dark Designs)
-        [89550] = true,  -- TROPHY Azura's Light (Twilight Shard)
-        [79510] = true,  -- TROPHY Blood Oath (Blade of the Blood Oath)
-        [73686] = true,  -- Old Orsinium Trophy (Malacath's Wrathful Flame)
-        [74151] = true,  -- Stun (Hidden Pressure Vent)
-        [92862] = true,  -- Ringing Bell (Dreamer's Chime)
+        [89550] = true, -- TROPHY Azura's Light (Twilight Shard)
+        [79510] = true, -- TROPHY Blood Oath (Blade of the Blood Oath)
+        [73686] = true, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
+        [74151] = true, -- Stun (Hidden Pressure Vent)
+        [92862] = true, -- Ringing Bell (Dreamer's Chime)
         [119099] = true, -- Brittle Burial Urn (Brittle Burial Urn)
         [125816] = true, -- Maarselok Corruption Memento (Corruption of Maarselok)
         [136120] = true, -- Ritual Circle Totem (Ritual Circle Totem)
@@ -792,10 +802,10 @@ local CastBarTable =
         [31816] = true, -- Stone Giant (Stone Giant)
 
         -- Nightblade
-        [33398] = true,  -- Death Stroke (Nightblade)
-        [36508] = true,  -- Incapacitating Strike (Nightblade)
+        [33398] = true, -- Death Stroke (Nightblade)
+        [36508] = true, -- Incapacitating Strike (Nightblade)
         [113105] = true, -- Incapacitating Strike (Nightblade)
-        [36514] = true,  -- Soul Harvest (Nightblade)
+        [36514] = true, -- Soul Harvest (Nightblade)
 
         -- Sorcerer
         [43714] = true, -- Crystal Shard (Sorcerer)
@@ -871,7 +881,7 @@ local CastBarTable =
         [40414] = true, -- Shatter Soul (Soul Magic)
 
         -- Vampire
-        [40350] = true,  -- Feed (Vampire - Bite Player)
+        [40350] = true, -- Feed (Vampire - Bite Player)
 
         [134583] = true, -- Vampiric Drain (Vampire)
         [135905] = true, -- Drain Vigor (Vampire)
@@ -893,9 +903,9 @@ local CastBarTable =
         [40124] = true, -- Devour (Werewolf - Quest)
 
         -- Guild
-        [35713] = true,  -- Dawnbreaker (Fighter's Guild)
-        [40161] = true,  -- Flawless Dawnbreaker (Fighter's Guild)
-        [40158] = true,  -- Dawnbreaker of Smiting (Fighter's Guild)
+        [35713] = true, -- Dawnbreaker (Fighter's Guild)
+        [40161] = true, -- Flawless Dawnbreaker (Fighter's Guild)
+        [40158] = true, -- Dawnbreaker of Smiting (Fighter's Guild)
         [103488] = true, -- Time Stop (Psijic Order)
         [104059] = true, -- Borrowed Time (Psijic Order)
         [103706] = true, -- Channeled Acceleration (Psijic Order)
@@ -933,55 +943,55 @@ local CastBarTable =
         -- CYRODIIL ----------------------------------------------------
         ----------------------------------------------------------------
 
-        [12256] = true,  -- Pack Siege (Siege Weapons)
+        [12256] = true, -- Pack Siege (Siege Weapons)
 
-        [29673] = true,  -- Create Ballista Bolt... (Ballista)
-        [29672] = true,  -- Create Ballista Bolt... (Ballista)
-        [29671] = true,  -- Create Ballista Bolt... (Ballista)
+        [29673] = true, -- Create Ballista Bolt... (Ballista)
+        [29672] = true, -- Create Ballista Bolt... (Ballista)
+        [29671] = true, -- Create Ballista Bolt... (Ballista)
 
-        [30611] = true,  -- Create Ballista Fire Bolt... (Fire Ballista)
-        [30607] = true,  -- Create Ballista Fire Bolt... (Fire Ballista)
-        [16751] = true,  -- Create Ballista Fire Bolt... (Fire Ballista)
+        [30611] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
+        [30607] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
+        [16751] = true, -- Create Ballista Fire Bolt... (Fire Ballista)
 
-        [30612] = true,  -- Create Ballista Lightning Bolt ... (Lightning Ballista)
-        [30608] = true,  -- Create Ballista Lightning Bolt ... (Lightning Ballista)
-        [16752] = true,  -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+        [30612] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+        [30608] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
+        [16752] = true, -- Create Ballista Lightning Bolt ... (Lightning Ballista)
 
-        [39914] = true,  -- Create Trebuchet... (Stone Trebuchet)
-        [39917] = true,  -- Create Trebuchet... (Stone Trebuchet)
-        [39910] = true,  -- Create Trebuchet... (Stone Trebuchet)
+        [39914] = true, -- Create Trebuchet... (Stone Trebuchet)
+        [39917] = true, -- Create Trebuchet... (Stone Trebuchet)
+        [39910] = true, -- Create Trebuchet... (Stone Trebuchet)
 
-        [39913] = true,  -- Create Trebuchet... (Iceball Trebuchet)
-        [39916] = true,  -- Create Trebuchet... (Iceball Trebuchet)
-        [39909] = true,  -- Create Trebuchet... (Iceball Trebuchet)
+        [39913] = true, -- Create Trebuchet... (Iceball Trebuchet)
+        [39916] = true, -- Create Trebuchet... (Iceball Trebuchet)
+        [39909] = true, -- Create Trebuchet... (Iceball Trebuchet)
 
-        [13665] = true,  -- Create Trebuchet... (Firepot Trebuchet)
-        [13664] = true,  -- Create Trebuchet... (Firepot Trebuchet)
-        [13663] = true,  -- Create Trebuchet... (Firepot Trebuchet)
+        [13665] = true, -- Create Trebuchet... (Firepot Trebuchet)
+        [13664] = true, -- Create Trebuchet... (Firepot Trebuchet)
+        [13663] = true, -- Create Trebuchet... (Firepot Trebuchet)
 
-        [30613] = true,  -- Create Catapult Meatbag (Meatbag Catapult)
-        [30609] = true,  -- Create Catapult Meatbag (Meatbag Catapult)
-        [16755] = true,  -- Create Catapult Meatbag (Meatbag Catapult)
+        [30613] = true, -- Create Catapult Meatbag (Meatbag Catapult)
+        [30609] = true, -- Create Catapult Meatbag (Meatbag Catapult)
+        [16755] = true, -- Create Catapult Meatbag (Meatbag Catapult)
 
-        [30614] = true,  -- Create Catapult Oil Jar... (Oil Catapult)
-        [30610] = true,  -- Create Catapult Oil Jar... (Oil Catapult)
-        [16754] = true,  -- Create Catapult Oil Jar... (Oil Catapult)
+        [30614] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+        [30610] = true, -- Create Catapult Oil Jar... (Oil Catapult)
+        [16754] = true, -- Create Catapult Oil Jar... (Oil Catapult)
 
-        [39915] = true,  -- Create Catapult Meatbag (Scattershot Catapult)
-        [39918] = true,  -- Create Catapult Oil Jar... (Scattershot Catapult)
-        [39911] = true,  -- Create Trebuchet... (Scattershot Catapult)
+        [39915] = true, -- Create Catapult Meatbag (Scattershot Catapult)
+        [39918] = true, -- Create Catapult Oil Jar... (Scattershot Catapult)
+        [39911] = true, -- Create Trebuchet... (Scattershot Catapult)
 
-        [66438] = true,  -- Create Trebuchet... (Cold Stone Trebuchet)
-        [66439] = true,  -- Create Trebuchet... (Cold Stone Trebuchet)
-        [66440] = true,  -- Create Trebuchet... (Cold Stone Trebuchet)
+        [66438] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+        [66439] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
+        [66440] = true, -- Create Trebuchet... (Cold Stone Trebuchet)
 
-        [66434] = true,  -- Create Trebuchet... (Cold Fire Trebuchet)
-        [66388] = true,  -- Create Trebuchet... (Cold Fire Trebuchet)
-        [66387] = true,  -- Create Trebuchet... (Cold Fire Trebuchet)
+        [66434] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+        [66388] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
+        [66387] = true, -- Create Trebuchet... (Cold Fire Trebuchet)
 
-        [66437] = true,  -- Create Ballista... (Cold Fire Ballista)
-        [66436] = true,  -- Create Ballista... (Cold Fire Ballista)
-        [66435] = true,  -- Create Ballista... (Cold Fire Ballista)
+        [66437] = true, -- Create Ballista... (Cold Fire Ballista)
+        [66436] = true, -- Create Ballista... (Cold Fire Ballista)
+        [66435] = true, -- Create Ballista... (Cold Fire Ballista)
 
         [135862] = true, -- Create Lance Cannon... (Shock Lancer)
         [135861] = true, -- Create Lance Cannon... (Shock Lancer)
@@ -995,19 +1005,19 @@ local CastBarTable =
         [135867] = true, -- Create Lance Cannon... (Frost Lancer)
         [135866] = true, -- Create Lance Cannon... (Frost Lancer)
 
-        [22570] = true,  -- Create Boiling Oil... (Flaming Oil)
-        [15876] = true,  -- Create Large Ram... (Battering Ram)
-        [16171] = true,  -- Create Large Ram... (Battering Ram)
-        [16170] = true,  -- Create Large Ram... (Battering Ram)
+        [22570] = true, -- Create Boiling Oil... (Flaming Oil)
+        [15876] = true, -- Create Large Ram... (Battering Ram)
+        [16171] = true, -- Create Large Ram... (Battering Ram)
+        [16170] = true, -- Create Large Ram... (Battering Ram)
 
-        [13853] = true,  -- Wall Repair Kit
-        [16723] = true,  -- Door Repair Kit
-        [13601] = true,  -- Advanced Siege Repair Kit
+        [13853] = true, -- Wall Repair Kit
+        [16723] = true, -- Door Repair Kit
+        [13601] = true, -- Advanced Siege Repair Kit
         [112975] = true, -- Wall Repair Kit (Bridge and Milegate Repair Kit)
 
-        [19039] = true,  -- Ebonheart Forward Camp
-        [19040] = true,  -- Aldmeri Forward Camp
-        [19041] = true,  -- Daggerfall Forward Camp
+        [19039] = true, -- Ebonheart Forward Camp
+        [19040] = true, -- Aldmeri Forward Camp
+        [19041] = true, -- Daggerfall Forward Camp
 
         -- [12355] = true, -- Destroy Siege Weapon (Doesn't show up due to Cyrodiil Limitations)
 
@@ -1118,8 +1128,9 @@ local CastBarTable =
     --------------------------------------------------------------------------------------------------------------------------------
     -- Fix for a few goofy events that channel onto the player (or just where we need it)
     --------------------------------------------------------------------------------------------------------------------------------
-    CastOverride = {
-        [4197] = true,  -- Recovering (NPC Duel)
+    CastOverride =
+    {
+        [4197] = true, -- Recovering (NPC Duel)
         [47186] = true, -- CHT Portal Killer (The Weight of Three Crown)
         [34499] = true, -- Corruption Beam (The Blight of the Bosmer)
     },
@@ -1127,21 +1138,23 @@ local CastBarTable =
     --------------------------------------------------------------------------------------------------------------------------------
     -- Some abilities cast into a channeled stun effect - we want these abilities to display the cast and channel if flagged.
     --------------------------------------------------------------------------------------------------------------------------------
-    MultiCast = {
-        [42076] = true,  -- Tear (Mezha-dro's Sealing Amulet)
-        [42053] = true,  -- Yokudan Salute (Yokudan Totem)
+    MultiCast =
+    {
+        [42076] = true, -- Tear (Mezha-dro's Sealing Amulet)
+        [42053] = true, -- Yokudan Salute (Yokudan Totem)
         [115681] = true, -- Party Noise Maker (Festive Noise Maker)
     },
 
     --------------------------------------------------------------------------------------------------------------------------------
     -- If one of these abilities stuns the player - we ignore the standard effect of breaking the cast bar. In some cases a cast event is also applied with a stun for certain quest events, etc.
     --------------------------------------------------------------------------------------------------------------------------------
-    IgnoreCastBarStun = {
+    IgnoreCastBarStun =
+    {
         -- Player
-        [36434] = true,  -- Mount Up (Mount)
+        [36434] = true, -- Mount Up (Mount)
         [141001] = true, -- Mount Up (Passenger Mount)
-        [74232] = true,  -- Stun (Malacath's Wrathful Flame)
-        [92863] = true,  -- Stun (Dreamer's Chime)
+        [74232] = true, -- Stun (Malacath's Wrathful Flame)
+        [92863] = true, -- Stun (Dreamer's Chime)
         [115046] = true, -- 68235 Stun (Nascent Indrik)
 
         -- Quests
@@ -1150,7 +1163,8 @@ local CastBarTable =
     --------------------------------------------------------------------------------------------------------------------------------
     -- Abilities flagged to break when EFFECT_RESULT_FADED is detected with the source as the player
     --------------------------------------------------------------------------------------------------------------------------------
-    CastBreakOnRemoveEffect = {
+    CastBreakOnRemoveEffect =
+    {
         -- Werewolf
         [33208] = true, -- Devour (Werewolf)
 
@@ -1170,7 +1184,8 @@ CastBreakOnRemoveEvent = {
     --------------------------------------------------------------------------------------------------------------------------------
     -- Convert a cast time ability to channeled, since our function detects Casts/Channels automatically and tries to sort them, we need to add a forced override for certain things we want to show as a channel when it makes sense
     --------------------------------------------------------------------------------------------------------------------------------
-    CastChannelConvert = {
+    CastChannelConvert =
+    {
         -- Cyrodiil
         [12256] = true, -- Pack Siege (Siege Weapons)
 

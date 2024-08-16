@@ -4,6 +4,7 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 
 local string_format = string.format
@@ -221,18 +222,23 @@ end
 --- @param callback function: The callback function to be executed when the button is clicked.
 --- @return table identifier: The created dialogue button table.
 function LUIE.RegisterDialogueButton(identifier, title, text, callback)
-    ESO_Dialogs[identifier] = {
-        gamepadInfo = {
+    ESO_Dialogs[identifier] =
+    {
+        gamepadInfo =
+        {
             dialogType = GAMEPAD_DIALOGS.BASIC,
         },
         canQueue = true,
-        title = {
+        title =
+        {
             text = title,
         },
-        mainText = {
+        mainText =
+        {
             text = text,
         },
-        buttons = {
+        buttons =
+        {
             {
                 text = SI_DIALOG_CONFIRM,
                 callback = callback,
@@ -315,7 +321,7 @@ function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     -- Update syntax for The Lady, The Lover, and the Thief Mundus stones since they aren't consistent with other buffs.
     if abilityId == 13976 or abilityId == 13981 then -- The Lady / The Lover
         tooltipText = zo_strgsub(tooltipText, GetString(LUIE_STRING_SKILL_MUNDUS_SUB_RES_PEN), GetString(LUIE_STRING_SKILL_MUNDUS_SUB_RES_PEN_REPLACE))
-    elseif abilityId == 13975 then                   -- The Thief
+    elseif abilityId == 13975 then -- The Thief
         tooltipText = zo_strgsub(tooltipText, GetString(LUIE_STRING_SKILL_MUNDUS_SUB_THIEF), GetString(LUIE_STRING_SKILL_MUNDUS_SUB_THIEF_REPLACE))
     end
     -- Replace "Increases your" with "Increase"

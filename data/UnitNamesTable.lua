@@ -3,9 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 
-local UnitNames = {
+local UnitNames =
+{
 
     ----------------------------------------------------------------
     -- TARGET DUMMY NAMES ------------------------------------------
@@ -15,22 +17,22 @@ local UnitNames = {
     Dummy_Robust_Target_Minotaur_Handler = zo_strformat("<<1>>", GetItemLinkName("|H0:item:130193:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")),
     Dummy_Soul_Sworn_Thrall = GetItemLinkName("|H0:item:165569:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Dummy_Target_Bloodknight = zo_strformat("<<1>>", GetItemLinkName("|H0:item:169117:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")),
-    Dummy_Bone_Goliath_Reanimated = GetItemLinkName("|H0:item:153563:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),              -- Verified
-    Dummy_Target_Centurion_Dwarf_Brass = GetItemLinkName("|H0:item:126035:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),         -- Verified
-    Dummy_Target_Centurion_Lambent = GetItemLinkName("|H0:item:126037:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),             -- Verified
-    Dummy_Target_Centurion_Robust_Lambent = GetItemLinkName("|H0:item:126038:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),      -- Verified
+    Dummy_Bone_Goliath_Reanimated = GetItemLinkName("|H0:item:153563:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Verified
+    Dummy_Target_Centurion_Dwarf_Brass = GetItemLinkName("|H0:item:126035:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Verified
+    Dummy_Target_Centurion_Lambent = GetItemLinkName("|H0:item:126037:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Verified
+    Dummy_Target_Centurion_Robust_Lambent = GetItemLinkName("|H0:item:126038:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Verified
     Dummy_Target_Centurion_Robust_Refabricated = GetItemLinkName("|H0:item:126036:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Verified
     Dummy_Target_Frost_Atronach = GetItemLinkName("|H0:item:156669:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Target_Harrowing_Reaper_Trial = GetItemLinkName("|H0:item:171875:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
     Dummy_Target_Iron_Atronach = zo_strformat("<<1>>", GetItemLinkName("|H0:item:130195:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")),
-    Dummy_Target_Iron_Atronach_Trial = GetItemLinkName("|H0:item:147926:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),               -- Verified
+    Dummy_Target_Iron_Atronach_Trial = GetItemLinkName("|H0:item:147926:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Verified
     Dummy_Target_Mournful_Aegis = GetItemLinkName("|H0:item:134823:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
-    Dummy_Target_Skeleton_Argonian = GetItemLinkName("|H0:item:120427:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),                 -- Verified
-    Dummy_Target_Skeleton_Humanoid = GetItemLinkName("|H0:item:118553:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),                 -- Verified
-    Dummy_Target_Skeleton_Khajiit = GetItemLinkName("|H0:item:120426:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),                  -- Verified
-    Dummy_Target_Skeleton_Robust_Argonian = GetItemLinkName("|H0:item:121400:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),          -- Verified
-    Dummy_Target_Skeleton_Robust_Humanoid = GetItemLinkName("|H0:item:121314:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),          -- Verified
-    Dummy_Target_Skeleton_Robust_Khajiit = GetItemLinkName("|H0:item:121399:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),           -- Verified
+    Dummy_Target_Skeleton_Argonian = GetItemLinkName("|H0:item:120427:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Verified
+    Dummy_Target_Skeleton_Humanoid = GetItemLinkName("|H0:item:118553:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Verified
+    Dummy_Target_Skeleton_Khajiit = GetItemLinkName("|H0:item:120426:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Verified
+    Dummy_Target_Skeleton_Robust_Argonian = GetItemLinkName("|H0:item:121400:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Verified
+    Dummy_Target_Skeleton_Robust_Humanoid = GetItemLinkName("|H0:item:121314:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Verified
+    Dummy_Target_Skeleton_Robust_Khajiit = GetItemLinkName("|H0:item:121399:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Verified
     Dummy_Target_Stone_Atronach = zo_strformat("<<1>>", GetItemLinkName("|H0:item:130194:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")),
     Dummy_Target_Stone_Husk = zo_strformat("<<1>>", GetItemLinkName("|H0:item:166960:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h")), -- Verified
     Dummy_Target_Voriplasm = GetItemLinkName("|H0:item:146069:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"),
@@ -71,13 +73,13 @@ local UnitNames = {
     -- NORMAL NPC NAMES --------------------------------------------
     ----------------------------------------------------------------
 
-    NPC_The_Feast = "The Feast",           -- GENERIC NPC
+    NPC_The_Feast = "The Feast", -- GENERIC NPC
     NPC_Ice_Barrier = "Ice Barrier",
-    NPC_Clannfear = "Clannfear",           -- GENERIC NPC
-    NPC_Lion = "Lion",                     -- GENERIC NPC
-    NPC_Lioness = "Lioness",               -- GENERIC NPC
-    NPC_Sabre_Cat = "Sabre Cat",           -- GENERIC NPC
-    NPC_Senche_Tiger = "Senche-Tiger",     -- GENERIC NPC
+    NPC_Clannfear = "Clannfear", -- GENERIC NPC
+    NPC_Lion = "Lion", -- GENERIC NPC
+    NPC_Lioness = "Lioness", -- GENERIC NPC
+    NPC_Sabre_Cat = "Sabre Cat", -- GENERIC NPC
+    NPC_Senche_Tiger = "Senche-Tiger", -- GENERIC NPC
     NPC_Spectral_Senche_Tiger = "Spectral Senche-Tiger",
     NPC_Senche_Panther = "Senche-Panther", -- GENERIC NPC
     NPC_Spider = "Spider",
@@ -103,13 +105,13 @@ local UnitNames = {
     NPC_Auroran_Battlemage = "Auroran Battlemage",
     NPC_Watcher = "Watcher",
     NPC_Dremora_Narkynaz = "Dremora Narkynaz",
-    NPC_Dremora_Kyngald = "Dremora Kyngald",         -- VERIFIED - BANISHED CELLS I
-    NPC_Flame_Atronach = "Flame Atronach",           -- GENERIC NPC
+    NPC_Dremora_Kyngald = "Dremora Kyngald", -- VERIFIED - BANISHED CELLS I
+    NPC_Flame_Atronach = "Flame Atronach", -- GENERIC NPC
     NPC_Skeletal_Infernal = "Skeletal Infernal",
-    NPC_Skeletal_Archer = "Skeletal Archer",         -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
+    NPC_Skeletal_Archer = "Skeletal Archer", -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
     NPC_Skeletal_Pyromancer = "Skeletal Pyromancer", -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
     NPC_Skeletal_Runecaster = "Skeletal Runecaster", -- VERIFIED - DUNGEON - CRYPT OF HEARTS I
-    NPC_Ghost = "Ghost",                             -- GENERIC NPC
+    NPC_Ghost = "Ghost", -- GENERIC NPC
     NPC_Skeletal_Tempest = "Skeletal Tempest",
     NPC_Skeletal_Striker = "Skeletal Striker",
     NPC_Skeletal_Slayer = "Skeletal Slayer",
@@ -117,21 +119,21 @@ local UnitNames = {
     NPC_Spectral_Storm_Mage = "Spectral Storm Mage",
     NPC_Sainted_Archer = "Sainted Archer",
     NPC_Sainted_Charger = "Sainted Charger",
-    NPC_Gargoyle = "Gargoyle",               -- GENERIC NPC
-    NPC_Xivilai = "Xivilai",                 -- GENERIC NPC
-    NPC_Wraith = "Wraith",                   -- GENERIC NPC
-    NPC_Daedroth = "Daedroth",               -- GENERIC NPC
-    NPC_Daedric_Titan = "Daedric Titan",     -- GENERIC NPC
-    NPC_Spider_Daedra = "Spider Daedra",     -- GENERIC NPC
-    NPC_Spiderling = "Spiderling",           -- GENERIC NPC
-    NPC_Flame_Ogrim = "Flame Ogrim",         -- GENERIC NPC (SUMMON)
+    NPC_Gargoyle = "Gargoyle", -- GENERIC NPC
+    NPC_Xivilai = "Xivilai", -- GENERIC NPC
+    NPC_Wraith = "Wraith", -- GENERIC NPC
+    NPC_Daedroth = "Daedroth", -- GENERIC NPC
+    NPC_Daedric_Titan = "Daedric Titan", -- GENERIC NPC
+    NPC_Spider_Daedra = "Spider Daedra", -- GENERIC NPC
+    NPC_Spiderling = "Spiderling", -- GENERIC NPC
+    NPC_Flame_Ogrim = "Flame Ogrim", -- GENERIC NPC (SUMMON)
     NPC_Winged_Twilight = "Winged Twilight", -- GENERIC NPC
-    NPC_Alit = "Alit",                       -- GENERIC NPC
-    NPC_Guar = "Guar",                       -- GENERIC NPC
-    NPC_Cliff_Strider = "Cliff Strider",     -- GENERIC NPC
-    NPC_Strangler = "Strangler",             -- GENERIC NPC
-    NPC_Crocodile = "Crocodile",             -- GENERIC NPC
-    NPC_Feral_Guardian = "Feral Guardian",   -- GENERIC NPC (SUMMON)
+    NPC_Alit = "Alit", -- GENERIC NPC
+    NPC_Guar = "Guar", -- GENERIC NPC
+    NPC_Cliff_Strider = "Cliff Strider", -- GENERIC NPC
+    NPC_Strangler = "Strangler", -- GENERIC NPC
+    NPC_Crocodile = "Crocodile", -- GENERIC NPC
+    NPC_Feral_Guardian = "Feral Guardian", -- GENERIC NPC (SUMMON)
 
     NPC_Aura_of_Protection = "Aura of Protection",
 
@@ -159,35 +161,35 @@ local UnitNames = {
     NPC_Thundermaul = "Thundermaul",
     NPC_Pact_Pyromancer = "Pact Pyromancer",
     NPC_Pact_Necromancer = "Pact Necromancer",
-    NPC_Scamp = "Scamp",                             -- GENERIC NPC
-    NPC_Dremora_Kynval = "Dremora Kynval",           -- GENERIC NPC
-    NPC_Dremora_Hauzkyn = "Dremora Hauzkyn",         -- GENERIC NPC
-    NPC_Dremora_Gandrakyn = "Dremora Gandrakyn",     -- GENERIC NPC
-    NPC_Storm_Atronach = "Storm Atronach",           -- GENERIC NPC
-    NPC_Lamia_Curare = "Lamia Curare",               -- GENERIC NPC
+    NPC_Scamp = "Scamp", -- GENERIC NPC
+    NPC_Dremora_Kynval = "Dremora Kynval", -- GENERIC NPC
+    NPC_Dremora_Hauzkyn = "Dremora Hauzkyn", -- GENERIC NPC
+    NPC_Dremora_Gandrakyn = "Dremora Gandrakyn", -- GENERIC NPC
+    NPC_Storm_Atronach = "Storm Atronach", -- GENERIC NPC
+    NPC_Lamia_Curare = "Lamia Curare", -- GENERIC NPC
 
     NPC_Sea_Viper_Strongarm = "Sea Viper Strongarm", -- GENERIC NPC
     NPC_Sea_Viper_Berserker = "Sea Viper Berserker", -- GENERIC NPC
-    NPC_Sea_Viper_Charger = "Sea Viper Charger",     -- GENERIC NPC
-    NPC_Sea_Viper_Deadeye = "Sea Viper Deadeye",     -- GENERIC NPC
-    NPC_Sea_Viper_Healer = "Sea Viper Healer",       -- GENERIC NPC
+    NPC_Sea_Viper_Charger = "Sea Viper Charger", -- GENERIC NPC
+    NPC_Sea_Viper_Deadeye = "Sea Viper Deadeye", -- GENERIC NPC
+    NPC_Sea_Viper_Healer = "Sea Viper Healer", -- GENERIC NPC
 
-    NPC_Wolf = "Wolf",                               -- GENERIC NPC
+    NPC_Wolf = "Wolf", -- GENERIC NPC
 
-    NPC_Grave_Archer = "Grave Archer",               -- GENERIC NPC (Stros M'Kai)
+    NPC_Grave_Archer = "Grave Archer", -- GENERIC NPC (Stros M'Kai)
     NPC_Dogeater_Skirmisher = "Dogeater Skirmisher", -- GENERIC NPC (Stros M'Kai)
-    NPC_Dogeater_Witch = "Dogeater Witch",           -- GENERIC NPC (Stros M'Kai)
-    NPC_Drake_Cutthroat = "Drake Cutthroat",         -- GENERIC NPC (Stros M'Kai)
-    NPC_Drake_Brigand = "Drake Brigand",             -- GENERIC NPC (Stros M'Kai)
+    NPC_Dogeater_Witch = "Dogeater Witch", -- GENERIC NPC (Stros M'Kai)
+    NPC_Drake_Cutthroat = "Drake Cutthroat", -- GENERIC NPC (Stros M'Kai)
+    NPC_Drake_Brigand = "Drake Brigand", -- GENERIC NPC (Stros M'Kai)
 
-    NPC_Ogrim = "Ogrim",                             -- GENERIC NPC
+    NPC_Ogrim = "Ogrim", -- GENERIC NPC
 
-    NPC_Duneripper = "Duneripper",                   -- GENERIC NPC
+    NPC_Duneripper = "Duneripper", -- GENERIC NPC
 
-    NPC_Dremora_Channeler = "Dremora Channeler",     -- Cyrodiil IC Bridges
-    NPC_Burdening_Eye = "Burdening Eye",             -- Summoned NPC
+    NPC_Dremora_Channeler = "Dremora Channeler", -- Cyrodiil IC Bridges
+    NPC_Burdening_Eye = "Burdening Eye", -- Summoned NPC
 
-    NPC_Dremora_Caitiff = "Dremora Caitiff",         -- Dremora Caitiff
+    NPC_Dremora_Caitiff = "Dremora Caitiff", -- Dremora Caitiff
 
     -- DWEMER
     NPC_Dwarven_Sphere = "Dwarven Sphere",
@@ -281,85 +283,85 @@ local UnitNames = {
     ----------------------------------------------------------------
 
     -- Auridon
-    Boss_Norendo = "Norendo",                     -- Auridon (Soulfire Plateau)
-    Boss_Eraman = "Eraman",                       -- Auridon (Soulfire Plateau)
-    Boss_Quendia = "Quendia",                     -- Auridon (Soulfire Plateau)
-    Boss_Quenyas = "Quenyas",                     -- Auridon (Seaside Scarp Camp)
-    Boss_Oskana = "Oskana",                       -- Auridon (Seaside Scarp Camp)
+    Boss_Norendo = "Norendo", -- Auridon (Soulfire Plateau)
+    Boss_Eraman = "Eraman", -- Auridon (Soulfire Plateau)
+    Boss_Quendia = "Quendia", -- Auridon (Soulfire Plateau)
+    Boss_Quenyas = "Quenyas", -- Auridon (Seaside Scarp Camp)
+    Boss_Oskana = "Oskana", -- Auridon (Seaside Scarp Camp)
     Boss_Captain_Blanchete = "Captain Blanchete", -- Auridon (Wreck of the Raptor)
-    Boss_Snapjaw = "Snapjaw",                     -- Auridon (Heretic's Summons)
-    Boss_The_Nestmother = "The Nestmother",       -- Auridon (Nestmothers Den)
-    Boss_Anarume = "Anarume",                     -- Auridon (Heritance Proving Ground)
+    Boss_Snapjaw = "Snapjaw", -- Auridon (Heretic's Summons)
+    Boss_The_Nestmother = "The Nestmother", -- Auridon (Nestmothers Den)
+    Boss_Anarume = "Anarume", -- Auridon (Heritance Proving Ground)
 
     -- Grahtwood
-    Boss_Bavura_the_Blizzard = "Bavura the Blizzard",     -- Grahtwood (Nindaeril's Perch)
+    Boss_Bavura_the_Blizzard = "Bavura the Blizzard", -- Grahtwood (Nindaeril's Perch)
     Boss_Nindaeril_the_Monsoon = "Nindaeril the Monsoon", -- Grahtwood (Nindaeril's Perch)
-    Boss_Shagura = "Shagura",                             -- Grahtwood (Hircine's Henge)
-    Boss_Gurgozu = "Gurgozu",                             -- Grahtwood (Hircine's Henge)
-    Boss_Valanir_the_Restless = "Valanir the Restless",   -- Grahtwood (Valanir's Rest)
-    Boss_Valanirs_Shield = "Valanir's Shield",            -- Grahtwood (Valanir's Rest)
-    Boss_Lady_Solace = "Lady Solace",                     -- Grahtwood (Lady Solace's Fen)
-    Boss_Otho_Rufinus = "Otho Rufinus",                   -- Grahtwood (Poacher Camp)
-    Boss_Thugrub_the_Reformed = "Thugrub the Reformed",   -- Grahtwood (Thugrub's Cave)
+    Boss_Shagura = "Shagura", -- Grahtwood (Hircine's Henge)
+    Boss_Gurgozu = "Gurgozu", -- Grahtwood (Hircine's Henge)
+    Boss_Valanir_the_Restless = "Valanir the Restless", -- Grahtwood (Valanir's Rest)
+    Boss_Valanirs_Shield = "Valanir's Shield", -- Grahtwood (Valanir's Rest)
+    Boss_Lady_Solace = "Lady Solace", -- Grahtwood (Lady Solace's Fen)
+    Boss_Otho_Rufinus = "Otho Rufinus", -- Grahtwood (Poacher Camp)
+    Boss_Thugrub_the_Reformed = "Thugrub the Reformed", -- Grahtwood (Thugrub's Cave)
 
     -- Greenshade
-    Boss_Zymel_Etitan = "Zymel Etitan",                   -- Greenshade (Pelda Tarn)
-    Boss_Gathongor_the_Mauler = "Gathongor the Mauler",   -- Greenshade (Gathongor's Mine)
-    Boss_Smiles_With_Knife = "Smiles-With-Knife",         -- Greenshade (Reconnaissance Camp)
-    Boss_Maheelius = "Maheelius",                         -- Greenshade (Reconnaissance Camp)
-    Boss_Navlos = "Navlos",                               -- Greenshade (Reconnaissance Camp)
-    Boss_Heart_of_Rootwater = "Heart of Rootwater",       -- Greenshade (Rootwater Spring)
+    Boss_Zymel_Etitan = "Zymel Etitan", -- Greenshade (Pelda Tarn)
+    Boss_Gathongor_the_Mauler = "Gathongor the Mauler", -- Greenshade (Gathongor's Mine)
+    Boss_Smiles_With_Knife = "Smiles-With-Knife", -- Greenshade (Reconnaissance Camp)
+    Boss_Maheelius = "Maheelius", -- Greenshade (Reconnaissance Camp)
+    Boss_Navlos = "Navlos", -- Greenshade (Reconnaissance Camp)
+    Boss_Heart_of_Rootwater = "Heart of Rootwater", -- Greenshade (Rootwater Spring)
     Boss_Thodundor_of_the_Hill = "Thodundor of the Hill", -- Greenshade (Thodundor's View)
-    Boss_Neiral = "Neiral",                               -- Greenshade (Maormer Camp View)
-    Boss_Hetsha = "Hetsha",                               -- Greenshade (Maormer Camp View)
-    Boss_Jahlasri = "Jahlasri",                           -- Greenshade (Maormer Camp View)
+    Boss_Neiral = "Neiral", -- Greenshade (Maormer Camp View)
+    Boss_Hetsha = "Hetsha", -- Greenshade (Maormer Camp View)
+    Boss_Jahlasri = "Jahlasri", -- Greenshade (Maormer Camp View)
 
     -- Malabal Tor
-    Boss_Thjormar_the_Drowned = "Thjormar the Drowned",   -- Malabal Tor (Bitterpoint Strand)
-    Boss_Drowned_First_Mate = "Drowned First Mate",       -- Malabal Tor (Bitterpoint Strand)
-    Boss_Dugan_the_Red = "Dugan the Red",                 -- Malabal Tor (Dugan's Knoll)
-    Boss_Bagul = "Bagul",                                 -- Malabal Tor (Dugan's Knoll)
-    Boss_Fangoz = "Fangoz",                               -- Malabal Tor (Dugan's Knoll)
-    Boss_Bone_Grappler = "Bone Grappler",                 -- Malabal Tor (Bone Grappler's Nest)
+    Boss_Thjormar_the_Drowned = "Thjormar the Drowned", -- Malabal Tor (Bitterpoint Strand)
+    Boss_Drowned_First_Mate = "Drowned First Mate", -- Malabal Tor (Bitterpoint Strand)
+    Boss_Dugan_the_Red = "Dugan the Red", -- Malabal Tor (Dugan's Knoll)
+    Boss_Bagul = "Bagul", -- Malabal Tor (Dugan's Knoll)
+    Boss_Fangoz = "Fangoz", -- Malabal Tor (Dugan's Knoll)
+    Boss_Bone_Grappler = "Bone Grappler", -- Malabal Tor (Bone Grappler's Nest)
     Boss_Tallatta_the_Lustrous = "Tallatta the Lustrous", -- Malabal Tor (Jagged Grotto)
-    Boss_Commander_Faldethil = "Commander Faldethil",     -- Malabal Tor (River Edge)
+    Boss_Commander_Faldethil = "Commander Faldethil", -- Malabal Tor (River Edge)
 
     -- Reaper's March
-    Boss_Gravecaller_Niramo = "Gravecaller Niramo",             -- Reaper's March (Reaper's Henge)
-    Boss_Varien = "Varien",                                     -- Reaper's March (Reaper's Henge)
-    Boss_Dirge_of_Thorns = "Dirge of Thorns",                   -- Reaper's March (Deathsong Cleft)
-    Boss_Ravenous_Loam = "Ravenous Loam",                       -- Reaper's March (Deathsong Cleft)
-    Boss_Queen_of_Three_Mercies = "Queen of Three Mercies",     -- Reaper's March (Waterdancer Falls)
-    Boss_Overlord_Nur_dro = "Overlord Nur-dro",                 -- Reaper's March (Ushmal's Rest)
-    Boss_Big_Ozur = "Big Ozur",                                 -- Reaper's March (Big Ozur's Valley)
+    Boss_Gravecaller_Niramo = "Gravecaller Niramo", -- Reaper's March (Reaper's Henge)
+    Boss_Varien = "Varien", -- Reaper's March (Reaper's Henge)
+    Boss_Dirge_of_Thorns = "Dirge of Thorns", -- Reaper's March (Deathsong Cleft)
+    Boss_Ravenous_Loam = "Ravenous Loam", -- Reaper's March (Deathsong Cleft)
+    Boss_Queen_of_Three_Mercies = "Queen of Three Mercies", -- Reaper's March (Waterdancer Falls)
+    Boss_Overlord_Nur_dro = "Overlord Nur-dro", -- Reaper's March (Ushmal's Rest)
+    Boss_Big_Ozur = "Big Ozur", -- Reaper's March (Big Ozur's Valley)
     Boss_Ysolmarr_the_Roving_Pyre = "Ysolmarr the Roving Pyre", -- Reaper's March (Old S'ren-ja Docks)
 
     -- Glenumbra
-    Boss_Limbscather = "Limbscather",                    -- Western Overlook (Glenumbra)
-    Boss_Salazar_the_Wolf = "Salazar the Wolf",          -- The Wolf's Camp (Glenumbra)
-    Boss_Lieutenant_Bran = "Lieutenant Bran",            -- The Wolf's Camp (Glenumbra)
-    Boss_Annyce = "Annyce",                              -- The Wolf's Camp (Glenumbra)
-    Boss_Asard_the_Putrid = "Asard the Putrid",          -- North Shore Point (Glenumbra)
-    Boss_Graufang = "Graufang",                          -- Seaview Point (Glenumbra)
-    Boss_Grivier_Bloodcaller = "Grivier Bloodcaller",    -- Balefire Island (Glenumbra)
+    Boss_Limbscather = "Limbscather", -- Western Overlook (Glenumbra)
+    Boss_Salazar_the_Wolf = "Salazar the Wolf", -- The Wolf's Camp (Glenumbra)
+    Boss_Lieutenant_Bran = "Lieutenant Bran", -- The Wolf's Camp (Glenumbra)
+    Boss_Annyce = "Annyce", -- The Wolf's Camp (Glenumbra)
+    Boss_Asard_the_Putrid = "Asard the Putrid", -- North Shore Point (Glenumbra)
+    Boss_Graufang = "Graufang", -- Seaview Point (Glenumbra)
+    Boss_Grivier_Bloodcaller = "Grivier Bloodcaller", -- Balefire Island (Glenumbra)
     Boss_Griviers_Monstrosity = "Grivier's Monstrosity", -- Balefire Island (Glenumbra)
 
     -- Stormhaven
     Boss_Old_Widow_Silk = "Old Widow Silk", -- Spider Nest (Stormhaven)
-    Boss_Titanclaw = "Titanclaw",           -- Mudcrab Beach (Stormhaven)
-    Boss_Brood_Queen = "Brood Queen",       -- Dreugh Waters (Stormhaven)
-    Boss_Gar_Xuu_Gar = "Gar Xuu Gar",       -- Abandoned Farm (Stormhaven)
-    Boss_Cousin_Scrag = "Cousin Scrag",     -- Scrag's Larder (Stormhaven)
-    Boss_Zymel_Kruz = "Zymel Kruz",         -- Ancient Altar (Stormhaven)
+    Boss_Titanclaw = "Titanclaw", -- Mudcrab Beach (Stormhaven)
+    Boss_Brood_Queen = "Brood Queen", -- Dreugh Waters (Stormhaven)
+    Boss_Gar_Xuu_Gar = "Gar Xuu Gar", -- Abandoned Farm (Stormhaven)
+    Boss_Cousin_Scrag = "Cousin Scrag", -- Scrag's Larder (Stormhaven)
+    Boss_Zymel_Kruz = "Zymel Kruz", -- Ancient Altar (Stormhaven)
 
     -- Rivenspire
     Boss_Aesar_the_Hatespinner = "Aesar the Hatespinner", -- Aesar's Web (Rivenspire)
-    Boss_Magdelena = "Magdelena",                         -- Magdelena's Haunt (Rivenspire)
-    Boss_Calixte_Darkblood = "Calixte Darkblood",         -- Old Kalgon's Keep (Rivenspire)
-    Boss_Louna_Darkblood = "Louna Darkblood",             -- Old Kalgon's Keep (Rivenspire)
-    Boss_Lyse_Darkblood = "Lyse Darkblood",               -- Old Kalgon's Keep (Rivenspire)
-    Boss_Stroda_gra_Drom = "Stroda gra-Drom",             -- East-Rock Landing (Rivenspire)
-    Boss_Desuuga_the_Siren = "Desuuga the Siren",         -- Siren's Cove (Rivenspire)
+    Boss_Magdelena = "Magdelena", -- Magdelena's Haunt (Rivenspire)
+    Boss_Calixte_Darkblood = "Calixte Darkblood", -- Old Kalgon's Keep (Rivenspire)
+    Boss_Louna_Darkblood = "Louna Darkblood", -- Old Kalgon's Keep (Rivenspire)
+    Boss_Lyse_Darkblood = "Lyse Darkblood", -- Old Kalgon's Keep (Rivenspire)
+    Boss_Stroda_gra_Drom = "Stroda gra-Drom", -- East-Rock Landing (Rivenspire)
+    Boss_Desuuga_the_Siren = "Desuuga the Siren", -- Siren's Cove (Rivenspire)
 
     -- Dolmen Bosses
     NPC_Dread_Xivkyn_Cauterizer = "Dread Xivkyn Cauterizer",
@@ -377,27 +379,27 @@ local UnitNames = {
     -- PUBLIC DUNGEONS ---------------------------------------------
     ----------------------------------------------------------------
 
-    Boss_Nitch = "Nitch",                                     -- Auridon (Toothmaul Gully)
-    Boss_Thek_Elf_Stabber = "Thek Elf-Stabber",               -- Auridon (Toothmaul Gully)
-    Boss_Black_Bessie = "Black Bessie",                       -- Auridon (Toothmaul Gully)
-    Boss_Bloodroot = "Bloodroot",                             -- Auridon (Toothmaul Gully)
-    Boss_Togga_the_Skewerer = "Togga the Skewerer",           -- Auridon (Toothmaul Gully)
-    Boss_Dzeizik = "Dzeizik",                                 -- Auridon (Toothmaul Gully)
-    Boss_Slakkith = "Slakkith",                               -- Auridon (Toothmaul Gully)
-    Boss_Gorg = "Gorg",                                       -- Auridon (Toothmaul Gully)
+    Boss_Nitch = "Nitch", -- Auridon (Toothmaul Gully)
+    Boss_Thek_Elf_Stabber = "Thek Elf-Stabber", -- Auridon (Toothmaul Gully)
+    Boss_Black_Bessie = "Black Bessie", -- Auridon (Toothmaul Gully)
+    Boss_Bloodroot = "Bloodroot", -- Auridon (Toothmaul Gully)
+    Boss_Togga_the_Skewerer = "Togga the Skewerer", -- Auridon (Toothmaul Gully)
+    Boss_Dzeizik = "Dzeizik", -- Auridon (Toothmaul Gully)
+    Boss_Slakkith = "Slakkith", -- Auridon (Toothmaul Gully)
+    Boss_Gorg = "Gorg", -- Auridon (Toothmaul Gully)
 
-    Boss_Great_Thorn = "Great Thorn",                         -- Grahtwood (Root Sunder Ruins)
-    Boss_The_Devil_Wrathmaw = "The Devil Wrathmaw",           -- Grahtwood (Root Sunder Ruins)
-    Boss_Rootbiter = "Rootbiter",                             -- Grahtwood (Root Sunder Ruins)
-    Boss_Silent_Claw = "Silent Claw",                         -- Grahtwood (Root Sunder Ruins)
-    Boss_Thick_Bark = "Thick-Bark",                           -- Grahtwood (Root Sunder Ruins)
+    Boss_Great_Thorn = "Great Thorn", -- Grahtwood (Root Sunder Ruins)
+    Boss_The_Devil_Wrathmaw = "The Devil Wrathmaw", -- Grahtwood (Root Sunder Ruins)
+    Boss_Rootbiter = "Rootbiter", -- Grahtwood (Root Sunder Ruins)
+    Boss_Silent_Claw = "Silent Claw", -- Grahtwood (Root Sunder Ruins)
+    Boss_Thick_Bark = "Thick-Bark", -- Grahtwood (Root Sunder Ruins)
     Boss_Guardian_of_Root_Sunder = "Guardian of Root Sunder", -- Grahtwood (Root Sunder Ruins)
 
-    Boss_Lost_Master = "Lost Master",                         -- Greenshade (Rulanyil's Fall)
-    Boss_Utiasl = "Utiasl",                                   -- Greenshade (Rulanyil's Fall)
-    Boss_Skirar_the_Decaying = "Skirar the Decaying",         -- Greenshade (Rulanyil's Fall)
-    Boss_Magna_Tharn = "Magna Tharn",                         -- Greenshade (Rulanyil's Fall)
-    Boss_Hannat_the_Bonebringer = "Hannat the Bonebringer",   -- Greenshade (Rulanyil's Fall)
+    Boss_Lost_Master = "Lost Master", -- Greenshade (Rulanyil's Fall)
+    Boss_Utiasl = "Utiasl", -- Greenshade (Rulanyil's Fall)
+    Boss_Skirar_the_Decaying = "Skirar the Decaying", -- Greenshade (Rulanyil's Fall)
+    Boss_Magna_Tharn = "Magna Tharn", -- Greenshade (Rulanyil's Fall)
+    Boss_Hannat_the_Bonebringer = "Hannat the Bonebringer", -- Greenshade (Rulanyil's Fall)
 
     ----------------------------------------------------------------
     -- ARENAS ------------------------------------------------------

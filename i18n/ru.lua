@@ -5,7 +5,8 @@
 
 -- Main LUI Extended localization
 -- Translation by: KiriX
-local strings = {
+local strings =
+{
 
     -- LuiExtended
     LUIE_STRING_ERROR_FONT = "LUI Extended: Возникла проблема с выбором шрифта. Возвращение к настройкам по умолчанию.",

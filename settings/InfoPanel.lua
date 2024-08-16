@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 local InfoPanel = LUIE.InfoPanel
 
@@ -19,7 +20,8 @@ function InfoPanel.CreateSettings()
     local Defaults = InfoPanel.Defaults
     local Settings = InfoPanel.SV
 
-    local panelDataInfoPanel = {
+    local panelDataInfoPanel =
+    {
         type = "panel",
         name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_PNL)),
         displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_PNL)),
@@ -37,13 +39,15 @@ function InfoPanel.CreateSettings()
     local optionsDataInfoPanel = {}
 
     -- Info Panel description
-    optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
+    optionsDataInfoPanel[#optionsDataInfoPanel + 1] =
+    {
         type = "description",
         text = GetString(LUIE_STRING_LAM_PNL_DESCRIPTION),
     }
 
     -- ReloadUI Button
-    optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
+    optionsDataInfoPanel[#optionsDataInfoPanel + 1] =
+    {
         type = "button",
         name = GetString(LUIE_STRING_LAM_RELOADUI),
         tooltip = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
@@ -54,7 +58,8 @@ function InfoPanel.CreateSettings()
     }
 
     -- Unlock InfoPanel
-    optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
+    optionsDataInfoPanel[#optionsDataInfoPanel + 1] =
+    {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_PNL_UNLOCKPANEL),
         tooltip = GetString(LUIE_STRING_LAM_PNL_UNLOCKPANEL_TP),
@@ -71,7 +76,8 @@ function InfoPanel.CreateSettings()
     }
 
     -- InfoPanel scale
-    optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
+    optionsDataInfoPanel[#optionsDataInfoPanel + 1] =
+    {
         type = "slider",
         name = GetString(LUIE_STRING_LAM_PNL_PANELSCALE),
         tooltip = GetString(LUIE_STRING_LAM_PNL_PANELSCALE_TP),
@@ -93,7 +99,8 @@ function InfoPanel.CreateSettings()
     }
 
     -- Reset InfoPanel position
-    optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
+    optionsDataInfoPanel[#optionsDataInfoPanel + 1] =
+    {
         type = "button",
         name = GetString(LUIE_STRING_LAM_RESETPOSITION),
         tooltip = GetString(LUIE_STRING_LAM_PNL_RESETPOSITION_TP),
@@ -102,10 +109,12 @@ function InfoPanel.CreateSettings()
     }
 
     -- Info Panel Options Submenu
-    optionsDataInfoPanel[#optionsDataInfoPanel+1] = {
+    optionsDataInfoPanel[#optionsDataInfoPanel + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_PNL_HEADER),
-        controls = {
+        controls =
+        {
             {
                 type = "header",
                 name = GetString(LUIE_STRING_LAM_PNL_ELEMENTS_HEADER),

@@ -4,6 +4,7 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 LUIE.CombatTextPool = ZO_ObjectPool:Subclass()
 local CombatTextPool = LUIE.CombatTextPool
@@ -56,7 +57,8 @@ function CombatTextPool:CreateNewAnimation()
     local Settings = LUIE.CombatText.SV
     local animationSpeed = 1 / (Settings.animation.animationDuration / 100)
 
-    local animationTypes = {
+    local animationTypes =
+    {
         [poolTypes.ANIMATION_CLOUD] = function ()
             anim:Alpha(nil, 0, 1, animationSpeed * 50)
             anim:Alpha(nil, 1, 0, animationSpeed * 500, animationSpeed * 1500, slowFast)

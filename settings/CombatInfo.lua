@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 local CombatInfo = LUIE.CombatInfo
 local CrowdControlTracker = CombatInfo.CrowdControlTracker
@@ -12,7 +13,7 @@ local type, pairs = type, pairs
 local table_insert = table.insert
 local zo_strformat = zo_strformat
 local string_format = string.format
-local castBarMovingEnabled = false    -- Helper local flag
+local castBarMovingEnabled = false -- Helper local flag
 local alertFrameMovingEnabled = false -- Helper local flag
 
 local globalMethodOptions = { "Ascending", "Descending", "Radial" }
@@ -44,8 +45,10 @@ local function GenerateCustomList(input)
     return options, values
 end
 
-local dialogs = {
-    [1] = { -- Clear Blacklist
+local dialogs =
+{
+    [1] =
+    { -- Clear Blacklist
         identifier = "LUIE_CLEAR_CASTBAR_BLACKLIST",
         title = GetString(LUIE_STRING_LAM_UF_BLACKLIST_CLEAR),
         text = zo_strformat(GetString(LUIE_STRING_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(LUIE_STRING_CUSTOM_LIST_CASTBAR_BLACKLIST)),
@@ -94,7 +97,8 @@ function CombatInfo.CreateSettings()
     -- Load Dialog Buttons
     loadDialogButtons()
 
-    local panelDataCombatInfo = {
+    local panelDataCombatInfo =
+    {
         type = "panel",
         name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_CI)),
         displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_CI)),
@@ -112,13 +116,15 @@ function CombatInfo.CreateSettings()
     local optionsDataCombatInfo = {}
 
     -- Combat Info Description
-    optionsDataCombatInfo[#optionsDataCombatInfo+1] = {
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] =
+    {
         type = "description",
         text = GetString(LUIE_STRING_LAM_CI_DESCRIPTION),
     }
 
     -- ReloadUI Button
-    optionsDataCombatInfo[#optionsDataCombatInfo+1] = {
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] =
+    {
         type = "button",
         name = GetString(LUIE_STRING_LAM_RELOADUI),
         tooltip = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
@@ -129,10 +135,12 @@ function CombatInfo.CreateSettings()
     }
 
     -- Combat Info - Global Cooldown Options Submenu
-    optionsDataCombatInfo[#optionsDataCombatInfo+1] = {
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CI_HEADER_GCD),
-        controls = {
+        controls =
+        {
             {
                 type = "checkbox",
                 name = GetString(LUIE_STRING_LAM_CI_GCD_SHOW),
@@ -240,10 +248,12 @@ function CombatInfo.CreateSettings()
     }
 
     -- Combat Info - Ultimate Tracking Options Submenu
-    optionsDataCombatInfo[#optionsDataCombatInfo+1] = {
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CI_HEADER_ULTIMATE),
-        controls = {
+        controls =
+        {
             {
                 type = "checkbox",
                 name = GetString(LUIE_STRING_LAM_CI_ULTIMATE_SHOW_VAL),
@@ -396,10 +406,12 @@ function CombatInfo.CreateSettings()
     }
 
     -- Combat Info - Bar Ability Highlight Options Submenu
-    optionsDataCombatInfo[#optionsDataCombatInfo+1] = {
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CI_HEADER_BAR),
-        controls = {
+        controls =
+        {
             {
                 -- Highlight Ability Bar Icon for Active Procs
                 type = "checkbox",
@@ -734,10 +746,12 @@ function CombatInfo.CreateSettings()
     }
 
     -- Combat Info - Quickslot Cooldown Timer Option Submenu
-    optionsDataCombatInfo[#optionsDataCombatInfo+1] = {
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CI_HEADER_POTION),
-        controls = {
+        controls =
+        {
             {
                 -- Show Quickslot Cooldown
                 type = "checkbox",
@@ -869,10 +883,12 @@ function CombatInfo.CreateSettings()
         },
     }
     -- Combat Info - Floating Markers Option Submenu
-    optionsDataCombatInfo[#optionsDataCombatInfo+1] = {
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CI_ENEMY_MARKER_HEADER),
-        controls = {
+        controls =
+        {
             {
                 type = "checkbox",
                 name = GetString(LUIE_STRING_LAM_CI_ENEMY_MARKER),
@@ -901,10 +917,12 @@ function CombatInfo.CreateSettings()
         },
     }
     -- Combat Info -- Cast Bar Option Submenu
-    optionsDataCombatInfo[#optionsDataCombatInfo+1] = {
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CI_HEADER_CASTBAR),
-        controls = {
+        controls =
+        {
 
             -- Cast Bar Unlock
             {
@@ -1144,7 +1162,8 @@ function CombatInfo.CreateSettings()
                     CombatInfo.UpdateCastBar()
                 end,
                 width = "half",
-                default = {
+                default =
+                {
                     r = Settings.CastBarGradientC1[1],
                     g = Settings.CastBarGradientC1[2],
                     b = Settings.CastBarGradientC1[3],
@@ -1166,7 +1185,8 @@ function CombatInfo.CreateSettings()
                     CombatInfo.UpdateCastBar()
                 end,
                 width = "half",
-                default = {
+                default =
+                {
                     r = Settings.CastBarGradientC2[1],
                     g = Settings.CastBarGradientC2[2],
                     b = Settings.CastBarGradientC2[3],
@@ -1255,10 +1275,12 @@ function CombatInfo.CreateSettings()
     }
 
     -- Active Combat Alerts
-    optionsDataCombatInfo[#optionsDataCombatInfo+1] = {
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CI_HEADER_ACTIVE_COMBAT_ALERT),
-        controls = {
+        controls =
+        {
             {
                 type = "description",
                 text = GetString(LUIE_STRING_LAM_CI_ALERT_DESCRIPTION),
@@ -1399,7 +1421,8 @@ function CombatInfo.CreateSettings()
                 disabled = function ()
                     return not (Settings.alerts.toggles.alertEnable and Settings.alerts.toggles.alertTimer)
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.alertTimer[1],
                     g = Defaults.alerts.colors.alertTimer[2],
                     b = Defaults.alerts.colors.alertTimer[3],
@@ -1420,7 +1443,8 @@ function CombatInfo.CreateSettings()
                 disabled = function ()
                     return not Settings.alerts.toggles.alertEnable
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.alertShared[1],
                     g = Defaults.alerts.colors.alertShared[2],
                     b = Defaults.alerts.colors.alertShared[3],
@@ -1752,7 +1776,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.alertBlockA = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.alertBlockA[1],
                     g = Defaults.alerts.colors.alertBlockA[2],
                     b = Defaults.alerts.colors.alertBlockA[3],
@@ -1795,7 +1820,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.alertDodgeA = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.alertDodgeA[1],
                     g = Defaults.alerts.colors.alertDodgeA[2],
                     b = Defaults.alerts.colors.alertDodgeA[3],
@@ -1838,7 +1864,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.alertAvoidB = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.alertAvoidB[1],
                     g = Defaults.alerts.colors.alertAvoidB[2],
                     b = Defaults.alerts.colors.alertAvoidB[3],
@@ -1898,7 +1925,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.alertInterruptC = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.alertInterruptC[1],
                     g = Defaults.alerts.colors.alertInterruptC[2],
                     b = Defaults.alerts.colors.alertInterruptC[3],
@@ -1957,7 +1985,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.alertUnmit = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.alertUnmit[1],
                     g = Defaults.alerts.colors.alertUnmit[2],
                     b = Defaults.alerts.colors.alertUnmit[3],
@@ -2048,7 +2077,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.alertPower = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.alertPower[1],
                     g = Defaults.alerts.colors.alertPower[2],
                     b = Defaults.alerts.colors.alertPower[3],
@@ -2139,7 +2169,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.alertDestroy = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.alertDestroy[1],
                     g = Defaults.alerts.colors.alertDestroy[2],
                     b = Defaults.alerts.colors.alertDestroy[3],
@@ -2230,7 +2261,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.alertSummon = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.alertSummon[1],
                     g = Defaults.alerts.colors.alertSummon[2],
                     b = Defaults.alerts.colors.alertSummon[3],
@@ -2257,7 +2289,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.stunColor = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.stunColor[1],
                     g = Defaults.alerts.colors.stunColor[2],
                     b = Defaults.alerts.colors.stunColor[3],
@@ -2278,7 +2311,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.knockbackColor = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.knockbackColor[1],
                     g = Defaults.alerts.colors.knockbackColor[2],
                     b = Defaults.alerts.colors.knockbackColor[3],
@@ -2299,7 +2333,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.levitateColor = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.levitateColor[1],
                     g = Defaults.alerts.colors.levitateColor[2],
                     b = Defaults.alerts.colors.levitateColor[3],
@@ -2320,7 +2355,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.disorientColor = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.disorientColor[1],
                     g = Defaults.alerts.colors.disorientColor[2],
                     b = Defaults.alerts.colors.disorientColor[3],
@@ -2341,7 +2377,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.fearColor = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.fearColor[1],
                     g = Defaults.alerts.colors.fearColor[2],
                     b = Defaults.alerts.colors.fearColor[3],
@@ -2362,7 +2399,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.charmColor = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.charmColor[1],
                     g = Defaults.alerts.colors.charmColor[2],
                     b = Defaults.alerts.colors.charmColor[3],
@@ -2383,7 +2421,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.silenceColor = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.silenceColor[1],
                     g = Defaults.alerts.colors.silenceColor[2],
                     b = Defaults.alerts.colors.silenceColor[3],
@@ -2404,7 +2443,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.staggerColor = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.staggerColor[1],
                     g = Defaults.alerts.colors.staggerColor[2],
                     b = Defaults.alerts.colors.staggerColor[3],
@@ -2425,7 +2465,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.unbreakableColor = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.unbreakableColor[1],
                     g = Defaults.alerts.colors.unbreakableColor[2],
                     b = Defaults.alerts.colors.unbreakableColor[3],
@@ -2446,7 +2487,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.snareColor = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.snareColor[1],
                     g = Defaults.alerts.colors.snareColor[2],
                     b = Defaults.alerts.colors.snareColor[3],
@@ -2467,7 +2509,8 @@ function CombatInfo.CreateSettings()
                     Settings.alerts.colors.rootColor = { r, g, b, a }
                     AbilityAlerts.SetAlertColors()
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.alerts.colors.rootColor[1],
                     g = Defaults.alerts.colors.rootColor[2],
                     b = Defaults.alerts.colors.rootColor[3],
@@ -3118,10 +3161,12 @@ function CombatInfo.CreateSettings()
     }
 
     -- Crowd Control Tracker
-    optionsDataCombatInfo[#optionsDataCombatInfo+1] = {
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_CI_CCT_HEADER),
-        controls = {
+        controls =
+        {
 
             -- CCT Description
             {

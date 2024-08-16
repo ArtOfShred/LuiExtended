@@ -4,6 +4,7 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 LUIE.CombatTextResourceEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CombatTextResourceEventViewer = LUIE.CombatTextResourceEventViewer

@@ -4,6 +4,7 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 
 local CombatInfo = LUIE.CombatInfo
@@ -27,12 +28,13 @@ local windowManager = WINDOW_MANAGER
 
 local moduleName = LUIE.name .. "CombatInfo"
 
-local uiTlw = {}  -- GUI
+local uiTlw = {} -- GUI
 local refireDelay = {}
 local g_alertFont -- Font for Alerts
-local g_inDuel    -- Tracker for whether the player is in a duel or not
+local g_inDuel -- Tracker for whether the player is in a duel or not
 
-local alertTypes = {
+local alertTypes =
+{
     UNMIT = "LUIE_ALERT_TYPE_UNMIT",
     DESTROY = "LUIE_ALERT_TYPE_DESTROY",
     POWER = "LUIE_ALERT_TYPE_POWER",
@@ -52,7 +54,8 @@ end
 -- Set Alert Colors
 function AbilityAlerts.SetAlertColors()
     local colors = CombatInfo.SV.alerts.colors
-    AbilityAlerts.AlertColors = {
+    AbilityAlerts.AlertColors =
+    {
         alertColorBlock = ZO_ColorDef:New(unpack(colors.alertBlockA)):ToHex(),
         alertColorDodge = ZO_ColorDef:New(unpack(colors.alertDodgeA)):ToHex(),
         alertColorAvoid = ZO_ColorDef:New(unpack(colors.alertAvoidB)):ToHex(),
@@ -90,7 +93,8 @@ function AbilityAlerts.ResetAlertSize()
     uiTlw.alertFrame:SetDimensions(500, (CombatInfo.SV.alerts.toggles.alertFontSize * 2) + 4)
 end
 
-local ccResults = {
+local ccResults =
+{
     [ACTION_RESULT_STAGGERED] = true,
     [ACTION_RESULT_STUNNED] = true,
     [ACTION_RESULT_KNOCKBACK] = true,
@@ -104,7 +108,8 @@ local ccResults = {
     [ACTION_RESULT_DIED_XP] = true,
 }
 
-local deathResults = {
+local deathResults =
+{
     [ACTION_RESULT_KILLING_BLOW] = true,
     [ACTION_RESULT_DIED] = true,
     [ACTION_RESULT_DIED_XP] = true,
@@ -156,7 +161,8 @@ function AbilityAlerts.CreateAlertFrame()
     for i = 1, 3 do
         local alert = UI.Control(uiTlw.alertFrame, anchor, { nil, height }, false, "LUIE_Alert" .. i)
 
-        alert.data = {
+        alert.data =
+        {
             ["available"] = true,
             ["textPrefix"] = "",
             ["textName"] = "TEST NAME",
@@ -478,25 +484,25 @@ end
 function AbilityAlerts.CrowdControlColorSetup(crowdControl, isBorder)
     if crowdControl == LUIE_CC_TYPE_STUN or crowdControl == LUIE_CC_TYPE_KNOCKDOWN then -- Stun/Knockdown
         return CombatInfo.SV.alerts.colors.stunColor
-    elseif crowdControl == LUIE_CC_TYPE_KNOCKBACK then                                  -- Knockback
+    elseif crowdControl == LUIE_CC_TYPE_KNOCKBACK then -- Knockback
         return CombatInfo.SV.alerts.colors.knockbackColor
-    elseif crowdControl == LUIE_CC_TYPE_PULL then                                       -- Pull/Levitate
+    elseif crowdControl == LUIE_CC_TYPE_PULL then -- Pull/Levitate
         return CombatInfo.SV.alerts.colors.levitateColor
-    elseif crowdControl == LUIE_CC_TYPE_DISORIENT then                                  -- Disorient
+    elseif crowdControl == LUIE_CC_TYPE_DISORIENT then -- Disorient
         return CombatInfo.SV.alerts.colors.disorientColor
-    elseif crowdControl == LUIE_CC_TYPE_FEAR then                                       -- Fear
+    elseif crowdControl == LUIE_CC_TYPE_FEAR then -- Fear
         return CombatInfo.SV.alerts.colors.fearColor
-    elseif crowdControl == LUIE_CC_TYPE_CHARM then                                      -- Charm
+    elseif crowdControl == LUIE_CC_TYPE_CHARM then -- Charm
         return CombatInfo.SV.alerts.colors.charmColor
-    elseif crowdControl == LUIE_CC_TYPE_SILENCE then                                    -- Silence
+    elseif crowdControl == LUIE_CC_TYPE_SILENCE then -- Silence
         return CombatInfo.SV.alerts.colors.silenceColor
-    elseif crowdControl == LUIE_CC_TYPE_STAGGER then                                    -- Stagger
+    elseif crowdControl == LUIE_CC_TYPE_STAGGER then -- Stagger
         return CombatInfo.SV.alerts.colors.staggerColor
-    elseif crowdControl == LUIE_CC_TYPE_UNBREAKABLE then                                -- Unbreakable
+    elseif crowdControl == LUIE_CC_TYPE_UNBREAKABLE then -- Unbreakable
         return CombatInfo.SV.alerts.colors.unbreakableColor
-    elseif crowdControl == LUIE_CC_TYPE_SNARE then                                      -- Snare
+    elseif crowdControl == LUIE_CC_TYPE_SNARE then -- Snare
         return CombatInfo.SV.alerts.colors.snareColor
-    elseif crowdControl == LUIE_CC_TYPE_ROOT then                                       -- Immobilize
+    elseif crowdControl == LUIE_CC_TYPE_ROOT then -- Immobilize
         return CombatInfo.SV.alerts.colors.rootColor
     else
         if isBorder then

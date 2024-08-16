@@ -5,7 +5,8 @@
 
 -- Main LUI Extended localization
 -- Translation by: AmonFlorian
-local strings = {
+local strings =
+{
 
     -- LuiExtended
     LUIE_STRING_ERROR_FONT = "LUI Extended: Es gab ein Problem bei der Auswahl der benötigten Schriftart. Standard wiederhergestellt.",
@@ -275,8 +276,8 @@ local strings = {
     LUIE_STRING_CA_FRIENDS_LIST_LOGGED_ON = "|cFFFFFF<<1>>|r hat sich eingeloggt.",
     LUIE_STRING_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF = "|cFFFFFF<<1>>|r hat sich mit |cFFFFFF<<2>>|r ausgeloggt.",
     LUIE_STRING_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON = "|cFFFFFF<<1>>|r hat sich mit |cFFFFFF<<2>>|r eingeloggt.",
-    LUIE_STRING_CA_FRIENDS_LIST_IGNORE_ADDED = "|cFFFFFF<<1>>|r wird ignoriert.",                       -- TODO: Retranslate this as "ignore list"
-    LUIE_STRING_CA_FRIENDS_LIST_IGNORE_REMOVED = "|cFFFFFF<<1>>|r wird nicht mehr ignoriert.",          -- TODO: Retranslate this as "ignore list"
+    LUIE_STRING_CA_FRIENDS_LIST_IGNORE_ADDED = "|cFFFFFF<<1>>|r wird ignoriert.", -- TODO: Retranslate this as "ignore list"
+    LUIE_STRING_CA_FRIENDS_LIST_IGNORE_REMOVED = "|cFFFFFF<<1>>|r wird nicht mehr ignoriert.", -- TODO: Retranslate this as "ignore list"
     LUIE_STRING_CA_PLAYER_TO_PLAYER_ALREADY_FRIEND = "Du bist bereits mit |cFFFFFF<<1>>|r befreundet.", -- TODO: Unused - This should have a content though?
     LUIE_STRING_CA_GROUP_INVITE_MENU = "Du hast |cFFFFFF<<1>>|r in deine Gruppe eingeladen.",
     LUIE_STRING_CA_GROUP_INVITE_NONAME = "Du musst den Account- oder Charakternamen des Spielers eingeben, den du in deine Gruppe einladen möchtest.",

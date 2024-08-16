@@ -5,7 +5,8 @@
 
 -- Main LUI Extended localization
 -- Translation by: <default>
-local strings = {
+local strings =
+{
 
     -- LuiExtended
     LUIE_STRING_ERROR_FONT = "LUI Extended: Un problème est survenu lors de la sélection de la police. Retour à la configuration par défaut.",

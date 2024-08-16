@@ -4,6 +4,7 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 local SpellCastBuffs = LUIE.SpellCastBuffs
 
@@ -63,7 +64,8 @@ function SpellCastBuffs.DisplayMountIcon()
         local abilityId = 999017
         local abilityName = Abilities.Innate_Mounted
         local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, abilityName)
-        SpellCastBuffs.EffectsList[context][abilityId] = {
+        SpellCastBuffs.EffectsList[context][abilityId] =
+        {
             target = SpellCastBuffs.DetermineTarget(context),
             type = 1,
             id = abilityId,
@@ -147,7 +149,8 @@ function SpellCastBuffs.CollectibleBuff()
         local abilityId = 999018
         local abilityName = Abilities.Innate_Vanity_Pet
         local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, abilityName)
-        SpellCastBuffs.EffectsList[context][abilityId] = {
+        SpellCastBuffs.EffectsList[context][abilityId] =
+        {
             target = SpellCastBuffs.DetermineTarget(context),
             type = 1,
             id = abilityId,
@@ -173,7 +176,8 @@ function SpellCastBuffs.CollectibleBuff()
         local abilityId = 999019
         local abilityName = Abilities.Innate_Assistant
         local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, abilityName)
-        SpellCastBuffs.EffectsList[context][abilityId] = {
+        SpellCastBuffs.EffectsList[context][abilityId] =
+        {
             target = SpellCastBuffs.DetermineTarget(context),
             type = 1,
             id = abilityId,

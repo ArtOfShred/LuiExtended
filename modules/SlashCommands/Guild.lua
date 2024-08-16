@@ -4,6 +4,7 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 local SlashCommands = LUIE.SlashCommands
 
@@ -180,7 +181,8 @@ function SlashCommands.SlashGuildKick(option)
 
         compareCharacter = zo_strgsub(compareCharacter, "%^%a+", "")
 
-        g_guildNamesTable[i] = {
+        g_guildNamesTable[i] =
+        {
             displayName = displayName,
             characterName = characterName,
             compareDisplay = compareDisplay,

@@ -4,6 +4,7 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 -- InfoPanel namespace
 LUIE.InfoPanel = {}
@@ -19,7 +20,8 @@ local string_format = string.format
 
 local moduleName = LUIE.name .. "InfoPanel"
 
-local colors = {
+local colors =
+{
     RED = { r = 1, g = 0, b = 0 },
     GREEN = { r = 0, g = 1, b = 0 },
     BLUE = { r = 0, g = 0, b = 1 },
@@ -32,7 +34,8 @@ local colors = {
 --local fakeControl   = {}
 
 InfoPanel.Enabled = false
-InfoPanel.Defaults = {
+InfoPanel.Defaults =
+{
     ClockFormat = "HH:m:s",
 }
 InfoPanel.SV = nil
@@ -53,44 +56,55 @@ local uiGems = {}
 -- Add info panel into LUIE namespace
 InfoPanel.Panel = uiPanel
 
-local uiLatency = {
-    color = {
+local uiLatency =
+{
+    color =
+    {
         [1] = { ping = 100, color = colors.GREEN },
         [2] = { ping = 200, color = colors.YELLOW },
         [3] = { color = colors.RED },
     },
 }
 
-local uiFps = {
-    color = {
+local uiFps =
+{
+    color =
+    {
         [1] = { fps = 25, color = colors.RED },
         [2] = { fps = 40, color = colors.YELLOW },
         [3] = { color = colors.GREEN },
     },
 }
 
-local uiFeedTimer = {
+local uiFeedTimer =
+{
     hideLocally = false,
 }
 
-local uiArmour = {
-    color = {
+local uiArmour =
+{
+    color =
+    {
         [1] = { dura = 25, color = colors.RED, iconcolor = colors.WHITE },
         [2] = { dura = 50, color = colors.YELLOW, iconcolor = colors.WHITE },
         [3] = { color = colors.GREEN, iconcolor = colors.WHITE },
     },
 }
 
-local uiWeapons = {
-    color = {
+local uiWeapons =
+{
+    color =
+    {
         [1] = { charges = 10, color = colors.RED },
         [2] = { charges = 25, color = colors.YELLOW },
         [3] = { color = colors.WHITE },
     },
 }
 
-local uiBags = {
-    color = {
+local uiBags =
+{
+    color =
+    {
         [1] = { fill = 70, color = colors.WHITE },
         [2] = { fill = 90, color = colors.YELLOW },
         [3] = { color = colors.RED },
@@ -184,7 +198,7 @@ function InfoPanel.RearrangePanel()
     uiPanel:SetScale(1)
     -- Top row
     local anchorTop = nil -- Rename the variable to anchorTop
-    local sizeTop = 0     -- Rename the variable to sizeTop
+    local sizeTop = 0 -- Rename the variable to sizeTop
     -- Latency
     if InfoPanel.SV.HideLatency then
         uiLatency.control:SetHidden(true)
@@ -193,7 +207,7 @@ function InfoPanel.RearrangePanel()
         uiLatency.control:SetAnchor(LEFT, anchorTop or uiTopRow, (anchorTop == nil) and LEFT or RIGHT, 0, 0)
         uiLatency.control:SetHidden(false)
         sizeTop = sizeTop + uiLatency.control:GetWidth() -- Update the variable name
-        anchorTop = uiLatency.control                    -- Update the variable name
+        anchorTop = uiLatency.control -- Update the variable name
     end
     -- FPS
     if InfoPanel.SV.HideFPS then
@@ -203,7 +217,7 @@ function InfoPanel.RearrangePanel()
         uiFps.control:SetAnchor(LEFT, anchorTop or uiTopRow, (anchorTop == nil) and LEFT or RIGHT, 0, 0)
         uiFps.control:SetHidden(false)
         sizeTop = sizeTop + uiFps.control:GetWidth() -- Update the variable name
-        anchorTop = uiFps.control                    -- Update the variable name
+        anchorTop = uiFps.control -- Update the variable name
     end
     -- Time
     if InfoPanel.SV.HideClock then
@@ -213,7 +227,7 @@ function InfoPanel.RearrangePanel()
         uiClock.control:SetAnchor(LEFT, anchorTop or uiTopRow, (anchorTop == nil) and LEFT or RIGHT, 0, 0)
         uiClock.control:SetHidden(false)
         sizeTop = sizeTop + uiClock.control:GetWidth() -- Update the variable name
-        anchorTop = uiClock.control                    -- Update the variable name
+        anchorTop = uiClock.control -- Update the variable name
     end
     -- Soulgems
     if InfoPanel.SV.HideGems then
@@ -223,13 +237,13 @@ function InfoPanel.RearrangePanel()
         uiGems.control:SetAnchor(LEFT, anchorTop or uiBotRow, (anchorTop == nil) and LEFT or RIGHT, 0, 0)
         uiGems.control:SetHidden(false)
         sizeTop = sizeTop + uiGems.control:GetWidth() -- Update the variable name
-        anchorTop = uiGems.control                    -- Update the variable name
+        anchorTop = uiGems.control -- Update the variable name
     end
     -- Set row size
     uiTopRow:SetWidth((sizeTop > 0) and sizeTop or 10) -- Update the variable name
     -- Bottom row
-    local anchorBot = nil                              -- Rename the variable to anchorBot
-    local sizeBot = 0                                  -- Rename the variable to sizeBot
+    local anchorBot = nil -- Rename the variable to anchorBot
+    local sizeBot = 0 -- Rename the variable to sizeBot
     -- Feed timer
     if InfoPanel.SV.HideMountFeed or uiFeedTimer.hideLocally then
         uiFeedTimer.control:SetHidden(true)
@@ -239,7 +253,7 @@ function InfoPanel.RearrangePanel()
         uiFeedTimer.control:SetAnchor(LEFT, anchorBot or uiBotRow, (anchorBot == nil) and LEFT or RIGHT, 0, 0)
         uiFeedTimer.control:SetHidden(false)
         sizeBot = sizeBot + uiFeedTimer.control:GetWidth() -- Update the variable name
-        anchorBot = uiFeedTimer.control                    -- Update the variable name
+        anchorBot = uiFeedTimer.control -- Update the variable name
     end
     -- Durability
     if InfoPanel.SV.HideArmour then
@@ -249,7 +263,7 @@ function InfoPanel.RearrangePanel()
         uiArmour.control:SetAnchor(LEFT, anchorBot or uiBotRow, (anchorBot == nil) and LEFT or RIGHT, 0, 0)
         uiArmour.control:SetHidden(false)
         sizeBot = sizeBot + uiArmour.control:GetWidth() -- Update the variable name
-        anchorBot = uiArmour.control                    -- Update the variable name
+        anchorBot = uiArmour.control -- Update the variable name
     end
     -- Charges
     if InfoPanel.SV.HideWeapons then
@@ -259,7 +273,7 @@ function InfoPanel.RearrangePanel()
         uiWeapons.control:SetAnchor(LEFT, anchorBot or uiBotRow, (anchorBot == nil) and LEFT or RIGHT, 0, 0)
         uiWeapons.control:SetHidden(false)
         sizeBot = sizeBot + uiWeapons.control:GetWidth() -- Update the variable name
-        anchorBot = uiWeapons.control                    -- Update the variable name
+        anchorBot = uiWeapons.control -- Update the variable name
     end
     -- Bags
     if InfoPanel.SV.HideBags then
@@ -269,7 +283,7 @@ function InfoPanel.RearrangePanel()
         uiBags.control:SetAnchor(LEFT, anchorBot or uiBotRow, (anchorBot == nil) and LEFT or RIGHT, 0, 0)
         uiBags.control:SetHidden(false)
         sizeBot = sizeBot + uiBags.control:GetWidth() -- Update the variable name
-        anchorBot = uiBags.control                    -- Update the variable name
+        anchorBot = uiBags.control -- Update the variable name
     end
     -- Set row size
     uiBotRow:SetWidth((sizeBot > 0) and sizeBot or 10) -- Update the variable name

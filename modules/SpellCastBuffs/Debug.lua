@@ -4,6 +4,7 @@
 --]]
 
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 local SpellCastBuffs = LUIE.SpellCastBuffs
 

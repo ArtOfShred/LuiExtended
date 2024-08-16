@@ -5,7 +5,8 @@
 
 -- Addon Settings Menu localization
 -- Translation by: NA @Dakkidaze
-local strings = {
+local strings =
+{
 
     -- Settings
     LUIE_STRING_LAM_COMPATIBILITY_WARNING = "如果存在兼容性问题，请禁用此选项。",
@@ -129,7 +130,7 @@ local strings = {
     LUIE_STRING_LAM_SLASHCMDS_WITCH_TP = "'/witch' 使用The Witches Festival经验增益纪念品以激活/刷新增益。\n\t\t\t\t\t其他选项：'/witchfest'",
     LUIE_STRING_LAM_SLASHCMDS_REPORT = "启用“举报” ( '/report' )",
     LUIE_STRING_LAM_SLASHCMDS_REPORT_TP = "'/report' 'name' 打开举报玩家窗口。",
-    
+
 
     -- Module: Buffs & Debuffs
     LUIE_STRING_LAM_BUFF_ENABLEEFFECTSTRACK = "增益与减益模块",
@@ -174,7 +175,7 @@ local strings = {
     LUIE_STRING_LAM_BUFF_LABELCOLOR_TP = "将文本标签的颜色设置为与图标边框相同或保持为白色。",
     LUIE_STRING_LAM_BUFF_SHOWSECONDFRACTIONS = "显示秒的小数部分",
     LUIE_STRING_LAM_BUFF_SHOWSECONDFRACTIONS_TP = '将剩余文本标签格式化为 "12.3" 或仅保留秒数 "12"。',
-    LUIE_STRING_LAM_BUFF_SHOWFRACTIONSTHRESHOLDVALUE = "持续时间阈值",    -- 注意：此选项实际上在CombatInfo中用于条形突出显示
+    LUIE_STRING_LAM_BUFF_SHOWFRACTIONSTHRESHOLDVALUE = "持续时间阈值", -- 注意：此选项实际上在CombatInfo中用于条形突出显示
     LUIE_STRING_LAM_BUFF_SHOWFRACTIONSTHRESHOLDVALUE_TP = "当技能的剩余持续时间低于此值时，以小数形式显示计时器。",
     LUIE_STRING_LAM_BUFF_SHOWFRACTIONSABOVETHRESHOLD = "始终显示小数", -- 注意：此选项实际上在CombatInfo中用于条形突出显示
     LUIE_STRING_LAM_BUFF_SHOWFRACTIONSABOVETHRESHOLD_TP = "无论技能持续时间多长，都显示小数（忽略上面设置的阈值）。",
@@ -184,7 +185,7 @@ local strings = {
     LUIE_STRING_LAM_BUFF_SHOWBORDERCOOLDOWN_TP = "随着增益效果或减益效果的持续时间进行，显示一个设定颜色的径向倒计时边框。",
     LUIE_STRING_LAM_BUFF_FADEEXPIREICON = "淡出即将到期的图标",
     LUIE_STRING_LAM_BUFF_FADEEXPIREICON_TP = "当增益效果/减益效果即将到期时，使图标透明。",
-    
+
     LUIE_STRING_LAM_BUFF_SORTING_HEADER = "对齐和排序选项",
     LUIE_STRING_LAM_BUFF_SORTING_NORMAL_HEADER = "玩家/目标的增益效果和减益效果",
     LUIE_STRING_LAM_BUFF_SORTING_GENERIC_ALIGN = "<<1>> 对齐",
@@ -204,7 +205,7 @@ local strings = {
     LUIE_STRING_LAM_BUFF_SORTING_SORT_VERTICAL = "<<1>> 垂直排序",
     LUIE_STRING_LAM_BUFF_SORTING_SORT_VERTICAL_TP = "选择 <<1>> 容器中图标的垂直排序方向。",
     LUIE_STRING_LAM_BUFF_SORTING_UNANCHORED_HEADER = "玩家/目标（仅未锚定框架）",
-    LUIE_STRING_LAM_BUFF_SORTING_UNANCHORED_DESCRIPTION = '未将增益/减益效果框架锁定到（玩家）血条单位框架的位置时，您可在此自定义玩家/目标增益/减益效果选项。\n注意：您可以将“宽度”字段设置为最小值，以使图标垂直堆叠。',
+    LUIE_STRING_LAM_BUFF_SORTING_UNANCHORED_DESCRIPTION = "未将增益/减益效果框架锁定到（玩家）血条单位框架的位置时，您可在此自定义玩家/目标增益/减益效果选项。\n注意：您可以将“宽度”字段设置为最小值，以使图标垂直堆叠。",
     LUIE_STRING_LAM_BUFF_SORTING_LONGTERM_HEADER = "长期玩家增益效果",
     LUIE_STRING_LAM_BUFF_SORTING_PROMINET_HEADER = "显著增益效果和减益效果",
 
@@ -214,7 +215,7 @@ local strings = {
     LUIE_STRING_LAM_BUFF_TOOLTIP_CUSTOM = "显示自定义提示",
     LUIE_STRING_LAM_BUFF_TOOLTIP_CUSTOM_TP = "显示自定义LuiExtended提示 - 此功能需要手动更新（目前已经有几年没有更新了，因此某些提示可能不正确）。",
     LUIE_STRING_LAM_BUFF_TOOLTIP_STICKY = "提示显示持续时间",
-    LUIE_STRING_LAM_BUFF_TOOLTIP_STICKY_TP = '提示将在展示一定时间后自动消失，单位为毫秒。',
+    LUIE_STRING_LAM_BUFF_TOOLTIP_STICKY_TP = "提示将在展示一定时间后自动消失，单位为毫秒。",
     LUIE_STRING_LAM_BUFF_TOOLTIP_ABILITY_ID = "在提示中显示技能 ID",
     LUIE_STRING_LAM_BUFF_TOOLTIP_ABILITY_ID_TP = "在提示底部显示技能 ID。\n注意：此设置也适用于“主动效果”窗口。",
     LUIE_STRING_LAM_BUFF_TOOLTIP_BUFF_TYPE = "在提示中显示增益类型",
@@ -862,7 +863,7 @@ local strings = {
     LUIE_STRING_LAM_CA_LOOT_SHOWQUESTADD_TP = "拾取或收到任务物品时显示消息。",
     LUIE_STRING_LAM_CA_LOOT_SHOWQUESTREM = "显示任务物品移除",
     LUIE_STRING_LAM_CA_LOOT_SHOWQUESTREM_TP = "使用或移除任务物品时显示消息。",
-    
+
     LUIE_STRING_LAM_CA_LOOT_VENDOR_MERGE = "合并货币和拾取消息",
     LUIE_STRING_LAM_CA_LOOT_VENDOR_MERGE_TP = "将单独的物品购买消息和货币变化消息合并为一行。",
     LUIE_STRING_LAM_CA_LOOT_VENDOR_TOTALITEMS = "显示交易的物品总数",
@@ -905,7 +906,7 @@ local strings = {
     LUIE_STRING_LAM_CA_EXP_NAME = "经验值名称",
     LUIE_STRING_LAM_CA_EXP_NAME_TP = "用于经验值的名称。\n默认：经验 <<1[点/点]>>",
     LUIE_STRING_LAM_CA_EXPERIENCE_COLORMESSAGE = "经验获取消息颜色", -- TODO: 添加带最终颜色值的提示信息
-    LUIE_STRING_LAM_CA_EXPERIENCE_COLORNAME = "经验值名称颜色",     -- TODO: 添加带最终颜色值的提示信息
+    LUIE_STRING_LAM_CA_EXPERIENCE_COLORNAME = "经验值名称颜色", -- TODO: 添加带最终颜色值的提示信息
     LUIE_STRING_LAM_CA_EXP_EXPGAINCONTEXTNAME = "经验获取的上下文名称",
     LUIE_STRING_LAM_CA_EXP_EXPGAINCONTEXTNAME_TP = "此选项旨在与货币和战利品消息形成对比，因为经验获取不受上下文影响。\n默认：“[获得]”",
     LUIE_STRING_LAM_CA_EXP_EXPGAINDISPLAYNAME = "经验获取的显示名称",
@@ -919,14 +920,14 @@ local strings = {
     LUIE_STRING_LAM_CA_EXP_HEADER_SKILL_POINTS = "技能点",
     LUIE_STRING_LAM_CA_SKILLPOINT_UPDATED = "显示技能点获取 - <<1>>",
     LUIE_STRING_LAM_CA_SKILLPOINT_UPDATED_TP = "在通过升级、任务或天空碎片获得技能点时显示<<1>>。",
-    LUIE_STRING_LAM_CA_SKILLPOINT_COLOR1 = "天空碎片消息颜色",     -- TODO: 添加带最终颜色值的提示信息
+    LUIE_STRING_LAM_CA_SKILLPOINT_COLOR1 = "天空碎片消息颜色", -- TODO: 添加带最终颜色值的提示信息
     LUIE_STRING_LAM_CA_SKILLPOINT_COLOR2 = "技能点消息颜色", -- TODO: 添加带最终颜色值的提示信息
     LUIE_STRING_LAM_CA_SKILLPOINT_PARTIALPREFIX = "吸收天空碎片消息",
     LUIE_STRING_LAM_CA_SKILLPOINT_PARTIALPREFIX_TP = "吸收天空碎片时将显示此前缀消息。\n默认：吸收天空碎片",
     LUIE_STRING_LAM_CA_SKILLPOINT_PARTIALBRACKET = "天空碎片分隔符括号",
     LUIE_STRING_LAM_CA_SKILLPOINT_PARTIALBRACKET_TP = "吸收天空碎片时，当技能点（或部分技能点）获得时，此括号将包含前缀消息。",
     LUIE_STRING_LAM_CA_SKILLPOINT_UPDATEDPARTIAL = "显示部分技能点",
-    LUIE_STRING_LAM_CA_SKILLPOINT_UPDATEDPARTIAL_TP = '吸收天空碎片时显示“已收集的碎片 x/3”。',
+    LUIE_STRING_LAM_CA_SKILLPOINT_UPDATEDPARTIAL_TP = "吸收天空碎片时显示“已收集的碎片 x/3”。",
     LUIE_STRING_LAM_CA_EXP_HEADER_SKILL_LINES = "技能线",
     LUIE_STRING_LAM_CA_SKILL_LINE_UNLOCKED = "显示解锁的技能线 - <<1>>",
     LUIE_STRING_LAM_CA_SKILL_LINE_UNLOCKED_TP = "解锁技能线时显示<<1>>。",
@@ -1003,7 +1004,7 @@ local strings = {
     LUIE_STRING_LAM_CA_LOREBOOK_ICON = "显示文化传统之书图标",
     LUIE_STRING_LAM_CA_LOREBOOK_ICON_TP = "显示相关已解锁文化传统之书的图标。",
     LUIE_STRING_LAM_CA_LOREBOOK_COLOR1 = "文化传统之书前缀信息颜色", -- TODO: 添加已定稿的颜色值的工具提示
-    LUIE_STRING_LAM_CA_LOREBOOK_COLOR2 = "文化传统之书信息颜色",        -- TODO: 添加已定稿的颜色值的工具提示
+    LUIE_STRING_LAM_CA_LOREBOOK_COLOR2 = "文化传统之书信息颜色", -- TODO: 添加已定稿的颜色值的工具提示
     LUIE_STRING_LAM_CA_LOREBOOK_PREFIX1 = "文化传统之书前缀信息",
     LUIE_STRING_LAM_CA_LOREBOOK_PREFIX1_TP = "当发现一本文化传统之书时显示的前缀信息。\n默认值：发现文化传统之书",
     LUIE_STRING_LAM_CA_LOREBOOK_PREFIX2 = "书籍前缀信息",
@@ -1051,7 +1052,7 @@ local strings = {
     LUIE_STRING_LAM_CA_ACHIEVE_ICON = "显示成就图标",
     LUIE_STRING_LAM_CA_ACHIEVE_ICON_TP = "在进行中或完成时显示相关成就图标。",
     LUIE_STRING_LAM_CA_ACHIEVE_COLOR1 = "成就前缀消息颜色", -- TODO: 添加带有最终颜色值的工具提示
-    LUIE_STRING_LAM_CA_ACHIEVE_COLOR2 = "成就消息颜色",        -- TODO: 添加带有最终颜色值的工具提示
+    LUIE_STRING_LAM_CA_ACHIEVE_COLOR2 = "成就消息颜色", -- TODO: 添加带有最终颜色值的工具提示
     LUIE_STRING_LAM_CA_ACHIEVE_PROGMSG = "成就进度前缀消息",
     LUIE_STRING_LAM_CA_ACHIEVE_PROGMSG_TP = "成就进度消息的前缀。\n默认值：成就已更新",
     LUIE_STRING_LAM_CA_ACHIEVE_COMPLETEMSG = "成就完成前缀消息",
@@ -1095,10 +1096,10 @@ local strings = {
     LUIE_STRING_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG = "显示详细兴趣点描述",
     LUIE_STRING_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG_TP = "打开时，接受/完成具有关联地图兴趣点的任务将显示完整描述。",
     LUIE_STRING_LAM_CA_QUEST_COLOR1 = "兴趣点名称颜色",
-    LUIE_STRING_LAM_CA_QUEST_COLOR2 = "兴趣点描述颜色",   -- TODO: 添加带有最终颜色值的工具提示
-    LUIE_STRING_LAM_CA_QUEST_COLOR3 = "任务名称颜色",        -- TODO: 添加带有最终颜色值的工具提示
+    LUIE_STRING_LAM_CA_QUEST_COLOR2 = "兴趣点描述颜色", -- TODO: 添加带有最终颜色值的工具提示
+    LUIE_STRING_LAM_CA_QUEST_COLOR3 = "任务名称颜色", -- TODO: 添加带有最终颜色值的工具提示
     LUIE_STRING_LAM_CA_QUEST_COLOR4 = "任务描述颜色", -- TODO: 添加带有最终颜色值的工具提示
-    
+
     LUIE_STRING_LAM_CA_SOCIAL_HEADER = "社交/公会公告",
     LUIE_STRING_LAM_CA_SOCIAL_FRIENDS_HEADER = "好友/忽略列表",
     LUIE_STRING_LAM_CA_SOCIAL_FRIENDS = "显示好友/忽略请求 - <<1>>",
@@ -1360,7 +1361,7 @@ local strings = {
     LUIE_STRING_LAM_CI_CCT_AOE_TIER_NPC_BOSS = "NPC - 首领",
     LUIE_STRING_LAM_CI_CCT_AOE_TIER_NPC_ELITE = "NPC - 精英",
     LUIE_STRING_LAM_CI_CCT_AOE_TIER_NPC_NORMAL = "NPC - 普通",
-    
+
 
     -- Module: Info Panel
     LUIE_STRING_LAM_PNL = "信息面板",
@@ -1703,7 +1704,7 @@ local strings = {
     LUIE_STRING_LAM_UF_CFRAMESCOMPANION_ICPACITY_TP = "更改自定义伙伴框架在战斗中的透明度。",
     LUIE_STRING_LAM_UF_CFRAMESCOMPANION_NAMECLIP = "伙伴名称裁剪位置",
     LUIE_STRING_LAM_UF_CFRAMESCOMPANION_NAMECLIP_TP = "由于无法检测到生命值的长度，您可以使用此设置手动更改伙伴框架上名称的裁剪位置，以防止重叠。",
-    
+
     -- Module: Combat Text
     LUIE_STRING_LAM_CT = "战斗警报",
     LUIE_STRING_LAM_CT_SHOWCOMBATTEXT = "战斗警报模组",
@@ -2095,7 +2096,7 @@ local strings = {
     LUIE_STRING_LAM_CT_COLOR_NOTIFICATION_LOW_MAGICKA_TP = "为低法力值警报设置颜色",
     LUIE_STRING_LAM_CT_COLOR_NOTIFICATION_LOW_STAMINA_TP = "为低耐力值警报设置颜色",
     LUIE_STRING_LAM_CT_COLOR_NOTIFICATION_ULTIMATE_TP = "为终极技就绪时的通知设置颜色",
-    LUIE_STRING_LAM_CT_COLOR_NOTIFICATION_POTION_TP = "为药水冷却完毕时的通知设置颜色" ,
+    LUIE_STRING_LAM_CT_COLOR_NOTIFICATION_POTION_TP = "为药水冷却完毕时的通知设置颜色",
     LUIE_STRING_LAM_CT_FORMAT_DESCRIPTION = "格式参考:\n %t 技能名称，本地化名称\n %a 数量，数值\n %r 能量类型，资源",
     LUIE_STRING_LAM_CT_FORMAT_COMBAT_DAMAGE_TP = "直接伤害数字的字体格式。",
     LUIE_STRING_LAM_CT_FORMAT_COMBAT_DAMAGE_CRITICAL_TP = "直接暴击伤害数字的字体格式。",
@@ -2156,7 +2157,7 @@ local strings = {
     LUIE_STRING_LAM_CT_ANIMATION_ICON_IN = "承受图标位置",
     LUIE_STRING_LAM_CT_ANIMATION_ICON_IN_TP = "设置承受（被攻击等）文本的图标位置。",
     LUIE_STRING_LAM_CT_ANIMATION_TEST = "测试动画",
-    LUIE_STRING_LAM_CT_ANIMATION_TEST_TP = "测试输出、承受文本的动画效果。",    
+    LUIE_STRING_LAM_CT_ANIMATION_TEST_TP = "测试输出、承受文本的动画效果。",
     LUIE_STRING_LAM_CT_THROTTLE_HEADER = "节流选项",
     LUIE_STRING_LAM_CT_THROTTLE_DESCRIPTION = "将一定时间内的多个攻击数值合并成一个。使用滑条设置时间长度，单位为毫秒。暴击不遵守节流设置，除非在下方手动启用选项。",
     LUIE_STRING_LAM_CT_THROTTLE_DAMAGE_TP = "设置伤害数字的节流时间长度.\nDefault: 200 ms",

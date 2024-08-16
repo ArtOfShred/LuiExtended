@@ -5,7 +5,8 @@
 
 -- Skill names & Tooltips localization
 -- Translation by: <default>
-local strings = {
+local strings =
+{
 
     ----------------------------------------------------------------
     -- INNATE SKILLS -----------------------------------------------
@@ -83,16 +84,16 @@ local strings = {
     LUIE_STRING_SKILL_POISON_STEALTH_DRAIN = "Stealth-Draining Poison",
     LUIE_STRING_SKILL_POISON_CONSPICUOUS = "Conspicuous Poison",
     LUIE_STRING_SKILL_DRINK_INCREASE = "Increase",
-    LUIE_STRING_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL = "These effects are scaled based on your level.",                                                                                                                                               -- Note this needs to be an exact match to the description in Crown Crate food/drink items for it to be correctly removed in each localization.
-    LUIE_STRING_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA = "If you are a vampire, the blood in this drink will also purify you, reducing your Stage by 1.\nThese effects are scaled based on your level.",                                          -- Must be exact match in each localization
+    LUIE_STRING_SKILL_REMOVE_TOOLTIP_SCALED_LEVEL = "These effects are scaled based on your level.", -- Note this needs to be an exact match to the description in Crown Crate food/drink items for it to be correctly removed in each localization.
+    LUIE_STRING_SKILL_REMOVE_TOOLTIP_DOUBLE_BLOODY_MARA = "If you are a vampire, the blood in this drink will also purify you, reducing your Stage by 1.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
     LUIE_STRING_SKILL_REMOVE_TOOLTIP_HISSMIR = "This drink will also grant you insights into what manner of fish spawn in various bodies of water, as well as alertness for nearby fish activity.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
     LUIE_STRING_SKILL_ADD_TOOLTIP_HISSMIR = "\n\nThis drink will also grant you insights into what manner of fish spawn in various bodies of water, as well as alertness for nearby fish activity.",
-    LUIE_STRING_SKILL_REMOVE_TOOLTIP_ARTAEUM_BOWL = "Also increases",                                                                                                                                                                              -- Must be exact match in each localization
+    LUIE_STRING_SKILL_REMOVE_TOOLTIP_ARTAEUM_BOWL = "Also increases", -- Must be exact match in each localization
     LUIE_STRING_SKILL_ADD_TOOLTIP_ARTAEUM_BOWL = "\n\nAlso increases",
-    LUIE_STRING_SKILL_REMOVE_TOOLTIP_TWICE_SPIKED_ALE = "This drink is very gassy.\nThese effects are scaled based on your level.",                                                                                                                -- Must be exact match in each localization
-    LUIE_STRING_SKILL_REMOVE_TOOLTIP_PACK_LEADERS_BROTH = "If you are a werewolf, the rich marrow will also slightly ease your transformation.\nThese effects are scaled based on your level.",                                                    -- Must be exact match in each localization
+    LUIE_STRING_SKILL_REMOVE_TOOLTIP_TWICE_SPIKED_ALE = "This drink is very gassy.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
+    LUIE_STRING_SKILL_REMOVE_TOOLTIP_PACK_LEADERS_BROTH = "If you are a werewolf, the rich marrow will also slightly ease your transformation.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
     LUIE_STRING_SKILL_ADD_TOOLTIP_PACK_LEADERS_BROTH = "\nIf you are a werewolf, the rich marrow will also slightly ease your transformation.",
-    LUIE_STRING_SKILL_REMOVE_TOOLTIP_DISASTROUSLY_BLOODY = "If you are a vampire, the tainted blood in this drink will corrupt you, increasing your Stage to 4.\nThese effects are scaled based on your level.",                                   -- Must be exact match in each localization
+    LUIE_STRING_SKILL_REMOVE_TOOLTIP_DISASTROUSLY_BLOODY = "If you are a vampire, the tainted blood in this drink will corrupt you, increasing your Stage to 4.\nThese effects are scaled based on your level.", -- Must be exact match in each localization
     LUIE_STRING_SKILL_ESO_PLUS_TP = "Increase Experience, Gold, and Inspiration Points earned by |cFFFFFF10|r%.\nIncrease Trait Research speed by |cFFFFFF10|r%.",
 
     -- Collectible

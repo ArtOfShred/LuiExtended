@@ -3,6 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
+---@class (partial) LuiExtended
 local LUIE = LUIE
 local SpellCastBuffs = LUIE.SpellCastBuffs
 local BlacklistPresets = LUIE.Data.AbilityBlacklistPresets
@@ -41,8 +42,10 @@ local function GenerateCustomList(input)
     return options, values
 end
 
-local dialogs = {
-    [1] = { -- Clear Blacklist
+local dialogs =
+{
+    [1] =
+    { -- Clear Blacklist
         identifier = "LUIE_CLEAR_ABILITY_BLACKLIST",
         title = GetString(LUIE_STRING_LAM_UF_BLACKLIST_CLEAR),
         text = zo_strformat(GetString(LUIE_STRING_LAM_UF_BLACKLIST_CLEAR_DIALOG), GetString(LUIE_STRING_CUSTOM_LIST_AURA_BLACKLIST)),
@@ -51,7 +54,8 @@ local dialogs = {
             LUIE_Blacklist:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.BlacklistTable))
         end,
     },
-    [2] = { -- Clear Prominent Buffs
+    [2] =
+    { -- Clear Prominent Buffs
         identifier = "LUIE_CLEAR_PROMINENT_BUFFS",
         title = GetString(LUIE_STRING_LAM_UF_PROMINENT_CLEAR_BUFFS),
         text = zo_strformat(GetString(LUIE_STRING_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(LUIE_STRING_SCB_WINDOWTITLE_PROMINENTBUFFS)),
@@ -60,7 +64,8 @@ local dialogs = {
             LUIE_Prominent_Buffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PromBuffTable))
         end,
     },
-    [3] = { -- Clear Prominent Debuffs
+    [3] =
+    { -- Clear Prominent Debuffs
         identifier = "LUIE_CLEAR_PROMINENT_DEBUFFS",
         title = GetString(LUIE_STRING_LAM_UF_PROMINENT_CLEAR_DEBUFFS),
         text = zo_strformat(GetString(LUIE_STRING_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(LUIE_STRING_SCB_WINDOWTITLE_PROMINENTDEBUFFS)),
@@ -70,7 +75,8 @@ local dialogs = {
         end,
     },
 
-    [4] = { -- Clear Priority Buffs
+    [4] =
+    { -- Clear Priority Buffs
         identifier = "LUIE_CLEAR_PRIORITY_BUFFS",
         title = GetString(LUIE_STRING_LAM_UF_PRIORITY_CLEAR_BUFFS),
         text = zo_strformat(GetString(LUIE_STRING_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(LUIE_STRING_CUSTOM_LIST_PRIORITY_BUFFS)),
@@ -79,7 +85,8 @@ local dialogs = {
             LUIE_Priority_Buffs_List:UpdateChoices(GenerateCustomList(SpellCastBuffs.SV.PriorityBuffTable))
         end,
     },
-    [5] = { -- Clear Priority Debuffs
+    [5] =
+    { -- Clear Priority Debuffs
         identifier = "LUIE_CLEAR_PRIORITY_DEBUFFS",
         title = GetString(LUIE_STRING_LAM_UF_PRIORITY_CLEAR_DEBUFFS),
         text = zo_strformat(GetString(LUIE_STRING_LAM_UF_BLACKLIST_CLEAR_DIALOG_LIST), GetString(LUIE_STRING_CUSTOM_LIST_PRIORITY_DEBUFFS)),
@@ -122,7 +129,8 @@ function SpellCastBuffs.CreateSettings()
     -- Load Dialog Buttons
     loadDialogButtons()
 
-    local panelDataBuffsDebuffs = {
+    local panelDataBuffsDebuffs =
+    {
         type = "panel",
         name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_BUFFSDEBUFFS)),
         displayName = zo_strformat("<<1>> <<2>>", LUIE.name, GetString(LUIE_STRING_LAM_BUFFSDEBUFFS)),
@@ -140,13 +148,15 @@ function SpellCastBuffs.CreateSettings()
     local optionsDataBuffsDebuffs = {}
 
     -- Buffs & Debuffs Description
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "description",
         text = GetString(LUIE_STRING_LAM_BUFFS_DESCRIPTION),
     }
 
     -- ReloadUI Button
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "button",
         name = GetString(LUIE_STRING_LAM_RELOADUI),
         tooltip = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
@@ -157,7 +167,8 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Buffs Window Unlock
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_BUFF_UNLOCKWINDOW),
         tooltip = GetString(LUIE_STRING_LAM_BUFF_UNLOCKWINDOW_TP),
@@ -174,14 +185,16 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Buffs Window Reset position
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "button",
         name = GetString(LUIE_STRING_LAM_RESETPOSITION),
         tooltip = GetString(LUIE_STRING_LAM_BUFF_RESETPOSITION_TP),
         func = SpellCastBuffs.ResetTlwPosition,
         width = "half",
     }
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         -- Hard-Lock Position to Unit Frames
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_BUFF_HARDLOCK),
@@ -198,10 +211,12 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Buffs&Debuffs - Position and Display Options Submenu
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_BUFF_HEADER_POSITION),
-        controls = {
+        controls =
+        {
             {
                 type = "checkbox",
                 name = zo_strformat(GetString(LUIE_STRING_LAM_BUFF_SHOWPLAYERBUFF)),
@@ -407,10 +422,12 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Buffs&Debuffs - Long & Short Term Effects Filters
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_BUFF_LONG_SHORT_HEADER),
-        controls = {
+        controls =
+        {
             {
                 type = "checkbox",
                 name = GetString(LUIE_STRING_LAM_BUFF_SHORTTERM_SELF),
@@ -1317,10 +1334,12 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Buffs&Debuffs - Icon Options Submenu
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_BUFF_ICON_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Buff Icon Size
                 type = "slider",
@@ -1576,10 +1595,12 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Buffs&Debuffs - Color Options Submenu
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_BUFF_COLOR_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Basic Color Options
                 type = "header",
@@ -1611,7 +1632,8 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.debuff = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.debuff[1],
                     g = Defaults.colors.debuff[2],
                     b = Defaults.colors.debuff[3],
@@ -1629,7 +1651,8 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.prioritybuff = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.prioritybuff[1],
                     g = Defaults.colors.prioritybuff[2],
                     b = Defaults.colors.prioritybuff[3],
@@ -1647,7 +1670,8 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.prioritydebuff = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.prioritydebuff[1],
                     g = Defaults.colors.prioritydebuff[2],
                     b = Defaults.colors.prioritydebuff[3],
@@ -1689,7 +1713,8 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.unbreakable = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.unbreakable[1],
                     g = Defaults.colors.unbreakable[2],
                     b = Defaults.colors.unbreakable[3],
@@ -1728,7 +1753,8 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.cosmetic = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.cosmetic[1],
                     g = Defaults.colors.cosmetic[2],
                     b = Defaults.colors.cosmetic[3],
@@ -1806,7 +1832,8 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.knockback = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.knockback[1],
                     g = Defaults.colors.knockback[2],
                     b = Defaults.colors.knockback[3],
@@ -1827,7 +1854,8 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.levitate = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.levitate[1],
                     g = Defaults.colors.levitate[2],
                     b = Defaults.colors.levitate[3],
@@ -1848,7 +1876,8 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.disorient = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.disorient[1],
                     g = Defaults.colors.disorient[2],
                     b = Defaults.colors.disorient[3],
@@ -1903,7 +1932,8 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.stagger = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.stagger[1],
                     g = Defaults.colors.stagger[2],
                     b = Defaults.colors.stagger[3],
@@ -1924,7 +1954,8 @@ function SpellCastBuffs.CreateSettings()
                 setFunc = function (r, g, b, a)
                     Settings.colors.silence = { r, g, b, a }
                 end,
-                default = {
+                default =
+                {
                     r = Defaults.colors.silence[1],
                     g = Defaults.colors.silence[2],
                     b = Defaults.colors.silence[3],
@@ -1972,10 +2003,12 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Buffs&Debuffs - Alignment & Sorting Options Submenu
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_BUFF_SORTING_HEADER),
-        controls = {
+        controls =
+        {
             -- Buffs/Debuffs Alignment & Sorting
             {
                 type = "header",
@@ -2614,10 +2647,12 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Buffs&Debuffs - Tooltip Options Submenu
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_BUFF_TOOLTIP_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Tooltip Enable
                 type = "checkbox",
@@ -2710,10 +2745,12 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Buffs&Debuffs - Priority Buffs & Debuffs Options Submenu
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_BUFF_PRIORITY_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Prominent Buffs & Debuffs Description
                 type = "description",
@@ -2820,10 +2857,12 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Buffs&Debuffs - Prominent Buffs & Debuffs Options Submenu
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_BUFF_PROM_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Prominent Buffs & Debuffs Description
                 type = "description",
@@ -2961,7 +3000,8 @@ function SpellCastBuffs.CreateSettings()
                     SpellCastBuffs.Reset()
                 end,
                 width = "half",
-                default = {
+                default =
+                {
                     r = Settings.ProminentProgressBuffC1[1],
                     g = Settings.ProminentProgressBuffC1[2],
                     b = Settings.ProminentProgressBuffC1[3],
@@ -2983,7 +3023,8 @@ function SpellCastBuffs.CreateSettings()
                     SpellCastBuffs.Reset()
                 end,
                 width = "half",
-                default = {
+                default =
+                {
                     r = Settings.ProminentProgressBuffC2[1],
                     g = Settings.ProminentProgressBuffC2[2],
                     b = Settings.ProminentProgressBuffC2[3],
@@ -3006,7 +3047,8 @@ function SpellCastBuffs.CreateSettings()
                     SpellCastBuffs.Reset()
                 end,
                 width = "half",
-                default = {
+                default =
+                {
                     r = Settings.ProminentProgressBuffPriorityC1[1],
                     g = Settings.ProminentProgressBuffPriorityC1[2],
                     b = Settings.ProminentProgressBuffPriorityC1[3],
@@ -3028,7 +3070,8 @@ function SpellCastBuffs.CreateSettings()
                     SpellCastBuffs.Reset()
                 end,
                 width = "half",
-                default = {
+                default =
+                {
                     r = Settings.ProminentProgressBuffPriorityC2[1],
                     g = Settings.ProminentProgressBuffPriorityC2[2],
                     b = Settings.ProminentProgressBuffPriorityC2[3],
@@ -3051,7 +3094,8 @@ function SpellCastBuffs.CreateSettings()
                     SpellCastBuffs.Reset()
                 end,
                 width = "half",
-                default = {
+                default =
+                {
                     r = Settings.ProminentProgressDebuffC1[1],
                     g = Settings.ProminentProgressDebuffC1[2],
                     b = Settings.ProminentProgressDebuffC1[3],
@@ -3073,7 +3117,8 @@ function SpellCastBuffs.CreateSettings()
                     SpellCastBuffs.Reset()
                 end,
                 width = "half",
-                default = {
+                default =
+                {
                     r = Settings.ProminentProgressDebuffC2[1],
                     g = Settings.ProminentProgressDebuffC2[2],
                     b = Settings.ProminentProgressDebuffC2[3],
@@ -3096,7 +3141,8 @@ function SpellCastBuffs.CreateSettings()
                     SpellCastBuffs.Reset()
                 end,
                 width = "half",
-                default = {
+                default =
+                {
                     r = Settings.ProminentProgressDebuffPriorityC1[1],
                     g = Settings.ProminentProgressDebuffPriorityC1[2],
                     b = Settings.ProminentProgressDebuffPriorityC1[3],
@@ -3118,7 +3164,8 @@ function SpellCastBuffs.CreateSettings()
                     SpellCastBuffs.Reset()
                 end,
                 width = "half",
-                default = {
+                default =
+                {
                     r = Settings.ProminentProgressDebuffPriorityC2[1],
                     g = Settings.ProminentProgressDebuffPriorityC2[2],
                     b = Settings.ProminentProgressDebuffPriorityC2[3],
@@ -3268,10 +3315,12 @@ function SpellCastBuffs.CreateSettings()
         },
     }
 
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_BUFF_BLACKLIST_HEADER),
-        controls = {
+        controls =
+        {
             {
                 -- Buffs & Debuffs Blacklist Description
                 type = "description",
@@ -3382,14 +3431,16 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Debug Options
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "header",
         name = "Debug Options",
         width = "full",
     }
 
     -- Debug
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "checkbox",
         name = "Show AbilityId on Buffs & Debuffs",
         tooltip = "Toggle the display of AbilityId on buffs and debuffs - useful for adding auras to Prominent Buffs & Debuffs or the Aura Blacklist.",
@@ -3408,7 +3459,8 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Debug
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "checkbox",
         name = "Show Debug for Combat Events",
         tooltip = "Display debug information for combat events - used for development.",
@@ -3427,7 +3479,8 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Debug
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "checkbox",
         name = "Show Debug for Effect Change Events",
         tooltip = "Display debug information for effect change events - used for development.",
@@ -3446,7 +3499,8 @@ function SpellCastBuffs.CreateSettings()
     }
 
     -- Debug
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs+1] = {
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] =
+    {
         type = "checkbox",
         name = "Filter Debug Events & Effects",
         tooltip = "Filter out events and effects that have already been processed - used for development.",
