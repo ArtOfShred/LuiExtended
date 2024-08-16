@@ -59,7 +59,7 @@ local function ReplaceDefaultTemplate(object, functionName, frameName)
             ---@type Control
             local frame = _G[frameName]
             frame:ClearAnchors()
-            frame:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y, frame:GetResizeToFitConstrains())
+            frame:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y)
         end
         return result
     end
@@ -103,7 +103,7 @@ local function setAnchor(k, frameName)
     local y = LUIE.SV[frameName][2]
     if x ~= nil and y ~= nil then
         k:ClearAnchors()
-        k:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y, k:GetResizeToFitConstrains())
+        k:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y)
     end
     -- Fix the Objective Capture Meter fill alignment.
     if k == ZO_ObjectiveCaptureMeter then
@@ -154,9 +154,9 @@ end
 ---@param offsetY number: The Y offset for the top-level window.
 ---@param relativeTo object: The element to which the top-level window is relative.
 ---@return TopLevelWindow tlw: The created top-level window.
-local function createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo, anchorConstrains)
+local function createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo)
     ---@type TopLevelWindow
-    local tlw = UI.TopLevel({ point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() }, k:GetDimensionConstraints())
+    local tlw = UI.TopLevel({ point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() })
     tlw:SetDrawLayer(DL_BACKGROUND)
     tlw:SetDrawTier(DT_MEDIUM)
     tlw.customPositionAttr = k:GetName()
@@ -190,11 +190,10 @@ function LUIE.SetupElementMover(state)
                     relativePoint = TOPRIGHT
                     offsetX = 0
                     offsetY = 0
-                    anchorConstrains = k:GetDimensionConstraints()
                 end
             end
             ---@type TopLevelWindow
-            local tlw = createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo, anchorConstrains)
+            local tlw = createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo)
             -- Setup handlers to set the custom position SV and call LUIE.SetElementPosition() to apply this positioning
             tlw:SetHandler("OnMoveStop", function (self)
                 LUIE.SV[self.customPositionAttr] = { self:GetLeft(), self:GetTop() }

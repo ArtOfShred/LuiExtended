@@ -11,7 +11,7 @@ local CombatTextResourceEventViewer = LUIE.CombatTextResourceEventViewer
 local poolTypes = LUIE.Data.CombatTextConstants.poolType
 local eventType = LUIE.Data.CombatTextConstants.eventType
 local resourceTypes = LUIE.Data.CombatTextConstants.resourceType
-
+---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextResourceEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
     obj:RegisterCallback(eventType.RESOURCE, function (...) self:OnEvent(...) end)

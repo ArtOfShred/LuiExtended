@@ -12,7 +12,7 @@ local poolTypes = LUIE.Data.CombatTextConstants.poolType
 local eventType = LUIE.Data.CombatTextConstants.eventType
 
 local zo_strformat = zo_strformat
-
+---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextDeathViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
     obj:RegisterCallback(eventType.DEATH, function (...)

@@ -10,7 +10,7 @@ local CombatTextResourcesPowerEventListener = LUIE.CombatTextResourcesPowerEvent
 
 local eventType = LUIE.Data.CombatTextConstants.eventType
 local resourceType = LUIE.Data.CombatTextConstants.resourceType
-
+---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextResourcesPowerEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_POWER_UPDATE, function (...)

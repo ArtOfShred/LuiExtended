@@ -19,7 +19,7 @@ local easeOutIn = function (progress)
     progress = progress < 0.5 and progress * 2 or (1 - progress) * 2
     return zo_sqrt(1 - ((1 - progress) ^ 2))
 end
-
+---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextPool:New(poolType)
     -- Check if poolType is not nil or empty
     if not poolType then

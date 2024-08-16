@@ -11,7 +11,7 @@ local CombatTextCombatScrollEventViewer = LUIE.CombatTextCombatScrollEventViewer
 
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 local AbbreviateNumber = LUIE.AbbreviateNumber
-
+---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextCombatScrollEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
     obj:RegisterCallback(CombatTextConstants.eventType.COMBAT, function (...) self:OnEvent(...) end)

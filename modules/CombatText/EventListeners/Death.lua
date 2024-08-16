@@ -9,7 +9,7 @@ LUIE.CombatTextDeathListener = LUIE.CombatTextEventListener:Subclass()
 local CombatTextDeathListener = LUIE.CombatTextDeathListener
 
 local eventType = LUIE.Data.CombatTextConstants.eventType
-
+---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextDeathListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_UNIT_DEATH_STATE_CHANGED, function (...)

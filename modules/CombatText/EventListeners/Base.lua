@@ -27,7 +27,7 @@ end
 
 ---@param event any
 ---@param func fun(...)
----@vararg any
+---@param ... any
 function CombatTextEventListener:RegisterForEvent(event, func, ...)
     eventManager:RegisterForEvent(moduleName .. "Event" .. event .. "_" .. eventPostfix, event, function (eventCode, ...) func(...) end)
 
@@ -46,7 +46,7 @@ end
 ---@param name any
 ---@param timer any
 ---@param func fun(...)
----@vararg any
+---@param ... any
 function CombatTextEventListener:RegisterForUpdate(name, timer, func, ...)
     eventManager:RegisterForUpdate(moduleName .. "Event" .. name .. "_" .. eventPostfix, timer, func)
 end

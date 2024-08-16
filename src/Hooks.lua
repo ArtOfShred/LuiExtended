@@ -1759,7 +1759,7 @@ Override function for GetKillingAttackInfo.
         local id = skillProgressionData:GetAbilityId()
         control.slotIcon:SetTexture(GetAbilityIcon(id))
         ZO_Skills_SetKeyboardAbilityButtonTextures(control.slot)
-        ZO_ActionSlot_SetUnusable(control.slotIcon, not isPurchased)
+        ZO_ActionSlot_SetUnusable(control.slotIcon, not isPurchased, false)
         control.slot:SetEnabled(isPurchased and isActive)
         control.slotLock:SetHidden(isUnlocked)
 

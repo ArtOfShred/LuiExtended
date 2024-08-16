@@ -6,10 +6,11 @@
 
 ---@class (partial) LuiExtended
 local LUIE = LUIE
-LUIE.CombatTextAnimation = ZO_InitializingObject:Subclass()
-local CombatTextAnimation = LUIE.CombatTextAnimation
 
-local animationManager = ANIMATION_MANAGER
+---@class CombatTextAnimation : ZO_InitializingObject
+local CombatTextAnimation = ZO_InitializingObject:Subclass()
+LUIE.CombatTextAnimation = CombatTextAnimation
+local animationManager = GetAnimationManager()
 
 function CombatTextAnimation:New()
     local obj = setmetatable({}, self)

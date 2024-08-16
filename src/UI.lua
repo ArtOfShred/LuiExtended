@@ -24,7 +24,7 @@ function UI.TopLevel(anchors, dims)
     tlw:SetMovable(false)
     tlw:SetHidden(true)
     if anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
-        tlw:SetAnchor(anchors[1], anchors[5] or GuiRoot, anchors[2], anchors[3] or 0, anchors[4] or 0, tlw:GetResizeToFitConstrains())
+        tlw:SetAnchor(anchors[1], anchors[5] or GuiRoot, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
     if dims ~= nil and #dims == 2 then
         tlw:SetDimensions(dims[1], dims[2])
@@ -37,7 +37,7 @@ end
 ---@param anchors table|nil: The anchor points for the control.
 ---@param dims table|nil: The dimensions of the control.
 ---@param hidden boolean: Whether the control is hidden or not.
----@param name string: The name of the control.
+---@param name string|nil: The name of the control.
 ---@return Control|nil c: The created control.
 function UI.Control(parent, anchors, dims, hidden, name)
     if not parent then
@@ -50,7 +50,7 @@ function UI.Control(parent, anchors, dims, hidden, name)
     if anchors == "fill" then
         c:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
-        c:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0, c:GetResizeToFitConstrains())
+        c:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
     if dims == "inherit" then
         c:SetDimensions(parent:GetWidth(), parent:GetHeight())
@@ -78,7 +78,7 @@ function UI.Texture(parent, anchors, dims, texture, drawlayer, hidden)
     if anchors == "fill" then
         t:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
-        t:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0, t:GetResizeToFitConstrains())
+        t:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
     if dims == "inherit" then
         t:SetDimensions(parent:GetWidth(), parent:GetHeight())
@@ -118,7 +118,7 @@ function UI.Backdrop(parent, anchors, dims, center, edge, hidden)
     if anchors == "fill" then
         bg:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
-        bg:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0, bg:GetResizeToFitConstrains())
+        bg:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
     if dims == "inherit" then
         bg:SetDimensions(parent:GetWidth(), parent:GetHeight())
@@ -154,7 +154,7 @@ function UI.ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
     if anchors == "fill" then
         bg:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
-        bg:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0, bg:GetResizeToFitConstrains())
+        bg:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
     if dims == "inherit" then
         bg:SetDimensions(parent:GetWidth(), parent:GetHeight())
@@ -181,7 +181,7 @@ function UI.StatusBar(parent, anchors, dims, color, hidden)
     if anchors == "fill" then
         sb:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
-        sb:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0, sb:GetResizeToFitConstrains())
+        sb:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
     if dims == "inherit" then
         sb:SetDimensions(parent:GetWidth(), parent:GetHeight())
@@ -220,7 +220,7 @@ function UI.Label(parent, anchors, dims, align, font, text, hidden, name)
     if anchors == "fill" then
         label:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
-        label:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0, label:GetResizeToFitConstrains())
+        label:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
     if dims == "inherit" then
         label:SetDimensions(parent:GetWidth(), parent:GetHeight())

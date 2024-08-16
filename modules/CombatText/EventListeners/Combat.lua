@@ -22,6 +22,7 @@ local isWarned =
     charmed = false,
 }
 
+---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextCombatEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_PLAYER_ACTIVATED, function ()

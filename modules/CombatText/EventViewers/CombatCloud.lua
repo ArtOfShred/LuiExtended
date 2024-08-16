@@ -7,17 +7,16 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class LUIE.CombatTextCombatCloudEventViewer : LUIE, ZO_Object
-LUIE.CombatTextCombatCloudEventViewer = LUIE.CombatTextEventViewer:Subclass()
-
-local CombatTextCombatCloudEventViewer = LUIE.CombatTextCombatCloudEventViewer
+---@class CombatTextCombatCloudEventViewer : CombatTextEventViewer, ZO_InitializingObject 
+local CombatTextCombatCloudEventViewer = LUIE.CombatTextEventViewer:Subclass()
+LUIE.CombatTextCombatCloudEventViewer = CombatTextCombatCloudEventViewer
 
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 local AbbreviateNumber = LUIE.AbbreviateNumber
 local string_format = string.format
 
 function CombatTextCombatCloudEventViewer:New(...)
-    local obj = LUIE.CombatTextEventViewer:New(...)
+    local obj = LUIE.CombatTextEventViewer:New(...) --[[@as CombatTextEventViewer]]
     obj:RegisterCallback(CombatTextConstants.eventType.COMBAT, function (...)
         self:OnEvent(...)
     end)

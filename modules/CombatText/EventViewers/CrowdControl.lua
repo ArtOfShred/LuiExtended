@@ -12,7 +12,7 @@ local poolTypes = LUIE.Data.CombatTextConstants.poolType
 local eventType = LUIE.Data.CombatTextConstants.eventType
 local combatType = LUIE.Data.CombatTextConstants.combatType
 local crowdControlTypes = LUIE.Data.CombatTextConstants.crowdControlType
-
+---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextCrowdControlEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
     obj:RegisterCallback(eventType.CROWDCONTROL, function (...)

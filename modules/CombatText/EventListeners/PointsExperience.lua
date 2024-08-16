@@ -10,7 +10,7 @@ local CombatTextPointsExperienceEventListener = LUIE.CombatTextPointsExperienceE
 
 local eventType = LUIE.Data.CombatTextConstants.eventType
 local pointType = LUIE.Data.CombatTextConstants.pointType
-
+---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextPointsExperienceEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_EXPERIENCE_UPDATE, function (...)
