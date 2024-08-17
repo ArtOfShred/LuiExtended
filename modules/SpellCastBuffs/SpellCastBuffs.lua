@@ -262,6 +262,50 @@ local function EaseOutQuad(t, b, c, d)
     return -c * t * (t - 2) + b
 end
 
+---@type table<number, string>
+local oakensoul =
+{
+    [61665] = "Major Brutality",
+    [61667] = "Major Savagery",
+    [61687] = "Major Sorcery",
+    [61689] = "Major Prophecy",
+    [61694] = "Major Resolve",
+    [61697] = "Minor Fortitude",
+    [61704] = "Minor Endurance",
+    [61706] = "Minor Intellect",
+    [61708] = "Minor Heroism",
+    [61710] = "Minor Mending",
+    [61721] = "Minor Protection",
+    [61737] = "Empower",
+    [61744] = "Minor Berserk",
+    [61746] = "Minor Force",
+    [76617] = "Minor Slayer",
+    [76618] = "Minor Aegis",
+    [147417] = "Minor Courage",
+}
+
+---@return boolean
+local function OakensoulEquipped()
+    if GetItemLinkItemId(GetItemLink(BAG_WORN, 11)) == 187658 or
+        GetItemLinkItemId(GetItemLink(BAG_WORN, 12)) == 187658 then
+        return true
+    end
+    return false
+end
+
+---@param buffId number
+---@return boolean
+local function IsOakensoul(buffId)
+    if OakensoulEquipped() then
+        for id in pairs(oakensoul) do
+            if buffId == id then
+                return true
+            end
+        end
+    end
+    return false
+end
+
 local function UpdateEffectOnSkillUpdate(overrideRank, casterUnitTag)
     -- Mages Guild
     Effects.EffectOverride[40465].tooltip = zo_strformat(GetString(LUIE_STRING_SKILL_SCALDING_RUNE_TP), ((GetAbilityDuration(40468, overrideRank, casterUnitTag) or 0) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8))
@@ -573,7 +617,8 @@ function SpellCastBuffs.Initialize(enabled)
     eventManager:RegisterForEvent(moduleName .. "Target", EVENT_EFFECT_CHANGED, SpellCastBuffs.OnEffectChanged)
     eventManager:AddFilterForEvent(moduleName .. "Player", EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
     eventManager:AddFilterForEvent(moduleName .. "Target", EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover")
-
+    eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, OakensoulEquipped)
+    eventManager:AddFilterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_BAG_ID, BAG_WORN)
     -- GROUND & MINE EFFECTS - add a filtered event for each AbilityId
     for k, v in pairs(Effects.EffectGroundDisplay) do
         eventManager:RegisterForEvent(moduleName .. "Ground" .. k, EVENT_EFFECT_CHANGED, SpellCastBuffs.OnEffectChangedGround)
@@ -1964,7 +2009,29 @@ end
 
 -- Runs on the EVENT_EFFECT_CHANGED listener.
 -- This handler fires every long-term effect added or removed
-function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+---@param eventCode integer
+---@param changeType EffectResult
+---@param effectSlot integer
+---@param effectName string
+---@param unitTag string
+---@param beginTime integer
+---@param endTime integer
+---@param stackCount integer
+---@param iconName string
+---@param deprecatedBuffType string
+---@param effectType BuffEffectType
+---@param abilityType AbilityType
+---@param statusEffectType StatusEffectType
+---@param unitName string
+---@param unitId integer
+---@param abilityId integer
+---@param castByPlayer CombatUnitType
+function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, deprecatedBuffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+    -- Bail out if this is an effect from Oakensoul
+    if IsOakensoul(abilityId) and unitTag == "player" then
+        return
+    end
+
     -- Change the effect type / name before we determine if we want to filter anything else.
     if Effects.EffectOverride[abilityId] then
         effectName = Effects.EffectOverride[abilityId].name or effectName
