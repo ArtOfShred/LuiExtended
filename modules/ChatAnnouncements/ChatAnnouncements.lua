@@ -10302,7 +10302,7 @@ function ChatAnnouncements.HookFunction()
 
     ---@param self ZO_PlayerToPlayer
     ---@param isIgnored boolean
-    ZO_PreHook(PLAYER_TO_PLAYER,"ShowPlayerInteractMenu", function (self, isIgnored)
+    PLAYER_TO_PLAYER.ShowPlayerInteractMenu = function (self, isIgnored)
         local currentTargetCharacterName = self.currentTargetCharacterName
         local currentTargetCharacterNameRaw = self.currentTargetCharacterNameRaw
         local currentTargetDisplayName = self.currentTargetDisplayName
@@ -10513,7 +10513,7 @@ function ChatAnnouncements.HookFunction()
         self:GetRadialMenu():Show()
         self.showingPlayerInteractMenu = true
         self.isLastRadialMenuGamepad = IsInGamepadPreferredMode()
-    end)
+    end
 
 
 
@@ -10698,7 +10698,7 @@ function ChatAnnouncements.HookFunction()
     end
     ZO_MailSend_Gamepad.IsMailValid = IsMailValid
     -- Hook MAIL_SEND.Send to get name of player we send to.
-    ZO_PreHook(MAIL_SEND,"Send", function (self)
+    MAIL_SEND.Send = function (self)
         windowManager:SetFocusByName("")
         if not self.sendMoneyMode and GetQueuedCOD() == 0 then
             if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
@@ -10730,9 +10730,9 @@ function ChatAnnouncements.HookFunction()
 
             g_mailTarget = ZO_SELECTED_TEXT:Colorize(nameLink)
         end
-    end)
+    end
 
-    ZO_PreHook(PLAYER_INVENTORY,"AddQuestItem", function (self, questItem, searchType)
+    PLAYER_INVENTORY.AddQuestItem = function (self, questItem, searchType)
         local inventory = self.inventories[INVENTORY_QUEST_ITEM]
 
         questItem.inventory = inventory
@@ -10748,9 +10748,9 @@ function ChatAnnouncements.HookFunction()
         if ChatAnnouncements.SV.Inventory.LootQuestAdd or ChatAnnouncements.SV.Inventory.LootQuestRemove then
             DisplayQuestItem(questItem.questItemId, questItem.stackCount, questItem.iconFile, false)
         end
-    end)
+    end
 
-    ZO_PreHook(PLAYER_INVENTORY,"ResetQuest",function (self, questIndex)
+    PLAYER_INVENTORY.ResetQuest = function (self, questIndex)
         local inventory = self.inventories[INVENTORY_QUEST_ITEM]
         local itemTable = inventory.slots[questIndex]
         if itemTable then
@@ -10766,7 +10766,7 @@ function ChatAnnouncements.HookFunction()
             end
         end
         inventory.slots[questIndex] = nil
-    end)
+    end
 
     -- Called by hooked TryGroupInviteByName function
     -- TODO: Maybe see about links for names here for non-menu
@@ -10802,7 +10802,7 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- HOOK Group Invite function so we can modify CA/Alert here
-    ZO_PreHook("TryGroupInviteByName", function (characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
+    TryGroupInviteByName = function (characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
         if IsPlayerInGroup(characterOrDisplayName) then
             printToChat(GetString(SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER), true)
             if ChatAnnouncements.SV.Group.GroupAlert then
@@ -10842,7 +10842,7 @@ function ChatAnnouncements.HookFunction()
 
             CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
         end
-    end)
+    end
 
     -- Hook for EVENT_GUILD_MEMBER_ADDED
     GUILD_ROSTER_MANAGER.OnGuildMemberAdded = function (self, guildId, displayName)
@@ -10898,7 +10898,7 @@ function ChatAnnouncements.HookFunction()
     EVENT_MANAGER:RegisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_DEMOTE_SUCCESSFUL, ChatAnnouncements.GuildMemberDemoteSuccessful)
 
     -- Hook for Guild Invite function used from Guild Menu
-    ZO_PreHook("ZO_TryGuildInvite", function (guildId, displayName)
+    ZO_TryGuildInvite = function (guildId, displayName)
         -- TODO: Update when more alerts are added to CA
         if not DoesPlayerHaveGuildPermission(guildId, GUILD_PERMISSION_INVITE) then
             ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_INVITE_PERMISSION)
@@ -10952,18 +10952,18 @@ function ChatAnnouncements.HookFunction()
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(LUIE_STRING_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAllianceAlert))
             end
         end
-    end)
+    end
 
     -- Called when changing guilds in the Guild tab
-    ZO_PreHook(GUILD_SHARED_INFO,"SetGuildId", function (self, guildId)
+    GUILD_SHARED_INFO.SetGuildId = function (self, guildId)
         self.guildId = guildId
         self:Refresh(guildId)
         -- Set selected guild for use when resolving Rank/Heraldry updates
         g_selectedGuild = guildId
-    end)
+    end
 
     -- Called when changing guilds in the Guild tab or leaving/joining a guild
-    ZO_PreHook(GUILD_SHARED_INFO,"Refresh", function (self, guildId)
+    GUILD_SHARED_INFO.Refresh = function (self, guildId)
         if self.guildId and self.guildId == guildId then
             local count = GetControl(self.control, "Count")
             local numGuildMembers, numOnline = GetGuildInfo(guildId)
@@ -10993,7 +10993,7 @@ function ChatAnnouncements.HookFunction()
         end
         -- Set selected guild for use when resolving Rank/Heraldry updates
         g_selectedGuild = guildId
-    end)
+    end
 
     -- Used to pull the cost of guild Heraldry change
     -- TODO: Fix later
