@@ -20,9 +20,9 @@ local zo_strformat = zo_strformat
 local table_insert = table.insert
 local table_sort = table.sort
 --local displayName = GetDisplayName()
-local eventManager = EVENT_MANAGER
+local eventManager = GetEventManager()
 local sceneManager = SCENE_MANAGER
-local windowManager = WINDOW_MANAGER
+local windowManager = GetWindowManager()
 
 local moduleName = LUIE.name .. "SpellCastBuffs"
 
@@ -166,6 +166,7 @@ SpellCastBuffs.Defaults =
     ShowResurrectionImmunity = true,
     ShowRecall = true,
     ShowWerewolf = true,
+    HideOakenSoul = false,
     HidePlayerBuffs = false,
     HidePlayerDebuffs = false,
     HideTargetBuffs = false,
@@ -617,8 +618,6 @@ function SpellCastBuffs.Initialize(enabled)
     eventManager:RegisterForEvent(moduleName .. "Target", EVENT_EFFECT_CHANGED, SpellCastBuffs.OnEffectChanged)
     eventManager:AddFilterForEvent(moduleName .. "Player", EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
     eventManager:AddFilterForEvent(moduleName .. "Target", EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover")
-    eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, OakensoulEquipped)
-    eventManager:AddFilterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_BAG_ID, BAG_WORN)
     -- GROUND & MINE EFFECTS - add a filtered event for each AbilityId
     for k, v in pairs(Effects.EffectGroundDisplay) do
         eventManager:RegisterForEvent(moduleName .. "Ground" .. k, EVENT_EFFECT_CHANGED, SpellCastBuffs.OnEffectChangedGround)
@@ -2028,7 +2027,7 @@ end
 ---@param castByPlayer CombatUnitType
 function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, deprecatedBuffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     -- Bail out if this is an effect from Oakensoul
-    if IsOakensoul(abilityId) and unitTag == "player" then
+    if IsOakensoul(abilityId) and unitTag == "player" and (SpellCastBuffs.SV.HideOakenSoul == true) then
         return
     end
 

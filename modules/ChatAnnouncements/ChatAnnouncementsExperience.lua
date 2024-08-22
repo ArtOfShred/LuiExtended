@@ -19,8 +19,8 @@ local string_format = string.format
 local table_insert = table.insert
 local table_concat = table.concat
 
-local eventManager = EVENT_MANAGER
-local windowManager = WINDOW_MANAGER
+local eventManager = GetEventManager()
+local windowManager = GetWindowManager()
 
 local moduleName = LUIE.name .. "ChatAnnouncements"
 

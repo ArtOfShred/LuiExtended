@@ -8,7 +8,7 @@
 local LUIE = LUIE
 
 local zo_strformat = zo_strformat
-local eventManager = EVENT_MANAGER
+local eventManager = GetEventManager()
 
 --[[
     Load saved settings.

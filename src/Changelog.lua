@@ -12,14 +12,10 @@ local table_concat = table.concat
 
 local changelogMessages =
 {
-    "|cFFA500LuiExtended Version 6.7.4|r",
+    "|cFFA500LuiExtended Version 6.7.5|r",
     "",
     "|cFFFF00General:|r",
-    "[*] Oakensoul support added for buff icons!.",
-    "",
-    "[*] Added missing assistants for keybinds.",
-    "",
-    "[*] Added Warden AOE pre-Charm AoE to AoE alerts.",
+    "[*] Oakensoul menu setting added to Buffs & Debuffs Module -> Display Options.",
     "",
 }
 

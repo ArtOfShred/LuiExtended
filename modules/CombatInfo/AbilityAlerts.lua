@@ -22,9 +22,9 @@ local pairs = pairs
 local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 local string_format = string.format
-local eventManager = EVENT_MANAGER
+local eventManager = GetEventManager()
 local sceneManager = SCENE_MANAGER
-local windowManager = WINDOW_MANAGER
+local windowManager = GetWindowManager()
 
 local moduleName = LUIE.name .. "CombatInfo"
 

@@ -12,7 +12,7 @@ local InfoPanel = LUIE.InfoPanel
 
 local UI = LUIE.UI
 
-local eventManager = EVENT_MANAGER
+local eventManager = GetEventManager()
 local sceneManager = SCENE_MANAGER
 
 local pairs = pairs

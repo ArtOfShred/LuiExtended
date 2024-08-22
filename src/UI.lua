@@ -10,14 +10,14 @@ local LUIE = LUIE
 ---@class UI
 local UI = {}
 
-local windowManager = WINDOW_MANAGER
+local windowManager = GetWindowManager()
 
 --- Creates an empty `CT_TOPLEVELCONTROL` window.
 ---@param anchors table|nil: The anchor points for the window.
 ---@param dims table|nil: The dimensions of the window.
----@return object tlw: The created top-level window.
+---@return TopLevelWindow tlw: The created top-level window.
 function UI.TopLevel(anchors, dims)
-    ---@type object
+    ---@type TopLevelWindow
     local tlw = windowManager:CreateTopLevelWindow(nil)
     tlw:SetClampedToScreen(true)
     tlw:SetMouseEnabled(false)

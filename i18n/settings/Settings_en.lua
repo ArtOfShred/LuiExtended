@@ -132,6 +132,8 @@ local strings =
     LUIE_STRING_LAM_SLASHCMDS_REPORT_TP = "'/report' 'name' Opens the report player window.",
 
     -- Module: Buffs & Debuffs
+    LUIE_STRING_LAM_BUFF_MISC_HIDE_OAKENSOUL = "Hide OakenSoul Buffs",
+    LUIE_STRING_LAM_BUFF_MISC_HIDE_OAKENSOUL_TP = "Hide the OakenSoul Buffs.",
     LUIE_STRING_LAM_BUFF_ENABLEEFFECTSTRACK = "Buffs & Debuffs Module",
     LUIE_STRING_LAM_BUFF_HEADER_POSITION = "Display Options",
     LUIE_STRING_LAM_BUFF_HARDLOCK = "Hard-Lock Position to Unit Frames",

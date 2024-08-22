@@ -10,6 +10,7 @@ local zo_strformat = zo_strformat
 local printToChat = LUIE.PrintToChat
 local table_insert = table.insert
 local table_sort = table.sort
+local ANIMATION_MANAGER = GetAnimationManager()
 
 local FORCE_SUPPRESS_COOLDOWN_SOUND = true
 local HIDE_COUNT = 0

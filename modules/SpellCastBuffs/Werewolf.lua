@@ -7,7 +7,7 @@
 local LUIE = LUIE
 local SpellCastBuffs = LUIE.SpellCastBuffs
 
-local eventManager = EVENT_MANAGER
+local eventManager = GetEventManager()
 
 local moduleName = LUIE.name .. "SpellCastBuffs"
 

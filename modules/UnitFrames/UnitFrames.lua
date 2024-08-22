@@ -21,7 +21,7 @@ local table_remove = table.remove
 local string_format = string.format
 local zo_strformat = zo_strformat
 
-local eventManager = EVENT_MANAGER
+local eventManager = GetEventManager()
 local sceneManager = SCENE_MANAGER
 
 local moduleName = LUIE.name .. "UnitFrames"

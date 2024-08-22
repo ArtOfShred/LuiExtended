@@ -12,8 +12,8 @@ local CrowdControlTracker = CombatInfo.CrowdControlTracker
 
 local Effects = LUIE.Data.Effects
 local CrowdControl = LUIE.Data.CrowdControl
-local eventManager = EVENT_MANAGER
-local animationManager = ANIMATION_MANAGER
+local eventManager = GetEventManager()
+local animationManager = GetAnimationManager()
 local table_insert = table.insert
 local table_remove = table.remove
 local pairs = pairs

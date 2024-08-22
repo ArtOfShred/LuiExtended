@@ -26,8 +26,8 @@ local string_format = string.format
 local table_insert = table.insert
 local table_concat = table.concat
 
-local eventManager = EVENT_MANAGER
-local windowManager = WINDOW_MANAGER
+local eventManager = GetEventManager()
+local windowManager = GetWindowManager()
 
 local moduleName = LUIE.name .. "ChatAnnouncements"
 
@@ -913,7 +913,7 @@ local ChatEventFormattersDelete =
 function ChatAnnouncements.SlayChatHandlers()
     -- Unregister ZOS handlers for events we need to modify
     for eventCode, _ in pairs(ChatEventFormattersDelete) do
-        EVENT_MANAGER:UnregisterForEvent("ChatRouter", eventCode)
+        eventManager:UnregisterForEvent("ChatRouter", eventCode)
     end
 
     -- Slay these events in case LibChatMessage is active and hooks them
@@ -935,7 +935,7 @@ function ChatAnnouncements.Initialize(enabled)
     -- Some modules might need to pull some of the color settings from CA so we want these to always be set regardless of CA module being enabled/disabled.
     ChatAnnouncements.RegisterColorEvents()
     -- Always register this function for other components to use
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_USE_RESULT, ChatAnnouncements.CollectibleUsed)
+    eventManager:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_USE_RESULT, ChatAnnouncements.CollectibleUsed)
 
     -- Disable module if setting not toggled on
     if not enabled then
@@ -10890,12 +10890,12 @@ function ChatAnnouncements.HookFunction()
 
     local EVENT_NAMESPACE = "GuildRoster"
     -- Unregister ZOS Guild Roster events and replace with our own.
-    EVENT_MANAGER:UnregisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_PLAYER_RANK_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_PROMOTE_SUCCESSFUL)
-    EVENT_MANAGER:UnregisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_DEMOTE_SUCCESSFUL)
-    EVENT_MANAGER:RegisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_PLAYER_RANK_CHANGED, ChatAnnouncements.GuildPlayerRankChanged)
-    EVENT_MANAGER:RegisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_PROMOTE_SUCCESSFUL, ChatAnnouncements.GuildMemberPromoteSuccessful)
-    EVENT_MANAGER:RegisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_DEMOTE_SUCCESSFUL, ChatAnnouncements.GuildMemberDemoteSuccessful)
+    eventManager:UnregisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_PLAYER_RANK_CHANGED)
+    eventManager:UnregisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_PROMOTE_SUCCESSFUL)
+    eventManager:UnregisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_DEMOTE_SUCCESSFUL)
+    eventManager:RegisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_PLAYER_RANK_CHANGED, ChatAnnouncements.GuildPlayerRankChanged)
+    eventManager:RegisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_PROMOTE_SUCCESSFUL, ChatAnnouncements.GuildMemberPromoteSuccessful)
+    eventManager:RegisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_DEMOTE_SUCCESSFUL, ChatAnnouncements.GuildMemberDemoteSuccessful)
 
     -- Hook for Guild Invite function used from Guild Menu
     ZO_TryGuildInvite = function (guildId, displayName)

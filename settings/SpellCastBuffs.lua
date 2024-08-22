@@ -218,6 +218,18 @@ function SpellCastBuffs.CreateSettings()
         controls =
         {
             {
+                -- Hide OakenSoul
+                type = "checkbox",
+                name = GetString(LUIE_STRING_LAM_BUFF_MISC_HIDE_OAKENSOUL),
+                tooltip = GetString(LUIE_STRING_LAM_BUFF_MISC_HIDE_OAKENSOUL_TP),
+                getFunc = function() return Settings.HideOakenSoul end,
+                setFunc = function(value) Settings.HideOakenSoul = value end,
+                width = "full",
+                default = Defaults.HideOakenSoul,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+                requiresReload = true,
+            },
+            {
                 type = "checkbox",
                 name = zo_strformat(GetString(LUIE_STRING_LAM_BUFF_SHOWPLAYERBUFF)),
                 tooltip = GetString(LUIE_STRING_LAM_BUFF_SHOWPLAYERBUFF_TP),
