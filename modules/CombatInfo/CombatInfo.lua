@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 -- CombatInfo namespace
@@ -33,8 +32,7 @@ local moduleName = LUIE.name .. "CombatInfo"
 local ACTION_RESULT_AREA_EFFECT = 669966
 
 CombatInfo.Enabled = false
-CombatInfo.Defaults =
-{
+CombatInfo.Defaults = {
     blacklist = {},
     GlobalShowGCD = false,
     GlobalPotion = false,
@@ -89,10 +87,8 @@ CombatInfo.Defaults =
     CastBarGradientC1 = { 0, 47 / 255, 130 / 255 },
     CastBarGradientC2 = { 82 / 255, 215 / 255, 1 },
     CastBarHeavy = false,
-    alerts =
-    {
-        toggles =
-        {
+    alerts = {
+        toggles = {
             alertEnable = true,
             alertFontFace = "Univers 67",
             alertFontStyle = "soft-shadow-thick",
@@ -144,8 +140,7 @@ CombatInfo.Defaults =
             sound_destroyEnable = true,
             sound_healEnable = false,
         },
-        colors =
-        {
+        colors = {
             alertShared = { 1, 1, 1, 1 },
             alertTimer = { 1, 1, 1, 1 },
             alertBlockA = { 1, 0, 0, 1 },
@@ -168,8 +163,7 @@ CombatInfo.Defaults =
             snareColor = { 1, 242 / 255, 32 / 255, 1 },
             rootColor = { 1, 165 / 255, 0, 1 },
         },
-        formats =
-        {
+        formats = {
             alertBlock = GetString(LUIE_STRING_CI_BLOCK_DEFAULT),
             alertBlockStagger = GetString(LUIE_STRING_CI_BLOCKSTAGGER_DEFAULT),
             alertInterrupt = GetString(LUIE_STRING_CI_INTERRUPT_DEFAULT),
@@ -181,8 +175,7 @@ CombatInfo.Defaults =
             alertDestroy = GetString(LUIE_STRING_CI_DESTROY_DEFAULT),
             alertSummon = GetString(LUIE_STRING_CI_SUMMON_DEFAULT),
         },
-        sounds =
-        {
+        sounds = {
             --[[ Old Sounds here for reference
             sound3                      = "Champion Damage Taken",
             sound3CC                    = "Champion Points Committed",
@@ -218,8 +211,7 @@ CombatInfo.Defaults =
             sound_heal = "Console Game Enter",
         },
     },
-    cct =
-    {
+    cct = {
         enabled = false,
         enabledOnlyInCyro = false,
         unlock = false,
@@ -265,8 +257,7 @@ CombatInfo.Defaults =
         showOptions = "all",
         offsetX = 0,
         offsetY = 0,
-        colors =
-        {
+        colors = {
             [ACTION_RESULT_AREA_EFFECT] = { 1, 242 / 255, 32 / 255, 1 },
             [ACTION_RESULT_BLOCKED_DAMAGE] = { 1, 1, 1, 1 },
             [ACTION_RESULT_BLOCKED] = { 1, 1, 1, 1 },
@@ -335,22 +326,18 @@ local BACKBAR_INDEX_END = 7 -- Separate index for backbar as long as we're not u
 local BACKBAR_INDEX_OFFSET = 50
 
 -- Quickslot
-local uiQuickSlot =
-{
+local uiQuickSlot = {
     color = { 0.941, 0.565, 0.251 },
-    timeColors =
-    {
+    timeColors = {
         [1] = { remain = 15000, color = { 0.878, 0.941, 0.251 } },
         [2] = { remain = 5000, color = { 0.251, 0.941, 0.125 } },
     },
 }
 
 -- Ultimate slot
-local uiUltimate =
-{
+local uiUltimate = {
     color = { 0.941, 0.973, 0.957 },
-    pctColors =
-    {
+    pctColors = {
         [1] = { pct = 100, color = { 0.878, 0.941, 0.251 } },
         [2] = { pct = 80, color = { 0.941, 0.565, 0.251 } },
         [3] = { pct = 50, color = { 0.941, 0.251, 0.125 } },
@@ -360,21 +347,18 @@ local uiUltimate =
 }
 
 -- Cooldown Animation Types for GCD Tracking
-local CooldownMethod =
-{
+local CooldownMethod = {
     [1] = CD_TYPE_VERTICAL_REVEAL,
     [2] = CD_TYPE_VERTICAL,
     [3] = CD_TYPE_RADIAL,
 }
 
 -- Constants from actionbar.lua with only the information we need
-local GAMEPAD_CONSTANTS =
-{
+local GAMEPAD_CONSTANTS = {
     abilitySlotOffsetX = 10,
     ultimateSlotOffsetX = 65,
 }
-local KEYBOARD_CONSTANTS =
-{
+local KEYBOARD_CONSTANTS = {
     abilitySlotOffsetX = 2,
     ultimateSlotOffsetX = 62,
 }
@@ -474,7 +458,7 @@ function CombatInfo.Initialize(enabled)
     uiUltimate.LabelVal = UI.Label(AB8, { BOTTOM, TOP, 0, -3 }, nil, { 1, 2 }, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true)
     uiUltimate.LabelPct = UI.Label(AB8, nil, nil, nil, g_ultimateFont, nil, true)
     local actionButton = ZO_ActionBar_GetButton(g_ultimateSlot, g_hotbarCategory)
-    uiUltimate.LabelPct:SetAnchor(TOPLEFT, actionButton.slot)
+    uiUltimate.LabelPct:SetAnchor(TOPLEFT, actionButton.slot, nil, 0, 0)
     uiUltimate.LabelPct:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.UltimateLabelPosition)
 
     uiUltimate.LabelPct:SetColor(unpack(uiUltimate.color))
@@ -575,8 +559,7 @@ function CombatInfo.SetupBackBarIcons(button, flip)
     end
 
     -- Special case for certain skills, so the proc icon doesn't get stuck.
-    local specialCases =
-    {
+    local specialCases = {
         [114716] = 46324, -- Crystal Fragments --> Crystal Fragments
         [20824] = 20816, -- Power Lash --> Flame Lash
         [35445] = 35441, -- Shadow Image Teleport --> Shadow Image
@@ -623,7 +606,7 @@ end
 function CombatInfo.HookGCD()
     -- Hook to update GCD support
     ---@diagnostic disable-next-line: duplicate-set-field
-    ActionButton.UpdateUsable = function (self)
+    ActionButton.UpdateUsable = function(self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
         local isGamepad = IsInGamepadPreferredMode()
@@ -651,7 +634,7 @@ function CombatInfo.HookGCD()
 
     -- Hook to update GCD support
     ---@diagnostic disable-next-line: duplicate-set-field
-    ActionButton.UpdateCooldown = function (self, options)
+    ActionButton.UpdateCooldown = function(self, options)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
         local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum, hotbarCategory)
@@ -681,7 +664,7 @@ function CombatInfo.HookGCD()
                     self.cooldown:SetHidden(false)
                 end
 
-                self.slot:SetHandler("OnUpdate", function ()
+                self.slot:SetHandler("OnUpdate", function()
                     self:RefreshCooldown()
                 end)
                 if updateChromaQuickslot then
@@ -1285,7 +1268,7 @@ end
 function CombatInfo.ResetPotionTimerLabel()
     local QSB = ACTION_BAR:GetNamedChild("QuickslotButtonButton")
     uiQuickSlot.label:ClearAnchors()
-    uiQuickSlot.label:SetAnchor(TOPLEFT, QSB)
+    uiQuickSlot.label:SetAnchor(TOPLEFT, QSB, nil, 0, 0)
     uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, QSB, nil, 0, -CombatInfo.SV.PotionTimerLabelPosition)
 end
 
@@ -1807,13 +1790,13 @@ function CombatInfo.CreateCastBar()
     uiTlw.castBar.previewLabel = UI.Label(uiTlw.castBar.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", "Cast Bar", false)
 
     -- Callback used to hide anchor coords preview label on movement start
-    local tlwOnMoveStart = function (self)
-        eventManager:RegisterForUpdate(moduleName .. "PreviewMove", 200, function ()
+    local tlwOnMoveStart = function(self)
+        eventManager:RegisterForUpdate(moduleName .. "PreviewMove", 200, function()
             self.preview.anchorLabel:SetText(zo_strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
         end)
     end
     -- Callback used to save new position of frames
-    local tlwOnMoveStop = function (self)
+    local tlwOnMoveStop = function(self)
         eventManager:UnregisterForUpdate(moduleName .. "PreviewMove")
         CombatInfo.SV.CastbarOffsetX = self:GetLeft()
         CombatInfo.SV.CastbarOffsetY = self:GetTop()
@@ -1842,7 +1825,7 @@ function CombatInfo.CreateCastBar()
     sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
 
     castbar = UI.Backdrop(uiTlw.castBar, nil, nil, { 0, 0, 0, 0.5 }, { 0, 0, 0, 1 }, false)
-    castbar:SetAnchor(LEFT, uiTlw.castBar, LEFT)
+    castbar:SetAnchor(LEFT, uiTlw.castBar, LEFT, 0, 0)
 
     castbar.starts = 0
     castbar.ends = 0
@@ -1851,8 +1834,8 @@ function CombatInfo.CreateCastBar()
     castbar:SetDimensions(CombatInfo.SV.CastBarIconSize, CombatInfo.SV.CastBarIconSize)
 
     castbar.back = UI.Texture(castbar, nil, nil, "LuiExtended/media/icons/icon_border/icon-border.dds", nil, false)
-    castbar.back:SetAnchor(TOPLEFT, castbar, TOPLEFT)
-    castbar.back:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT)
+    castbar.back:SetAnchor(TOPLEFT, castbar, TOPLEFT, 0, 0)
+    castbar.back:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT, 0, 0)
 
     castbar.iconbg = UI.Texture(castbar, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false)
     castbar.iconbg = UI.Backdrop(castbar, nil, nil, { 0, 0, 0, 0.9 }, { 0, 0, 0, 0.9 }, false)
@@ -1864,8 +1847,7 @@ function CombatInfo.CreateCastBar()
     castbar.icon:SetAnchor(TOPLEFT, castbar, TOPLEFT, 3, 3)
     castbar.icon:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT, -3, -3)
 
-    castbar.bar =
-    {
+    castbar.bar = {
         ["backdrop"] = UI.Backdrop(castbar, nil, { CombatInfo.SV.CastBarSizeW, CombatInfo.SV.CastBarSizeH }, nil, nil, false),
         ["bar"] = UI.StatusBar(castbar, nil, { CombatInfo.SV.CastBarSizeW - 4, CombatInfo.SV.CastBarSizeH - 4 }, nil, false),
         ["name"] = UI.Label(castbar, nil, nil, nil, nil, g_castbarFont, false),
@@ -1873,7 +1855,7 @@ function CombatInfo.CreateCastBar()
     }
     castbar.id = 0
 
-    castbar.bar.backdrop:SetEdgeTexture("", 8, 2, 2)
+    castbar.bar.backdrop:SetEdgeTexture("", 8, 2, 2, 0)
     castbar.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
     castbar.bar.backdrop:SetDrawLevel(DL_CONTROLS)
     castbar.bar.bar:SetMinMax(0, 1)
@@ -2252,7 +2234,7 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
 
     -- Fix to lower the duration of the next cast of Profane Symbol quest ability for Scion of the Blood Matron (Vampire)
     if abilityId == 39507 then
-        zo_callLater(function ()
+        zo_callLater(function()
             Castbar.CastDurationFix[39507] = 19500
         end, 5000)
     end
@@ -2503,7 +2485,7 @@ end
 
 function CombatInfo.InventoryItemUsed()
     g_potionUsed = true
-    zo_callLater(function ()
+    zo_callLater(function()
         g_potionUsed = false
     end, 200)
 end
@@ -2576,10 +2558,10 @@ function CombatInfo.PlayProcAnimations(slotNum)
         local procLoopTimeline = ANIMATION_MANAGER:CreateTimelineFromVirtual("UltimateReadyLoop", procLoopTexture)
         procLoopTimeline.procLoopTexture = procLoopTexture
 
-        procLoopTimeline.onPlay = function (self)
+        procLoopTimeline.onPlay = function(self)
             self.procLoopTexture:SetHidden(false)
         end
-        procLoopTimeline.onStop = function (self)
+        procLoopTimeline.onStop = function(self)
             self.procLoopTexture:SetHidden(true)
         end
 

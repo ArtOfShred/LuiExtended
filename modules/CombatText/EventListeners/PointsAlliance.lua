@@ -13,7 +13,7 @@ local pointType = LUIE.Data.CombatTextConstants.pointType
 ---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextPointsAllianceEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
-    obj:RegisterForEvent(EVENT_ALLIANCE_POINT_UPDATE, function (...)
+    obj:RegisterForEvent(EVENT_ALLIANCE_POINT_UPDATE, function(...)
         self:OnEvent(...)
     end)
     return obj

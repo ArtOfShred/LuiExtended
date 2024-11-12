@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 LUIE.CombatTextPointEventViewer = LUIE.CombatTextEventViewer:Subclass()
@@ -15,7 +14,7 @@ local pointTypes = LUIE.Data.CombatTextConstants.pointType
 ---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextPointEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(eventType.POINT, function (...)
+    obj:RegisterCallback(eventType.POINT, function(...)
         self:OnEvent(...)
     end)
     self.locationOffset = 0 -- Simple way to avoid overlapping. When number of active notes is back to 0, the offset is also reset
@@ -78,7 +77,7 @@ function CombatTextPointEventViewer:OnEvent(pointType, value)
     animation:Play()
 
     --Add items back into pool after animation
-    zo_callLater(function ()
+    zo_callLater(function()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activePoints = self.activePoints - 1

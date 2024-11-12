@@ -17,8 +17,7 @@ local HIDE_COUNT = 0
 
 function LUIE.InitializeHooks()
     -- TODO: Localize
-    local buffTypes =
-    {
+    local buffTypes = {
         [LUIE_BUFF_TYPE_BUFF] = "Buff",
         [LUIE_BUFF_TYPE_DEBUFF] = "Debuff",
         [LUIE_BUFF_TYPE_UB_BUFF] = "Cosmetic Buff",
@@ -43,7 +42,7 @@ function LUIE.InitializeHooks()
     @return string, string, number, boolean, boolean, boolean, number, number: The name, texture, earned rank, passive flag, ultimate flag, purchased flag, progression index, and rank index.
 ]]
     local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
-    GetSkillAbilityInfo = function (skillType, skillIndex, abilityIndex)
+    GetSkillAbilityInfo = function(skillType, skillIndex, abilityIndex)
         local name, texture, earnedRank, passive, ultimate, purchased, progressionIndex, rankIndex = zos_GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
         local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, true)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].icon then
@@ -63,7 +62,7 @@ function LUIE.InitializeHooks()
     @return string, string, number: The name, texture, and earned rank.
 ]]
     local zos_GetSkillAbilityNextUpgradeInfo = GetSkillAbilityNextUpgradeInfo
-    GetSkillAbilityNextUpgradeInfo = function (skillType, skillIndex, abilityIndex)
+    GetSkillAbilityNextUpgradeInfo = function(skillType, skillIndex, abilityIndex)
         local name, texture, earnedRank = zos_GetSkillAbilityNextUpgradeInfo(skillType, skillIndex, abilityIndex)
         local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, true)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].icon then
@@ -82,7 +81,7 @@ function LUIE.InitializeHooks()
     @return string, number, number, number, number, string, number, number, number, number, number, boolean, boolean: The buff name, start time, end time, buff slot, stack count, icon file, buff type, effect type, ability type, status effect type, ability id, can click off, and cast by player.
 ]]
     local zos_GetUnitBuffInfo = GetUnitBuffInfo
-    GetUnitBuffInfo = function (unitTag, buffIndex)
+    GetUnitBuffInfo = function(unitTag, buffIndex)
         local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = zos_GetUnitBuffInfo(unitTag, buffIndex)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].name then
             buffName = LUIE.Data.Effects.EffectOverride[abilityId].name
@@ -107,7 +106,7 @@ function LUIE.InitializeHooks()
     @param index number: The index of the killing attack.
     @return boolean: True if the killing attack has an attacker, false otherwise.
 ]]
-    DoesKillingAttackHaveAttacker = function (index)
+    DoesKillingAttackHaveAttacker = function(index)
         local hasAttacker = zos_DoesKillingAttackHaveAttacker
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
         if LUIE.Data.Effects.EffectSourceOverride[abilityId] then
@@ -123,7 +122,7 @@ function LUIE.InitializeHooks()
     @param index number: The index of the killing attack.
     @return string, number, number, number, boolean, boolean, number, string, string: The attacker raw name, attacker champion points, attacker level, attacker alliance rank, is player, is boss, alliance, minion name, attacker display name.
 ]]
-    GetKillingAttackerInfo = function (index)
+    GetKillingAttackerInfo = function(index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
         if LUIE.Data.Effects.EffectSourceOverride[abilityId] then
@@ -159,7 +158,7 @@ Override function for GetKillingAttackInfo.
 @param index number: The index of the killing attack.
 @return string, number, string, boolean, number, number, number: The attack name, attack damage, attack icon, was killing blow, cast time ago in milliseconds, duration in milliseconds, number of attack hits.
 ]]
-    GetKillingAttackInfo = function (index)
+    GetKillingAttackInfo = function(index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
 
@@ -260,7 +259,7 @@ Override function for GetKillingAttackInfo.
 ]]
     LUIE.GetAbilityIcon = GetAbilityIcon -- Used only for PTS testing
     local zos_GetAbilityIcon = GetAbilityIcon
-    GetAbilityIcon = function (abilityId)
+    GetAbilityIcon = function(abilityId)
         local icon = zos_GetAbilityIcon(abilityId)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].icon then
             icon = LUIE.Data.Effects.EffectOverride[abilityId].icon
@@ -275,7 +274,7 @@ Override function for GetKillingAttackInfo.
 ]]
     LUIE.GetAbilityName = GetAbilityName -- Used only for PTS testing
     local zos_GetAbilityName = GetAbilityName
-    GetAbilityName = function (abilityId)
+    GetAbilityName = function(abilityId)
         local abilityName = zos_GetAbilityName(abilityId)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].name then
             abilityName = LUIE.Data.Effects.EffectOverride[abilityId].name
@@ -290,7 +289,7 @@ Override function for GetKillingAttackInfo.
 ]]
     LUIE.GetArtificialEffectInfo = GetArtificialEffectInfo -- Used only for PTS testing
     local zos_GetArtificialEffectInfo = GetArtificialEffectInfo
-    GetArtificialEffectInfo = function (artificialEffectId)
+    GetArtificialEffectInfo = function(artificialEffectId)
         local displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding = zos_GetArtificialEffectInfo(artificialEffectId)
         if LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId].icon then
             iconFile = LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId].icon
@@ -307,7 +306,7 @@ Override function for GetKillingAttackInfo.
     @return string: The tooltip text for the artificial effect.
 ]]
     local zos_GetArtificialEffectTooltipText = GetArtificialEffectTooltipText
-    GetArtificialEffectTooltipText = function (artificialEffectId)
+    GetArtificialEffectTooltipText = function(artificialEffectId)
         local tooltip
         if LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId].tooltip then
             tooltip = LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId].tooltip
@@ -321,7 +320,7 @@ Override function for GetKillingAttackInfo.
     --[[
     Hook synergy popup Icon/Name (to fix inconsistencies and add custom icons for some Quest/Encounter based Synergies)
 ]]
-    ZO_Synergy.OnSynergyAbilityChanged = function (self)
+    ZO_Synergy.OnSynergyAbilityChanged = function(self)
         local synergyName, iconFilename = GetSynergyInfo()
         if LUIE.Data.Effects.SynergyNameOverride[synergyName] then
             if LUIE.Data.Effects.SynergyNameOverride[synergyName].icon then
@@ -363,7 +362,7 @@ Override function for GetKillingAttackInfo.
         end
     end
 
-    STATS.AddLongTermEffects = function (self, container, effectsRowPool)
+    STATS.AddLongTermEffects = function(self, container, effectsRowPool)
         local function UpdateEffects()
             if not container:IsHidden() then
                 effectsRowPool:ReleaseAllObjects()
@@ -403,8 +402,7 @@ Override function for GetKillingAttackInfo.
                 local trackBuffs = {}
                 for i = 1, GetNumBuffs("player") do
                     local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId = GetUnitBuffInfo("player", i)
-                    trackBuffs[counter] =
-                    {
+                    trackBuffs[counter] = {
                         buffName = buffName,
                         startTime = startTime,
                         endTime = endTime,
@@ -578,8 +576,7 @@ Override function for GetKillingAttackInfo.
         container:SetHandler("OnEffectivelyShown", UpdateEffects)
     end
 
-    local GAMEPAD_STATS_DISPLAY_MODE =
-    {
+    local GAMEPAD_STATS_DISPLAY_MODE = {
         CHARACTER = 1,
         ATTRIBUTES = 2,
         EFFECTS = 3,
@@ -595,7 +592,7 @@ Override function for GetKillingAttackInfo.
     end
 
     -- Hook GAMEPAD Stats List
-    GAMEPAD_STATS.RefreshMainList = function (self)
+    GAMEPAD_STATS.RefreshMainList = function(self)
         if self.currentTitleDropdown and self.currentTitleDropdown:IsDropdownVisible() then
             self.refreshMainListOnDropdownClose = true
             return
@@ -700,7 +697,7 @@ Override function for GetKillingAttackInfo.
     end
 
     -- Hook GAMEPAD Stats Refresh
-    GAMEPAD_STATS.RefreshCharacterEffects = function (self)
+    GAMEPAD_STATS.RefreshCharacterEffects = function(self)
         local selectedData = self.mainList:GetTargetData()
 
         local artificial, contentTitle, contentDescription, contentStartTime, contentEndTime, _
@@ -871,7 +868,7 @@ Override function for GetKillingAttackInfo.
     -- Hook for request friend so menu option also displays invite message
     -- Menu is true if this request is sent from the Player to Player interaction menu
     local zos_RequestFriend = RequestFriend
-    RequestFriend = function (option1, option2, menu)
+    RequestFriend = function(option1, option2, menu)
         zos_RequestFriend(option1, option2)
         if not menu then
             local message = zo_strformat(GetString(LUIE_STRING_SLASHCMDS_FRIEND_INVITE_MSG), option1)
@@ -884,7 +881,7 @@ Override function for GetKillingAttackInfo.
 
     -- Hook for request ignore to handle error message if account name is already ignored
     local zos_AddIgnore = AddIgnore
-    AddIgnore = function (option)
+    AddIgnore = function(option)
         zos_AddIgnore(option)
 
         if IsIgnored(option) then -- Only lists account names, unfortunately
@@ -953,7 +950,7 @@ Override function for GetKillingAttackInfo.
     end
 
     -- Hook Tooltip Generation for STATS Screen Buffs & Debuffs
-    ZO_StatsActiveEffect_OnMouseEnter = function (control)
+    ZO_StatsActiveEffect_OnMouseEnter = function(control)
         InitializeTooltip(GameTooltip, control, RIGHT, -15, 0)
 
         local detailsLine
@@ -999,10 +996,9 @@ Override function for GetKillingAttackInfo.
         control.animation:PlayForward()
     end
 
-
     -- Hook Skills Advisor (Keyboard) and use this variable to refresh the abilityData one time on initialization. We don't want to reload any more after that.
     ---@diagnostic disable-next-line: duplicate-set-field
-    ZO_SkillsAdvisor_Suggestions_Keyboard.SetupAbilityEntry = function (self, control, skillProgressionData)
+    ZO_SkillsAdvisor_Suggestions_Keyboard.SetupAbilityEntry = function(self, control, skillProgressionData)
         local skillData = skillProgressionData:GetSkillData()
         local isPassive = skillData:IsPassive()
 
@@ -1032,8 +1028,7 @@ Override function for GetKillingAttackInfo.
 
     -- Hook Action Slots
     local ACTION_BUTTON_BGS = { ability = "EsoUI/Art/ActionBar/abilityInset.dds", item = "EsoUI/Art/ActionBar/quickslotBG.dds" }
-    local ACTION_BUTTON_BORDERS =
-    {
+    local ACTION_BUTTON_BORDERS = {
         normal = "EsoUI/Art/ActionBar/abilityFrame64_up.dds",
         mouseDown = "EsoUI/Art/ActionBar/abilityFrame64_down.dds",
     }
@@ -1098,8 +1093,7 @@ Override function for GetKillingAttackInfo.
         slotObject:Clear()
     end
 
-    SetupSlotHandlers =
-    {
+    SetupSlotHandlers = {
         [ACTION_TYPE_ABILITY] = SetupAbilitySlot,
         [ACTION_TYPE_ITEM] = SetupItemSlot,
         [ACTION_TYPE_CRAFTED_ABILITY] = SetupAbilitySlot,
@@ -1110,10 +1104,9 @@ Override function for GetKillingAttackInfo.
         [ACTION_TYPE_NOTHING] = SetupEmptyActionSlot,
     }
 
-
     -- Hook to make Activation Highlight Effect play indefinitely instead of animation only once
     ---@diagnostic disable-next-line: duplicate-set-field
-    ActionButton.UpdateActivationHighlight = function (self)
+    ActionButton.UpdateActivationHighlight = function(self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or self.button.hotbarCategory
         local slotType = GetSlotType(slotnum, hotbarCategory)
@@ -1153,7 +1146,7 @@ Override function for GetKillingAttackInfo.
 
     -- Hook to add AVA Guard Ability + Morphs into Toggle Highlights
     ---@diagnostic disable-next-line: duplicate-set-field
-    ActionButton.UpdateState = function (self)
+    ActionButton.UpdateState = function(self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or self.button.hotbarCategory
         local slotType = GetSlotType(slotnum, hotbarCategory)
@@ -1212,8 +1205,7 @@ Override function for GetKillingAttackInfo.
 
     local function GetKeepBonusData(campaignId)
         local _, enemyKeepsHeld = GetAvAKeepScore(campaignId, GetUnitAlliance("player"))
-        local data =
-        {
+        local data = {
             stringId = SI_CAMPAIGN_BONUSES_ENEMY_KEEP_INFO,
             value = enemyKeepsHeld,
         }
@@ -1230,8 +1222,7 @@ Override function for GetKillingAttackInfo.
     end
 
     local function GetEdgeKeepBonusData(campaignId)
-        local data =
-        {
+        local data = {
             stringId = SI_CAMPAIGN_BONUSES_EDGE_KEEP_INFO,
             value = GetEdgeKeepBonusScore(campaignId),
         }
@@ -1240,8 +1231,7 @@ Override function for GetKillingAttackInfo.
 
     local function GetDefensiveBonusData(campaignId)
         local _, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_DEFENSIVE)
-        local data =
-        {
+        local data = {
             stringId = SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO,
             value = enemyScrollsHeld,
         }
@@ -1263,8 +1253,7 @@ Override function for GetKillingAttackInfo.
 
     local function GetOffensiveBonusData(campaignId)
         local _, enemyScrollsHeld = GetAvAArtifactScore(campaignId, GetUnitAlliance("player"), OBJECTIVE_ARTIFACT_OFFENSIVE)
-        local data =
-        {
+        local data = {
             stringId = SI_CAMPAIGN_BONUSES_ENEMY_SCROLL_INFO,
             value = enemyScrollsHeld,
         }
@@ -1315,10 +1304,8 @@ Override function for GetKillingAttackInfo.
         return 0
     end
 
-    local BONUS_SECTION_DATA =
-    {
-        [ZO_CAMPAIGN_BONUS_TYPE_HOME_KEEPS] =
-        {
+    local BONUS_SECTION_DATA = {
+        [ZO_CAMPAIGN_BONUS_TYPE_HOME_KEEPS] = {
             typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
             typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
             headerText = GetString(SI_CAMPAIGN_BONUSES_HOME_KEEP_HEADER),
@@ -1328,8 +1315,7 @@ Override function for GetKillingAttackInfo.
             abilityFunction = GetKeepScoreBonusAbilityId,
             scoreFunction = GetHomeKeepBonusScore,
         },
-        [ZO_CAMPAIGN_BONUS_TYPE_EMPEROR] =
-        {
+        [ZO_CAMPAIGN_BONUS_TYPE_EMPEROR] = {
             typeIcon = "EsoUI/Art/Campaign/campaignBonus_emperorshipIcon.dds",
             typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_emperor.dds",
             headerText = GetString(SI_CAMPAIGN_BONUSES_EMPERORSHIP_HEADER),
@@ -1339,8 +1325,7 @@ Override function for GetKillingAttackInfo.
             abilityFunction = GetEmperorBonusAbilityId,
             scoreFunction = GetEmperorBonusScore,
         },
-        [ZO_CAMPAIGN_BONUS_TYPE_ENEMY_KEEPS] =
-        {
+        [ZO_CAMPAIGN_BONUS_TYPE_ENEMY_KEEPS] = {
             typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
             typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
             headerText = GetString(SI_CAMPAIGN_BONUSES_ENEMY_KEEP_HEADER),
@@ -1351,8 +1336,7 @@ Override function for GetKillingAttackInfo.
             abilityFunction = GetKeepScoreBonusAbilityId,
             scoreFunction = GetKeepBonusScore,
         },
-        [ZO_CAMPAIGN_BONUS_TYPE_DEFENSIVE_SCROLLS] =
-        {
+        [ZO_CAMPAIGN_BONUS_TYPE_DEFENSIVE_SCROLLS] = {
             typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
             typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
             headerText = GetString(SI_CAMPAIGN_BONUSES_DEFENSIVE_SCROLL_HEADER),
@@ -1362,8 +1346,7 @@ Override function for GetKillingAttackInfo.
             abilityFunction = GetDefensiveBonusAbilityId,
             scoreFunction = GetDefensiveBonusScore,
         },
-        [ZO_CAMPAIGN_BONUS_TYPE_OFFENSIVE_SCROLLS] =
-        {
+        [ZO_CAMPAIGN_BONUS_TYPE_OFFENSIVE_SCROLLS] = {
             typeIcon = "EsoUI/Art/Campaign/campaignBonus_scrollIcon.dds",
             typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_scrolls.dds",
             headerText = GetString(SI_CAMPAIGN_BONUSES_OFFENSIVE_SCROLL_HEADER),
@@ -1373,8 +1356,7 @@ Override function for GetKillingAttackInfo.
             abilityFunction = GetOffensiveBonusAbilityId,
             scoreFunction = GetOffensiveBonusScore,
         },
-        [ZO_CAMPAIGN_BONUS_TYPE_EDGE_KEEPS] =
-        {
+        [ZO_CAMPAIGN_BONUS_TYPE_EDGE_KEEPS] = {
             typeIcon = "EsoUI/Art/Campaign/campaignBonus_keepIcon.dds",
             typeIconGamepad = "EsoUI/Art/Campaign/Gamepad/gp_bonusIcon_keeps.dds",
             headerText = GetString(SI_CAMPAIGN_BONUSES_EDGE_KEEP_HEADER),
@@ -1387,7 +1369,7 @@ Override function for GetKillingAttackInfo.
 
     -- Hook Campaign Bonuses Data Table
     ---@diagnostic disable-next-line: duplicate-set-field
-    ZO_CampaignBonuses_Shared.CreateDataTable = function (self, header)
+    ZO_CampaignBonuses_Shared.CreateDataTable = function(self)
         self:BuildMasterList()
 
         self.dataTable = {}
@@ -1402,7 +1384,7 @@ Override function for GetKillingAttackInfo.
                 self.dataTable[i] = ZO_GamepadEntryData:New(data.name, data.icon)
 
                 if nextItemIsHeader then
-                    self.dataTable[i]:SetHeader(header)
+                    self.dataTable[i]:SetHeader(headerName)
                 end
 
                 self.dataTable[i].index = data.index
@@ -1421,10 +1403,10 @@ Override function for GetKillingAttackInfo.
 
     -- Hook Campaign Bonuses Build Master List
     ---@diagnostic disable-next-line: duplicate-set-field
-    ZO_CampaignBonuses_Shared.BuildMasterList = function (self)
+    ZO_CampaignBonuses_Shared.BuildMasterList = function(self)
         self.masterList = {}
 
-        for bonusType, info in pairs(BONUS_SECTION_DATA) do
+        for bonusType, info in ipairs(BONUS_SECTION_DATA) do
             local infoData = info.infoData
             if type(info.infoData) == "function" then
                 infoData = info.infoData(self.campaignId)
@@ -1440,8 +1422,7 @@ Override function for GetKillingAttackInfo.
                 detailsText = info.detailsText(self.campaignId)
             end
 
-            local headerData =
-            {
+            local headerData = {
                 isHeader = true,
                 headerString = info.headerText,
                 infoString = infoText,
@@ -1460,6 +1441,7 @@ Override function for GetKillingAttackInfo.
             index = zo_min(index, count)
             local scoreIndex = index - startIndex + 1
             local countText = scoreIndex
+            ---@diagnostic disable-next-line: redundant-parameter
             local abilityId = info.abilityFunction(index, self.campaignId)
             local name = GetAbilityName(abilityId)
             local icon = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId) -- Get Updated LUIE AbilityIcon here
@@ -1473,8 +1455,7 @@ Override function for GetKillingAttackInfo.
                 end
             end
 
-            local data =
-            {
+            local data = {
                 index = index,
                 isHeader = false,
                 typeIcon = info.typeIcon,
@@ -1496,7 +1477,7 @@ Override function for GetKillingAttackInfo.
     end
 
     -- Hook Gamepad Campaign Bonuses Tooltip
-    CAMPAIGN_BONUSES_GAMEPAD.UpdateToolTip = function (self)
+    CAMPAIGN_BONUSES_GAMEPAD.UpdateToolTip = function(self)
         GAMEPAD_TOOLTIPS:ClearLines(GAMEPAD_RIGHT_TOOLTIP)
         if self.abilityList:IsActive() then
             local targetData = self.abilityList:GetTargetData()
@@ -1633,7 +1614,7 @@ Override function for GetKillingAttackInfo.
 
     -- Hook AVA Keep Upgrade
     ---@diagnostic disable-next-line: duplicate-set-field
-    ZO_MapKeepUpgrade_Shared.RefreshLevels = function (self)
+    ZO_MapKeepUpgrade_Shared.RefreshLevels = function(self)
         self.levelsGridList:ClearGridList()
 
         for currentLevel = 0, GetKeepMaxUpgradeLevel(self.keepUpgradeObject:GetKeep()) do
@@ -1664,8 +1645,7 @@ Override function for GetKillingAttackInfo.
                         name = LUIE.Data.Effects.KeepUpgradeNameFix[name]
                     end
 
-                    local data =
-                    {
+                    local data = {
                         index = i,
                         gridHeaderName = levelHeaderText,
                         level = currentLevel,
@@ -1685,7 +1665,7 @@ Override function for GetKillingAttackInfo.
     end
 
     -- Hook Keep Upgrade Tooltip (Keyboard)
-    WORLD_MAP_KEEP_UPGRADE.Button_OnMouseEnter = function (self, control)
+    WORLD_MAP_KEEP_UPGRADE.Button_OnMouseEnter = function(self, control)
         InitializeTooltip(KeepUpgradeTooltip, control, TOPLEFT, 5, 0)
 
         local data = control.dataEntry.data:GetDataSource()
@@ -1708,24 +1688,20 @@ Override function for GetKillingAttackInfo.
     end
 
     -- Variables for Skill Window Hook
-    local INCREASE_BUTTON_TEXTURES =
-    {
-        PLUS =
-        {
+    local INCREASE_BUTTON_TEXTURES = {
+        PLUS = {
             normal = "EsoUI/Art/Progression/addPoints_up.dds",
             mouseDown = "EsoUI/Art/Progression/addPoints_down.dds",
             mouseover = "EsoUI/Art/Progression/addPoints_over.dds",
             disabled = "EsoUI/Art/Progression/addPoints_disabled.dds",
         },
-        MORPH =
-        {
+        MORPH = {
             normal = "EsoUI/Art/Progression/morph_up.dds",
             mouseDown = "EsoUI/Art/Progression/morph_down.dds",
             mouseover = "EsoUI/Art/Progression/morph_over.dds",
             disabled = "EsoUI/Art/Progression/morph_disabled.dds",
         },
-        REMORPH =
-        {
+        REMORPH = {
             normal = "EsoUI/Art/Progression/remorph_up.dds",
             mouseDown = "EsoUI/Art/Progression/remorph_down.dds",
             mouseover = "EsoUI/Art/Progression/remorph_over.dds",
@@ -1926,34 +1902,29 @@ Override function for GetKillingAttackInfo.
             end
         end
 
-        ZO_Dialogs_RegisterCustomDialog("PURCHASE_ABILITY_CONFIRM",
-            {
-                customControl = confirmDialogControl,
-                setup = SetupPurchaseAbilityConfirmDialog,
-                title =
-                {
-                    text = SI_SKILLS_CONFIRM_PURCHASE_ABILITY,
+        ZO_Dialogs_RegisterCustomDialog("PURCHASE_ABILITY_CONFIRM", {
+            customControl = confirmDialogControl,
+            setup = SetupPurchaseAbilityConfirmDialog,
+            title = {
+                text = SI_SKILLS_CONFIRM_PURCHASE_ABILITY,
+            },
+            buttons = {
+                [1] = {
+                    control = confirmDialogControl:GetNamedChild("Confirm"),
+                    text = SI_SKILLS_UNLOCK_CONFIRM,
+                    callback = function(dialog)
+                        local skillProgressionData = dialog.data
+                        local skillPointAllocator = skillProgressionData:GetSkillData():GetPointAllocator()
+                        skillPointAllocator:Purchase()
+                    end,
                 },
-                buttons =
-                {
-                    [1] =
-                    {
-                        control = confirmDialogControl:GetNamedChild("Confirm"),
-                        text = SI_SKILLS_UNLOCK_CONFIRM,
-                        callback = function (dialog)
-                            local skillProgressionData = dialog.data
-                            local skillPointAllocator = skillProgressionData:GetSkillData():GetPointAllocator()
-                            skillPointAllocator:Purchase()
-                        end,
-                    },
 
-                    [2] =
-                    {
-                        control = confirmDialogControl:GetNamedChild("Cancel"),
-                        text = SI_CANCEL,
-                    },
+                [2] = {
+                    control = confirmDialogControl:GetNamedChild("Cancel"),
+                    text = SI_CANCEL,
                 },
-            })
+            },
+        })
     end
 
     -- Overwrite default Upgrade menu for Skills with Custom Icons (Keyboard)
@@ -2000,33 +1971,28 @@ Override function for GetKillingAttackInfo.
             end
         end
 
-        ZO_Dialogs_RegisterCustomDialog("UPGRADE_ABILITY_CONFIRM",
-            {
-                customControl = upgradeDialogControl,
-                setup = SetupUpgradeAbilityDialog,
-                title =
-                {
-                    text = SI_SKILLS_UPGRADE_ABILITY,
+        ZO_Dialogs_RegisterCustomDialog("UPGRADE_ABILITY_CONFIRM", {
+            customControl = upgradeDialogControl,
+            setup = SetupUpgradeAbilityDialog,
+            title = {
+                text = SI_SKILLS_UPGRADE_ABILITY,
+            },
+            buttons = {
+                [1] = {
+                    control = upgradeDialogControl:GetNamedChild("Confirm"),
+                    text = SI_SKILLS_UPGRADE_CONFIRM,
+                    callback = function(dialog)
+                        local skillData = dialog.data
+                        local skillPointAllocator = skillData:GetPointAllocator()
+                        skillPointAllocator:IncreaseRank()
+                    end,
                 },
-                buttons =
-                {
-                    [1] =
-                    {
-                        control = upgradeDialogControl:GetNamedChild("Confirm"),
-                        text = SI_SKILLS_UPGRADE_CONFIRM,
-                        callback = function (dialog)
-                            local skillData = dialog.data
-                            local skillPointAllocator = skillData:GetPointAllocator()
-                            skillPointAllocator:IncreaseRank()
-                        end,
-                    },
-                    [2] =
-                    {
-                        control = upgradeDialogControl:GetNamedChild("Cancel"),
-                        text = SI_CANCEL,
-                    },
+                [2] = {
+                    control = upgradeDialogControl:GetNamedChild("Cancel"),
+                    text = SI_CANCEL,
                 },
-            })
+            },
+        })
     end
 
     InitializeKeyboardConfirmDialog()

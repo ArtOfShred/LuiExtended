@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 local SpellCastBuffs = LUIE.SpellCastBuffs
@@ -48,7 +47,7 @@ function SpellCastBuffs.DisplayMountIcon()
 
                 -- Add the nickname into the name if present
                 if nickname ~= "" and nickname ~= nil then
-                    name = zo_strformat('<<1>> "<<2>>"', name, nickname)
+                    name = zo_strformat("<<1>> \"<<2>>\"", name, nickname)
                 end
             else
                 name = Abilities.Innate_Mounted
@@ -64,8 +63,7 @@ function SpellCastBuffs.DisplayMountIcon()
         local abilityId = 999017
         local abilityName = Abilities.Innate_Mounted
         local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, abilityName)
-        SpellCastBuffs.EffectsList[context][abilityId] =
-        {
+        SpellCastBuffs.EffectsList[context][abilityId] = {
             target = SpellCastBuffs.DetermineTarget(context),
             type = 1,
             id = abilityId,
@@ -138,7 +136,7 @@ function SpellCastBuffs.CollectibleBuff()
 
             -- Add the nickname into the name if present
             if nickname ~= "" and nickname ~= nil then
-                name = zo_strformat('<<1>> "<<2>>"', name, nickname)
+                name = zo_strformat("<<1>> \"<<2>>\"", name, nickname)
             end
         else
             name = Abilities.Innate_Vanity_Pet
@@ -149,8 +147,7 @@ function SpellCastBuffs.CollectibleBuff()
         local abilityId = 999018
         local abilityName = Abilities.Innate_Vanity_Pet
         local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, abilityName)
-        SpellCastBuffs.EffectsList[context][abilityId] =
-        {
+        SpellCastBuffs.EffectsList[context][abilityId] = {
             target = SpellCastBuffs.DetermineTarget(context),
             type = 1,
             id = abilityId,
@@ -176,8 +173,7 @@ function SpellCastBuffs.CollectibleBuff()
         local abilityId = 999019
         local abilityName = Abilities.Innate_Assistant
         local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, abilityName)
-        SpellCastBuffs.EffectsList[context][abilityId] =
-        {
+        SpellCastBuffs.EffectsList[context][abilityId] = {
             target = SpellCastBuffs.DetermineTarget(context),
             type = 1,
             id = abilityId,

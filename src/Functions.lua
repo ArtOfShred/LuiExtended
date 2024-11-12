@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
@@ -55,14 +54,14 @@ local function CreateTimestamp(timeStr, formatStr)
     local hoursNoLead = ToInteger(hours) -- hours without leading zero
     local hours12NoLead = (hoursNoLead - 1) % 12 + 1
     local hours12
-    if (hours12NoLead < 10) then
+    if hours12NoLead < 10 then
         hours12 = "0" .. hours12NoLead
     else
         hours12 = hours12NoLead
     end
     local pUp = "AM"
     local pLow = "am"
-    if (hoursNoLead >= 12) then
+    if hoursNoLead >= 12 then
         pUp = "PM"
         pLow = "pm"
     end
@@ -80,7 +79,6 @@ local function CreateTimestamp(timeStr, formatStr)
 end
 
 LUIE.CreateTimestamp = CreateTimestamp
-
 
 --[[
     Helper function to format a message with an optional timestamp.
@@ -109,11 +107,10 @@ function LUIE.ToggleVisibility(hidden)
 end
 
 --- Adds a system message to the chat.
---- @param msg string: The message to be printed.
+--- @param messageOrFormatter string: The message to be printed.
 --- @param ... string: Variable number of arguments to be passed to CHAT_ROUTER:AddSystemMessage.
---- @return function|nil: The return value of CHAT_ROUTER:AddSystemMessage.
-function LUIE.AddSystemMessage(msg, ...)
-    return CHAT_ROUTER:AddSystemMessage(msg, ...)
+function LUIE.AddSystemMessage(messageOrFormatter, ...)
+    CHAT_ROUTER:AddSystemMessage(string_format(messageOrFormatter or "", ...))
 end
 
 --- Easy Print to Chat.
@@ -222,23 +219,18 @@ end
 --- @param callback function: The callback function to be executed when the button is clicked.
 --- @return table identifier: The created dialogue button table.
 function LUIE.RegisterDialogueButton(identifier, title, text, callback)
-    ESO_Dialogs[identifier] =
-    {
-        gamepadInfo =
-        {
+    ESO_Dialogs[identifier] = {
+        gamepadInfo = {
             dialogType = GAMEPAD_DIALOGS.BASIC,
         },
         canQueue = true,
-        title =
-        {
+        title = {
             text = title,
         },
-        mainText =
-        {
+        mainText = {
             text = text,
         },
-        buttons =
-        {
+        buttons = {
             {
                 text = SI_DIALOG_CONFIRM,
                 callback = callback,

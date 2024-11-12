@@ -15,7 +15,7 @@ local crowdControlTypes = LUIE.Data.CombatTextConstants.crowdControlType
 ---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextCrowdControlEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(eventType.CROWDCONTROL, function (...)
+    obj:RegisterCallback(eventType.CROWDCONTROL, function(...)
         self:OnEvent(...)
     end)
     self.locationOffset = { [combatType.OUTGOING] = 0, [combatType.INCOMING] = 0 }
@@ -101,7 +101,7 @@ function CombatTextCrowdControlEventViewer:OnEvent(crowdControlType, eventCombat
     animation:Play()
 
     -- Add items back into pool after animation
-    zo_callLater(function ()
+    zo_callLater(function()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activeCrowdControls[eventCombatType] = self.activeCrowdControls[eventCombatType] - 1

@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 -- InfoPanel namespace
@@ -20,8 +19,7 @@ local string_format = string.format
 
 local moduleName = LUIE.name .. "InfoPanel"
 
-local colors =
-{
+local colors = {
     RED = { r = 1, g = 0, b = 0 },
     GREEN = { r = 0, g = 1, b = 0 },
     BLUE = { r = 0, g = 0, b = 1 },
@@ -34,8 +32,7 @@ local colors =
 --local fakeControl   = {}
 
 InfoPanel.Enabled = false
-InfoPanel.Defaults =
-{
+InfoPanel.Defaults = {
     ClockFormat = "HH:m:s",
 }
 InfoPanel.SV = nil
@@ -56,55 +53,44 @@ local uiGems = {}
 -- Add info panel into LUIE namespace
 InfoPanel.Panel = uiPanel
 
-local uiLatency =
-{
-    color =
-    {
+local uiLatency = {
+    color = {
         [1] = { ping = 100, color = colors.GREEN },
         [2] = { ping = 200, color = colors.YELLOW },
         [3] = { color = colors.RED },
     },
 }
 
-local uiFps =
-{
-    color =
-    {
+local uiFps = {
+    color = {
         [1] = { fps = 25, color = colors.RED },
         [2] = { fps = 40, color = colors.YELLOW },
         [3] = { color = colors.GREEN },
     },
 }
 
-local uiFeedTimer =
-{
+local uiFeedTimer = {
     hideLocally = false,
 }
 
-local uiArmour =
-{
-    color =
-    {
+local uiArmour = {
+    color = {
         [1] = { dura = 25, color = colors.RED, iconcolor = colors.WHITE },
         [2] = { dura = 50, color = colors.YELLOW, iconcolor = colors.WHITE },
         [3] = { color = colors.GREEN, iconcolor = colors.WHITE },
     },
 }
 
-local uiWeapons =
-{
-    color =
-    {
+local uiWeapons = {
+    color = {
         [1] = { charges = 10, color = colors.RED },
         [2] = { charges = 25, color = colors.YELLOW },
         [3] = { color = colors.WHITE },
     },
 }
 
-local uiBags =
-{
-    color =
-    {
+local uiBags = {
+    color = {
         [1] = { fill = 70, color = colors.WHITE },
         [2] = { fill = 90, color = colors.YELLOW },
         [3] = { color = colors.RED },
@@ -323,7 +309,7 @@ function InfoPanel.Initialize(enabled)
     end
 
     -- Dragging
-    uiPanel.OnMoveStop = function (self)
+    uiPanel.OnMoveStop = function(self)
         InfoPanel.SV.position = { self:GetCenter() }
     end
     uiPanel:SetHandler("OnMoveStop", uiPanel.OnMoveStop)

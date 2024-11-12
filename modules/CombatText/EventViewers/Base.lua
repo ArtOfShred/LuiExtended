@@ -15,20 +15,18 @@ local CombatTextConstants = LUIE.Data.CombatTextConstants
 
 local callbackManager = CALLBACK_MANAGER
 
-CombatTextEventViewer.resourceNames = setmetatable({},
-    {
-        __index = function (t, k)
-            t[k] = GetString("SI_COMBATMECHANICTYPE", k)
-            return t[k]
-        end,
-    })
-CombatTextEventViewer.damageTypes = setmetatable({},
-    {
-        __index = function (t, k)
-            t[k] = GetString("SI_DAMAGETYPE", k)
-            return t[k]
-        end,
-    })
+CombatTextEventViewer.resourceNames = setmetatable({}, {
+    __index = function(t, k)
+        t[k] = GetString("SI_COMBATMECHANICTYPE", k)
+        return t[k]
+    end,
+})
+CombatTextEventViewer.damageTypes = setmetatable({}, {
+    __index = function(t, k)
+        t[k] = GetString("SI_DAMAGETYPE", k)
+        return t[k]
+    end,
+})
 
 function CombatTextEventViewer:New(poolManager, LMP)
     local obj = setmetatable({}, self)
@@ -76,7 +74,7 @@ function CombatTextEventViewer:GetDefaultIcon(ccType)
 end
 
 function CombatTextEventViewer:FormatString(inputFormat, params)
-    return zo_strgsub(inputFormat, "%%.", function (x)
+    return zo_strgsub(inputFormat, "%%.", function(x)
         if x == "%t" then
             return params.text or ""
         elseif x == "%a" then
@@ -92,7 +90,7 @@ function CombatTextEventViewer:FormatString(inputFormat, params)
 end
 
 function CombatTextEventViewer:FormatAlertString(inputFormat, params)
-    return zo_strgsub(inputFormat, "%%.", function (x)
+    return zo_strgsub(inputFormat, "%%.", function(x)
         if x == "%n" then
             return params.source or ""
         elseif x == "%t" then
@@ -295,7 +293,7 @@ function CombatTextEventViewer:ControlLayout(control, abilityId, combatType, sou
 end
 
 function CombatTextEventViewer:RegisterCallback(eventType, func)
-    callbackManager:RegisterCallback(eventType, function (...)
+    callbackManager:RegisterCallback(eventType, function(...)
         func(...)
     end)
 end

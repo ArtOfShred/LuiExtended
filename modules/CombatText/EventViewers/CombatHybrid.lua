@@ -14,7 +14,7 @@ local string_format = string.format
 ---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextCombatHybridEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
-    obj:RegisterCallback(CombatTextConstants.eventType.COMBAT, function (...)
+    obj:RegisterCallback(CombatTextConstants.eventType.COMBAT, function(...)
         self:OnEvent(...)
     end)
     self.eventBuffer = {}
@@ -53,7 +53,7 @@ function CombatTextCombatHybridEventViewer:OnEvent(combatType, powerType, value,
             elseif isHotCritical then
                 throttleTime = Settings.throttles.hotcritical
             end
-            zo_callLater(function ()
+            zo_callLater(function()
                 self:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
             end, throttleTime)
         else
@@ -164,7 +164,7 @@ function CombatTextCombatHybridEventViewer:View(combatType, powerType, value, ab
     animation:Play()
 
     -- Add items back into pool after use
-    zo_callLater(function ()
+    zo_callLater(function()
         self.poolManager:ReleasePoolObject(CombatTextConstants.poolType.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
         self.activeControls[combatType][control:GetName()] = nil

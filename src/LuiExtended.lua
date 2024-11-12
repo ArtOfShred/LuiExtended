@@ -14,7 +14,7 @@ local LUIE = LUIE
 
 LUIE.tag = "LUIE"
 LUIE.name = "LuiExtended"
-LUIE.version = "6.7.5"
+LUIE.version = "6.7.6"
 LUIE.author = "ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder"
 LUIE.website = "https://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github = "https://github.com/ArtOfShred/LuiExtended"
@@ -31,8 +31,7 @@ LUIE.Data = {}
 LUIE.Components = {}
 
 -- Default Settings
-LUIE.Defaults =
-{
+LUIE.Defaults = {
     CharacterSpecificSV = false,
     StartupInfo = false,
     HideAlertFrame = false,
@@ -54,8 +53,7 @@ LUIE.Defaults =
 }
 
 -- Global fonts table to use in other parts of this addon
-LUIE.Fonts =
-{
+LUIE.Fonts = {
     ["Adventure"] = "/LuiExtended/media/fonts/Adventure/adventure.slug",
     ["ArchivoNarrow Bold"] = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Bold.slug",
     ["ArchivoNarrow BoldItalic"] = "/LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-BoldItalic.slug",
@@ -98,9 +96,7 @@ LUIE.Fonts =
     ["Yellowjacket"] = "/LuiExtended/media/fonts/Yellowjacket/yellowjacket.slug",
 }
 
-
-LUIE.Sounds =
-{
+LUIE.Sounds = {
     ["Death Recap Killing Blow"] = SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN,
     ["LFG Find Replacement"] = SOUNDS.LFG_FIND_REPLACEMENT,
     ["LFG Search Started"] = SOUNDS.LFG_SEARCH_STARTED,
@@ -132,8 +128,7 @@ LUIE.Sounds =
     ["Champion Cycled"] = SOUNDS.CHAMPION_CYCLED_TO_WARRIOR,
 }
 
-LUIE.StatusbarTextures =
-{
+LUIE.StatusbarTextures = {
     ["Aluminium"] = "/LuiExtended/media/unitframes/textures/Aluminium.dds",
     ["Elder Scrolls Gradient"] = "/LuiExtended/media/unitframes/textures/ElderScrollsGrad.dds",
     ["Glass"] = "/LuiExtended/media/unitframes/textures/Glass.dds",

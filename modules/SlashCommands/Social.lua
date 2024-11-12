@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 local SlashCommands = LUIE.SlashCommands
@@ -57,8 +56,7 @@ function SlashCommands.SlashRemoveFriend(option)
         local compareDisplay = zo_strlower(displayName)
         local compareCharacter = zo_strlower(characterName)
         compareCharacter = zo_strgsub(compareCharacter, "%^%a+", "")
-        g_friendIndex[i] =
-        {
+        g_friendIndex[i] = {
             displayName = displayName,
             characterName = characterName,
             compareDisplay = compareDisplay,

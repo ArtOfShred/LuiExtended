@@ -3,15 +3,13 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
 local zo_strformat = zo_strformat
 local table_concat = table.concat
 
-local changelogMessages =
-{
+local changelogMessages = {
     "|cFFA500LuiExtended Version 6.7.5|r",
     "",
     "|cFFFF00General:|r",

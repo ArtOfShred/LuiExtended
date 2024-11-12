@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 -- CombatText namespace
@@ -19,8 +18,7 @@ local LMP = LibMediaProvider
 
 local moduleName = LUIE.name .. "CombatText"
 
-local panelTitles =
-{
+local panelTitles = {
     LUIE_CombatText_Outgoing = GetString(LUIE_STRING_CT_PANEL_OUTGOING),
     LUIE_CombatText_Incoming = GetString(LUIE_STRING_CT_PANEL_INCOMING),
     LUIE_CombatText_Point = GetString(LUIE_STRING_CT_PANEL_POINT),
@@ -29,16 +27,13 @@ local panelTitles =
 }
 
 CombatText.Enabled = false
-CombatText.Defaults =
-{
+CombatText.Defaults = {
     unlocked = false,
     blacklist = {},
     -- Panel Defaults
-    panels =
-    {
+    panels = {
         -- Outgoing
-        LUIE_CombatText_Outgoing =
-        {
+        LUIE_CombatText_Outgoing = {
             point = CENTER,
             relativePoint = CENTER,
             offsetX = 450,
@@ -46,8 +41,7 @@ CombatText.Defaults =
             dimensions = { 400, 100 },
         },
         -- Incoming
-        LUIE_CombatText_Incoming =
-        {
+        LUIE_CombatText_Incoming = {
             point = CENTER,
             relativePoint = CENTER,
             offsetX = -450,
@@ -55,8 +49,7 @@ CombatText.Defaults =
             dimensions = { 400, 100 },
         },
         -- Alerts
-        LUIE_CombatText_Alert =
-        {
+        LUIE_CombatText_Alert = {
             point = CENTER,
             relativePoint = CENTER,
             offsetX = 0,
@@ -64,8 +57,7 @@ CombatText.Defaults =
             dimensions = { 400, 100 },
         },
         -- Points
-        LUIE_CombatText_Point =
-        {
+        LUIE_CombatText_Point = {
             point = CENTER,
             relativePoint = CENTER,
             offsetX = 0,
@@ -73,8 +65,7 @@ CombatText.Defaults =
             dimensions = { 400, 100 },
         },
         -- Resources
-        LUIE_CombatText_Resource =
-        {
+        LUIE_CombatText_Resource = {
             point = CENTER,
             relativePoint = CENTER,
             offsetX = 0,
@@ -82,8 +73,7 @@ CombatText.Defaults =
             dimensions = { 400, 100 },
         },
     },
-    common =
-    {
+    common = {
         transparencyValue = 100,
         overkill = true,
         overheal = true,
@@ -92,16 +82,14 @@ CombatText.Defaults =
         defaultIconOptions = false,
     },
     -- Toggle Defaults
-    toggles =
-    {
+    toggles = {
         -- General
         inCombatOnly = false,
         showThrottleTrailer = true,
         throttleCriticals = false,
 
         -- Incoming
-        incoming =
-        {
+        incoming = {
             -- Damage & Healing
             showDamage = true,
             showHealing = true,
@@ -131,8 +119,7 @@ CombatText.Defaults =
         },
 
         -- Outgoing
-        outgoing =
-        {
+        outgoing = {
             -- Damage & Healing
             showDamage = true,
             showHealing = true,
@@ -193,8 +180,7 @@ CombatText.Defaults =
     -- Font defaults
     fontFace = [[Univers 67]],
     fontOutline = [[soft-shadow-thick]],
-    fontSizes =
-    {
+    fontSizes = {
         -- Combat
         damage = 32,
         damagecritical = 32,
@@ -217,11 +203,9 @@ CombatText.Defaults =
     },
 
     -- Color defaults
-    colors =
-    {
+    colors = {
         -- Damage & Healing
-        damage =
-        {
+        damage = {
             [DAMAGE_TYPE_NONE] = { 1, 1, 1, 1 },
             [DAMAGE_TYPE_GENERIC] = { 1, 1, 1, 1 },
             [DAMAGE_TYPE_PHYSICAL] = { 200 / 255, 200 / 255, 160 / 255, 1 },
@@ -282,8 +266,7 @@ CombatText.Defaults =
         potionReady = { 0.470588, 0.156863, 0.745098, 1 }, --RGB(120, 40, 190)
     },
     -- Format defaults
-    formats =
-    {
+    formats = {
         --Damage & Healing
         damage = "%t %a",
         damagecritical = "%t %a!",
@@ -334,27 +317,23 @@ CombatText.Defaults =
     },
 
     -- Animation defaults
-    animation =
-    {
+    animation = {
         animationType = "ellipse",
         animationDuration = 100,
         outgoingIcon = "left",
         incomingIcon = "right",
-        outgoing =
-        {
+        outgoing = {
             directionType = "down",
             speed = 4000,
         },
-        incoming =
-        {
+        incoming = {
             directionType = "down",
             speed = 4000,
         },
     },
 
     -- Throttle defaults
-    throttles =
-    {
+    throttles = {
         damage = 200,
         damagecritical = 200,
         healing = 200,

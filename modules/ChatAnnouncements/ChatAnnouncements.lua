@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 -- ChatAnnouncements namespace
@@ -35,8 +34,7 @@ local moduleName = LUIE.name .. "ChatAnnouncements"
 -- DEFAULT VARIABLE SETUP ----------------------
 ------------------------------------------------
 ChatAnnouncements.Enabled = false
-ChatAnnouncements.Defaults =
-{
+ChatAnnouncements.Defaults = {
     -- Chat Message Settings
     ChatPlayerDisplayOptions = 2,
     --NotificationColor             = { .75, .75, .75, 1 },
@@ -55,8 +53,7 @@ ChatAnnouncements.Defaults =
     TimeStampColor = { 143 / 255, 143 / 255, 143 / 255 },
 
     -- Achievements
-    Achievement =
-    {
+    Achievement = {
         AchievementCategoryIgnore = {}, -- Inverted list of achievements to be tracked
         AchievementProgressMsg = GetString(LUIE_STRING_CA_ACHIEVEMENT_PROGRESS_MSG),
         AchievementCompleteMsg = GetString(SI_ACHIEVEMENT_AWARDED_CENTER_SCREEN),
@@ -80,8 +77,7 @@ ChatAnnouncements.Defaults =
     },
 
     -- Group
-    Group =
-    {
+    Group = {
         GroupCA = true,
         GroupAlert = false,
         GroupLFGCA = true,
@@ -108,8 +104,7 @@ ChatAnnouncements.Defaults =
     },
 
     -- Social
-    Social =
-    {
+    Social = {
         -- Guild
         GuildCA = true,
         GuildAlert = false,
@@ -150,8 +145,7 @@ ChatAnnouncements.Defaults =
     },
 
     -- Notifications
-    Notify =
-    {
+    Notify = {
         -- Notifications
         NotificationConfiscateCA = true,
         NotificationConfiscateAlert = false,
@@ -187,8 +181,7 @@ ChatAnnouncements.Defaults =
     },
 
     -- Collectibles
-    Collectibles =
-    {
+    Collectibles = {
         CollectibleCA = true,
         CollectibleCSA = true,
         CollectibleAlert = false,
@@ -212,8 +205,7 @@ ChatAnnouncements.Defaults =
     },
 
     -- Lorebooks
-    Lorebooks =
-    {
+    Lorebooks = {
         LorebookCA = true, -- Display a CA for Lorebooks
         LorebookCSA = true, -- Display a CSA for Lorebooks
         LorebookCSALoreOnly = true, -- Only Display a CSA for non-Eidetic Memory Books
@@ -233,8 +225,7 @@ ChatAnnouncements.Defaults =
     },
 
     -- Antiquities
-    Antiquities =
-    {
+    Antiquities = {
         AntiquityCA = true,
         AntiquityCSA = true,
         AntiquityAlert = false,
@@ -247,8 +238,7 @@ ChatAnnouncements.Defaults =
     },
 
     -- Quest
-    Quests =
-    {
+    Quests = {
         QuestShareCA = true,
         QuestShareAlert = false,
         QuestColorLocName = { 1, 1, 1, 1 },
@@ -288,8 +278,7 @@ ChatAnnouncements.Defaults =
     },
 
     -- Experience
-    XP =
-    {
+    XP = {
         ExperienceEnlightenedCA = false,
         ExperienceEnlightenedCSA = true,
         ExperienceEnlightenedAlert = false,
@@ -312,8 +301,7 @@ ChatAnnouncements.Defaults =
     },
 
     -- Skills
-    Skills =
-    {
+    Skills = {
         SkillPointCA = true,
         SkillPointCSA = true,
         SkillPointAlert = false,
@@ -358,8 +346,7 @@ ChatAnnouncements.Defaults =
     },
 
     -- Currency
-    Currency =
-    {
+    Currency = {
         CurrencyAPColor = { 0.164706, 0.862745, 0.133333, 1 },
         CurrencyAPFilter = 0,
         CurrencyAPName = GetString(LUIE_STRING_CA_CURRENCY_ALLIANCE_POINT),
@@ -437,8 +424,7 @@ ChatAnnouncements.Defaults =
     },
 
     -- Loot
-    Inventory =
-    {
+    Inventory = {
         Loot = true,
         LootLogOverride = false,
         LootBank = true,
@@ -484,8 +470,7 @@ ChatAnnouncements.Defaults =
         LootQuestRemove = false,
     },
 
-    ContextMessages =
-    {
+    ContextMessages = {
         CurrencyMessageConfiscate = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_CONFISCATE),
         CurrencyMessageDeposit = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_DEPOSIT),
         CurrencyMessageDepositStorage = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE),
@@ -577,54 +562,45 @@ ChatAnnouncements.Defaults =
         CurrencyMessageDisguiseDestroy = GetString(LUIE_STRING_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY),
     },
 
-    DisplayAnnouncements =
-    {
+    DisplayAnnouncements = {
         Debug = false, -- Display EVENT_DISPLAY_ANNOUNCEMENT debug messages
-        General =
-        {
+        General = {
             CA = false,
             CSA = true,
             Alert = false,
         },
-        GroupArea =
-        {
+        GroupArea = {
             CA = false,
             CSA = true,
             Alert = false,
         },
-        Respec =
-        {
+        Respec = {
             CA = true,
             CSA = true,
             Alert = false,
         },
-        ZoneIC =
-        {
+        ZoneIC = {
             CA = true,
             CSA = true,
             Alert = false,
             Description = true, -- For 2nd line of Display Announcements
         },
-        ZoneCraglorn =
-        {
+        ZoneCraglorn = {
             CA = false,
             CSA = true,
             Alert = false,
         },
-        ArenaMaelstrom =
-        {
+        ArenaMaelstrom = {
             CA = true,
             CSA = true,
             Alert = false,
         },
-        ArenaDragonstar =
-        {
+        ArenaDragonstar = {
             CA = true,
             CSA = true,
             Alert = false,
         },
-        DungeonEndlessArchive =
-        {
+        DungeonEndlessArchive = {
             CA = true,
             CSA = true,
             Alert = false,
@@ -773,8 +749,7 @@ local g_weAreInADig = false -- When in a digsite.
 ------------------------------------------------
 
 -- 5 Option Bracket (1)
-local bracket1 =
-{
+local bracket1 = {
     [1] = "[",
     [2] = "(",
     [3] = "",
@@ -783,8 +758,7 @@ local bracket1 =
 }
 
 -- 5 Option Bracket (2)
-local bracket2 =
-{
+local bracket2 = {
     [1] = "]",
     [2] = ")",
     [3] = " -",
@@ -793,8 +767,7 @@ local bracket2 =
 }
 
 -- 4 Option Bracket (1)
-local bracket3 =
-{
+local bracket3 = {
     [1] = "[",
     [2] = "(",
     [3] = "- ",
@@ -802,8 +775,7 @@ local bracket3 =
 }
 
 -- 4 Option Bracket (2)
-local bracket4 =
-{
+local bracket4 = {
     [1] = "]",
     [2] = ")",
     [3] = "",
@@ -814,20 +786,17 @@ local bracket4 =
 -- LINK BRACKET OPTIONS ------------------------
 ------------------------------------------------
 
-local linkBrackets =
-{
+local linkBrackets = {
     [1] = LINK_STYLE_DEFAULT,
     [2] = LINK_STYLE_BRACKETS,
 }
 
-local linkBracket1 =
-{
+local linkBracket1 = {
     [1] = "",
     [2] = "[",
 }
 
-local linkBracket2 =
-{
+local linkBracket2 = {
     [1] = "",
     [2] = "]",
 }
@@ -837,16 +806,14 @@ local linkBracket2 =
 ------------------------------------------------
 
 -- List of items to whitelist as notable loot
-local g_notableIDs =
-{
+local g_notableIDs = {
     [56862] = true, -- Fortified Nirncrux
     [56863] = true, -- Potent Nirncrux
     [68342] = true, -- Hakeijo
 }
 
 -- List of items that can be removed from the players equipped item slots.
-local g_removeableIDs =
-{
+local g_removeableIDs = {
     [44486] = true, -- Prismatic Blade (Fighters Guild Quests)
     [44487] = true, -- Prismatic Greatblade (Fighters Guild Quests)
     [44488] = true, -- Prismatic Long Bow (Fighters Guild Quests)
@@ -855,8 +822,7 @@ local g_removeableIDs =
 }
 
 -- List of items to blacklist as annoying loot
-local g_blacklistIDs =
-{
+local g_blacklistIDs = {
     -- General
     [64713] = true, -- Laurel
     [64690] = true, -- Malachite Shard
@@ -887,8 +853,7 @@ local g_blacklistIDs =
     [140222] = true, -- 200 Transmute Crystals (This is probably just a test item)
 }
 
-local guildAllianceColors =
-{
+local guildAllianceColors = {
     [1] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_ALDMERI_DOMINION)),
     [2] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_DAGGERFALL_COVENANT)),
     [3] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_EBONHEART_PACT)),
@@ -896,8 +861,7 @@ local guildAllianceColors =
 
 local g_firstLoad = true
 
-local ChatEventFormattersDelete =
-{
+local ChatEventFormattersDelete = {
     [EVENT_BATTLEGROUND_INACTIVITY_WARNING] = true,
     [EVENT_BROADCAST] = true,
     [EVENT_FRIEND_PLAYER_STATUS_CHANGED] = true,
@@ -1074,8 +1038,7 @@ function ChatAnnouncements.RegisterQuestEvents()
                 name = GetString(SI_QUEST_JOURNAL_UNKNOWN_QUEST_NAME)
             end
 
-            g_questIndex[name] =
-            {
+            g_questIndex[name] = {
                 questType = questType,
                 instanceDisplayType = instanceDisplayType,
             }
@@ -1358,7 +1321,7 @@ function ChatAnnouncements.OnDigStart()
 end
 
 function ChatAnnouncements.OnDigEnd()
-    zo_callLater(function ()
+    zo_callLater(function()
         g_weAreInADig = false
     end, 1000)
 end
@@ -1843,7 +1806,7 @@ function ChatAnnouncements.GroupingToolsLFGJoined(eventCode, locationName)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(LUIE_STRING_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName))
         end
         g_lfgDisableGroupEvents = true
-        zo_callLater(function ()
+        zo_callLater(function()
             g_lfgDisableGroupEvents = false
         end, 3000)
     end
@@ -1986,15 +1949,15 @@ function ChatAnnouncements.ReadyCheckUpdate(eventCode)
             end]]
             --
             g_rcSpamPrevention = true
-            zo_callLater(function ()
+            zo_callLater(function()
                 g_rcSpamPrevention = false
             end, 1000)
             g_showActivityStatus = false
-            zo_callLater(function ()
+            zo_callLater(function()
                 g_showActivityStatus = true
             end, 1000)
             g_stopGroupLeaveQueue = true
-            zo_callLater(function ()
+            zo_callLater(function()
                 g_stopGroupLeaveQueue = false
             end, 1000)
             g_showRCUpdates = true
@@ -2114,8 +2077,7 @@ local RESPEC_TYPE_ATTRIBUTES = 2
 local RESPEC_TYPE_SKILLS = 3
 local RESPEC_TYPE_MORPHS = 4
 
-local LUIE_AttributeDisplayType =
-{
+local LUIE_AttributeDisplayType = {
     [RESPEC_TYPE_CHAMPION] = GetString(LUIE_STRING_CA_CURRENCY_NOTIFY_CHAMPION),
     [RESPEC_TYPE_ATTRIBUTES] = GetString(LUIE_STRING_CA_CURRENCY_NOTIFY_ATTRIBUTES),
     [RESPEC_TYPE_SKILLS] = GetString(LUIE_STRING_CA_CURRENCY_NOTIFY_SKILLS),
@@ -2564,28 +2526,7 @@ function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocatio
         messageChange = ChatAnnouncements.SV.ContextMessages.CurrencyMessageSpend
         -- ==============================================================================
         -- DEBUG EVENTS - Don't know if these are implemented or what they are for.
-    elseif reason == CURRENCY_CHANGE_REASON_ACTION
-        or reason == CURRENCY_CHANGE_REASON_KEEP_UPGRADE
-        or reason == CURRENCY_CHANGE_REASON_DEPRECATED_0
-        or reason == CURRENCY_CHANGE_REASON_DEPRECATED_2
-        or reason == CURRENCY_CHANGE_REASON_SOUL_HEAL
-        or reason == CURRENCY_CHANGE_REASON_CASH_ON_DELIVERY
-        or reason == CURRENCY_CHANGE_REASON_ABILITY_UPGRADE_PURCHASE
-        or reason == CURRENCY_CHANGE_REASON_DEPRECATED_1
-        or reason == CURRENCY_CHANGE_REASON_STABLESPACE
-        or reason == CURRENCY_CHANGE_REASON_ACHIEVEMENT
-        or reason == CURRENCY_CHANGE_REASON_TRAIT_REVEAL
-        or reason == CURRENCY_CHANGE_REASON_REFORGE
-        or reason == CURRENCY_CHANGE_REASON_RECIPE
-        or reason == CURRENCY_CHANGE_REASON_CONSUME_FOOD_DRINK
-        or reason == CURRENCY_CHANGE_REASON_CONSUME_POTION
-        or reason == CURRENCY_CHANGE_REASON_HARVEST_REAGENT
-        or reason == CURRENCY_CHANGE_REASON_RESEARCH_TRAIT
-        or reason == CURRENCY_CHANGE_REASON_GUILD_TABARD
-        or reason == CURRENCY_CHANGE_REASON_GUILD_FORWARD_CAMP
-        or reason == CURRENCY_CHANGE_REASON_BANK_FEE
-        or reason == CURRENCY_CHANGE_REASON_CHARACTER_UPGRADE
-        or reason == CURRENCY_CHANGE_REASON_TRIBUTE then
+    elseif reason == CURRENCY_CHANGE_REASON_ACTION or reason == CURRENCY_CHANGE_REASON_KEEP_UPGRADE or reason == CURRENCY_CHANGE_REASON_DEPRECATED_0 or reason == CURRENCY_CHANGE_REASON_DEPRECATED_2 or reason == CURRENCY_CHANGE_REASON_SOUL_HEAL or reason == CURRENCY_CHANGE_REASON_CASH_ON_DELIVERY or reason == CURRENCY_CHANGE_REASON_ABILITY_UPGRADE_PURCHASE or reason == CURRENCY_CHANGE_REASON_DEPRECATED_1 or reason == CURRENCY_CHANGE_REASON_STABLESPACE or reason == CURRENCY_CHANGE_REASON_ACHIEVEMENT or reason == CURRENCY_CHANGE_REASON_TRAIT_REVEAL or reason == CURRENCY_CHANGE_REASON_REFORGE or reason == CURRENCY_CHANGE_REASON_RECIPE or reason == CURRENCY_CHANGE_REASON_CONSUME_FOOD_DRINK or reason == CURRENCY_CHANGE_REASON_CONSUME_POTION or reason == CURRENCY_CHANGE_REASON_HARVEST_REAGENT or reason == CURRENCY_CHANGE_REASON_RESEARCH_TRAIT or reason == CURRENCY_CHANGE_REASON_GUILD_TABARD or reason == CURRENCY_CHANGE_REASON_GUILD_FORWARD_CAMP or reason == CURRENCY_CHANGE_REASON_BANK_FEE or reason == CURRENCY_CHANGE_REASON_CHARACTER_UPGRADE or reason == CURRENCY_CHANGE_REASON_TRIBUTE then
         messageChange = zo_strformat(GetString(LUIE_STRING_CA_DEBUG_MSG_CURRENCY), reason)
         -- END DEBUG EVENTS
         -- ==============================================================================
@@ -2761,7 +2702,7 @@ end
 
 function ChatAnnouncements.MiscAlertLockBroke(eventCode, inactivityLengthMs)
     g_lockpickBroken = true
-    zo_callLater(function ()
+    zo_callLater(function()
         g_lockpickBroken = false
     end, 200)
 end
@@ -2777,7 +2718,7 @@ function ChatAnnouncements.MiscAlertLockSuccess(eventCode)
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(LUIE_STRING_CA_LOCKPICK_SUCCESS))
     end
     g_lockpickBroken = true
-    zo_callLater(function ()
+    zo_callLater(function()
         g_lockpickBroken = false
     end, 200)
 end
@@ -2858,8 +2799,7 @@ function ChatAnnouncements.OnBuybackItem(eventCode, itemName, quantity, money, i
 end
 
 -- TODO: Move to a data table outside of CA (maybe?)
-local isShopCollectible =
-{
+local isShopCollectible = {
     [GetCollectibleInfo(3)] = 3, -- Brown Paint Horse
     [GetCollectibleInfo(4)] = 4, -- Bay Dun Horse
     [GetCollectibleInfo(5)] = 5, -- Midnight Steed
@@ -3568,8 +3508,7 @@ function ChatAnnouncements.IndexBank()
     end
 end
 
-local HouseBags =
-{
+local HouseBags = {
     [1] = BAG_HOUSE_BANK_ONE,
     [2] = BAG_HOUSE_BANK_TWO,
     [3] = BAG_HOUSE_BANK_THREE,
@@ -3694,7 +3633,7 @@ function ChatAnnouncements.StoreClose(eventCode)
     if not (ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Inventory.LootShowDisguise) then
         g_inventoryStacks = {}
     end
-    zo_callLater(function ()
+    zo_callLater(function()
         g_weAreInAStore = false
         g_weAreInAFence = false
     end, 1000)
@@ -3713,7 +3652,7 @@ function ChatAnnouncements.GuildStoreClose(eventCode)
     if not (ChatAnnouncements.SV.Inventory.Loot or ChatAnnouncements.SV.Inventory.LootShowDisguise) then
         g_inventoryStacks = {}
     end
-    zo_callLater(function ()
+    zo_callLater(function()
         g_weAreInAStore = false
         g_weAreInAGuildStore = false
     end, 1000)
@@ -3820,7 +3759,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
 
                 countChange = newValue + questItemIndex[itemId].counter
                 g_questItemRemoved[itemId] = true
-                zo_callLater(function ()
+                zo_callLater(function()
                     g_questItemRemoved[itemId] = false
                 end, 100)
 
@@ -3840,13 +3779,11 @@ function ChatAnnouncements.ResolveQuestItemChange()
                         end
 
                         if Quests.ItemRemovedMessage[itemId] and not Quests.ItemIgnoreTurnIn[itemId] then
-                            logPrefix = Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_TURNIN and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_USE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestUse or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_EXHAUST and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestExhaust or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_OFFER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOffer or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_DISCARD and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestDiscard or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_CONFISCATE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestConfiscate or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_OPEN and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOpen or
-                                Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_ADMINISTER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestAdminister or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_PLACE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestPlace
+                            logPrefix = Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_TURNIN and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_USE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestUse or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_EXHAUST and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestExhaust or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_OFFER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOffer or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_DISCARD and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestDiscard or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_CONFISCATE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestConfiscate or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_OPEN and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOpen or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_ADMINISTER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestAdminister or Quests.ItemRemovedMessage[itemId] == LUIE_QUEST_MESSAGE_PLACE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestPlace
                         end
 
                         if Quests.ItemRemovedInDialogueMessage[itemId] and g_talkingToNPC then
-                            logPrefix = Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_TURNIN and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_USE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestUse or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_EXHAUST and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestExhaust or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_OFFER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOffer or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_DISCARD and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestDiscard or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_CONFISCATE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestConfiscate or
-                                Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_OPEN and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOpen or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_ADMINISTER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestAdminister or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_PLACE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestPlace
+                            logPrefix = Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_TURNIN and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_USE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestUse or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_EXHAUST and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestExhaust or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_OFFER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOffer or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_DISCARD and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestDiscard or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_CONFISCATE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestConfiscate or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_OPEN and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestOpen or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_ADMINISTER and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestAdminister or Quests.ItemRemovedInDialogueMessage[itemId] == LUIE_QUEST_MESSAGE_PLACE and ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestPlace
                         end
 
                         -- Any items that are removed at the same time a quest is abandoned will be flagged to display as "Removed."
@@ -3888,7 +3825,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
                 --
                 countChange = newValue - questItemIndex[itemId].stack
                 g_questItemAdded[itemId] = true
-                zo_callLater(function ()
+                zo_callLater(function()
                     g_questItemAdded[itemId] = false
                 end, 100)
 
@@ -4216,8 +4153,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
             ChatAnnouncements.QueuedMessagesCounter = g_itemCounterGain
         end
         ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
-        ChatAnnouncements.QueuedMessages[g_itemCounterGain] =
-        {
+        ChatAnnouncements.QueuedMessages[g_itemCounterGain] = {
             message = g_itemStringGain,
             type = messageType,
             formattedRecipient = formattedRecipient,
@@ -4248,8 +4184,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
             ChatAnnouncements.QueuedMessagesCounter = g_itemCounterLoss
         end
         ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
-        ChatAnnouncements.QueuedMessages[g_itemCounterLoss] =
-        {
+        ChatAnnouncements.QueuedMessages[g_itemCounterLoss] = {
             message = g_itemStringLoss,
             type = messageType,
             formattedRecipient = formattedRecipient,
@@ -4261,8 +4196,7 @@ function ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, 
         eventManager:RegisterForUpdate(moduleName .. "Printer", delayTimer, ChatAnnouncements.PrintQueuedMessages)
     else
         local totalString = formattedTotal
-        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] =
-        {
+        ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = {
             message = itemString,
             type = messageType,
             formattedRecipient = formattedRecipient,
@@ -4345,36 +4279,33 @@ end
 -- Simple posthook into ZOS crafting mode functions, based off MultiCraft, thanks Ayantir!
 function ChatAnnouncements.CraftModeOverrides()
     -- Get SMITHING mode
-    g_smithing.GetMode = function ()
+    g_smithing.GetMode = function()
         return SMITHING.mode
     end
 
     -- Get ENCHANTING mode
-    g_enchanting.GetMode = function ()
+    g_enchanting.GetMode = function()
         return ENCHANTING:GetEnchantingMode()
     end
 
     -- NOTE: Alchemy and provisioning don't matter, as the only options are to craft and use materials.
 
     -- Crafting Mode Syntax (Enchanting - Item Gain)
-    g_enchant_prefix_pos =
-    {
+    g_enchant_prefix_pos = {
         [1] = ChatAnnouncements.SV.ContextMessages.CurrencyMessageCraft,
         [2] = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive,
         [3] = ChatAnnouncements.SV.ContextMessages.CurrencyMessageCraft,
     }
 
     -- Crafting Mode Syntax (Enchanting - Item Loss)
-    g_enchant_prefix_neg =
-    {
+    g_enchant_prefix_neg = {
         [1] = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse,
         [2] = ChatAnnouncements.SV.ContextMessages.CurrencyMessageExtract,
         [3] = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse,
     }
 
     -- Crafting Mode Syntax (Blacksmithing - Item Gain)
-    g_smithing_prefix_pos =
-    {
+    g_smithing_prefix_pos = {
         [1] = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive,
         [2] = ChatAnnouncements.SV.ContextMessages.CurrencyMessageCraft,
         [3] = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive,
@@ -4384,8 +4315,7 @@ function ChatAnnouncements.CraftModeOverrides()
     }
 
     -- Crafting Mode Syntax (Blacksmithing - Item Loss)
-    g_smithing_prefix_neg =
-    {
+    g_smithing_prefix_neg = {
         [1] = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRefine,
         [2] = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse,
         [3] = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeconstruct,
@@ -4409,8 +4339,7 @@ function ChatAnnouncements.ItemCounterDelay(icon, stack, itemType, itemId, itemL
     if delayedItemPool[itemId] then
         stack = delayedItemPool[itemId].stack + stack -- Add stack count first, only if item already exists.
     end
-    delayedItemPool[itemId] =
-    {
+    delayedItemPool[itemId] = {
         icon = icon,
         itemType = itemType,
         itemLink = itemLink,
@@ -4442,8 +4371,7 @@ function ChatAnnouncements.ItemCounterDelayOut(icon, stack, itemType, itemId, it
     if delayedItemPoolOut[itemId] then
         stack = delayedItemPoolOut[itemId].stack + stack -- Add stack count first, only if item already exists.
     end
-    delayedItemPoolOut[itemId] =
-    {
+    delayedItemPoolOut[itemId] = {
         icon = icon,
         itemType = itemType,
         itemLink = itemLink,
@@ -4471,8 +4399,7 @@ function ChatAnnouncements.SendDelayedItemsOut()
     delayedItemPoolOut = {}
 end
 
-local crownRidingIds =
-{
+local crownRidingIds = {
     [64700] = true, -- Crown Lesson: Riding Speed
     [64701] = true, -- Crown Lesson: Riding Stamina
     [64702] = true, -- Crown Lesson: Riding Capacity
@@ -4700,7 +4627,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                 elseif g_talkingToNPC and not g_weAreInAStore and ChatAnnouncements.SV.Inventory.LootShowTurnIn then
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageQuestTurnIn
-                    zo_callLater(function ()
+                    zo_callLater(function()
                         if g_stackSplit == false then
                             ChatAnnouncements.ItemCounterDelay(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, false, true, false)
                             eventManager:UnregisterForUpdate(moduleName .. "Printer")
@@ -4751,13 +4678,13 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     end
                     -- If this is a Skill respec scroll, manually call an announcement for it if enabled (for some reason doesn't display an EVENT_DISPLAY_ANNOUNCEMENT on use anymore)
                     if removedItemType == ITEMTYPE_CROWN_ITEM and (itemId == 64524 or itemId == 135128) then
-                        zo_callLater(function ()
+                        zo_callLater(function()
                             ChatAnnouncements.PointRespecDisplay(RESPEC_TYPE_SKILLS)
                         end, 25)
                     end
                     -- If this is an Attribute respec scroll, manually call an announcement for it if enabled (we disable EVENT_DISPLAY_ANNOUNCEMENT for this to sync it better)
                     if removedItemType == ITEMTYPE_CROWN_ITEM and (itemId == 64523 or itemId == 135130) then
-                        zo_callLater(function ()
+                        zo_callLater(function()
                             ChatAnnouncements.PointRespecDisplay(RESPEC_TYPE_ATTRIBUTES)
                         end, 25)
                     end
@@ -4813,7 +4740,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                     end
                     -- If any of these options were flagged, run a callLater on a 50ms delay to make sure we didn't just split stacks.
                     if flag then
-                        zo_callLater(function ()
+                        zo_callLater(function()
                             if g_stackSplit == false then
                                 ChatAnnouncements.ItemCounterDelay(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, false, true, false)
                                 eventManager:UnregisterForUpdate(moduleName .. "Printer")
@@ -4887,8 +4814,7 @@ function ChatAnnouncements.Dummy()
     LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 64489, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 91)
     LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 533, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 91)
 
-    d(
-        "|c0b610bYou craft |r|t16:16:/esoui/art/icons/crafting_smith_plug_standard_r_001.dds|t |H1:item:6000:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Dwarven Ingot]|h |cFFFFFFx33|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ore_base_ebony_r3.dds|t |H1:item:6001:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Ebony Ingot]|h |cFFFFFFx232|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ore_base_iron_r3.dds|t |H1:item:23107:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Orichalcum Ingot]|h |cFFFFFFx12|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ore_base_iron_r2.dds|t |H1:item:5413:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Iron Ingot]|h |cFFFFFFx134|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ore_base_high_iron_r3.dds|t |H1:item:4487:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Steel Ingot]|h |cFFFFFFx83|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_colossus_iron.dds|t |H1:item:64489:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Rubedite Ingot]|h |cFFFFFFx91|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_wood_base_oak_r3.dds|t |H1:item:533:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Sanded Oak]|h |cFFFFFFx91|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ingot_voidstone.dds|t |H1:item:46130:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Voidstone Ingot]|h |cFFFFFFx58|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ingot_moonstone.dds|t |H1:item:46129:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Quicksilver Ingot]|h |cFFFFFFx44|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ingot_galatite.dds|t |H1:item:46128:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Galatite Ingot]|h |cFFFFFFx73|r|c0b610b.|r")
+    d("|c0b610bYou craft |r|t16:16:/esoui/art/icons/crafting_smith_plug_standard_r_001.dds|t |H1:item:6000:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Dwarven Ingot]|h |cFFFFFFx33|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ore_base_ebony_r3.dds|t |H1:item:6001:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Ebony Ingot]|h |cFFFFFFx232|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ore_base_iron_r3.dds|t |H1:item:23107:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Orichalcum Ingot]|h |cFFFFFFx12|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ore_base_iron_r2.dds|t |H1:item:5413:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Iron Ingot]|h |cFFFFFFx134|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ore_base_high_iron_r3.dds|t |H1:item:4487:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Steel Ingot]|h |cFFFFFFx83|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_colossus_iron.dds|t |H1:item:64489:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Rubedite Ingot]|h |cFFFFFFx91|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_wood_base_oak_r3.dds|t |H1:item:533:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Sanded Oak]|h |cFFFFFFx91|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ingot_voidstone.dds|t |H1:item:46130:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Voidstone Ingot]|h |cFFFFFFx58|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ingot_moonstone.dds|t |H1:item:46129:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Quicksilver Ingot]|h |cFFFFFFx44|r|c0b610b,|r |t16:16:/esoui/art/icons/crafting_ingot_galatite.dds|t |H1:item:46128:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h[Galatite Ingot]|h |cFFFFFFx73|r|c0b610b.|r")
 
     --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 803, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 24)
     --LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 23121, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 78)
@@ -4908,15 +4834,7 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
         return
     end
 
-    local traceback = debug.traceback(
-        "Inventory Update" ..
-        " eventCode: " .. tostring(eventCode) ..
-        " bagId: " .. tostring(bagId) ..
-        " slotId: " .. tostring(slotId) ..
-        " isNewItem: " .. tostring(isNewItem) ..
-        " itemSoundCategory: " .. tostring(itemSoundCategory) ..
-        " inventoryUpdateReason: " .. tostring(inventoryUpdateReason) ..
-        " stackCountChange: " .. tostring(stackCountChange), 2)
+    local traceback = debug.traceback("Inventory Update" .. " eventCode: " .. tostring(eventCode) .. " bagId: " .. tostring(bagId) .. " slotId: " .. tostring(slotId) .. " isNewItem: " .. tostring(isNewItem) .. " itemSoundCategory: " .. tostring(itemSoundCategory) .. " inventoryUpdateReason: " .. tostring(inventoryUpdateReason) .. " stackCountChange: " .. tostring(stackCountChange), 2)
 
     Debug(traceback)
 
@@ -4924,8 +4842,7 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
         local craftingType = GetCraftingInteractionType()
         local smithingMode = g_smithing.GetMode()
 
-        local validItemTypes =
-        {
+        local validItemTypes = {
             [ITEMTYPE_ADDITIVE] = true,
             [ITEMTYPE_ARMOR_BOOSTER] = true,
             [ITEMTYPE_ARMOR_TRAIT] = true,
@@ -5913,8 +5830,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                         g_savedPurchase.carriedItem = carriedItem
                         g_savedPurchase.carriedItemTotal = carriedItemTotal
                     else
-                        g_savedLaunder =
-                        {
+                        g_savedLaunder = {
                             icon = icon,
                             stack = 0,
                             itemType = itemType,
@@ -5972,8 +5888,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                         g_savedPurchase.carriedItem = carriedItem
                         g_savedPurchase.carriedItemTotal = carriedItemTotal
                     else
-                        g_savedLaunder =
-                        {
+                        g_savedLaunder = {
                             icon = icon,
                             stack = change,
                             itemType = itemType,
@@ -6037,8 +5952,7 @@ function ChatAnnouncements.InventoryUpdateFence(eventCode, bagId, slotId, isNewI
                 g_savedPurchase.carriedItem = carriedItem
                 g_savedPurchase.carriedItemTotal = carriedItemTotal
             else
-                g_savedLaunder =
-                {
+                g_savedLaunder = {
                     icon = icon,
                     stack = change,
                     itemType = itemType,
@@ -6286,7 +6200,7 @@ function ChatAnnouncements.OnPlayerActivated(eventCode)
         g_firstLoad = false
     end
 
-    zo_callLater(function ()
+    zo_callLater(function()
         g_loginHideQuestLoot = false
     end, 3000)
 
@@ -6453,32 +6367,28 @@ local function GetCurrentChampionPointsBarParams(triggeringEvent)
 end
 
 -- local vars for EVENT_SKILL_XP
-local GUILD_SKILL_SHOW_REASONS =
-{
+local GUILD_SKILL_SHOW_REASONS = {
     [PROGRESS_REASON_DARK_ANCHOR_CLOSED] = true,
     [PROGRESS_REASON_DARK_FISSURE_CLOSED] = true,
     [PROGRESS_REASON_BOSS_KILL] = true,
 }
 
 -- local vars for EVENT_SKILL_XP
-local GUILD_SKILL_SHOW_SOUNDS =
-{
+local GUILD_SKILL_SHOW_SOUNDS = {
     [PROGRESS_REASON_DARK_ANCHOR_CLOSED] = SOUNDS.SKILL_XP_DARK_ANCHOR_CLOSED,
     [PROGRESS_REASON_DARK_FISSURE_CLOSED] = SOUNDS.SKILL_XP_DARK_FISSURE_CLOSED,
     [PROGRESS_REASON_BOSS_KILL] = SOUNDS.SKILL_XP_BOSS_KILLED,
 }
 
 -- Used by EVENT_SKILL_POINTS_CHANGED (CSA Handler) to ignore skill point updates in certain cases.
-local SUPPRESS_SKILL_POINT_CSA_REASONS =
-{
+local SUPPRESS_SKILL_POINT_CSA_REASONS = {
     [SKILL_POINT_CHANGE_REASON_IGNORE] = true,
     [SKILL_POINT_CHANGE_REASON_SKILL_RESPEC] = true,
     [SKILL_POINT_CHANGE_REASON_SKILL_RESET] = true,
 }
 
 -- TODO: Check if there is an equivalency in one of the handlers for this
-local GUILD_SKILL_ICONS =
-{
+local GUILD_SKILL_ICONS = {
     [45] = "esoui/art/icons/mapkey/mapkey_fightersguild.dds",
     [44] = "esoui/art/icons/mapkey/mapkey_magesguild.dds",
     [55] = "esoui/art/icons/mapkey/mapkey_undaunted.dds",
@@ -6937,11 +6847,11 @@ function ChatAnnouncements.HookFunction()
             elseif isLeader and isLocalPlayer then
                 message = zo_strformat(LUIE_STRING_GROUPDISBANDLEADER)
                 alert = zo_strformat(LUIE_STRING_GROUPDISBANDLEADER)
-                zo_callLater(function ()
+                zo_callLater(function()
                     ChatAnnouncements.CheckLFGStatusLeave(false)
                 end, 100)
             elseif isLocalPlayer then
-                zo_callLater(function ()
+                zo_callLater(function()
                     ChatAnnouncements.CheckLFGStatusLeave(false)
                 end, 100)
             end
@@ -6949,13 +6859,13 @@ function ChatAnnouncements.HookFunction()
         elseif reason == GROUP_LEAVE_REASON_KICKED then
             if actionRequiredVote then
                 if isLocalPlayer then
-                    zo_callLater(function ()
+                    zo_callLater(function()
                         ChatAnnouncements.CheckLFGStatusLeave(true)
                     end, 100)
                     message = zo_strformat(SI_GROUP_ELECTION_KICK_PLAYER_PASSED)
                     alert = zo_strformat(SI_GROUP_ELECTION_KICK_PLAYER_PASSED)
                 elseif hasValidNames then
-                    zo_callLater(function ()
+                    zo_callLater(function()
                         ChatAnnouncements.CheckLFGStatusLeave(false)
                     end, 100)
                     message = zo_strformat(LUIE_STRING_CA_GROUPFINDER_VOTEKICK_PASSED, finalName)
@@ -6968,19 +6878,19 @@ function ChatAnnouncements.HookFunction()
                 if isLeader and isLocalPlayer then
                     message = zo_strformat(LUIE_STRING_GROUPDISBANDLEADER)
                     alert = zo_strformat(LUIE_STRING_GROUPDISBANDLEADER)
-                    zo_callLater(function ()
+                    zo_callLater(function()
                         ChatAnnouncements.CheckLFGStatusLeave(false)
                     end, 100)
                     sound = SOUNDS.GROUP_DISBAND
                 elseif isLocalPlayer then
-                    zo_callLater(function ()
+                    zo_callLater(function()
                         ChatAnnouncements.CheckLFGStatusLeave(true)
                     end, 100)
                     message = zo_strformat(SI_GROUP_NOTIFICATION_GROUP_SELF_KICKED)
                     alert = zo_strformat(SI_GROUP_NOTIFICATION_GROUP_SELF_KICKED)
                     sound = SOUNDS.GROUP_KICK
                 else
-                    zo_callLater(function ()
+                    zo_callLater(function()
                         ChatAnnouncements.CheckLFGStatusLeave(false)
                     end, 100)
                     useDefaultReasonText = true
@@ -6990,13 +6900,13 @@ function ChatAnnouncements.HookFunction()
         elseif reason == GROUP_LEAVE_REASON_VOLUNTARY or reason == GROUP_LEAVE_REASON_LEFT_BATTLEGROUND then
             if not isLocalPlayer then
                 useDefaultReasonText = true
-                zo_callLater(function ()
+                zo_callLater(function()
                     ChatAnnouncements.CheckLFGStatusLeave(false)
                 end, 100)
             else
                 message = (zo_strformat(GetString(LUIE_STRING_CA_GROUP_MEMBER_LEAVE_SELF), finalName))
                 alert = (zo_strformat(GetString(LUIE_STRING_CA_GROUP_MEMBER_LEAVE_SELF), finalAlertName))
-                zo_callLater(function ()
+                zo_callLater(function()
                     ChatAnnouncements.CheckLFGStatusLeave(false)
                 end, 100)
             end
@@ -7065,7 +6975,7 @@ function ChatAnnouncements.HookFunction()
             -- Set final messages to send
             local SendMessage = (zo_strformat(GetString(LUIE_STRING_CA_GROUP_MEMBER_JOIN), finalName))
             local SendAlert = (zo_strformat(GetString(LUIE_STRING_CA_GROUP_MEMBER_JOIN), finalAlertName))
-            zo_callLater(function ()
+            zo_callLater(function()
                 ChatAnnouncements.PrintJoinStatusNotSelf(SendMessage, SendAlert)
             end, 100)
         end
@@ -7147,8 +7057,7 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- Variables for EVENT_GROUP_ELECTION_RESULT
-    local GroupElectionResultToSoundId =
-    {
+    local GroupElectionResultToSoundId = {
         [GROUP_ELECTION_RESULT_ELECTION_WON] = SOUNDS.GROUP_ELECTION_RESULT_WON,
         [GROUP_ELECTION_RESULT_ELECTION_LOST] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
         [GROUP_ELECTION_RESULT_ABANDONED] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
@@ -7272,14 +7181,14 @@ function ChatAnnouncements.HookFunction()
 
         -- Stop the cancel message from status update from triggering when any other result here happens.
         g_lfgHideStatusCancel = true
-        zo_callLater(function ()
+        zo_callLater(function()
             g_lfgHideStatusCancel = false
         end, 1000)
 
         -- Sometimes if another player cancels slightly before a player in your group cancels, the "you have been placed in the front of the queue message displays. If this is the case, we want to show queue left for that event."
         if reason ~= LFG_READY_CHECK_CANCEL_REASON_GROUP_REPLACED_IN_QUEUE then
             g_showActivityStatus = false
-            zo_callLater(function ()
+            zo_callLater(function()
                 g_showActivityStatus = true
             end, 1000)
         end
@@ -7360,7 +7269,7 @@ function ChatAnnouncements.HookFunction()
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(LUIE_STRING_CA_LOCKPICK_FAILED))
         end
         g_lockpickBroken = true
-        zo_callLater(function ()
+        zo_callLater(function()
             g_lockpickBroken = false
         end, 200)
         return true
@@ -7574,7 +7483,7 @@ function ChatAnnouncements.HookFunction()
                     end
                 end
                 eventManager:UnregisterForEvent(moduleName, EVENT_CURRENCY_UPDATE)
-                zo_callLater(function ()
+                zo_callLater(function()
                     eventManager:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, ChatAnnouncements.OnCurrencyUpdate)
                 end, 500)
             end
@@ -8234,8 +8143,7 @@ function ChatAnnouncements.HookFunction()
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
 
         -- Add quest to index
-        g_questIndex[questName] =
-        {
+        g_questIndex[questName] = {
             questType = questType,
             instanceDisplayType = instanceDisplayType,
         }
@@ -8726,7 +8634,7 @@ function ChatAnnouncements.HookFunction()
             local rejectedMat = rejectQuest(questIndex)
             if rejectedMat then
                 d("Writ Crafter abandoned the " .. GetJournalQuestName(questIndex) .. " because it requires " .. rejectedMat .. " which was disallowed for use in the settings")
-                zo_callLater(function ()
+                zo_callLater(function()
                     AbandonQuest(questIndex)
                 end, 500)
                 return
@@ -8802,8 +8710,7 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    local XP_GAIN_SHOW_REASONS =
-    {
+    local XP_GAIN_SHOW_REASONS = {
         [PROGRESS_REASON_PVP_EMPEROR] = true,
         [PROGRESS_REASON_DUNGEON_CHALLENGE] = true,
         [PROGRESS_REASON_OVERLAND_BOSS_KILL] = true,
@@ -8812,8 +8719,7 @@ function ChatAnnouncements.HookFunction()
         [PROGRESS_REASON_LFG_REWARD] = true,
     }
 
-    local XP_GAIN_SHOW_SOUNDS =
-    {
+    local XP_GAIN_SHOW_SOUNDS = {
         [PROGRESS_REASON_OVERLAND_BOSS_KILL] = SOUNDS.OVERLAND_BOSS_KILL,
         [PROGRESS_REASON_LOCK_PICK] = SOUNDS.LOCKPICKING_SUCCESS_CELEBRATION,
     }
@@ -9159,8 +9065,7 @@ function ChatAnnouncements.HookFunction()
     local function ChampionPointGainedPrinter()
         -- adding one so that we are starting from the first gained point instead of the starting champion points
         local startingPoints = savedEndingPoints - savedPointDelta + 1
-        local championPointsByType =
-        {
+        local championPointsByType = {
             [CHAMPION_DISCIPLINE_TYPE_WORLD] = 0,
             [CHAMPION_DISCIPLINE_TYPE_COMBAT] = 0,
             [CHAMPION_DISCIPLINE_TYPE_CONDITIONING] = 0,
@@ -9185,7 +9090,9 @@ function ChatAnnouncements.HookFunction()
             for pointType, amount in pairs(championPointsByType) do
                 if amount > 0 then
                     local disciplineData = CHAMPION_DATA_MANAGER:FindChampionDisciplineDataByType(pointType)
-                    if disciplineData == nil then return end
+                    if disciplineData == nil then
+                        return
+                    end
                     local icon = disciplineData:GetHUDIcon()
                     local formattedIcon = ChatAnnouncements.SV.XP.ExperienceLevelUpIcon and zo_strformat(" <<1>>", zo_iconFormat(icon, 16, 16)) or ""
                     local disciplineName = disciplineData:GetRawName()
@@ -9428,14 +9335,13 @@ function ChatAnnouncements.HookFunction()
         -- Display CSA
         if ChatAnnouncements.SV.Group.GroupRaidCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_RAID_COMPLETE_TEXT, SOUNDS.RAID_TRIAL_COMPLETED)
-            messageParams:SetEndOfRaidData(
-                {
-                    score,
-                    formattedTime,
-                    wasUnderTargetTime,
-                    vitalityBonus,
-                    zo_strformat(SI_REVIVE_COUNTER_REVIVES_USED, currentCount, maxCount),
-                })
+            messageParams:SetEndOfRaidData({
+                score,
+                formattedTime,
+                wasUnderTargetTime,
+                vitalityBonus,
+                zo_strformat(SI_REVIVE_COUNTER_REVIVES_USED, currentCount, maxCount),
+            })
             messageParams:SetText(zo_strformat(SI_TRIAL_COMPLETED_LARGE, raidName))
             messageParams:SetLifespanMS(TRIAL_COMPLETE_LIFESPAN_MS)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
@@ -9543,57 +9449,46 @@ function ChatAnnouncements.HookFunction()
         return true
     end
 
-    local TRIAL_SCORE_REASON_TO_ASSETS =
-    {
-        [RAID_POINT_REASON_KILL_MINIBOSS] =
-        {
+    local TRIAL_SCORE_REASON_TO_ASSETS = {
+        [RAID_POINT_REASON_KILL_MINIBOSS] = {
             icon = "EsoUI/Art/Trials/trialPoints_normal.dds",
             soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_NORMAL,
         },
-        [RAID_POINT_REASON_KILL_BOSS] =
-        {
+        [RAID_POINT_REASON_KILL_BOSS] = {
             icon = "EsoUI/Art/Trials/trialPoints_veryHigh.dds",
             soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_HIGH,
         },
 
-        [RAID_POINT_REASON_BONUS_ACTIVITY_LOW] =
-        {
+        [RAID_POINT_REASON_BONUS_ACTIVITY_LOW] = {
             icon = "EsoUI/Art/Trials/trialPoints_veryLow.dds",
             soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_LOW,
         },
-        [RAID_POINT_REASON_BONUS_ACTIVITY_MEDIUM] =
-        {
+        [RAID_POINT_REASON_BONUS_ACTIVITY_MEDIUM] = {
             icon = "EsoUI/Art/Trials/trialPoints_low.dds",
             soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_LOW,
         },
-        [RAID_POINT_REASON_BONUS_ACTIVITY_HIGH] =
-        {
+        [RAID_POINT_REASON_BONUS_ACTIVITY_HIGH] = {
             icon = "EsoUI/Art/Trials/trialPoints_high.dds",
             soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_HIGH,
         },
 
-        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_ONE] =
-        {
+        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_ONE] = {
             icon = "EsoUI/Art/Trials/trialPoints_veryLow.dds",
             soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_LOW,
         },
-        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_TWO] =
-        {
+        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_TWO] = {
             icon = "EsoUI/Art/Trials/trialPoints_low.dds",
             soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_LOW,
         },
-        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_THREE] =
-        {
+        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_THREE] = {
             icon = "EsoUI/Art/Trials/trialPoints_normal.dds",
             soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_NORMAL,
         },
-        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_FOUR] =
-        {
+        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_FOUR] = {
             icon = "EsoUI/Art/Trials/trialPoints_high.dds",
             soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_HIGH,
         },
-        [RAID_POINT_REASON_SOLO_ARENA_COMPLETE] =
-        {
+        [RAID_POINT_REASON_SOLO_ARENA_COMPLETE] = {
             icon = "EsoUI/Art/Trials/trialPoints_veryHigh.dds",
             soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_HIGH,
         },
@@ -9670,8 +9565,7 @@ function ChatAnnouncements.HookFunction()
         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_ROLLING_METER_PROGRESS_TEXT)
         local stageIcon, cycleIcon, arcIcon = ZO_EndlessDungeonManager.GetProgressionIcons()
         local stageNarration, cycleNarration, arcNarration = ZO_EndlessDungeonManager.GetProgressionNarrationDescriptions(stage, cycle, arc)
-        local progressData =
-        {
+        local progressData = {
             {
                 iconTexture = arcIcon,
                 narrationDescription = arcNarration,
@@ -9708,7 +9602,6 @@ function ChatAnnouncements.HookFunction()
         g_previousEndlessDungeonProgression[3] = arc
     end
 
-
     ENDLESS_DUNGEON_MANAGER:RegisterCallback("StateChanged", RefreshEndlessDungeonProgressionState)
 
     local function UpdateEndlessDungeonTrackers()
@@ -9719,8 +9612,7 @@ function ChatAnnouncements.HookFunction()
         end
     end
 
-    local ZoneIds =
-    {
+    local ZoneIds = {
         [1436] = "Endless Archive", -- Dungeon - Endless Archive
         [888] = "Craglorn", -- Zone - Craglorn
         [584] = "Imperial City", -- Imperial City (Overland)
@@ -9728,8 +9620,7 @@ function ChatAnnouncements.HookFunction()
         [635] = "Dragonstar Arena", -- Dragonstar Arena
     }
 
-    local MapIds =
-    {
+    local MapIds = {
         [988] = "Maelstrom Arena", -- Vale of the Surreal (Maelstrom Arena - Stage 1)
         [963] = "Maelstrom Arena", -- Seht's Balcony (Maelstrom Arena - Stage 2)
         -- TODO - Need MapIds for Stage 3-9
@@ -10135,76 +10026,64 @@ function ChatAnnouncements.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_ANTIQUITY_LEAD_ACQUIRED, AntiquityLeadAcquired)
 
     -- HOOK PLAYER_TO_PLAYER Group Notifications to edit Ignore alert
-    local KEYBOARD_INTERACT_ICONS =
-    {
-        [SI_PLAYER_TO_PLAYER_WHISPER] =
-        {
+    local KEYBOARD_INTERACT_ICONS = {
+        [SI_PLAYER_TO_PLAYER_WHISPER] = {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_whisper_up.dds",
             enabledSelected = "EsoUI/Art/HUD/radialIcon_whisper_over.dds",
             disabledNormal = "EsoUI/Art/HUD/radialIcon_whisper_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/radialIcon_whisper_disabled.dds",
         },
-        [SI_PLAYER_TO_PLAYER_ADD_GROUP] =
-        {
+        [SI_PLAYER_TO_PLAYER_ADD_GROUP] = {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_inviteGroup_up.dds",
             enabledSelected = "EsoUI/Art/HUD/radialIcon_inviteGroup_over.dds",
             disabledNormal = "EsoUI/Art/HUD/radialIcon_inviteGroup_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/radialIcon_inviteGroup_disabled.dds",
         },
-        [SI_PLAYER_TO_PLAYER_REMOVE_GROUP] =
-        {
+        [SI_PLAYER_TO_PLAYER_REMOVE_GROUP] = {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_removeFromGroup_up.dds",
             enabledSelected = "EsoUI/Art/HUD/radialIcon_removeFromGroup_over.dds",
             disabledNormal = "EsoUI/Art/HUD/radialIcon_removeFromGroup_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/radialIcon_removeFromGroup_disabled.dds",
         },
-        [SI_PLAYER_TO_PLAYER_ADD_FRIEND] =
-        {
+        [SI_PLAYER_TO_PLAYER_ADD_FRIEND] = {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_addFriend_up.dds",
             enabledSelected = "EsoUI/Art/HUD/radialIcon_addFriend_over.dds",
             disabledNormal = "EsoUI/Art/HUD/radialIcon_addFriend_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/radialIcon_addFriend_disabled.dds",
         },
-        [SI_CHAT_PLAYER_CONTEXT_REPORT] =
-        {
+        [SI_CHAT_PLAYER_CONTEXT_REPORT] = {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_reportPlayer_up.dds",
             enabledSelected = "EsoUI/Art/HUD/radialIcon_reportPlayer_over.dds",
         },
-        [SI_PLAYER_TO_PLAYER_INVITE_DUEL] =
-        {
+        [SI_PLAYER_TO_PLAYER_INVITE_DUEL] = {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_duel_up.dds",
             enabledSelected = "EsoUI/Art/HUD/radialIcon_duel_over.dds",
             disabledNormal = "EsoUI/Art/HUD/radialIcon_duel_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/radialIcon_duel_disabled.dds",
         },
-        [SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE] =
-        {
+        [SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE] = {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_tribute_up.dds",
             enabledSelected = "EsoUI/Art/HUD/radialIcon_tribute_over.dds",
             disabledNormal = "EsoUI/Art/HUD/radialIcon_tribute_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/radialIcon_tribute_disabled.dds",
         },
-        [SI_PLAYER_TO_PLAYER_INVITE_TRADE] =
-        {
+        [SI_PLAYER_TO_PLAYER_INVITE_TRADE] = {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_trade_up.dds",
             enabledSelected = "EsoUI/Art/HUD/radialIcon_trade_over.dds",
             disabledNormal = "EsoUI/Art/HUD/radialIcon_trade_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/radialIcon_trade_disabled.dds",
         },
-        [SI_RADIAL_MENU_CANCEL_BUTTON] =
-        {
+        [SI_RADIAL_MENU_CANCEL_BUTTON] = {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_cancel_up.dds",
             enabledSelected = "EsoUI/Art/HUD/radialIcon_cancel_over.dds",
         },
-        [SI_PLAYER_TO_PLAYER_RIDE_MOUNT] =
-        {
+        [SI_PLAYER_TO_PLAYER_RIDE_MOUNT] = {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_joinMount_up.dds",
             enabledSelected = "EsoUI/Art/HUD/radialIcon_joinMount_over.dds",
             disabledNormal = "EsoUI/Art/HUD/radialIcon_joinMount_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/radialIcon_joinMount_disabled.dds",
         },
-        [SI_PLAYER_TO_PLAYER_DISMOUNT] =
-        {
+        [SI_PLAYER_TO_PLAYER_DISMOUNT] = {
             enabledNormal = "EsoUI/Art/HUD/radialIcon_dismount_up.dds",
             enabledSelected = "EsoUI/Art/HUD/radialIcon_dismount_over.dds",
             disabledNormal = "EsoUI/Art/HUD/radialIcon_dismount_disabled.dds",
@@ -10212,76 +10091,64 @@ function ChatAnnouncements.HookFunction()
         },
     }
 
-    local GAMEPAD_INTERACT_ICONS =
-    {
-        [SI_PLAYER_TO_PLAYER_WHISPER] =
-        {
+    local GAMEPAD_INTERACT_ICONS = {
+        [SI_PLAYER_TO_PLAYER_WHISPER] = {
             enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_whisper_down.dds",
             enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_whisper_down.dds",
             disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_whisper_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_whisper_disabled.dds",
         },
-        [SI_PLAYER_TO_PLAYER_ADD_GROUP] =
-        {
+        [SI_PLAYER_TO_PLAYER_ADD_GROUP] = {
             enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_inviteGroup_down.dds",
             enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_inviteGroup_down.dds",
             disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_inviteGroup_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_inviteGroup_disabled.dds",
         },
-        [SI_PLAYER_TO_PLAYER_REMOVE_GROUP] =
-        {
+        [SI_PLAYER_TO_PLAYER_REMOVE_GROUP] = {
             enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_removeFromGroup_down.dds",
             enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_removeFromGroup_down.dds",
             disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_removeFromGroup_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_removeFromGroup_disabled.dds",
         },
-        [SI_PLAYER_TO_PLAYER_ADD_FRIEND] =
-        {
+        [SI_PLAYER_TO_PLAYER_ADD_FRIEND] = {
             enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_addFriend_down.dds",
             enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_addFriend_down.dds",
             disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_addFriend_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_addFriend_disabled.dds",
         },
-        [SI_CHAT_PLAYER_CONTEXT_REPORT] =
-        {
+        [SI_CHAT_PLAYER_CONTEXT_REPORT] = {
             enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_reportPlayer_down.dds",
             enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_reportPlayer_down.dds",
         },
-        [SI_PLAYER_TO_PLAYER_INVITE_DUEL] =
-        {
+        [SI_PLAYER_TO_PLAYER_INVITE_DUEL] = {
             enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_duel_down.dds",
             enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_duel_down.dds",
             disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_duel_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_duel_disabled.dds",
         },
-        [SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE] =
-        {
+        [SI_PLAYER_TO_PLAYER_INVITE_TRIBUTE] = {
             enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_tribute_down.dds",
             enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_tribute_down.dds",
             disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_tribute_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_tribute_disabled.dds",
         },
-        [SI_PLAYER_TO_PLAYER_INVITE_TRADE] =
-        {
+        [SI_PLAYER_TO_PLAYER_INVITE_TRADE] = {
             enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_trade_down.dds",
             enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_trade_down.dds",
             disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_trade_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_trade_disabled.dds",
         },
-        [SI_RADIAL_MENU_CANCEL_BUTTON] =
-        {
+        [SI_RADIAL_MENU_CANCEL_BUTTON] = {
             enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_cancel_down.dds",
             enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_cancel_down.dds",
         },
-        [SI_PLAYER_TO_PLAYER_RIDE_MOUNT] =
-        {
+        [SI_PLAYER_TO_PLAYER_RIDE_MOUNT] = {
             enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_joinMount_down.dds",
             enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_joinMount_down.dds",
             disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_joinMount_disabled.dds",
             disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_joinMount_disabled.dds",
         },
-        [SI_PLAYER_TO_PLAYER_DISMOUNT] =
-        {
+        [SI_PLAYER_TO_PLAYER_DISMOUNT] = {
             enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_dismount_down.dds",
             enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_dismount_down.dds",
             disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_dismount_disabled.dds",
@@ -10302,7 +10169,7 @@ function ChatAnnouncements.HookFunction()
 
     ---@param self ZO_PlayerToPlayer
     ---@param isIgnored boolean
-    PLAYER_TO_PLAYER.ShowPlayerInteractMenu = function (self, isIgnored)
+    PLAYER_TO_PLAYER.ShowPlayerInteractMenu = function(self, isIgnored)
         local currentTargetCharacterName = self.currentTargetCharacterName
         local currentTargetCharacterNameRaw = self.currentTargetCharacterNameRaw
         local currentTargetDisplayName = self.currentTargetDisplayName
@@ -10361,11 +10228,11 @@ function ChatAnnouncements.HookFunction()
             local groupKickFunction = nil
             if groupKickEnabled then
                 if lfgKick then
-                    groupKickFunction = function ()
+                    groupKickFunction = function()
                         LUIE.SlashCommands.SlashVoteKick(currentTargetCharacterName)
                     end
                 else
-                    groupKickFunction = function ()
+                    groupKickFunction = function()
                         GroupKickByName(currentTargetCharacterNameRaw)
                     end
                 end
@@ -10378,7 +10245,7 @@ function ChatAnnouncements.HookFunction()
             local groupInviteEnabled = ENABLED_IF_NOT_IGNORED and isGroupModificationAvailable and isSoloOrLeader
             local groupInviteFunction = nil
             if groupInviteEnabled then
-                groupInviteFunction = function ()
+                groupInviteFunction = function()
                     local NOT_SENT_FROM_CHAT = false
                     local DISPLAY_INVITED_MESSAGE = true
                     TryGroupInviteByName(primaryNameInternal, NOT_SENT_FROM_CHAT, DISPLAY_INVITED_MESSAGE)
@@ -10456,7 +10323,7 @@ function ChatAnnouncements.HookFunction()
         local duelStateI, partnerCharacterName, partnerDisplayName = GetDuelInfo()
         if duelStateI ~= DUEL_STATE_IDLE then
             local function AlreadyDuelingWarning(duelState, characterName, displayName)
-                return function ()
+                return function()
                     local userFacingPartnerName = ZO_GetPrimaryPlayerNameWithSecondary(displayName, characterName)
                     local statusString = GetString("SI_DUELSTATE", duelState)
                     statusString = zo_strformat(statusString, userFacingPartnerName)
@@ -10478,7 +10345,7 @@ function ChatAnnouncements.HookFunction()
         local tributeInviteStateI, partnerCharacterNameI, partnerDisplayNameI = GetTributeInviteInfo()
         if tributeInviteStateI ~= TRIBUTE_INVITE_STATE_NONE then
             local function TributeInviteFailWarning(tributeInviteState, characterName, displayName)
-                return function ()
+                return function()
                     local userFacingPartnerName = ZO_GetPrimaryPlayerNameWithSecondary(displayName, characterName)
                     local statusString = GetString("SI_TRIBUTEINVITESTATE", tributeInviteState)
                     statusString = zo_strformat(statusString, userFacingPartnerName)
@@ -10514,8 +10381,6 @@ function ChatAnnouncements.HookFunction()
         self.showingPlayerInteractMenu = true
         self.isLastRadialMenuGamepad = IsInGamepadPreferredMode()
     end
-
-
 
     -- Since the Crown Store Gifting functionality was added, hooking these functions seems to cause an insecure code issue when receiving gifts via the Player to Player notification system.
     -- TODO: Try to securecall some of this or maybe use a message specific filter (hook alerts handling?)
@@ -10667,7 +10532,7 @@ function ChatAnnouncements.HookFunction()
 
     -- Hook Gamepad mail name function
     local orgIsMailValid = ZO_MailSend_Gamepad.IsMailValid
-    local IsMailValid = function (self, ...)
+    local IsMailValid = function(self, ...)
         local to = self.mailView:GetAddress()
         if (not to) or (to == "") then
             return false
@@ -10698,7 +10563,7 @@ function ChatAnnouncements.HookFunction()
     end
     ZO_MailSend_Gamepad.IsMailValid = IsMailValid
     -- Hook MAIL_SEND.Send to get name of player we send to.
-    MAIL_SEND.Send = function (self)
+    MAIL_SEND.Send = function(self)
         windowManager:SetFocusByName("")
         if not self.sendMoneyMode and GetQueuedCOD() == 0 then
             if ChatAnnouncements.SV.Notify.NotificationMailSendCA then
@@ -10732,7 +10597,7 @@ function ChatAnnouncements.HookFunction()
         end
     end
 
-    PLAYER_INVENTORY.AddQuestItem = function (self, questItem, searchType)
+    PLAYER_INVENTORY.AddQuestItem = function(self, questItem, searchType)
         local inventory = self.inventories[INVENTORY_QUEST_ITEM]
 
         questItem.inventory = inventory
@@ -10750,7 +10615,7 @@ function ChatAnnouncements.HookFunction()
         end
     end
 
-    PLAYER_INVENTORY.ResetQuest = function (self, questIndex)
+    PLAYER_INVENTORY.ResetQuest = function(self, questIndex)
         local inventory = self.inventories[INVENTORY_QUEST_ITEM]
         local itemTable = inventory.slots[questIndex]
         if itemTable then
@@ -10802,7 +10667,7 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- HOOK Group Invite function so we can modify CA/Alert here
-    TryGroupInviteByName = function (characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
+    TryGroupInviteByName = function(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
         if IsPlayerInGroup(characterOrDisplayName) then
             printToChat(GetString(SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER), true)
             if ChatAnnouncements.SV.Group.GroupAlert then
@@ -10845,7 +10710,7 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- Hook for EVENT_GUILD_MEMBER_ADDED
-    GUILD_ROSTER_MANAGER.OnGuildMemberAdded = function (self, guildId, displayName)
+    GUILD_ROSTER_MANAGER.OnGuildMemberAdded = function(self, guildId, displayName)
         self:RefreshData()
 
         local data = self:FindDataByDisplayName(displayName)
@@ -10869,7 +10734,7 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- Hook for EVENT_GUILD_MEMBER_REMOVED
-    GUILD_ROSTER_MANAGER.OnGuildMemberRemoved = function (self, guildId, rawCharacterName, displayName)
+    GUILD_ROSTER_MANAGER.OnGuildMemberRemoved = function(self, guildId, rawCharacterName, displayName)
         local displayNameLink = ChatAnnouncements.ResolveNameLink(rawCharacterName, displayName)
         local guildName = self.guildName
         local guildAlliance = GetGuildAlliance(guildId)
@@ -10898,7 +10763,7 @@ function ChatAnnouncements.HookFunction()
     eventManager:RegisterForEvent(EVENT_NAMESPACE, EVENT_GUILD_MEMBER_DEMOTE_SUCCESSFUL, ChatAnnouncements.GuildMemberDemoteSuccessful)
 
     -- Hook for Guild Invite function used from Guild Menu
-    ZO_TryGuildInvite = function (guildId, displayName)
+    ZO_TryGuildInvite = function(guildId, displayName)
         -- TODO: Update when more alerts are added to CA
         if not DoesPlayerHaveGuildPermission(guildId, GUILD_PERMISSION_INVITE) then
             ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_INVITE_PERMISSION)
@@ -10955,7 +10820,7 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- Called when changing guilds in the Guild tab
-    GUILD_SHARED_INFO.SetGuildId = function (self, guildId)
+    GUILD_SHARED_INFO.SetGuildId = function(self, guildId)
         self.guildId = guildId
         self:Refresh(guildId)
         -- Set selected guild for use when resolving Rank/Heraldry updates
@@ -10963,7 +10828,7 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- Called when changing guilds in the Guild tab or leaving/joining a guild
-    GUILD_SHARED_INFO.Refresh = function (self, guildId)
+    GUILD_SHARED_INFO.Refresh = function(self, guildId)
         if self.guildId and self.guildId == guildId then
             local count = GetControl(self.control, "Count")
             local numGuildMembers, numOnline = GetGuildInfo(guildId)
@@ -11024,13 +10889,13 @@ function ChatAnnouncements.HookFunction()
 
     -- Replace the default DeclineLFGReadyCheckNotification function to display the message that we are not in queue any longer + LFG activity join event.
     local zos_DeclineLFGReadyCheckNotification = DeclineLFGReadyCheckNotification
-    DeclineLFGReadyCheckNotification = function (self)
+    DeclineLFGReadyCheckNotification = function(self)
         zos_DeclineLFGReadyCheckNotification()
 
         local message = (GetString(SI_LFGREADYCHECKCANCELREASON3))
         g_showRCUpdates = true
         g_weDeclinedTheQueue = true
-        zo_callLater(function ()
+        zo_callLater(function()
             g_weDeclinedTheQueue = false
         end, 1000)
 
@@ -11462,8 +11327,7 @@ function ChatAnnouncements.PrintQueuedMessages()
     eventManager:UnregisterForUpdate(moduleName .. "Printer")
 end
 
-local mementoTable =
-{
+local mementoTable = {
     [10287] = GetString(LUIE_STRING_SLASHCMDS_COLLECTIBLE_CAKE),
     [1167] = GetString(LUIE_STRING_SLASHCMDS_COLLECTIBLE_PIE),
     [1168] = GetString(LUIE_STRING_SLASHCMDS_COLLECTIBLE_MEAD),
@@ -11707,8 +11571,7 @@ function ChatAnnouncements.CollectibleResult()
 
     -- Special / Appearance
     if collectibleType == COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN or collectibleType == COLLECTIBLE_CATEGORY_TYPE_HAT or collectibleType == COLLECTIBLE_CATEGORY_TYPE_HAIR or collectibleType == COLLECTIBLE_CATEGORY_TYPE_HEAD_MARKING or collectibleType == COLLECTIBLE_CATEGORY_TYPE_FACIAL_HAIR_HORNS or collectibleType == COLLECTIBLE_CATEGORY_TYPE_FACIAL_ACCESSORY or collectibleType == COLLECTIBLE_CATEGORY_TYPE_PIERCING_JEWELRY or collectibleType == COLLECTIBLE_CATEGORY_TYPE_COSTUME or collectibleType == COLLECTIBLE_CATEGORY_TYPE_BODY_MARKING or collectibleType == COLLECTIBLE_CATEGORY_TYPE_SKIN or collectibleType == COLLECTIBLE_CATEGORY_TYPE_PERSONALITY or collectibleType == COLLECTIBLE_CATEGORY_TYPE_POLYMORPH then
-        local categoryString = (collectibleType == COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN) and GetString(SI_COLLECTIBLECATEGORYTYPE23) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_HAT) and GetString(SI_COLLECTIBLECATEGORYTYPE10) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_HAIR) and GetString(SI_COLLECTIBLECATEGORYTYPE13) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_HEAD_MARKING) and GetString(SI_COLLECTIBLECATEGORYTYPE17) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_FACIAL_HAIR_HORNS) and GetString(SI_COLLECTIBLECATEGORYTYPE14) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_FACIAL_ACCESSORY) and GetString(SI_COLLECTIBLECATEGORYTYPE15) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_PIERCING_JEWELRY) and GetString(SI_COLLECTIBLECATEGORYTYPE16) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_COSTUME) and GetString(SI_COLLECTIBLECATEGORYTYPE4) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_BODY_MARKING) and GetString(SI_COLLECTIBLECATEGORYTYPE18) or
-            (collectibleType == COLLECTIBLE_CATEGORY_TYPE_SKIN) and GetString(SI_COLLECTIBLECATEGORYTYPE11) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_PERSONALITY) and GetString(SI_COLLECTIBLECATEGORYTYPE9) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) and GetString(SI_COLLECTIBLECATEGORYTYPE12)
+        local categoryString = (collectibleType == COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN) and GetString(SI_COLLECTIBLECATEGORYTYPE23) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_HAT) and GetString(SI_COLLECTIBLECATEGORYTYPE10) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_HAIR) and GetString(SI_COLLECTIBLECATEGORYTYPE13) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_HEAD_MARKING) and GetString(SI_COLLECTIBLECATEGORYTYPE17) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_FACIAL_HAIR_HORNS) and GetString(SI_COLLECTIBLECATEGORYTYPE14) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_FACIAL_ACCESSORY) and GetString(SI_COLLECTIBLECATEGORYTYPE15) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_PIERCING_JEWELRY) and GetString(SI_COLLECTIBLECATEGORYTYPE16) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_COSTUME) and GetString(SI_COLLECTIBLECATEGORYTYPE4) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_BODY_MARKING) and GetString(SI_COLLECTIBLECATEGORYTYPE18) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_SKIN) and GetString(SI_COLLECTIBLECATEGORYTYPE11) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_PERSONALITY) and GetString(SI_COLLECTIBLECATEGORYTYPE9) or (collectibleType == COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) and GetString(SI_COLLECTIBLECATEGORYTYPE12)
 
         if collectibleType == (COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN and (ChatAnnouncements.SV.Collectibles.CollectibleUseCategory12 or LUIE.SlashCollectibleOverride)) or (collectibleType ~= COLLECTIBLE_CATEGORY_TYPE_ABILITY_SKIN and (ChatAnnouncements.SV.Collectibles.CollectibleUseCategory3 or LUIE.SlashCollectibleOverride)) then
             if GetActiveCollectibleByType(GetCollectibleCategoryType(lastCollectibleUsed), GAMEPLAY_ACTOR_CATEGORY_PLAYER) > 0 then

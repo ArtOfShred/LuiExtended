@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 -- TODO: Update id's here with fake ids probably, to set different icons etc for Prominent add/remove
@@ -36,8 +35,7 @@ function SpellCastBuffs.SetDisguiseItem()
     -- Determine Context
     local context = SpellCastBuffs.DetermineContextSimple("player1", abilityId, abilityName)
     -- Create Buff
-    SpellCastBuffs.EffectsList[context][abilityId] =
-    {
+    SpellCastBuffs.EffectsList[context][abilityId] = {
         target = SpellCastBuffs.DetermineTarget(context),
         type = 1,
         id = abilityId,
@@ -92,8 +90,7 @@ function SpellCastBuffs.DisguiseStateChanged(eventCode, unitTag, disguiseState)
 
     -- Add disguise icon if we are in any state of disguise
     if disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED then
-        SpellCastBuffs.EffectsList[context][abilityId] =
-        {
+        SpellCastBuffs.EffectsList[context][abilityId] = {
             target = SpellCastBuffs.DetermineTarget(context),
             type = 1,
             id = abilityId,
@@ -148,8 +145,7 @@ function SpellCastBuffs.StealthStateChanged(eventCode, unitTag, stealthState)
         local abilityId = 20299
         local abilityName = Abilities.Innate_Sneak
         context = SpellCastBuffs.DetermineContextSimple(context, abilityId, abilityName)
-        SpellCastBuffs.EffectsList[context][abilityId] =
-        {
+        SpellCastBuffs.EffectsList[context][abilityId] = {
             target = SpellCastBuffs.DetermineTarget(context),
             type = 1,
             id = abilityId,
@@ -167,8 +163,7 @@ function SpellCastBuffs.StealthStateChanged(eventCode, unitTag, stealthState)
         local abilityId = 20309
         local abilityName = Abilities.Innate_Hidden
         context = SpellCastBuffs.DetermineContextSimple(context, abilityId, abilityName)
-        SpellCastBuffs.EffectsList[context][abilityId] =
-        {
+        SpellCastBuffs.EffectsList[context][abilityId] = {
             target = SpellCastBuffs.DetermineTarget(context),
             type = 1,
             id = abilityId,

@@ -102,8 +102,7 @@ function LUIE.CreateSettings()
 
     GenerateCharacterProfiles()
 
-    local panelData =
-    {
+    local panelData = {
         type = "panel",
         name = LUIE.name,
         displayName = LUIE.name,
@@ -119,12 +118,11 @@ function LUIE.CreateSettings()
     }
 
     -- Changelog Button
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "button",
         name = GetString(LUIE_STRING_LAM_CHANGELOG),
         tooltip = GetString(LUIE_STRING_LAM_CHANGELOG_TP),
-        func = function ()
+        func = function()
             LUIE.ToggleChangelog(false)
             SCENE_MANAGER:ShowBaseScene()
         end,
@@ -132,27 +130,25 @@ function LUIE.CreateSettings()
     }
 
     -- ReloadUI Button
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "button",
         name = GetString(LUIE_STRING_LAM_RELOADUI),
         tooltip = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
-        func = function ()
+        func = function()
             ReloadUI("ingame")
         end,
         width = "half",
     }
 
     -- Default UI Elements Position Unlock
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_UNLOCK_DEFAULT_UI),
         tooltip = GetString(LUIE_STRING_LAM_UNLOCK_DEFAULT_UI_TP),
-        getFunc = function ()
+        getFunc = function()
             return g_ElementMovingEnabled
         end,
-        setFunc = function (value)
+        setFunc = function(value)
             g_ElementMovingEnabled = value
             LUIE.SetupElementMover(value)
         end,
@@ -162,8 +158,7 @@ function LUIE.CreateSettings()
     }
 
     -- Default UI Elements Position Reset
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "button",
         name = GetString(LUIE_STRING_LAM_RESETPOSITION),
         tooltip = GetString(LUIE_STRING_LAM_RESET_DEFAULT_UI_TP),
@@ -173,12 +168,10 @@ function LUIE.CreateSettings()
     }
 
     -- Character Profile Settings Submenu
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "submenu",
         name = GetString(LUIE_STRING_LAM_SVPROFILE_HEADER),
-        controls =
-        {
+        controls = {
             {
                 -- Character Profile Description
                 type = "description",
@@ -191,10 +184,10 @@ function LUIE.CreateSettings()
                 name = GetString(LUIE_STRING_LAM_SVPROFILE_SETTINGSTOGGLE),
                 tooltip = GetString(LUIE_STRING_LAM_SVPROFILE_SETTINGSTOGGLE_TP),
                 warning = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
-                getFunc = function ()
+                getFunc = function()
                     return LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV
                 end,
-                setFunc = function (value)
+                setFunc = function(value)
                     LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV = value
                     ReloadUI("ingame")
                 end,
@@ -208,10 +201,10 @@ function LUIE.CreateSettings()
                 tooltip = GetString(LUIE_STRING_LAM_SVPROFILE_PROFILECOPY_TP),
                 choices = profileCharacters,
                 sort = "name-up",
-                getFunc = function ()
+                getFunc = function()
                     return profileCharacters
                 end,
-                setFunc = function (value)
+                setFunc = function(value)
                     profileQueuedCopy = value
                 end,
                 width = "full",
@@ -222,7 +215,7 @@ function LUIE.CreateSettings()
                 name = GetString(LUIE_STRING_LAM_SVPROFILE_PROFILECOPYBUTTON),
                 tooltip = GetString(LUIE_STRING_LAM_SVPROFILE_PROFILECOPYBUTTON_TP),
                 warning = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
-                func = function ()
+                func = function()
                     CopyCharacterProfile()
                 end,
                 width = "full",
@@ -233,12 +226,12 @@ function LUIE.CreateSettings()
                 name = GetString(LUIE_STRING_LAM_SVPROFILE_RESETCHAR),
                 tooltip = GetString(LUIE_STRING_LAM_SVPROFILE_RESETCHAR_TP),
                 warning = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
-                func = function ()
+                func = function()
                     DeleteCurrentProfile(false)
                     ReloadUI("ingame")
                 end,
                 width = "half",
-                disabled = function ()
+                disabled = function()
                     return not LUIESV.Default[GetDisplayName()]["$AccountWide"].CharacterSpecificSV
                 end,
             },
@@ -249,7 +242,7 @@ function LUIE.CreateSettings()
                 tooltip = GetString(LUIE_STRING_LAM_SVPROFILE_RESETACCOUNT_TP),
                 warning = GetString(LUIE_STRING_LAM_RELOADUI_BUTTON),
                 width = "half",
-                func = function ()
+                func = function()
                     DeleteCurrentProfile(true)
                     ReloadUI("ingame")
                 end,
@@ -258,22 +251,20 @@ function LUIE.CreateSettings()
     }
 
     -- Modules Header
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "header",
         name = GetString(LUIE_STRING_LAM_MODULEHEADER),
         width = "full",
     }
 
     -- Unit Frames Module
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_UF_ENABLE),
-        getFunc = function ()
+        getFunc = function()
             return Settings.UnitFrames_Enabled
         end,
-        setFunc = function (value)
+        setFunc = function(value)
             Settings.UnitFrames_Enabled = value
         end,
         width = "half",
@@ -282,22 +273,20 @@ function LUIE.CreateSettings()
     }
 
     -- Unit Frames module description
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "description",
         width = "half",
         text = GetString(LUIE_STRING_LAM_UF_DESCRIPTION),
     }
 
     -- Combat Info Module
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_CI_SHOWCOMBATINFO),
-        getFunc = function ()
+        getFunc = function()
             return Settings.CombatInfo_Enabled
         end,
-        setFunc = function (value)
+        setFunc = function(value)
             Settings.CombatInfo_Enabled = value
         end,
         width = "half",
@@ -306,22 +295,20 @@ function LUIE.CreateSettings()
     }
 
     -- Combat Info Description
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "description",
         width = "half",
         text = GetString(LUIE_STRING_LAM_CI_DESCRIPTION),
     }
 
     -- Combat Text Module
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_CT_SHOWCOMBATTEXT),
-        getFunc = function ()
+        getFunc = function()
             return Settings.CombatText_Enabled
         end,
-        setFunc = function (value)
+        setFunc = function(value)
             Settings.CombatText_Enabled = value
         end,
         width = "half",
@@ -330,22 +317,20 @@ function LUIE.CreateSettings()
     }
 
     -- Combat Text Description
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "description",
         width = "half",
         text = GetString(LUIE_STRING_LAM_CT_DESCRIPTION),
     }
 
     -- Buffs & Debuffs Module
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_BUFF_ENABLEEFFECTSTRACK),
-        getFunc = function ()
+        getFunc = function()
             return Settings.SpellCastBuff_Enable
         end,
-        setFunc = function (value)
+        setFunc = function(value)
             Settings.SpellCastBuff_Enable = value
         end,
         width = "half",
@@ -354,22 +339,20 @@ function LUIE.CreateSettings()
     }
 
     -- Buffs & Debuffs Description
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "description",
         width = "half",
         text = GetString(LUIE_STRING_LAM_BUFFS_DESCRIPTION),
     }
 
     -- Chat Announcements Module
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_CA_ENABLE),
-        getFunc = function ()
+        getFunc = function()
             return Settings.ChatAnnouncements_Enable
         end,
-        setFunc = function (value)
+        setFunc = function(value)
             Settings.ChatAnnouncements_Enable = value
         end,
         width = "half",
@@ -378,22 +361,20 @@ function LUIE.CreateSettings()
     }
 
     -- Chat Announcements Module Description
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "description",
         width = "half",
         text = GetString(LUIE_STRING_LAM_CA_DESCRIPTION),
     }
 
     -- Slash Commands Module
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_SLASHCMDS_ENABLE),
-        getFunc = function ()
+        getFunc = function()
             return Settings.SlashCommands_Enable
         end,
-        setFunc = function (value)
+        setFunc = function(value)
             Settings.SlashCommands_Enable = value
         end,
         width = "half",
@@ -402,22 +383,20 @@ function LUIE.CreateSettings()
     }
 
     -- Slash Commands Module Description
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "description",
         width = "half",
         text = GetString(LUIE_STRING_LAM_SLASHCMDS_DESCRIPTION),
     }
 
     -- Show InfoPanel
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_PNL_ENABLE),
-        getFunc = function ()
+        getFunc = function()
             return Settings.InfoPanel_Enabled
         end,
-        setFunc = function (value)
+        setFunc = function(value)
             Settings.InfoPanel_Enabled = value
         end,
         width = "half",
@@ -426,16 +405,14 @@ function LUIE.CreateSettings()
     }
 
     -- InfoPanel Module Description
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "description",
         width = "half",
         text = GetString(LUIE_STRING_LAM_PNL_DESCRIPTION),
     }
 
     -- Misc Settings
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "header",
         name = GetString(LUIE_STRING_LAM_MISCHEADER),
         width = "full",
@@ -457,15 +434,14 @@ function LUIE.CreateSettings()
     --
 
     -- Hide Alerts
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_ALERT_HIDE_ALL),
         tooltip = GetString(LUIE_STRING_LAM_ALERT_HIDE_ALL_TP),
-        getFunc = function ()
+        getFunc = function()
             return Settings.HideAlertFrame
         end,
-        setFunc = function (value)
+        setFunc = function(value)
             Settings.HideAlertFrame = value
             LUIE.SetupAlertFrameVisibility()
         end,
@@ -474,15 +450,14 @@ function LUIE.CreateSettings()
     }
 
     -- Toggle XP Bar popup
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_HIDE_EXPERIENCE_BAR),
         tooltip = GetString(LUIE_STRING_LAM_HIDE_EXPERIENCE_BAR_TP),
-        getFunc = function ()
+        getFunc = function()
             return Settings.HideXPBar
         end,
-        setFunc = function (value)
+        setFunc = function(value)
             Settings.HideXPBar = value
         end,
         width = "full",
@@ -490,15 +465,14 @@ function LUIE.CreateSettings()
     }
 
     -- Startup Message Options
-    optionsData[#optionsData + 1] =
-    {
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(LUIE_STRING_LAM_STARTUPMSG),
         tooltip = GetString(LUIE_STRING_LAM_STARTUPMSG_TP),
-        getFunc = function ()
+        getFunc = function()
             return Settings.StartupInfo
         end,
-        setFunc = function (value)
+        setFunc = function(value)
             Settings.StartupInfo = value
         end,
         width = "full",

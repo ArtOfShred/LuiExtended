@@ -13,7 +13,7 @@ local pointType = LUIE.Data.CombatTextConstants.pointType
 ---@diagnostic disable-next-line: duplicate-set-field
 function CombatTextPointsChampionEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
-    obj:RegisterForEvent(EVENT_CHAMPION_POINT_UPDATE, function (...)
+    obj:RegisterForEvent(EVENT_CHAMPION_POINT_UPDATE, function(...)
         self:OnEvent(...)
     end, REGISTER_FILTER_UNIT_TAG, "player")
     self.gain = 0
@@ -46,7 +46,7 @@ function CombatTextPointsChampionEventListener:OnEvent(unit, currentPoints, maxP
         -- Trigger custom event (500ms buffer)
         if self.gain > 0 and not self.timeoutActive then
             self.timeoutActive = true
-            zo_callLater(function ()
+            zo_callLater(function()
                 self:TriggerEvent(eventType.POINT, pointType.CHAMPION_POINTS, self.gain)
                 self.gain = 0
                 self.timeoutActive = false

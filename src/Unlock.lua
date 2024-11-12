@@ -15,8 +15,7 @@ local savedHiddenStates = {}
 
 -- Table of UI elements to unlock for moving.
 -- Constraints for some of these elements need to be adjusted - using values from Azurah.
-local defaultPanels =
-{
+local defaultPanels = {
     [ZO_HUDInfamyMeter] = { GetString(LUIE_STRING_DEFAULT_FRAME_INFAMY_METER) },
     [ZO_HUDTelvarMeter] = { GetString(LUIE_STRING_DEFAULT_FRAME_TEL_VAR_METER) },
     [ZO_HUDDaedricEnergyMeter] = { GetString(LUIE_STRING_DEFAULT_FRAME_VOLENDRUNG_METER) },
@@ -49,7 +48,7 @@ local g_framesUnlocked = false
 local function ReplaceDefaultTemplate(object, functionName, frameName)
     ---@type function
     local zos_function = object[functionName]
-    object[functionName] = function (self)
+    object[functionName] = function(self)
         local result = zos_function(self) -- Get Original Function results
         local frameData = LUIE.SV[frameName] -- Get LUIE Saved Frame Data
         -- Apply positional setup
@@ -71,9 +70,9 @@ end
 local function sceneChange(oldState, newState)
     if g_framesUnlocked then
         local isHidden = false
-        if (newState == SCENE_SHOWN) then
+        if newState == SCENE_SHOWN then
             isHidden = true
-        elseif (newState == SCENE_HIDDEN) then
+        elseif newState == SCENE_HIDDEN then
             isHidden = false
         end
         for k, v in pairs(g_LUIE_Movers) do
@@ -127,7 +126,6 @@ local function setAnchor(k, frameName)
         end
     end
 end
-
 
 --- Called when an element mover is adjusted and on initialization to update all positions.
 function LUIE.SetElementPosition()
@@ -195,7 +193,7 @@ function LUIE.SetupElementMover(state)
             ---@type TopLevelWindow
             local tlw = createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo)
             -- Setup handlers to set the custom position SV and call LUIE.SetElementPosition() to apply this positioning
-            tlw:SetHandler("OnMoveStop", function (self)
+            tlw:SetHandler("OnMoveStop", function(self)
                 LUIE.SV[self.customPositionAttr] = { self:GetLeft(), self:GetTop() }
                 LUIE.SetElementPosition()
             end)

@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 -- SlashCommands namespace
@@ -13,8 +12,7 @@ local SlashCommands = LUIE.SlashCommands
 local pairs = pairs
 
 SlashCommands.Enabled = false
-SlashCommands.Defaults =
-{
+SlashCommands.Defaults = {
     SlashHome = true,
     SlashHomeChoice = 1,
     SlashSetPrimaryHome = true,
@@ -163,7 +161,7 @@ function SlashCommands.RegisterSlashCommands()
     if SlashCommands.SV.SlashCompanion then
         for id, name in pairs(LUIE.Data.CollectibleTables.Companions) do
             local command = "/" .. zo_strlower(name)
-            SLASH_COMMANDS[command] = function (...)
+            SLASH_COMMANDS[command] = function(...)
                 SlashCommands.SlashCollectible(id)
             end
         end
@@ -179,10 +177,10 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/vendor"] = SlashCommands.SlashMerchant
     end
     if SlashCommands.SV.SlashFence then
-        SLASH_COMMANDS["/smuggler"] = function (...)
+        SLASH_COMMANDS["/smuggler"] = function(...)
             SlashCommands.SlashCollectible(300)
         end
-        SLASH_COMMANDS["/fence"] = function (...)
+        SLASH_COMMANDS["/fence"] = function(...)
             SlashCommands.SlashCollectible(300)
         end
     end
@@ -190,15 +188,15 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/armory"] = SlashCommands.SlashArmory
     end
     if SlashCommands.SV.SlashDecon then
-        SLASH_COMMANDS["/decon"] = function (...)
+        SLASH_COMMANDS["/decon"] = function(...)
             SlashCommands.SlashCollectible(10184)
         end
-        SLASH_COMMANDS["/deconstruction"] = function (...)
+        SLASH_COMMANDS["/deconstruction"] = function(...)
             SlashCommands.SlashCollectible(10184)
         end
     end
     if SlashCommands.SV.SlashEye then
-        SLASH_COMMANDS["/eye"] = function (...)
+        SLASH_COMMANDS["/eye"] = function(...)
             SlashCommands.SlashCollectible(8006)
         end
     end
@@ -210,34 +208,34 @@ function SlashCommands.RegisterSlashCommands()
         SLASH_COMMANDS["/dismisspets"] = SlashCommands.SlashPet
     end
     if SlashCommands.SV.SlashCake then
-        SLASH_COMMANDS["/cake"] = function (...)
+        SLASH_COMMANDS["/cake"] = function(...)
             SlashCommands.SlashCollectible(10287)
         end
-        SLASH_COMMANDS["/jubilee"] = function (...)
+        SLASH_COMMANDS["/jubilee"] = function(...)
             SlashCommands.SlashCollectible(10287)
         end
     end
     if SlashCommands.SV.SlashPie then
-        SLASH_COMMANDS["/pie"] = function (...)
+        SLASH_COMMANDS["/pie"] = function(...)
             SlashCommands.SlashCollectible(1167)
         end
-        SLASH_COMMANDS["/jester"] = function (...)
+        SLASH_COMMANDS["/jester"] = function(...)
             SlashCommands.SlashCollectible(1167)
         end
     end
     if SlashCommands.SV.SlashMead then
-        SLASH_COMMANDS["/mead"] = function (...)
+        SLASH_COMMANDS["/mead"] = function(...)
             SlashCommands.SlashCollectible(1168)
         end
-        SLASH_COMMANDS["/newlife"] = function (...)
+        SLASH_COMMANDS["/newlife"] = function(...)
             SlashCommands.SlashCollectible(1168)
         end
     end
     if SlashCommands.SV.SlashWitch then
-        SLASH_COMMANDS["/witch"] = function (...)
+        SLASH_COMMANDS["/witch"] = function(...)
             SlashCommands.SlashCollectible(479)
         end
-        SLASH_COMMANDS["/witchfest"] = function (...)
+        SLASH_COMMANDS["/witchfest"] = function(...)
             SlashCommands.SlashCollectible(479)
         end
     end

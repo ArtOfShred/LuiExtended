@@ -3,13 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
 ---@class CombatTextEventListener : ZO_InitializingObject
 local CombatTextEventListener = ZO_InitializingObject:Subclass()
-
 
 local callbackManager = CALLBACK_MANAGER
 local eventManager = GetEventManager()
@@ -29,7 +27,9 @@ end
 ---@param func fun(...)
 ---@param ... any
 function CombatTextEventListener:RegisterForEvent(event, func, ...)
-    eventManager:RegisterForEvent(moduleName .. "Event" .. event .. "_" .. eventPostfix, event, function (eventCode, ...) func(...) end)
+    eventManager:RegisterForEvent(moduleName .. "Event" .. event .. "_" .. eventPostfix, event, function(eventCode, ...)
+        func(...)
+    end)
 
     ---@type any[]
     local filters = { ... }

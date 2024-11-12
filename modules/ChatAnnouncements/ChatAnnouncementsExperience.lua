@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 -- ChatAnnouncements namespace
@@ -159,8 +158,7 @@ end
 
 -- Helper function to get the color for the Guild
 local function GetGuildColor(lineId)
-    local GUILD_SKILL_COLOR_TABLE =
-    {
+    local GUILD_SKILL_COLOR_TABLE = {
         [45] = ColorizeColors.SkillGuildColorizeFG,
         [44] = ColorizeColors.SkillGuildColorizeMG,
         [55] = ColorizeColors.SkillGuildColorizeUD,
@@ -172,8 +170,7 @@ local function GetGuildColor(lineId)
 end
 
 -- TODO: Check if there is an equivalency in one of the handlers for this
-local GUILD_SKILL_ICONS =
-{
+local GUILD_SKILL_ICONS = {
     [45] = "esoui/art/icons/mapkey/mapkey_fightersguild.dds",
     [44] = "esoui/art/icons/mapkey/mapkey_magesguild.dds",
     [55] = "esoui/art/icons/mapkey/mapkey_undaunted.dds",

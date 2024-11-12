@@ -3,7 +3,6 @@
     License: The MIT License (MIT)
 --]]
 
-
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 LUIE.CampaignNames = {}
@@ -371,8 +370,7 @@ function SlashCommands.SlashReport(player)
     HELP_CUSTOMER_SUPPORT_KEYBOARD:OpenScreen(HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD_FRAGMENT)
 end
 
-local petIds =
-{
+local petIds = {
     [23304] = "[Familiar]", -- Summon Unstable Familiar (Sorcerer)
     [23319] = "[Clannfear]", -- Summon Unstable Clannfear (Sorcerer)
     [23316] = "[Volatile Familiar]", -- Summon Volatile Familiar (Sorcerer)

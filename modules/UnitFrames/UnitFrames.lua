@@ -26,23 +26,20 @@ local sceneManager = SCENE_MANAGER
 
 local moduleName = LUIE.name .. "UnitFrames"
 
-local roleIcons =
-{
+local roleIcons = {
     [0] = "LuiExtended/media/unitframes/unitframes_class_none.dds",
     [1] = "esoui/art/lfg/lfg_icon_dps.dds",
     [4] = "esoui/art/lfg/lfg_icon_healer.dds",
     [2] = "esoui/art/lfg/lfg_icon_tank.dds",
 }
 
-local leaderIcons =
-{
+local leaderIcons = {
     [0] = "LuiExtended/media/unitframes/unitframes_class_none.dds",
     [1] = "/esoui/art/icons/guildranks/guild_rankicon_misc01.dds",
 }
 
 UnitFrames.Enabled = false
-UnitFrames.Defaults =
-{
+UnitFrames.Defaults = {
     ShortenNumbers = false,
     RepositionFrames = true,
     DefaultOocTransparency = 85,
@@ -245,8 +242,7 @@ local playerDisplayName = GetUnitDisplayName("player")
 -- local playerTlw
 local CP_BAR_COLORS = ZO_CP_BAR_GRADIENT_COLORS
 
-local g_PendingUpdate =
-{
+local g_PendingUpdate = {
     Group = { flag = false, delay = 200, name = moduleName .. "PendingGroupUpdate" },
     VeteranXP = { flag = false, delay = 5000, name = moduleName .. "PendingVeteranXP" },
 }
@@ -265,8 +261,7 @@ local strResPendingRaid = GetString(LUIE_STRING_UF_DEAD_STATUS_RES_PENDING_SHORT
 
 -- Following settings will be used in options menu to define DefaultFrames behaviour
 -- TODO: localization
-local g_DefaultFramesOptions =
-{
+local g_DefaultFramesOptions = {
     [1] = "Disable", -- false
     [2] = "Do nothing (keep default)", -- nil
     [3] = "Use Extender (display text overlay)", -- true
@@ -306,7 +301,7 @@ local function CreateRegenAnimation(parent, anchors, dims, alpha, number)
     control:SetAlpha(0)
     control:SetDrawLayer(1)
 
-    local isValidAnchor, point, relativeTo, relativePoint, _, offsetY = control:GetAnchor()
+    local offsetY = select(6, control:GetAnchor())
 
     -- Create an horizontal sliding animation
     local animation, timeline = CreateSimpleAnimation(ANIMATION_TRANSLATE, control, 0)
@@ -442,30 +437,30 @@ function UnitFrames.GroupFrames_OnMouseUp(self, button, upInside)
         local isOnline = IsUnitOnline(unitTag)
 
         if isPlayer then
-            AddMenuItem(GetString(SI_GROUP_LIST_MENU_LEAVE_GROUP), function ()
+            AddMenuItem(GetString(SI_GROUP_LIST_MENU_LEAVE_GROUP), function()
                 ZO_Dialogs_ShowDialog("GROUP_LEAVE_DIALOG")
             end)
         elseif isOnline then
             if IsChatSystemAvailableForCurrentPlatform() then
-                AddMenuItem(GetString(SI_SOCIAL_LIST_PANEL_WHISPER), function ()
+                AddMenuItem(GetString(SI_SOCIAL_LIST_PANEL_WHISPER), function()
                     StartChatInput("", CHAT_CHANNEL_WHISPER, accountName)
                 end)
             end
-            AddMenuItem(GetString(SI_SOCIAL_MENU_VISIT_HOUSE), function ()
+            AddMenuItem(GetString(SI_SOCIAL_MENU_VISIT_HOUSE), function()
                 JumpToHouse(accountName)
             end)
             if not ZO_IsTributeLocked() then
-                AddMenuItem(GetString(SI_SOCIAL_MENU_TRIBUTE_INVITE), function ()
+                AddMenuItem(GetString(SI_SOCIAL_MENU_TRIBUTE_INVITE), function()
                     InviteToTributeByDisplayName(accountName)
                 end)
             end
-            AddMenuItem(GetString(SI_SOCIAL_MENU_JUMP_TO_PLAYER), function ()
+            AddMenuItem(GetString(SI_SOCIAL_MENU_JUMP_TO_PLAYER), function()
                 JumpToGroupMember(accountName)
             end)
         end
 
         if not isPlayer and not IsFriend(accountName) and not IsIgnored(accountName) then
-            AddMenuItem(GetString(SI_SOCIAL_MENU_ADD_FRIEND), function ()
+            AddMenuItem(GetString(SI_SOCIAL_MENU_ADD_FRIEND), function()
                 ZO_Dialogs_ShowDialog("REQUEST_FRIEND", { name = accountName })
             end)
         end
@@ -474,13 +469,13 @@ function UnitFrames.GroupFrames_OnMouseUp(self, button, upInside)
             if IsUnitGroupLeader("player") then
                 if isPlayer then
                     if not isLFG then
-                        AddMenuItem(GetString(SI_GROUP_LIST_MENU_DISBAND_GROUP), function ()
+                        AddMenuItem(GetString(SI_GROUP_LIST_MENU_DISBAND_GROUP), function()
                             ZO_Dialogs_ShowDialog("GROUP_DISBAND_DIALOG")
                         end)
                     end
                 else
                     if not isLFG then
-                        AddMenuItem(GetString(SI_GROUP_LIST_MENU_KICK_FROM_GROUP), function ()
+                        AddMenuItem(GetString(SI_GROUP_LIST_MENU_KICK_FROM_GROUP), function()
                             GroupKick(unitTag)
                         end)
                     end
@@ -489,7 +484,7 @@ function UnitFrames.GroupFrames_OnMouseUp(self, button, upInside)
 
             --Cannot vote for yourself
             if isLFG and not isPlayer then
-                AddMenuItem(GetString(SI_GROUP_LIST_MENU_VOTE_KICK_FROM_GROUP), function ()
+                AddMenuItem(GetString(SI_GROUP_LIST_MENU_VOTE_KICK_FROM_GROUP), function()
                     BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, ZO_GROUP_ELECTION_DESCRIPTORS.NONE, unitTag)
                 end)
             end
@@ -497,7 +492,7 @@ function UnitFrames.GroupFrames_OnMouseUp(self, button, upInside)
 
         --Per design, promoting doesn't expressly fall under the mantle of "group modification"
         if IsUnitGroupLeader("player") and not isPlayer and isOnline then
-            AddMenuItem(GetString(SI_GROUP_LIST_MENU_PROMOTE_TO_LEADER), function ()
+            AddMenuItem(GetString(SI_GROUP_LIST_MENU_PROMOTE_TO_LEADER), function()
                 GroupPromote(unitTag)
             end)
         end
@@ -606,8 +601,7 @@ local function CreateDefaultFrames()
     local default_controls = {}
 
     if UnitFrames.SV.DefaultFramesNewPlayer == 3 then
-        default_controls.player =
-        {
+        default_controls.player = {
             [COMBAT_MECHANIC_FLAGS_HEALTH] = ZO_PlayerAttributeHealth,
             [COMBAT_MECHANIC_FLAGS_MAGICKA] = ZO_PlayerAttributeMagicka,
             [COMBAT_MECHANIC_FLAGS_STAMINA] = ZO_PlayerAttributeStamina,
@@ -623,8 +617,7 @@ local function CreateDefaultFrames()
     for unitTag, fields in pairs(default_controls) do
         g_DefaultFrames[unitTag] = { ["unitTag"] = unitTag }
         for powerType, parent in pairs(fields) do
-            g_DefaultFrames[unitTag][powerType] =
-            {
+            g_DefaultFrames[unitTag][powerType] = {
                 ["label"] = UI.Label(parent, { CENTER, CENTER }, nil, nil, nil, nil, false),
                 ["color"] = UnitFrames.SV.DefaultTextColour,
             }
@@ -706,13 +699,11 @@ local function CreateCustomFrames()
         sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
 
         -- Collect all together
-        UnitFrames.CustomFrames.player =
-        {
+        UnitFrames.CustomFrames.player = {
             ["unitTag"] = "player",
             ["tlw"] = playerTlw,
             ["control"] = player,
-            [COMBAT_MECHANIC_FLAGS_HEALTH] =
-            {
+            [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                 ["backdrop"] = phb,
                 ["labelOne"] = UI.Label(phb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
                 ["labelTwo"] = UI.Label(phb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
@@ -721,24 +712,21 @@ local function CreateCustomFrames()
                 ["shield"] = UI.StatusBar(phb, nil, nil, nil, true),
                 ["threshold"] = g_healthThreshold,
             },
-            [COMBAT_MECHANIC_FLAGS_MAGICKA] =
-            {
+            [COMBAT_MECHANIC_FLAGS_MAGICKA] = {
                 ["backdrop"] = pmb,
                 ["labelOne"] = UI.Label(pmb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
                 ["labelTwo"] = UI.Label(pmb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                 ["bar"] = UI.StatusBar(pmb, nil, nil, nil, false),
                 ["threshold"] = g_magickaThreshold,
             },
-            [COMBAT_MECHANIC_FLAGS_STAMINA] =
-            {
+            [COMBAT_MECHANIC_FLAGS_STAMINA] = {
                 ["backdrop"] = psb,
                 ["labelOne"] = UI.Label(psb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
                 ["labelTwo"] = UI.Label(psb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                 ["bar"] = UI.StatusBar(psb, nil, nil, nil, false),
                 ["threshold"] = g_staminaThreshold,
             },
-            ["alternative"] =
-            {
+            ["alternative"] = {
                 ["backdrop"] = alt,
                 ["enlightenment"] = UI.StatusBar(alt, nil, nil, nil, false),
                 ["bar"] = UI.StatusBar(alt, nil, nil, nil, false),
@@ -775,8 +763,7 @@ local function CreateCustomFrames()
             UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MAGICKA].labelTwo:SetHidden(true)
         end
 
-        UnitFrames.CustomFrames.controlledsiege =
-        { -- placeholder for alternative bar when using siege weapon
+        UnitFrames.CustomFrames.controlledsiege = { -- placeholder for alternative bar when using siege weapon
             ["unitTag"] = "controlledsiege",
         }
     end
@@ -817,14 +804,12 @@ local function CreateCustomFrames()
         sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
 
         -- Collect all together
-        UnitFrames.CustomFrames.reticleover =
-        {
+        UnitFrames.CustomFrames.reticleover = {
             ["unitTag"] = "reticleover",
             ["tlw"] = targetTlw,
             ["control"] = target,
             ["canHide"] = true,
-            [COMBAT_MECHANIC_FLAGS_HEALTH] =
-            {
+            [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                 ["backdrop"] = thb,
                 ["labelOne"] = UI.Label(thb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
                 ["labelTwo"] = UI.Label(thb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
@@ -888,14 +873,12 @@ local function CreateCustomFrames()
         -- Notice, that we put this table into same UnitFrames.CustomFrames table.
         -- This is done to apply formating more easier
         -- Later this table will be referenced from g_AvaCustFrames
-        UnitFrames.CustomFrames.AvaPlayerTarget =
-        {
+        UnitFrames.CustomFrames.AvaPlayerTarget = {
             ["unitTag"] = "reticleover",
             ["tlw"] = targetTlw,
             ["control"] = target,
             ["canHide"] = true,
-            [COMBAT_MECHANIC_FLAGS_HEALTH] =
-            {
+            [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                 ["backdrop"] = thb,
                 ["label"] = UI.Label(thb, { CENTER, CENTER }, nil, { 1, 1 }, nil, "zz%", false),
                 ["labelOne"] = UI.Label(thb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx + ss", false),
@@ -956,12 +939,10 @@ local function CreateCustomFrames()
             ghb:SetDrawLevel(DL_CONTROLS)
             local gli = UI.Texture(topInfo, nil, { 20, 20 }, nil, nil, false)
 
-            UnitFrames.CustomFrames[unitTag] =
-            {
+            UnitFrames.CustomFrames[unitTag] = {
                 ["tlw"] = group,
                 ["control"] = control,
-                [COMBAT_MECHANIC_FLAGS_HEALTH] =
-                {
+                [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                     ["backdrop"] = ghb,
                     ["labelOne"] = UI.Label(ghb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
                     ["labelTwo"] = UI.Label(ghb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
@@ -1016,12 +997,10 @@ local function CreateCustomFrames()
             rhb:SetDrawLayer(DL_BACKGROUND)
             rhb:SetDrawLevel(DL_CONTROLS)
 
-            UnitFrames.CustomFrames[unitTag] =
-            {
+            UnitFrames.CustomFrames[unitTag] = {
                 ["tlw"] = raid,
                 ["control"] = control,
-                [COMBAT_MECHANIC_FLAGS_HEALTH] =
-                {
+                [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                     ["backdrop"] = rhb,
                     ["label"] = UI.Label(rhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                     ["trauma"] = UI.StatusBar(rhb, nil, nil, nil, true),
@@ -1070,12 +1049,10 @@ local function CreateCustomFrames()
             shb:SetDrawLayer(DL_BACKGROUND)
             shb:SetDrawLevel(DL_CONTROLS)
 
-            UnitFrames.CustomFrames[unitTag] =
-            {
+            UnitFrames.CustomFrames[unitTag] = {
                 ["tlw"] = pet,
                 ["control"] = control,
-                [COMBAT_MECHANIC_FLAGS_HEALTH] =
-                {
+                [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                     ["backdrop"] = shb,
                     ["label"] = UI.Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                     ["trauma"] = UI.StatusBar(shb, nil, nil, nil, true),
@@ -1113,13 +1090,11 @@ local function CreateCustomFrames()
         shb:SetDrawLayer(DL_BACKGROUND)
         shb:SetDrawLevel(DL_CONTROLS)
 
-        UnitFrames.CustomFrames.companion =
-        {
+        UnitFrames.CustomFrames.companion = {
             ["unitTag"] = "companion",
             ["tlw"] = companionTlw,
             ["control"] = companion,
-            [COMBAT_MECHANIC_FLAGS_HEALTH] =
-            {
+            [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                 ["backdrop"] = shb,
                 ["label"] = UI.Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                 ["trauma"] = UI.StatusBar(shb, nil, nil, nil, true),
@@ -1159,13 +1134,11 @@ local function CreateCustomFrames()
             bhb:SetDrawLayer(DL_BACKGROUND)
             bhb:SetDrawLevel(DL_CONTROLS)
 
-            UnitFrames.CustomFrames[unitTag] =
-            {
+            UnitFrames.CustomFrames[unitTag] = {
                 ["unitTag"] = unitTag,
                 ["tlw"] = bosses,
                 ["control"] = control,
-                [COMBAT_MECHANIC_FLAGS_HEALTH] =
-                {
+                [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                     ["backdrop"] = bhb,
                     ["label"] = UI.Label(bhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
                     ["trauma"] = UI.StatusBar(bhb, nil, nil, nil, true),
@@ -1184,29 +1157,28 @@ local function CreateCustomFrames()
     end
 
     -- Callback used to hide anchor coords preview label on movement start
-    local tlwOnMoveStart = function (self)
-        eventManager:RegisterForUpdate(moduleName .. "PreviewMove", 200, function ()
+    local tlwOnMoveStart = function(self)
+        eventManager:RegisterForUpdate(moduleName .. "PreviewMove", 200, function()
             self.preview.anchorLabel:SetText(zo_strformat("<<1>>, <<2>>", self:GetLeft(), self:GetTop()))
         end)
     end
     -- Callback used to save new position of frames
-    local tlwOnMoveStop = function (self)
+    local tlwOnMoveStop = function(self)
         eventManager:UnregisterForUpdate(moduleName .. "PreviewMove")
         UnitFrames.SV[self.customPositionAttr] = { self:GetLeft(), self:GetTop() }
     end
 
     -- Common actions for all created frames:
-    for _, baseName in pairs(
-        {
-            "player",
-            "reticleover",
-            "companion",
-            "SmallGroup",
-            "RaidGroup",
-            "boss",
-            "AvaPlayerTarget",
-            "PetGroup",
-        }) do
+    for _, baseName in pairs({
+        "player",
+        "reticleover",
+        "companion",
+        "SmallGroup",
+        "RaidGroup",
+        "boss",
+        "AvaPlayerTarget",
+        "PetGroup",
+    }) do
         -- set mouse handlers for all created tlws and create anchor coords preview labels
         local unitFrame = UnitFrames.CustomFrames[baseName] or UnitFrames.CustomFrames[baseName .. "1"] or nil
         if unitFrame ~= nil then
@@ -1232,13 +1204,12 @@ local function CreateCustomFrames()
         for i = 0, 24 do
             local unitTag = (i == 0) and baseName or (baseName .. i)
             if UnitFrames.CustomFrames[unitTag] then
-                for _, powerType in pairs(
-                    {
-                        COMBAT_MECHANIC_FLAGS_HEALTH,
-                        COMBAT_MECHANIC_FLAGS_MAGICKA,
-                        COMBAT_MECHANIC_FLAGS_STAMINA,
-                        "alternative",
-                    }) do
+                for _, powerType in pairs({
+                    COMBAT_MECHANIC_FLAGS_HEALTH,
+                    COMBAT_MECHANIC_FLAGS_MAGICKA,
+                    COMBAT_MECHANIC_FLAGS_STAMINA,
+                    "alternative",
+                }) do
                     local powerBar = UnitFrames.CustomFrames[unitTag][powerType]
                     if powerBar then
                         powerBar.bar:SetAnchor(TOPLEFT, powerBar.backdrop, TOPLEFT, 1, 1)
@@ -1322,12 +1293,11 @@ local function CreateCustomFrames()
         for i = 1, 4 do
             local unitTag = "SmallGroup" .. i
             if UnitFrames.CustomFrames[unitTag] then
-                for _, powerType in pairs(
-                    {
-                        COMBAT_MECHANIC_FLAGS_HEALTH,
-                        COMBAT_MECHANIC_FLAGS_MAGICKA,
-                        COMBAT_MECHANIC_FLAGS_STAMINA,
-                    }) do
+                for _, powerType in pairs({
+                    COMBAT_MECHANIC_FLAGS_HEALTH,
+                    COMBAT_MECHANIC_FLAGS_MAGICKA,
+                    COMBAT_MECHANIC_FLAGS_STAMINA,
+                }) do
                     if UnitFrames.CustomFrames[unitTag][powerType] then
                         local backdrop = UnitFrames.CustomFrames[unitTag][powerType].backdrop
                         local size1 = UnitFrames.SV.GroupBarWidth
@@ -1348,12 +1318,11 @@ local function CreateCustomFrames()
         for i = 1, 24 do
             local unitTag = "RaidGroup" .. i
             if UnitFrames.CustomFrames[unitTag] then
-                for _, powerType in pairs(
-                    {
-                        COMBAT_MECHANIC_FLAGS_HEALTH,
-                        COMBAT_MECHANIC_FLAGS_MAGICKA,
-                        COMBAT_MECHANIC_FLAGS_STAMINA,
-                    }) do
+                for _, powerType in pairs({
+                    COMBAT_MECHANIC_FLAGS_HEALTH,
+                    COMBAT_MECHANIC_FLAGS_MAGICKA,
+                    COMBAT_MECHANIC_FLAGS_STAMINA,
+                }) do
                     if UnitFrames.CustomFrames[unitTag][powerType] then
                         local backdrop = UnitFrames.CustomFrames[unitTag][powerType].backdrop
                         local size1 = UnitFrames.SV.RaidBarWidth
@@ -1374,12 +1343,11 @@ local function CreateCustomFrames()
         for i = 0, 6 do
             local unitTag = "boss" .. i
             if UnitFrames.CustomFrames[unitTag] then
-                for _, powerType in pairs(
-                    {
-                        COMBAT_MECHANIC_FLAGS_HEALTH,
-                        COMBAT_MECHANIC_FLAGS_MAGICKA,
-                        COMBAT_MECHANIC_FLAGS_STAMINA,
-                    }) do
+                for _, powerType in pairs({
+                    COMBAT_MECHANIC_FLAGS_HEALTH,
+                    COMBAT_MECHANIC_FLAGS_MAGICKA,
+                    COMBAT_MECHANIC_FLAGS_STAMINA,
+                }) do
                     if UnitFrames.CustomFrames[unitTag][powerType] then
                         local backdrop = UnitFrames.CustomFrames[unitTag][powerType].backdrop
                         local size1 = UnitFrames.SV.BossBarWidth
@@ -1406,8 +1374,7 @@ local function CreateCustomFrames()
                     UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {}
                 end
                 local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
-                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] =
-                {
+                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] = {
                     ["dec"] = CreateDecreasedArmorOverlay(backdrop, false),
                     ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 13, 0 }, { 24, 24 }, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true),
                 }
@@ -1424,8 +1391,7 @@ local function CreateCustomFrames()
                     UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {}
                 end
                 local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
-                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] =
-                {
+                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] = {
                     ["dec"] = CreateDecreasedArmorOverlay(backdrop, false),
                     ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 13, 0 }, { 24, 24 }, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true),
                 }
@@ -1442,8 +1408,7 @@ local function CreateCustomFrames()
                     UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {}
                 end
                 local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
-                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] =
-                {
+                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] = {
                     ["dec"] = CreateDecreasedArmorOverlay(backdrop, false),
                     ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 13, 0 }, { 24, 24 }, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true),
                 }
@@ -1460,8 +1425,7 @@ local function CreateCustomFrames()
                     UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {}
                 end
                 local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
-                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] =
-                {
+                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] = {
                     ["dec"] = CreateDecreasedArmorOverlay(backdrop, false),
                     ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 13, 0 }, { 24, 24 }, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true),
                 }
@@ -1490,8 +1454,7 @@ local function CreateCustomFrames()
                         UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {}
                     end
                     local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
-                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] =
-                    {
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] = {
                         ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 4, 0 }, { size1 * 1.8, size2 * 4.0 }, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true),
                         ["dec"] = UI.Texture(backdrop, { CENTER, CENTER, 0, 0 }, { size1 * 2.2, size2 * 3 }, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true),
                     }
@@ -1515,8 +1478,7 @@ local function CreateCustomFrames()
                         UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {}
                     end
                     local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
-                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] =
-                    {
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] = {
                         ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 4, 0 }, { size1 * 1.8, size2 * 4.0 }, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true),
                         ["dec"] = UI.Texture(backdrop, { CENTER, CENTER, 0, 0 }, { size1 * 2.2, size2 * 3 }, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true),
                     }
@@ -1537,8 +1499,7 @@ local function CreateCustomFrames()
                         UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {}
                     end
                     local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
-                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] =
-                    {
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] = {
                         ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 4, 0 }, { size1 * 1.8, size2 * 4.0 }, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true),
                         ["dec"] = UI.Texture(backdrop, { CENTER, CENTER, 0, 0 }, { size1 * 2.2, size2 * 3 }, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true),
                     }
@@ -1559,8 +1520,7 @@ local function CreateCustomFrames()
                         UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat = {}
                     end
                     local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
-                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] =
-                    {
+                    UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] = {
                         ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 4, 0 }, { size1 * 1.8, size2 * 4.0 }, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true),
                         ["dec"] = UI.Texture(backdrop, { CENTER, CENTER, 0, 0 }, { size1 * 2.2, size2 * 3 }, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true),
                     }
@@ -1618,17 +1578,16 @@ local function CreateCustomFrames()
     UnitFrames.CustomFramesApplyBarAlignment()
 
     -- Add this top level window to global controls list, so it can be hidden
-    for _, unitTag in pairs(
-        {
-            "player",
-            "reticleover",
-            "companion",
-            "SmallGroup1",
-            "RaidGroup1",
-            "boss1",
-            "AvaPlayerTarget",
-            "PetGroup1",
-        }) do
+    for _, unitTag in pairs({
+        "player",
+        "reticleover",
+        "companion",
+        "SmallGroup1",
+        "RaidGroup1",
+        "boss1",
+        "AvaPlayerTarget",
+        "PetGroup1",
+    }) do
         if UnitFrames.CustomFrames[unitTag] then
             LUIE.Components[moduleName .. "_CustomFrame_" .. unitTag] = UnitFrames.CustomFrames[unitTag].tlw
         end
@@ -1780,7 +1739,7 @@ function UnitFrames.Initialize(enabled)
     CreateDefaultFrames()
     CreateCustomFrames()
 
-    BOSS_BAR.RefreshBossHealthBar = function (self, smoothAnimate)
+    BOSS_BAR.RefreshBossHealthBar = function(self, smoothAnimate)
         local totalHealth = 0
         local totalMaxHealth = 0
 
@@ -1920,12 +1879,11 @@ function UnitFrames.CustomFramesFormatLabels(menu)
 
     -- Format Player Labels
     if UnitFrames.CustomFrames["player"] then
-        for _, powerType in pairs(
-            {
-                COMBAT_MECHANIC_FLAGS_HEALTH,
-                COMBAT_MECHANIC_FLAGS_MAGICKA,
-                COMBAT_MECHANIC_FLAGS_STAMINA,
-            }) do
+        for _, powerType in pairs({
+            COMBAT_MECHANIC_FLAGS_HEALTH,
+            COMBAT_MECHANIC_FLAGS_MAGICKA,
+            COMBAT_MECHANIC_FLAGS_STAMINA,
+        }) do
             if UnitFrames.CustomFrames["player"][powerType] then
                 if UnitFrames.CustomFrames["player"][powerType].labelOne then
                     if UnitFrames.SV.BarAlignCenterLabelPlayer then
@@ -2224,7 +2182,7 @@ function UnitFrames.CustomPetUpdate()
 
     UnitFrames.CustomFramesUnreferencePetControl(n)
 
-    table_sort(petList, function (x, y)
+    table_sort(petList, function(x, y)
         return x.unitName < y.unitName
     end)
 
@@ -2322,11 +2280,9 @@ function UnitFrames.DefaultFramesCreateUnitGroupControls(unitTag)
                 -- Prepare dimension of regen bar
                 local width, height = parentBar:GetDimensions()
                 -- Populate UI elements
-                g_DefaultFrames[unitTag] =
-                {
+                g_DefaultFrames[unitTag] = {
                     ["unitTag"] = unitTag,
-                    [COMBAT_MECHANIC_FLAGS_HEALTH] =
-                    {
+                    [COMBAT_MECHANIC_FLAGS_HEALTH] = {
                         label = UI.Label(parentBar, { TOP, BOTTOM }, nil, nil, nil, nil, false),
                         color = UnitFrames.SV.DefaultTextColour,
                         shield = UI.StatusBar(parentBar, { BOTTOM, BOTTOM, 0, 0 }, { width - height, height }, { 1, 0.75, 0, 0.5 }, true),
@@ -2504,7 +2460,7 @@ function UnitFrames.OnReticleTargetChanged(eventCode)
 
             if IsUnitReincarnating("reticleover") then
                 UnitFrames.CustomFramesSetDeadLabel(UnitFrames.CustomFrames["reticleover"], strResSelf)
-                eventManager:RegisterForUpdate(moduleName .. "Res" .. "reticleover", 100, function ()
+                eventManager:RegisterForUpdate(moduleName .. "Res" .. "reticleover", 100, function()
                     UnitFrames.ResurrectionMonitor("reticleover")
                 end)
             end
@@ -2635,14 +2591,12 @@ end
 
 -- Helper tables for next function
 -- I believe this is mostly deprecated, as we no longer want to show the level of anything but a player target
-local HIDE_LEVEL_REACTIONS =
-{
+local HIDE_LEVEL_REACTIONS = {
     [UNIT_REACTION_FRIENDLY] = true,
     [UNIT_REACTION_NPC_ALLY] = true,
 }
 -- I believe this is mostly deprecated, as we no longer want to show the level of anything but a player target
-local HIDE_LEVEL_TYPES =
-{
+local HIDE_LEVEL_TYPES = {
     [UNIT_TYPE_SIEGEWEAPON] = true,
     [UNIT_TYPE_INTERACTFIXTURE] = true,
     [UNIT_TYPE_INTERACTOBJ] = true,
@@ -3326,7 +3280,7 @@ function UnitFrames.OnGroupMemberRoleChange(eventCode, unitTag, dps, healer, tan
 end
 
 function UnitFrames.OnGroupMemberChange(eventCode, memberName)
-    zo_callLater(function ()
+    zo_callLater(function()
         UnitFrames.CustomFramesApplyColors(false)
     end, 200)
 end
@@ -3381,12 +3335,12 @@ function UnitFrames.ResurrectionMonitor(unitTag)
         else
             UnitFrames.CustomFramesSetDeadLabel(UnitFrames.CustomFrames[unitTag], strDead)
         end
-        eventManager:RegisterForUpdate(moduleName .. "Res" .. unitTag, 100, function ()
+        eventManager:RegisterForUpdate(moduleName .. "Res" .. unitTag, 100, function()
             UnitFrames.ResurrectionMonitor(unitTag)
         end)
     elseif IsUnitReincarnating(unitTag) then
         UnitFrames.CustomFramesSetDeadLabel(UnitFrames.CustomFrames[unitTag], strResSelf)
-        eventManager:RegisterForUpdate(moduleName .. "Res" .. unitTag, 100, function ()
+        eventManager:RegisterForUpdate(moduleName .. "Res" .. unitTag, 100, function()
             UnitFrames.ResurrectionMonitor(unitTag)
         end)
     else
@@ -3477,15 +3431,13 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
         UnitFrames.CustomFrames.player.alternative.enlightenment:SetHidden(true)
     elseif UnitFrames.SV.PlayerEnableAltbarMSW and isMounted then
         icon = "LuiExtended/media/unitframes/unitframes_bar_mount.dds"
-        center =
-        {
+        center = {
             0.1 * UnitFrames.SV.CustomColourStamina[1],
             0.1 * UnitFrames.SV.CustomColourStamina[2],
             0.1 * UnitFrames.SV.CustomColourStamina[3],
             0.9,
         }
-        color =
-        {
+        color = {
             UnitFrames.SV.CustomColourStamina[1],
             UnitFrames.SV.CustomColourStamina[2],
             UnitFrames.SV.CustomColourStamina[3],
@@ -3738,7 +3690,7 @@ function UnitFrames.OnCombatEvent(eventCode, result, isError, abilityName, abili
         local uniqueId = moduleName .. "PowerError" .. powerType
         local firstRun = true
 
-        eventManager:RegisterForUpdate(uniqueId, 300, function ()
+        eventManager:RegisterForUpdate(uniqueId, 300, function()
             if firstRun then
                 backdrop:SetCenterColor(r, g, b, 0.9)
                 firstRun = false
@@ -3891,7 +3843,7 @@ function UnitFrames.CustomFramesGroupUpdate()
     -- Now we have local list with valid units and we are ready to sort it
     -- FIXME: Sorting is again hardcoded to be done always
     --if not raid or UnitFrames.SV.RaidSort then
-    table_sort(groupList, function (x, y)
+    table_sort(groupList, function(x, y)
         return x.unitName < y.unitName
     end)
     --end
@@ -4030,17 +3982,16 @@ function UnitFrames.CustomFramesSetPositions()
     default_anchors["boss1"] = { TOPLEFT, CENTER, boss1[1], boss1[2] }
     default_anchors["AvaPlayerTarget"] = { CENTER, CENTER, AvaPlayerTarget[1], AvaPlayerTarget[2] }
 
-    for _, unitTag in pairs(
-        {
-            "player",
-            "reticleover",
-            "companion",
-            "SmallGroup1",
-            "RaidGroup1",
-            "boss1",
-            "AvaPlayerTarget",
-            "PetGroup1",
-        }) do
+    for _, unitTag in pairs({
+        "player",
+        "reticleover",
+        "companion",
+        "SmallGroup1",
+        "RaidGroup1",
+        "boss1",
+        "AvaPlayerTarget",
+        "PetGroup1",
+    }) do
         if UnitFrames.CustomFrames[unitTag] then
             local savedPos = UnitFrames.SV[UnitFrames.CustomFrames[unitTag].tlw.customPositionAttr]
             local anchors = (savedPos ~= nil and #savedPos == 2) and { TOPLEFT, TOPLEFT, savedPos[1], savedPos[2] } or default_anchors[unitTag]
@@ -4073,17 +4024,16 @@ function UnitFrames.CustomFramesSetMovingState(state)
     UnitFrames.CustomFramesMovingState = state
 
     -- Unlock individual frames
-    for _, unitTag in pairs(
-        {
-            "player",
-            "reticleover",
-            "companion",
-            "SmallGroup1",
-            "RaidGroup1",
-            "boss1",
-            "AvaPlayerTarget",
-            "PetGroup1",
-        }) do
+    for _, unitTag in pairs({
+        "player",
+        "reticleover",
+        "companion",
+        "SmallGroup1",
+        "RaidGroup1",
+        "boss1",
+        "AvaPlayerTarget",
+        "PetGroup1",
+    }) do
         if UnitFrames.CustomFrames[unitTag] then
             local tlw = UnitFrames.CustomFrames[unitTag].tlw
             if tlw.preview then
@@ -4121,58 +4071,50 @@ end
 
 -- Apply selected colors for all known bars on custom unit frames
 function UnitFrames.CustomFramesApplyColors(isMenu)
-    local health =
-    {
+    local health = {
         UnitFrames.SV.CustomColourHealth[1],
         UnitFrames.SV.CustomColourHealth[2],
         UnitFrames.SV.CustomColourHealth[3],
         0.9,
     }
-    local shield =
-    {
+    local shield = {
         UnitFrames.SV.CustomColourShield[1],
         UnitFrames.SV.CustomColourShield[2],
         UnitFrames.SV.CustomColourShield[3],
         0,
     }
-    local trauma =
-    {
+    local trauma = {
         UnitFrames.SV.CustomColourTrauma[1],
         UnitFrames.SV.CustomColourTrauma[2],
         UnitFrames.SV.CustomColourTrauma[3],
         0.9,
     } -- .a value will be fixed in the loop
-    local magicka =
-    {
+    local magicka = {
         UnitFrames.SV.CustomColourMagicka[1],
         UnitFrames.SV.CustomColourMagicka[2],
         UnitFrames.SV.CustomColourMagicka[3],
         0.9,
     }
-    local stamina =
-    {
+    local stamina = {
         UnitFrames.SV.CustomColourStamina[1],
         UnitFrames.SV.CustomColourStamina[2],
         UnitFrames.SV.CustomColourStamina[3],
         0.9,
     }
 
-    local dps =
-    {
+    local dps = {
         UnitFrames.SV.CustomColourDPS[1],
         UnitFrames.SV.CustomColourDPS[2],
         UnitFrames.SV.CustomColourDPS[3],
         0.9,
     }
-    local healer =
-    {
+    local healer = {
         UnitFrames.SV.CustomColourHealer[1],
         UnitFrames.SV.CustomColourHealer[2],
         UnitFrames.SV.CustomColourHealer[3],
         0.9,
     }
-    local tank =
-    {
+    local tank = {
         UnitFrames.SV.CustomColourTank[1],
         UnitFrames.SV.CustomColourTank[2],
         UnitFrames.SV.CustomColourTank[3],
@@ -4180,50 +4122,43 @@ function UnitFrames.CustomFramesApplyColors(isMenu)
     }
     local invalid = { 75 / 255, 75 / 255, 75 / 255, 0.9 }
 
-    local class1 =
-    {
+    local class1 = {
         UnitFrames.SV.CustomColourDragonknight[1],
         UnitFrames.SV.CustomColourDragonknight[2],
         UnitFrames.SV.CustomColourDragonknight[3],
         0.9,
     } -- Dragonkight
-    local class2 =
-    {
+    local class2 = {
         UnitFrames.SV.CustomColourSorcerer[1],
         UnitFrames.SV.CustomColourSorcerer[2],
         UnitFrames.SV.CustomColourSorcerer[3],
         0.9,
     } -- Sorcerer
-    local class3 =
-    {
+    local class3 = {
         UnitFrames.SV.CustomColourNightblade[1],
         UnitFrames.SV.CustomColourNightblade[2],
         UnitFrames.SV.CustomColourNightblade[3],
         0.9,
     } -- Nightblade
-    local class4 =
-    {
+    local class4 = {
         UnitFrames.SV.CustomColourWarden[1],
         UnitFrames.SV.CustomColourWarden[2],
         UnitFrames.SV.CustomColourWarden[3],
         0.9,
     } -- Warden
-    local class5 =
-    {
+    local class5 = {
         UnitFrames.SV.CustomColourNecromancer[1],
         UnitFrames.SV.CustomColourNecromancer[2],
         UnitFrames.SV.CustomColourNecromancer[3],
         0.9,
     } -- Necromancer
-    local class6 =
-    {
+    local class6 = {
         UnitFrames.SV.CustomColourTemplar[1],
         UnitFrames.SV.CustomColourTemplar[2],
         UnitFrames.SV.CustomColourTemplar[3],
         0.9,
     } -- Templar
-    local class117 =
-    {
+    local class117 = {
         UnitFrames.SV.CustomColourArcanist[1],
         UnitFrames.SV.CustomColourArcanist[2],
         UnitFrames.SV.CustomColourArcanist[3],
@@ -4231,59 +4166,51 @@ function UnitFrames.CustomFramesApplyColors(isMenu)
     } -- Arcanist
 
     local petcolor = { UnitFrames.SV.CustomColourPet[1], UnitFrames.SV.CustomColourPet[2], UnitFrames.SV.CustomColourPet[3], 0.9 } -- Player Pet
-    local companioncolor =
-    {
+    local companioncolor = {
         UnitFrames.SV.CustomColourCompanionFrame[1],
         UnitFrames.SV.CustomColourCompanionFrame[2],
         UnitFrames.SV.CustomColourCompanionFrame[3],
         0.9,
     } -- Companion
 
-    local health_bg =
-    {
+    local health_bg = {
         0.1 * UnitFrames.SV.CustomColourHealth[1],
         0.1 * UnitFrames.SV.CustomColourHealth[2],
         0.1 * UnitFrames.SV.CustomColourHealth[3],
         0.9,
     }
-    local shield_bg =
-    {
+    local shield_bg = {
         0.1 * UnitFrames.SV.CustomColourShield[1],
         0.1 * UnitFrames.SV.CustomColourShield[2],
         0.1 * UnitFrames.SV.CustomColourShield[3],
         0.9,
     }
-    local magicka_bg =
-    {
+    local magicka_bg = {
         0.1 * UnitFrames.SV.CustomColourMagicka[1],
         0.1 * UnitFrames.SV.CustomColourMagicka[2],
         0.1 * UnitFrames.SV.CustomColourMagicka[3],
         0.9,
     }
-    local stamina_bg =
-    {
+    local stamina_bg = {
         0.1 * UnitFrames.SV.CustomColourStamina[1],
         0.1 * UnitFrames.SV.CustomColourStamina[2],
         0.1 * UnitFrames.SV.CustomColourStamina[3],
         0.9,
     }
 
-    local dps_bg =
-    {
+    local dps_bg = {
         0.1 * UnitFrames.SV.CustomColourDPS[1],
         0.1 * UnitFrames.SV.CustomColourDPS[2],
         0.1 * UnitFrames.SV.CustomColourDPS[3],
         0.9,
     }
-    local healer_bg =
-    {
+    local healer_bg = {
         0.1 * UnitFrames.SV.CustomColourHealer[1],
         0.1 * UnitFrames.SV.CustomColourHealer[2],
         0.1 * UnitFrames.SV.CustomColourHealer[3],
         0.9,
     }
-    local tank_bg =
-    {
+    local tank_bg = {
         0.1 * UnitFrames.SV.CustomColourTank[1],
         0.1 * UnitFrames.SV.CustomColourTank[2],
         0.1 * UnitFrames.SV.CustomColourTank[3],
@@ -4291,79 +4218,68 @@ function UnitFrames.CustomFramesApplyColors(isMenu)
     }
     local invalid_bg = { 0.1 * invalid[1], 0.1 * invalid[2], 0.1 * invalid[3], 0.9 }
 
-    local class1_bg =
-    {
+    local class1_bg = {
         0.1 * UnitFrames.SV.CustomColourDragonknight[1],
         0.1 * UnitFrames.SV.CustomColourDragonknight[2],
         0.1 * UnitFrames.SV.CustomColourDragonknight[3],
         0.9,
     } -- Dragonkight
-    local class2_bg =
-    {
+    local class2_bg = {
         0.1 * UnitFrames.SV.CustomColourSorcerer[1],
         0.1 * UnitFrames.SV.CustomColourSorcerer[2],
         0.1 * UnitFrames.SV.CustomColourSorcerer[3],
         0.9,
     } -- Sorcerer
-    local class3_bg =
-    {
+    local class3_bg = {
         0.1 * UnitFrames.SV.CustomColourNightblade[1],
         0.1 * UnitFrames.SV.CustomColourNightblade[2],
         0.1 * UnitFrames.SV.CustomColourNightblade[3],
         0.9,
     } -- Nightblade
-    local class4_bg =
-    {
+    local class4_bg = {
         0.1 * UnitFrames.SV.CustomColourWarden[1],
         0.1 * UnitFrames.SV.CustomColourWarden[2],
         0.1 * UnitFrames.SV.CustomColourWarden[3],
         0.9,
     } -- Warden
-    local class5_bg =
-    {
+    local class5_bg = {
         0.1 * UnitFrames.SV.CustomColourNecromancer[1],
         0.1 * UnitFrames.SV.CustomColourNecromancer[2],
         0.1 * UnitFrames.SV.CustomColourNecromancer[3],
         0.9,
     } -- Necromancer
-    local class6_bg =
-    {
+    local class6_bg = {
         0.1 * UnitFrames.SV.CustomColourTemplar[1],
         0.1 * UnitFrames.SV.CustomColourTemplar[2],
         0.1 * UnitFrames.SV.CustomColourTemplar[3],
         0.9,
     } -- Templar
-    local class117_bg =
-    {
+    local class117_bg = {
         0.1 * UnitFrames.SV.CustomColourArcanist[1],
         0.1 * UnitFrames.SV.CustomColourArcanist[2],
         0.1 * UnitFrames.SV.CustomColourArcanist[3],
         0.9,
     } -- Arcanist
 
-    local petcolor_bg =
-    {
+    local petcolor_bg = {
         0.1 * UnitFrames.SV.CustomColourPet[1],
         0.1 * UnitFrames.SV.CustomColourPet[2],
         0.1 * UnitFrames.SV.CustomColourPet[3],
         0.9,
     } -- Player Pet
-    local companioncolor_bg =
-    {
+    local companioncolor_bg = {
         0.1 * UnitFrames.SV.CustomColourCompanionFrame[1],
         0.1 * UnitFrames.SV.CustomColourCompanionFrame[2],
         0.1 * UnitFrames.SV.CustomColourCompanionFrame[3],
         0.9,
     } -- Companion
-    local invulnerablecolor =
-    {
+    local invulnerablecolor = {
         UnitFrames.SV.CustomColourInvulnerable[1],
         UnitFrames.SV.CustomColourInvulnerable[2],
         UnitFrames.SV.CustomColourInvulnerable[3],
         0.9,
     } -- Invulnerable
-    local invulnerablecolor_inlay =
-    {
+    local invulnerablecolor_inlay = {
         UnitFrames.SV.CustomColourInvulnerable[1],
         UnitFrames.SV.CustomColourInvulnerable[2],
         UnitFrames.SV.CustomColourInvulnerable[3],
@@ -4629,60 +4545,52 @@ function UnitFrames.CustomFramesApplyColors(isMenu)
 end
 
 function UnitFrames.CustomFramesApplyColorsSingle(unitTag)
-    local health =
-    {
+    local health = {
         UnitFrames.SV.CustomColourHealth[1],
         UnitFrames.SV.CustomColourHealth[2],
         UnitFrames.SV.CustomColourHealth[3],
         0.9,
     }
 
-    local dps =
-    {
+    local dps = {
         UnitFrames.SV.CustomColourDPS[1],
         UnitFrames.SV.CustomColourDPS[2],
         UnitFrames.SV.CustomColourDPS[3],
         0.9,
     }
-    local healer =
-    {
+    local healer = {
         UnitFrames.SV.CustomColourHealer[1],
         UnitFrames.SV.CustomColourHealer[2],
         UnitFrames.SV.CustomColourHealer[3],
         0.9,
     }
-    local tank =
-    {
+    local tank = {
         UnitFrames.SV.CustomColourTank[1],
         UnitFrames.SV.CustomColourTank[2],
         UnitFrames.SV.CustomColourTank[3],
         0.9,
     }
 
-    local health_bg =
-    {
+    local health_bg = {
         0.1 * UnitFrames.SV.CustomColourHealth[1],
         0.1 * UnitFrames.SV.CustomColourHealth[2],
         0.1 * UnitFrames.SV.CustomColourHealth[3],
         0.9,
     }
 
-    local dps_bg =
-    {
+    local dps_bg = {
         0.1 * UnitFrames.SV.CustomColourDPS[1],
         0.1 * UnitFrames.SV.CustomColourDPS[2],
         0.1 * UnitFrames.SV.CustomColourDPS[3],
         0.9,
     }
-    local healer_bg =
-    {
+    local healer_bg = {
         0.1 * UnitFrames.SV.CustomColourHealer[1],
         0.1 * UnitFrames.SV.CustomColourHealer[2],
         0.1 * UnitFrames.SV.CustomColourHealer[3],
         0.9,
     }
-    local tank_bg =
-    {
+    local tank_bg = {
         0.1 * UnitFrames.SV.CustomColourTank[1],
         0.1 * UnitFrames.SV.CustomColourTank[2],
         0.1 * UnitFrames.SV.CustomColourTank[3],
@@ -4721,52 +4629,44 @@ end
 
 function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
     if isPlayer and UnitFrames.SV.FrameColorClass then
-        local classColor =
-        {
-            [1] =
-            {
+        local classColor = {
+            [1] = {
                 UnitFrames.SV.CustomColourDragonknight[1],
                 UnitFrames.SV.CustomColourDragonknight[2],
                 UnitFrames.SV.CustomColourDragonknight[3],
                 0.9,
             }, -- Dragonkight
-            [2] =
-            {
+            [2] = {
                 UnitFrames.SV.CustomColourSorcerer[1],
                 UnitFrames.SV.CustomColourSorcerer[2],
                 UnitFrames.SV.CustomColourSorcerer[3],
                 0.9,
             }, -- Sorcerer
-            [3] =
-            {
+            [3] = {
                 UnitFrames.SV.CustomColourNightblade[1],
                 UnitFrames.SV.CustomColourNightblade[2],
                 UnitFrames.SV.CustomColourNightblade[3],
                 0.9,
             }, -- Nightblade
-            [4] =
-            {
+            [4] = {
                 UnitFrames.SV.CustomColourWarden[1],
                 UnitFrames.SV.CustomColourWarden[2],
                 UnitFrames.SV.CustomColourWarden[3],
                 0.9,
             }, -- Warden
-            [5] =
-            {
+            [5] = {
                 UnitFrames.SV.CustomColourNecromancer[1],
                 UnitFrames.SV.CustomColourNecromancer[2],
                 UnitFrames.SV.CustomColourNecromancer[3],
                 0.9,
             }, -- Necromancer
-            [6] =
-            {
+            [6] = {
                 UnitFrames.SV.CustomColourTemplar[1],
                 UnitFrames.SV.CustomColourTemplar[2],
                 UnitFrames.SV.CustomColourTemplar[3],
                 0.9,
             }, -- Templar
-            [117] =
-            {
+            [117] = {
                 UnitFrames.SV.CustomColourArcanist[1],
                 UnitFrames.SV.CustomColourArcanist[2],
                 UnitFrames.SV.CustomColourArcanist[3],
@@ -4774,52 +4674,44 @@ function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
             }, -- Arcanist
         }
 
-        local classBackground =
-        {
-            [1] =
-            {
+        local classBackground = {
+            [1] = {
                 0.1 * UnitFrames.SV.CustomColourDragonknight[1],
                 0.1 * UnitFrames.SV.CustomColourDragonknight[2],
                 0.1 * UnitFrames.SV.CustomColourDragonknight[3],
                 0.9,
             }, -- Dragonkight
-            [2] =
-            {
+            [2] = {
                 0.1 * UnitFrames.SV.CustomColourSorcerer[1],
                 0.1 * UnitFrames.SV.CustomColourSorcerer[2],
                 0.1 * UnitFrames.SV.CustomColourSorcerer[3],
                 0.9,
             }, -- Sorcerer
-            [3] =
-            {
+            [3] = {
                 0.1 * UnitFrames.SV.CustomColourNightblade[1],
                 0.1 * UnitFrames.SV.CustomColourNightblade[2],
                 0.1 * UnitFrames.SV.CustomColourNightblade[3],
                 0.9,
             }, -- Nightblade
-            [4] =
-            {
+            [4] = {
                 0.1 * UnitFrames.SV.CustomColourWarden[1],
                 0.1 * UnitFrames.SV.CustomColourWarden[2],
                 0.1 * UnitFrames.SV.CustomColourWarden[3],
                 0.9,
             }, -- Warden
-            [5] =
-            {
+            [5] = {
                 0.1 * UnitFrames.SV.CustomColourNecromancer[1],
                 0.1 * UnitFrames.SV.CustomColourNecromancer[2],
                 0.1 * UnitFrames.SV.CustomColourNecromancer[3],
                 0.9,
             }, -- Necromancer
-            [6] =
-            {
+            [6] = {
                 0.1 * UnitFrames.SV.CustomColourTemplar[1],
                 0.1 * UnitFrames.SV.CustomColourTemplar[2],
                 0.1 * UnitFrames.SV.CustomColourTemplar[3],
                 0.9,
             }, -- Templar
-            [117] =
-            {
+            [117] = {
                 0.1 * UnitFrames.SV.CustomColourArcanist[1],
                 0.1 * UnitFrames.SV.CustomColourArcanist[2],
                 0.1 * UnitFrames.SV.CustomColourArcanist[3],
@@ -4839,52 +4731,44 @@ function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
     end
 
     if UnitFrames.SV.FrameColorReaction then
-        local reactionColor =
-        {
-            [UNIT_REACTION_PLAYER_ALLY] =
-            {
+        local reactionColor = {
+            [UNIT_REACTION_PLAYER_ALLY] = {
                 UnitFrames.SV.CustomColourPlayer[1],
                 UnitFrames.SV.CustomColourPlayer[2],
                 UnitFrames.SV.CustomColourPlayer[3],
                 0.9,
             },
-            [UNIT_REACTION_DEFAULT] =
-            {
+            [UNIT_REACTION_DEFAULT] = {
                 UnitFrames.SV.CustomColourFriendly[1],
                 UnitFrames.SV.CustomColourFriendly[2],
                 UnitFrames.SV.CustomColourFriendly[3],
                 0.9,
             },
-            [UNIT_REACTION_FRIENDLY] =
-            {
+            [UNIT_REACTION_FRIENDLY] = {
                 UnitFrames.SV.CustomColourFriendly[1],
                 UnitFrames.SV.CustomColourFriendly[2],
                 UnitFrames.SV.CustomColourFriendly[3],
                 0.9,
             },
-            [UNIT_REACTION_NPC_ALLY] =
-            {
+            [UNIT_REACTION_NPC_ALLY] = {
                 UnitFrames.SV.CustomColourFriendly[1],
                 UnitFrames.SV.CustomColourFriendly[2],
                 UnitFrames.SV.CustomColourFriendly[3],
                 0.9,
             },
-            [UNIT_REACTION_HOSTILE] =
-            {
+            [UNIT_REACTION_HOSTILE] = {
                 UnitFrames.SV.CustomColourHostile[1],
                 UnitFrames.SV.CustomColourHostile[2],
                 UnitFrames.SV.CustomColourHostile[3],
                 0.9,
             },
-            [UNIT_REACTION_NEUTRAL] =
-            {
+            [UNIT_REACTION_NEUTRAL] = {
                 UnitFrames.SV.CustomColourNeutral[1],
                 UnitFrames.SV.CustomColourNeutral[2],
                 UnitFrames.SV.CustomColourNeutral[3],
                 0.9,
             },
-            [UNIT_REACTION_COMPANION] =
-            {
+            [UNIT_REACTION_COMPANION] = {
                 UnitFrames.SV.CustomColourCompanion[1],
                 UnitFrames.SV.CustomColourCompanion[2],
                 UnitFrames.SV.CustomColourCompanion[3],
@@ -4892,52 +4776,44 @@ function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
             },
         }
 
-        local reactionBackground =
-        {
-            [UNIT_REACTION_PLAYER_ALLY] =
-            {
+        local reactionBackground = {
+            [UNIT_REACTION_PLAYER_ALLY] = {
                 0.1 * UnitFrames.SV.CustomColourPlayer[1],
                 0.1 * UnitFrames.SV.CustomColourPlayer[2],
                 0.1 * UnitFrames.SV.CustomColourPlayer[3],
                 0.9,
             },
-            [UNIT_REACTION_DEFAULT] =
-            {
+            [UNIT_REACTION_DEFAULT] = {
                 0.1 * UnitFrames.SV.CustomColourFriendly[1],
                 0.1 * UnitFrames.SV.CustomColourFriendly[2],
                 0.1 * UnitFrames.SV.CustomColourFriendly[3],
                 0.9,
             },
-            [UNIT_REACTION_FRIENDLY] =
-            {
+            [UNIT_REACTION_FRIENDLY] = {
                 0.1 * UnitFrames.SV.CustomColourFriendly[1],
                 0.1 * UnitFrames.SV.CustomColourFriendly[2],
                 0.1 * UnitFrames.SV.CustomColourFriendly[3],
                 0.9,
             },
-            [UNIT_REACTION_NPC_ALLY] =
-            {
+            [UNIT_REACTION_NPC_ALLY] = {
                 0.1 * UnitFrames.SV.CustomColourFriendly[1],
                 0.1 * UnitFrames.SV.CustomColourFriendly[2],
                 0.1 * UnitFrames.SV.CustomColourFriendly[3],
                 0.9,
             },
-            [UNIT_REACTION_HOSTILE] =
-            {
+            [UNIT_REACTION_HOSTILE] = {
                 0.1 * UnitFrames.SV.CustomColourHostile[1],
                 0.1 * UnitFrames.SV.CustomColourHostile[2],
                 0.1 * UnitFrames.SV.CustomColourHostile[3],
                 0.9,
             },
-            [UNIT_REACTION_NEUTRAL] =
-            {
+            [UNIT_REACTION_NEUTRAL] = {
                 0.1 * UnitFrames.SV.CustomColourNeutral[1],
                 0.1 * UnitFrames.SV.CustomColourNeutral[2],
                 0.1 * UnitFrames.SV.CustomColourNeutral[3],
                 0.9,
             },
-            [UNIT_REACTION_COMPANION] =
-            {
+            [UNIT_REACTION_COMPANION] = {
                 0.1 * UnitFrames.SV.CustomColourCompanion[1],
                 0.1 * UnitFrames.SV.CustomColourCompanion[2],
                 0.1 * UnitFrames.SV.CustomColourCompanion[3],
@@ -4952,15 +4828,13 @@ function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
             local reactioncolor
             local reactioncolor_bg
             if IsUnitInvulnerableGuard("reticleover") then
-                reactioncolor =
-                {
+                reactioncolor = {
                     UnitFrames.SV.CustomColourGuard[1],
                     UnitFrames.SV.CustomColourGuard[2],
                     UnitFrames.SV.CustomColourGuard[3],
                     0.9,
                 }
-                reactioncolor_bg =
-                {
+                reactioncolor_bg = {
                     0.1 * UnitFrames.SV.CustomColourGuard[1],
                     0.1 * UnitFrames.SV.CustomColourGuard[2],
                     0.1 * UnitFrames.SV.CustomColourGuard[3],
@@ -4975,15 +4849,13 @@ function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
             thb.backdrop:SetCenterColor(unpack(reactioncolor_bg))
         end
     else
-        local health =
-        {
+        local health = {
             UnitFrames.SV.CustomColourHealth[1],
             UnitFrames.SV.CustomColourHealth[2],
             UnitFrames.SV.CustomColourHealth[3],
             0.9,
         }
-        local health_bg =
-        {
+        local health_bg = {
             0.1 * UnitFrames.SV.CustomColourHealth[1],
             0.1 * UnitFrames.SV.CustomColourHealth[2],
             0.1 * UnitFrames.SV.CustomColourHealth[3],
@@ -5111,15 +4983,14 @@ function UnitFrames.DefaultFramesApplyFont(unitTag)
     local fontStyle = (UnitFrames.SV.DefaultFontStyle and UnitFrames.SV.DefaultFontStyle ~= "") and UnitFrames.SV.DefaultFontStyle or "soft-shadow-thick"
     local fontSize = (UnitFrames.SV.DefaultFontSize and UnitFrames.SV.DefaultFontSize > 0) and UnitFrames.SV.DefaultFontSize or 16
 
-    local applyDefaultFont = function (unitTag)
+    local applyDefaultFont = function(unitTag)
         if g_DefaultFrames[unitTag] then
             local unitFrame = g_DefaultFrames[unitTag]
-            for _, powerType in pairs(
-                {
-                    COMBAT_MECHANIC_FLAGS_HEALTH,
-                    COMBAT_MECHANIC_FLAGS_MAGICKA,
-                    COMBAT_MECHANIC_FLAGS_STAMINA,
-                }) do
+            for _, powerType in pairs({
+                COMBAT_MECHANIC_FLAGS_HEALTH,
+                COMBAT_MECHANIC_FLAGS_MAGICKA,
+                COMBAT_MECHANIC_FLAGS_STAMINA,
+            }) do
                 if unitFrame[powerType] then
                     unitFrame[powerType].label:SetFont(zo_strformat("<<1>>|<<2>>|<<3>>", fontName, fontSize, fontStyle))
                 end
@@ -5144,15 +5015,14 @@ end
 -- Reapplies color for default unit frames extender module labels
 function UnitFrames.DefaultFramesApplyColor()
     -- Helper function
-    local applyDefaultColor = function (unitTag)
+    local applyDefaultColor = function(unitTag)
         if g_DefaultFrames[unitTag] then
             local unitFrame = g_DefaultFrames[unitTag]
-            for _, powerType in pairs(
-                {
-                    COMBAT_MECHANIC_FLAGS_HEALTH,
-                    COMBAT_MECHANIC_FLAGS_MAGICKA,
-                    COMBAT_MECHANIC_FLAGS_STAMINA,
-                }) do
+            for _, powerType in pairs({
+                COMBAT_MECHANIC_FLAGS_HEALTH,
+                COMBAT_MECHANIC_FLAGS_MAGICKA,
+                COMBAT_MECHANIC_FLAGS_STAMINA,
+            }) do
                 if unitFrame[powerType] then
                     unitFrame[powerType].color = UnitFrames.SV.DefaultTextColour
                     unitFrame[powerType].label:SetColor(UnitFrames.SV.DefaultTextColour[1], UnitFrames.SV.DefaultTextColour[2], UnitFrames.SV.DefaultTextColour[3])
@@ -5182,22 +5052,21 @@ function UnitFrames.CustomFramesApplyFont()
     local sizeCaption = (UnitFrames.SV.CustomFontOther and UnitFrames.SV.CustomFontOther > 0) and UnitFrames.SV.CustomFontOther or 16
     local sizeBars = (UnitFrames.SV.CustomFontBars and UnitFrames.SV.CustomFontBars > 0) and UnitFrames.SV.CustomFontBars or 14
 
-    local __mkFont = function (size)
+    local __mkFont = function(size)
         return zo_strformat("<<1>>|<<2>>|<<3>>", fontName, size, fontStyle)
     end
 
     -- After fonts is applied unhide frames, so player can see changes even from menu
-    for _, baseName in pairs(
-        {
-            "player",
-            "reticleover",
-            "companion",
-            "SmallGroup",
-            "RaidGroup",
-            "boss",
-            "AvaPlayerTarget",
-            "PetGroup",
-        }) do
+    for _, baseName in pairs({
+        "player",
+        "reticleover",
+        "companion",
+        "SmallGroup",
+        "RaidGroup",
+        "boss",
+        "AvaPlayerTarget",
+        "PetGroup",
+    }) do
         for i = 0, 24 do
             local unitTag = (i == 0) and baseName or (baseName .. i)
             if UnitFrames.CustomFrames[unitTag] then
@@ -5220,12 +5089,11 @@ function UnitFrames.CustomFramesApplyFont()
                 if unitFrame.dead then
                     unitFrame.dead:SetFont(__mkFont(sizeBars))
                 end
-                for _, powerType in pairs(
-                    {
-                        COMBAT_MECHANIC_FLAGS_HEALTH,
-                        COMBAT_MECHANIC_FLAGS_MAGICKA,
-                        COMBAT_MECHANIC_FLAGS_STAMINA,
-                    }) do
+                for _, powerType in pairs({
+                    COMBAT_MECHANIC_FLAGS_HEALTH,
+                    COMBAT_MECHANIC_FLAGS_MAGICKA,
+                    COMBAT_MECHANIC_FLAGS_STAMINA,
+                }) do
                     if unitFrame[powerType] then
                         if unitFrame[powerType].label then
                             unitFrame[powerType].label:SetFont(__mkFont(sizeBars))

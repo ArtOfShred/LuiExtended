@@ -28,8 +28,7 @@ function SpellCastBuffs.DisplayWerewolfIcon()
     SetWerewolfIcon()
     local context = SpellCastBuffs.DetermineContextSimple("player1", g_werewolfId, g_werewolfName)
     local power = GetUnitPower("player", COMBAT_MECHANIC_FLAGS_WEREWOLF)
-    SpellCastBuffs.EffectsList[context]["Werewolf Indicator"] =
-    {
+    SpellCastBuffs.EffectsList[context]["Werewolf Indicator"] = {
         target = "player",
         type = 1,
         id = g_werewolfId,
@@ -78,7 +77,7 @@ function SpellCastBuffs.WerewolfState(eventCode, werewolf, onActivation)
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
         g_werewolfCounter = 0
         -- Delay resetting this value - as the quest werewolf transform event causes werewolf true, false, true in succession.
-        zo_callLater(function ()
+        zo_callLater(function()
             g_werewolfQuest = 0
         end, 5000)
     end
@@ -99,7 +98,7 @@ function SpellCastBuffs.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType,
         eventManager:UnregisterForUpdate(moduleName .. "WerewolfTicker")
         g_werewolfCounter = 0
         -- Delay resetting this value - as the quest werewolf transform event causes werewolf true, false, true in succession.
-        zo_callLater(function ()
+        zo_callLater(function()
             g_werewolfQuest = 0
         end, 5000)
     end
