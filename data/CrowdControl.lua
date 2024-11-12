@@ -6,6 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
+---@class CrowdControl
 local CrowdControl = LUIE.Data.CrowdControl
 
 -- CrowdControl.aoePlayerUltimate

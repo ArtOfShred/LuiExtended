@@ -6,6 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
+---@class BlacklistPresets
 local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
 
 -- Sets

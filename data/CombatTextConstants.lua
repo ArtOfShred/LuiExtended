@@ -6,6 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
+---@class CombatTextConstants
 local CombatTextConstants =
 {
     -- Damage & Healing

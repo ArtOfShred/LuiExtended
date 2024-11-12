@@ -38,6 +38,7 @@ local PoisonDamage = GetString(SI_DAMAGETYPE11) .. " Damage" -- TODO: Localize
 local BleedDamage = GetString(SI_DAMAGETYPE12) .. " Damage" -- TODO: Localize
 local OblivionDamage = "Oblivion Damage" -- TODO: Localize
 
+---@class Tooltips
 local Tooltips =
 {
     ----------------------------------------------------------------

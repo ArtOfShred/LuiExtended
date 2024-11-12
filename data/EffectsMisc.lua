@@ -6,6 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
+---@class Effects
 local Effects = LUIE.Data.Effects
 
 local Tooltips = LUIE.Data.Tooltips

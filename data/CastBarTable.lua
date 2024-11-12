@@ -8,6 +8,7 @@ local LUIE = LUIE
 
 --local Abilities = LUIE.Data.Abilities --unused local
 
+---@class CastBarTable
 local CastBarTable =
 {
     --------------------------------------------------------------------------------------------------------------------------------
