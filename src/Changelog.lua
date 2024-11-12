@@ -10,10 +10,12 @@ local zo_strformat = zo_strformat
 local table_concat = table.concat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.7.5|r",
+    "|cFFA500LuiExtended Version 6.7.6|r",
     "",
     "|cFFFF00General:|r",
-    "[*] Oakensoul menu setting added to Buffs & Debuffs Module -> Display Options.",
+    "[*] Fixed ESO Plus Member Icon from always showing on long buffs.",
+	"",
+	 "[*] Increased api version of LUIE and optional dependencies.",
     "",
 }
 
