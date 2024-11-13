@@ -44,6 +44,12 @@
 			<Action name="LUIE_COMMAND_AZANDAR">
 				<Down>LUIE.SlashCommands.SlashCollectible(11114)</Down>
 			</Action>
+			<Action name="LUIE_COMMAND_TANLORIN">
+				<Down>LUIE.SlashCommands.SlashCollectible(12172)</Down>
+			</Action>
+			<Action name="LUIE_COMMAND_ZERITHVAR">
+				<Down>LUIE.SlashCommands.SlashCollectible(12173)</Down>
+			</Action>
 			<Action name="LUIE_DISMISS_PET">
 				<Down>LUIE.SlashCommands.SlashPet()</Down>
 			</Action>

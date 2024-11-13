@@ -10,12 +10,12 @@ local zo_strformat = zo_strformat
 local table_concat = table.concat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.7.6|r",
+    "|cFFA500LuiExtended Version 6.7.7|r",
     "",
     "|cFFFF00General:|r",
-    "[*] Fixed ESO Plus Member Icon from always showing on long buffs.",
-	"",
-	 "[*] Increased api version of LUIE and optional dependencies.",
+    "[*] Hopefully fixed the error, "Escape '%' characters to prevent illegal format specifiers."",
+    "",
+    "[*] Added new Companions, Tanlorin and Zerith-var.",
     "",
 }
 

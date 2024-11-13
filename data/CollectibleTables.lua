@@ -64,6 +64,8 @@ local CollectibleTables =
         [9912] = "Isobel",
         [11113] = "Sharp",
         [11114] = "Azandar",
+        [12172] = "Tanlorin",
+        [12173] = "Zerith-var",
     },
 }
 
