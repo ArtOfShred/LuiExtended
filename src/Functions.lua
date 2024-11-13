@@ -110,7 +110,15 @@ end
 --- @param messageOrFormatter string: The message to be printed.
 --- @param ... string: Variable number of arguments to be passed to CHAT_ROUTER:AddSystemMessage.
 function LUIE.AddSystemMessage(messageOrFormatter, ...)
-    CHAT_ROUTER:AddSystemMessage(string_format(messageOrFormatter or "", ...))
+    local formattedMessage
+    if select("#", ...) > 0 then
+        -- Escape '%' characters to prevent illegal format specifiers.
+        local safeFormat = zo_strgsub(messageOrFormatter, "%%", "%%%%")
+        formattedMessage = string_format(safeFormat, ...)
+    else
+        formattedMessage = messageOrFormatter
+    end
+    CHAT_ROUTER:AddSystemMessage(formattedMessage)
 end
 
 --- Easy Print to Chat.
