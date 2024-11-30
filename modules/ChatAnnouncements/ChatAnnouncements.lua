@@ -813,7 +813,7 @@ local g_notableIDs = {
 };
 
 -- List of items that can be removed from the players equipped item slots.
-local g_removeableIDs = {
+local g_removableIDs = {
     [44486] = true; -- Prismatic Blade (Fighters Guild Quests)
     [44487] = true; -- Prismatic Greatblade (Fighters Guild Quests)
     [44488] = true; -- Prismatic Long Bow (Fighters Guild Quests)
@@ -4497,7 +4497,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                             gainOrLoss = 3;
                         end;
                         ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false);
-                    elseif not g_itemWasDestroyed and g_removeableIDs[itemId] and ChatAnnouncements.SV.Inventory.LootShowRemove then
+                    elseif not g_itemWasDestroyed and g_removableIDs[itemId] and ChatAnnouncements.SV.Inventory.LootShowRemove then
                         gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4;
                         logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove;
                         ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false);
@@ -4752,7 +4752,7 @@ function ChatAnnouncements.InventoryUpdate(eventCode, bagId, slotId, isNewItem, 
                         end, 25);
                     end;
                     -- For any leftover cases for items removed.
-                elseif not g_itemWasDestroyed and g_removeableIDs[itemId] and ChatAnnouncements.SV.Inventory.LootShowRemove then
+                elseif not g_itemWasDestroyed and g_removableIDs[itemId] and ChatAnnouncements.SV.Inventory.LootShowRemove then
                     gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4;
                     logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove;
                     ChatAnnouncements.ItemPrinter(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false);
@@ -10205,7 +10205,7 @@ function ChatAnnouncements.HookFunction()
 
         --Group--
         local isGroupModificationAvailable = IsGroupModificationAvailable();
-        local groupModicationRequiresVoting = DoesGroupModificationRequireVote();
+        local groupModificationRequiresVoting = DoesGroupModificationRequireVote();
         local isSoloOrLeader = IsUnitSoloOrGroupLeader('player');
 
         local function AlertGroupDisabled()
@@ -10227,7 +10227,7 @@ function ChatAnnouncements.HookFunction()
         local isInGroup = IsPlayerInGroup(currentTargetCharacterNameRaw);
 
         if isInGroup then
-            local groupKickEnabled = isGroupModificationAvailable and isSoloOrLeader and not groupModicationRequiresVoting or IsInLFGGroup();
+            local groupKickEnabled = isGroupModificationAvailable and isSoloOrLeader and not groupModificationRequiresVoting or IsInLFGGroup();
             local lfgKick = IsInLFGGroup();
             local groupKickFunction = nil;
             if groupKickEnabled then
