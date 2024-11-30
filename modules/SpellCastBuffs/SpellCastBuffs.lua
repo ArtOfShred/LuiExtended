@@ -2359,7 +2359,7 @@ function SpellCastBuffs.ArtificialEffectUpdate(eventCode, effectId)
     if effectId then
         local removeEffect = effectId;
         -- Handle Battle Spirit effect ID
-        if effectId == 0 or effectId == 2 then
+        if effectId == 1 or effectId == 2 then
             removeEffect = 999014;
         end;
         local displayName = GetDisplayName();
@@ -2367,8 +2367,8 @@ function SpellCastBuffs.ArtificialEffectUpdate(eventCode, effectId)
         SpellCastBuffs.EffectsList[context][removeEffect] = nil;
     end;
     for activeEffectId in ZO_GetNextActiveArtificialEffectIdIter do
-        -- Bail out if we don't have Battle Spirit display for the player on
-        if (activeEffectId == 0 or activeEffectId == 2) and SpellCastBuffs.SV.IgnoreBattleSpiritPlayer or SpellCastBuffs.SV.IgnoreEsoPlusPlayer then
+        -- Bail out if we don't have ESO Plus or Battle Spirit display for the player on
+        if (activeEffectId == 0 and SpellCastBuffs.SV.IgnoreEsoPlusPlayer) or ((activeEffectId == 1 or activeEffectId == 2) and SpellCastBuffs.SV.IgnoreBattleSpiritPlayer) then
             return;
         end;
         local displayName, iconFile, effectType, _, startTime = GetArtificialEffectInfo(activeEffectId);
