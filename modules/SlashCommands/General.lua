@@ -355,7 +355,7 @@ function SlashCommands.SlashReport(player)
     local currenttime = GetTimeString();
     local currentdate = GetDateStringFromTimestamp(GetTimeStamp());
     local server = GetWorldName();
-    local text = "I've encounterd a suspicious player.\n\nName: <<1>>\nLocation: <<2>>\nDate & Time: <<3>> <<4>>\nServer: <<5>>";
+    local text = "I've encountered a suspicious player.\n\nName: <<1>>\nLocation: <<2>>\nDate & Time: <<3>> <<4>>\nServer: <<5>>";
 
     -- Set the category to report a player
     HELP_CUSTOMER_SERVICE_ASK_FOR_HELP_KEYBOARD:SelectCategory(2);
