@@ -51,6 +51,11 @@ Effects.EffectHideSCT =
     [84357] = true; -- Hand of Mephala Webbing (of Mephala's Hand)
 
     ----------------------------
+    -- Arcanist
+    ----------------------------
+    [184291] = true; -- Exhausting Fatecarver(IMMUNE)
+
+    ----------------------------
     -- Nightblade
     ----------------------------
 
