@@ -848,7 +848,7 @@ function LUIE.InitializeHooks()
                 if selectedData.isArtificial then
                     if abilityId == 0 then
                         -- ESO Plus
-                        labelAbilityId = 999017;
+                        labelAbilityId = 63601;
                     elseif abilityId == 1 or abilityId == 2 then
                         labelAbilityId = 999014;
                     else
@@ -958,7 +958,7 @@ function LUIE.InitializeHooks()
                     -- Map artificial effect IDs to our tracking IDs
                     if control.effectId == 0 then
                         -- ESO Plus
-                        labelAbilityId = 999017;
+                        labelAbilityId = 63601;
                     elseif control.effectId == 1 or control.effectId == 2 then
                         -- Battle Spirit (Cyrodiil)
                         labelAbilityId = 999014;
