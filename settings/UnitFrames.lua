@@ -103,7 +103,7 @@ function UnitFrames.CreateSettings()
 
     -- Get fonts
     local FontsList = {};
-    for f in pairs(LUIE.Fonts) do
+    for f, _ in pairs(LUIE.Fonts) do
         table_insert(FontsList, f);
     end;
 

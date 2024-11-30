@@ -48,7 +48,7 @@ function UI.Control(parent, anchors, dims, hidden, name)
     local c = windowManager:CreateControl(controlName, parent, CT_CONTROL);
     c:SetHidden(hidden);
     if anchors == 'fill' then
-        c:SetAnchorFill();
+        c:SetAnchorFill(nil);
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         c:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0);
     end;
@@ -76,7 +76,7 @@ function UI.Texture(parent, anchors, dims, texture, drawlayer, hidden)
     local t = windowManager:CreateControl(nil, parent, CT_TEXTURE);
     t:SetHidden(hidden);
     if anchors == 'fill' then
-        t:SetAnchorFill();
+        t:SetAnchorFill(nil);
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         t:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0);
     end;
@@ -116,7 +116,7 @@ function UI.Backdrop(parent, anchors, dims, center, edge, hidden)
     bg:SetDrawLayer(DL_BACKGROUND);
     bg:SetHidden(hidden);
     if anchors == 'fill' then
-        bg:SetAnchorFill();
+        bg:SetAnchorFill(nil);
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         bg:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0);
     end;
@@ -152,7 +152,7 @@ function UI.ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
     bg:SetDrawLayer(DL_BACKGROUND);
     bg:SetHidden(hidden);
     if anchors == 'fill' then
-        bg:SetAnchorFill();
+        bg:SetAnchorFill(nil);
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         bg:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0);
     end;
@@ -179,7 +179,7 @@ function UI.StatusBar(parent, anchors, dims, color, hidden)
     local sb = windowManager:CreateControl(nil, parent, CT_STATUSBAR);
     sb:SetHidden(hidden);
     if anchors == 'fill' then
-        sb:SetAnchorFill();
+        sb:SetAnchorFill(nil);
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         sb:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0);
     end;
@@ -218,7 +218,7 @@ function UI.Label(parent, anchors, dims, align, font, text, hidden, name)
     label:SetWrapMode(TEXT_WRAP_MODE_ELLIPSIS);
     label:SetHidden(hidden);
     if anchors == 'fill' then
-        label:SetAnchorFill();
+        label:SetAnchorFill(nil);
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         label:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0);
     end;

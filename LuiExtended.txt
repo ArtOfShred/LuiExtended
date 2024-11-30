@@ -1,8 +1,8 @@
 ## Title: |c00C000Lui Extended|r
 ## Author: ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder
-## Version: 6.7.7
+## Version: 6.7.8
 ## APIVersion: 101044 101045
-## AddOnVersion: 677
+## AddOnVersion: 678
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buff & Debuff Tracking, Chat Announcements and Slash Commands.
 ## DependsOn: LibAddonMenu-2.0>=37 LibMediaProvider-1.0>=32
 ## OptionalDependsOn: LibChatMessage>=113 pChat>=10005050 CombatMetrics>=10516
@@ -46,6 +46,7 @@ data/AbilityTables.lua
 data/Tooltips.lua
 data/UnitNamesTable.lua
 data/ZoneNamesTable.lua
+# Effects
 data/Effects/KeepUpgradeOverride.lua
 data/Effects/KeepUpgradeTooltip.lua
 data/Effects/MapDataOverride.lua
@@ -77,7 +78,18 @@ data/CastBarTable.lua
 data/CollectibleTables.lua
 data/CombatTextConstants.lua
 data/AlertTable.lua
-data/CrowdControl.lua
+# CrowdControl
+data/CrowdControl/aoeNPCBoss.lua
+data/CrowdControl/aoeNPCElite.lua
+data/CrowdControl/aoeNPCNormal.lua
+data/CrowdControl/aoePlayerNormal.lua
+data/CrowdControl/aoePlayerSet.lua
+data/CrowdControl/aoePlayerUltimate.lua
+data/CrowdControl/aoeTraps.lua
+data/CrowdControl/IgnoreList.lua
+data/CrowdControl/LavaAlerts.lua
+data/CrowdControl/ReversedLogic.lua
+data/CrowdControl/SpecialCC.lua
 data/DebugTable.lua
 data/Quests.lua
 data/PetNames.lua

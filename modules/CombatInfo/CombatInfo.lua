@@ -5,12 +5,9 @@
 
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
--- CombatInfo namespace
----@class LUIE.CombatInfo : LuiExtended
-LUIE.CombatInfo = {};
 
----@class CombatInfo : LUIE.CombatInfo
-local CombatInfo = LUIE.CombatInfo;
+---@class CombatInfo
+local CombatInfo = {};
 
 local UI = LUIE.UI;
 local Effects = LUIE.Data.Effects;
@@ -1124,7 +1121,7 @@ end;
 -- Stops Attack Cast when releasing heavy attacks
 function CombatInfo.OnAbilityUsed(eventCode, actionSlotIndex)
     if actionSlotIndex == 2 then
-        LUIE.CombatInfo.StopCastBar();
+        CombatInfo.StopCastBar();
     end;
 end;
 
@@ -2729,3 +2726,7 @@ function CombatInfo.OnInventorySlotUpdate(eventCode, bagId, slotId, isNewItem, i
         CombatInfo.UpdateUltimateLabel();
     end;
 end;
+
+-- CombatInfo namespace
+---@class LUIE.CombatInfo : CombatInfo
+LUIE.CombatInfo = CombatInfo

@@ -39,8 +39,8 @@ function LUIE.InitializeHooks()
     local zos_GetSkillAbilityInfo = GetSkillAbilityInfo;
     --- Hook for Icon/Name changes.
     ---@param skillType SkillType
-    ---@param skillLineIndex luaindex
     ---@param skillIndex luaindex
+    ---@param abilityIndex luaindex
     ---@return string name
     ---@return textureName texture
     ---@return luaindex earnedRank
@@ -293,7 +293,7 @@ function LUIE.InitializeHooks()
     ---@param abilityId integer
     ---@param casterUnitTag? string
     ---@return string abilityName
-    GetAbilityName = function (abilityId)
+    GetAbilityName = function (abilityId, casterUnitTag)
         local abilityName = zos_GetAbilityName(abilityId);
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].name then
             abilityName = LUIE.Data.Effects.EffectOverride[abilityId].name;

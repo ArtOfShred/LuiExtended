@@ -159,7 +159,7 @@ local function createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY
     tlw:SetDrawTier(DT_MEDIUM);
     tlw.customPositionAttr = k:GetName();
     tlw.preview = UI.Backdrop(tlw, 'fill', nil, nil, nil, false);
-    tlw.preview:SetAnchorFill();
+    tlw.preview:SetAnchorFill(nil);
     tlw.previewLabel = UI.Label(tlw.preview, { CENTER, CENTER }, nil, nil, 'ZoFontGameMedium', v[1], false);
     return tlw;
 end;
