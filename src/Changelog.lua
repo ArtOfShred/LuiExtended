@@ -10,12 +10,12 @@ local zo_strformat = zo_strformat
 local table_concat = table.concat
 
 local changelogMessages = {
-    "|cFFA500LuiExtended Version 6.7.7|r",
+    "|cFFA500LuiExtended Version 6.7.8|r",
     "",
     "|cFFFF00General:|r",
-    "[*] Hopefully fixed the error, Escape '%' characters to prevent illegal format specifiers.",
+    "[*] Added Exhausting Fatecarver immune effect to the combattext ignore list. No more spam, woo.",
     "",
-    "[*] Added new Companions, Tanlorin and Zerith-var.",
+    "[*] Code cleanup. Shouldn't have any problems...but let me know if you do in the comments.",
     "",
 }
 
