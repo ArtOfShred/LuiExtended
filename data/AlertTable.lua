@@ -4111,7 +4111,7 @@ local AlertTable =
         summon = true;
         priority = 2;
         eventdetect = true;
-        reuslt = ACTION_RESULT_BEGIN;
+        result = ACTION_RESULT_BEGIN;
         fakeName = Unitnames.Boss_Prince_Naemon;
         refire = 120000;
     }; -- Q4960 Naemon Shield Shade (Shade of Naemon)
