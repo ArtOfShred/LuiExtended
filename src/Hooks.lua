@@ -64,8 +64,8 @@ function LUIE.InitializeHooks()
     local zos_GetSkillAbilityNextUpgradeInfo = GetSkillAbilityNextUpgradeInfo;
     --- Hook for Icon/Name changes.
     ---@param skillType SkillType
-    ---@param skillLineIndex luaindex
     ---@param skillIndex luaindex
+    ---@param abilityIndex luaindex
     ---@return string name
     ---@return textureName texture
     ---@return luaindex|nil earnedRank
@@ -171,14 +171,14 @@ function LUIE.InitializeHooks()
 
     --- Override function for GetKillingAttackInfo.
     ---@param index luaindex
-    ---@return string attackName
-    ---@return integer attackDamage
-    ---@return textureName attackIcon
-    ---@return bool wasKillingBlow
-    ---@return integer castTimeAgoMS
-    ---@return integer durationMS
-    ---@return integer numAttackHits
-    ---@return integer abilityId
+    ---@return string|nil attackName
+    ---@return integer|nil attackDamage
+    ---@return textureName|nil attackIcon
+    ---@return bool|nil wasKillingBlow
+    ---@return integer|nil castTimeAgoMS
+    ---@return integer|nil durationMS
+    ---@return integer|nil numAttackHits
+    ---@return integer|nil abilityId
     ---@return textureName|nil abilityFxIcon
     GetKillingAttackInfo = function (index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index);
@@ -338,6 +338,7 @@ function LUIE.InitializeHooks()
     end;
 
     -- Hook synergy popup Icon/Name (to fix inconsistencies and add custom icons for some Quest/Encounter based Synergies)
+    ---@diagnostic disable-next-line: duplicate-set-field
     ZO_Synergy.OnSynergyAbilityChanged = function (self)
         local hasSynergy, synergyName, iconFilename, prompt = GetCurrentSynergyInfo();
 
@@ -666,23 +667,26 @@ function LUIE.InitializeHooks()
         --Artificial effects
         local sortedArtificialEffectsTable = {};
         for effectId in ZO_GetNextActiveArtificialEffectIdIter do
-            local displayName, iconFile, effectType, sortOrder, startTime, endTime = GetArtificialEffectInfo(effectId);
+            -- Skip ESO Plus buff (effectId == 0)
+            if effectId ~= 0 then
+                local displayName, iconFile, effectType, sortOrder, startTime, endTime = GetArtificialEffectInfo(effectId);
 
-            local data = ZO_GamepadEntryData:New(zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName), iconFile);
-            data.displayMode = GAMEPAD_STATS_DISPLAY_MODE.EFFECTS;
-            data.canClickOff = false;
-            data.artificialEffectId = effectId;
-            data.tooltipTitle = displayName;
-            data.sortOrder = sortOrder;
-            data.isArtificial = true;
+                local data = ZO_GamepadEntryData:New(zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName), iconFile);
+                data.displayMode = GAMEPAD_STATS_DISPLAY_MODE.EFFECTS;
+                data.canClickOff = false;
+                data.artificialEffectId = effectId;
+                data.tooltipTitle = displayName;
+                data.sortOrder = sortOrder;
+                data.isArtificial = true;
 
-            local duration = endTime - startTime;
-            if duration > 0 then
-                local timeLeft = (endTime * 1000.0) - GetFrameTimeMilliseconds();
-                data:SetCooldown(timeLeft, duration * 1000.0);
+                local duration = endTime - startTime;
+                if duration > 0 then
+                    local timeLeft = (endTime * 1000.0) - GetFrameTimeMilliseconds();
+                    data:SetCooldown(timeLeft, duration * 1000.0);
+                end;
+
+                table_insert(sortedArtificialEffectsTable, data);
             end;
-
-            table_insert(sortedArtificialEffectsTable, data);
         end;
 
         table_sort(sortedArtificialEffectsTable, ArtificialEffectsRowComparator);
@@ -842,8 +846,10 @@ function LUIE.InitializeHooks()
                     artificial = true;
                 end;
                 if selectedData.isArtificial then
-                    -- Change id for Battle Spirit to match the one we track in SCB to avoid confusion
-                    if abilityId == 0 or abilityId == 2 then
+                    if abilityId == 0 then
+                        -- ESO Plus
+                        labelAbilityId = 999017;
+                    elseif abilityId == 1 or abilityId == 2 then
                         labelAbilityId = 999014;
                     else
                         labelAbilityId = 'Artificial';
@@ -950,12 +956,12 @@ function LUIE.InitializeHooks()
                 end;
                 if control.isArtificial then
                     -- Map artificial effect IDs to our tracking IDs
-                    if control.effectId == 0 or control.effectId == 2 then
-                        -- Battle Spirit (Cyrodiil)
-                        labelAbilityId = 999014;
-                    elseif control.effectId == 1 then
+                    if control.effectId == 0 then
                         -- ESO Plus
                         labelAbilityId = 999017;
+                    elseif control.effectId == 1 or control.effectId == 2 then
+                        -- Battle Spirit (Cyrodiil)
+                        labelAbilityId = 999014;
                     elseif control.effectId == 3 then
                         -- Battleground Deserter
                         labelAbilityId = 999015;
