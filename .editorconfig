@@ -10,7 +10,7 @@ indent_size = 4
 # if indent_style is tab, this is valid
 tab_width = 4
 # none/single/double
-quote_style = double
+quote_style = single
 
 continuation_indent = 4
 ## extend option
@@ -23,11 +23,11 @@ continuation_indent.in_table = 4
 max_line_length = unset
 
 # optional crlf/lf/cr/auto, if it is 'auto', in windows it is crlf other platforms are lf
-# in neovim the value 'auto' is not a valid option, please use 'unset'
+# in neovim the value 'auto' is not a valid option, please use 'unset' 
 end_of_line = crlf
 
 #  none/ comma / semicolon / only_kv_colon
-table_separator_style = none
+table_separator_style = only_kv_colon
 
 #optional keep/never/always/smart
 trailing_table_separator = keep
@@ -56,9 +56,9 @@ space_before_closure_open_parenthesis = true
 space_before_function_call_single_arg = always
 ## extend option
 ## always/keep/none
-# space_before_function_call_single_arg.table = always
+space_before_function_call_single_arg.table = always
 ## always/keep/none
-# space_before_function_call_single_arg.string = always
+space_before_function_call_single_arg.string = always
 
 space_before_open_square_bracket = false
 
@@ -110,7 +110,7 @@ align_continuous_line_space = 2
 align_if_branch = false
 
 # option none / always / contain_curly/
-align_array_table = contain_curly
+align_array_table = false
 
 align_continuous_similar_call_args = false
 
@@ -130,8 +130,8 @@ allow_non_indented_comments = false
 # [line space]
 
 # The following configuration supports four expressions
-# keep
-# fixed(n)
+# keep  
+# fixed(n)   
 # min(n)
 # max(n)
 # for eg. min(2)
@@ -160,11 +160,11 @@ break_all_list_when_line_exceed = false
 
 auto_collapse_lines = false
 
-break_before_braces = true
+break_before_braces = false
 
 # [preference]
 ignore_space_after_colon = false
 
 remove_call_expression_list_finish_comma = false
 # keep / always / same_line / replace_with_newline / never
-end_statement_with_semicolon = replace_with_newline
+end_statement_with_semicolon = always

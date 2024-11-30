@@ -13,7 +13,7 @@ local changelogMessages = {
     "|cFFA500LuiExtended Version 6.7.7|r",
     "",
     "|cFFFF00General:|r",
-    "[*] Hopefully fixed the error, "Escape '%' characters to prevent illegal format specifiers."",
+    "[*] Hopefully fixed the error, Escape '%' characters to prevent illegal format specifiers.",
     "",
     "[*] Added new Companions, Tanlorin and Zerith-var.",
     "",
