@@ -19,7 +19,7 @@ local AbilityTables =
 
     -- Generic
     Skill_Off_Balance = 14062;
-    Skill_Off_Balace_Immunity = 134599;
+    Skill_Off_Balance_Immunity = 134599;
     Skill_Major_Vulnerability_Immunity = GetString(LUIE_STRING_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY);
     Skill_Hindrance = 46210;
 
