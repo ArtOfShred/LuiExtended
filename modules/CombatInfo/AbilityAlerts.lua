@@ -554,7 +554,7 @@ function AbilityAlerts.PlayAlertSound(abilityId, ...)
         elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_DESTROY then
             isPlay = Settings.toggles.sound_destroyEnable and Settings.sounds.sound_destroy;
         elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_HEAL then
-            isPlay = Settings.toggles.sound_healEnable and Settings.sounds.ound_heal;
+            isPlay = Settings.toggles.sound_healEnable and Settings.sounds.sound_heal;
         end;
     end;
 
