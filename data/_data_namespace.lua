@@ -4,9 +4,9 @@
 --]]
 
 ---@class (partial) LuiExtended
-local LUIE = LUIE
+local LUIE = LUIE;
 
----@class Data
+---@class (partial) Data
 ---@field public Abilities AbilityTables
 ---@field public AbilityBlacklistPresets BlacklistPresets
 ---@field public AlertBossNameConvert AlertBossNameConvert
@@ -29,26 +29,27 @@ local LUIE = LUIE
 ---@field public ZoneTable ZoneTable
 local Data =
 {
-    Abilities = {},
-    AbilityBlacklistPresets = {},
-    AlertBossNameConvert = {},
-    AlertMapOverride = {},
-    AlertTable = {},
-    AlertZoneOverride = {},
-    CastBarTable = {},
-    CollectibleTables = {},
-    CombatTextBlacklistPresets = {},
-    CombatTextConstants = {},
-    CrowdControl = {},
-    DebugResults = {},
-    DebugAuras = {},
-    Effects = {},
-    PetNames = {},
-    Quests = {},
-    Tooltips = {},
-    UnitNames = {},
-    ZoneNames = {},
-    ZoneTable = {},
-}
+    Abilities = {};
+    AbilityBlacklistPresets = {};
+    AlertBossNameConvert = {};
+    AlertMapOverride = {};
+    AlertTable = {};
+    AlertZoneOverride = {};
+    CastBarTable = {};
+    CollectibleTables = {};
+    CombatTextBlacklistPresets = {};
+    CombatTextConstants = {};
+    CrowdControl = {};
+    DebugResults = {};
+    DebugAuras = {};
+    Effects = {};
+    PetNames = {};
+    Quests = {};
+    Tooltips = {};
+    UnitNames = {};
+    ZoneNames = {};
+    ZoneTable = {};
+};
 
-LUIE.Data = Data
+---@class (partial) Data
+LUIE.Data = Data;

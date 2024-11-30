@@ -2,23 +2,23 @@
       LuiExtended
       License: The MIT License (MIT)
 -->
-<GuiXml>
+<GuiXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://sir.insidi.at/or/schema/esoui.xsd">
     <Controls>
         <TopLevelControl name="LUIE_Changelog" mouseEnabled="true" movable="true" clampedToScreen="true" hidden="true" tier="2" layer="1">
-            <Dimensions x="900" y="700"/>
-            <Anchor point="CENTER" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-120"/>
+            <Dimensions x="900" y="700" />
+            <Anchor point="CENTER" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-120" />
             <Controls>
                 <Backdrop name="$(parent)_Background" inherits="ZO_ThinBackdrop">
-                    <AnchorFill/>
+                    <AnchorFill />
                 </Backdrop>
                 <Label name="$(parent)_Title" font="ZoFontWindowTitle" wrapMode="ELLIPSIS" verticalAlignment="TOP">
-                    <Anchor relativeTo="$(parent)" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="5" offsetY="5"/>
+                    <Anchor relativeTo="$(parent)" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="5" offsetY="5" />
                 </Label>
                 <Label name="$(parent)_About" font="ZoFontGame" wrapMode="ELLIPSIS">
-                    <Anchor relativeTo="$(parent)" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="10" offsetY="40"/>
+                    <Anchor relativeTo="$(parent)" relativePoint="TOPLEFT" point="TOPLEFT" offsetX="10" offsetY="40" />
                 </Label>
                 <Button name="$(parent)_Close" inherits="ZO_CloseButton">
-                    <Anchor point="TOPRIGHT" offsetY="3" offsetX="-3"/>
+                    <Anchor point="TOPRIGHT" offsetY="3" offsetX="-3" />
                     <OnClicked>
                         LUIE.ToggleChangelog(true)
                     </OnClicked>
@@ -27,11 +27,11 @@
                     <OnInitialized>
                         ZO_Scroll_Initialize(self)
                     </OnInitialized>
-                    <Dimensions x="895" y="620"/>
-                    <Anchor point="BOTTOMLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="6" offsetY="690"/>
+                    <Dimensions x="895" y="620" />
+                    <Anchor point="BOTTOMLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="6" offsetY="690" />
                 </Control>
                 <Label name="$(parent)_Text" font="ZoFontGame" wrapMode="ELLIPSIS">
-                    <Dimensions x="870"/>
+                    <Dimensions x="870" />
                     <OnInitialized>
                         self:SetParent(GetControl("LUIE_Changelog_ContainerScrollChild"))
                         self:SetAnchor(TOPLEFT, LUIE_Changelog_ContainerScrollChild, TOPLEFT, 4, 4)
