@@ -2729,4 +2729,4 @@ end;
 
 -- CombatInfo namespace
 ---@class LUIE.CombatInfo : CombatInfo
-LUIE.CombatInfo = CombatInfo
+LUIE.CombatInfo = CombatInfo;
