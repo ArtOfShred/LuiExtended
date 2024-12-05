@@ -7,6 +7,8 @@
 if LUIE == nil then
     ---@class (partial) LuiExtended
     LUIE = {};
+    LUIE.__index = LUIE;
+    LUIE.__newindex = LUIE;
 end;
 
 ---@class (partial) LuiExtended
@@ -27,7 +29,7 @@ LUIE.SV = nil;
 LUIE.SVVer = 2;
 LUIE.SVName = 'LUIESV';
 
-LUIE.Data = {};
+LUIE.Data = LUIE.Data or {};
 LUIE.Components = {};
 
 -- Default Settings

@@ -19,7 +19,7 @@ local zo_strformat = zo_strformat;
 --------------------------------------------------------------------------------------------------------------------------------
 -- When a target name matches a string here, add id's in the table with the name and icon specified. We use this primarily to add CC Immunity buffs for bosses.
 --------------------------------------------------------------------------------------------------------------------------------
-Effects.AddNameAura =
+local AddNameAura =
 {
 
     -- Target Dummy
@@ -406,3 +406,6 @@ Effects.AddNameAura =
     [Unitnames.NPC_Coldsnap_Ogre] = { [1] = { id = 33097 } }; -- Coldsnap Ogre
     [Unitnames.Boss_Icestalker] = { [1] = { id = 33097 } }; -- Icestalker
 };
+
+---@class (partial) AddNameAura
+LUIE.Data.Effects.AddNameAura = AddNameAura;

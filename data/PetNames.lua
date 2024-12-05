@@ -6,12 +6,12 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
---- @class PetNames
---- @field Assistants table<string, boolean>
---- @field Necromancer table<string, boolean>
---- @field Sets table<string, boolean>
---- @field Sorcerer table<string, boolean>
---- @field Warden table<string, boolean>
+---@class (partial) PetNames
+---@field Assistants table<string, boolean>
+---@field Necromancer table<string, boolean>
+---@field Sets table<string, boolean>
+---@field Sorcerer table<string, boolean>
+---@field Warden table<string, boolean>
 local PetNames =
 {
     -- Pet Names (Sorcerer)
@@ -72,5 +72,5 @@ local PetNames =
         [GetString(LUIE_STRING_PET_NAME_ASSISTANT_GHRASHAROG)] = true;
     };
 };
-
+---@class (partial) PetNames
 LUIE.Data.PetNames = PetNames;

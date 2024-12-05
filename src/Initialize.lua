@@ -32,10 +32,16 @@ end;
 --[[
     Load additional fonts from LMP.
 ]]
-local function UpdateFonts()
-    for _, f in pairs(LMP:List(LMP.MediaType.FONT)) do
-        if not LUIE.Fonts[f] then
-            LUIE.Fonts[f] = LMP:Fetch(LMP.MediaType.FONT, f);
+function LUIE.UpdateFonts()
+    -- First register our own fonts
+    for fontName, fontPath in pairs(LUIE.Fonts) do
+        LMP:Register(LMP.MediaType.FONT, fontName, fontPath);
+    end;
+
+    -- Then fetch fonts from other addons
+    for _, fontName in pairs(LMP:List(LMP.MediaType.FONT)) do
+        if not LUIE.Fonts[fontName] then
+            LUIE.Fonts[fontName] = LMP:Fetch(LMP.MediaType.FONT, fontName);
         end;
     end;
 end;
@@ -43,10 +49,16 @@ end;
 --[[
     Load additional status bar textures from LMP.
 ]]
-local function UpdateStatusbarTextures()
-    for _, s in pairs(LMP:List(LMP.MediaType.STATUSBAR)) do
-        if not LUIE.StatusbarTextures[s] then
-            LUIE.StatusbarTextures[s] = LMP:Fetch(LMP.MediaType.STATUSBAR, s);
+function LUIE.UpdateStatusbarTextures()
+    -- First register our own textures
+    for textureName, texturePath in pairs(LUIE.StatusbarTextures) do
+        LMP:Register(LMP.MediaType.STATUSBAR, textureName, texturePath);
+    end;
+
+    -- Then fetch textures from other addons
+    for _, textureName in pairs(LMP:List(LMP.MediaType.STATUSBAR)) do
+        if not LUIE.StatusbarTextures[textureName] then
+            LUIE.StatusbarTextures[textureName] = LMP:Fetch(LMP.MediaType.STATUSBAR, textureName);
         end;
     end;
 end;
@@ -54,10 +66,16 @@ end;
 --[[
     Load additional sounds from LMP.
 ]]
-local function UpdateSounds()
-    for _, a in pairs(LMP:List(LMP.MediaType.SOUND)) do
-        if not LUIE.Sounds[a] then
-            LUIE.Sounds[a] = LMP:Fetch(LMP.MediaType.SOUND, a);
+function LUIE.UpdateSounds()
+    -- First register our own sounds
+    for soundName, soundId in pairs(LUIE.Sounds) do
+        LMP:Register(LMP.MediaType.SOUND, soundName, soundId);
+    end;
+
+    -- Then fetch sounds from other addons
+    for _, soundName in pairs(LMP:List(LMP.MediaType.SOUND)) do
+        if not LUIE.Sounds[soundName] then
+            LUIE.Sounds[soundName] = LMP:Fetch(LMP.MediaType.SOUND, soundName);
         end;
     end;
 end;
@@ -66,9 +84,9 @@ end;
     Load additional media from LMP.
 ]]
 local function LoadMedia()
-    UpdateFonts();
-    UpdateStatusbarTextures();
-    UpdateSounds();
+    LUIE.UpdateFonts();
+    LUIE.UpdateStatusbarTextures();
+    LUIE.UpdateSounds();
 end;
 
 --[[

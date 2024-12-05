@@ -19,7 +19,7 @@ local zo_strformat = zo_strformat;
 --------------------------------------------------------------------------------------------------------------------------------
 -- Icon to display for Assistant Collectibles
 --------------------------------------------------------------------------------------------------------------------------------
-Effects.AssistantIcons =
+local AssistantIcons =
 {
     [GetCollectibleName(301)] = 'LuiExtended/media/icons/assistants/assistant_nuzhimeh.dds';
     [GetCollectibleName(300)] = 'LuiExtended/media/icons/assistants/assistant_pirharri.dds';
@@ -33,3 +33,6 @@ Effects.AssistantIcons =
     [GetCollectibleName(9745)] = 'LuiExtended/media/icons/assistants/assistant_ghrasharog.dds';
     [GetCollectibleName(10184)] = 'LuiExtended/media/icons/assistants/assistant_giladil.dds';
 };
+
+---@class (partial) AssistantIcons
+LUIE.Data.Effects.AssistantIcons = AssistantIcons;

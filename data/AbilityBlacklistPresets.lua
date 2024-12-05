@@ -88,5 +88,5 @@ local BlacklistPresets =
     };
 };
 
----@type BlacklistPresets
+---@class (partial) BlacklistPresets
 LUIE.Data.AbilityBlacklistPresets = BlacklistPresets;

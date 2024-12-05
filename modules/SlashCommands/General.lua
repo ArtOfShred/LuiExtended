@@ -5,7 +5,8 @@
 
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
-LUIE.CampaignNames = {};
+local CampaignNames = {};
+
 
 local SlashCommands = LUIE.SlashCommands;
 
@@ -180,15 +181,15 @@ function SlashCommands.SlashCampaignQ(option)
             -- TODO: Find a way to determine # of campaigns dynamically instead of iterating.
             local campaignName = zo_strlower(GetCampaignName(i));
             if campaignName ~= '' and campaignName ~= nil then
-                LUIE.CampaignNames[campaignName] = i;
+                CampaignNames[campaignName] = i;
             end;
         end;
     end;
 
     -- If input is valid and the name is in the campaign table, try to queue for the campaign.
     local optionLower = zo_strlower(option);
-    if LUIE.CampaignNames[optionLower] then
-        local campaignId = LUIE.CampaignNames[optionLower];
+    if CampaignNames[optionLower] then
+        local campaignId = CampaignNames[optionLower];
         local campaignName = GetCampaignName(campaignId);
 
         if GetAssignedCampaignId() == campaignId or GetGuestCampaignId() == campaignId then
@@ -396,3 +397,5 @@ function SlashCommands.SlashPet()
         end;
     end;
 end;
+
+LUIE.CampaignNames = CampaignNames;

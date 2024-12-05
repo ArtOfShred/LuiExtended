@@ -6,7 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class CollectibleTables
+---@class (partial) CollectibleTables
 local CollectibleTables =
 {
     -- Banker
@@ -79,4 +79,5 @@ for name, table in pairs(CollectibleTables) do
     end;
 end;
 
+---@class (partial) CollectibleTables
 LUIE.Data.CollectibleTables = CollectibleTables;

@@ -35,7 +35,7 @@ end;
 -- Debug Display for Combat Events
 function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overrideRank, casterUnitTag)
     -- Don't display if this aura is already added to the filter
-    if LUIE.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
+    if LUIE.Data.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
         return;
     end;
 
@@ -75,7 +75,7 @@ end;
 
 -- Debug Display for Effect Events
 function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    if LUIE.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
+    if LUIE.Data.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
         return;
     end;
 
@@ -258,7 +258,7 @@ end;
 
 function SpellCastBuffs.TempSlashCheckRemovedAbilities()
     d('Removed AbilityIds:');
-    for k, v in pairs(LUIE.DebugAuras) do
+    for k, v in pairs(LUIE.Data.DebugAuras) do
         if not DoesAbilityExist(k) then
             d(k);
         end;

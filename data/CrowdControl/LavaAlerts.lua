@@ -6,12 +6,9 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class CrowdControl
-local CrowdControl = LUIE.Data.CrowdControl;
-
-
 -- List of effects sourced by the player that damage self that should be shown
-CrowdControl.LavaAlerts =
+---@class (partial) LavaAlerts
+local LavaAlerts =
 {
     -- Player
     [115607] = true; -- Dismount Stun (Mount)
@@ -78,3 +75,6 @@ CrowdControl.LavaAlerts =
     -- Wayrest Sewers II
     [49052] = true; -- Pellingare Prison (Allene Pellingare)
 };
+
+---@class (partial) LavaAlerts
+LUIE.Data.CrowdControl.LavaAlerts = LavaAlerts;

@@ -6,7 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class ZoneNames
+---@class (partial) ZoneNames
 local ZoneNames =
 {
 
@@ -61,5 +61,5 @@ local ZoneNames =
     Zone_Tempest_Island = 'Tempest Island';
 };
 
----@type ZoneNames
+---@class (partial) ZoneNames
 LUIE.Data.ZoneNames = ZoneNames;

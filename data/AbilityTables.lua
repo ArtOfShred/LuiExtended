@@ -7,7 +7,7 @@
 local LUIE = LUIE;
 
 -- AbilityTables namespace
----@class AbilityTables
+---@class (partial) AbilityTables
 local AbilityTables =
 {
     -- ---------------------------------------------------
@@ -1176,5 +1176,5 @@ for k, v in pairs(AbilityTables) do
 end;
 
 -- Export string data to global namespace
----@type AbilityTables
+---@class (partial) AbilityTables
 LUIE.Data.Abilities = AbilityTables;

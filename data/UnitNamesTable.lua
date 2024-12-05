@@ -6,7 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class UnitNames
+---@class (partial) UnitNames
 local UnitNames =
 {
 
@@ -628,4 +628,5 @@ local UnitNames =
     Boss_Icestalker = 'Icestalker';
 };
 
+---@class (partial) UnitNames
 LUIE.Data.UnitNames = UnitNames;

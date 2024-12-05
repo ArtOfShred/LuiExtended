@@ -1531,7 +1531,7 @@ local Tooltips =
     Keep_Upgrade_Food_Guard_Abilities = GetString(LUIE_STRING_KEEP_UPGRADE_FOOD_GUARD_ABILITIES_TP);
 };
 
----@class (partial)Tooltips
+---@class (partial) Tooltips
 LUIE.Data.Tooltips = Tooltips;
 
 ---@param armorType any

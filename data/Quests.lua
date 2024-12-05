@@ -6,19 +6,19 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
---- @class Quests
---- @field ItemIgnoreTurnIn table :TODO
---- @field ItemReceivedMessage table<number, string>
---- @field ItemRemovedInDialogueMessage table<number, string>
---- @field ItemRemovedMessage table<number, string>
---- @field QuestAdvancedOverride table<string, string>
---- @field QuestItemHideLoot table<number, boolean>
---- @field QuestItemHideRemove table<number, boolean>
---- @field QuestItemMaxQuantityAdd table<number, boolean>
---- @field QuestItemMerge table<number, table[]>
---- @field QuestItemModifyOnAdd table<number, function>
---- @field QuestItemModifyOnRemove table<number, function>
---- @field QuestObjectiveCompleteOverride table<string, string>
+---@class (partial) Quests
+---@field ItemIgnoreTurnIn table :TODO
+---@field ItemReceivedMessage table<number, string>
+---@field ItemRemovedInDialogueMessage table<number, string>
+---@field ItemRemovedMessage table<number, string>
+---@field QuestAdvancedOverride table<string, string>
+---@field QuestItemHideLoot table<number, boolean>
+---@field QuestItemHideRemove table<number, boolean>
+---@field QuestItemMaxQuantityAdd table<number, boolean>
+---@field QuestItemMerge table<number, table[]>
+---@field QuestItemModifyOnAdd table<number, function>
+---@field QuestItemModifyOnRemove table<number, function>
+---@field QuestObjectiveCompleteOverride table<string, string>
 local Quests =
 {
     -- List of Quest Items to ignore when Looted (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
@@ -383,5 +383,5 @@ Quests.QuestItemModifyOnRemove =
         Quests.QuestItemHideRemove[3818] = true;
     end; -- Dwemer Device (Tip of the Spearhead)
 };
-
+---@class (partial) Quests
 LUIE.Data.Quests = Quests;
