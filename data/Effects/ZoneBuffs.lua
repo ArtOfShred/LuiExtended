@@ -6,7 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class Effects
+---@class (partial) Effects
 local Effects = LUIE.Data.Effects;
 
 local Tooltips = LUIE.Data.Tooltips;
@@ -26,4 +26,4 @@ local ZoneBuffs =
 };
 
 ---@class (partial) ZoneBuffs
-LUIE.Data.ZoneBuffs = ZoneBuffs;
+LUIE.Data.Effects.ZoneBuffs = ZoneBuffs;

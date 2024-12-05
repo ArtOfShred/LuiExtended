@@ -6,7 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class CombatInfo
+---@class (partial) CombatInfo
 local CombatInfo = {};
 
 local UI = LUIE.UI;

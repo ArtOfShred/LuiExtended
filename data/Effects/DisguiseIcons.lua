@@ -6,7 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class Effects
+---@class (partial) Effects
 local Effects = LUIE.Data.Effects;
 
 local Tooltips = LUIE.Data.Tooltips;
@@ -19,6 +19,7 @@ local zo_strformat = zo_strformat;
 --------------------------------------------------------------------------------------------------------------------------------
 -- Data for icon & description to show for the fake Disguise buff applied to the player.
 --------------------------------------------------------------------------------------------------------------------------------
+---@class (partial) DisguiseIcons
 local DisguiseIcons =
 {
     -- Required:

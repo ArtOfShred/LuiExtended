@@ -6,7 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class Effects
+---@class (partial) Effects
 local Effects = LUIE.Data.Effects;
 
 local Tooltips = LUIE.Data.Tooltips;
@@ -25,5 +25,5 @@ local AddStackOnEvent =
     [28759] = 0; -- Essence Siphon (Keeper Voranil) -- Note: Set to 0 here due to this event firing twice.
 };
 
----@class (partial) AddNameOnEvent
-LUIE.Data.Effects.AddNameOnEvent = AddStackOnEvent;
+---@class (partial) AddStackOnEvent
+LUIE.Data.Effects.AddStackOnEvent = AddStackOnEvent;

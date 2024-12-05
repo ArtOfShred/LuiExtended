@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 --[[
     LuiExtended
     License: The MIT License (MIT)
@@ -217,7 +218,7 @@ UnitFrames.Defaults = {
     BarAlignCenterLabelTarget = false;
     CustomFormatCenterLabel = 'Current + Shield - Trauma / Max (Percentage%)';
 };
-UnitFrames.SV = nil; ---@class UnitFramesSV
+UnitFrames.SV = nil; ---@type UnitFramesSV
 
 UnitFrames.CustomFrames = {};
 UnitFrames.CustomFramesMovingState = false;
@@ -3203,7 +3204,7 @@ end;
 
 -- Runs on the EVENT_MOUNTED_STATE_CHANGED listener.
 function UnitFrames.OnMount(eventCode, mounted)
-    UnitFrames.CustomFramesSetupAlternative(IsWerewolf(), false, mounted);
+    UnitFrames.CustomFramesSetupAlternative(IsPlayerInWerewolfForm(), false, mounted);
 end;
 
 -- Runs on the EVENT_EXPERIENCE_UPDATE listener.
@@ -3364,7 +3365,7 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
     end;
     -- If any of input parameters are nil, we need to query them
     if isWerewolf == nil then
-        isWerewolf = IsWerewolf();
+        isWerewolf = IsPlayerInWerewolfForm();
     end;
     if isSiege == nil then
         isSiege = (IsPlayerControllingSiegeWeapon() or IsPlayerEscortingRam());

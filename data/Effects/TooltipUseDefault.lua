@@ -6,7 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class Effects
+---@class (partial) Effects
 local Effects = LUIE.Data.Effects;
 
 local Tooltips = LUIE.Data.Tooltips;
@@ -16,11 +16,11 @@ local Abilities = LUIE.Data.Abilities;
 
 local zo_strformat = zo_strformat;
 
----@class (partial) TooltipUseDefault
 --------------------------------------------------------------------------------------------------------------------------------
 -- LUIE for the most part overwrites default ability tooltips due to the fact they are only exposed for buffs/debuffs that are on the player. In some cases there is no description with scaling or we need to still use the default where possible.
 -- The most noteworthy case of this is Mundus Boons, where there is a tooltip but no description. We want to display a generic tooltip describing the effect if mousing over another player - but display the default value with accurate number for self.
 --------------------------------------------------------------------------------------------------------------------------------
+---@class (partial) TooltipUseDefault
 local TooltipUseDefault =
 {
     [13940] = true; -- Boon: The Warrior
@@ -39,4 +39,4 @@ local TooltipUseDefault =
 };
 
 ---@class (partial) TooltipUseDefault
-LUIE.Data.TooltipUseDefault = TooltipUseDefault;
+LUIE.Data.Effects.TooltipUseDefault = TooltipUseDefault;

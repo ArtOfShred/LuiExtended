@@ -6,10 +6,15 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 -- ChatAnnouncements namespace
+---@class (partial) ChatAnnouncements
 local ChatAnnouncements = LUIE.ChatAnnouncements;
 
-local Effects = LUIE.Data.Effects;
-local Quests = LUIE.Data.Quests;
+---@type Data
+local Data = LUIE.Data;
+---@type Effects
+local Effects = Data.Effects;
+---@type Quests
+local Quests = Data.Quests;
 
 local ColorizeColors = ChatAnnouncements.Colors;
 
