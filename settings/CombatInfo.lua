@@ -5,6 +5,8 @@
 
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
+
+---@class (partial) CombatInfo
 local CombatInfo = LUIE.CombatInfo;
 local CrowdControlTracker = CombatInfo.CrowdControlTracker;
 local AbilityAlerts = CombatInfo.AbilityAlerts;

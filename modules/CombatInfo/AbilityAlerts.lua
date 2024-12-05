@@ -5,7 +5,7 @@
 
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
-
+---@class (partial) CombatInfo
 local CombatInfo = LUIE.CombatInfo;
 CombatInfo.AbilityAlerts = {};
 local AbilityAlerts = CombatInfo.AbilityAlerts;

@@ -447,4 +447,4 @@ local ZoneDataOverride =
 };
 
 ---@class (partial) ZoneDataOverride
-LUIE.Data.ZoneDataOverride = ZoneDataOverride;
+LUIE.Data.Effects.ZoneDataOverride = ZoneDataOverride;

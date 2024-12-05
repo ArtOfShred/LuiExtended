@@ -10,7 +10,10 @@ LUIE.SpellCastBuffs = {};
 local SpellCastBuffs = LUIE.SpellCastBuffs;
 
 local UI = LUIE.UI;
-local Effects = LUIE.Data.Effects;
+---@type Data
+local Data = LUIE.Data;
+---@type Effects
+local Effects = Data.Effects;
 local Abilities = LUIE.Data.Abilities;
 local Tooltips = LUIE.Data.Tooltips;
 local string_format = string.format;
@@ -713,7 +716,7 @@ function SpellCastBuffs.RegisterWerewolfEvents()
     eventManager:UnregisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED);
     if SpellCastBuffs.SV.ShowWerewolf then
         eventManager:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED, SpellCastBuffs.WerewolfState);
-        if IsWerewolf() then
+        if IsPlayerInWerewolfForm() then
             SpellCastBuffs.WerewolfState(nil, true, true);
         end;
     end;
@@ -1624,7 +1627,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         -- GameTooltip:SetAbilityId(117391)
 
         -- Debug show default Tooltip on my account
-        if LUIE.PlayerDisplayName == '@ArtOfShred' or LUIE.PlayerDisplayName == '@ArtOfShredPTS' or LUIE.PlayerDisplayName == '@dack_janiels' then
+        if LUIE.PlayerDisplayName == '@ArtOfShred' or LUIE.PlayerDisplayName == '@ArtOfShredPTS' --[[or LUIE.PlayerDisplayName == '@dack_janiels']] then
             GameTooltip:AddLine('Default Tooltip Below:', '', colorText:UnpackRGBA());
 
             local newtooltipText;
@@ -3384,7 +3387,7 @@ function SpellCastBuffs.OnDeath(eventCode, unitTag, isDead)
             end;
 
             -- If werewolf is active, reset the icon so it's not removed (otherwise it flashes off for about a second until the trailer function picks up on the fact that no power drain has occurred.
-            if SpellCastBuffs.SV.ShowWerewolf and IsWerewolf() then
+            if SpellCastBuffs.SV.ShowWerewolf and IsPlayerInWerewolfForm() then
                 SpellCastBuffs.WerewolfState(nil, true, true);
             end;
         else
@@ -3488,7 +3491,7 @@ function SpellCastBuffs.ReloadEffects(unitTag)
             SpellCastBuffs.ShowRecallCooldown();
         end;
         -- Reload werewolf effects
-        if SpellCastBuffs.SV.ShowWerewolf and IsWerewolf() then
+        if SpellCastBuffs.SV.ShowWerewolf and IsPlayerInWerewolfForm() then
             SpellCastBuffs.WerewolfState(nil, true, true);
         end;
     end;
@@ -4049,7 +4052,7 @@ function SpellCastBuffs.OnPlayerActivated(eventCode)
     end;
 
     -- Resolve Werewolf
-    if SpellCastBuffs.SV.ShowWerewolf and IsWerewolf() then
+    if SpellCastBuffs.SV.ShowWerewolf and IsPlayerInWerewolfForm() then
         SpellCastBuffs.WerewolfState(nil, true, true);
     end;
 

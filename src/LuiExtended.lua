@@ -5,10 +5,8 @@
 
 -- LUIE namespace
 if LUIE == nil then
-    ---@class (partial) LuiExtended
-    LUIE = {};
-    LUIE.__index = LUIE;
-    LUIE.__newindex = LUIE;
+    ---@class (partial) LuiExtended : ZO_Object
+    LUIE = ZO_Object:Subclass();
 end;
 
 ---@class (partial) LuiExtended
@@ -29,7 +27,7 @@ LUIE.SV = nil;
 LUIE.SVVer = 2;
 LUIE.SVName = 'LUIESV';
 
-LUIE.Data = LUIE.Data or {};
+--LUIE.Data = {};
 LUIE.Components = {};
 
 -- Default Settings

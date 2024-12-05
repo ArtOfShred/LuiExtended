@@ -23,6 +23,7 @@ local zo_strformat = zo_strformat;
 --------------------------------------------------------------------------------------------------------------------------------
 -- Adds this aura to a list of fake Ground auras to display when the player casts them
 --------------------------------------------------------------------------------------------------------------------------------
+---@class (partial) EffectGroundDisplay
 local EffectGroundDisplay =
 {
     -- Required:
