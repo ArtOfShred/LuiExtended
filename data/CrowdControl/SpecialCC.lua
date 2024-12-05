@@ -6,11 +6,12 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class CrowdControl
-local CrowdControl = LUIE.Data.CrowdControl;
-
 -- Use on ACTION_RESULT_EFFECT_GAINED
-CrowdControl.SpecialCC =
+---@class (partial) SpecialCC
+local SpecialCC =
 {
     [55756] = true; -- Burning (Valkyn Skoria)
 };
+
+---@class (partial) SpecialCC
+LUIE.Data.CrowdControl.SpecialCC = SpecialCC

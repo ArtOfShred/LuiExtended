@@ -46,35 +46,27 @@ end;
 ---@param formatStr string|nil (optional): The format string for the timestamp. If not provided, the default format from LUIE.ChatAnnouncements.SV.TimeStampFormat will be used.
 ---@return string: The formatted timestamp.
 local function CreateTimestamp(timeStr, formatStr)
-    if formatStr == nil then
-        formatStr = LUIE.ChatAnnouncements.SV.TimeStampFormat;
-    end;
+    formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat;
+
     -- split up default timestamp
-    local hours, minutes, seconds = zo_strmatch(timeStr, '([^%:]+):([^%:]+):([^%:]+)');
-    local hoursNoLead = ToInteger(hours); -- hours without leading zero
+    local hours, minutes, seconds = zo_strmatch(timeStr, "([^:]+):([^:]+):([^:]+)");
+    local hoursNoLead = tonumber(hours); -- hours without leading zero
     local hours12NoLead = (hoursNoLead - 1) % 12 + 1;
-    local hours12;
-    if hours12NoLead < 10 then
-        hours12 = '0' .. hours12NoLead;
-    else
-        hours12 = hours12NoLead;
-    end;
-    local pUp = 'AM';
-    local pLow = 'am';
-    if hoursNoLead >= 12 then
-        pUp = 'PM';
-        pLow = 'pm';
-    end;
-    -- create new one
+    local hours12 = hours12NoLead < 10 and "0" .. hours12NoLead or tostring(hours12NoLead);
+    local pUp = hoursNoLead >= 12 and "PM" or "AM";
+    local pLow = hoursNoLead >= 12 and "pm" or "am";
+
+    -- create new timestamp using substitutions
     local timestamp = formatStr;
-    timestamp = zo_strgsub(timestamp, 'HH', hours);
-    timestamp = zo_strgsub(timestamp, 'H', hoursNoLead);
-    timestamp = zo_strgsub(timestamp, 'hh', hours12);
-    timestamp = zo_strgsub(timestamp, 'h', hours12NoLead);
-    timestamp = zo_strgsub(timestamp, 'm', minutes);
-    timestamp = zo_strgsub(timestamp, 's', seconds);
-    timestamp = zo_strgsub(timestamp, 'A', pUp);
-    timestamp = zo_strgsub(timestamp, 'a', pLow);
+    timestamp = zo_strgsub(timestamp, "HH", hours);
+    timestamp = zo_strgsub(timestamp, "H", tostring(hoursNoLead));
+    timestamp = zo_strgsub(timestamp, "hh", hours12);
+    timestamp = zo_strgsub(timestamp, "h", tostring(hours12NoLead));
+    timestamp = zo_strgsub(timestamp, "m", minutes);
+    timestamp = zo_strgsub(timestamp, "s", seconds);
+    timestamp = zo_strgsub(timestamp, "A", pUp);
+    timestamp = zo_strgsub(timestamp, "a", pLow);
+    
     return timestamp;
 end;
 
@@ -84,17 +76,34 @@ LUIE.CreateTimestamp = CreateTimestamp;
     Helper function to format a message with an optional timestamp.
     @param msg string: The message to be formatted.
     @param doTimestamp boolean: If true, a timestamp will be added to the formatted message.
+    @param lineNumber number: The current line number for the chat message.
+    @param chanCode number: The chat channel code.
     @return string: The formatted message.
 ]]
-local function FormatMessage(msg, doTimestamp)
+local function FormatMessage(msg, doTimestamp, lineNumber, chanCode)
     local formattedMsg = msg or '';
     if doTimestamp then
         local timestring = GetTimeString();
-        -- Color Code to match pChat default
-        formattedMsg = string_format('|c%s[%s]|r %s', LUIE.TimeStampColorize, LUIE.CreateTimestamp(timestring, nil), formattedMsg);
+        local timestamp = CreateTimestamp(timestring, nil);
+
+        -- Make timestamp clickable if lineNumber and chanCode are provided
+        local timestampText;
+        if lineNumber and chanCode then
+            timestampText = ZO_LinkHandler_CreateLink(timestamp, nil, 'LUIE', lineNumber .. ':' .. chanCode);
+        else
+            timestampText = timestamp;
+        end;
+
+        -- Format with color and brackets
+        local timestampFormatted = string_format('|c%s[%s]|r ', LUIE.TimeStampColorize, timestampText);
+
+        -- Combine timestamp with message
+        formattedMsg = timestampFormatted .. formattedMsg;
     end;
     return formattedMsg;
 end;
+
+LUIE.FormatMessage = FormatMessage;
 
 --[[
     Hides or shows all LUIE components.

@@ -19,7 +19,7 @@ local zo_strformat = zo_strformat;
 --------------------------------------------------------------------------------------------------------------------------------
 -- This will create an effect on the player or target when X skill is detected as active. SpellCastBuffs creates the buff by the name listed here, this way if 3 or 4 effects all need to display for 1 ability, it will only show the one aura.
 --------------------------------------------------------------------------------------------------------------------------------
-Effects.EffectCreateSkillAura =
+local EffectCreateSkillAura =
 {
     -- Required:
     -- abilityId = #
@@ -34,3 +34,6 @@ Effects.EffectCreateSkillAura =
     [56689] = { removeOnEnd = true; abilityId = 33097 }; -- Enraged (Mantikora)
     [72725] = { removeOnEnd = true; abilityId = 28301 }; -- Fool Me Once (Sentinel) (TG DLC)
 };
+
+---@class (partial) EffectCreateSkillAura
+LUIE.Data.Effects.EffectCreateSkillAura = EffectCreateSkillAura;

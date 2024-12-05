@@ -67,17 +67,44 @@ data/Effects/AddNameOnEvent.lua
 data/Effects/AddStackOnEvent.lua
 data/Effects/ArtificialEffectOverride.lua
 data/Effects/AssistantIcons.lua
-data/Effects/BarHighlight.lua
+# BarHighlight
+data/Effects/BarHighlight/AddNoDurationBarHighlight.lua
+data/Effects/BarHighlight/BarHighlightCheckOnFade.lua
+data/Effects/BarHighlight/BarHighlightDestroFix.lua
+data/Effects/BarHighlight/BarHighlightExtraId.lua
+data/Effects/BarHighlight/BarHighlightOverride.lua
+data/Effects/BarHighlight/BarHighlightStack.lua
+data/Effects/BarHighlight/BarIdOverride.lua
+data/Effects/BarHighlight/HasAbilityProc.lua
+data/Effects/BarHighlight/IsAbilityActiveGlow.lua
+data/Effects/BarHighlight/IsAbilityActiveHighlight.lua
+data/Effects/BarHighlight/IsBloodFrenzy.lua
+data/Effects/BarHighlight/IsGrimFocus.lua
+data/Effects/BarHighlight/MajorMinor.lua
+data/Effects/BarHighlight/RemoveAbilityActiveHighlight.lua
 data/Effects/CreateSkillAura.lua
 data/Effects/DisguiseIcons.lua
-data/Effects/Fake.lua
+# Fake
+data/Effects/Fake/FakeAddGroundDamageAura.lua
+data/Effects/Fake/FakeEffectGroundDisplay.lua
+data/Effects/Fake/FakeExternalBuffs.lua
+data/Effects/Fake/FakeExternalDebuffs.lua
+data/Effects/Fake/FakePlayerBuffs.lua
+data/Effects/Fake/FakePlayerDebuffs.lua
+data/Effects/Fake/FakePlayerOfflineAura.lua
+data/Effects/Fake/FakeStagger.lua
 data/Effects/HideSCT.lua
 data/Effects/KeepUpgradeAlliance.lua
 data/Effects/KeepUpgradeNameFix.lua
 data/CastBarTable.lua
 data/CollectibleTables.lua
 data/CombatTextConstants.lua
-data/AlertTable.lua
+# Alert Table
+data/AlertTable/AlertTable.lua
+data/AlertTable/BossNameConvert.lua
+data/AlertTable/MapOverride.lua
+data/AlertTable/ZoneOverride.lua
+data/AlertTable/ZoneTable.lua
 # CrowdControl
 data/CrowdControl/aoeNPCBoss.lua
 data/CrowdControl/aoeNPCElite.lua
@@ -90,11 +117,13 @@ data/CrowdControl/IgnoreList.lua
 data/CrowdControl/LavaAlerts.lua
 data/CrowdControl/ReversedLogic.lua
 data/CrowdControl/SpecialCC.lua
-data/DebugTable.lua
 data/Quests.lua
 data/PetNames.lua
 data/AbilityBlacklistPresets.lua
 data/CombatTextBlacklistPresets.lua
+## Debug
+data/Debug/DebugAuras.lua
+data/Debug/DebugResults.lua
 
 modules/ChatAnnouncements/ChatAnnouncements.lua
 modules/ChatAnnouncements/ChatAnnouncementsExperience.lua

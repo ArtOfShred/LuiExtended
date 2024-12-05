@@ -6064,7 +6064,7 @@ Effects.EffectOverride =
     [95830] = { hide = true }; -- Mark of the Worm
     [95831] = { icon = '/esoui/art/icons/achievement_042.dds' }; -- Mark of the Worm
     [87949] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds' }; -- Lava (Foyada Quarry)
-    [87948] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds'; name = Abilities.Trap_Lava; duration = 0; groundLabel = true; unbreakable = 1; tooltip = Tooltips.Trap_Lava }; -- Lava Snare (Foyada Quarry)
+    [87948] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds'; name = Abilities.Trap_Lava; duration = 0; groundLabel = true; unbreakable = 1; tooltip = Tooltips.Generic_AOE_Fire_Stacking }; -- Lava Snare (Foyada Quarry)
     [92757] = { icon = '/esoui/art/icons/achievement_vvardenfel_047.dds'; name = Abilities.Trap_Blade_Trap }; -- Spinning Blade (Blade Trap)
     [92759] = { icon = '/esoui/art/icons/achievement_vvardenfel_047.dds'; name = Abilities.Trap_Blade_Trap; tooltip = Tooltips.Generic_Bleed; tooltipValue2 = 1 }; -- Serrated Blade (Blade Trap)
 
@@ -7252,7 +7252,7 @@ Effects.EffectOverride =
     [54068] = { icon = '/esoui/art/icons/ability_dragonknight_014.dds'; name = Abilities.Skill_Petrify; tooltip = Tooltips.Generic_Stun }; -- Fossilize (Earthen Heart Knight)
 
     -- Dragonstar Arena (Stage 5) - The Celestial Ring
-    [52879] = { tooltip = Tooltips.Skill_Generic_Enrage; tooltipValue2 = 5 }; -- Empowering Chains (Anka-Ra Blademaster)
+    [52879] = { tooltip = Tooltips.Generic_Enrage; tooltipValue2 = 5 }; -- Empowering Chains (Anka-Ra Blademaster)
     [52878] = { name = Abilities.Skill_Empowering_Chains }; -- Pull (Anka-Ra Blademaster)
     [54411] = { icon = '/esoui/art/icons/ability_mage_013.dds'; hide = true }; -- Celestial Blast (Anka-Ra Shadowcaster)
     [54415] = { hide = true }; -- Celestial Blast (Anka-Ra Shadowcaster)

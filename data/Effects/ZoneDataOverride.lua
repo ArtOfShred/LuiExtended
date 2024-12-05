@@ -6,7 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class Effects
+---@class (partial) Effects
 local Effects = LUIE.Data.Effects;
 
 local Tooltips = LUIE.Data.Tooltips;
@@ -19,7 +19,7 @@ local zo_strformat = zo_strformat;
 --------------------------------------------------------------------------------------------------------------------------------
 -- When GetZoneId(GetCurrentMapZoneIndex()) matches this filter, customize the ability based off this criteria.
 --------------------------------------------------------------------------------------------------------------------------------
-Effects.ZoneDataOverride =
+local ZoneDataOverride =
 {
 
     -- TUTORIAL AREAS
@@ -445,3 +445,6 @@ Effects.ZoneDataOverride =
         [809] = { icon = 'LuiExtended/media/icons/abilities/ability_spell_axe_1h_heavy.dds' }; -- The Wailing Prison (MSQ - Tutorial) -- Dreamora Kynval
     };
 };
+
+---@class (partial) ZoneDataOverride
+LUIE.Data.ZoneDataOverride = ZoneDataOverride;

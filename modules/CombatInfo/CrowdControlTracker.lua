@@ -1098,7 +1098,7 @@ function CrowdControlTracker:SetupDisplay(displayType)
         LUIE_CCTracker_IconFrame_GlobalCooldown:SetHidden(true);
         LUIE_CCTracker_IconFrame_IconBorderHighlight:SetHidden(true);
         LUIE_CCTracker_IconFrame_Icon:SetTextureCoords(0, 1, 0, 1);
-        LUIE_CCTracker_IconFrame_IconBG:SetColor(0, 0, 0);
+        LUIE_CCTracker_IconFrame_IconBG:SetColor(0, 0, 0, 0);
         self:IconHidden(false);
         self:TextHidden(false);
         self:TimerHidden(true);

@@ -6,11 +6,9 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class CrowdControl
-local CrowdControl = LUIE.Data.CrowdControl;
-
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal
-CrowdControl.ReversedLogic =
+---@class (partial) ReversedLogic
+local ReversedLogic =
 {
     -- Quests
     [21876] = true; -- Q4260 West Barrier Teleport
@@ -24,3 +22,6 @@ CrowdControl.ReversedLogic =
     [26716] = true; -- Skyward Slam (Stormfist) -- Tempest Island
     [34848] = true; -- Primal Sweep -- Wayrest Sewers
 };
+
+---@class (partial) ReversedLogic
+LUIE.Data.CrowdControl.ReversedLogic = ReversedLogic

@@ -8,7 +8,7 @@ local LUIE = LUIE;
 
 --local Abilities = LUIE.Data.Abilities --unused local
 
----@class CastBarTable
+---@class (partial) CastBarTable
 local CastBarTable =
 {
     --------------------------------------------------------------------------------------------------------------------------------
@@ -1207,4 +1207,5 @@ CastBarTable.InteractCast = {
     --
 };
 
+---@class (partial) CastBarTable
 LUIE.Data.CastBarTable = CastBarTable;

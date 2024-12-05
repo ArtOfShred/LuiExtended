@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class CrowdControl
-local CrowdControl = LUIE.Data.CrowdControl;
-
 -- CrowdControl.aoePlayerUltimate
 -- CrowdControl.aoePlayerNormal
 -- CrowdControl.aoePlayerSet
@@ -18,7 +15,8 @@ local CrowdControl = LUIE.Data.CrowdControl;
 -- CrowdControl.aoeNormal
 -- Increment by 1 here if we want to change priority. Best way to do this is +1 for a new ability, and shared morphs or other damage sources from a shared attack don't increment.
 -- Priority system doesn't support gaps so NEVER more than +1 here, also the FIRST ability in each tier needs to be +0 to prevent skips if a category is disabled in the options.
-CrowdControl.aoeNPCElite =
+---@class (partial) aoeNPCElite
+local aoeNPCElite =
 {
 
     -- Overland / Standard NPC's
@@ -64,3 +62,6 @@ CrowdControl.aoeNPCElite =
     [72159] = 1; -- Static Field (Dwarven Spider)
     [72203] = 1; -- Overcharge (Scavenger Thunder-Smith)
 };
+
+---@class (partial) aoeNPCElite
+LUIE.Data.CrowdControl.aoeNPCElite = aoeNPCElite

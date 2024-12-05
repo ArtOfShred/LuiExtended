@@ -6,10 +6,8 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE;
 
----@class CrowdControl
-local CrowdControl = LUIE.Data.CrowdControl;
-
-CrowdControl.IgnoreList =
+---@class (partial) IgnoreList
+local IgnoreList =
 {
     -- PVP
     [178127] = true; -- Diseased
@@ -111,3 +109,6 @@ CrowdControl.IgnoreList =
     [10650] = true; -- Oil Drenched
     [85656] = true; -- Harry
 };
+
+---@class (partial) IgnoreList
+LUIE.Data.CrowdControl.IgnoreList = IgnoreList;

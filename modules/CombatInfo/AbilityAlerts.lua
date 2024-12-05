@@ -116,30 +116,22 @@ function AbilityAlerts.ShouldUseDefaultIcon(abilityId)
     end;
 end;
 
+local CC_ICON_MAP = {
+    [LUIE_CC_TYPE_STUN] = LUIE_CC_ICON_STUN;
+    [LUIE_CC_TYPE_KNOCKDOWN] = LUIE_CC_ICON_STUN;
+    [LUIE_CC_TYPE_KNOCKBACK] = LUIE_CC_ICON_KNOCKBACK;
+    [LUIE_CC_TYPE_PULL] = LUIE_CC_ICON_PULL;
+    [LUIE_CC_TYPE_DISORIENT] = LUIE_CC_ICON_DISORIENT;
+    [LUIE_CC_TYPE_FEAR] = LUIE_CC_ICON_FEAR;
+    [LUIE_CC_TYPE_CHARM] = LUIE_CC_ICON_CHARM;
+    [LUIE_CC_TYPE_STAGGER] = LUIE_CC_ICON_STAGGER;
+    [LUIE_CC_TYPE_SILENCE] = LUIE_CC_ICON_SILENCE;
+    [LUIE_CC_TYPE_SNARE] = LUIE_CC_ICON_SNARE;
+    [LUIE_CC_TYPE_ROOT] = LUIE_CC_ICON_ROOT;
+};
+
 function AbilityAlerts.GetDefaultIcon(ccType)
-    if ccType == LUIE_CC_TYPE_STUN then
-        return LUIE_CC_ICON_STUN;
-    elseif ccType == LUIE_CC_TYPE_KNOCKDOWN then
-        return LUIE_CC_ICON_STUN;
-    elseif ccType == LUIE_CC_TYPE_KNOCKBACK then
-        return LUIE_CC_ICON_KNOCKBACK;
-    elseif ccType == LUIE_CC_TYPE_PULL then
-        return LUIE_CC_ICON_PULL;
-    elseif ccType == LUIE_CC_TYPE_DISORIENT then
-        return LUIE_CC_ICON_DISORIENT;
-    elseif ccType == LUIE_CC_TYPE_FEAR then
-        return LUIE_CC_ICON_FEAR;
-    elseif ccType == LUIE_CC_TYPE_CHARM then
-        return LUIE_CC_ICON_CHARM;
-    elseif ccType == LUIE_CC_TYPE_STAGGER then
-        return LUIE_CC_ICON_STAGGER;
-    elseif ccType == LUIE_CC_TYPE_SILENCE then
-        return LUIE_CC_ICON_SILENCE;
-    elseif ccType == LUIE_CC_TYPE_SNARE then
-        return LUIE_CC_ICON_SNARE;
-    elseif ccType == LUIE_CC_TYPE_ROOT then
-        return LUIE_CC_ICON_ROOT;
-    end;
+    return CC_ICON_MAP[ccType];
 end;
 
 -- Create Alert Frame - basic setup for now
@@ -475,36 +467,28 @@ function AbilityAlerts.AlertInterrupt(eventCode, resultType, isError, abilityNam
     end;
 end;
 
+local CC_COLOR_MAP = {
+    [LUIE_CC_TYPE_STUN] = function (sv) return sv.alerts.colors.stunColor; end;
+    [LUIE_CC_TYPE_KNOCKDOWN] = function (sv) return sv.alerts.colors.stunColor; end;
+    [LUIE_CC_TYPE_KNOCKBACK] = function (sv) return sv.alerts.colors.knockbackColor; end;
+    [LUIE_CC_TYPE_PULL] = function (sv) return sv.alerts.colors.levitateColor; end;
+    [LUIE_CC_TYPE_DISORIENT] = function (sv) return sv.alerts.colors.disorientColor; end;
+    [LUIE_CC_TYPE_FEAR] = function (sv) return sv.alerts.colors.fearColor; end;
+    [LUIE_CC_TYPE_CHARM] = function (sv) return sv.alerts.colors.charmColor; end;
+    [LUIE_CC_TYPE_SILENCE] = function (sv) return sv.alerts.colors.silenceColor; end;
+    [LUIE_CC_TYPE_STAGGER] = function (sv) return sv.alerts.colors.staggerColor; end;
+    [LUIE_CC_TYPE_UNBREAKABLE] = function (sv) return sv.alerts.colors.unbreakableColor; end;
+    [LUIE_CC_TYPE_SNARE] = function (sv) return sv.alerts.colors.snareColor; end;
+    [LUIE_CC_TYPE_ROOT] = function (sv) return sv.alerts.colors.rootColor; end;
+};
+
 function AbilityAlerts.CrowdControlColorSetup(crowdControl, isBorder)
-    if crowdControl == LUIE_CC_TYPE_STUN or crowdControl == LUIE_CC_TYPE_KNOCKDOWN then -- Stun/Knockdown
-        return CombatInfo.SV.alerts.colors.stunColor;
-    elseif crowdControl == LUIE_CC_TYPE_KNOCKBACK then -- Knockback
-        return CombatInfo.SV.alerts.colors.knockbackColor;
-    elseif crowdControl == LUIE_CC_TYPE_PULL then -- Pull/Levitate
-        return CombatInfo.SV.alerts.colors.levitateColor;
-    elseif crowdControl == LUIE_CC_TYPE_DISORIENT then -- Disorient
-        return CombatInfo.SV.alerts.colors.disorientColor;
-    elseif crowdControl == LUIE_CC_TYPE_FEAR then -- Fear
-        return CombatInfo.SV.alerts.colors.fearColor;
-    elseif crowdControl == LUIE_CC_TYPE_CHARM then -- Charm
-        return CombatInfo.SV.alerts.colors.charmColor;
-    elseif crowdControl == LUIE_CC_TYPE_SILENCE then -- Silence
-        return CombatInfo.SV.alerts.colors.silenceColor;
-    elseif crowdControl == LUIE_CC_TYPE_STAGGER then -- Stagger
-        return CombatInfo.SV.alerts.colors.staggerColor;
-    elseif crowdControl == LUIE_CC_TYPE_UNBREAKABLE then -- Unbreakable
-        return CombatInfo.SV.alerts.colors.unbreakableColor;
-    elseif crowdControl == LUIE_CC_TYPE_SNARE then -- Snare
-        return CombatInfo.SV.alerts.colors.snareColor;
-    elseif crowdControl == LUIE_CC_TYPE_ROOT then -- Immobilize
-        return CombatInfo.SV.alerts.colors.rootColor;
-    else
-        if isBorder then
-            return { 0, 0, 0, 0 };
-        else
-            return CombatInfo.SV.alerts.colors.alertShared;
-        end;
+    if CC_COLOR_MAP[crowdControl] then
+        return CC_COLOR_MAP[crowdControl](CombatInfo.SV);
     end;
+
+    -- Default fallback
+    return isBorder and { 0, 0, 0, 0 } or CombatInfo.SV.alerts.colors.alertShared;
 end;
 
 -- Called from Menu to preview sounds
@@ -515,53 +499,44 @@ function AbilityAlerts.PreviewAlertSound(value)
     end;
 end;
 
+-- Sound type to settings mapping
+local SOUND_TYPE_SETTINGS = {
+    [LUIE_ALERT_SOUND_TYPE_ST] = { toggle = 'sound_stEnable'; sound = 'sound_st' };
+    [LUIE_ALERT_SOUND_TYPE_ST_CC] = { toggle = 'sound_st_ccEnable'; sound = 'sound_st_cc' };
+    [LUIE_ALERT_SOUND_TYPE_AOE] = { toggle = 'sound_aoeEnable'; sound = 'sound_aoe' };
+    [LUIE_ALERT_SOUND_TYPE_AOE_CC] = { toggle = 'sound_aoe_ccEnable'; sound = 'sound_aoe_cc' };
+    [LUIE_ALERT_SOUND_TYPE_POWER_ATTACK] = { toggle = 'sound_powerattackEnable'; sound = 'sound_powerattack' };
+    [LUIE_ALERT_SOUND_TYPE_RADIAL_AVOID] = { toggle = 'sound_radialEnable'; sound = 'sound_radial' };
+    [LUIE_ALERT_SOUND_TYPE_TRAVELER] = { toggle = 'sound_travelEnable'; sound = 'sound_travel' };
+    [LUIE_ALERT_SOUND_TYPE_TRAVELER_CC] = { toggle = 'sound_travel_ccEnable'; sound = 'sound_travel_cc' };
+    [LUIE_ALERT_SOUND_TYPE_GROUND] = { toggle = 'sound_groundEnable'; sound = 'sound_ground' };
+    [LUIE_ALERT_SOUND_TYPE_METEOR] = { toggle = 'sound_meteorEnable'; sound = 'sound_meteor' };
+    [LUIE_ALERT_SOUND_TYPE_UNMIT] = { toggle = 'sound_unmit_stEnable'; sound = 'sound_unmit_st' };
+    [LUIE_ALERT_SOUND_TYPE_UNMIT_AOE] = { toggle = 'sound_unmit_aoeEnable'; sound = 'sound_unmit_aoe' };
+    [LUIE_ALERT_SOUND_TYPE_POWER_DAMAGE] = { toggle = 'sound_power_damageEnable'; sound = 'sound_power_damage' };
+    [LUIE_ALERT_SOUND_TYPE_POWER_DEFENSE] = { toggle = 'sound_power_buffEnable'; sound = 'sound_power_buff' };
+    [LUIE_ALERT_SOUND_TYPE_SUMMON] = { toggle = 'sound_summonEnable'; sound = 'sound_summon' };
+    [LUIE_ALERT_SOUND_TYPE_DESTROY] = { toggle = 'sound_destroyEnable'; sound = 'sound_destroy' };
+    [LUIE_ALERT_SOUND_TYPE_HEAL] = { toggle = 'sound_healEnable'; sound = 'sound_heal' };
+};
+
 -- Play a sound if the option is enabled and priority is set.
 function AbilityAlerts.PlayAlertSound(abilityId, ...)
     local Settings = CombatInfo.SV.alerts;
+    local soundType = Alerts[abilityId].sound;
 
-    local isPlay;
-    if Alerts[abilityId].sound then
-        if Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_ST then
-            isPlay = Settings.toggles.sound_stEnable and Settings.sounds.sound_st;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_ST_CC then
-            isPlay = Settings.toggles.sound_st_ccEnable and Settings.sounds.sound_st_cc;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_AOE then
-            isPlay = Settings.toggles.sound_aoeEnable and Settings.sounds.sound_aoe;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_AOE_CC then
-            isPlay = Settings.toggles.sound_aoe_ccEnable and Settings.sounds.sound_aoe_cc;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_POWER_ATTACK then
-            isPlay = Settings.toggles.sound_powerattackEnable and Settings.sounds.sound_powerattack;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_RADIAL_AVOID then
-            isPlay = Settings.toggles.sound_radialEnable and Settings.sounds.sound_radial;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_TRAVELER then
-            isPlay = Settings.toggles.sound_travelEnable and Settings.sounds.sound_travel;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_TRAVELER_CC then
-            isPlay = Settings.toggles.sound_travel_ccEnable and Settings.sounds.sound_travel_cc;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_GROUND then
-            isPlay = Settings.toggles.sound_groundEnable and Settings.sounds.sound_ground;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_METEOR then
-            isPlay = Settings.toggles.sound_meteorEnable and Settings.sounds.sound_meteor;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_UNMIT then
-            isPlay = Settings.toggles.sound_unmit_stEnable and Settings.sounds.sound_unmit_st;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_UNMIT_AOE then
-            isPlay = Settings.toggles.sound_unmit_aoeEnable and Settings.sounds.sound_unmit_aoe;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_POWER_DAMAGE then
-            isPlay = Settings.toggles.sound_power_damageEnable and Settings.sounds.sound_power_damage;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_POWER_DEFENSE then
-            isPlay = Settings.toggles.sound_power_buffEnable and Settings.sounds.sound_power_buff;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_SUMMON then
-            isPlay = Settings.toggles.sound_summonEnable and Settings.sounds.sound_summon;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_DESTROY then
-            isPlay = Settings.toggles.sound_destroyEnable and Settings.sounds.sound_destroy;
-        elseif Alerts[abilityId].sound == LUIE_ALERT_SOUND_TYPE_HEAL then
-            isPlay = Settings.toggles.sound_healEnable and Settings.sounds.sound_heal;
-        end;
-    end;
+    if not soundType then return; end;
 
-    if isPlay ~= nil then
-        for i = 1, Settings.toggles.soundVolume do
-            PlaySound(LUIE.Sounds[isPlay]);
-        end;
+    local soundSettings = SOUND_TYPE_SETTINGS[soundType];
+    if not soundSettings then return; end;
+
+    -- Check if sound is enabled and get the sound to play
+    local isPlay = Settings.toggles[soundSettings.toggle] and Settings.sounds[soundSettings.sound];
+    if not isPlay then return; end;
+
+    -- Play the sound the configured number of times
+    for i = 1, Settings.toggles.soundVolume do
+        PlaySound(LUIE.Sounds[isPlay]);
     end;
 end;
 

@@ -19,7 +19,7 @@ local zo_strformat = zo_strformat;
 --------------------------------------------------------------------------------------------------------------------------------
 -- Data for icon & description to show for the fake Disguise buff applied to the player.
 --------------------------------------------------------------------------------------------------------------------------------
-Effects.DisguiseIcons =
+local DisguiseIcons =
 {
     -- Required:
     -- icon = '' -- Icon to use
@@ -65,3 +65,6 @@ Effects.DisguiseIcons =
     [0] = { icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds'; description = 'by the Earring of Disguise.'; id = nil }; -- Generic Disguise override - at least the Arenthia quest in Reaper's March applies a disguise without utilizing an item
     [55262] = { icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds'; description = 'by the Earring of Disguise.'; id = nil }; -- Compatibility - for Arenthia quest is player is wearing a Guild Tabard
 };
+
+---@class (partial) DisguiseIcons
+LUIE.Data.Effects.DisguiseIcons = DisguiseIcons;
