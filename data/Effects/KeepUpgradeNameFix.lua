@@ -4,20 +4,20 @@
 --]]
 
 ---@class (partial) LuiExtended
-local LUIE = LUIE;
+local LUIE = LUIE
 
 ---@class (partial) Effects
-local Effects = LUIE.Data.Effects;
+local Effects = LUIE.Data.Effects
 
-local Tooltips = LUIE.Data.Tooltips;
-local Unitnames = LUIE.Data.UnitNames;
-local Zonenames = LUIE.Data.ZoneNames;
-local Abilities = LUIE.Data.Abilities;
+local Tooltips = LUIE.Data.Tooltips
+local Unitnames = LUIE.Data.UnitNames
+local Zonenames = LUIE.Data.ZoneNames
+local Abilities = LUIE.Data.Abilities
 
-local zo_strformat = zo_strformat;
+local zo_strformat = zo_strformat
 
 
 Effects.KeepUpgradeNameFix =
 {
-    [Abilities.Keep_Upgrade_Food_Mage_Abilities] = Abilities.Keep_Upgrade_Food_Mage_Abilities_Fix;
-};
+    [Abilities.Keep_Upgrade_Food_Mage_Abilities] = Abilities.Keep_Upgrade_Food_Mage_Abilities_Fix,
+}

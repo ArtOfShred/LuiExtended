@@ -4,17 +4,17 @@
 --]]
 
 ---@class (partial) LuiExtended
-local LUIE = LUIE;
+local LUIE = LUIE
 
 ---@class (partial) Effects
-local Effects = LUIE.Data.Effects;
+local Effects = LUIE.Data.Effects
 
-local Tooltips = LUIE.Data.Tooltips;
-local Unitnames = LUIE.Data.UnitNames;
-local Zonenames = LUIE.Data.ZoneNames;
-local Abilities = LUIE.Data.Abilities;
+local Tooltips = LUIE.Data.Tooltips
+local Unitnames = LUIE.Data.UnitNames
+local Zonenames = LUIE.Data.ZoneNames
+local Abilities = LUIE.Data.Abilities
 
-local zo_strformat = zo_strformat;
+local zo_strformat = zo_strformat
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- EFFECTS TABLE FOR FAKE EFFECTS
@@ -44,19 +44,19 @@ local zo_strformat = zo_strformat;
 local FakePlayerOfflineAura =
 {
     -- Sets
-    [75814] = { duration = 'GET' }; -- Lunar Bastion (Lunar Bastion)
+    [75814] = { duration = "GET" }, -- Lunar Bastion (Lunar Bastion)
 
     -- Templar
-    [22265] = { duration = 'GET' }; -- Cleansing Ritual (Cleansing Ritual)
-    [22259] = { duration = 'GET' }; -- Ritual of Retribution (Ritual of Retribution)
-    [22262] = { duration = 'GET' }; -- Extended Ritual (Extended Ritual)
+    [22265] = { duration = "GET" }, -- Cleansing Ritual (Cleansing Ritual)
+    [22259] = { duration = "GET" }, -- Ritual of Retribution (Ritual of Retribution)
+    [22262] = { duration = "GET" }, -- Extended Ritual (Extended Ritual)
 
     -- Fighter's Guild
-    [35750] = { duration = 'GET'; ground = true }; -- Trap Beast (Trap Beast)
-    [40382] = { duration = 'GET'; ground = true }; -- Barbed Trap (Barbed Trap)
-    [40372] = { duration = 'GET'; ground = true }; -- Lightweight Beast Trap (Lightweight Beast Trap)
-};
+    [35750] = { duration = "GET", ground = true }, -- Trap Beast (Trap Beast)
+    [40382] = { duration = "GET", ground = true }, -- Barbed Trap (Barbed Trap)
+    [40372] = { duration = "GET", ground = true }, -- Lightweight Beast Trap (Lightweight Beast Trap)
+}
 
 
 ---@class (partial) FakePlayerOfflineAura
-LUIE.Data.Effects.FakePlayerOfflineAura = FakePlayerOfflineAura;
+LUIE.Data.Effects.FakePlayerOfflineAura = FakePlayerOfflineAura

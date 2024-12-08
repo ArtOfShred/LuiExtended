@@ -4,17 +4,17 @@
 --]]
 
 ---@class (partial) LuiExtended
-local LUIE = LUIE;
+local LUIE = LUIE
 
 ---@class (partial) Effects
-local Effects = LUIE.Data.Effects;
+local Effects = LUIE.Data.Effects
 
-local Tooltips = LUIE.Data.Tooltips;
-local Unitnames = LUIE.Data.UnitNames;
-local Zonenames = LUIE.Data.ZoneNames;
-local Abilities = LUIE.Data.Abilities;
+local Tooltips = LUIE.Data.Tooltips
+local Unitnames = LUIE.Data.UnitNames
+local Zonenames = LUIE.Data.ZoneNames
+local Abilities = LUIE.Data.Abilities
 
-local zo_strformat = zo_strformat;
+local zo_strformat = zo_strformat
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- EFFECTS TABLE FOR FAKE EFFECTS
@@ -51,24 +51,24 @@ local FakePlayerDebuffs =
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
 
-    [86309] = { duration = 3000 }; -- Stun (Player blocks NPC charged attack)
-    [86312] = { duration = 3000 }; -- Stun (Player blocks Ogrim Body Slam)
+    [86309] = { duration = 3000 }, -- Stun (Player blocks NPC charged attack)
+    [86312] = { duration = 3000 }, -- Stun (Player blocks Ogrim Body Slam)
 
     -- Necromancer
-    [118242] = { duration = 1000 }; -- Beckoning Armor (Beckoning Armor)
+    [118242] = { duration = 1000 }, -- Beckoning Armor (Beckoning Armor)
 
     -- Destruction Staff
-    [38946] = { duration = 1800 }; -- Stun After Knockback Movement (Destructive Reach) -- Fire
+    [38946] = { duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach) -- Fire
 
     -- Vampire
-    [40349] = { duration = 23000 }; -- Feed (Blood Ritual - Rank 1)
+    [40349] = { duration = 23000 }, -- Feed (Blood Ritual - Rank 1)
 
     -- Werewolf
-    [40520] = { duration = 7000 }; -- Q3047 - Knockdown (Blood Moon - Rank 1)
+    [40520] = { duration = 7000 }, -- Q3047 - Knockdown (Blood Moon - Rank 1)
 
     -- Item Sets
-    [75706] = { duration = 1100; overrideDuration = true }; -- Bahraha's Curse -- Note: We add 100 ms to buffer here because it doesn't really matter and stops flashing
-};
+    [75706] = { duration = 1100, overrideDuration = true }, -- Bahraha's Curse -- Note: We add 100 ms to buffer here because it doesn't really matter and stops flashing
+}
 
 ---@class (partial) FakePlayerDebuffs
-LUIE.Data.Effects.FakePlayerDebuffs = FakePlayerDebuffs;
+LUIE.Data.Effects.FakePlayerDebuffs = FakePlayerDebuffs

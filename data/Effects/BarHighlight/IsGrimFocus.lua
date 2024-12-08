@@ -4,17 +4,17 @@
 --]]
 
 ---@class (partial) LuiExtended
-local LUIE = LUIE;
+local LUIE = LUIE
 
 ---@class (partial) Effects
-local Effects = LUIE.Data.Effects;
+local Effects = LUIE.Data.Effects
 
-local Tooltips = LUIE.Data.Tooltips;
-local Unitnames = LUIE.Data.UnitNames;
-local Zonenames = LUIE.Data.ZoneNames;
-local Abilities = LUIE.Data.Abilities;
+local Tooltips = LUIE.Data.Tooltips
+local Unitnames = LUIE.Data.UnitNames
+local Zonenames = LUIE.Data.ZoneNames
+local Abilities = LUIE.Data.Abilities
 
-local zo_strformat = zo_strformat;
+local zo_strformat = zo_strformat
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- EFFECTS TABLE FOR BAR HIGHLIGHT RELATED OVERRIDES
@@ -22,7 +22,7 @@ local zo_strformat = zo_strformat;
 
 Effects.IsGrimFocus =
 {
-    [122585] = true; -- Grim Focus
-    [122587] = true; -- Relentless Focus
-    [122586] = true; -- Merciless Resolve
-};
+    [122585] = true, -- Grim Focus
+    [122587] = true, -- Relentless Focus
+    [122586] = true, -- Merciless Resolve
+}

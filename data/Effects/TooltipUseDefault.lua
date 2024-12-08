@@ -4,17 +4,17 @@
 --]]
 
 ---@class (partial) LuiExtended
-local LUIE = LUIE;
+local LUIE = LUIE
 
 ---@class (partial) Effects
-local Effects = LUIE.Data.Effects;
+local Effects = LUIE.Data.Effects
 
-local Tooltips = LUIE.Data.Tooltips;
-local Unitnames = LUIE.Data.UnitNames;
-local Zonenames = LUIE.Data.ZoneNames;
-local Abilities = LUIE.Data.Abilities;
+local Tooltips = LUIE.Data.Tooltips
+local Unitnames = LUIE.Data.UnitNames
+local Zonenames = LUIE.Data.ZoneNames
+local Abilities = LUIE.Data.Abilities
 
-local zo_strformat = zo_strformat;
+local zo_strformat = zo_strformat
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- LUIE for the most part overwrites default ability tooltips due to the fact they are only exposed for buffs/debuffs that are on the player. In some cases there is no description with scaling or we need to still use the default where possible.
@@ -23,20 +23,20 @@ local zo_strformat = zo_strformat;
 ---@class (partial) TooltipUseDefault
 local TooltipUseDefault =
 {
-    [13940] = true; -- Boon: The Warrior
-    [13943] = true; -- Boon: The Mage
-    [13974] = true; -- Boon: The Serpent
-    [13975] = true; -- Boon: The Thief
-    [13976] = true; -- Boon: The Lady
-    [13977] = true; -- Boon: The Steed
-    [13978] = true; -- Boon: The Lord
-    [13979] = true; -- Boon: The Apprentice
-    [13980] = true; -- Boon: The Ritual
-    [13981] = true; -- Boon: The Lover
-    [13982] = true; -- Boon: The Atronach
-    [13984] = true; -- Boon: The Shadow
-    [13985] = true; -- Boon: The Tower
-};
+    [13940] = true, -- Boon: The Warrior
+    [13943] = true, -- Boon: The Mage
+    [13974] = true, -- Boon: The Serpent
+    [13975] = true, -- Boon: The Thief
+    [13976] = true, -- Boon: The Lady
+    [13977] = true, -- Boon: The Steed
+    [13978] = true, -- Boon: The Lord
+    [13979] = true, -- Boon: The Apprentice
+    [13980] = true, -- Boon: The Ritual
+    [13981] = true, -- Boon: The Lover
+    [13982] = true, -- Boon: The Atronach
+    [13984] = true, -- Boon: The Shadow
+    [13985] = true, -- Boon: The Tower
+}
 
 ---@class (partial) TooltipUseDefault
-LUIE.Data.Effects.TooltipUseDefault = TooltipUseDefault;
+LUIE.Data.Effects.TooltipUseDefault = TooltipUseDefault

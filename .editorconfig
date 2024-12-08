@@ -10,7 +10,7 @@ indent_size = 4
 # if indent_style is tab, this is valid
 tab_width = 4
 # none/single/double
-quote_style = single
+quote_style = double
 
 continuation_indent = 4
 ## extend option
@@ -27,7 +27,7 @@ max_line_length = unset
 end_of_line = crlf
 
 #  none/ comma / semicolon / only_kv_colon
-table_separator_style = only_kv_colon
+table_separator_style = comma
 
 #optional keep/never/always/smart
 trailing_table_separator = keep
@@ -81,7 +81,7 @@ space_after_comment_dash = false
 
 # [operator space]
 space_around_math_operator = true
-# space_around_math_operator.exponent = false
+space_around_math_operator.exponent = false
 
 space_after_comma = true
 
@@ -101,20 +101,20 @@ align_call_args = false
 
 align_function_params = false
 
-align_continuous_assign_statement = false
+align_continuous_assign_statement = true
 
-align_continuous_rect_table_field = false
+align_continuous_rect_table_field = true
 
 align_continuous_line_space = 2
 
 align_if_branch = false
 
 # option none / always / contain_curly/
-align_array_table = false
+align_array_table = true
 
 align_continuous_similar_call_args = false
 
-align_continuous_inline_comment = false
+align_continuous_inline_comment = true
 # option none / always / only_call_stmt
 align_chain_expr = none
 
@@ -160,11 +160,11 @@ break_all_list_when_line_exceed = false
 
 auto_collapse_lines = false
 
-break_before_braces = false
+break_before_braces = true
 
 # [preference]
 ignore_space_after_colon = false
 
 remove_call_expression_list_finish_comma = false
 # keep / always / same_line / replace_with_newline / never
-end_statement_with_semicolon = always
+end_statement_with_semicolon = replace_with_newline
