@@ -4,17 +4,17 @@
 --]]
 
 ---@class (partial) LuiExtended
-local LUIE = LUIE;
+local LUIE = LUIE
 
 ---@class (partial) Effects
-local Effects = LUIE.Data.Effects;
+local Effects = LUIE.Data.Effects
 
-local Tooltips = LUIE.Data.Tooltips;
-local Unitnames = LUIE.Data.UnitNames;
-local Zonenames = LUIE.Data.ZoneNames;
-local Abilities = LUIE.Data.Abilities;
+local Tooltips = LUIE.Data.Tooltips
+local Unitnames = LUIE.Data.UnitNames
+local Zonenames = LUIE.Data.ZoneNames
+local Abilities = LUIE.Data.Abilities
 
-local zo_strformat = zo_strformat;
+local zo_strformat = zo_strformat
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- EFFECTS TABLE FOR FAKE EFFECTS
@@ -43,19 +43,19 @@ local FakeExternalBuffs =
 {
 
     -- Quests
-    [21403] = { duration = 60000; ignoreFade = true }; -- Spiritual Cloak (The Mallari-Mora)
+    [21403] = { duration = 60000, ignoreFade = true }, -- Spiritual Cloak (The Mallari-Mora)
 
     -- Elsweyr Quests
-    [124310] = { duration = 10000 }; -- Master's Shield (Grand Adept Ma'hja-dro)
+    [124310] = { duration = 10000 }, -- Master's Shield (Grand Adept Ma'hja-dro)
 
     ----------------
     -- Dungeons ----
     ----------------
 
     -- Elden Root II
-    [32655] = { duration = 0 }; -- Fortification (Fortified Guardian)
-    [32614] = { duration = 0 }; -- Empowered (Mystic Guardian)
-};
+    [32655] = { duration = 0 }, -- Fortification (Fortified Guardian)
+    [32614] = { duration = 0 }, -- Empowered (Mystic Guardian)
+}
 
 ---@class (partial) FakeExternalBuffs
-LUIE.Data.Effects.FakeExternalBuffs = FakeExternalBuffs;
+LUIE.Data.Effects.FakeExternalBuffs = FakeExternalBuffs
