@@ -487,7 +487,7 @@ function LUIE.InitializeHooks()
                         -- Special handling for Battleground Deserter Penalty
                         if effectId == 1 then
                             startTime = GetFrameTimeSeconds();
-                            local cooldown = GetLFGCooldownTimeRemainingSeconds(LFG_COOLDOWN_BATTLEGROUND_DESERTED);
+                            local cooldown = GetLFGCooldownTimeRemainingSeconds(LFG_COOLDOWN_BATTLEGROUND_DESERTED_QUEUE);
                             endTime = startTime + cooldown;
                             duration = startTime - endTime;
                             effectsRow.time:SetHidden(duration == 0);
