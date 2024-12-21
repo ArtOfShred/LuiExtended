@@ -1912,7 +1912,7 @@ function UnitFrames.ReticleColorByReaction(value)
     end
     -- If this Reticle coloring is not required, revert it back to white
     if not value then
-        ZO_ReticleContainerReticle:SetColor(1, 1, 1)
+        ZO_ReticleContainerReticle:SetColor(1, 1, 1, 1)
     end
 end
 
@@ -2062,44 +2062,54 @@ function UnitFrames.CustomFramesFormatLabels(menu)
     end
 end
 
--- Runs on the EVENT_PLAYER_ACTIVATED listener.
--- This handler fires every time the player is loaded. Used to set initial values.
-function UnitFrames.OnPlayerActivated(eventCode)
-    -- Reload values for player frames
+-- Helper function to initialize player frames
+local function InitializePlayerFrames()
     UnitFrames.ReloadValues("player")
     UnitFrames.UpdateRegen("player", STAT_MAGICKA_REGEN_COMBAT, ATTRIBUTE_MAGICKA, COMBAT_MECHANIC_FLAGS_MAGICKA)
     UnitFrames.UpdateRegen("player", STAT_STAMINA_REGEN_COMBAT, ATTRIBUTE_STAMINA, COMBAT_MECHANIC_FLAGS_STAMINA)
+end
 
-    -- Create UI elements for default group members frames
-    if g_DefaultFrames.SmallGroup then
-        for i = 1, MAX_GROUP_SIZE_THRESHOLD do
-            local unitTag = "group" .. i
-            if DoesUnitExist(unitTag) then
-                UnitFrames.DefaultFramesCreateUnitGroupControls(unitTag)
-            end
-        end
-    end
-
-    -- If CustomFrames are used then values will be reloaded in following function
-    if UnitFrames.CustomFrames.SmallGroup1 ~= nil or UnitFrames.CustomFrames.RaidGroup1 ~= nil then
-        UnitFrames.CustomFramesGroupUpdate()
-
-        -- Else we need to manually scan and update DefaultFrames
-    elseif g_DefaultFrames.SmallGroup then
-        for i = 1, MAX_GROUP_SIZE_THRESHOLD do
-            local unitTag = "group" .. i
-            if DoesUnitExist(unitTag) then
+-- Helper function to initialize group frames
+local function InitializeGroupFrames()
+    -- Early return if no small group frames
+    if not g_DefaultFrames.SmallGroup then return end
+    
+    for i = 1, MAX_GROUP_SIZE_THRESHOLD do
+        local unitTag = "group" .. i
+        if DoesUnitExist(unitTag) then
+            UnitFrames.DefaultFramesCreateUnitGroupControls(unitTag)
+            -- Only reload values for default frames
+            if not (UnitFrames.CustomFrames.SmallGroup1 or UnitFrames.CustomFrames.RaidGroup1) then
                 UnitFrames.ReloadValues(unitTag)
             end
         end
     end
+end
 
+-- Helper function to initialize custom group frames
+local function InitializeCustomGroupFrames()
+    if UnitFrames.CustomFrames.SmallGroup1 or UnitFrames.CustomFrames.RaidGroup1 then
+        UnitFrames.CustomFramesGroupUpdate()
+    end
+end
+
+-- Helper function to initialize UI states
+local function InitializeUIStates()
     UnitFrames.OnReticleTargetChanged(nil)
     UnitFrames.OnBossesChanged()
     UnitFrames.OnPlayerCombatState(EVENT_PLAYER_COMBAT_STATE, IsUnitInCombat("player"))
     UnitFrames.CustomFramesGroupAlpha()
     UnitFrames.CustomFramesSetupAlternative()
+end
 
+-- Runs on the EVENT_PLAYER_ACTIVATED listener.
+-- This handler fires every time the player is loaded. Used to set initial values.
+function UnitFrames.OnPlayerActivated(eventCode)
+    InitializePlayerFrames()
+    InitializeGroupFrames()
+    InitializeCustomGroupFrames()
+    InitializeUIStates()
+    
     -- Apply bar colors here, has to be after player init to get group roles
     UnitFrames.CustomFramesApplyColors(false)
 end
@@ -2168,7 +2178,7 @@ function UnitFrames.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, pow
 end
 
 function UnitFrames.CustomFramesUnreferencePetControl(first)
-    local last = 7
+    local last = MAX_PET_UNIT_TAGS
     for i = first, last do
         local unitTag = "PetGroup" .. i
         UnitFrames.CustomFrames[unitTag].unitTag = nil
@@ -2487,7 +2497,7 @@ function UnitFrames.OnReticleTargetChanged(eventCode)
             g_defaultTargetNameLabel:SetColor(color[1], color[2], color[3], isWithinRange and 1 or 0.5)
         end
         if UnitFrames.SV.ReticleColourByReaction then
-            ZO_ReticleContainerReticle:SetColor(reticle_color[1], reticle_color[2], reticle_color[3])
+            ZO_ReticleContainerReticle:SetColor(reticle_color[1], reticle_color[2], reticle_color[3], 1)
         end
 
         -- And color of custom target name always. Also change 'labelOne' for critters
@@ -2560,7 +2570,7 @@ function UnitFrames.OnReticleTargetChanged(eventCode)
 
         -- Revert back the color of reticle to white
         if UnitFrames.SV.ReticleColourByReaction then
-            ZO_ReticleContainerReticle:SetColor(1, 1, 1)
+            ZO_ReticleContainerReticle:SetColor(1, 1, 1, 1)
         end
     end
 
