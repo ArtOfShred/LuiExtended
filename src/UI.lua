@@ -46,9 +46,8 @@ function UI.Control(parent, anchors, dims, hidden, name)
     local controlName = name or nil
     ---@type Control
     local c = windowManager:CreateControl(controlName, parent, CT_CONTROL)
-    c:SetHidden(hidden)
     if anchors == "fill" then
-        c:SetAnchorFill(nil)
+        c:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         c:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
@@ -56,6 +55,9 @@ function UI.Control(parent, anchors, dims, hidden, name)
         c:SetDimensions(parent:GetWidth(), parent:GetHeight())
     elseif dims ~= nil and #dims == 2 then
         c:SetDimensions(dims[1], dims[2])
+    end
+    if hidden then
+        c:SetHidden(hidden)
     end
     return c
 end
@@ -74,9 +76,8 @@ function UI.Texture(parent, anchors, dims, texture, drawlayer, hidden)
     end
     ---@type TextureControl
     local t = windowManager:CreateControl(nil, parent, CT_TEXTURE)
-    t:SetHidden(hidden)
     if anchors == "fill" then
-        t:SetAnchorFill(nil)
+        t:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         t:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
@@ -90,6 +91,9 @@ function UI.Texture(parent, anchors, dims, texture, drawlayer, hidden)
     end
     if drawlayer then
         t:SetDrawLayer(drawlayer)
+    end
+    if hidden then
+        t:SetHidden(hidden)
     end
     return t
 end
@@ -114,9 +118,8 @@ function UI.Backdrop(parent, anchors, dims, center, edge, hidden)
     bg:SetEdgeColor(edgeColor[1], edgeColor[2], edgeColor[3], edgeColor[4])
     bg:SetEdgeTexture("", 8, 1, 0, 0)
     bg:SetDrawLayer(DL_BACKGROUND)
-    bg:SetHidden(hidden)
     if anchors == "fill" then
-        bg:SetAnchorFill(nil)
+        bg:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         bg:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
@@ -124,6 +127,9 @@ function UI.Backdrop(parent, anchors, dims, center, edge, hidden)
         bg:SetDimensions(parent:GetWidth(), parent:GetHeight())
     elseif dims ~= nil and #dims == 2 then
         bg:SetDimensions(dims[1], dims[2])
+    end
+    if hidden then
+        bg:SetHidden(hidden)
     end
     return bg
 end
@@ -150,9 +156,9 @@ function UI.ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
     bg:SetEdgeTexture("/esoui/art/chatwindow/chat_bg_edge.dds", 256, 256, edgeSize, 0)
     bg:SetInsets(edgeSize, edgeSize, -edgeSize, -edgeSize)
     bg:SetDrawLayer(DL_BACKGROUND)
-    bg:SetHidden(hidden)
+
     if anchors == "fill" then
-        bg:SetAnchorFill(nil)
+        bg:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         bg:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
@@ -160,6 +166,9 @@ function UI.ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
         bg:SetDimensions(parent:GetWidth(), parent:GetHeight())
     elseif dims ~= nil and #dims == 2 then
         bg:SetDimensions(dims[1], dims[2])
+    end
+    if hidden then
+        bg:SetHidden(hidden)
     end
     return bg
 end
@@ -177,9 +186,9 @@ function UI.StatusBar(parent, anchors, dims, color, hidden)
     end
     ---@type StatusBarControl
     local sb = windowManager:CreateControl(nil, parent, CT_STATUSBAR)
-    sb:SetHidden(hidden)
+
     if anchors == "fill" then
-        sb:SetAnchorFill(nil)
+        sb:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         sb:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
@@ -190,6 +199,9 @@ function UI.StatusBar(parent, anchors, dims, color, hidden)
     end
     if color ~= nil and (#color == 3 or #color == 4) then
         sb:SetColor(unpack(color))
+    end
+    if hidden then
+        sb:SetHidden(hidden)
     end
     return sb
 end
@@ -216,9 +228,8 @@ function UI.Label(parent, anchors, dims, align, font, text, hidden, name)
     label:SetHorizontalAlignment(alignment[1])
     label:SetVerticalAlignment(alignment[2])
     label:SetWrapMode(TEXT_WRAP_MODE_ELLIPSIS)
-    label:SetHidden(hidden)
     if anchors == "fill" then
-        label:SetAnchorFill(nil)
+        label:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         label:SetAnchor(anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0)
     end
@@ -229,6 +240,9 @@ function UI.Label(parent, anchors, dims, align, font, text, hidden, name)
     end
     if text then
         label:SetText(text)
+    end
+    if hidden then
+        label:SetHidden(hidden)
     end
     return label
 end
