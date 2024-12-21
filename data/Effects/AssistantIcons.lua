@@ -32,6 +32,7 @@ local AssistantIcons =
     [GetCollectibleName(9744)] = "LuiExtended/media/icons/assistants/assistant_factotummerchant.dds",
     [GetCollectibleName(9745)] = "LuiExtended/media/icons/assistants/assistant_ghrasharog.dds",
     [GetCollectibleName(10184)] = "LuiExtended/media/icons/assistants/assistant_giladil.dds",
+	[GetCollectibleName(10618)] = "LuiExtended/media/icons/new_assistants/assistant_zuqoth.dds",
 }
 
 ---@class (partial) AssistantIcons

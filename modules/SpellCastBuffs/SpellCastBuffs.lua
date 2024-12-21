@@ -1405,20 +1405,19 @@ local function ClearStickyTooltip()
     eventManager:UnregisterForUpdate(moduleName .. "StickyTooltip")
 end
 
--- TODO: Localize
 local buffTypes =
 {
-    [LUIE_BUFF_TYPE_BUFF] = "Buff",
-    [LUIE_BUFF_TYPE_DEBUFF] = "Debuff",
-    [LUIE_BUFF_TYPE_UB_BUFF] = "Cosmetic Buff",
-    [LUIE_BUFF_TYPE_UB_DEBUFF] = "Unbreakable Debuff",
-    [LUIE_BUFF_TYPE_GROUND_BUFF_TRACKER] = "AOE Buff Tracker",
-    [LUIE_BUFF_TYPE_GROUND_DEBUFF_TRACKER] = "AOE Debuff Tracker",
-    [LUIE_BUFF_TYPE_GROUND_AOE_BUFF] = "AOE Buff",
-    [LUIE_BUFF_TYPE_GROUND_AOE_DEBUFF] = "AOE Debuff",
-    [LUIE_BUFF_TYPE_ENVIRONMENT_BUFF] = "Zone Buff",
-    [LUIE_BUFF_TYPE_ENVIRONMENT_DEBUFF] = "Hazard",
-    [LUIE_BUFF_TYPE_NONE] = "None",
+    [LUIE_BUFF_TYPE_BUFF] = GetString(LUIE_STRING_BUFF_TYPE_BUFF),
+    [LUIE_BUFF_TYPE_DEBUFF] = GetString(LUIE_STRING_BUFF_TYPE_DEBUFF),
+    [LUIE_BUFF_TYPE_UB_BUFF] = GetString(LUIE_STRING_BUFF_TYPE_UB_BUFF),
+    [LUIE_BUFF_TYPE_UB_DEBUFF] = GetString(LUIE_STRING_BUFF_TYPE_UB_DEBUFF),
+    [LUIE_BUFF_TYPE_GROUND_BUFF_TRACKER] = GetString(LUIE_STRING_BUFF_TYPE_GROUND_BUFF_TRACKER),
+    [LUIE_BUFF_TYPE_GROUND_DEBUFF_TRACKER] = GetString(LUIE_STRING_BUFF_TYPE_GROUND_DEBUFF_TRACKER),
+    [LUIE_BUFF_TYPE_GROUND_AOE_BUFF] = GetString(LUIE_STRING_BUFF_TYPE_GROUND_AOE_BUFF),
+    [LUIE_BUFF_TYPE_GROUND_AOE_DEBUFF] = GetString(LUIE_STRING_BUFF_TYPE_GROUND_AOE_DEBUFF),
+    [LUIE_BUFF_TYPE_ENVIRONMENT_BUFF] = GetString(LUIE_STRING_BUFF_TYPE_ENVIRONMENT_BUFF),
+    [LUIE_BUFF_TYPE_ENVIRONMENT_DEBUFF] = GetString(LUIE_STRING_BUFF_TYPE_ENVIRONMENT_DEBUFF),
+    [LUIE_BUFF_TYPE_NONE] = GetString(LUIE_STRING_BUFF_TYPE_NONE),
 }
 
 function SpellCastBuffs.TooltipBottomLine(control, detailsLine, artificial)
@@ -1660,171 +1659,192 @@ function SpellCastBuffs.Buff_OnMouseExit(control)
     end
 end
 
--- Create a Single Buff Icon
 function SpellCastBuffs.CreateSingleIcon(container, AnchorItem, effectType)
+    -- Create main buff container
     local buff = UI.Backdrop(uiTlw[container], nil, nil, { 0, 0, 0, 0.5 }, { 0, 0, 0, 1 }, false)
 
-    -- Enable tooltip
+    -- Setup mouse interaction
     buff:SetMouseEnabled(true)
     buff:SetHandler("OnMouseEnter", SpellCastBuffs.Buff_OnMouseEnter)
     buff:SetHandler("OnMouseExit", SpellCastBuffs.Buff_OnMouseExit)
     buff:SetHandler("OnMouseUp", SpellCastBuffs.Buff_OnMouseUp)
 
-    -- Border
-    buff.back = UI.Texture(buff, nil, nil, "LuiExtended/media/icons/icon_border/icon-border.dds", nil, false)
-    buff.back:SetAnchor(TOPLEFT, buff, TOPLEFT)
-    buff.back:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT)
-    -- Glow border
-    buff.frame = UI.Texture(buff, { CENTER, CENTER }, nil, nil, nil, false)
-    -- Background
-    if container ~= "player_long" then
-        buff.iconbg = UI.Texture(buff, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, true)
-        buff.iconbg = UI.Backdrop(buff, nil, nil, { 0, 0, 0, 0.9 }, { 0, 0, 0, 0.9 }, false)
-        buff.iconbg:SetDrawLevel(DL_CONTROLS)
-    end
-    -- Drop for collectible/mount
-    buff.drop = UI.Texture(buff, nil, nil, "LuiExtended/media/icons/abilities/ability_innate_background.dds", DL_BACKGROUND, true)
-    -- Icon itself
-    buff.icon = UI.Texture(buff, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false)
-    -- Remaining text label
-    buff.label = UI.Label(buff, nil, nil, nil, g_buffsFont, nil, false)
-    buff.label:SetAnchor(TOPLEFT, buff, LEFT, -g_padding, -SpellCastBuffs.SV.LabelPosition)
-    buff.label:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT, g_padding, -2)
-    -- AbilityId Debug label
-    buff.abilityId = UI.Label(buff, nil, nil, nil, g_buffsFont, nil, false)
-    buff.abilityId:SetAnchor(CENTER, buff, CENTER, 0, 0)
-    buff.abilityId:SetAnchor(CENTER, buff, CENTER, 0, 0)
-    -- Stack label
-    buff.stack = UI.Label(buff, nil, nil, nil, g_buffsFont, nil, false)
-    buff.stack:SetAnchor(CENTER, buff, BOTTOMLEFT, 0, 0)
-    buff.stack:SetAnchor(CENTER, buff, TOPRIGHT, -g_padding * 3, g_padding * 3)
-    -- Cooldown circular control
-    if buff.iconbg ~= nil then
-        buff.cd = windowManager:CreateControl(nil, buff, CT_COOLDOWN)
-        buff.cd:SetAnchor(TOPLEFT, buff, TOPLEFT, 1, 1)
-        buff.cd:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT, -1, -1)
-        buff.cd:SetDrawLayer(DL_BACKGROUND)
+    -- Create visual layers
+    local function createVisualElements()
+        -- Border layer - hidden by default, shown only for non-collectible buffs
+        buff.back = UI.Texture(buff, "fill", nil, "LuiExtended/media/icons/icon_border/icon-border.dds", DL_BACKGROUND, true)
+
+        -- Glow border layer
+        buff.frame = UI.Texture(buff, { CENTER, CENTER }, nil, nil, DL_OVERLAY, false)
+
+        -- Background layer (except for player_long container)
+        if container ~= "player_long" then
+            -- Create background texture
+            buff.iconbg = UI.Texture(buff, "fill", nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false)
+
+            -- Create dark backdrop behind the texture
+            local bgBackdrop = UI.Backdrop(buff.iconbg, "fill", nil, { 0, 0, 0, 0.9 }, { 0, 0, 0, 0.9 }, false)
+            bgBackdrop:SetDrawLevel(DL_CONTROLS)
+        end
+
+        -- Collectible/mount background
+        buff.drop = UI.Texture(buff, nil, nil, "LuiExtended/media/icons/abilities/ability_innate_background.dds", DL_BACKGROUND, true)
+
+        -- Main ability icon
+        buff.icon = UI.Texture(buff, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false)
     end
 
-    if container == "prominentbuffs" then
-        buff.effectType = effectType
-        buff.name = UI.Label(buff, nil, nil, nil, g_prominentFont, nil, false)
-        buff.bar =
-        {
-            ["backdrop"] = UI.Backdrop(buff, nil, { 154, 16 }, nil, nil, false),
-            ["bar"] = UI.StatusBar(buff, nil, { 150, 12 }, nil, false),
-        }
-        buff.bar.backdrop:SetEdgeTexture("", 8, 2, 2, 0)
-        buff.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
-        buff.bar.backdrop:SetDrawLevel(DL_CONTROLS)
-        buff.bar.bar:SetMinMax(0, 1)
+    -- Rest of the code remains the same...
+    local function createTextElements()
+        -- Duration label
+        buff.label = UI.Label(buff, nil, nil, nil, g_buffsFont, nil, false)
+        buff.label:SetAnchor(TOPLEFT, buff, LEFT, -g_padding, -SpellCastBuffs.SV.LabelPosition)
+        buff.label:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT, g_padding, -2)
+
+        -- Debug ability ID label
+        buff.abilityId = UI.Label(buff, { CENTER, CENTER }, nil, nil, g_buffsFont, nil, false)
+
+        -- Stack count label
+        buff.stack = UI.Label(buff, nil, nil, nil, g_buffsFont, nil, false)
+        buff.stack:SetAnchor(CENTER, buff, BOTTOMLEFT, 0, 0)
+        buff.stack:SetAnchor(CENTER, buff, TOPRIGHT, -g_padding * 3, g_padding * 3)
     end
 
-    if container == "prominentdebuffs" then
-        buff.effectType = effectType
-        buff.name = UI.Label(buff, nil, nil, nil, g_prominentFont, nil, false)
-        buff.bar =
-        {
-            ["backdrop"] = UI.Backdrop(buff, nil, { 154, 16 }, nil, nil, false),
-            ["bar"] = UI.StatusBar(buff, nil, { 150, 12 }, nil, false),
-        }
-        buff.bar.backdrop:SetEdgeTexture("", 8, 2, 2, 0)
-        buff.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
-        buff.bar.backdrop:SetDrawLevel(DL_CONTROLS)
-        buff.bar.bar:SetMinMax(0, 1)
+    local function createCooldownElement()
+        if buff.iconbg then
+            buff.cd = windowManager:CreateControl(nil, buff, CT_COOLDOWN)
+            buff.cd:SetAnchor(TOPLEFT, buff, TOPLEFT, 1, 1)
+            buff.cd:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT, -1, -1)
+            buff.cd:SetDrawLayer(DL_BACKGROUND)
+        end
     end
 
+    local function createProminentElements()
+        if container == "prominentbuffs" or container == "prominentdebuffs" then
+            buff.effectType = effectType
+            buff.name = UI.Label(buff, nil, nil, nil, g_prominentFont, nil, false)
+
+            -- Create progress bar
+            buff.bar =
+            {
+                backdrop = UI.Backdrop(buff, nil, { 154, 16 }, nil, nil, false),
+                bar = UI.StatusBar(buff, nil, { 150, 12 }, nil, false),
+            }
+
+            -- Setup bar properties
+            buff.bar.backdrop:SetEdgeTexture("", 8, 2, 2, 0)
+            buff.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
+            buff.bar.backdrop:SetDrawLevel(DL_CONTROLS)
+            buff.bar.bar:SetMinMax(0, 1)
+        end
+    end
+
+    -- Create all elements
+    createVisualElements()
+    createTextElements()
+    createCooldownElement()
+    createProminentElements()
+
+    -- Reset icon properties
     SpellCastBuffs.ResetSingleIcon(container, buff, AnchorItem)
+
     return buff
 end
 
--- Set proper color of border and text on single buff element
 function SpellCastBuffs.SetSingleIconBuffType(buff, buffType, unbreakable, id)
-    local contextType
-    local fillColor
-
-    if buffType == BUFF_EFFECT_TYPE_BUFF then
-        contextType = "buff"
-    else
-        contextType = "debuff"
-    end
-
+    -- Determine context type and get ability name
+    local contextType = (buffType == BUFF_EFFECT_TYPE_BUFF) and "buff" or "debuff"
     local abilityName = GetAbilityName(id)
 
-    if contextType == "buff" then
-        if SpellCastBuffs.SV.PriorityBuffTable[id] or SpellCastBuffs.SV.PriorityBuffTable[abilityName] then
-            fillColor = SpellCastBuffs.SV.colors.prioritybuff
-        elseif unbreakable == 1 and SpellCastBuffs.SV.ColorCosmetic then
-            fillColor = SpellCastBuffs.SV.colors.cosmetic
+    -- Helper function to determine if effect is priority
+    local function isPriorityEffect()
+        if contextType == "buff" then
+            return SpellCastBuffs.SV.PriorityBuffTable[id] or SpellCastBuffs.SV.PriorityBuffTable[abilityName]
         else
-            fillColor = SpellCastBuffs.SV.colors.buff
+            return SpellCastBuffs.SV.PriorityDebuffTable[id] or SpellCastBuffs.SV.PriorityDebuffTable[abilityName]
         end
-    elseif contextType == "debuff" then
-        if SpellCastBuffs.SV.PriorityDebuffTable[id] or SpellCastBuffs.SV.PriorityDebuffTable[abilityName] then
-            fillColor = SpellCastBuffs.SV.colors.prioritydebuff
-        elseif unbreakable == 1 and SpellCastBuffs.SV.ColorUnbreakable then
-            fillColor = SpellCastBuffs.SV.colors.unbreakable
-        else
-            -- If color by CC type is enabled then color by the crowd control type if detected
-            if SpellCastBuffs.SV.ColorCC then
-                if Effects.EffectOverride[id] and Effects.EffectOverride[id].cc then
-                    local cc = Effects.EffectOverride[id].cc
-                    if cc == LUIE_CC_TYPE_STUN or cc == LUIE_CC_TYPE_KNOCKDOWN then
-                        fillColor = SpellCastBuffs.SV.colors.stun
-                    elseif cc == LUIE_CC_TYPE_KNOCKBACK then
-                        fillColor = SpellCastBuffs.SV.colors.knockback
-                    elseif cc == LUIE_CC_TYPE_PULL then
-                        fillColor = SpellCastBuffs.SV.colors.levitate
-                    elseif cc == LUIE_CC_TYPE_DISORIENT then
-                        fillColor = SpellCastBuffs.SV.colors.disorient
-                    elseif cc == LUIE_CC_TYPE_FEAR then
-                        fillColor = SpellCastBuffs.SV.colors.fear
-                    elseif cc == LUIE_CC_TYPE_SILENCE then
-                        fillColor = SpellCastBuffs.SV.colors.silence
-                    elseif cc == LUIE_CC_TYPE_STAGGER then
-                        fillColor = SpellCastBuffs.SV.colors.stagger
-                    elseif cc == LUIE_CC_TYPE_SNARE then
-                        fillColor = SpellCastBuffs.SV.colors.snare
-                    elseif cc == LUIE_CC_TYPE_ROOT then
-                        fillColor = SpellCastBuffs.SV.colors.root
-                    else
-                        fillColor = SpellCastBuffs.SV.colors.nocc
-                    end
-                else
-                    fillColor = SpellCastBuffs.SV.colors.nocc
-                end
+    end
+
+    -- Helper function to get CC color
+    local function getCCColor(ccType)
+        local ccColors =
+        {
+            [LUIE_CC_TYPE_STUN] = SpellCastBuffs.SV.colors.stun,
+            [LUIE_CC_TYPE_KNOCKDOWN] = SpellCastBuffs.SV.colors.stun,
+            [LUIE_CC_TYPE_KNOCKBACK] = SpellCastBuffs.SV.colors.knockback,
+            [LUIE_CC_TYPE_PULL] = SpellCastBuffs.SV.colors.levitate,
+            [LUIE_CC_TYPE_DISORIENT] = SpellCastBuffs.SV.colors.disorient,
+            [LUIE_CC_TYPE_FEAR] = SpellCastBuffs.SV.colors.fear,
+            [LUIE_CC_TYPE_SILENCE] = SpellCastBuffs.SV.colors.silence,
+            [LUIE_CC_TYPE_STAGGER] = SpellCastBuffs.SV.colors.stagger,
+            [LUIE_CC_TYPE_SNARE] = SpellCastBuffs.SV.colors.snare,
+            [LUIE_CC_TYPE_ROOT] = SpellCastBuffs.SV.colors.root,
+        }
+        return ccColors[ccType] or SpellCastBuffs.SV.colors.nocc
+    end
+
+    -- Determine fill color based on buff type and conditions
+    local function determineFillColor()
+        if contextType == "buff" then
+            if isPriorityEffect() then
+                return SpellCastBuffs.SV.colors.prioritybuff
+            elseif unbreakable == 1 and SpellCastBuffs.SV.ColorCosmetic then
+                return SpellCastBuffs.SV.colors.cosmetic
             else
-                fillColor = SpellCastBuffs.SV.colors.debuff
+                return SpellCastBuffs.SV.colors.buff
+            end
+        else -- debuff
+            if isPriorityEffect() then
+                return SpellCastBuffs.SV.colors.prioritydebuff
+            elseif unbreakable == 1 and SpellCastBuffs.SV.ColorUnbreakable then
+                return SpellCastBuffs.SV.colors.unbreakable
+            elseif SpellCastBuffs.SV.ColorCC and Effects.EffectOverride[id] and Effects.EffectOverride[id].cc then
+                return getCCColor(Effects.EffectOverride[id].cc)
+            else
+                return SpellCastBuffs.SV.colors.debuff
             end
         end
     end
 
-    buff.frame:SetTexture("/esoui/art/actionbar/" .. contextType .. "_frame.dds")
+    -- Helper function to set progress bar colors
+    local function setProgressBarColors(isDebuff, isPriority)
+        local colors
+        if isDebuff then
+            colors = isPriority and SpellCastBuffs.SV.ProminentProgressDebuffPriorityC2 or SpellCastBuffs.SV.ProminentProgressDebuffC2
+        else
+            colors = isPriority and SpellCastBuffs.SV.ProminentProgressBuffPriorityC2 or SpellCastBuffs.SV.ProminentProgressBuffC2
+        end
+
+        local gradientColors = isDebuff and
+            (isPriority and SpellCastBuffs.SV.ProminentProgressDebuffPriorityC1 or SpellCastBuffs.SV.ProminentProgressDebuffC1) or
+            (isPriority and SpellCastBuffs.SV.ProminentProgressBuffPriorityC1 or SpellCastBuffs.SV.ProminentProgressBuffC1)
+
+        buff.bar.backdrop:SetCenterColor(0.1 * colors[1], 0.1 * colors[2], 0.1 * colors[3], 0.75)
+        buff.bar.bar:SetGradientColors(colors[1], colors[2], colors[3], 1,
+            gradientColors[1], gradientColors[2], gradientColors[3], 1)
+    end
+
+    -- Apply visual settings
+    local fillColor = determineFillColor()
     local labelColor = contextType == "buff" and SpellCastBuffs.SV.colors.buff or SpellCastBuffs.SV.colors.debuff
-    buff.label:SetColor(unpack(SpellCastBuffs.SV.RemainingTextColoured and labelColor or { 1, 1, 1, 1 }))
-    buff.stack:SetColor(unpack(SpellCastBuffs.SV.RemainingTextColoured and labelColor or { 1, 1, 1, 1 }))
-    if buff.cd ~= nil then
+    local textColor = SpellCastBuffs.SV.RemainingTextColoured and labelColor or { 1, 1, 1, 1 }
+
+    -- Set visual properties
+    buff.frame:SetTexture("/esoui/art/actionbar/" .. contextType .. "_frame.dds")
+    buff.label:SetColor(unpack(textColor))
+    buff.stack:SetColor(unpack(textColor))
+
+    buff.back:SetHidden(true)
+    buff.drop:SetHidden(false)
+
+    -- Set cooldown color if it exists
+    if buff.cd then
         buff.cd:SetFillColor(unpack(fillColor))
     end
 
+    -- Set progress bar colors if they exist
     if buff.bar then
-        if buffType == BUFF_EFFECT_TYPE_DEBUFF then
-            if SpellCastBuffs.SV.PriorityDebuffTable[id] or SpellCastBuffs.SV.PriorityDebuffTable[abilityName] then
-                buff.bar.backdrop:SetCenterColor((0.1 * SpellCastBuffs.SV.ProminentProgressDebuffPriorityC2[1]), (0.1 * SpellCastBuffs.SV.ProminentProgressDebuffPriorityC2[2]), (0.1 * SpellCastBuffs.SV.ProminentProgressDebuffPriorityC2[3]), 0.75)
-                buff.bar.bar:SetGradientColors(SpellCastBuffs.SV.ProminentProgressDebuffPriorityC2[1], SpellCastBuffs.SV.ProminentProgressDebuffPriorityC2[2], SpellCastBuffs.SV.ProminentProgressDebuffPriorityC2[3], 1, SpellCastBuffs.SV.ProminentProgressDebuffPriorityC1[1], SpellCastBuffs.SV.ProminentProgressDebuffPriorityC1[2], SpellCastBuffs.SV.ProminentProgressDebuffPriorityC1[3], 1)
-            else
-                buff.bar.backdrop:SetCenterColor((0.1 * SpellCastBuffs.SV.ProminentProgressDebuffC2[1]), (0.1 * SpellCastBuffs.SV.ProminentProgressDebuffC2[2]), (0.1 * SpellCastBuffs.SV.ProminentProgressDebuffC2[3]), 0.75)
-                buff.bar.bar:SetGradientColors(SpellCastBuffs.SV.ProminentProgressDebuffC2[1], SpellCastBuffs.SV.ProminentProgressDebuffC2[2], SpellCastBuffs.SV.ProminentProgressDebuffC2[3], 1, SpellCastBuffs.SV.ProminentProgressDebuffC1[1], SpellCastBuffs.SV.ProminentProgressDebuffC1[2], SpellCastBuffs.SV.ProminentProgressDebuffC1[3], 1)
-            end
-        elseif buffType == BUFF_EFFECT_TYPE_BUFF then
-            if SpellCastBuffs.SV.PriorityBuffTable[id] or SpellCastBuffs.SV.PriorityBuffTable[abilityName] then
-                buff.bar.backdrop:SetCenterColor((0.1 * SpellCastBuffs.SV.ProminentProgressBuffPriorityC2[1]), (0.1 * SpellCastBuffs.SV.ProminentProgressBuffPriorityC2[2]), (0.1 * SpellCastBuffs.SV.ProminentProgressBuffPriorityC2[3]), 0.75)
-                buff.bar.bar:SetGradientColors(SpellCastBuffs.SV.ProminentProgressBuffPriorityC2[1], SpellCastBuffs.SV.ProminentProgressBuffPriorityC2[2], SpellCastBuffs.SV.ProminentProgressBuffPriorityC2[3], 1, SpellCastBuffs.SV.ProminentProgressBuffPriorityC1[1], SpellCastBuffs.SV.ProminentProgressBuffPriorityC1[2], SpellCastBuffs.SV.ProminentProgressBuffPriorityC1[3], 1)
-            else
-                buff.bar.backdrop:SetCenterColor((0.1 * SpellCastBuffs.SV.ProminentProgressBuffC2[1]), (0.1 * SpellCastBuffs.SV.ProminentProgressBuffC2[2]), (0.1 * SpellCastBuffs.SV.ProminentProgressBuffC2[3]), 0.75)
-                buff.bar.bar:SetGradientColors(SpellCastBuffs.SV.ProminentProgressBuffC2[1], SpellCastBuffs.SV.ProminentProgressBuffC2[2], SpellCastBuffs.SV.ProminentProgressBuffC2[3], 1, SpellCastBuffs.SV.ProminentProgressBuffC1[1], SpellCastBuffs.SV.ProminentProgressBuffC1[2], SpellCastBuffs.SV.ProminentProgressBuffC1[3], 1)
-            end
-        end
+        setProgressBarColors(buffType == BUFF_EFFECT_TYPE_DEBUFF, isPriorityEffect())
     end
 end
 
@@ -2351,71 +2371,122 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
     end
 end
 
--- A helper function to handle artificial effect IDs
-local function handleBattleSpiritEffectId(effectId)
+-- Constants for artificial effect types
+local ARTIFICIAL_EFFECTS = {
+    ESO_PLUS = 0,
+    BATTLE_SPIRIT = 1,
+    BATTLE_SPIRIT_IC = 2,
+    BG_DESERTER = 3
+}
+
+-- Configuration for special effect durations
+local EFFECT_DURATIONS = {
+    [ARTIFICIAL_EFFECTS.BG_DESERTER] = {
+        duration = 300000,
+        effectType = BUFF_EFFECT_TYPE_BUFF
+    }
+}
+
+-- Handles Battle Spirit effect ID conversion and tooltip assignment
+local function handleBattleSpiritEffectId(activeEffectId)
     local tooltip = nil
     local artificial = true
-    if effectId == 0 or effectId == 2 then
-        if effectId == 0 then
-            tooltip = Tooltips.Innate_Battle_Spirit
-        else
-            tooltip = Tooltips.Innate_Battle_Spirit_Imperial_City
-        end
+    local effectId = activeEffectId
+
+    -- Handle different effect types
+    if activeEffectId == ARTIFICIAL_EFFECTS.ESO_PLUS then
+        tooltip = Tooltips.Innate_ESO_Plus
+    elseif activeEffectId == ARTIFICIAL_EFFECTS.BATTLE_SPIRIT then
+        tooltip = Tooltips.Innate_Battle_Spirit
+        effectId = 999014
+        artificial = false
+    elseif activeEffectId == ARTIFICIAL_EFFECTS.BATTLE_SPIRIT_IC then
+        tooltip = Tooltips.Innate_Battle_Spirit_Imperial_City
         effectId = 999014
         artificial = false
     end
+
     return effectId, tooltip, artificial
 end
 
--- Runs on the EVENT_ARTIFICIAL_EFFECT_ADDED / EVENT_ARTIFICIAL_EFFECT_REMOVED listener.
--- This handler fires whenever an ArtificialEffectId is added or removed
+-- Handles removal of artificial effects
+local function handleEffectRemoval(effectId)
+    local removeEffect = effectId
+    if effectId == ARTIFICIAL_EFFECTS.BATTLE_SPIRIT or effectId == ARTIFICIAL_EFFECTS.BATTLE_SPIRIT_IC then
+        removeEffect = 999014
+    end
+    
+    local displayName = GetDisplayName()
+    local context = SpellCastBuffs.DetermineContextSimple("player1", removeEffect, displayName)
+    SpellCastBuffs.EffectsList[context][removeEffect] = nil
+end
+
+-- Creates effect data structure
+local function createEffectData(effectId, displayName, iconFile, effectType, startTime, endTime, duration, tooltip, artificial)
+    return {
+        target = SpellCastBuffs.DetermineTarget("player1"),
+        type = effectType,
+        id = effectId,
+        name = displayName,
+        icon = iconFile,
+        tooltip = tooltip,
+        dur = duration,
+        starts = startTime,
+        ends = endTime,
+        forced = "long",
+        restart = true,
+        iconNum = 0,
+        artificial = artificial,
+    }
+end
+
+-- Handles BG deserter specific logic
+local function handleBGDeserterEffect(startTime)
+    local duration = EFFECT_DURATIONS[ARTIFICIAL_EFFECTS.BG_DESERTER].duration
+    local endTime = startTime + (GetLFGCooldownTimeRemainingSeconds(LFG_COOLDOWN_BATTLEGROUND_DESERTED_QUEUE) * 1000)
+    return duration, endTime, EFFECT_DURATIONS[ARTIFICIAL_EFFECTS.BG_DESERTER].effectType
+end
+
+-- Main function for handling artificial effects
 function SpellCastBuffs.ArtificialEffectUpdate(eventCode, effectId)
+    -- Early exit if player buffs are hidden
     if SpellCastBuffs.SV.HidePlayerBuffs then
         return
     end
+
+    -- Handle effect removal if effectId is provided
     if effectId then
-        local removeEffect = effectId
-        -- Handle Battle Spirit effect ID
-        if effectId == 1 or effectId == 2 then
-            removeEffect = 999014
-        end
-        local displayName = GetDisplayName()
-        local context = SpellCastBuffs.DetermineContextSimple("player1", removeEffect, displayName)
-        SpellCastBuffs.EffectsList[context][removeEffect] = nil
+        handleEffectRemoval(effectId)
     end
+
+    -- Process active artificial effects
     for activeEffectId in ZO_GetNextActiveArtificialEffectIdIter do
-        -- Bail out if we don't have ESO Plus or Battle Spirit display for the player on
-        if (activeEffectId == 0 and SpellCastBuffs.SV.IgnoreEsoPlusPlayer) or ((activeEffectId == 1 or activeEffectId == 2) and SpellCastBuffs.SV.IgnoreBattleSpiritPlayer) then
+        -- Skip if effect should be ignored based on settings
+        if (activeEffectId == ARTIFICIAL_EFFECTS.ESO_PLUS and SpellCastBuffs.SV.IgnoreEsoPlusPlayer) or 
+           ((activeEffectId == ARTIFICIAL_EFFECTS.BATTLE_SPIRIT or activeEffectId == ARTIFICIAL_EFFECTS.BATTLE_SPIRIT_IC) and 
+            SpellCastBuffs.SV.IgnoreBattleSpiritPlayer) then
             return
         end
+
+        -- Get effect info
         local displayName, iconFile, effectType, _, startTime = GetArtificialEffectInfo(activeEffectId)
         local duration = 0
         local endTime = nil
-        if activeEffectId == 3 then
-            duration = 300000
-            startTime = GetGameTimeMilliseconds()
-            endTime = startTime + (GetLFGCooldownTimeRemainingSeconds(LFG_COOLDOWN_BATTLEGROUND_DESERTED_QUEUE) * 1000)
-            effectType = BUFF_EFFECT_TYPE_BUFF -- Set to buff so it shows in long duration effects
+
+        -- Handle BG deserter specific case
+        if activeEffectId == ARTIFICIAL_EFFECTS.BG_DESERTER then
+            duration, endTime, effectType = handleBGDeserterEffect(startTime)
         end
-        local tooltip, artificial
-        effectId, tooltip, artificial = handleBattleSpiritEffectId(activeEffectId)
+
+        -- Process effects and get tooltips
+        local effectId, tooltip, artificial = handleBattleSpiritEffectId(activeEffectId)
+        
+        -- Create and store effect
         local context = SpellCastBuffs.DetermineContextSimple("player1", effectId, displayName)
-        SpellCastBuffs.EffectsList[context][effectId] =
-        {
-            target = SpellCastBuffs.DetermineTarget(context),
-            type = effectType,
-            id = effectId,
-            name = displayName,
-            icon = iconFile,
-            tooltip = tooltip,
-            dur = duration,
-            starts = startTime,
-            ends = endTime,
-            forced = "long",
-            restart = true,
-            iconNum = 0,
-            artificial = artificial,
-        }
+        SpellCastBuffs.EffectsList[context][effectId] = createEffectData(
+            effectId, displayName, iconFile, effectType, startTime, 
+            endTime, duration, tooltip, artificial
+        )
     end
 end
 

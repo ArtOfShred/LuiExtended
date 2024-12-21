@@ -4893,9 +4893,9 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
         return
     end
 
-    local traceback = debug.traceback("Inventory Update" .. " eventCode: " .. tostring(eventCode) .. " bagId: " .. tostring(bagId) .. " slotId: " .. tostring(slotId) .. " isNewItem: " .. tostring(isNewItem) .. " itemSoundCategory: " .. tostring(itemSoundCategory) .. " inventoryUpdateReason: " .. tostring(inventoryUpdateReason) .. " stackCountChange: " .. tostring(stackCountChange), 2)
+    --local traceback = debug.traceback("Inventory Update" .. " eventCode: " .. tostring(eventCode) .. " bagId: " .. tostring(bagId) .. " slotId: " .. tostring(slotId) .. " isNewItem: " .. tostring(isNewItem) .. " itemSoundCategory: " .. tostring(itemSoundCategory) .. " inventoryUpdateReason: " .. tostring(inventoryUpdateReason) .. " stackCountChange: " .. tostring(stackCountChange), 2)
 
-    Debug(traceback)
+    --Debug(traceback)
 
     local function ResolveCraftingUsed(itemType)
         local craftingType = GetCraftingInteractionType()
