@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -21,7 +18,8 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 
 -- Table of all Major / Minor Effects (Used by CombatInfo Bar Highlight to override the 0 duration on these abilities)
-Effects.MajorMinor =
+---@class (partial) MajorMinor
+local MajorMinor =
 {
     -- Major / Minor Buffs
     [61693] = true,  -- Minor Resolve
@@ -90,3 +88,6 @@ Effects.MajorMinor =
     -- Empower
     [61737] = true, -- Empower
 }
+
+---@class (partial) MajorMinor
+LUIE.Data.Effects.MajorMinor = MajorMinor

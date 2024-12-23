@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -19,10 +16,13 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- EFFECTS TABLE FOR BAR HIGHLIGHT RELATED OVERRIDES
 --------------------------------------------------------------------------------------------------------------------------------
-
-Effects.IsGrimFocus =
+---@class (partial) IsGrimFocus
+local IsGrimFocus =
 {
     [122585] = true, -- Grim Focus
     [122587] = true, -- Relentless Focus
     [122586] = true, -- Merciless Resolve
 }
+
+---@class (partial) IsGrimFocus
+LUIE.Data.Effects.IsGrimFocus = IsGrimFocus

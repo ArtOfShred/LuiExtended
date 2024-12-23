@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -27,7 +24,8 @@ local zo_strformat = zo_strformat
 -- If durationMod value is set to an ID, this value will be subtracted from the final duration (UNUSED)
 -- Note that any secondary id's for Bar Highlight in the table above will set their id to the original tracked id here
 -- Note all effects will check unitTag unless an id2Tag or id3Tag are specified in which case they will switch unitTags when searching for other ids.
-Effects.BarHighlightCheckOnFade =
+---@class (partial) BarHighlightCheckOnFade
+local BarHighlightCheckOnFade =
 {
 
     -- Dragonknight
@@ -95,3 +93,6 @@ Effects.BarHighlightCheckOnFade =
     -- Volendrung
     [116366] = { duration = 116374, durationMod = 116366, unitTag = "player" }, -- Pariah's Resolve
 }
+
+---@class (partial) BarHighlightCheckOnFade
+LUIE.Data.Effects.BarHighlightCheckOnFade = BarHighlightCheckOnFade

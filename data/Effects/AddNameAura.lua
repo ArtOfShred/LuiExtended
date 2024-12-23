@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -19,6 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- When a target name matches a string here, add id's in the table with the name and icon specified. We use this primarily to add CC Immunity buffs for bosses.
 --------------------------------------------------------------------------------------------------------------------------------
+---@class (partial) AddNameAura
 local AddNameAura =
 {
 

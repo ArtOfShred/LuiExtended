@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -39,6 +36,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Fake Buffs applied onto the player by NPCs or Events (Friendly)
 --------------------------------------------------------------------------------------------------------------------------------
+---@class (partial) FakeExternalBuffs
 local FakeExternalBuffs =
 {
 

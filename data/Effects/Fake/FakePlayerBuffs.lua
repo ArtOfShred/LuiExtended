@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -42,6 +39,7 @@ local zo_strformat = zo_strformat
 -- onlyExtra -- Only display this if the Show Extra Buffs menu option is enabled
 -- onlyExtended -- Only display this if the Show Extra Buffs menu option with "Extend Settings to Single Aura Effects" is enabled.
 --------------------------------------------------------------------------------------------------------------------------------
+---@class (partial) FakePlayerBuffs
 local FakePlayerBuffs =
 {
     -- Misc Consumables

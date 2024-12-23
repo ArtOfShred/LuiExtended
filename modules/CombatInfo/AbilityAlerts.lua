@@ -145,13 +145,13 @@ function AbilityAlerts.CreateAlertFrame()
     AbilityAlerts.ApplyFontAlert()
 
     -- Create Top Level Controls
-    uiTlw.alertFrame = UI.TopLevel(nil, nil)
+    uiTlw.alertFrame = UI:TopLevel(nil, nil)
 
     -- Create 3 alert labels
     local anchor = { CENTER, CENTER, 0, 0, uiTlw.alertFrame }
     local height = (CombatInfo.SV.alerts.toggles.alertFontSize * 2)
     for i = 1, 3 do
-        local alert = UI.Control(uiTlw.alertFrame, anchor, { nil, height }, false, "LUIE_Alert" .. i)
+        local alert = UI:Control(uiTlw.alertFrame, anchor, { nil, height }, false, "LUIE_Alert" .. i)
 
         alert.data =
         {
@@ -169,23 +169,23 @@ function AbilityAlerts.CreateAlertFrame()
             ["effectOnlyInterrupt"] = nil,
         }
 
-        alert.prefix = UI.Label(alert, nil, nil, nil, g_alertFont, alert.data.textPrefix, false)
-        alert.name = UI.Label(alert, nil, nil, nil, g_alertFont, alert.data.textName, false)
-        alert.modifier = UI.Label(alert, nil, nil, nil, g_alertFont, alert.data.textModifier, false)
+        alert.prefix = UI:Label(alert, nil, nil, nil, g_alertFont, alert.data.textPrefix, false)
+        alert.name = UI:Label(alert, nil, nil, nil, g_alertFont, alert.data.textName, false)
+        alert.modifier = UI:Label(alert, nil, nil, nil, g_alertFont, alert.data.textModifier, false)
         alert.prefix:SetAnchor(LEFT, alert, LEFT, 0, 0)
         alert.name:SetAnchor(LEFT, alert.prefix, RIGHT, 0, 0)
         alert.modifier:SetAnchor(LEFT, alert.name, RIGHT, 0, 0)
 
-        alert.icon = UI.Backdrop(alert.name, nil, nil, { 0, 0, 0, 0.5 }, { 0, 0, 0, 1 }, false)
+        alert.icon = UI:Backdrop(alert.name, nil, nil, { 0, 0, 0, 0.5 }, { 0, 0, 0, 1 }, false)
         alert.icon:SetDimensions(CombatInfo.SV.alerts.toggles.alertFontSize + 8, CombatInfo.SV.alerts.toggles.alertFontSize + 8)
         alert.icon:SetAnchor(LEFT, alert.modifier, RIGHT, 6, 0)
 
-        alert.icon.back = UI.Texture(alert.icon, nil, nil, "LuiExtended/media/icons/icon_border/icon-border.dds", nil, false)
+        alert.icon.back = UI:Texture(alert.icon, nil, nil, "LuiExtended/media/icons/icon_border/icon-border.dds", nil, false)
         alert.icon.back:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 0, 0)
         alert.icon.back:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, 0, 0)
 
-        alert.icon.iconbg = UI.Texture(alert.icon, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false)
-        alert.icon.iconbg = UI.Backdrop(alert.icon, nil, nil, { 0, 0, 0, 0.9 }, { 0, 0, 0, 0.9 }, false)
+        alert.icon.iconbg = UI:Texture(alert.icon, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false)
+        alert.icon.iconbg = UI:Backdrop(alert.icon, nil, nil, { 0, 0, 0, 0.9 }, { 0, 0, 0, 0.9 }, false)
         alert.icon.iconbg:SetDrawLevel(DL_CONTROLS)
         alert.icon.iconbg:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 3, 3)
         alert.icon.iconbg:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
@@ -197,14 +197,14 @@ function AbilityAlerts.CreateAlertFrame()
         alert.icon.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false)
         alert.icon.cd:SetDrawLayer(DL_BACKGROUND)
 
-        alert.icon.icon = UI.Texture(alert.icon, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false)
+        alert.icon.icon = UI:Texture(alert.icon, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false)
         alert.icon.icon:SetAnchor(TOPLEFT, alert.icon, TOPLEFT, 3, 3)
         alert.icon.icon:SetAnchor(BOTTOMRIGHT, alert.icon, BOTTOMRIGHT, -3, -3)
 
-        alert.mitigation = UI.Label(alert.icon, nil, nil, nil, g_alertFont, alert.data.textMitigation, false)
+        alert.mitigation = UI:Label(alert.icon, nil, nil, nil, g_alertFont, alert.data.textMitigation, false)
         alert.mitigation:SetAnchor(LEFT, alert.icon, RIGHT, 6, 0)
 
-        alert.timer = UI.Label(alert.icon, nil, nil, nil, g_alertFont, alert.data.duration, false)
+        alert.timer = UI:Label(alert.icon, nil, nil, nil, g_alertFont, alert.data.duration, false)
         alert.timer:SetAnchor(LEFT, alert.mitigation, RIGHT, 0, 0)
 
         alert:SetDimensions(alert.prefix:GetTextWidth() + alert.name:GetTextWidth() + alert.modifier:GetTextWidth() + 6 + alert.icon:GetWidth() + 6 + alert.mitigation:GetTextWidth() + alert.timer:GetTextWidth(), height)
@@ -216,7 +216,7 @@ function AbilityAlerts.CreateAlertFrame()
     uiTlw.alertFrame:SetDimensions(500, height + 4)
 
     -- Setup Preview
-    uiTlw.alertFrame.preview = LUIE.UI.Backdrop(uiTlw.alertFrame, "fill", nil, nil, nil, true)
+    uiTlw.alertFrame.preview = LUIE.UI:Backdrop(uiTlw.alertFrame, "fill", nil, nil, nil, true)
 
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function (self)
@@ -236,14 +236,14 @@ function AbilityAlerts.CreateAlertFrame()
     uiTlw.alertFrame:SetHandler("OnMoveStart", tlwOnMoveStart)
     uiTlw.alertFrame:SetHandler("OnMoveStop", tlwOnMoveStop)
 
-    uiTlw.alertFrame.preview.anchorTexture = UI.Texture(uiTlw.alertFrame.preview, { TOPLEFT, TOPLEFT }, { 16, 16 }, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false)
+    uiTlw.alertFrame.preview.anchorTexture = UI:Texture(uiTlw.alertFrame.preview, { TOPLEFT, TOPLEFT }, { 16, 16 }, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false)
     uiTlw.alertFrame.preview.anchorTexture:SetColor(1, 1, 0, 0.9)
 
-    uiTlw.alertFrame.preview.anchorLabel = UI.Label(uiTlw.alertFrame.preview, { BOTTOMLEFT, TOPLEFT, 0, -1 }, nil, { 0, 2 }, "ZoFontGameSmall", "xxx, yyy", false)
+    uiTlw.alertFrame.preview.anchorLabel = UI:Label(uiTlw.alertFrame.preview, { BOTTOMLEFT, TOPLEFT, 0, -1 }, nil, { 0, 2 }, "ZoFontGameSmall", "xxx, yyy", false)
     uiTlw.alertFrame.preview.anchorLabel:SetColor(1, 1, 0, 1)
     uiTlw.alertFrame.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
     uiTlw.alertFrame.preview.anchorLabel:SetDrawTier(DT_MEDIUM)
-    uiTlw.alertFrame.preview.anchorLabelBg = UI.Backdrop(uiTlw.alertFrame.preview.anchorLabel, "fill", nil, { 0, 0, 0, 1 }, { 0, 0, 0, 1 }, false)
+    uiTlw.alertFrame.preview.anchorLabelBg = UI:Backdrop(uiTlw.alertFrame.preview.anchorLabel, "fill", nil, { 0, 0, 0, 1 }, { 0, 0, 0, 1 }, false)
     uiTlw.alertFrame.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
     uiTlw.alertFrame.preview.anchorLabelBg:SetDrawTier(DT_LOW)
 

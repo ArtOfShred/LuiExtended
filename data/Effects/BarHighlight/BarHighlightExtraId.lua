@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -26,7 +23,8 @@ local zo_strformat = zo_strformat
 
 -- Also track this id on bar highlight
 -- SECONDARY ID = ORIGINAL BAR HIGHLIGHT ID
-Effects.BarHighlightExtraId =
+---@class (partial) BarHighlightExtraId
+local BarHighlightExtraId =
 {
 
     -- Dragonknight
@@ -71,3 +69,6 @@ Effects.BarHighlightExtraId =
     -- Vampire
     [138130] = 138098, -- Stupefy
 }
+
+---@class (partial) BarHighlightExtraId
+LUIE.Data.Effects.BarHighlightExtraId = BarHighlightExtraId

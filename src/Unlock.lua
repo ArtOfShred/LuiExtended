@@ -156,10 +156,10 @@ end
 ---@param relativeTo Control The element to which the top-level window is relative
 ---@return TopLevelWindow tlw The created top-level window
 local function createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY, relativeTo)
-    local tlw = UI.TopLevel({ point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() })
+    local tlw = UI:TopLevel({ point, relativePoint, offsetX, offsetY, relativeTo }, { k:GetWidth(), k:GetHeight() })
     tlw.customPositionAttr = k:GetName()
-    tlw.preview = UI.Backdrop(tlw, "fill", nil, nil, nil, false)
-    tlw.previewLabel = UI.Label(tlw.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", v[1], false)
+    tlw.preview = UI:Backdrop(tlw, "fill", nil, nil, nil, false)
+    tlw.previewLabel = UI:Label(tlw.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", v[1], false)
     return tlw
 end
 

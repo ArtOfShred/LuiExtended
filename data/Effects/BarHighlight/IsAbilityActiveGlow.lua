@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -19,8 +16,8 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- EFFECTS TABLE FOR BAR HIGHLIGHT RELATED OVERRIDES
 --------------------------------------------------------------------------------------------------------------------------------
-
-Effects.IsAbilityActiveGlow =
+---@class (partial) IsAbilityActiveGlow
+local IsAbilityActiveGlow =
 {
 
     [20824] = true,  -- Power Lash (Flame Lash)
@@ -31,3 +28,6 @@ Effects.IsAbilityActiveGlow =
     [137184] = true, -- Brutal Carnage (Brutal Pounce)
     [137164] = true, -- Feral Carnage (Feral Pounce)
 }
+
+---@class (partial) IsAbilityActiveGlow
+LUIE.Data.Effects.IsAbilityActiveGlow = IsAbilityActiveGlow

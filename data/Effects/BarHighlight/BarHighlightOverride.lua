@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -23,7 +20,8 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Replaces the tracking ID on an ability bar ability with a different id for the purpose of tracking effect duration on Bar Highlight tracker.
 --------------------------------------------------------------------------------------------------------------------------------
-Effects.BarHighlightOverride =
+---@class (partial) BarHighlightOverride
+local BarHighlightOverride =
 {
     -- Optional
     -- newId = # -- Replace ID
@@ -558,3 +556,6 @@ Effects.BarHighlightOverride =
     [116093] = { newId = 116364 }, -- Rourken's Rebuke
     [116095] = { newId = 116366 }, -- Pariah's Resolve
 }
+
+---@class (partial) BarHighlightOverride
+LUIE.Data.Effects.BarHighlightOverride = BarHighlightOverride

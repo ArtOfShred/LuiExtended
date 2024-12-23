@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -19,6 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- When GetZoneId(GetCurrentMapZoneIndex()) matches this filter, customize the ability based off this criteria.
 --------------------------------------------------------------------------------------------------------------------------------
+---@class (partial) ZoneDataOverride
 local ZoneDataOverride =
 {
 

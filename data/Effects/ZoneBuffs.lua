@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -19,6 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- When the player loads into the ZoneId listed below, add an unlimited duration long aura for the abilityId.
 --------------------------------------------------------------------------------------------------------------------------------
+---@class (partial) ZoneBuffs
 local ZoneBuffs =
 {
     -- Daggerfall Covenant Quests

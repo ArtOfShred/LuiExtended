@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -19,7 +16,8 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Hide this ID from appearing in any way on Combat Cloud Text - Useful for spammy ids.
 --------------------------------------------------------------------------------------------------------------------------------
-Effects.EffectHideSCT =
+---@class (partial) EffectHideSCT
+local EffectHideSCT =
 {
     -- Player - Basic
     [45982] = true, -- Bash Stun
@@ -303,3 +301,6 @@ Effects.EffectHideSCT =
     -- Tempest Island
     [6107] = true, -- Lightning Storm (Yalorasse the Speaker)
 }
+
+---@class (partial) EffectHideSCT
+LUIE.Data.Effects.EffectHideSCT = EffectHideSCT

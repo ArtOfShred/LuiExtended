@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -16,8 +13,8 @@ local Abilities = LUIE.Data.Abilities
 
 local zo_strformat = zo_strformat
 
-
-Effects.KeepUpgradeOverride =
+---@class (partial) KeepUpgradeOverride
+local KeepUpgradeOverride =
 {
     [Abilities.Keep_Upgrade_Food_Guard_Range] = "LuiExtended/media/icons/keepupgrade/upgrade_food_guard_range.dds",
     [Abilities.Keep_Upgrade_Food_Heartier_Guards] = "LuiExtended/media/icons/keepupgrade/upgrade_food_heartier_guards.dds",
@@ -36,3 +33,6 @@ Effects.KeepUpgradeOverride =
     [Abilities.Keep_Upgrade_Food_Mage_Abilities] = "LuiExtended/media/icons/keepupgrade/upgrade_food_mage.dds",
     [Abilities.Keep_Upgrade_Food_Guard_Abilities] = "LuiExtended/media/icons/keepupgrade/upgrade_food_guard.dds",
 }
+
+---@class (partial) KeepUpgradeOverride
+LUIE.Data.Effects.KeepUpgradeOverride = KeepUpgradeOverride

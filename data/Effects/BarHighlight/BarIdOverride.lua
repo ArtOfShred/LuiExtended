@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -23,7 +20,8 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- When a bar ability proc with a matching id appears, change the icon.
 --------------------------------------------------------------------------------------------------------------------------------
-Effects.BarIdOverride =
+---@class (partial) BarIdOverride
+local BarIdOverride =
 {
     -- Dragonknight
     [20824] = "LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds", -- Power Lash (Flame Lash)
@@ -43,3 +41,6 @@ Effects.BarIdOverride =
     [81415] = "esoui/art/icons/ability_ava_mystic_guard.dds",   -- Mystic Guard (Mystic Guard)
     [81420] = "esoui/art/icons/ability_ava_stalwart_guard.dds", -- Stalwart Guard (Stalwart Guard)
 }
+
+---@class (partial) BarIdOverride
+LUIE.Data.Effects.BarIdOverride = BarIdOverride

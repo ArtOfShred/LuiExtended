@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -19,9 +16,10 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- If this abilityId is up, then pull the duration from another active ability Id to set its duration (Unused - Might be useful in the future - Note this is supported in code)
 --------------------------------------------------------------------------------------------------------------------------------
-
-Effects.EffectPullDuration =
+---@class (partial) EffectPullDuration
+local EffectPullDuration =
 {
 }
 
---
+---@class (partial) EffectPullDuration
+LUIE.Data.Effects.EffectPullDuration = EffectPullDuration

@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -59,7 +56,8 @@ local zo_strformat = zo_strformat
     - ccMergedType = LUIE_CC_TYPE_* -- Set this ability to show this CC type ONLY when "merged" (hideReduce) effects are enabled. This would mean for example the dot for throw dagger would show as a snare since the effects are merged.
     - isPlayerAbility = true -- Set this ability to be a "Player Ability" for the purpose of determining if a generic CC icon should be used for the ability
 --]]
-Effects.EffectOverride =
+---@class (partial) EffectOverride
+local EffectOverride =
 {
 
     -- TEMP MOVE LATER
@@ -8905,3 +8903,6 @@ Effects.EffectOverride =
     [83453] = { icon = "LuiExtended/media/icons/abilities/ability_set_icy_conjuror.dds", tooltip = Tooltips.Generic_Knockback },                                                                                      -- Skeletal Smash (Ice Wraith)
     [116683] = { hide = true },                                                                                                                                                                                       -- U23-DUN1 B N Intro (Skeevaton)
 }
+
+---@class (partial) EffectOverride
+LUIE.Data.Effects.EffectOverride = EffectOverride

@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -22,7 +19,8 @@ local zo_strformat = zo_strformat
 -- pet = '' -- Change or remove pet name
 -- removePlayer = true -- If for some reason a damage effect is sourced from the player, set it to not be flagged as isPlayer == true in order to stop AVA rank, etc from showing.
 --------------------------------------------------------------------------------------------------------------------------------
-Effects.EffectSourceOverride =
+---@class (partial) EffectSourceOverride
+local EffectSourceOverride =
 {
 
     -- PLAYER SETS
@@ -143,3 +141,14 @@ Effects.EffectSourceOverride =
     -- Crypt of Hearts II
     [51883] = { pet = "" }, -- Creeping Storm (Creeping Storm)
 }
+
+---@class EffectSourceOverrideData
+---@field source? string|integer
+---@field pet? string|integer 
+---@field addSource? boolean
+---@field removePlayer? boolean
+
+---@generic T : table, K, V
+---@class (partial) EffectSourceOverride
+---@field [integer] EffectSourceOverrideData
+LUIE.Data.Effects.EffectSourceOverride = EffectSourceOverride

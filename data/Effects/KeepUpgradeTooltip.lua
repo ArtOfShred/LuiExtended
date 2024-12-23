@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -16,9 +13,8 @@ local Abilities = LUIE.Data.Abilities
 
 local zo_strformat = zo_strformat
 
-
-
-Effects.KeepUpgradeTooltip =
+---@class (partial) KeepUpgradeTooltip
+local KeepUpgradeTooltip =
 {
     [Abilities.Keep_Upgrade_Food_Guard_Range] = Tooltips.Keep_Upgrade_Food_Guard_Range,
     [Abilities.Keep_Upgrade_Food_Heartier_Guards] = Tooltips.Keep_Upgrade_Food_Heartier_Guards,
@@ -38,3 +34,6 @@ Effects.KeepUpgradeTooltip =
     [Abilities.Keep_Upgrade_Food_Honor_Guard_Abilities] = Tooltips.Keep_Upgrade_Food_Honor_Guard_Abilities,
     [Abilities.Keep_Upgrade_Food_Guard_Abilities] = Tooltips.Keep_Upgrade_Food_Guard_Abilities,
 }
+
+---@class (partial) KeepUpgradeTooltip
+LUIE.Data.Effects.KeepUpgradeTooltip = KeepUpgradeTooltip

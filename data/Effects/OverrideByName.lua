@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -19,7 +16,8 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Table of effects to adjust only based off a specific target - this allows us to override the name/icon or hide an effect only when the source is a specific NPC. Used to change icons for attacks with the same id coming from different types of animals, etc...
 --------------------------------------------------------------------------------------------------------------------------------
-Effects.EffectOverrideByName =
+---@class (partial) EffectOverrideByName
+local EffectOverrideByName =
 {
     [10618] =
     {                                                                                                                 -- Quick Strike (Shared)
@@ -458,3 +456,6 @@ Effects.EffectOverrideByName =
         [Unitnames.NPC_Student] = { hide = true, zone = { [932] = true } }, -- Wraith (Crypt of Hearts II)
     },
 }
+
+---@class (partial) EffectOverrideByName
+LUIE.Data.Effects.EffectOverrideByName = EffectOverrideByName

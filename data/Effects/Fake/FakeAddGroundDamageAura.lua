@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -42,6 +39,7 @@ local zo_strformat = zo_strformat
 -- type = BUFF_EFFECT_TYPE_BUFF or BUFF_EFFECT_TYPE_DEBUFF
 -- merge = Simple merge functionality for id's - these will be considered the same ID so as not to display multiple auras (for effects that have consecutive hits with different id's like Pestilent Colossus)
 --------------------------------------------------------------------------------------------------------------------------------
+---@class (partial) AddGroundDamageAura
 local AddGroundDamageAura =
 {
 

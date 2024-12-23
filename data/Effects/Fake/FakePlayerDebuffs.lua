@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -41,6 +38,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Fake debuffs applied onto a target by the player
 --------------------------------------------------------------------------------------------------------------------------------
+---@class (partial) FakePlayerDebuffs
 local FakePlayerDebuffs =
 {
     -- JUSTICE NPCS

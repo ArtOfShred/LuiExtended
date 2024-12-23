@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -20,8 +17,8 @@ local zo_strformat = zo_strformat
 -- EFFECTS TABLE FOR BAR HIGHLIGHT RELATED OVERRIDES
 --------------------------------------------------------------------------------------------------------------------------------
 
-
-Effects.BarHighlightStack =
+---@class (partial) BarHighlightStack
+local BarHighlightStack =
 {
 
     -- Sorcerer
@@ -36,3 +33,6 @@ Effects.BarHighlightStack =
     [86015] = 2,  -- Deep Fissure
     [178028] = 1, -- Deep Fissure
 }
+
+---@class (partial) BarHighlightStack
+LUIE.Data.Effects.BarHighlightStack = BarHighlightStack

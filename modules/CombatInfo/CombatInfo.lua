@@ -389,7 +389,7 @@ function CombatInfo.SetMarker(removeMarker)
         return
     end
     -- Otherwise, setup the marker texture & register EVENT_PLAYER_ACTIVATED handler
-    local LUIE_MARKER = "/LuiExtended/media/combatinfo/floatingicon/redarrow.dds"
+    local LUIE_MARKER = "LuiExtended/media/combatinfo/floatingicon/redarrow.dds"
     SetFloatingMarkerInfo(MAP_PIN_TYPE_AGGRO, CombatInfo.SV.markerSize, LUIE_MARKER, "", true, false)
     eventManager:RegisterForEvent(moduleName .. "Marker", EVENT_PLAYER_ACTIVATED, CombatInfo.OnPlayerActivatedMarker)
 end
@@ -454,7 +454,7 @@ function CombatInfo.Initialize(enabled)
     CombatInfo.ApplyFont()
     CombatInfo.ApplyProcSound()
     local QSB = _G["QuickslotButton"]
-    uiQuickSlot.label = UI.Label(QSB, { CENTER, CENTER }, nil, nil, g_potionFont, nil, true)
+    uiQuickSlot.label = UI:Label(QSB, { CENTER, CENTER }, nil, nil, g_potionFont, nil, true)
     uiQuickSlot.label:SetFont(g_potionFont)
     if CombatInfo.SV.PotionTimerColor then
         uiQuickSlot.label:SetColor(unpack(uiQuickSlot.color))
@@ -467,15 +467,15 @@ function CombatInfo.Initialize(enabled)
 
     -- Create Ultimate overlay labels
     local AB8 = _G["ActionButton8"]
-    uiUltimate.LabelVal = UI.Label(AB8, { BOTTOM, TOP, 0, -3 }, nil, { 1, 2 }, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true)
-    uiUltimate.LabelPct = UI.Label(AB8, nil, nil, nil, g_ultimateFont, nil, true)
+    uiUltimate.LabelVal = UI:Label(AB8, { BOTTOM, TOP, 0, -3 }, nil, { 1, 2 }, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true)
+    uiUltimate.LabelPct = UI:Label(AB8, nil, nil, nil, g_ultimateFont, nil, true)
     local actionButton = ZO_ActionBar_GetButton(g_ultimateSlot, g_hotbarCategory)
     uiUltimate.LabelPct:SetAnchor(TOPLEFT, actionButton.slot, nil, 0, 0)
     uiUltimate.LabelPct:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.UltimateLabelPosition)
 
     uiUltimate.LabelPct:SetColor(unpack(uiUltimate.color))
     -- And buff texture
-    uiUltimate.Texture = UI.Texture(AB8, { CENTER, CENTER }, { 160, 160 }, "/esoui/art/crafting/white_burst.dds", DL_BACKGROUND, true)
+    uiUltimate.Texture = UI:Texture(AB8, { CENTER, CENTER }, { 160, 160 }, "/esoui/art/crafting/white_burst.dds", DL_BACKGROUND, true)
 
     -- Create a top level window for backbar butons
     local tlw = windowManager:CreateControl("LUIE_Backbar", ACTION_BAR, CT_CONTROL)
@@ -1794,13 +1794,13 @@ function CombatInfo.BackbarToggleSettings()
 end
 
 function CombatInfo.CreateCastBar()
-    uiTlw.castBar = UI.TopLevel(nil, nil)
+    uiTlw.castBar = UI:TopLevel(nil, nil)
 
     uiTlw.castBar:SetDimensions(CombatInfo.SV.CastBarSizeW + CombatInfo.SV.CastBarIconSize + 4, CombatInfo.SV.CastBarSizeH)
 
     -- Setup Preview
-    uiTlw.castBar.preview = UI.Backdrop(uiTlw.castBar, "fill", nil, nil, nil, true)
-    uiTlw.castBar.previewLabel = UI.Label(uiTlw.castBar.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", "Cast Bar", false)
+    uiTlw.castBar.preview = UI:Backdrop(uiTlw.castBar, "fill", nil, nil, nil, true)
+    uiTlw.castBar.previewLabel = UI:Label(uiTlw.castBar.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", "Cast Bar", false)
 
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function (self)
@@ -1819,14 +1819,14 @@ function CombatInfo.CreateCastBar()
     uiTlw.castBar:SetHandler("OnMoveStart", tlwOnMoveStart)
     uiTlw.castBar:SetHandler("OnMoveStop", tlwOnMoveStop)
 
-    uiTlw.castBar.preview.anchorTexture = UI.Texture(uiTlw.castBar.preview, { TOPLEFT, TOPLEFT }, { 16, 16 }, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false)
+    uiTlw.castBar.preview.anchorTexture = UI:Texture(uiTlw.castBar.preview, { TOPLEFT, TOPLEFT }, { 16, 16 }, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false)
     uiTlw.castBar.preview.anchorTexture:SetColor(1, 1, 0, 0.9)
 
-    uiTlw.castBar.preview.anchorLabel = UI.Label(uiTlw.castBar.preview, { BOTTOMLEFT, TOPLEFT, 0, -1 }, nil, { 0, 2 }, "ZoFontGameSmall", "xxx, yyy", false)
+    uiTlw.castBar.preview.anchorLabel = UI:Label(uiTlw.castBar.preview, { BOTTOMLEFT, TOPLEFT, 0, -1 }, nil, { 0, 2 }, "ZoFontGameSmall", "xxx, yyy", false)
     uiTlw.castBar.preview.anchorLabel:SetColor(1, 1, 0, 1)
     uiTlw.castBar.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
     uiTlw.castBar.preview.anchorLabel:SetDrawTier(DT_MEDIUM)
-    uiTlw.castBar.preview.anchorLabelBg = UI.Backdrop(uiTlw.castBar.preview.anchorLabel, "fill", nil, { 0, 0, 0, 1 }, { 0, 0, 0, 1 }, false)
+    uiTlw.castBar.preview.anchorLabelBg = UI:Backdrop(uiTlw.castBar.preview.anchorLabel, "fill", nil, { 0, 0, 0, 1 }, { 0, 0, 0, 1 }, false)
     uiTlw.castBar.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
     uiTlw.castBar.preview.anchorLabelBg:SetDrawTier(DT_LOW)
 
@@ -1837,7 +1837,7 @@ function CombatInfo.CreateCastBar()
     sceneManager:GetScene("siegeBar"):AddFragment(fragment)
     sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
 
-    castbar = UI.Backdrop(uiTlw.castBar, nil, nil, { 0, 0, 0, 0.5 }, { 0, 0, 0, 1 }, false)
+    castbar = UI:Backdrop(uiTlw.castBar, nil, nil, { 0, 0, 0, 0.5 }, { 0, 0, 0, 1 }, false)
     castbar:SetAnchor(LEFT, uiTlw.castBar, LEFT, 0, 0)
 
     castbar.starts = 0
@@ -1846,30 +1846,30 @@ function CombatInfo.CreateCastBar()
 
     castbar:SetDimensions(CombatInfo.SV.CastBarIconSize, CombatInfo.SV.CastBarIconSize)
 
-    castbar.back = UI.Texture(castbar, nil, nil, "LuiExtended/media/icons/icon_border/icon-border.dds", nil, false)
+    castbar.back = UI:Texture(castbar, nil, nil, "LuiExtended/media/icons/icon_border/icon-border.dds", nil, false)
     castbar.back:SetAnchor(TOPLEFT, castbar, TOPLEFT, 0, 0)
     castbar.back:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT, 0, 0)
 
-    castbar.iconbg = UI.Texture(castbar, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false)
-    castbar.iconbg = UI.Backdrop(castbar, nil, nil, { 0, 0, 0, 0.9 }, { 0, 0, 0, 0.9 }, false)
+    castbar.iconbg = UI:Texture(castbar, nil, nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false)
+    castbar.iconbg = UI:Backdrop(castbar, nil, nil, { 0, 0, 0, 0.9 }, { 0, 0, 0, 0.9 }, false)
     castbar.iconbg:SetDrawLevel(DL_CONTROLS)
     castbar.iconbg:SetAnchor(TOPLEFT, castbar, TOPLEFT, 3, 3)
     castbar.iconbg:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT, -3, -3)
 
-    castbar.icon = UI.Texture(castbar, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false)
+    castbar.icon = UI:Texture(castbar, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false)
     castbar.icon:SetAnchor(TOPLEFT, castbar, TOPLEFT, 3, 3)
     castbar.icon:SetAnchor(BOTTOMRIGHT, castbar, BOTTOMRIGHT, -3, -3)
 
     castbar.bar =
     {
-        ["backdrop"] = UI.Backdrop(castbar, nil, { CombatInfo.SV.CastBarSizeW, CombatInfo.SV.CastBarSizeH }, nil, nil, false),
-        ["bar"] = UI.StatusBar(castbar, nil, { CombatInfo.SV.CastBarSizeW - 4, CombatInfo.SV.CastBarSizeH - 4 }, nil, false),
-        ["name"] = UI.Label(castbar, nil, nil, nil, nil, g_castbarFont, false),
-        ["timer"] = UI.Label(castbar, nil, nil, nil, nil, g_castbarFont, false),
+        ["backdrop"] = UI:Backdrop(castbar, nil, { CombatInfo.SV.CastBarSizeW, CombatInfo.SV.CastBarSizeH }, nil, nil, false),
+        ["bar"] = UI:StatusBar(castbar, nil, { CombatInfo.SV.CastBarSizeW - 4, CombatInfo.SV.CastBarSizeH - 4 }, nil, false),
+        ["name"] = UI:Label(castbar, nil, nil, nil, nil, g_castbarFont, false),
+        ["timer"] = UI:Label(castbar, nil, nil, nil, nil, g_castbarFont, false),
     }
     castbar.id = 0
 
-    castbar.bar.backdrop:SetEdgeTexture("", 8, 2, 2, 0)
+    castbar.bar.backdrop:SetEdgeTexture("", 8, 2, 2)
     castbar.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
     castbar.bar.backdrop:SetDrawLevel(DL_CONTROLS)
     castbar.bar.bar:SetMinMax(0, 1)
@@ -2560,7 +2560,7 @@ function CombatInfo.PlayProcAnimations(slotNum)
         procLoopTexture:SetDrawLayer(DL_TEXT)
         procLoopTexture:SetHidden(true)
 
-        procLoopTexture.label = UI.Label(procLoopTexture, nil, nil, nil, g_barFont, nil, false)
+        procLoopTexture.label = UI:Label(procLoopTexture, nil, nil, nil, g_barFont, nil, false)
         procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot)
         procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
         procLoopTexture.label:SetDrawLayer(DL_CONTROLS)
@@ -2630,7 +2630,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
         local window = windowManager:GetControlByName(name, "") -- Check to see if this frame already exists, don't create it if it does.
         if window == nil then
             local toggleFrame = windowManager:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
-            --toggleFrame.back = UI.Texture(toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
+            --toggleFrame.back = UI:Texture(toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
             toggleFrame:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
             toggleFrame:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
             toggleFrame:SetTexture("/esoui/art/actionbar/actionslot_toggledon.dds")
@@ -2641,7 +2641,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
             toggleFrame:SetColor(0.5, 1, 0.5, 1)
             toggleFrame:SetHidden(false)
 
-            toggleFrame.label = UI.Label(toggleFrame, nil, nil, nil, g_barFont, nil, false)
+            toggleFrame.label = UI:Label(toggleFrame, nil, nil, nil, g_barFont, nil, false)
             toggleFrame.label:SetAnchor(TOPLEFT, actionButton.slot)
             toggleFrame.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CombatInfo.SV.BarLabelPosition)
             toggleFrame.label:SetDrawLayer(DL_CONTROLS)
@@ -2650,7 +2650,7 @@ function CombatInfo.ShowCustomToggle(slotNum)
             toggleFrame.label:SetColor(unpack(CombatInfo.SV.RemainingTextColoured and color or { 1, 1, 1, 1 }))
             toggleFrame.label:SetHidden(false)
 
-            toggleFrame.stack = UI.Label(toggleFrame, nil, nil, nil, g_barFont, nil, false)
+            toggleFrame.stack = UI:Label(toggleFrame, nil, nil, nil, g_barFont, nil, false)
             toggleFrame.stack:SetAnchor(CENTER, actionButton.slot, BOTTOMLEFT)
             toggleFrame.stack:SetAnchor(CENTER, actionButton.slot, TOPRIGHT, -12, 14)
             --toggleFrame.stack:SetAnchor(TOPLEFT, actionButton.slot)

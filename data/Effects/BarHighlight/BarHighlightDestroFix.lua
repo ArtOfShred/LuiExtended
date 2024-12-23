@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -26,7 +23,8 @@ local zo_strformat = zo_strformat
 
 -- Switch backbar slotId's when we have a certain type of staff equipped
 -- Back Bar ID will unfortunately return either the base ability or the element type of the Staff we are using in our current weapon pair, so have to check for ALL of these conditions
-Effects.BarHighlightDestroFix =
+---@class (partial) BarHighlightDestroFix
+local BarHighlightDestroFix =
 {
     -- Base Ability
     [28858] = { [WEAPONTYPE_FIRE_STAFF] = 28807, [WEAPONTYPE_LIGHTNING_STAFF] = 28854, [WEAPONTYPE_FROST_STAFF] = 28849 }, -- Wall of Elements
@@ -72,3 +70,6 @@ Effects.BarHighlightDestroFix =
     [39146] = { [WEAPONTYPE_FIRE_STAFF] = 39145, [WEAPONTYPE_LIGHTNING_STAFF] = 39147, [WEAPONTYPE_FROST_STAFF] = 39146 }, -- Elemental Ring
     [39163] = { [WEAPONTYPE_FIRE_STAFF] = 39162, [WEAPONTYPE_LIGHTNING_STAFF] = 39167, [WEAPONTYPE_FROST_STAFF] = 39163 }, -- Pulsar
 }
+
+---@class (partial) BarHighlightDestroFix
+LUIE.Data.Effects.BarHighlightDestroFix = BarHighlightDestroFix

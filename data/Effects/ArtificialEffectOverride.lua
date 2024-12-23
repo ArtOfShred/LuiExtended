@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -23,6 +20,7 @@ end
 --------------------------------------------------------------------------------------------------------------------------------
 -- Using a separate chart for ZOS Artificial Effects just in case this is significantly expanded at any point -- Overrides Artificial Effect id name or icon.
 --------------------------------------------------------------------------------------------------------------------------------
+---@class (partial) ArtificialEffectOverride
 local ArtificialEffectOverride =
 {
     [0] = { name = ESO_Plus_Member(), tooltip = Tooltips.Innate_ESO_Plus },                                             -- ESO Plus (used for Active Effects window)

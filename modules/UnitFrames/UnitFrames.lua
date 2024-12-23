@@ -253,7 +253,7 @@ local g_PendingUpdate =
 }
 
 -- Font to be used on default UI overlay labels
-local defaultLabelFont = "/LuiExtended/media/fonts/Fontin/fontin_sans_sc.slug|15|outline"
+local defaultLabelFont = "LuiExtended/media/fonts/Fontin/fontin_sans_sc.slug|15|outline"
 
 -- Labels for Offline/Dead/Resurrection Status
 local strDead = GetString(SI_UNIT_FRAME_STATUS_DEAD)
@@ -286,19 +286,19 @@ local function CreateRegenAnimation(parent, anchors, dims, alpha, number)
     local offsetX
     local distance
     if number == "degen1" then
-        control = UI.Texture(parent, anchors, updateDims, "/LuiExtended/media/unitframes/regenleft.dds", 2, true)
+        control = UI:Texture(parent, anchors, updateDims, "LuiExtended/media/unitframes/regenleft.dds", 2, true)
         distance = -dims[1] * 0.35
         offsetX = dims[1] * 0.425
     elseif number == "degen2" then
-        control = UI.Texture(parent, anchors, updateDims, "/LuiExtended/media/unitframes/regenright.dds", 2, true)
+        control = UI:Texture(parent, anchors, updateDims, "LuiExtended/media/unitframes/regenright.dds", 2, true)
         distance = dims[1] * 0.35
         offsetX = -dims[1] * 0.425
     elseif number == "regen1" then
-        control = UI.Texture(parent, anchors, updateDims, "/LuiExtended/media/unitframes/regenright.dds", 2, true)
+        control = UI:Texture(parent, anchors, updateDims, "LuiExtended/media/unitframes/regenright.dds", 2, true)
         distance = dims[1] * 0.35
         offsetX = dims[1] * 0.075
     elseif number == "regen2" then
-        control = UI.Texture(parent, anchors, updateDims, "/LuiExtended/media/unitframes/regenleft.dds", 2, true)
+        control = UI:Texture(parent, anchors, updateDims, "LuiExtended/media/unitframes/regenleft.dds", 2, true)
         distance = -dims[1] * 0.35
         offsetX = -dims[1] * 0.075
     end
@@ -335,15 +335,15 @@ end
 
 -- Decreased armour overlay visuals
 local function CreateDecreasedArmorOverlay(parent, small)
-    local control = UI.Control(parent, { CENTER, CENTER }, { 512, 32 }, false)
-    control.smallTex = UI.Texture(control, { CENTER, CENTER }, { 512, 32 }, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_small.dds", 2, false)
+    local control = UI:Control(parent, { CENTER, CENTER }, { 512, 32 }, false)
+    control.smallTex = UI:Texture(control, { CENTER, CENTER }, { 512, 32 }, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_small.dds", 2, false)
     control.smallTex:SetDrawTier(DT_HIGH)
-    --control.smallTexGlow = UI.Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_small_glow.dds", 2, false)
+    --control.smallTexGlow = UI:Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_small_glow.dds", 2, false)
     --control.smallTexGlow:SetDrawTier(HIGH)
     if not small then
-        control.normalTex = UI.Texture(control, { CENTER, CENTER }, { 512, 32 }, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_standard.dds", 2, false)
+        control.normalTex = UI:Texture(control, { CENTER, CENTER }, { 512, 32 }, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_standard.dds", 2, false)
         control.normalTex:SetDrawTier(DT_HIGH)
-        --control.normalTexGlow = UI.Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_standard_glow.dds", 2, false)
+        --control.normalTexGlow = UI:Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_standard_glow.dds", 2, false)
         --control.normalTexGlow:SetDrawTier(HIGH)
     end
 
@@ -626,7 +626,7 @@ local function CreateDefaultFrames()
         for powerType, parent in pairs(fields) do
             g_DefaultFrames[unitTag][powerType] =
             {
-                ["label"] = UI.Label(parent, { CENTER, CENTER }, nil, nil, nil, nil, false),
+                ["label"] = UI:Label(parent, { CENTER, CENTER }, nil, nil, nil, nil, false),
                 ["color"] = UnitFrames.SV.DefaultTextColour,
             }
         end
@@ -642,8 +642,8 @@ local function CreateDefaultFrames()
     end
 
     -- Create classIcon and friendIcon: they should work even when default unit frames extender is disabled
-    g_DefaultFrames.reticleover.classIcon = UI.Texture(g_targetUnitFrame.frame, nil, { 32, 32 }, nil, nil, true)
-    g_DefaultFrames.reticleover.friendIcon = UI.Texture(g_targetUnitFrame.frame, nil, { 32, 32 }, nil, nil, true)
+    g_DefaultFrames.reticleover.classIcon = UI:Texture(g_targetUnitFrame.frame, nil, { 32, 32 }, nil, nil, true)
+    g_DefaultFrames.reticleover.friendIcon = UI:Texture(g_targetUnitFrame.frame, nil, { 32, 32 }, nil, nil, true)
     g_DefaultFrames.reticleover.friendIcon:SetAnchor(TOPLEFT, ZO_TargetUnitFramereticleoverTextArea, TOPRIGHT, 30, -4)
     -- add those 2 icons to automatic fade list, so fading will be done automatically by game
     table_insert(g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.classIcon)
@@ -677,27 +677,27 @@ local function CreateCustomFrames()
     -- Create Custom unit frames
     if UnitFrames.SV.CustomFramesPlayer then
         -- Player Frame
-        local playerTlw = UI.TopLevel(nil, nil)
+        local playerTlw = UI:TopLevel(nil, nil)
         playerTlw:SetDrawLayer(DL_BACKGROUND)
         playerTlw:SetDrawTier(DT_LOW)
         playerTlw:SetDrawLevel(DL_CONTROLS)
         playerTlw.customPositionAttr = "CustomFramesPlayerFramePos"
-        playerTlw.preview = UI.Backdrop(playerTlw, "fill", nil, nil, nil, true)
-        local player = UI.Control(playerTlw, { TOPLEFT, TOPLEFT }, nil, false)
-        local topInfo = UI.Control(player, { BOTTOM, TOP, 0, -3 }, nil, false)
-        local botInfo = UI.Control(player, { TOP, BOTTOM, 0, 2 }, nil, false)
-        local buffAnchor = UI.Control(player, { TOP, BOTTOM, 0, 2 }, nil, false)
-        local phb = UI.Backdrop(player, { TOP, TOP, 0, 0 }, nil, nil, nil, false)
+        playerTlw.preview = UI:Backdrop(playerTlw, "fill", nil, nil, nil, true)
+        local player = UI:Control(playerTlw, { TOPLEFT, TOPLEFT }, nil, false)
+        local topInfo = UI:Control(player, { BOTTOM, TOP, 0, -3 }, nil, false)
+        local botInfo = UI:Control(player, { TOP, BOTTOM, 0, 2 }, nil, false)
+        local buffAnchor = UI:Control(player, { TOP, BOTTOM, 0, 2 }, nil, false)
+        local phb = UI:Backdrop(player, { TOP, TOP, 0, 0 }, nil, nil, nil, false)
         phb:SetDrawLayer(DL_BACKGROUND)
         phb:SetDrawLevel(DL_CONTROLS)
-        local pmb = UI.Backdrop(player, nil, nil, nil, nil, false)
+        local pmb = UI:Backdrop(player, nil, nil, nil, nil, false)
         pmb:SetDrawLayer(DL_BACKGROUND)
         pmb:SetDrawLevel(DL_CONTROLS)
-        local psb = UI.Backdrop(player, nil, nil, nil, nil, false)
+        local psb = UI:Backdrop(player, nil, nil, nil, nil, false)
         psb:SetDrawLayer(DL_BACKGROUND)
         psb:SetDrawLevel(DL_CONTROLS)
-        local alt = UI.Backdrop(botInfo, { RIGHT, RIGHT }, nil, nil, { 0, 0, 0, 1 }, false)
-        local pli = UI.Texture(topInfo, nil, { 20, 20 }, nil, nil, false)
+        local alt = UI:Backdrop(botInfo, { RIGHT, RIGHT }, nil, nil, { 0, 0, 0, 1 }, false)
+        local pli = UI:Texture(topInfo, nil, { 20, 20 }, nil, nil, false)
 
         local fragment = ZO_HUDFadeSceneFragment:New(playerTlw, 0, 0)
 
@@ -715,45 +715,45 @@ local function CreateCustomFrames()
             [COMBAT_MECHANIC_FLAGS_HEALTH] =
             {
                 ["backdrop"] = phb,
-                ["labelOne"] = UI.Label(phb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
-                ["labelTwo"] = UI.Label(phb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
-                ["trauma"] = UI.StatusBar(phb, nil, nil, nil, true),
-                ["bar"] = UI.StatusBar(phb, nil, nil, nil, false),
-                ["shield"] = UI.StatusBar(phb, nil, nil, nil, true),
+                ["labelOne"] = UI:Label(phb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
+                ["labelTwo"] = UI:Label(phb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
+                ["trauma"] = UI:StatusBar(phb, nil, nil, nil, true),
+                ["bar"] = UI:StatusBar(phb, nil, nil, nil, false),
+                ["shield"] = UI:StatusBar(phb, nil, nil, nil, true),
                 ["threshold"] = g_healthThreshold,
             },
             [COMBAT_MECHANIC_FLAGS_MAGICKA] =
             {
                 ["backdrop"] = pmb,
-                ["labelOne"] = UI.Label(pmb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
-                ["labelTwo"] = UI.Label(pmb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
-                ["bar"] = UI.StatusBar(pmb, nil, nil, nil, false),
+                ["labelOne"] = UI:Label(pmb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
+                ["labelTwo"] = UI:Label(pmb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
+                ["bar"] = UI:StatusBar(pmb, nil, nil, nil, false),
                 ["threshold"] = g_magickaThreshold,
             },
             [COMBAT_MECHANIC_FLAGS_STAMINA] =
             {
                 ["backdrop"] = psb,
-                ["labelOne"] = UI.Label(psb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
-                ["labelTwo"] = UI.Label(psb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
-                ["bar"] = UI.StatusBar(psb, nil, nil, nil, false),
+                ["labelOne"] = UI:Label(psb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
+                ["labelTwo"] = UI:Label(psb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
+                ["bar"] = UI:StatusBar(psb, nil, nil, nil, false),
                 ["threshold"] = g_staminaThreshold,
             },
             ["alternative"] =
             {
                 ["backdrop"] = alt,
-                ["enlightenment"] = UI.StatusBar(alt, nil, nil, nil, false),
-                ["bar"] = UI.StatusBar(alt, nil, nil, nil, false),
-                ["icon"] = UI.Texture(alt, { RIGHT, LEFT, -2, 0 }, { 20, 20 }, nil, nil, false),
+                ["enlightenment"] = UI:StatusBar(alt, nil, nil, nil, false),
+                ["bar"] = UI:StatusBar(alt, nil, nil, nil, false),
+                ["icon"] = UI:Texture(alt, { RIGHT, LEFT, -2, 0 }, { 20, 20 }, nil, nil, false),
             },
             ["topInfo"] = topInfo,
-            ["name"] = UI.Label(topInfo, { BOTTOMLEFT, BOTTOMLEFT }, nil, { 0, 4 }, nil, "Player Name", false),
+            ["name"] = UI:Label(topInfo, { BOTTOMLEFT, BOTTOMLEFT }, nil, { 0, 4 }, nil, "Player Name", false),
             ["levelIcon"] = pli,
-            ["level"] = UI.Label(topInfo, { LEFT, RIGHT, 1, 0, pli }, nil, { 0, 1 }, nil, "level", false),
-            ["classIcon"] = UI.Texture(topInfo, { RIGHT, RIGHT, -1, 0 }, { 22, 22 }, nil, nil, false),
+            ["level"] = UI:Label(topInfo, { LEFT, RIGHT, 1, 0, pli }, nil, { 0, 1 }, nil, "level", false),
+            ["classIcon"] = UI:Texture(topInfo, { RIGHT, RIGHT, -1, 0 }, { 22, 22 }, nil, nil, false),
             ["botInfo"] = botInfo,
             ["buffAnchor"] = buffAnchor,
-            ["buffs"] = UI.Control(playerTlw, nil, nil, false),
-            ["debuffs"] = UI.Control(playerTlw, { BOTTOM, TOP, 0, -2, topInfo }, nil, false),
+            ["buffs"] = UI:Control(playerTlw, nil, nil, false),
+            ["debuffs"] = UI:Control(playerTlw, { BOTTOM, TOP, 0, -2, topInfo }, nil, false),
         }
 
         UnitFrames.CustomFrames.player.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
@@ -784,30 +784,30 @@ local function CreateCustomFrames()
 
     if UnitFrames.SV.CustomFramesTarget then
         -- Target Frame
-        local targetTlw = UI.TopLevel(nil, nil)
+        local targetTlw = UI:TopLevel(nil, nil)
         targetTlw:SetDrawLayer(DL_BACKGROUND)
         targetTlw:SetDrawTier(DT_LOW)
         targetTlw:SetDrawLevel(DL_CONTROLS)
         targetTlw.customPositionAttr = "CustomFramesTargetFramePos"
-        targetTlw.preview = UI.Backdrop(targetTlw, "fill", nil, nil, nil, true)
-        targetTlw.previewLabel = UI.Label(targetTlw.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", "Target Frame", false)
-        local target = UI.Control(targetTlw, { TOPLEFT, TOPLEFT }, nil, false)
-        local topInfo = UI.Control(target, { BOTTOM, TOP, 0, -3 }, nil, false)
-        local botInfo = UI.Control(target, { TOP, BOTTOM, 0, 2 }, nil, false)
-        local buffAnchor = UI.Control(target, { TOP, BOTTOM, 0, 2 }, nil, false)
-        local thb = UI.Backdrop(target, { TOP, TOP, 0, 0 }, nil, nil, nil, false)
+        targetTlw.preview = UI:Backdrop(targetTlw, "fill", nil, nil, nil, true)
+        targetTlw.previewLabel = UI:Label(targetTlw.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", "Target Frame", false)
+        local target = UI:Control(targetTlw, { TOPLEFT, TOPLEFT }, nil, false)
+        local topInfo = UI:Control(target, { BOTTOM, TOP, 0, -3 }, nil, false)
+        local botInfo = UI:Control(target, { TOP, BOTTOM, 0, 2 }, nil, false)
+        local buffAnchor = UI:Control(target, { TOP, BOTTOM, 0, 2 }, nil, false)
+        local thb = UI:Backdrop(target, { TOP, TOP, 0, 0 }, nil, nil, nil, false)
         thb:SetDrawLayer(DL_BACKGROUND)
         thb:SetDrawLevel(DL_CONTROLS)
-        local tli = UI.Texture(topInfo, nil, { 20, 20 }, nil, nil, false)
-        local ari = UI.Texture(botInfo, { RIGHT, RIGHT, -1, 0 }, { 20, 20 }, nil, nil, false)
+        local tli = UI:Texture(topInfo, nil, { 20, 20 }, nil, nil, false)
+        local ari = UI:Texture(botInfo, { RIGHT, RIGHT, -1, 0 }, { 20, 20 }, nil, nil, false)
         local buffs
         local debuffs
         if UnitFrames.SV.PlayerFrameOptions == 1 then
-            buffs = UI.Control(targetTlw, { TOP, BOTTOM, 0, 2, buffAnchor }, nil, false)
-            debuffs = UI.Control(targetTlw, { BOTTOM, TOP, 0, -2, topInfo }, nil, false)
+            buffs = UI:Control(targetTlw, { TOP, BOTTOM, 0, 2, buffAnchor }, nil, false)
+            debuffs = UI:Control(targetTlw, { BOTTOM, TOP, 0, -2, topInfo }, nil, false)
         else
-            buffs = UI.Control(targetTlw, { BOTTOM, TOP, 0, -2, topInfo }, nil, false)
-            debuffs = UI.Control(targetTlw, { TOP, BOTTOM, 0, 2, buffAnchor }, nil, false)
+            buffs = UI:Control(targetTlw, { BOTTOM, TOP, 0, -2, topInfo }, nil, false)
+            debuffs = UI:Control(targetTlw, { TOP, BOTTOM, 0, 2, buffAnchor }, nil, false)
         end
 
         local fragment = ZO_HUDFadeSceneFragment:New(targetTlw, 0, 0)
@@ -827,32 +827,32 @@ local function CreateCustomFrames()
             [COMBAT_MECHANIC_FLAGS_HEALTH] =
             {
                 ["backdrop"] = thb,
-                ["labelOne"] = UI.Label(thb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
-                ["labelTwo"] = UI.Label(thb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
-                ["trauma"] = UI.StatusBar(thb, nil, nil, nil, true),
-                ["bar"] = UI.StatusBar(thb, nil, nil, nil, false),
-                ["invulnerable"] = UI.StatusBar(thb, nil, nil, nil, false),
-                ["invulnerableInlay"] = UI.StatusBar(thb, nil, nil, nil, false),
-                ["shield"] = UI.StatusBar(thb, nil, nil, nil, true),
+                ["labelOne"] = UI:Label(thb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
+                ["labelTwo"] = UI:Label(thb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
+                ["trauma"] = UI:StatusBar(thb, nil, nil, nil, true),
+                ["bar"] = UI:StatusBar(thb, nil, nil, nil, false),
+                ["invulnerable"] = UI:StatusBar(thb, nil, nil, nil, false),
+                ["invulnerableInlay"] = UI:StatusBar(thb, nil, nil, nil, false),
+                ["shield"] = UI:StatusBar(thb, nil, nil, nil, true),
                 ["threshold"] = g_targetThreshold,
             },
             ["topInfo"] = topInfo,
-            ["name"] = UI.Label(topInfo, { BOTTOMLEFT, BOTTOMLEFT }, nil, { 0, 4 }, nil, "Target Name", false),
+            ["name"] = UI:Label(topInfo, { BOTTOMLEFT, BOTTOMLEFT }, nil, { 0, 4 }, nil, "Target Name", false),
             ["levelIcon"] = tli,
-            ["level"] = UI.Label(topInfo, { LEFT, RIGHT, 1, 0, tli }, nil, { 0, 1 }, nil, "level", false),
-            ["classIcon"] = UI.Texture(topInfo, { RIGHT, RIGHT, -1, 0 }, { 22, 22 }, nil, nil, false),
-            ["className"] = UI.Label(topInfo, { BOTTOMRIGHT, TOPRIGHT, -1, -1 }, nil, { 2, 4 }, nil, "Class", false),
-            ["friendIcon"] = UI.Texture(topInfo, { RIGHT, RIGHT, -20, 0 }, { 22, 22 }, nil, nil, false),
-            ["star1"] = UI.Texture(topInfo, { RIGHT, RIGHT, -28, -1 }, { 16, 16 }, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true),
-            ["star2"] = UI.Texture(topInfo, { RIGHT, RIGHT, -45, -1 }, { 16, 16 }, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true),
-            ["star3"] = UI.Texture(topInfo, { RIGHT, RIGHT, -62, -1 }, { 16, 16 }, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true),
+            ["level"] = UI:Label(topInfo, { LEFT, RIGHT, 1, 0, tli }, nil, { 0, 1 }, nil, "level", false),
+            ["classIcon"] = UI:Texture(topInfo, { RIGHT, RIGHT, -1, 0 }, { 22, 22 }, nil, nil, false),
+            ["className"] = UI:Label(topInfo, { BOTTOMRIGHT, TOPRIGHT, -1, -1 }, nil, { 2, 4 }, nil, "Class", false),
+            ["friendIcon"] = UI:Texture(topInfo, { RIGHT, RIGHT, -20, 0 }, { 22, 22 }, nil, nil, false),
+            ["star1"] = UI:Texture(topInfo, { RIGHT, RIGHT, -28, -1 }, { 16, 16 }, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true),
+            ["star2"] = UI:Texture(topInfo, { RIGHT, RIGHT, -45, -1 }, { 16, 16 }, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true),
+            ["star3"] = UI:Texture(topInfo, { RIGHT, RIGHT, -62, -1 }, { 16, 16 }, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true),
             ["botInfo"] = botInfo,
             ["buffAnchor"] = buffAnchor,
-            ["title"] = UI.Label(botInfo, { TOPLEFT, TOPLEFT }, nil, { 0, 3 }, nil, "<Title>", false),
+            ["title"] = UI:Label(botInfo, { TOPLEFT, TOPLEFT }, nil, { 0, 3 }, nil, "<Title>", false),
             ["avaRankIcon"] = ari,
-            ["avaRank"] = UI.Label(botInfo, { RIGHT, LEFT, -1, 0, ari }, nil, { 2, 3 }, nil, "ava", false),
-            ["dead"] = UI.Label(thb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "Status", true),
-            ["skull"] = UI.Texture(target, { RIGHT, LEFT, -8, 0 }, nil, "LuiExtended/media/unitframes/unitframes_execute.dds", nil, true),
+            ["avaRank"] = UI:Label(botInfo, { RIGHT, LEFT, -1, 0, ari }, nil, { 2, 3 }, nil, "ava", false),
+            ["dead"] = UI:Label(thb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "Status", true),
+            ["skull"] = UI:Texture(target, { RIGHT, LEFT, -8, 0 }, nil, "LuiExtended/media/unitframes/unitframes_execute.dds", nil, true),
             ["buffs"] = buffs,
             ["debuffs"] = debuffs,
         }
@@ -862,21 +862,21 @@ local function CreateCustomFrames()
 
     if UnitFrames.SV.AvaCustFramesTarget then
         -- Target Frame
-        local targetTlw = UI.TopLevel(nil, nil)
+        local targetTlw = UI:TopLevel(nil, nil)
         targetTlw:SetDrawLayer(DL_BACKGROUND)
         targetTlw:SetDrawTier(DT_LOW)
         targetTlw:SetDrawLevel(DL_CONTROLS)
         targetTlw.customPositionAttr = "AvaCustFramesTargetFramePos"
-        targetTlw.preview = UI.Backdrop(targetTlw, "fill", nil, nil, nil, true)
-        targetTlw.previewLabel = UI.Label(targetTlw.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", "PvP Player Target Frame", false)
-        local target = UI.Control(targetTlw, { TOPLEFT, TOPLEFT }, nil, false)
-        local topInfo = UI.Control(target, { BOTTOM, TOP, 0, -3 }, nil, false)
-        local botInfo = UI.Control(target, { TOP, BOTTOM, 0, 2 }, nil, false)
-        local buffAnchor = UI.Control(target, { TOP, BOTTOM, 0, 2 }, nil, false)
-        local thb = UI.Backdrop(target, { TOP, TOP, 0, 0 }, nil, nil, nil, false)
+        targetTlw.preview = UI:Backdrop(targetTlw, "fill", nil, nil, nil, true)
+        targetTlw.previewLabel = UI:Label(targetTlw.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", "PvP Player Target Frame", false)
+        local target = UI:Control(targetTlw, { TOPLEFT, TOPLEFT }, nil, false)
+        local topInfo = UI:Control(target, { BOTTOM, TOP, 0, -3 }, nil, false)
+        local botInfo = UI:Control(target, { TOP, BOTTOM, 0, 2 }, nil, false)
+        local buffAnchor = UI:Control(target, { TOP, BOTTOM, 0, 2 }, nil, false)
+        local thb = UI:Backdrop(target, { TOP, TOP, 0, 0 }, nil, nil, nil, false)
         thb:SetDrawLayer(DL_BACKGROUND)
         thb:SetDrawLevel(DL_CONTROLS)
-        local cn = UI.Label(botInfo, { TOP, TOP }, nil, { 1, 3 }, nil, "Class", false)
+        local cn = UI:Label(botInfo, { TOP, TOP }, nil, { 1, 3 }, nil, "Class", false)
 
         local fragment = ZO_HUDFadeSceneFragment:New(targetTlw, 0, 0)
 
@@ -898,26 +898,26 @@ local function CreateCustomFrames()
             [COMBAT_MECHANIC_FLAGS_HEALTH] =
             {
                 ["backdrop"] = thb,
-                ["label"] = UI.Label(thb, { CENTER, CENTER }, nil, { 1, 1 }, nil, "zz%", false),
-                ["labelOne"] = UI.Label(thb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx + ss", false),
-                ["labelTwo"] = UI.Label(thb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "yy", false),
-                ["trauma"] = UI.StatusBar(thb, nil, nil, nil, true),
-                ["bar"] = UI.StatusBar(thb, nil, nil, nil, false),
-                ["invulnerable"] = UI.StatusBar(thb, nil, nil, nil, false),
-                ["invulnerableInlay"] = UI.StatusBar(thb, nil, nil, nil, false),
-                ["shield"] = UI.StatusBar(thb, nil, nil, nil, true),
+                ["label"] = UI:Label(thb, { CENTER, CENTER }, nil, { 1, 1 }, nil, "zz%", false),
+                ["labelOne"] = UI:Label(thb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx + ss", false),
+                ["labelTwo"] = UI:Label(thb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "yy", false),
+                ["trauma"] = UI:StatusBar(thb, nil, nil, nil, true),
+                ["bar"] = UI:StatusBar(thb, nil, nil, nil, false),
+                ["invulnerable"] = UI:StatusBar(thb, nil, nil, nil, false),
+                ["invulnerableInlay"] = UI:StatusBar(thb, nil, nil, nil, false),
+                ["shield"] = UI:StatusBar(thb, nil, nil, nil, true),
                 ["threshold"] = g_targetThreshold,
             },
             ["topInfo"] = topInfo,
-            ["name"] = UI.Label(topInfo, { BOTTOM, BOTTOM }, nil, { 1, 4 }, nil, "Target Name", false),
-            ["classIcon"] = UI.Texture(topInfo, { LEFT, LEFT }, { 20, 20 }, nil, nil, false),
-            ["avaRankIcon"] = UI.Texture(topInfo, { RIGHT, RIGHT }, { 20, 20 }, nil, nil, false),
+            ["name"] = UI:Label(topInfo, { BOTTOM, BOTTOM }, nil, { 1, 4 }, nil, "Target Name", false),
+            ["classIcon"] = UI:Texture(topInfo, { LEFT, LEFT }, { 20, 20 }, nil, nil, false),
+            ["avaRankIcon"] = UI:Texture(topInfo, { RIGHT, RIGHT }, { 20, 20 }, nil, nil, false),
             ["botInfo"] = botInfo,
             ["buffAnchor"] = buffAnchor,
             ["className"] = cn,
-            ["title"] = UI.Label(botInfo, { TOP, BOTTOM, 0, 0, cn }, nil, { 1, 3 }, nil, "<Title>", false),
-            ["avaRank"] = UI.Label(botInfo, { TOPRIGHT, TOPRIGHT }, nil, { 2, 3 }, nil, "ava", false),
-            ["dead"] = UI.Label(thb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "Status", true),
+            ["title"] = UI:Label(botInfo, { TOP, BOTTOM, 0, 0, cn }, nil, { 1, 3 }, nil, "<Title>", false),
+            ["avaRank"] = UI:Label(botInfo, { TOPRIGHT, TOPRIGHT }, nil, { 2, 3 }, nil, "ava", false),
+            ["dead"] = UI:Label(thb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "Status", true),
         }
 
         UnitFrames.CustomFrames.AvaPlayerTarget.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
@@ -932,13 +932,13 @@ local function CreateCustomFrames()
     -- Loop through Small Group members
     if UnitFrames.SV.CustomFramesGroup then
         -- Group Frame
-        local group = UI.TopLevel(nil, nil)
+        local group = UI:TopLevel(nil, nil)
         group:SetDrawLayer(DL_BACKGROUND)
         group:SetDrawTier(DT_LOW)
         group:SetDrawLevel(DL_CONTROLS)
         group.customPositionAttr = "CustomFramesGroupFramePos"
-        group.preview = UI.Backdrop(group, "fill", nil, nil, nil, true)
-        group.previewLabel = UI.Label(group.preview, { BOTTOM, TOP, 0, -1, group }, nil, nil, "ZoFontGameMedium", "Small Group", false)
+        group.preview = UI:Backdrop(group, "fill", nil, nil, nil, true)
+        group.previewLabel = UI:Label(group.preview, { BOTTOM, TOP, 0, -1, group }, nil, nil, "ZoFontGameMedium", "Small Group", false)
 
         local fragment = ZO_HUDFadeSceneFragment:New(group, 0, 0)
 
@@ -948,14 +948,14 @@ local function CreateCustomFrames()
         sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
         sceneManager:GetScene("loot"):AddFragment(fragment)
 
-        for i = 1, SMALL_GROUP_SIZE_THRESHOLD do
+        for i = 1, STANDARD_GROUP_SIZE_THRESHOLD do
             local unitTag = "SmallGroup" .. i
-            local control = UI.Control(group, nil, nil, false)
-            local topInfo = UI.Control(control, { BOTTOMRIGHT, TOPRIGHT, 0, -3 }, nil, false)
-            local ghb = UI.Backdrop(control, { TOPLEFT, TOPLEFT }, nil, nil, nil, false)
+            local control = UI:Control(group, nil, nil, false)
+            local topInfo = UI:Control(control, { BOTTOMRIGHT, TOPRIGHT, 0, -3 }, nil, false)
+            local ghb = UI:Backdrop(control, { TOPLEFT, TOPLEFT }, nil, nil, nil, false)
             ghb:SetDrawLayer(DL_BACKGROUND)
             ghb:SetDrawLevel(DL_CONTROLS)
-            local gli = UI.Texture(topInfo, nil, { 20, 20 }, nil, nil, false)
+            local gli = UI:Texture(topInfo, nil, { 20, 20 }, nil, nil, false)
 
             UnitFrames.CustomFrames[unitTag] =
             {
@@ -964,21 +964,21 @@ local function CreateCustomFrames()
                 [COMBAT_MECHANIC_FLAGS_HEALTH] =
                 {
                     ["backdrop"] = ghb,
-                    ["labelOne"] = UI.Label(ghb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
-                    ["labelTwo"] = UI.Label(ghb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
-                    ["trauma"] = UI.StatusBar(ghb, nil, nil, nil, true),
-                    ["bar"] = UI.StatusBar(ghb, nil, nil, nil, false),
-                    ["shield"] = UI.StatusBar(ghb, nil, nil, nil, true),
+                    ["labelOne"] = UI:Label(ghb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "xx / yy", false),
+                    ["labelTwo"] = UI:Label(ghb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
+                    ["trauma"] = UI:StatusBar(ghb, nil, nil, nil, true),
+                    ["bar"] = UI:StatusBar(ghb, nil, nil, nil, false),
+                    ["shield"] = UI:StatusBar(ghb, nil, nil, nil, true),
                 },
                 ["topInfo"] = topInfo,
-                ["name"] = UI.Label(topInfo, { BOTTOMLEFT, BOTTOMLEFT }, nil, { 0, 4 }, nil, unitTag, false),
+                ["name"] = UI:Label(topInfo, { BOTTOMLEFT, BOTTOMLEFT }, nil, { 0, 4 }, nil, unitTag, false),
                 ["levelIcon"] = gli,
-                ["level"] = UI.Label(topInfo, { LEFT, RIGHT, 1, 0, gli }, nil, { 0, 1 }, nil, "level", false),
-                ["classIcon"] = UI.Texture(topInfo, { RIGHT, RIGHT, -1, 0 }, { 22, 22 }, nil, nil, false),
-                ["friendIcon"] = UI.Texture(topInfo, { RIGHT, RIGHT, -20, 0 }, { 22, 22 }, nil, nil, false),
-                ["roleIcon"] = UI.Texture(ghb, { LEFT, LEFT, 5, 0 }, { 18, 18 }, nil, 2, false),
-                ["dead"] = UI.Label(ghb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "Status", false),
-                ["leader"] = UI.Texture(topInfo, { LEFT, LEFT, -7, 0 }, { 32, 32 }, nil, 2, false),
+                ["level"] = UI:Label(topInfo, { LEFT, RIGHT, 1, 0, gli }, nil, { 0, 1 }, nil, "level", false),
+                ["classIcon"] = UI:Texture(topInfo, { RIGHT, RIGHT, -1, 0 }, { 22, 22 }, nil, nil, false),
+                ["friendIcon"] = UI:Texture(topInfo, { RIGHT, RIGHT, -20, 0 }, { 22, 22 }, nil, nil, false),
+                ["roleIcon"] = UI:Texture(ghb, { LEFT, LEFT, 5, 0 }, { 18, 18 }, nil, 2, false),
+                ["dead"] = UI:Label(ghb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, "Status", false),
+                ["leader"] = UI:Texture(topInfo, { LEFT, LEFT, -7, 0 }, { 32, 32 }, nil, 2, false),
             }
 
             UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
@@ -994,13 +994,13 @@ local function CreateCustomFrames()
     -- Loop through Raid Group members
     if UnitFrames.SV.CustomFramesRaid then
         -- Raid Frame
-        local raid = UI.TopLevel(nil, nil)
+        local raid = UI:TopLevel(nil, nil)
         raid:SetDrawLayer(DL_BACKGROUND)
         raid:SetDrawTier(DT_LOW)
         raid:SetDrawLevel(DL_CONTROLS)
         raid.customPositionAttr = "CustomFramesRaidFramePos"
-        raid.preview = UI.Backdrop(raid, { TOPLEFT, TOPLEFT }, nil, nil, nil, true)
-        raid.previewLabel = UI.Label(raid.preview, { BOTTOM, TOP, 0, -1, raid }, nil, nil, "ZoFontGameMedium", "Raid Group", false)
+        raid.preview = UI:Backdrop(raid, { TOPLEFT, TOPLEFT }, nil, nil, nil, true)
+        raid.previewLabel = UI:Label(raid.preview, { BOTTOM, TOP, 0, -1, raid }, nil, nil, "ZoFontGameMedium", "Raid Group", false)
 
         local fragment = ZO_HUDFadeSceneFragment:New(raid, 0, 0)
 
@@ -1010,10 +1010,10 @@ local function CreateCustomFrames()
         sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
         sceneManager:GetScene("loot"):AddFragment(fragment)
 
-        for i = 1, MAX_GROUP_SIZE_THRESHOLD do
+        for i = 1, LARGE_GROUP_SIZE_THRESHOLD do
             local unitTag = "RaidGroup" .. i
-            local control = UI.Control(raid, nil, nil, false)
-            local rhb = UI.Backdrop(control, "fill", nil, nil, nil, false)
+            local control = UI:Control(raid, nil, nil, false)
+            local rhb = UI:Backdrop(control, "fill", nil, nil, nil, false)
             rhb:SetDrawLayer(DL_BACKGROUND)
             rhb:SetDrawLevel(DL_CONTROLS)
 
@@ -1024,16 +1024,16 @@ local function CreateCustomFrames()
                 [COMBAT_MECHANIC_FLAGS_HEALTH] =
                 {
                     ["backdrop"] = rhb,
-                    ["label"] = UI.Label(rhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
-                    ["trauma"] = UI.StatusBar(rhb, nil, nil, nil, true),
-                    ["bar"] = UI.StatusBar(rhb, nil, nil, nil, false),
-                    ["shield"] = UI.StatusBar(rhb, nil, nil, nil, true),
+                    ["label"] = UI:Label(rhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
+                    ["trauma"] = UI:StatusBar(rhb, nil, nil, nil, true),
+                    ["bar"] = UI:StatusBar(rhb, nil, nil, nil, false),
+                    ["shield"] = UI:StatusBar(rhb, nil, nil, nil, true),
                 },
-                ["name"] = UI.Label(rhb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, unitTag, false),
-                ["roleIcon"] = UI.Texture(rhb, { LEFT, LEFT, 4, 0 }, { 16, 16 }, nil, 2, false),
-                ["classIcon"] = UI.Texture(rhb, { LEFT, LEFT, 1, 0 }, { 20, 20 }, nil, 2, false),
-                ["dead"] = UI.Label(rhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "Status", false),
-                ["leader"] = UI.Texture(rhb, { LEFT, LEFT, -2, 0 }, { 28, 28 }, nil, 2, false),
+                ["name"] = UI:Label(rhb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, unitTag, false),
+                ["roleIcon"] = UI:Texture(rhb, { LEFT, LEFT, 4, 0 }, { 16, 16 }, nil, 2, false),
+                ["classIcon"] = UI:Texture(rhb, { LEFT, LEFT, 1, 0 }, { 20, 20 }, nil, 2, false),
+                ["dead"] = UI:Label(rhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "Status", false),
+                ["leader"] = UI:Texture(rhb, { LEFT, LEFT, -2, 0 }, { 28, 28 }, nil, 2, false),
             }
             UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
 
@@ -1047,13 +1047,13 @@ local function CreateCustomFrames()
 
     if UnitFrames.SV.CustomFramesPet then
         -- Pet Frame
-        local pet = UI.TopLevel(nil, nil)
+        local pet = UI:TopLevel(nil, nil)
         pet:SetDrawLayer(DL_BACKGROUND)
         pet:SetDrawTier(DT_LOW)
         pet:SetDrawLevel(DL_CONTROLS)
         pet.customPositionAttr = "CustomFramesPetFramePos"
-        pet.preview = UI.Backdrop(pet, "fill", nil, nil, nil, true)
-        pet.previewLabel = UI.Label(pet.preview, { BOTTOM, TOP, 0, -1, nil }, nil, nil, "ZoFontGameMedium", "Player Pets", false)
+        pet.preview = UI:Backdrop(pet, "fill", nil, nil, nil, true)
+        pet.previewLabel = UI:Label(pet.preview, { BOTTOM, TOP, 0, -1, nil }, nil, nil, "ZoFontGameMedium", "Player Pets", false)
 
         local fragment = ZO_HUDFadeSceneFragment:New(pet, 0, 0)
 
@@ -1065,8 +1065,8 @@ local function CreateCustomFrames()
 
         for i = 1, MAX_PET_UNIT_TAGS do
             local unitTag = "PetGroup" .. i
-            local control = UI.Control(pet, nil, nil, false)
-            local shb = UI.Backdrop(control, "fill", nil, nil, nil, false)
+            local control = UI:Control(pet, nil, nil, false)
+            local shb = UI:Backdrop(control, "fill", nil, nil, nil, false)
 
             shb:SetDrawLayer(DL_BACKGROUND)
             shb:SetDrawLevel(DL_CONTROLS)
@@ -1078,13 +1078,13 @@ local function CreateCustomFrames()
                 [COMBAT_MECHANIC_FLAGS_HEALTH] =
                 {
                     ["backdrop"] = shb,
-                    ["label"] = UI.Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
-                    ["trauma"] = UI.StatusBar(shb, nil, nil, nil, true),
-                    ["bar"] = UI.StatusBar(shb, nil, nil, nil, false),
-                    ["shield"] = UI.StatusBar(shb, nil, nil, nil, true),
+                    ["label"] = UI:Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
+                    ["trauma"] = UI:StatusBar(shb, nil, nil, nil, true),
+                    ["bar"] = UI:StatusBar(shb, nil, nil, nil, false),
+                    ["shield"] = UI:StatusBar(shb, nil, nil, nil, true),
                 },
-                ["dead"] = UI.Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "Status", true),
-                ["name"] = UI.Label(shb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, unitTag, false),
+                ["dead"] = UI:Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "Status", true),
+                ["name"] = UI:Label(shb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, unitTag, false),
             }
             UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].label.fmt = "Current (Percentage%)"
@@ -1093,13 +1093,13 @@ local function CreateCustomFrames()
 
     if UnitFrames.SV.CustomFramesCompanion then
         -- Companion Frame
-        local companionTlw = UI.TopLevel(nil, nil)
+        local companionTlw = UI:TopLevel(nil, nil)
         companionTlw:SetDrawLayer(DL_BACKGROUND)
         companionTlw:SetDrawTier(DT_LOW)
         companionTlw:SetDrawLevel(DL_CONTROLS)
         companionTlw.customPositionAttr = "CustomFramesCompanionFramePos"
-        companionTlw.preview = UI.Backdrop(companionTlw, "fill", nil, nil, nil, true)
-        companionTlw.previewLabel = UI.Label(companionTlw.preview, { BOTTOM, TOP, 0, -1, nil }, nil, nil, "ZoFontGameMedium", "Player Companion", false)
+        companionTlw.preview = UI:Backdrop(companionTlw, "fill", nil, nil, nil, true)
+        companionTlw.previewLabel = UI:Label(companionTlw.preview, { BOTTOM, TOP, 0, -1, nil }, nil, nil, "ZoFontGameMedium", "Player Companion", false)
 
         local fragment = ZO_HUDFadeSceneFragment:New(companionTlw, 0, 0)
 
@@ -1109,8 +1109,8 @@ local function CreateCustomFrames()
         sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
         sceneManager:GetScene("loot"):AddFragment(fragment)
 
-        local companion = UI.Control(companionTlw, nil, nil, false)
-        local shb = UI.Backdrop(companion, "fill", nil, nil, nil, false)
+        local companion = UI:Control(companionTlw, nil, nil, false)
+        local shb = UI:Backdrop(companion, "fill", nil, nil, nil, false)
         shb:SetDrawLayer(DL_BACKGROUND)
         shb:SetDrawLevel(DL_CONTROLS)
 
@@ -1122,13 +1122,13 @@ local function CreateCustomFrames()
             [COMBAT_MECHANIC_FLAGS_HEALTH] =
             {
                 ["backdrop"] = shb,
-                ["label"] = UI.Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
-                ["trauma"] = UI.StatusBar(shb, nil, nil, nil, true),
-                ["bar"] = UI.StatusBar(shb, nil, nil, nil, false),
-                ["shield"] = UI.StatusBar(shb, nil, nil, nil, true),
+                ["label"] = UI:Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
+                ["trauma"] = UI:StatusBar(shb, nil, nil, nil, true),
+                ["bar"] = UI:StatusBar(shb, nil, nil, nil, false),
+                ["shield"] = UI:StatusBar(shb, nil, nil, nil, true),
             },
-            ["dead"] = UI.Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "Status", true),
-            ["name"] = UI.Label(shb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, nil, false),
+            ["dead"] = UI:Label(shb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "Status", true),
+            ["name"] = UI:Label(shb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, nil, false),
         }
         UnitFrames.CustomFrames.companion.name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
         UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].label.fmt = "Current (Percentage%)"
@@ -1137,13 +1137,13 @@ local function CreateCustomFrames()
     -- Loop through Bosses
     if UnitFrames.SV.CustomFramesBosses then
         -- Bosses Frame
-        local bosses = UI.TopLevel(nil, nil)
+        local bosses = UI:TopLevel(nil, nil)
         bosses:SetDrawLayer(DL_BACKGROUND)
         bosses:SetDrawTier(DT_LOW)
         bosses:SetDrawLevel(DL_CONTROLS)
         bosses.customPositionAttr = "CustomFramesBossesFramePos"
-        bosses.preview = UI.Backdrop(bosses, "fill", nil, nil, nil, true)
-        bosses.previewLabel = UI.Label(bosses.preview, { BOTTOM, TOP, 0, -1, bosses }, nil, nil, "ZoFontGameMedium", "Bosses Group", false)
+        bosses.preview = UI:Backdrop(bosses, "fill", nil, nil, nil, true)
+        bosses.previewLabel = UI:Label(bosses.preview, { BOTTOM, TOP, 0, -1, bosses }, nil, nil, "ZoFontGameMedium", "Bosses Group", false)
 
         local fragment = ZO_HUDFadeSceneFragment:New(bosses, 0, 0)
 
@@ -1155,8 +1155,8 @@ local function CreateCustomFrames()
 
         for i = BOSS_RANK_ITERATION_BEGIN, BOSS_RANK_ITERATION_END do
             local unitTag = "boss" .. i
-            local control = UI.Control(bosses, nil, nil, false)
-            local bhb = UI.Backdrop(control, "fill", nil, nil, nil, false)
+            local control = UI:Control(bosses, nil, nil, false)
+            local bhb = UI:Backdrop(control, "fill", nil, nil, nil, false)
             bhb:SetDrawLayer(DL_BACKGROUND)
             bhb:SetDrawLevel(DL_CONTROLS)
 
@@ -1168,16 +1168,16 @@ local function CreateCustomFrames()
                 [COMBAT_MECHANIC_FLAGS_HEALTH] =
                 {
                     ["backdrop"] = bhb,
-                    ["label"] = UI.Label(bhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
-                    ["trauma"] = UI.StatusBar(bhb, nil, nil, nil, true),
-                    ["bar"] = UI.StatusBar(bhb, nil, nil, nil, false),
-                    ["invulnerable"] = UI.StatusBar(bhb, nil, nil, nil, false),
-                    ["invulnerableInlay"] = UI.StatusBar(bhb, nil, nil, nil, false),
-                    ["shield"] = UI.StatusBar(bhb, nil, nil, nil, true),
+                    ["label"] = UI:Label(bhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "zz%", false),
+                    ["trauma"] = UI:StatusBar(bhb, nil, nil, nil, true),
+                    ["bar"] = UI:StatusBar(bhb, nil, nil, nil, false),
+                    ["invulnerable"] = UI:StatusBar(bhb, nil, nil, nil, false),
+                    ["invulnerableInlay"] = UI:StatusBar(bhb, nil, nil, nil, false),
+                    ["shield"] = UI:StatusBar(bhb, nil, nil, nil, true),
                     ["threshold"] = g_targetThreshold,
                 },
-                ["dead"] = UI.Label(bhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "Status", true),
-                ["name"] = UI.Label(bhb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, unitTag, false),
+                ["dead"] = UI:Label(bhb, { RIGHT, RIGHT, -5, 0 }, nil, { 2, 1 }, nil, "Status", true),
+                ["name"] = UI:Label(bhb, { LEFT, LEFT, 5, 0 }, nil, { 0, 1 }, nil, unitTag, false),
             }
             UnitFrames.CustomFrames[unitTag].name:SetWrapMode(TEXT_WRAP_MODE_TRUNCATE)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].label.fmt = "Percentage%"
@@ -1216,21 +1216,21 @@ local function CreateCustomFrames()
             unitFrame.tlw:SetHandler("OnMoveStop", tlwOnMoveStop)
 
             -- Create Texture and a label for Anchor Preview
-            unitFrame.tlw.preview.anchorTexture = UI.Texture(unitFrame.tlw.preview, { TOPLEFT, TOPLEFT }, { 16, 16 }, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false)
+            unitFrame.tlw.preview.anchorTexture = UI:Texture(unitFrame.tlw.preview, { TOPLEFT, TOPLEFT }, { 16, 16 }, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false)
             unitFrame.tlw.preview.anchorTexture:SetColor(1, 1, 0, 0.9)
 
-            unitFrame.tlw.preview.anchorLabel = UI.Label(unitFrame.tlw.preview, { BOTTOMLEFT, TOPLEFT, 0, -1 }, nil, { 0, 2 }, "ZoFontGameSmall", "xxx, yyy", false)
+            unitFrame.tlw.preview.anchorLabel = UI:Label(unitFrame.tlw.preview, { BOTTOMLEFT, TOPLEFT, 0, -1 }, nil, { 0, 2 }, "ZoFontGameSmall", "xxx, yyy", false)
             unitFrame.tlw.preview.anchorLabel:SetColor(1, 1, 0, 1)
             unitFrame.tlw.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
             unitFrame.tlw.preview.anchorLabel:SetDrawTier(DT_MEDIUM)
-            unitFrame.tlw.preview.anchorLabelBg = UI.Backdrop(unitFrame.tlw.preview.anchorLabel, "fill", nil, { 0, 0, 0, 1 }, { 0, 0, 0, 1 }, false)
+            unitFrame.tlw.preview.anchorLabelBg = UI:Backdrop(unitFrame.tlw.preview.anchorLabel, "fill", nil, { 0, 0, 0, 1 }, { 0, 0, 0, 1 }, false)
             unitFrame.tlw.preview.anchorLabelBg:SetDrawLayer(DL_OVERLAY)
             unitFrame.tlw.preview.anchorLabelBg:SetDrawTier(DT_LOW)
         end
 
         -- Now we have to anchor all bars to their backdrops
         local shieldOverlay = (baseName == "RaidGroup" or baseName == "boss") or not UnitFrames.SV.CustomShieldBarSeparate
-        for i = 0, MAX_GROUP_SIZE_THRESHOLD do
+        for i = 0, LARGE_GROUP_SIZE_THRESHOLD do
             local unitTag = (i == 0) and baseName or (baseName .. i)
             if UnitFrames.CustomFrames[unitTag] then
                 for _, powerType in pairs(
@@ -1275,7 +1275,7 @@ local function CreateCustomFrames()
                                 end
                             else
                                 -- In non-overlay mode we need to create separate backdrop for shield
-                                powerBar.shieldbackdrop = UI.Backdrop(UnitFrames.CustomFrames[unitTag].control, nil, nil, nil, nil, true)
+                                powerBar.shieldbackdrop = UI:Backdrop(UnitFrames.CustomFrames[unitTag].control, nil, nil, nil, nil, true)
                                 powerBar.shield:SetAnchor(TOPLEFT, powerBar.shieldbackdrop, TOPLEFT, 1, 1)
                                 powerBar.shield:SetAnchor(BOTTOMRIGHT, powerBar.shieldbackdrop, BOTTOMRIGHT, -1, -1)
                             end
@@ -1320,7 +1320,7 @@ local function CreateCustomFrames()
     end
 
     if UnitFrames.SV.GroupEnableRegen then
-        for i = 1, SMALL_GROUP_SIZE_THRESHOLD do
+        for i = 1, STANDARD_GROUP_SIZE_THRESHOLD do
             local unitTag = "SmallGroup" .. i
             if UnitFrames.CustomFrames[unitTag] then
                 for _, powerType in pairs(
@@ -1346,7 +1346,7 @@ local function CreateCustomFrames()
     end
 
     if UnitFrames.SV.RaidEnableRegen then
-        for i = 1, MAX_GROUP_SIZE_THRESHOLD do
+        for i = 1, LARGE_GROUP_SIZE_THRESHOLD do
             local unitTag = "RaidGroup" .. i
             if UnitFrames.CustomFrames[unitTag] then
                 for _, powerType in pairs(
@@ -1410,14 +1410,14 @@ local function CreateCustomFrames()
                 UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] =
                 {
                     ["dec"] = CreateDecreasedArmorOverlay(backdrop, false),
-                    ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 13, 0 }, { 24, 24 }, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true),
+                    ["inc"] = UI:Texture(backdrop, { CENTER, CENTER, 13, 0 }, { 24, 24 }, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true),
                 }
             end
         end
     end
 
     if UnitFrames.SV.GroupEnableArmor then
-        for i = 1, SMALL_GROUP_SIZE_THRESHOLD do
+        for i = 1, STANDARD_GROUP_SIZE_THRESHOLD do
             local unitTag = "SmallGroup" .. i
             if UnitFrames.CustomFrames[unitTag] then
                 -- Assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
@@ -1428,14 +1428,14 @@ local function CreateCustomFrames()
                 UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] =
                 {
                     ["dec"] = CreateDecreasedArmorOverlay(backdrop, false),
-                    ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 13, 0 }, { 24, 24 }, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true),
+                    ["inc"] = UI:Texture(backdrop, { CENTER, CENTER, 13, 0 }, { 24, 24 }, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true),
                 }
             end
         end
     end
 
     if UnitFrames.SV.RaidEnableArmor then
-        for i = 1, MAX_GROUP_SIZE_THRESHOLD do
+        for i = 1, LARGE_GROUP_SIZE_THRESHOLD do
             local unitTag = "RaidGroup" .. i
             if UnitFrames.CustomFrames[unitTag] then
                 -- Assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
@@ -1446,7 +1446,7 @@ local function CreateCustomFrames()
                 UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] =
                 {
                     ["dec"] = CreateDecreasedArmorOverlay(backdrop, false),
-                    ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 13, 0 }, { 24, 24 }, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true),
+                    ["inc"] = UI:Texture(backdrop, { CENTER, CENTER, 13, 0 }, { 24, 24 }, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true),
                 }
             end
         end
@@ -1464,7 +1464,7 @@ local function CreateCustomFrames()
                 UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_ARMOR_RATING] =
                 {
                     ["dec"] = CreateDecreasedArmorOverlay(backdrop, false),
-                    ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 13, 0 }, { 24, 24 }, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true),
+                    ["inc"] = UI:Texture(backdrop, { CENTER, CENTER, 13, 0 }, { 24, 24 }, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true),
                 }
             end
         end
@@ -1493,8 +1493,8 @@ local function CreateCustomFrames()
                     local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
                     UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] =
                     {
-                        ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 4, 0 }, { size1 * 1.8, size2 * 4.0 }, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true),
-                        ["dec"] = UI.Texture(backdrop, { CENTER, CENTER, 0, 0 }, { size1 * 2.2, size2 * 3 }, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true),
+                        ["inc"] = UI:Texture(backdrop, { CENTER, CENTER, 4, 0 }, { size1 * 1.8, size2 * 4.0 }, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true),
+                        ["dec"] = UI:Texture(backdrop, { CENTER, CENTER, 0, 0 }, { size1 * 2.2, size2 * 3 }, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true),
                     }
                 end
             end
@@ -1502,7 +1502,7 @@ local function CreateCustomFrames()
     end
 
     if UnitFrames.SV.GroupEnablePower then
-        for i = 1, SMALL_GROUP_SIZE_THRESHOLD do
+        for i = 1, STANDARD_GROUP_SIZE_THRESHOLD do
             local unitTag = "SmallGroup" .. i
             if UnitFrames.CustomFrames[unitTag] then
                 -- assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
@@ -1518,8 +1518,8 @@ local function CreateCustomFrames()
                     local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
                     UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] =
                     {
-                        ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 4, 0 }, { size1 * 1.8, size2 * 4.0 }, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true),
-                        ["dec"] = UI.Texture(backdrop, { CENTER, CENTER, 0, 0 }, { size1 * 2.2, size2 * 3 }, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true),
+                        ["inc"] = UI:Texture(backdrop, { CENTER, CENTER, 4, 0 }, { size1 * 1.8, size2 * 4.0 }, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true),
+                        ["dec"] = UI:Texture(backdrop, { CENTER, CENTER, 0, 0 }, { size1 * 2.2, size2 * 3 }, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true),
                     }
                 end
             end
@@ -1527,7 +1527,7 @@ local function CreateCustomFrames()
     end
 
     if UnitFrames.SV.RaidEnablePower then
-        for i = 1, MAX_GROUP_SIZE_THRESHOLD do
+        for i = 1, LARGE_GROUP_SIZE_THRESHOLD do
             local unitTag = "RaidGroup" .. i
             if UnitFrames.CustomFrames[unitTag] then
                 -- assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
@@ -1540,8 +1540,8 @@ local function CreateCustomFrames()
                     local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
                     UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] =
                     {
-                        ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 4, 0 }, { size1 * 1.8, size2 * 4.0 }, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true),
-                        ["dec"] = UI.Texture(backdrop, { CENTER, CENTER, 0, 0 }, { size1 * 2.2, size2 * 3 }, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true),
+                        ["inc"] = UI:Texture(backdrop, { CENTER, CENTER, 4, 0 }, { size1 * 1.8, size2 * 4.0 }, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true),
+                        ["dec"] = UI:Texture(backdrop, { CENTER, CENTER, 0, 0 }, { size1 * 2.2, size2 * 3 }, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true),
                     }
                 end
             end
@@ -1562,8 +1562,8 @@ local function CreateCustomFrames()
                     local backdrop = UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop
                     UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].stat[STAT_POWER] =
                     {
-                        ["inc"] = UI.Texture(backdrop, { CENTER, CENTER, 4, 0 }, { size1 * 1.8, size2 * 4.0 }, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true),
-                        ["dec"] = UI.Texture(backdrop, { CENTER, CENTER, 0, 0 }, { size1 * 2.2, size2 * 3 }, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true),
+                        ["inc"] = UI:Texture(backdrop, { CENTER, CENTER, 4, 0 }, { size1 * 1.8, size2 * 4.0 }, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true),
+                        ["dec"] = UI:Texture(backdrop, { CENTER, CENTER, 0, 0 }, { size1 * 2.2, size2 * 3 }, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true),
                     }
                 end
             end
@@ -1572,7 +1572,7 @@ local function CreateCustomFrames()
 
     -- Animate Power Glow for all frames that have it displayed
     for _, baseName in pairs({ "player", "reticleover", "AvaPlayerTarget", "boss", "SmallGroup", "RaidGroup" }) do
-        for i = 0, MAX_GROUP_SIZE_THRESHOLD do
+        for i = 0, LARGE_GROUP_SIZE_THRESHOLD do
             local unitTag = (i == 0) and baseName or (baseName .. i)
             if UnitFrames.CustomFrames[unitTag] then
                 if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
@@ -1750,7 +1750,7 @@ function UnitFrames.Initialize(enabled)
     g_savedHealth.controlledsiege = { 1, 1, 1, 0, 0 }
     g_savedHealth.reticleover = { 1, 1, 1, 0, 0 }
     g_savedHealth.companion = { 1, 1, 1, 0, 0 }
-    for i = 1, MAX_GROUP_SIZE_THRESHOLD do
+    for i = 1, LARGE_GROUP_SIZE_THRESHOLD do
         g_savedHealth["group" .. i] = { 1, 1, 1, 0, 0 }
     end
     for i = BOSS_RANK_ITERATION_BEGIN, BOSS_RANK_ITERATION_END do
@@ -1998,7 +1998,7 @@ function UnitFrames.CustomFramesFormatLabels(menu)
     end
 
     -- Format Small Group Labels
-    for i = 1, SMALL_GROUP_SIZE_THRESHOLD do
+    for i = 1, STANDARD_GROUP_SIZE_THRESHOLD do
         local unitTag = "SmallGroup" .. i
         if UnitFrames.CustomFrames[unitTag] then
             if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
@@ -2016,7 +2016,7 @@ function UnitFrames.CustomFramesFormatLabels(menu)
     end
 
     -- Format Raid Labels
-    for i = 1, MAX_GROUP_SIZE_THRESHOLD do
+    for i = 1, LARGE_GROUP_SIZE_THRESHOLD do
         local unitTag = "RaidGroup" .. i
         if UnitFrames.CustomFrames[unitTag] then
             if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
@@ -2073,8 +2073,8 @@ end
 local function InitializeGroupFrames()
     -- Early return if no small group frames
     if not g_DefaultFrames.SmallGroup then return end
-    
-    for i = 1, MAX_GROUP_SIZE_THRESHOLD do
+
+    for i = 1, LARGE_GROUP_SIZE_THRESHOLD do
         local unitTag = "group" .. i
         if DoesUnitExist(unitTag) then
             UnitFrames.DefaultFramesCreateUnitGroupControls(unitTag)
@@ -2109,7 +2109,7 @@ function UnitFrames.OnPlayerActivated(eventCode)
     InitializeGroupFrames()
     InitializeCustomGroupFrames()
     InitializeUIStates()
-    
+
     -- Apply bar colors here, has to be after player init to get group roles
     UnitFrames.CustomFramesApplyColors(false)
 end
@@ -2339,12 +2339,12 @@ function UnitFrames.DefaultFramesCreateUnitGroupControls(unitTag)
                     ["unitTag"] = unitTag,
                     [COMBAT_MECHANIC_FLAGS_HEALTH] =
                     {
-                        label = UI.Label(parentBar, { TOP, BOTTOM }, nil, nil, nil, nil, false),
+                        label = UI:Label(parentBar, { TOP, BOTTOM }, nil, nil, nil, nil, false),
                         color = UnitFrames.SV.DefaultTextColour,
-                        shield = UI.StatusBar(parentBar, { BOTTOM, BOTTOM, 0, 0 }, { width - height, height }, { 1, 0.75, 0, 0.5 }, true),
+                        shield = UI:StatusBar(parentBar, { BOTTOM, BOTTOM, 0, 0 }, { width - height, height }, { 1, 0.75, 0, 0.5 }, true),
                     },
-                    ["classIcon"] = UI.Texture(parentName, { RIGHT, LEFT, -4, 2 }, { 24, 24 }, nil, nil, true),
-                    ["friendIcon"] = UI.Texture(parentName, { RIGHT, LEFT, -4, 24 }, { 24, 24 }, nil, nil, true),
+                    ["classIcon"] = UI:Texture(parentName, { RIGHT, LEFT, -4, 2 }, { 24, 24 }, nil, nil, true),
+                    ["friendIcon"] = UI:Texture(parentName, { RIGHT, LEFT, -4, 24 }, { 24, 24 }, nil, nil, true),
                 }
                 -- Apply selected font
                 UnitFrames.DefaultFramesApplyFont(unitTag)
@@ -3837,7 +3837,7 @@ function UnitFrames.CustomFramesGroupUpdate()
     -- Build and optionally sort group list
     local groupList = {}
     local groupChanged = false
-    for i = 1, MAX_GROUP_SIZE_THRESHOLD do
+    for i = 1, LARGE_GROUP_SIZE_THRESHOLD do
         local unitTag = "group" .. i
         if DoesUnitExist(unitTag) then
             local unitName = GetUnitName(unitTag)
@@ -4973,108 +4973,95 @@ function UnitFrames.CustomFramesApplyReactionColor(isPlayer)
     end
 end
 
--- Apply selected texture for all known bars on custom unit frames
-function UnitFrames.CustomFramesApplyTexture()
-    local texture = LUIE.StatusbarTextures[UnitFrames.SV.CustomTexture]
+-- Helper function to apply texture to health-related elements
+local function ApplyHealthTextures(frame, texture)
+    if not frame then return end
 
-    -- After texture is applied unhide frames, so player can see changes even from menu
-    if UnitFrames.CustomFrames.player then
-        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
-        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
-        if UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop then
-            UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop:SetCenterTexture(texture)
-        end
-        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
-        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
-        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MAGICKA].backdrop:SetCenterTexture(texture)
-        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_MAGICKA].bar:SetTexture(texture)
-        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_STAMINA].backdrop:SetCenterTexture(texture)
-        UnitFrames.CustomFrames.player[COMBAT_MECHANIC_FLAGS_STAMINA].bar:SetTexture(texture)
-        UnitFrames.CustomFrames.player.alternative.backdrop:SetCenterTexture(texture)
-        UnitFrames.CustomFrames.player.alternative.bar:SetTexture(texture)
-        UnitFrames.CustomFrames.player.alternative.enlightenment:SetTexture(texture)
-        UnitFrames.CustomFrames.player.tlw:SetHidden(false)
+    local health = frame[COMBAT_MECHANIC_FLAGS_HEALTH]
+    health.backdrop:SetCenterTexture(texture)
+    health.bar:SetTexture(texture)
+    health.shield:SetTexture(texture)
+    health.trauma:SetTexture(texture)
+
+    -- Optional elements
+    if health.shieldbackdrop then
+        health.shieldbackdrop:SetCenterTexture(texture)
     end
-    if UnitFrames.CustomFrames.reticleover then
-        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
-        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
-        if UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop then
-            UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop:SetCenterTexture(texture)
-        end
-        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
-        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
-        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerable:SetTexture(texture)
-        UnitFrames.CustomFrames.reticleover[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerableInlay:SetTexture("LuiExtended/media/unitframes/invulnerable_munge.dds")
-        UnitFrames.CustomFrames.reticleover.tlw:SetHidden(false)
-    end
-    if UnitFrames.CustomFrames.AvaPlayerTarget then
-        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
-        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
-        if UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop then
-            UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop:SetCenterTexture(texture)
-        end
-        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
-        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
-        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerable:SetTexture(texture)
-        UnitFrames.CustomFrames.AvaPlayerTarget[COMBAT_MECHANIC_FLAGS_HEALTH].invulnerableInlay:SetTexture("LuiExtended/media/unitframes/invulnerable_munge.dds")
-        UnitFrames.CustomFrames.AvaPlayerTarget.tlw:SetHidden(false)
-    end
-    if UnitFrames.CustomFrames.companion then
-        UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
-        UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
-        UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
-        UnitFrames.CustomFrames.companion[COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
-        UnitFrames.CustomFrames.companion.tlw:SetHidden(false)
-    end
-    if UnitFrames.CustomFrames.SmallGroup1 then
-        for i = 1, SMALL_GROUP_SIZE_THRESHOLD do
-            local unitTag = "SmallGroup" .. i
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
-            if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop then
-                UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shieldbackdrop:SetCenterTexture(texture)
-            end
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
-        end
-        UnitFrames.CustomFrames.SmallGroup1.tlw:SetHidden(false)
-    end
-    if UnitFrames.CustomFrames.RaidGroup1 then
-        for i = 1, MAX_GROUP_SIZE_THRESHOLD do
-            local unitTag = "RaidGroup" .. i
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
-        end
-        UnitFrames.CustomFrames.RaidGroup1.tlw:SetHidden(false)
-    end
-    if UnitFrames.CustomFrames.PetGroup1 then
-        for i = 1, MAX_PET_UNIT_TAGS do
-            local unitTag = "PetGroup" .. i
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
-        end
-        UnitFrames.CustomFrames.PetGroup1.tlw:SetHidden(false)
-    end
-    if UnitFrames.CustomFrames.boss1 then
-        for i = BOSS_RANK_ITERATION_BEGIN, BOSS_RANK_ITERATION_END do
-            local unitTag = "boss" .. i
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].shield:SetTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].trauma:SetTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].invulnerable:SetTexture(texture)
-            UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].invulnerableInlay:SetTexture("LuiExtended/media/unitframes/invulnerable_munge.dds")
-        end
-        UnitFrames.CustomFrames.boss1.tlw:SetHidden(false)
+    if health.invulnerable then
+        health.invulnerable:SetTexture(texture)
+        health.invulnerableInlay:SetTexture("LuiExtended/media/unitframes/invulnerable_munge.dds")
     end
 end
 
--- Apply selected font for all known label on default unit frames
-function UnitFrames.DefaultFramesApplyFont(unitTag)
+-- Helper function to apply texture to resource bars
+local function ApplyResourceTextures(frame, texture)
+    if not frame then return end
+
+    for _, resource in pairs({ COMBAT_MECHANIC_FLAGS_MAGICKA, COMBAT_MECHANIC_FLAGS_STAMINA }) do
+        if frame[resource] then
+            frame[resource].backdrop:SetCenterTexture(texture)
+            frame[resource].bar:SetTexture(texture)
+        end
+    end
+end
+
+-- Helper function to apply texture to alternative bars
+local function ApplyAlternativeTextures(frame, texture)
+    if not frame or not frame.alternative then return end
+
+    frame.alternative.backdrop:SetCenterTexture(texture)
+    frame.alternative.bar:SetTexture(texture)
+    if frame.alternative.enlightenment then
+        frame.alternative.enlightenment:SetTexture(texture)
+    end
+end
+
+-- Apply texture to group frames
+local function ApplyGroupTextures(frames, startIndex, endIndex, prefix)
+    if not frames[prefix .. startIndex] then return end
+
+    for i = startIndex, endIndex do
+        local unitTag = prefix .. i
+        ApplyHealthTextures(frames[unitTag], texture)
+    end
+    frames[prefix .. startIndex].tlw:SetHidden(false)
+end
+
+function UnitFrames.CustomFramesApplyTexture()
+    local texture = LUIE.StatusbarTextures[UnitFrames.SV.CustomTexture]
+    local frames = UnitFrames.CustomFrames
+
+    -- Player frame
+    if frames.player then
+        ApplyHealthTextures(frames.player, texture)
+        ApplyResourceTextures(frames.player, texture)
+        ApplyAlternativeTextures(frames.player, texture)
+        frames.player.tlw:SetHidden(false)
+    end
+
+    -- Target frames
+    for _, frame in pairs({ frames.reticleover, frames.AvaPlayerTarget }) do
+        if frame then
+            ApplyHealthTextures(frame, texture)
+            frame.tlw:SetHidden(false)
+        end
+    end
+
+    -- Companion frame
+    if frames.companion then
+        ApplyHealthTextures(frames.companion, texture)
+        frames.companion.tlw:SetHidden(false)
+    end
+
+    -- Group frames
+    ApplyGroupTextures(frames, 1, STANDARD_GROUP_SIZE_THRESHOLD, "SmallGroup")
+    ApplyGroupTextures(frames, 1, LARGE_GROUP_SIZE_THRESHOLD, "RaidGroup")
+    ApplyGroupTextures(frames, 1, MAX_PET_UNIT_TAGS, "PetGroup")
+    ApplyGroupTextures(frames, BOSS_RANK_ITERATION_BEGIN, BOSS_RANK_ITERATION_END, "boss")
+end
+
+---@param unitTag unitTag
+local applyDefaultFont = function (unitTag)
     -- First try selecting font face
     local fontName = LUIE.Fonts[UnitFrames.SV.DefaultFontFace]
     if not fontName or fontName == "" then
@@ -5085,31 +5072,31 @@ function UnitFrames.DefaultFramesApplyFont(unitTag)
     local fontStyle = (UnitFrames.SV.DefaultFontStyle and UnitFrames.SV.DefaultFontStyle ~= "") and UnitFrames.SV.DefaultFontStyle or "soft-shadow-thick"
     local fontSize = (UnitFrames.SV.DefaultFontSize and UnitFrames.SV.DefaultFontSize > 0) and UnitFrames.SV.DefaultFontSize or 16
 
-    local applyDefaultFont = function (unitTag)
-        if g_DefaultFrames[unitTag] then
-            local unitFrame = g_DefaultFrames[unitTag]
-            for _, powerType in pairs(
-                {
-                    COMBAT_MECHANIC_FLAGS_HEALTH,
-                    COMBAT_MECHANIC_FLAGS_MAGICKA,
-                    COMBAT_MECHANIC_FLAGS_STAMINA,
-                }) do
-                if unitFrame[powerType] then
-                    unitFrame[powerType].label:SetFont(zo_strformat("<<1>>|<<2>>|<<3>>", fontName, fontSize, fontStyle))
-                end
+    if g_DefaultFrames[unitTag] then
+        local unitFrame = g_DefaultFrames[unitTag]
+        for _, powerType in pairs(
+            {
+                COMBAT_MECHANIC_FLAGS_HEALTH,
+                COMBAT_MECHANIC_FLAGS_MAGICKA,
+                COMBAT_MECHANIC_FLAGS_STAMINA,
+            }) do
+            if unitFrame[powerType] then
+                unitFrame[powerType].label:SetFont(zo_strformat("<<1>>|<<2>>|<<3>>", fontName, fontSize, fontStyle))
             end
         end
     end
+end
 
+-- Apply selected font for all known label on default unit frames
+function UnitFrames.DefaultFramesApplyFont(unitTag)
     -- Apply setting only for one requested unitTag
     if unitTag then
         applyDefaultFont(unitTag)
-
         -- Otherwise do it for all possible unitTags
     else
         applyDefaultFont("player")
         applyDefaultFont("reticleover")
-        for i = 0, MAX_GROUP_SIZE_THRESHOLD do
+        for i = 0, LARGE_GROUP_SIZE_THRESHOLD do
             applyDefaultFont("group" .. i)
         end
     end
@@ -5138,7 +5125,7 @@ function UnitFrames.DefaultFramesApplyColor()
     -- Apply setting for all possible unitTags
     applyDefaultColor("player")
     applyDefaultColor("reticleover")
-    for i = 0, MAX_GROUP_SIZE_THRESHOLD do
+    for i = 0, LARGE_GROUP_SIZE_THRESHOLD do
         applyDefaultColor("group" .. i)
     end
 end
@@ -5172,7 +5159,7 @@ function UnitFrames.CustomFramesApplyFont()
             "AvaPlayerTarget",
             "PetGroup",
         }) do
-        for i = 0, MAX_GROUP_SIZE_THRESHOLD do
+        for i = 0, LARGE_GROUP_SIZE_THRESHOLD do
             local unitTag = (i == 0) and baseName or (baseName .. i)
             if UnitFrames.CustomFrames[unitTag] then
                 local unitFrame = UnitFrames.CustomFrames[unitTag]
@@ -5684,7 +5671,7 @@ function UnitFrames.CustomFramesApplyLayoutGroup(unhide)
     local group = UnitFrames.CustomFrames.SmallGroup1.tlw
     group:SetDimensions(UnitFrames.SV.GroupBarWidth, groupBarHeight * 4 + UnitFrames.SV.GroupBarSpacing * 3.5)
 
-    for i = 1, SMALL_GROUP_SIZE_THRESHOLD do
+    for i = 1, STANDARD_GROUP_SIZE_THRESHOLD do
         local unitFrame = UnitFrames.CustomFrames["SmallGroup" .. i]
         local unitTag = GetGroupUnitTagByIndex(i)
 
@@ -6034,14 +6021,14 @@ end
 function UnitFrames.CustomFramesGroupAlpha()
     local alphaGroup = 0.01 * UnitFrames.SV.GroupAlpha
 
-    for i = 1, SMALL_GROUP_SIZE_THRESHOLD do
+    for i = 1, STANDARD_GROUP_SIZE_THRESHOLD do
         local unitTag = "SmallGroup" .. i
         if UnitFrames.CustomFrames[unitTag] then
             UnitFrames.CustomFrames[unitTag].control:SetAlpha(IsUnitInGroupSupportRange(UnitFrames.CustomFrames[unitTag].unitTag) and alphaGroup or (alphaGroup / 2))
         end
     end
 
-    for i = 1, MAX_GROUP_SIZE_THRESHOLD do
+    for i = 1, LARGE_GROUP_SIZE_THRESHOLD do
         local unitTag = "RaidGroup" .. i
         if UnitFrames.CustomFrames[unitTag] then
             UnitFrames.CustomFrames[unitTag].control:SetAlpha(IsUnitInGroupSupportRange(UnitFrames.CustomFrames[unitTag].unitTag) and alphaGroup or (alphaGroup / 2))
@@ -6059,7 +6046,7 @@ function UnitFrames.CustomFramesReloadControlsMenu(player, group, raid)
     UnitFrames.UpdateStaticControls(UnitFrames.CustomFrames["reticleover"])
     UnitFrames.UpdateStaticControls(g_AvaCustFrames["reticleover"])
 
-    for i = 1, MAX_GROUP_SIZE_THRESHOLD do
+    for i = 1, LARGE_GROUP_SIZE_THRESHOLD do
         local unitTag = "group" .. i
         UnitFrames.UpdateStaticControls(g_DefaultFrames[unitTag])
         UnitFrames.UpdateStaticControls(UnitFrames.CustomFrames[unitTag])
@@ -6114,7 +6101,7 @@ end
 ----------------------------------------------------------
 
 function UnitFrames.CustomFramesDebugGroup()
-    for i = 1, SMALL_GROUP_SIZE_THRESHOLD do
+    for i = 1, STANDARD_GROUP_SIZE_THRESHOLD do
         local unitTag = "SmallGroup" .. i
         UnitFrames.CustomFrames[unitTag].unitTag = "player"
         UnitFrames.CustomFrames[unitTag].control:SetHidden(false)
@@ -6126,7 +6113,7 @@ function UnitFrames.CustomFramesDebugGroup()
 end
 
 function UnitFrames.CustomFramesDebugRaid()
-    for i = 1, MAX_GROUP_SIZE_THRESHOLD do
+    for i = 1, LARGE_GROUP_SIZE_THRESHOLD do
         local unitTag = "RaidGroup" .. i
         UnitFrames.CustomFrames[unitTag].unitTag = "player"
         UnitFrames.CustomFrames[unitTag].control:SetHidden(false)
@@ -6137,7 +6124,7 @@ end
 
 -- Updates group frames when a relevant social change event happens
 function UnitFrames.SocialUpdateFrames()
-    for i = 1, MAX_GROUP_SIZE_THRESHOLD do
+    for i = 1, LARGE_GROUP_SIZE_THRESHOLD do
         local unitTag = "group" .. i
         if DoesUnitExist(unitTag) then
             UnitFrames.ReloadValues(unitTag)

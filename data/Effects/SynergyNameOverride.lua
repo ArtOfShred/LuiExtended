@@ -6,9 +6,6 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
-local Effects = LUIE.Data.Effects
-
 local Tooltips = LUIE.Data.Tooltips
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
@@ -19,7 +16,8 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Synergy Icon Overrides - When a synergy with a matching ability name appears, change the icon or name.
 --------------------------------------------------------------------------------------------------------------------------------
-Effects.SynergyNameOverride =
+---@class (partial) SynergyNameOverride
+local SynergyNameOverride =
 {
     ["Tonal Inverter"] = { icon = "LuiExtended/media/icons/abilities/ability_quest_tonal_inverter.dds" },                                                 -- Tonal Inverter (Divine Intervention)
     [Abilities.Skill_Blade_of_Woe] = { icon = "LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds" },                             -- Blade of Woe (Dark Brotherhood)
@@ -35,3 +33,6 @@ Effects.SynergyNameOverride =
     -- Sets
     [Abilities.Set_Sanguine_Burst] = { icon = "LuiExtended/media/icons/abilities/ability_set_hollowfang.dds" },                                           -- Sanguine Burst (Lady Thorn)
 }
+
+---@class (partial) SynergyNameOverride
+LUIE.Data.Effects.SynergyNameOverride = SynergyNameOverride

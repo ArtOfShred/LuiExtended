@@ -444,12 +444,12 @@ function SpellCastBuffs.Initialize(enabled)
         containerRouting.player1 = "player1"
         containerRouting.player2 = "player2"
     else
-        uiTlw.playerb = UI.TopLevel(nil, nil)
+        uiTlw.playerb = UI:TopLevel(nil, nil)
         uiTlw.playerb:SetHandler("OnMoveStop", function (self)
             SpellCastBuffs.SV.playerbOffsetX = self:GetLeft()
             SpellCastBuffs.SV.playerbOffsetY = self:GetTop()
         end)
-        uiTlw.playerd = UI.TopLevel(nil, nil)
+        uiTlw.playerd = UI:TopLevel(nil, nil)
         uiTlw.playerd:SetHandler("OnMoveStop", function (self)
             SpellCastBuffs.SV.playerdOffsetX = self:GetLeft()
             SpellCastBuffs.SV.playerdOffsetY = self:GetTop()
@@ -471,12 +471,12 @@ function SpellCastBuffs.Initialize(enabled)
         containerRouting.reticleover2 = "target2"
         containerRouting.ground = "target2"
     else
-        uiTlw.targetb = UI.TopLevel(nil, nil)
+        uiTlw.targetb = UI:TopLevel(nil, nil)
         uiTlw.targetb:SetHandler("OnMoveStop", function (self)
             SpellCastBuffs.SV.targetbOffsetX = self:GetLeft()
             SpellCastBuffs.SV.targetbOffsetY = self:GetTop()
         end)
-        uiTlw.targetd = UI.TopLevel(nil, nil)
+        uiTlw.targetd = UI:TopLevel(nil, nil)
         uiTlw.targetd:SetHandler("OnMoveStop", function (self)
             SpellCastBuffs.SV.targetdOffsetX = self:GetLeft()
             SpellCastBuffs.SV.targetdOffsetY = self:GetTop()
@@ -492,7 +492,7 @@ function SpellCastBuffs.Initialize(enabled)
     end
 
     -- Create TopLevelWindows for Prominent Buffs
-    uiTlw.prominentbuffs = UI.TopLevel(nil, nil)
+    uiTlw.prominentbuffs = UI:TopLevel(nil, nil)
     uiTlw.prominentbuffs:SetHandler("OnMoveStop", function (self)
         if self.alignVertical then
             SpellCastBuffs.SV.prominentbVOffsetX = self:GetLeft()
@@ -502,7 +502,7 @@ function SpellCastBuffs.Initialize(enabled)
             SpellCastBuffs.SV.prominentbHOffsetY = self:GetTop()
         end
     end)
-    uiTlw.prominentdebuffs = UI.TopLevel(nil, nil)
+    uiTlw.prominentdebuffs = UI:TopLevel(nil, nil)
     uiTlw.prominentdebuffs:SetHandler("OnMoveStop", function (self)
         if self.alignVertical then
             SpellCastBuffs.SV.prominentdVOffsetX = self:GetLeft()
@@ -537,7 +537,7 @@ function SpellCastBuffs.Initialize(enabled)
     table_insert(fragments, fragmentP2)
 
     -- Separate container for players long term buffs
-    uiTlw.player_long = UI.TopLevel(nil, nil)
+    uiTlw.player_long = UI:TopLevel(nil, nil)
     uiTlw.player_long:SetHandler("OnMoveStop", function (self)
         local left = self:GetLeft()
         local top = self:GetTop()
@@ -581,16 +581,16 @@ function SpellCastBuffs.Initialize(enabled)
         uiTlw[v]:SetDrawLevel(DL_CONTROLS)
         if uiTlw[v].preview == nil then
             -- Create background areas for preview position purposes
-            --uiTlw[v].preview = UI.Backdrop( uiTlw[v], "fill", nil, nil, nil, true )
-            uiTlw[v].preview = UI.Texture(uiTlw[v], "fill", nil, "/esoui/art/miscellaneous/inset_bg.dds", DL_BACKGROUND, true)
-            uiTlw[v].previewLabel = UI.Label(uiTlw[v].preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", windowTitles[v] .. (SpellCastBuffs.SV.lockPositionToUnitFrames and (v ~= "player_long" and v ~= "prominentbuffs" and v ~= "prominentdebuffs") and " (locked)" or ""), false)
+            --uiTlw[v].preview = UI:Backdrop( uiTlw[v], "fill", nil, nil, nil, true )
+            uiTlw[v].preview = UI:Texture(uiTlw[v], "fill", nil, "/esoui/art/miscellaneous/inset_bg.dds", DL_BACKGROUND, true)
+            uiTlw[v].previewLabel = UI:Label(uiTlw[v].preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", windowTitles[v] .. (SpellCastBuffs.SV.lockPositionToUnitFrames and (v ~= "player_long" and v ~= "prominentbuffs" and v ~= "prominentdebuffs") and " (locked)" or ""), false)
 
             -- Create control that will hold the icons
             uiTlw[v].prevIconsCount = 0
             -- We need this container only for icons that are aligned in one row/column automatically.
             -- Thus we do not create containers for player and target buffs/debuffs on custom frames
             if v ~= "player1" and v ~= "player2" and v ~= "target1" and v ~= "target2" and v ~= "playerb" and v ~= "playerd" and v ~= "targetb" and v ~= "targetd" then
-                uiTlw[v].iconHolder = UI.Control(uiTlw[v], nil, nil, false)
+                uiTlw[v].iconHolder = UI:Control(uiTlw[v], nil, nil, false)
             end
             -- Create table to store created contols for icons
             uiTlw[v].icons = {}
@@ -1661,7 +1661,7 @@ end
 
 function SpellCastBuffs.CreateSingleIcon(container, AnchorItem, effectType)
     -- Create main buff container
-    local buff = UI.Backdrop(uiTlw[container], nil, nil, { 0, 0, 0, 0.5 }, { 0, 0, 0, 1 }, false)
+    local buff = UI:Backdrop(uiTlw[container], nil, nil, { 0, 0, 0, 0.5 }, { 0, 0, 0, 1 }, false)
 
     -- Setup mouse interaction
     buff:SetMouseEnabled(true)
@@ -1672,40 +1672,40 @@ function SpellCastBuffs.CreateSingleIcon(container, AnchorItem, effectType)
     -- Create visual layers
     local function createVisualElements()
         -- Border layer - hidden by default, shown only for non-collectible buffs
-        buff.back = UI.Texture(buff, "fill", nil, "LuiExtended/media/icons/icon_border/icon-border.dds", DL_BACKGROUND, true)
+        buff.back = UI:Texture(buff, "fill", nil, "LuiExtended/media/icons/icon_border/icon-border.dds", DL_BACKGROUND, true)
 
         -- Glow border layer
-        buff.frame = UI.Texture(buff, { CENTER, CENTER }, nil, nil, DL_OVERLAY, false)
+        buff.frame = UI:Texture(buff, { CENTER, CENTER }, nil, nil, DL_OVERLAY, false)
 
         -- Background layer (except for player_long container)
         if container ~= "player_long" then
             -- Create background texture
-            buff.iconbg = UI.Texture(buff, "fill", nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false)
+            buff.iconbg = UI:Texture(buff, "fill", nil, "/esoui/art/actionbar/abilityinset.dds", DL_CONTROLS, false)
 
             -- Create dark backdrop behind the texture
-            local bgBackdrop = UI.Backdrop(buff.iconbg, "fill", nil, { 0, 0, 0, 0.9 }, { 0, 0, 0, 0.9 }, false)
+            local bgBackdrop = UI:Backdrop(buff.iconbg, "fill", nil, { 0, 0, 0, 0.9 }, { 0, 0, 0, 0.9 }, false)
             bgBackdrop:SetDrawLevel(DL_CONTROLS)
         end
 
         -- Collectible/mount background
-        buff.drop = UI.Texture(buff, nil, nil, "LuiExtended/media/icons/abilities/ability_innate_background.dds", DL_BACKGROUND, true)
+        buff.drop = UI:Texture(buff, nil, nil, "LuiExtended/media/icons/abilities/ability_innate_background.dds", DL_BACKGROUND, true)
 
         -- Main ability icon
-        buff.icon = UI.Texture(buff, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false)
+        buff.icon = UI:Texture(buff, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false)
     end
 
     -- Rest of the code remains the same...
     local function createTextElements()
         -- Duration label
-        buff.label = UI.Label(buff, nil, nil, nil, g_buffsFont, nil, false)
+        buff.label = UI:Label(buff, nil, nil, nil, g_buffsFont, nil, false)
         buff.label:SetAnchor(TOPLEFT, buff, LEFT, -g_padding, -SpellCastBuffs.SV.LabelPosition)
         buff.label:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT, g_padding, -2)
 
         -- Debug ability ID label
-        buff.abilityId = UI.Label(buff, { CENTER, CENTER }, nil, nil, g_buffsFont, nil, false)
+        buff.abilityId = UI:Label(buff, { CENTER, CENTER }, nil, nil, g_buffsFont, nil, false)
 
         -- Stack count label
-        buff.stack = UI.Label(buff, nil, nil, nil, g_buffsFont, nil, false)
+        buff.stack = UI:Label(buff, nil, nil, nil, g_buffsFont, nil, false)
         buff.stack:SetAnchor(CENTER, buff, BOTTOMLEFT, 0, 0)
         buff.stack:SetAnchor(CENTER, buff, TOPRIGHT, -g_padding * 3, g_padding * 3)
     end
@@ -1722,17 +1722,17 @@ function SpellCastBuffs.CreateSingleIcon(container, AnchorItem, effectType)
     local function createProminentElements()
         if container == "prominentbuffs" or container == "prominentdebuffs" then
             buff.effectType = effectType
-            buff.name = UI.Label(buff, nil, nil, nil, g_prominentFont, nil, false)
+            buff.name = UI:Label(buff, nil, nil, nil, g_prominentFont, nil, false)
 
             -- Create progress bar
             buff.bar =
             {
-                backdrop = UI.Backdrop(buff, nil, { 154, 16 }, nil, nil, false),
-                bar = UI.StatusBar(buff, nil, { 150, 12 }, nil, false),
+                backdrop = UI:Backdrop(buff, nil, { 154, 16 }, nil, nil, false),
+                bar = UI:StatusBar(buff, nil, { 150, 12 }, nil, false),
             }
 
             -- Setup bar properties
-            buff.bar.backdrop:SetEdgeTexture("", 8, 2, 2, 0)
+            buff.bar.backdrop:SetEdgeTexture("", 8, 2, 2)
             buff.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
             buff.bar.backdrop:SetDrawLevel(DL_CONTROLS)
             buff.bar.bar:SetMinMax(0, 1)

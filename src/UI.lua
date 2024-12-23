@@ -3,20 +3,22 @@
     License: The MIT License (MIT)
 --]]
 
+local windowManager = GetWindowManager()
+
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
 ---@class UI
----@field TopLevel fun(anchors?: table, dims?: table): TopLevelWindow # Creates a top-level window control
----@field Control fun(parent: userdata, anchors?: table|string, dims?: table|string, hidden?: boolean, name?: string): Control|nil # Creates a basic UI control
----@field Texture fun(parent: userdata, anchors?: table|"fill", dims?: table|"inherit", texture?: string, drawlayer?: integer, hidden?: boolean): TextureControl|nil # Creates a texture control
----@field Backdrop fun(parent: userdata, anchors?: table|"fill", dims?: table|"inherit", center?: table, edge?: table, hidden?: boolean): BackdropControl|nil # Creates a backdrop control
----@field ChatBackdrop fun(parent: userdata, anchors?: table|"fill", dims?: table|"inherit", color?: table, edge_size?: number, hidden?: boolean): BackdropControl|nil # Creates a chat-style backdrop
----@field StatusBar fun(parent: userdata, anchors?: table|"fill", dims?: table|"inherit", color?: table, hidden?: boolean): StatusBarControl|nil # Creates a status bar control
----@field Label fun(parent: userdata, anchors?: table|"fill", dims?: table|"inherit", align?: table, font?: string, text?: string, hidden?: boolean, name?: string): LabelControl|nil # Creates a label control
-local UI = {}
-
-local windowManager = GetWindowManager()
+---@field __index UI
+---@field TopLevel fun(self:UI, anchors?: table, dims?: table): TopLevelWindow # Creates a top-level window control
+---@field Control fun(self:UI, parent: userdata, anchors?: table|string, dims?: table|string, hidden?: boolean, name?: string): Control|nil # Creates a basic UI control
+---@field Texture fun(self:UI, parent: userdata, anchors?: table|"fill", dims?: table|"inherit", texture?: string, drawlayer?: integer, hidden?: boolean): TextureControl|nil # Creates a texture control
+---@field Backdrop fun(self:UI, parent: userdata, anchors?: table|"fill", dims?: table|"inherit", center?: table, edge?: table, hidden?: boolean): BackdropControl|nil # Creates a backdrop control
+---@field ChatBackdrop fun(self:UI, parent: userdata, anchors?: table|"fill", dims?: table|"inherit", color?: table, edge_size?: number, hidden?: boolean): BackdropControl|nil # Creates a chat-style backdrop
+---@field StatusBar fun(self:UI, parent: userdata, anchors?: table|"fill", dims?: table|"inherit", color?: table, hidden?: boolean): StatusBarControl|nil # Creates a status bar control
+---@field Label fun(self:UI, parent: userdata, anchors?: table|"fill", dims?: table|"inherit", align?: table, font?: string, text?: string, hidden?: boolean, name?: string): LabelControl|nil # Creates a label control
+local UI = {...}
+UI.__index = UI
 
 -- Local control counters
 local controlCounters =
@@ -42,7 +44,7 @@ end
 ---@param anchors? table Array of anchor points: [point, relativeTo, relativePoint, offsetX, offsetY]
 ---@param dims? table Array of dimensions: [width, height]
 ---@return TopLevelWindow tlw The created top-level window
-function UI.TopLevel(anchors, dims)
+function UI:TopLevel(anchors, dims)
     local name = GetUniqueControlName("TopLevel")
     ---@type TopLevelWindow
     local tlw = windowManager:CreateTopLevelWindow(name)
@@ -66,7 +68,7 @@ end
 ---@param hidden? boolean Whether the control starts hidden
 ---@param name? string Optional custom control name
 ---@return Control|nil c The created control, or nil if parent is invalid
-function UI.Control(parent, anchors, dims, hidden, name)
+function UI:Control(parent, anchors, dims, hidden, name)
     if not parent then
         return
     end
@@ -97,7 +99,7 @@ end
 ---@param drawlayer? integer The draw layer for rendering order (DL_* constants)
 ---@param hidden? boolean Whether the texture starts hidden
 ---@return TextureControl|nil texture The created texture control, or nil if parent is invalid
-function UI.Texture(parent, anchors, dims, texture, drawlayer, hidden)
+function UI:Texture(parent, anchors, dims, texture, drawlayer, hidden)
     if not parent then
         return
     end
@@ -134,7 +136,7 @@ end
 ---@param edge? table Array of RGBA values [r, g, b, a] for the edge color. Defaults to [0, 0, 0, 0.6]
 ---@param hidden? boolean Whether the backdrop starts hidden
 ---@return BackdropControl|nil backdrop The created backdrop control, or nil if parent is invalid
-function UI.Backdrop(parent, anchors, dims, center, edge, hidden)
+function UI:Backdrop(parent, anchors, dims, center, edge, hidden)
     if not parent then
         return
     end
@@ -171,7 +173,7 @@ end
 ---@param edge_size? number Size of the backdrop edge in pixels. Defaults to 16
 ---@param hidden? boolean Whether the backdrop starts hidden
 ---@return BackdropControl|nil backdrop The created chat backdrop control, or nil if parent is invalid
-function UI.ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
+function UI:ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
     if not parent then
         return
     end
@@ -210,7 +212,7 @@ end
 ---@param color? table Array of RGB or RGBA values [r, g, b] or [r, g, b, a] for the bar color
 ---@param hidden? boolean Whether the status bar starts hidden
 ---@return StatusBarControl|nil statusbar The created status bar control, or nil if parent is invalid
-function UI.StatusBar(parent, anchors, dims, color, hidden)
+function UI:StatusBar(parent, anchors, dims, color, hidden)
     if not parent then
         return
     end
@@ -247,7 +249,7 @@ end
 ---@param hidden? boolean Whether the label starts hidden
 ---@param name? string Optional custom name for the label control
 ---@return LabelControl|nil label The created label control, or nil if parent is invalid
-function UI.Label(parent, anchors, dims, align, font, text, hidden, name)
+function UI:Label(parent, anchors, dims, align, font, text, hidden, name)
     if not parent then
         return
     end
@@ -278,4 +280,5 @@ function UI.Label(parent, anchors, dims, align, font, text, hidden, name)
     return label
 end
 
+---@type UI
 LUIE.UI = UI
