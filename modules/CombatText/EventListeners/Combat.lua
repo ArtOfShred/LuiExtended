@@ -5,7 +5,9 @@
 
 ---@class (partial) LuiExtended
 local LUIE = LUIE
+---@class (partial) CombatTextCombatEventListener : CombatTextEventListener
 LUIE.CombatTextCombatEventListener = LUIE.CombatTextEventListener:Subclass()
+---@class (partial) CombatTextCombatEventListener
 local CombatTextCombatEventListener = LUIE.CombatTextCombatEventListener
 
 local Effects = LUIE.Data.Effects
