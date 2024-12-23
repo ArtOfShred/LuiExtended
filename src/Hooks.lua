@@ -118,7 +118,7 @@ function LUIE.InitializeHooks()
     ---@param index luaindex
     ---@return bool hasAttacker
     DoesKillingAttackHaveAttacker = function (index)
-        local hasAttacker = zos_DoesKillingAttackHaveAttacker
+        local hasAttacker = zos_DoesKillingAttackHaveAttacker(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
         if LUIE.Data.Effects.EffectSourceOverride[abilityId] then
             if LUIE.Data.Effects.EffectSourceOverride[abilityId].addSource then
