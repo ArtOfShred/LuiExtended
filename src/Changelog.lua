@@ -11,12 +11,10 @@ local table_concat = table.concat
 
 local changelogMessages =
 {
-    "|cFFA500LuiExtended Version 6.7.8|r",
+    "|cFFA500LuiExtended Version 6.7.9|r",
     "",
     "|cFFFF00General:|r",
-    "[*] Added Exhausting Fatecarver immune effect to the combat text ignore list. No more spam, woo.",
-    "",
-    "[*] Code cleanup. Shouldn't have any problems...but let me know if you do in the esoui comments.",
+    "[*] Performance and stability improvements. Isn't that what apps use to get away with writing changelogs? :-)",
     "",
 }
 
