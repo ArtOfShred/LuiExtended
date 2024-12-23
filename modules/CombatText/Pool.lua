@@ -29,8 +29,7 @@ function CombatTextPool:New(poolType)
     if poolType == poolTypes.CONTROL then
         obj = ZO_ObjectPool:New(self.CreateNewControl, self.ResetControl)
     else
-        -- Assuming that self.ResetAnimation exists
-        obj = ZO_ObjectPool:New(self.CreateNewAnimation, self.ResetAnimation)
+        obj = ZO_ObjectPool:New(self.CreateNewAnimation, function () end)
     end
 
     obj.poolType = poolType
