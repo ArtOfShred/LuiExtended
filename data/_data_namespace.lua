@@ -35,14 +35,14 @@ local LUIE = LUIE
 ---@field BarIdOverride table Table of bar ID overrides
 ---@field CreateSkillAura table Table of skill aura creation definitions
 ---@field DisguiseIcons table Table of disguise icon definitions
----@field FakeAddGroundDamageAura table Table of fake ground damage aura definitions
----@field FakeEffectGroundDisplay table Table of fake ground effect display definitions
----@field FakeExternalBuffs table Table of fake external buff definitions
----@field FakeExternalDebuffs table Table of fake external debuff definitions
----@field FakePlayerBuffs table Table of fake player buff definitions
----@field FakePlayerDebuffs table Table of fake player debuff definitions
----@field FakePlayerOfflineAura table Table of fake offline aura definitions
----@field FakeStagger table Table of fake stagger effect definitions
+---@field AddGroundDamageAura table Table of fake ground damage aura definitions
+---@field EffectGroundDisplay table Table of fake ground effect display definitions
+---@field ExternalBuffs table Table of fake external buff definitions
+---@field ExternalDebuffs table Table of fake external debuff definitions
+---@field PlayerBuffs table Table of fake player buff definitions
+---@field PlayerDebuffs table Table of fake player debuff definitions
+---@field PlayerOfflineAura table Table of fake offline aura definitions
+---@field Stagger table Table of fake stagger effect definitions
 ---@field HasAbilityProc table Table of ability proc definitions
 ---@field HideSCT table Table of effects to hide from SCT
 ---@field IsAbilityActiveGlow table Table of ability active glow effects

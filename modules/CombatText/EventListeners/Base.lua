@@ -6,7 +6,7 @@
 ---@class (partial) LuiExtended
 local LUIE = LUIE
 
----@class CombatTextEventListener : ZO_InitializingObject
+---@class (partial) CombatTextEventListener : ZO_InitializingObject
 local CombatTextEventListener = ZO_InitializingObject:Subclass()
 
 local callbackManager = CALLBACK_MANAGER
@@ -51,9 +51,10 @@ function CombatTextEventListener:RegisterForUpdate(name, timer, func, ...)
     eventManager:RegisterForUpdate(moduleName .. "Event" .. name .. "_" .. eventPostfix, timer, func)
 end
 
----@vararg any
+---@param ... any
 function CombatTextEventListener:TriggerEvent(...)
     callbackManager:FireCallbacks(...)
 end
 
+---@class (partial) CombatTextEventListener
 LUIE.CombatTextEventListener = CombatTextEventListener
