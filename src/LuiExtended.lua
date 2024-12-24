@@ -4,10 +4,11 @@
 --]]
 
 -- LUIE namespace
-if LUIE == nil then
-    ---@class (partial) LuiExtended : ZO_Object
-    LUIE = ZO_Object:Subclass()
-end
+---@class (partial) LuiExtended
+---@field __index LuiExtended
+LUIE = {}
+LUIE.__index = LUIE
+LUIE.__newindex = NewIndexHandler
 
 ---@class (partial) LuiExtended
 local LUIE = LUIE
