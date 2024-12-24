@@ -1332,7 +1332,7 @@ function CombatInfo.CreateSettings()
                 setFunc = AbilityAlerts.SetMovingStateAlert,
                 width = "half",
                 default = false,
-                resetFunc = CombatInfo.ResetAlertFramePosition,
+                resetFunc = AbilityAlerts.ResetAlertFramePosition,
                 disabled = function ()
                     return not LUIE.SV.CombatInfo_Enabled
                 end,
