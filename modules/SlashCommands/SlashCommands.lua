@@ -78,8 +78,8 @@ function SlashCommands.Initialize(enabled)
 end
 
 function SlashCommands.RegisterSlashCommands()
---     CHAT_SYSTEM.textEntry.slashCommandAutoComplete:InvalidateSlashCommandCache()
-SlashCommandAutoComplete:InvalidateSlashCommandCache()
+    -- CHAT_SYSTEM.textEntry.slashCommandAutoComplete:InvalidateSlashCommandCache()
+    SlashCommandAutoComplete:InvalidateSlashCommandCache()
 
     -- Register commands that replace default functions
     SLASH_COMMANDS["/kick"] = SlashCommands.SlashKick             -- This command is always registered since it is also a default emote
