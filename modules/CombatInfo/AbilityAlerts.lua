@@ -7,7 +7,7 @@
 local LUIE = LUIE
 ---@class (partial) CombatInfo
 local CombatInfo = LUIE.CombatInfo
-CombatInfo.AbilityAlerts = {}
+---@class (partial) AbilityAlerts
 local AbilityAlerts = CombatInfo.AbilityAlerts
 
 local UI = LUIE.UI

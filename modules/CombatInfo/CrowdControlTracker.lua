@@ -7,7 +7,7 @@
 local LUIE = LUIE
 ---@class (partial) CombatInfo
 local CombatInfo = LUIE.CombatInfo
-CombatInfo.CrowdControlTracker = {}
+---@class (partial) CrowdControlTracker
 local CrowdControlTracker = CombatInfo.CrowdControlTracker
 
 local Effects = LUIE.Data.Effects

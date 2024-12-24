@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 --[[
     LuiExtended
     License: The MIT License (MIT)
@@ -93,7 +94,6 @@ local Data =
     Abilities = {},
     AbilityBlacklistPresets = {},
     AlertBossNameConvert = {},
-    ---@diagnostic disable-next-line: missing-fields
     AlertMapOverride = {},
     AlertTable = {},
     AlertZoneOverride = {},
@@ -137,8 +137,7 @@ local Data =
         DebuffDisplayOverrideIdAlways = {},
         DebuffDisplayOverrideMajorMinor = {},
         DebuffDisplayOverrideName = {},
-        ---@diagnostic disable-next-line: missing-fields
-        DisguiseIcons = {}, ---@type DisguiseIcons
+        DisguiseIcons = {},
         EffectHideSCT = {},
         EffectMergeId = {},
         EffectMergeName = {},

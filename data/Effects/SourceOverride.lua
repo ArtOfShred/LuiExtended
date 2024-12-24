@@ -143,12 +143,11 @@ local EffectSourceOverride =
 }
 
 ---@class EffectSourceOverrideData
----@field source? string|integer
----@field pet? string|integer 
----@field addSource? boolean
----@field removePlayer? boolean
+---@field source (string | integer)?
+---@field pet (string | integer )?
+---@field addSource boolean?
+---@field removePlayer boolean?
 
----@generic T : table, K, V
 ---@class (partial) EffectSourceOverride
 ---@field [integer] EffectSourceOverrideData
 LUIE.Data.Effects.EffectSourceOverride = EffectSourceOverride

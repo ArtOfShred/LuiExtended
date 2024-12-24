@@ -7,7 +7,22 @@
 local LUIE = LUIE
 
 ---@class (partial) CombatInfo
-local CombatInfo = {}
+---@field AbilityAlerts AbilityAlerts
+---@field CrowdControlTracker CrowdControlTracker
+local CombatInfo =
+{
+    ---@class (partial) AbilityAlerts
+    AbilityAlerts =
+    {
+        name = LUIE.name .. "CombatInfo" .. "AbilityAlerts",
+    },
+    ---@class (partial) CrowdControlTracker
+    CrowdControlTracker =
+    {
+        name = LUIE.name .. "CombatInfo" .. "CrowdControlTracker",
+    }
+}
+
 
 local UI = LUIE.UI
 local Effects = LUIE.Data.Effects
@@ -321,8 +336,8 @@ local g_boundArmamentsPlayed = false                      -- Specific variable t
 local g_disableProcSound = {}                             -- When we play a proc sound from a bar ability changing (like power lash) we put a 3 sec ICD on it so it doesn't spam when mousing on/off a target, etc
 local g_hotbarCategory = GetActiveHotbarCategory()        -- Set on initialization and when we swap weapons to determine the current hotbar category
 local g_backbarButtons = {}                               -- Table to hold backbar buttons
-local g_activeWeaponSwapInProgress = false                -- Toggled on when weapon swapping, TODO: maybe not needed
 local g_castbarWorldMapFix = false                        -- Fix for viewing the World Map changing the player coordinates for some reason
+local g_actionBarActiveWeaponPair
 
 local ACTION_BAR = _G["ZO_ActionBar1"]
 local BAR_INDEX_START = 3
@@ -417,7 +432,7 @@ end
 local function OnSwapAnimationDone(animation, button)
     button.noUpdates = false
     if button:GetSlot() == ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 then
-        g_activeWeaponSwapInProgress = false
+        _G.g_activeWeaponSwapInProgress = false
     end
     slotsUpdated = {}
 end
@@ -611,9 +626,12 @@ function CombatInfo.handleFlip(slotNum)
     CombatInfo.ToggleBackbarSaturation(slotNum, desaturate)
 end
 
-function CombatInfo.OnActiveWeaponPairChanged()
-    g_hotbarCategory = GetActiveHotbarCategory()
-    g_activeWeaponSwapInProgress = true
+function CombatInfo.OnActiveWeaponPairChanged(eventCode, activeWeaponPair)
+    if activeWeaponPair ~= g_actionBarActiveWeaponPair then
+        g_hotbarCategory = GetActiveHotbarCategory()
+        _G.g_activeWeaponSwapInProgress = true
+        g_actionBarActiveWeaponPair = activeWeaponPair
+    end
 end
 
 function CombatInfo.HookGCD()
@@ -2513,7 +2531,7 @@ function CombatInfo.OnActiveHotbarUpdate(eventCode, didActiveHotbarChange, shoul
             end
         end
     else
-        g_activeWeaponSwapInProgress = false
+        _G.g_activeWeaponSwapInProgress = false
     end
 end
 

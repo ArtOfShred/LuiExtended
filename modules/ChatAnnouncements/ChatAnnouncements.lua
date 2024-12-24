@@ -2162,7 +2162,13 @@ function ChatAnnouncements.OnLootUpdated(eventCode)
     eventManager:RegisterForUpdate(moduleName .. "ResetContainer", 150, ResetContainerRecentlyOpened)
 end
 
-function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, oldValue, reason)
+---@param eventCode integer
+---@param currency CurrencyType
+---@param newValue integer
+---@param oldValue integer
+---@param reason CurrencyChangeReason
+---@param reasonSupplementaryInfo integer
+function ChatAnnouncements.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, oldValue, reason, reasonSupplementaryInfo)
     if currencyLocation ~= CURRENCY_LOCATION_CHARACTER and currencyLocation ~= CURRENCY_LOCATION_ACCOUNT then
         return
     end
