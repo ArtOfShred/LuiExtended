@@ -410,8 +410,8 @@ function LUIE.InitializeHooks()
         local override = LUIE.Data.Effects.EffectOverride[abilityId]
 
         -- Handle veteran difficulty tooltip
-        if LUIE.ResolveVeteranDifficulty() and override and override.tooltipVet then
-            tooltipText = zo_strformat(override.tooltipVet, timer, value2, value3)
+        if LUIE.ResolveVeteranDifficulty() and override and override.tooltipVeteran then
+            tooltipText = zo_strformat(override.tooltipVeteran, timer, value2, value3)
         else
             tooltipText = (override and override.tooltip) and
                 zo_strformat(override.tooltip, timer, value2, value3) or
@@ -455,8 +455,8 @@ function LUIE.InitializeHooks()
 
     -- Helper function to get third line text
     local function GetThirdLine(abilityId, timer)
-        if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipDurFix then
-            timer = timer + LUIE.Data.Effects.EffectOverride[abilityId].tooltipDurFix
+        if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].duration then
+            timer = timer + LUIE.Data.Effects.EffectOverride[abilityId].duration
         end
         -- Additional third line logic can be added here if needed
         return nil
@@ -784,8 +784,8 @@ function LUIE.InitializeHooks()
                 timer = zo_floor((timer * 10) + 0.5) / 10
 
                 local tooltipText
-                if LUIE.ResolveVeteranDifficulty() == true and LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipVet then
-                    tooltipText = zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltipVet, timer, value2, value3)
+                if LUIE.ResolveVeteranDifficulty() == true and LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipVeteran then
+                    tooltipText = zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltipVeteran, timer, value2, value3)
                 else
                     tooltipText = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltip) and zo_strformat(LUIE.Data.Effects.EffectOverride[abilityId].tooltip, timer, value2, value3) or ""
                 end
@@ -822,8 +822,8 @@ function LUIE.InitializeHooks()
                 end
                 local thirdLine
                 local timer2 = (contentEndTime - contentStartTime)
-                if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].tooltipDurFix then
-                    timer2 = timer2 + LUIE.Data.Effects.EffectOverride[abilityId].tooltipDurFix
+                if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].duration then
+                    timer2 = timer2 + LUIE.Data.Effects.EffectOverride[abilityId].duration
                 end
                 --[[
                 if LUIE.Data.Effects.TooltipNameOverride[contentTitle] then
@@ -944,7 +944,6 @@ function LUIE.InitializeHooks()
 
     -- Used to update Tooltips for Active Effects Window
     local function TooltipBottomLine(control, detailsLine)
-        local artificial
         -- Add bottom divider and info if present:
         if LUIE.SpellCastBuffs.SV.TooltipAbilityId or LUIE.SpellCastBuffs.SV.TooltipBuffType then
             ZO_Tooltip_AddDivider(GameTooltip)
@@ -957,7 +956,7 @@ function LUIE.InitializeHooks()
                     labelAbilityId = "None"
                 end
                 if labelAbilityId == "Fake" then
-                    artificial = true
+                    control.artificial = true
                 end
                 if control.isArtificial then
                     -- Map artificial effect IDs to our tracking IDs
