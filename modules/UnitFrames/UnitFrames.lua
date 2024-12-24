@@ -656,7 +656,7 @@ local function CreateDefaultFrames()
 
     -- Apply fonts
     UnitFrames.DefaultFramesApplyFont()
-
+    UnitFrames.DefaultFramesApplyColor()
     -- Instead of using Default Unit Frames Extender, the player could wish simply to disable and hide default UI frames
     if UnitFrames.SV.DefaultFramesNewPlayer == 1 then
         local frames = { "Health", "Stamina", "Magicka", "MountStamina", "Werewolf", "SiegeHealth" }
@@ -2109,7 +2109,8 @@ function UnitFrames.OnPlayerActivated(eventCode)
     InitializeGroupFrames()
     InitializeCustomGroupFrames()
     InitializeUIStates()
-
+    UnitFrames.CompanionUpdate()
+    UnitFrames.CustomPetUpdate()
     -- Apply bar colors here, has to be after player init to get group roles
     UnitFrames.CustomFramesApplyColors(false)
 end
@@ -2191,13 +2192,17 @@ function UnitFrames.CompanionUpdate()
         return
     end
     local unitTag = "companion"
-    if DoesUnitExist(unitTag) then
+    if DoesUnitExist(unitTag) == true then
         if UnitFrames.CustomFrames[unitTag] then
             UnitFrames.CustomFrames[unitTag].control:SetHidden(false)
             UnitFrames.ReloadValues(unitTag)
         end
     else
-        UnitFrames.CustomFrames[unitTag].control:SetHidden(true)
+        if DoesUnitExist(unitTag) == false then
+            if UnitFrames.CustomFrames[unitTag] then
+                UnitFrames.CustomFrames[unitTag].control:SetHidden(true)
+            end
+        end
     end
 end
 
@@ -2348,6 +2353,7 @@ function UnitFrames.DefaultFramesCreateUnitGroupControls(unitTag)
                 }
                 -- Apply selected font
                 UnitFrames.DefaultFramesApplyFont(unitTag)
+                UnitFrames.DefaultFramesApplyColor(unitTag)
             end
         end
     end
@@ -5102,26 +5108,26 @@ function UnitFrames.DefaultFramesApplyFont(unitTag)
     end
 end
 
--- Reapplies color for default unit frames extender module labels
-function UnitFrames.DefaultFramesApplyColor()
-    -- Helper function
-    local applyDefaultColor = function (unitTag)
-        if g_DefaultFrames[unitTag] then
-            local unitFrame = g_DefaultFrames[unitTag]
-            for _, powerType in pairs(
-                {
-                    COMBAT_MECHANIC_FLAGS_HEALTH,
-                    COMBAT_MECHANIC_FLAGS_MAGICKA,
-                    COMBAT_MECHANIC_FLAGS_STAMINA,
-                }) do
-                if unitFrame[powerType] then
-                    unitFrame[powerType].color = UnitFrames.SV.DefaultTextColour
-                    unitFrame[powerType].label:SetColor(UnitFrames.SV.DefaultTextColour[1], UnitFrames.SV.DefaultTextColour[2], UnitFrames.SV.DefaultTextColour[3])
-                end
+---@param unitTag unitTag
+local applyDefaultColor = function (unitTag)
+    if g_DefaultFrames[unitTag] then
+        local unitFrame = g_DefaultFrames[unitTag]
+        for _, powerType in pairs(
+            {
+                COMBAT_MECHANIC_FLAGS_HEALTH,
+                COMBAT_MECHANIC_FLAGS_MAGICKA,
+                COMBAT_MECHANIC_FLAGS_STAMINA,
+            }) do
+            if unitFrame[powerType] then
+                unitFrame[powerType].color = UnitFrames.SV.DefaultTextColour
+                unitFrame[powerType].label:SetColor(UnitFrames.SV.DefaultTextColour[1], UnitFrames.SV.DefaultTextColour[2], UnitFrames.SV.DefaultTextColour[3])
             end
         end
     end
+end
 
+-- Reapplies color for default unit frames extender module labels
+function UnitFrames.DefaultFramesApplyColor(unitTag)
     -- Apply setting for all possible unitTags
     applyDefaultColor("player")
     applyDefaultColor("reticleover")
