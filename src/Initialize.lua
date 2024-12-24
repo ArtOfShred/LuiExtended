@@ -126,9 +126,6 @@ local function RegisterEvents()
         eventManager:RegisterForEvent(LUIE.name .. "ChatAnnouncements", EVENT_GUILD_SELF_JOINED_GUILD, LUIE.UpdateGuildData)
         eventManager:RegisterForEvent(LUIE.name .. "ChatAnnouncements", EVENT_GUILD_SELF_LEFT_GUILD, LUIE.UpdateGuildData)
     end
-
-    -- Load additional media from LMP and other addons
-    LoadMedia()
 end
 
 --[[
@@ -142,6 +139,8 @@ local function OnAddonOnLoaded(eventCode, addonName)
     -- Once we know it's ours, lets unregister the event listener
     eventManager:UnregisterForEvent(addonName, eventCode)
 
+    -- Load additional media from LMP and other addons
+    LoadMedia()
     -- Load saved variables
     LoadSavedVars()
     -- Initialize Hooks
