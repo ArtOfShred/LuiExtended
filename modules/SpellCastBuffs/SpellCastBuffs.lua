@@ -1587,8 +1587,8 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
 
         local thirdLine
         local duration = control.duration / 1000
-        if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].tooltipDurFix then
-            duration = duration + Effects.EffectOverride[control.effectId].tooltipDurFix
+        if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].duration then
+            duration = duration + Effects.EffectOverride[control.effectId].duration
         end
         --[[
         if Effects.TooltipNameOverride[control.effectName] then
