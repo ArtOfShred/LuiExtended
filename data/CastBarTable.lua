@@ -134,6 +134,17 @@ local CastBarTable =
         [6811] = true,  -- Recall
         [69293] = true, -- Sigil of Imperial Retreat
 
+        -- Customized Actions - Recalling
+        [209299] = true, -- Accursed Recall
+        [187552] = true, -- Bitter Coast Recall
+        [215092] = true, -- Coldharbour Recall
+        [200161] = true, -- Frostfall Recall
+        [215089] = true, -- Gold Road Recall
+        [191859] = true, -- Legionnaire's Recall
+        [199791] = true, -- Recall of the Crusader
+        [181388] = true, -- Recall of the Galen Wilds
+        [221093] = true, -- Recall of the Outer Darkness
+
         -- Misc Items
         [63427] = true, -- Clean Fish (Filet Fish)
         [78052] = true, -- Minor Pardon (Counterfeit Pardon Edict)
@@ -646,6 +657,17 @@ local CastBarTable =
         [16261] = true, -- Ice
         [18396] = true, -- Lightning
         [18429] = true, -- Unarmed
+
+        -- Customized Actions - Recalling
+        [209299] = true, -- Accursed Recall
+        [187552] = true, -- Bitter Coast Recall
+        [215092] = true, -- Coldharbour Recall
+        [200161] = true, -- Frostfall Recall
+        [215089] = true, -- Gold Road Recall
+        [191859] = true, -- Legionnaire's Recall
+        [199791] = true, -- Recall of the Crusader
+        [181388] = true, -- Recall of the Galen Wilds
+        [221093] = true, -- Recall of the Outer Darkness
 
         -- Misc Items
         [206063] = true, -- CreateAttunableStation (Attunable Crafting Station)
