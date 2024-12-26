@@ -5,6 +5,7 @@
 
 ---@class (partial) LuiExtended
 local LUIE = LUIE
+---@class (partial) UnitFrames
 local UnitFrames = LUIE.UnitFrames
 local PetNames = LUIE.Data.PetNames
 local pairs = pairs
@@ -104,6 +105,7 @@ function UnitFrames.CreateSettings()
     end
 
     local Defaults = UnitFrames.Defaults
+    ---@class (partial) LUIE_UnitFrames_SV
     local Settings = UnitFrames.SV
 
     -- Load Dialog Buttons

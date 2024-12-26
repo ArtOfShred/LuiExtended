@@ -9,7 +9,7 @@ local LUIE = LUIE
 -- Unit Frames namespace
 ---@class (partial) UnitFrames
 local UnitFrames = {}
-
+---@type UI
 local UI = LUIE.UI
 
 local AbbreviateNumber = LUIE.AbbreviateNumber
@@ -221,6 +221,8 @@ UnitFrames.Defaults =
     BarAlignCenterLabelTarget = false,
     CustomFormatCenterLabel = "Current + Shield - Trauma / Max (Percentage%)",
 }
+
+---@class (partial) LUIE_UnitFrames_SV
 UnitFrames.SV = nil
 
 UnitFrames.CustomFrames = {}
@@ -707,6 +709,7 @@ local function CreateCustomFrames()
         sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
 
         -- Collect all together
+        ---@type LuiPlayerFrame
         UnitFrames.CustomFrames.player =
         {
             ["unitTag"] = "player",
@@ -1869,6 +1872,19 @@ function UnitFrames.Initialize(enabled)
     UnitFrames.ReticleColorByReaction()
 end
 
+function UnitFrames.OnCurrentCampaignChanged(_)
+    local self = ZO_PlayerToPlayer
+    self:RemoveFromIncomingQueue(ZO_INTERACT_TYPE.CAMPAIGN_LOCK_PENDING)
+    MarkAllianceLockPendingNotificationSeen()
+end
+
+function UnitFrames.OnCampaignEmperorChanged(campaignId)
+    local self = CampaignEmperor_Shared
+    if self.campaignId == campaignId then
+        self:RefreshEmperor()
+    end
+end
+
 -- Sets out-of-combat transparency values for default user-frames
 function UnitFrames.SetDefaultFramesTransparency(min_pct_value, max_pct_value)
     if min_pct_value ~= nil then
@@ -1882,9 +1898,10 @@ function UnitFrames.SetDefaultFramesTransparency(min_pct_value, max_pct_value)
     local min_value = UnitFrames.SV.DefaultOocTransparency / 100
     local max_value = UnitFrames.SV.DefaultIncTransparency / 100
 
-    ZO_PlayerAttributeHealth.playerAttributeBarObject.timeline:GetAnimation():SetAlphaValues(min_value, max_value)
-    ZO_PlayerAttributeMagicka.playerAttributeBarObject.timeline:GetAnimation():SetAlphaValues(min_value, max_value)
-    ZO_PlayerAttributeStamina.playerAttributeBarObject.timeline:GetAnimation():SetAlphaValues(min_value, max_value)
+    local animationIndex = 1
+    ZO_PlayerAttributeHealth.playerAttributeBarObject.timeline:GetAnimation(animationIndex):SetAlphaValues(min_value, max_value)
+    ZO_PlayerAttributeMagicka.playerAttributeBarObject.timeline:GetAnimation(animationIndex):SetAlphaValues(min_value, max_value)
+    ZO_PlayerAttributeStamina.playerAttributeBarObject.timeline:GetAnimation(animationIndex):SetAlphaValues(min_value, max_value)
 
     local inCombat = IsUnitInCombat("player")
     ZO_PlayerAttributeHealth:SetAlpha(inCombat and max_value or min_value)
