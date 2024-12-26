@@ -46,8 +46,11 @@ local infoPanelFontSize = 16
 local infoPanelFontStyle = "soft-shadow-thin"
 local g_infoPanelFont = string_format("%s|%d|%s", infoPanelFontFace, infoPanelFontSize, infoPanelFontStyle)
 
+---@type TopLevelWindow
 local uiPanel = nil
+---@type Control
 local uiTopRow = nil
+---@type Control
 local uiBotRow = nil
 local uiClock = {}
 local uiGems = {}
