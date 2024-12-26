@@ -3466,7 +3466,7 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
                             cmpInfo[i] = ChatAnnouncements.SV.Achievement.AchievementColorProgress and string_format("%s %s|c%s%d|r%s|c71DE73%d|r%s", ColorizeColors.AchievementColorize2:Colorize(cmpInfo[i][1]), ColorizeColors.AchievementColorize2:Colorize("("), AchievementPctToColor(pct), cmpInfo[i][2], ColorizeColors.AchievementColorize2:Colorize("/"), cmpInfo[i][3], ColorizeColors.AchievementColorize2:Colorize(")")) or ColorizeColors.AchievementColorize2:Colorize(string_format("%s (%d/%d)", cmpInfo[i][1], cmpInfo[i][2], cmpInfo[i][3]))
                         end
                     end
-                    stringpart4 = "\n" .. table_concat(cmpInfo, ColorizeColors.AchievementColorize2:Colorize(", ")) .. "\n"
+                    stringpart4 = table_concat(cmpInfo, ColorizeColors.AchievementColorize2:Colorize(", "))
                 end
             end
             local finalString = string_format("%s%s%s%s", stringpart1, stringpart2, stringpart3, stringpart4)
