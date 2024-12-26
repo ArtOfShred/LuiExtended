@@ -9758,8 +9758,8 @@ function ChatAnnouncements.HookFunction()
         else
             -- Standard Display Announcement
             messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(category, soundId)
-            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISPLAY_ANNOUNCEMENT)
-        end
+        messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISPLAY_ANNOUNCEMENT)
+    end
 
         if soundId then
             messageParams:SetSound(soundId)
@@ -9779,12 +9779,12 @@ function ChatAnnouncements.HookFunction()
         end
         if secondaryText == "" then
             secondaryText = nil
-        end
+    end
 
         -- No message so return
         if primaryText == nil and secondaryText == nil then
             return
-        end
+    end
 
         -- Check zoneId or mapId if needed
         local zoneId = GetZoneId(GetCurrentMapZoneIndex())
@@ -9806,7 +9806,7 @@ function ChatAnnouncements.HookFunction()
             -- Update message syntax here
             if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE0) then
                 primaryText = GetString(LUIE_STRING_CA_CURRENCY_NOTIFY_SKILLS)
-            end
+        end
             if primaryText == GetString(SI_RESPECTYPE_POINTSRESETTITLE1) then
                 primaryText = GetString(LUIE_STRING_CA_CURRENCY_NOTIFY_ATTRIBUTES)
             end
@@ -9840,14 +9840,14 @@ function ChatAnnouncements.HookFunction()
             d("Zone Id: " .. zoneid)
             local mapid = GetCurrentMapId()
             d("Map Id: " .. mapid)
-        end
+    end
 
         -- Display CA if enabled
         if settings.CA then
             -- Some formatting may be needed for CA:
             local caPrimary = primaryText
             local caSecondary = secondaryText
-            local language = GetCVar("language.2")
+        local language = GetCVar("language.2")
             -- Extra formatting in Imperial City: Remove "Entered: " and format it and add it back on and color the message.
             -- Note we don't want to mess with strings outside of EN localization for now (TODO)
             -- Custom formatting for IC messages
@@ -9900,8 +9900,8 @@ function ChatAnnouncements.HookFunction()
                 -- Fallback sound if no soundId
             else
                 PlaySound(SOUNDS.DISPLAY_ANNOUNCEMENT)
-            end
         end
+    end
 
         return true
     end
@@ -10273,13 +10273,12 @@ function ChatAnnouncements.HookFunction()
         },
     }
 
-    local ALERT_IGNORED_STRING = IsConsoleUI() and SI_PLAYER_TO_PLAYER_BLOCKED or SI_PLAYER_TO_PLAYER_IGNORED
+    local ALERT_IGNORED_STRING = SI_PLAYER_TO_PLAYER_IGNORED
 
     local function AlertIgnored(SendString)
-        local alertString = IsConsoleUI() and SI_PLAYER_TO_PLAYER_BLOCKED or SendString
-        printToChat(GetString(alertString), true)
+        printToChat(GetString(SendString), true)
         if ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, alertString)
+            ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, SendString)
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
     end
@@ -10292,22 +10291,17 @@ function ChatAnnouncements.HookFunction()
         local currentTargetDisplayName = self.currentTargetDisplayName
         local primaryName = ZO_GetPrimaryPlayerName(currentTargetDisplayName, currentTargetCharacterName)
         local primaryNameInternal = ZO_GetPrimaryPlayerName(currentTargetDisplayName, currentTargetCharacterName, USE_INTERNAL_FORMAT)
-        local platformIcons = IsInGamepadPreferredMode() and GAMEPAD_INTERACT_ICONS or KEYBOARD_INTERACT_ICONS
+        local platformIcons = KEYBOARD_INTERACT_ICONS
         local ENABLED = true
         local DISABLED = false
         local ENABLED_IF_NOT_IGNORED = not isIgnored
 
         self:GetRadialMenu():Clear()
-        --Gamecard--
-        if IsConsoleUI() then
-            self:AddShowGamerCard(currentTargetDisplayName, currentTargetCharacterName)
-        end
 
         --Whisper--
         if IsChatSystemAvailableForCurrentPlatform() then
-            local nameToUse = IsConsoleUI() and currentTargetDisplayName or primaryNameInternal
             local function WhisperOption()
-                StartChatInput(nil, CHAT_CHANNEL_WHISPER, nameToUse)
+                StartChatInput(nil, CHAT_CHANNEL_WHISPER, primaryNameInternal)
             end
             local function WhisperIgnore()
                 AlertIgnored(LUIE_STRING_IGNORE_ERROR_WHISPER)
@@ -10393,12 +10387,7 @@ function ChatAnnouncements.HookFunction()
             self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_ADD_FRIEND), platformIcons[SI_PLAYER_TO_PLAYER_ADD_FRIEND], DISABLED, AlreadyFriendsWarning)
         else
             local function RequestFriendOption()
-                local isConsoleUI = IsConsoleUI()
-                if isConsoleUI then
-                    ZO_ShowConsoleAddFriendDialog(currentTargetCharacterName)
-                else
-                    RequestFriend(currentTargetDisplayName, nil)
-                end
+                RequestFriend(currentTargetDisplayName, nil)
 
                 local displayNameLink = ZO_LinkHandler_CreateLink(currentTargetDisplayName, nil, DISPLAY_NAME_LINK_TYPE, currentTargetDisplayName)
                 if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
@@ -10498,142 +10487,6 @@ function ChatAnnouncements.HookFunction()
         self.showingPlayerInteractMenu = true
         self.isLastRadialMenuGamepad = IsInGamepadPreferredMode()
     end
-
-    -- Since the Crown Store Gifting functionality was added, hooking these functions seems to cause an insecure code issue when receiving gifts via the Player to Player notification system.
-    -- TODO: Try to securecall some of this or maybe use a message specific filter (hook alerts handling?)
-    --[[
-
-    --local INTERACT_TYPE_TRADE_INVITE = 3
-    local INTERACT_TYPE_GROUP_INVITE = 4
-    local INTERACT_TYPE_QUEST_SHARE = 5
-    local INTERACT_TYPE_FRIEND_REQUEST = 6
-    local INTERACT_TYPE_GUILD_INVITE = 7
-
-    local INCOMING_MESSAGE_TEXT = {
-        --[INTERACT_TYPE_TRADE_INVITE] = GetString(LUIE_STRING_NOTIFICATION_TRADE_INVITE),
-        [INTERACT_TYPE_GROUP_INVITE] = GetString(LUIE_STRING_NOTIFICATION_GROUP_INVITE),
-        [INTERACT_TYPE_QUEST_SHARE] = GetString(LUIE_STRING_NOTIFICATION_SHARE_QUEST_INVITE),
-        [INTERACT_TYPE_FRIEND_REQUEST] = GetString(LUIE_STRING_NOTIFICATION_FRIEND_INVITE),
-        [INTERACT_TYPE_GUILD_INVITE] = GetString(LUIE_STRING_NOTIFICATION_GUILD_INVITE)
-    }
-
-    local function DisplayNotificationMessage(message, data)
-        local typeString = INCOMING_MESSAGE_TEXT[data.incomingType]
-        if typeString then
-            -- Group Invite
-            if data.incomingType == INTERACT_TYPE_GROUP_INVITE then
-                if ChatAnnouncements.SV.Group.GroupCA then
-                    printToChat(zo_strformat(message, typeString), true)
-                end
-                if ChatAnnouncements.SV.Group.GroupAlert then
-                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
-                end
-            -- Guild Invite
-            elseif data.incomingType == INTERACT_TYPE_GUILD_INVITE then
-                if ChatAnnouncements.SV.Social.GuildCA then
-                    printToChat(zo_strformat(message, typeString), true)
-                end
-                if ChatAnnouncements.SV.Social.GuildAlert then
-                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
-                end
-            -- Friend Invite
-            elseif data.incomingType == INTERACT_TYPE_FRIEND_REQUEST then
-                if ChatAnnouncements.SV.Social.FriendIgnoreCA then
-                    printToChat(zo_strformat(message, typeString), true)
-                end
-                if ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
-                end
-            -- Quest Shared
-            elseif data.incomingType == INTERACT_TYPE_QUEST_SHARE then
-                if ChatAnnouncements.SV.Quests.QuestShareCA then
-                    printToChat(zo_strformat(message, typeString), true)
-                end
-                if ChatAnnouncements.SV.Quests.QuestShareAlert then
-                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
-                end
-            else
-                ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
-            end
-        end
-    end
-
-    local function NotificationAccepted(data)
-        if not data.dontRemoveOnAccept then
-            data.pendingResponse = false
-        end
-        if data.acceptCallback then
-            data.acceptCallback()
-            if data.uniqueSounds then
-                PlaySound(data.uniqueSounds.accept)
-            else
-                PlaySound(SOUNDS.DIALOG_ACCEPT)
-            end
-            DisplayNotificationMessage(GetString(SI_NOTIFICATION_ACCEPTED), data)
-        end
-    end
-
-    local function NotificationDeclined(data)
-        if not data.dontRemoveOnDecline then
-            data.pendingResponse = false
-        end
-        if data.declineCallback then
-            data.declineCallback()
-            if data.uniqueSounds then
-                PlaySound(data.uniqueSounds.decline)
-            else
-                PlaySound(SOUNDS.DIALOG_DECLINE)
-            end
-            DisplayNotificationMessage(GetString(SI_NOTIFICATION_DECLINED), data)
-        end
-    end
-
-    PLAYER_TO_PLAYER.Accept = function(self, incomingEntry)
-        local index = self:GetIndexFromIncomingQueue(incomingEntry)
-        if index then
-            if not incomingEntry.dontRemoveOnAccept then
-                self:RemoveEntryFromIncomingQueueTable(index)
-            end
-            NotificationAccepted(incomingEntry)
-        else
-            self:OnPromptAccepted()
-        end
-    end
-
-    PLAYER_TO_PLAYER.Decline = function(self, incomingEntry)
-        local index = self:GetIndexFromIncomingQueue(incomingEntry)
-        if index then
-            if not incomingEntry.dontRemoveOnDecline then
-                self:RemoveEntryFromIncomingQueueTable(index)
-            end
-            NotificationDeclined(incomingEntry)
-        else
-            self:OnPromptDeclined()
-        end
-    end
-
-    --With proper timing, both of these events can fire in the same frame, making it possible to be responding but having already cleared the incoming queue
-    PLAYER_TO_PLAYER.OnPromptAccepted = function(self)
-        if self.showingResponsePrompt and #self.incomingQueue > 0 then
-            local incomingEntryToRespondTo = self.incomingQueue[1]
-            if not incomingEntryToRespondTo.dontRemoveOnAccept then
-                self:RemoveEntryFromIncomingQueueTable(1)
-            end
-            NotificationAccepted(incomingEntryToRespondTo)
-        end
-    end
-
-    PLAYER_TO_PLAYER.OnPromptDeclined = function(self)
-        if self.showingResponsePrompt and #self.incomingQueue > 0 then
-            local incomingEntryToRespondTo = self.incomingQueue[1]
-            if not incomingEntryToRespondTo.dontRemoveOnDecline then
-                self:RemoveEntryFromIncomingQueueTable(1)
-            end
-            NotificationDeclined(incomingEntryToRespondTo)
-        end
-    end
-    ]]
-    --
 
     -- Required when hooking ZO_MailSend_Gamepad:IsValid()
     -- Returns whether there is any item attached.
@@ -10802,28 +10655,16 @@ function ChatAnnouncements.HookFunction()
             return
         end
 
-        if IsConsoleUI() then
-            local displayName = characterOrDisplayName
-
-            local function GroupInviteCallback(success)
-                if success then
-                    CompleteGroupInvite(displayName, sentFromChat, displayInvitedMessage, isMenu)
-                end
+        if IsIgnored(characterOrDisplayName) then
+            printToChat(GetString(LUIE_STRING_IGNORE_ERROR_GROUP), true)
+            if ChatAnnouncements.SV.Group.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, LUIE_STRING_IGNORE_ERROR_GROUP)
             end
-
-            ZO_ConsoleAttemptInteractOrError(GroupInviteCallback, displayName, ZO_PLAYER_CONSOLE_INFO_REQUEST_DONT_BLOCK, ZO_CONSOLE_CAN_COMMUNICATE_ERROR_ALERT, ZO_ID_REQUEST_TYPE_DISPLAY_NAME, displayName)
-        else
-            if IsIgnored(characterOrDisplayName) then
-                printToChat(GetString(LUIE_STRING_IGNORE_ERROR_GROUP), true)
-                if ChatAnnouncements.SV.Group.GroupAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, LUIE_STRING_IGNORE_ERROR_GROUP)
-                end
-                PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-                return
-            end
-
-            CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+            return
         end
+
+        CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
     end
 
     -- Hook for EVENT_GUILD_MEMBER_ADDED
@@ -10881,13 +10722,11 @@ function ChatAnnouncements.HookFunction()
 
     -- Hook for Guild Invite function used from Guild Menu
     ZO_TryGuildInvite = function (guildId, displayName)
-        -- TODO: Update when more alerts are added to CA
         if not DoesPlayerHaveGuildPermission(guildId, GUILD_PERMISSION_INVITE) then
             ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_INVITE_PERMISSION)
             return
         end
 
-        -- TODO: Update when more alerts are added to CA
         if GetNumGuildMembers(guildId) == MAX_GUILD_MEMBERS then
             ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_ROOM)
             return
@@ -10899,40 +10738,23 @@ function ChatAnnouncements.HookFunction()
         local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
-        if IsConsoleUI() then
-            local function GuildInviteCallback(success)
-                if success then
-                    GuildInvite(guildId, displayName)
-                    if ChatAnnouncements.SV.Social.GuildCA then
-                        printToChat(zo_strformat(LUIE_STRING_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAlliance), true)
-                    end
-                    if ChatAnnouncements.SV.Social.GuildAlert then
-                        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(LUIE_STRING_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAllianceAlert))
-                    end
-                end
-            end
-
-            ZO_ConsoleAttemptInteractOrError(GuildInviteCallback, displayName, ZO_PLAYER_CONSOLE_INFO_REQUEST_DONT_BLOCK, ZO_CONSOLE_CAN_COMMUNICATE_ERROR_ALERT, ZO_ID_REQUEST_TYPE_DISPLAY_NAME, displayName)
-        else
-            -- TODO: This needs fixed in the API so that character names are also factored in here. This check here is just about pointless as it stands.
-            if IsIgnored(displayName) then
-                if ChatAnnouncements.SV.Social.GuildCA then
-                    printToChat(GetString(LUIE_STRING_IGNORE_ERROR_GUILD), true)
-                end
-                if ChatAnnouncements.SV.Social.GuildAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(LUIE_STRING_IGNORE_ERROR_GUILD))
-                end
-                PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-                return
-            end
-
-            GuildInvite(guildId, displayName)
+        if IsIgnored(displayName) then
             if ChatAnnouncements.SV.Social.GuildCA then
-                printToChat(zo_strformat(LUIE_STRING_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAlliance), true)
+                printToChat(GetString(LUIE_STRING_IGNORE_ERROR_GUILD), true)
             end
             if ChatAnnouncements.SV.Social.GuildAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(LUIE_STRING_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAllianceAlert))
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(LUIE_STRING_IGNORE_ERROR_GUILD))
             end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+            return
+        end
+
+        GuildInvite(guildId, displayName)
+        if ChatAnnouncements.SV.Social.GuildCA then
+            printToChat(zo_strformat(LUIE_STRING_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAlliance), true)
+        end
+        if ChatAnnouncements.SV.Social.GuildAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(LUIE_STRING_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAllianceAlert))
         end
     end
 
