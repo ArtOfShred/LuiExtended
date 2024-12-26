@@ -1316,39 +1316,76 @@ end
 -- Runs on the EVENT_RETICLE_TARGET_CHANGED listener.
 -- This handler fires every time the player's reticle target changes
 function CombatInfo.OnReticleTargetChanged(eventCode)
-    local unitTag = "reticleover"
+    -- Define all possible reticle unit tags
+    local reticleUnitTags =
+    {
+        "reticleover",
+        "reticleoverplayer",
+        "reticleovercompanion"
+    }
 
+    -- Clear existing toggles that should be removed on target change
     for k, v in pairs(g_toggledSlotsRemain) do
-        if ((g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]]) or (g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]])) and not (g_toggledSlotsPlayer[k] or g_barNoRemove[k]) then
+        if ((g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]]) or
+                (g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]])) and
+            not (g_toggledSlotsPlayer[k] or g_barNoRemove[k]) then
+            -- Hide front slot if it exists
             if g_toggledSlotsFront[k] and g_uiCustomToggle[g_toggledSlotsFront[k]] then
-                local slotNum = g_toggledSlotsFront[k]
-                CombatInfo.HideSlot(slotNum, k)
+                CombatInfo.HideSlot(g_toggledSlotsFront[k], k)
             end
+
+            -- Hide back slot if it exists
             if g_toggledSlotsBack[k] and g_uiCustomToggle[g_toggledSlotsBack[k]] then
-                local slotNum = g_toggledSlotsBack[k]
-                CombatInfo.HideSlot(slotNum, k)
+                CombatInfo.HideSlot(g_toggledSlotsBack[k], k)
             end
+
+            -- Clear related data
             g_toggledSlotsRemain[k] = nil
             g_toggledSlotsStack[k] = nil
+
+            -- Check for bar highlight effects
             if Effects.BarHighlightCheckOnFade[k] then
                 CombatInfo.BarHighlightSwap(k)
             end
         end
     end
 
-    if DoesUnitExist("reticleover") then
-        -- Fill it again
-        for i = 1, GetNumBuffs(unitTag) do
-            local unitName = GetRawUnitName(unitTag)
-            local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
-            -- Convert boolean to number value if cast by player
-            if castByPlayer == true then
-                castByPlayer = 1
-            else
-                castByPlayer = 5
-            end
-            if not IsUnitDead(unitTag) then
-                CombatInfo.OnEffectChanged(0, EFFECT_RESULT_UPDATED, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0, abilityId, castByPlayer, false)
+    -- Process buffs for each reticle unit tag
+    for _, unitTag in ipairs(reticleUnitTags) do
+        if DoesUnitExist(unitTag) then
+            for i = 1, GetNumBuffs(unitTag) do
+                -- Get unit and buff information
+                local unitName = GetRawUnitName(unitTag)
+                local buffName, timeStarted, timeEnding, buffSlot, stackCount,
+                iconFilename, buffType, effectType, abilityType,
+                statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
+
+                -- Convert boolean castByPlayer to numeric value
+                local castByPlayerNumeric = castByPlayer and 1 or 5
+
+                -- Process effect if unit is alive
+                if not IsUnitDead(unitTag) then
+                    CombatInfo.OnEffectChanged(
+                        0, -- eventCode
+                        EFFECT_RESULT_UPDATED,
+                        buffSlot,
+                        buffName,
+                        unitTag,
+                        timeStarted,
+                        timeEnding,
+                        stackCount,
+                        iconFilename,
+                        buffType,
+                        effectType,
+                        abilityType,
+                        statusEffectType,
+                        unitName,
+                        0, -- unitId
+                        abilityId,
+                        castByPlayerNumeric,
+                        false -- passThrough
+                    )
+                end
             end
         end
     end
