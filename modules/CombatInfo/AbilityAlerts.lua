@@ -41,14 +41,7 @@ local alertTypes =
     SHARED = "LUIE_ALERT_TYPE_SHARED",
 }
 
--- Quadratic easing out - decelerating to zero velocity (For buff fade)
-local function EaseOutQuad(t, b, c, d)
-    -- protect against division by zero
-    t = t == 0 and 0.0001 or t
-    d = d == 0 and 0.0001 or d
-    t = t / d
-    return -c * t * (t - 2) + b
-end
+local ZO_EaseOutQuadratic = ZO_EaseOutQuadratic
 
 -- Set Alert Colors
 function AbilityAlerts.SetAlertColors()
@@ -410,7 +403,8 @@ function AbilityAlerts.AlertUpdate(currentTime)
                 --alert.data = { }
                 if postCast <= 0 then
                     local duration = 1000 - (postCast * -1)
-                    alert:SetAlpha(EaseOutQuad(duration, 0, 1, 1000))
+                    local progress = duration / 1000
+                    alert:SetAlpha(ZO_EaseOutQuadratic(progress))
                 end
                 alert.timer:SetText("")
             end
