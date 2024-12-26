@@ -11,10 +11,10 @@ local table_concat = table.concat
 
 local changelogMessages =
 {
-    "|cFFA500LuiExtended Version 6.7.9|r",
+    "|cFFA500LuiExtended Version 6.7.9.1|r",
     "",
     "|cFFFF00General:|r",
-    "[*] Performance and stability improvements. Isn't that what apps use to get away with writing changelogs? :-)",
+    "[*] fixed some bugs, introduced some other bugs, fixed/ reverted reintroduced bug fixes. So fun right?!" ,
     "",
 }
 
