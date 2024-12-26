@@ -9,19 +9,6 @@ local LUIE = LUIE
 local string_format = string.format
 
 --[[
-    Converts a value to an integer.
-    @param number any: The value to be converted to an integer.
-    @return number: The converted integer value.
-    @throws error: If the value cannot be cast to a number.
-]]
-local function ToInteger(number)
-    return zo_floor(tonumber(number) or error("Could not cast '" .. tostring(number) .. "' to number.'"))
-end
-
--- Create access to local function
-LUIE.ToInteger = ToInteger
-
---[[
     Called from the menu and on initialization to update the timestamp color when changed.
 ]]
 LUIE.TimeStampColorize = nil
@@ -72,14 +59,13 @@ end
 
 LUIE.CreateTimestamp = CreateTimestamp
 
---[[
-    Helper function to format a message with an optional timestamp.
-    @param msg string: The message to be formatted.
-    @param doTimestamp boolean: If true, a timestamp will be added to the formatted message.
-    @param lineNumber number: The current line number for the chat message.
-    @param chanCode number: The chat channel code.
-    @return string: The formatted message.
-]]
+
+--- Helper function to format a message with an optional timestamp.
+---@param msg string: The message to be formatted.
+---@param doTimestamp boolean: If true, a timestamp will be added to the formatted message.
+---@param lineNumber? number: The current line number for the chat message.
+---@param chanCode? number: The chat channel code.
+---@return string: The formatted message.
 local function FormatMessage(msg, doTimestamp, lineNumber, chanCode)
     local formattedMsg = msg or ""
     if doTimestamp then
@@ -105,10 +91,8 @@ end
 
 LUIE.FormatMessage = FormatMessage
 
---[[
-    Hides or shows all LUIE components.
-    @param hidden boolean: If true, all components will be hidden. If false, all components will be shown.
-]]
+--- Hides or shows all LUIE components.
+---@param hidden boolean: If true, all components will be hidden. If false, all components will be shown.
 function LUIE.ToggleVisibility(hidden)
     for _, control in pairs(LUIE.Components) do
         control:SetHidden(hidden)
@@ -116,8 +100,8 @@ function LUIE.ToggleVisibility(hidden)
 end
 
 --- Adds a system message to the chat.
---- @param messageOrFormatter string: The message to be printed.
---- @param ... string: Variable number of arguments to be passed to CHAT_ROUTER:AddSystemMessage.
+---@param messageOrFormatter string: The message to be printed.
+---@param ... string: Variable number of arguments to be passed to CHAT_ROUTER:AddSystemMessage.
 function LUIE.AddSystemMessage(messageOrFormatter, ...)
     local formattedMessage
     if select("#", ...) > 0 then
@@ -132,8 +116,8 @@ end
 
 --- Easy Print to Chat.
 --- Prints a message to the chat.
---- @param msg string: The message to be printed.
---- @param isSystem? boolean: If true, the message is considered a system message.
+---@param msg string: The message to be printed.
+---@param isSystem? boolean: If true, the message is considered a system message.
 function LUIE.PrintToChat(msg, isSystem)
     if CHAT_SYSTEM.primaryContainer then
         if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
@@ -183,10 +167,10 @@ end
 
 --- Returns a formatted number with commas.
 --- Function to abbreviate a number by shortening and adding commas.
---- @param number number: The number to be abbreviated.
---- @param shorten? boolean: Whether to shorten the number or not.
---- @param comma? boolean: Whether to add commas or not.
---- @return number|string: The formatted number with commas.
+---@param number number: The number to be abbreviated.
+---@param shorten? boolean: Whether to shorten the number or not.
+---@param comma? boolean: Whether to add commas or not.
+---@return number|string: The formatted number with commas.
 function LUIE.AbbreviateNumber(number, shorten, comma)
     if number > 0 and shorten then
         local value
@@ -230,11 +214,11 @@ function LUIE.AbbreviateNumber(number, shorten, comma)
 end
 
 --- Takes an input with a name identifier, title, text, and callback function to create a dialogue button.
---- @param identifier string: The identifier for the dialogue button.
---- @param title string: The title text for the dialogue button.
---- @param text string: The main text for the dialogue button.
---- @param callback function: The callback function to be executed when the button is clicked.
---- @return table identifier: The created dialogue button table.
+---@param identifier string: The identifier for the dialogue button.
+---@param title string: The title text for the dialogue button.
+---@param text string: The main text for the dialogue button.
+---@param callback function: The callback function to be executed when the button is clicked.
+---@return table identifier: The created dialogue button table.
 function LUIE.RegisterDialogueButton(identifier, title, text, callback)
     ESO_Dialogs[identifier] =
     {
@@ -279,7 +263,7 @@ function LUIE.UpdateGuildData()
 end
 
 --- Simple function to check the veteran difficulty.
---- @return boolean: Returns true if the player is in a veteran dungeon or using veteran difficulty, false otherwise.
+---@return boolean: Returns true if the player is in a veteran dungeon or using veteran difficulty, false otherwise.
 function LUIE.ResolveVeteranDifficulty()
     if GetGroupSize() <= 1 and IsUnitUsingVeteranDifficulty("player") then
         return true
@@ -291,7 +275,7 @@ function LUIE.ResolveVeteranDifficulty()
 end
 
 --- Simple function that checks if the player is in a PVP zone.
---- @return boolean: Returns true if the player is PvP flagged, false otherwise.
+---@return boolean: Returns true if the player is PvP flagged, false otherwise.
 function LUIE.ResolvePVPZone()
     if IsUnitPvPFlagged("player") then
         return true
@@ -301,8 +285,8 @@ function LUIE.ResolvePVPZone()
 end
 
 --- Pulls the name for the current morph of a skill.
---- @param abilityId number: The AbilityId of the skill.
---- @return string abilityName: The name of the current morph of the skill.
+---@param abilityId number: The AbilityId of the skill.
+---@return string abilityName: The name of the current morph of the skill.
 function LUIE.GetSkillMorphName(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local abilityName = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
@@ -310,8 +294,8 @@ function LUIE.GetSkillMorphName(abilityId)
 end
 
 --- Pulls the icon for the current morph of a skill.
---- @param abilityId number: The AbilityId of the skill.
---- @return string abilityIcon: The icon path of the current morph of the skill.
+---@param abilityId number: The AbilityId of the skill.
+---@return string abilityIcon: The icon path of the current morph of the skill.
 function LUIE.GetSkillMorphIcon(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local abilityIcon = select(2, GetSkillAbilityInfo(skillType, skillIndex, abilityIndex))
@@ -319,8 +303,8 @@ function LUIE.GetSkillMorphIcon(abilityId)
 end
 
 --- Pulls the AbilityId for the current morph of a skill.
---- @param abilityId number: The AbilityId of the skill.
---- @return number morphAbilityId: The AbilityId of the current morph of the skill.
+---@param abilityId number: The AbilityId of the skill.
+---@return number morphAbilityId: The AbilityId of the current morph of the skill.
 function LUIE.GetSkillMorphAbilityId(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local morphAbilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, false)
@@ -328,9 +312,9 @@ function LUIE.GetSkillMorphAbilityId(abilityId)
 end
 
 --- Function to update the syntax for default Mundus Stone tooltips we pull (in order to retain scaling).
---- @param abilityId number: The ID of the ability.
---- @param tooltipText string: The original tooltip text.
---- @return string tooltipText: The updated tooltip text.
+---@param abilityId number: The ID of the ability.
+---@param tooltipText string: The original tooltip text.
+---@return string tooltipText: The updated tooltip text.
 function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     -- Update syntax for The Lady, The Lover, and the Thief Mundus stones since they aren't consistent with other buffs.
     if abilityId == 13976 or abilityId == 13981 then -- The Lady / The Lover
@@ -343,10 +327,22 @@ function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     return tooltipText
 end
 
+
+--- This function is used to address an issue where the original method returns craftedAbilityIds for scribed skills, rather than the expected ability IDs. Here's a breakdown of its functionality:
+---  - 1. Get Slot Bound ID: Retrieves the bound ID of a slot on the action bar using GetSlotBoundId(index, bar). This ID could be for any action type, including crafted abilities.
+---  - 2. Determine Action Type: Determines the type of action bound to the slot using GetSlotType(index, bar).
+---  - 3. Crafted Ability Check: If the action type is ACTION_TYPE_CRAFTED_ABILITY, indicating the slot is bound to a crafted ability, it converts the craftedAbilityId to the corresponding ability ID using GetAbilityIdForCraftedAbilityId(id).
+---  - 4. Return ID: Finally, it returns the id, which will be the original bound ID for non-crafted abilities or the converted ability ID for crafted abilities.
+---   This workaround ensures that regardless of the action type bound to a slot, the function returns a consistent type of ID, specifically addressing issues with scribed skills.
+---
+---@param index number
+---@param bar HotBarCategory
+---@return number actionId
 function LUIE.GetSlotTrueBoundId(index, bar)
     local id = GetSlotBoundId(index, bar)
     local actionType = GetSlotType(index, bar)
-    if actionType == ACTION_TYPE_CRAFTED_ABILITY then
+    local craftedAbilityId = GetAbilityIdForCraftedAbilityId(id)
+    if actionType == ACTION_TYPE_CRAFTED_ABILITY and IsCraftedAbilityScribed(craftedAbilityId) then
         id = GetAbilityIdForCraftedAbilityId(id)
     end
     return id
