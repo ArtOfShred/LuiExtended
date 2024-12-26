@@ -327,22 +327,14 @@ function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     return tooltipText
 end
 
-
---- This function is used to address an issue where the original method returns craftedAbilityIds for scribed skills, rather than the expected ability IDs. Here's a breakdown of its functionality:
----  - 1. Get Slot Bound ID: Retrieves the bound ID of a slot on the action bar using GetSlotBoundId(index, bar). This ID could be for any action type, including crafted abilities.
----  - 2. Determine Action Type: Determines the type of action bound to the slot using GetSlotType(index, bar).
----  - 3. Crafted Ability Check: If the action type is ACTION_TYPE_CRAFTED_ABILITY, indicating the slot is bound to a crafted ability, it converts the craftedAbilityId to the corresponding ability ID using GetAbilityIdForCraftedAbilityId(id).
----  - 4. Return ID: Finally, it returns the id, which will be the original bound ID for non-crafted abilities or the converted ability ID for crafted abilities.
----   This workaround ensures that regardless of the action type bound to a slot, the function returns a consistent type of ID, specifically addressing issues with scribed skills.
----
 ---@param index number
----@param bar HotBarCategory
+---@param bar? HotBarCategory
 ---@return number actionId
 function LUIE.GetSlotTrueBoundId(index, bar)
+    bar = bar or GetActiveHotbarCategory()
     local id = GetSlotBoundId(index, bar)
     local actionType = GetSlotType(index, bar)
-    local craftedAbilityId = GetAbilityIdForCraftedAbilityId(id)
-    if actionType == ACTION_TYPE_CRAFTED_ABILITY and IsCraftedAbilityScribed(craftedAbilityId) then
+    if actionType == ACTION_TYPE_CRAFTED_ABILITY then
         id = GetAbilityIdForCraftedAbilityId(id)
     end
     return id
