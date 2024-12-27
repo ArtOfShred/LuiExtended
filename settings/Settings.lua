@@ -455,7 +455,39 @@ function LUIE.CreateSettings()
     }
     ]]
     --
+    -- Modules Header
+    optionsData[#optionsData + 1] =
+    {
+        type = "header",
+        name = GetString(LUIE_STRING_LAM_MODULEHEADER),
+        width = "full",
+    }
 
+    -- -- Custom Icons Toggle
+    -- optionsData[#optionsData + 1] =
+    -- {
+    --     type = "checkbox",
+    --     name = GetString(LUIE_STRING_LAM_CUSTOM_ICONS_ENABLE),
+    --     tooltip = GetString(LUIE_STRING_LAM_CUSTOM_ICONS_ENABLE_TP),
+    --     getFunc = function() 
+    --         return Settings.CustomIcons_Enabled 
+    --     end,
+    --     setFunc = function(value)
+    --         Settings.CustomIcons_Enabled = value
+    --         -- Queue UI reload since this requires reinitialization of hooks
+    --         ReloadUI("ingame")
+    --     end,
+    --     width = "half",
+    --     warning = GetString(LUIE_STRING_LAM_RELOADUI_WARNING),
+    --     default = Defaults.CustomIcons_Enabled,
+    -- }
+    -- -- Custom Icons Description
+    -- optionsData[#optionsData + 1] =
+    -- {
+    --     type = "description",
+    --     width = "half",
+    --     text = GetString(LUIE_STRING_LAM_CUSTOM_ICONS_DESCRIPTION),
+    -- }
     -- Hide Alerts
     optionsData[#optionsData + 1] =
     {

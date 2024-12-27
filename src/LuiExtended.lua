@@ -38,6 +38,7 @@ LUIE.Defaults =
     StartupInfo = false,
     HideAlertFrame = false,
     AlertFrameAlignment = 3,
+    --CustomIcons_Enabled = true,
     HideXPBar = false,
     TempAlertHome = false,
     TempAlertCampaign = false,
