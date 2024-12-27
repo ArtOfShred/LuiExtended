@@ -35,7 +35,10 @@ local buffTypes =
 
 function LUIE.InitializeHooks()
     -- Hook Gamepad Skill Advisor for custom icon support
+    -- Check if custom icons are enabled in settings
+    -- if LUIE.SV.CustomIcons_Enabled then
     LUIE.InitializeHooksSkillAdvisor()
+
 
     local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
     --- Hook for Icon/Name changes.
@@ -2338,4 +2341,6 @@ function LUIE.InitializeHooks()
         -- Size the label to allow space for the keybind and decrease icon
         control.label:SetWidth(labelWidth)
     end
+
+    --end
 end
