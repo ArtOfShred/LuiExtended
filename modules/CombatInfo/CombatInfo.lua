@@ -299,7 +299,7 @@ CombatInfo.Defaults =
     },
 }
 
-CombatInfo.SV = nil
+CombatInfo.SV = ...
 CombatInfo.CastBarUnlocked = false
 CombatInfo.AlertFrameUnlocked = false
 

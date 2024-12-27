@@ -24,7 +24,7 @@ LUIE.translation = "https://github.com/ArtOfShredLuiExtended/tree/develop/i18n"
 LUIE.donation = "https://www.paypal.me/ArtOfShred"
 
 -- Saved variables options
-LUIE.SV = nil
+LUIE.SV = ...
 LUIE.SVVer = 2
 LUIE.SVName = "LUIESV"
 
