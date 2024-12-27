@@ -16,6 +16,8 @@ local zo_strgsub = zo_strgsub
 local printtochat = LUIE.PrintToChat
 
 -- Add millisecond timestamp to ability debug
+---@param message string Message to add timestamp to
+---@return string Formatted message with timestamp
 local function MillisecondTimestampDebug(message)
     local currentTime = GetGameTimeMilliseconds()
     local timestamp = FormatTimeMilliseconds(currentTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_MILLISECONDS_NO_HOURS_OR_DAYS, TIME_FORMAT_DIRECTION_NONE)
@@ -32,175 +34,311 @@ local function MillisecondTimestampDebug(message)
     return message
 end
 
--- Debug Display for Combat Events
-function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overrideRank, casterUnitTag)
-    -- Don't display if this aura is already added to the filter
-    if LUIE.Data.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
-        return
+---Format unit name for debug messages
+---@param name string Raw unit name
+---@return string Formatted name
+local function FormatUnitName(name)
+    if name == LUIE.PlayerNameFormatted then
+        return "Player"
+    elseif name == "" then
+        return "NIL"
+    else
+        return name
     end
-
-    local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
-
-    local source = zo_strformat("<<C:1>>", sourceName)
-    local target = zo_strformat("<<C:1>>", targetName)
-    local ability = zo_strformat("<<C:1>>", nameFormatted)
-    local duration = GetAbilityDuration(abilityId, overrideRank, casterUnitTag) or 0
-    local channeled, durationValue = GetAbilityCastInfo(abilityId, overrideRank, casterUnitTag)
-    local showacasttime = "" or GetString(SI_ABILITY_TOOLTIP_CHANNEL_TIME_LABEL)
-    local showachantime = "" or GetString(SI_ABILITY_TOOLTIP_CAST_TIME_LABEL)
-    if channeled then
-        showachantime = (" [Chan] " .. durationValue)
-    end
-    if durationValue ~= 0 then
-        showacasttime = (" [Cast] " .. durationValue)
-    end
-    if source == LUIE.PlayerNameFormatted then
-        source = "Player"
-    end
-    if target == LUIE.PlayerNameFormatted then
-        target = "Player"
-    end
-    if source == "" and target == "" then
-        source = "NIL"
-        target = "NIL"
-    end
-
-    local formattedResult = LUIE.Data.DebugResults[result]
-
-    local finalString = (iconFormatted .. " [" .. abilityId .. "] " .. ability .. ": [S] " .. source .. " --> [T] " .. target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. formattedResult)
-    finalString = MillisecondTimestampDebug(finalString)
-    printtochat(finalString)
 end
 
--- Debug Display for Effect Events
-function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    if LUIE.Data.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
-        return
+---@param abilityId integer Unique ID of the ability
+---@param overrideRank integer? Rank override for the ability
+---@param casterUnitTag string? Unit tag of the caster
+---@return string Formatted timing string
+local function GetAbilityTimingString(abilityId, overrideRank, casterUnitTag)
+    local channeled, durationValue = GetAbilityCastInfo(abilityId, overrideRank, casterUnitTag)
+    local castStr = durationValue ~= 0 and string_format(" [Cast] %s", durationValue) or ""
+    local chanStr = channeled and string_format(" [Chan] %s", durationValue) or ""
+    return castStr .. chanStr
+end
+
+-- Helper functions for effect debug messages
+
+---Format unit name for effect messages
+---@param unitName string Raw unit name
+---@param unitTag string Unit tag
+---@return string Formatted name with tag
+local function FormatEffectUnitName(unitName, unitTag)
+    local formatted = zo_strformat("<<C:1>>", unitName)
+    if formatted == LUIE.PlayerNameFormatted then
+        formatted = "Player"
     end
+    return formatted .. " (" .. unitTag .. ")"
+end
 
-    local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
-
-    unitName = zo_strformat("<<C:1>>", unitName)
-    if unitName == LUIE.PlayerNameFormatted then
-        unitName = "Player"
-    end
-    unitName = unitName .. " (" .. unitTag .. ")"
-
-    local cmxHIDE
+---Check if ability is hidden in Combat Metrics
+---@param abilityId integer Ability ID to check
+---@return string Hide status string
+local function GetCMXHideStatus(abilityId)
     if CMX and CMX.CustomAbilityHide and CMX.CustomAbilityHide[abilityId] then
-        cmxHIDE = " + HIDDEN CMX"
-    else
-        cmxHIDE = ""
+        return " + HIDDEN CMX"
     end
+    return ""
+end
 
-    local finalString
-    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].hide then
-        finalString = (iconFormatted .. "|c00E200 [" .. abilityId .. "] " .. nameFormatted .. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] " .. unitName .. "|r")
-        finalString = MillisecondTimestampDebug(finalString)
-        -- Use CHAT_ROUTER to bypass some other addons modifying this string
-        CHAT_ROUTER:AddSystemMessage(finalString)
-        return
-    end
+---Format message for hidden effects
+---@param icon string Formatted ability icon
+---@param abilityId integer Ability ID
+---@param name string Ability name
+---@param cmxStatus string CMX hide status
+---@param unitName string Formatted unit name
+---@return string Formatted message
+local function FormatHiddenEffectString(icon, abilityId, name, cmxStatus, unitName)
+    return string_format("%s|c00E200 [%d] %s: HIDDEN LUI%s: [Tag] %s|r",
+        icon, abilityId, name, cmxStatus, unitName)
+end
 
-    local duration = (endTime - beginTime) * 1000
-
-    local refreshOnly = ""
+---Get refresh status string for effects
+---@param abilityId integer Ability ID to check
+---@return string Refresh status string
+local function GetEffectRefreshStatus(abilityId)
     if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].refreshOnly then
-        refreshOnly = " |c00E200(Hidden)|r "
+        return " |c00E200(Hidden)|r "
     end
+    return ""
+end
+
+---Format effect change message based on change type
+---@param changeType integer Type of effect change
+---@param refreshStatus string Refresh status string
+---@param icon string Formatted ability icon
+---@param abilityId integer Ability ID
+---@param name string Ability name
+---@param unitName string Formatted unit name
+---@param duration number Effect duration
+---@return string Formatted message
+local function FormatEffectChangeString(changeType, refreshStatus, icon, abilityId, name, unitName, duration)
+    local prefix
+    local suffix = ""
 
     if changeType == 1 then
-        finalString = ("|c00E200Gained:|r " .. refreshOnly .. iconFormatted .. " [" .. abilityId .. "] " .. nameFormatted .. ": [Tag] " .. unitName .. " [Dur] " .. duration)
+        prefix = "|c00E200Gained:|r"
+        suffix = string_format(" [Dur] %d", duration)
     elseif changeType == 2 then
-        finalString = ("|c00E200Faded:|r " .. iconFormatted .. " [" .. abilityId .. "] " .. nameFormatted .. ": [Tag] " .. unitName)
+        prefix = "|c00E200Faded:|r"
     else
-        finalString = ("|c00E200Refreshed:|r " .. iconFormatted .. " (" .. changeType .. ") [" .. abilityId .. "] " .. nameFormatted .. ": [Tag] " .. unitName .. " [Dur] " .. duration)
+        prefix = "|c00E200Refreshed:|r"
+        suffix = string_format(" [Dur] %d", duration)
     end
-    finalString = MillisecondTimestampDebug(finalString)
-    printtochat(finalString)
+
+    return string_format("%s %s%s [%d] %s: [Tag] %s%s", prefix, refreshStatus, icon, abilityId, name, unitName, suffix)
 end
 
--- Account specific DEBUG for ArtOfShred (These are only registered to give me some additional debug options)
-function SpellCastBuffs.AuthorCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+---Format author-specific combat debug message
+---@param icon string Formatted ability icon
+---@param abilityId integer Ability ID
+---@param name string Ability name
+---@param cmxStatus string CMX hide status
+---@param source string Source name
+---@param target string Target name
+---@param result string Formatted result
+---@return string Formatted message
+local function FormatAuthorCombatString(icon, abilityId, name, cmxStatus, source, target, result)
+    return string_format("%s[%d] %s: HIDDEN LUI%s: [S] %s --> [T] %s [R] %s",
+        icon, abilityId, name, cmxStatus, source, target, result)
+end
+
+---Send message to all chat windows
+---@param message string Message to send
+local function SendToChatWindows(message)
+    if not CHAT_SYSTEM.primaryContainer then return end
+
+    for _, cc in ipairs(CHAT_SYSTEM.containers) do
+        local chatContainer = cc
+        local chatWindow = cc.windows[2]
+        if chatContainer then
+            chatContainer:AddEventMessageToWindow(chatWindow, message, CHAT_CATEGORY_SYSTEM)
+        end
+    end
+end
+
+---Handles debug output for combat events, displaying detailed information about ability usage
+---@param eventCode integer Event code (unused)
+---@param result ActionResult The result of the combat action (hit, miss, etc)
+---@param isError boolean Whether the action resulted in an error
+---@param abilityName string Name of the ability used
+---@param abilityGraphic integer Ability graphic ID (unused)
+---@param abilityActionSlotType ActionSlotType Type of action slot used
+---@param sourceName string Name of the ability source/caster
+---@param sourceType CombatUnitType Type of unit that is the source
+---@param targetName string Name of the ability target
+---@param targetType CombatUnitType Type of unit that is the target
+---@param hitValue integer Damage/healing value
+---@param powerType CombatMechanicFlags Type of resource affected
+---@param damageType DamageType Type of damage dealt
+---@param log boolean Whether to log this event
+---@param sourceUnitId integer Unique ID of source unit
+---@param targetUnitId integer Unique ID of target unit
+---@param abilityId integer Unique ID of the ability
+---@param overrideRank integer? Rank override for the ability
+---@param casterUnitTag string? Unit tag of the caster
+function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overrideRank, casterUnitTag)
+    -- Skip if ability is filtered
+    if LUIE.Data.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
+        return
+    end
+
+    -- Format ability information
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
     local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
-
-    local source = zo_strformat("<<C:1>>", sourceName)
-    local target = zo_strformat("<<C:1>>", targetName)
     local ability = zo_strformat("<<C:1>>", nameFormatted)
-    if source == LUIE.PlayerNameFormatted then
-        source = "Player"
-    end
-    if target == LUIE.PlayerNameFormatted then
-        target = "Player"
-    end
-    if source == "" and target == "" then
-        source = "NIL"
-        target = "NIL"
-    end
 
-    local cmxHIDE
-    if CMX and CMX.CustomAbilityHide and CMX.CustomAbilityHide[abilityId] then
-        cmxHIDE = " + HIDDEN CMX"
-    else
-        cmxHIDE = ""
-    end
+    -- Format source and target names
+    local source = FormatUnitName(zo_strformat("<<C:1>>", sourceName))
+    local target = FormatUnitName(zo_strformat("<<C:1>>", targetName))
 
-    local formattedResult = LUIE.Data.DebugResults[result]
+    -- Get ability timing information
+    local duration = GetAbilityDuration(abilityId, overrideRank, casterUnitTag) or 0
+    local timingInfo = GetAbilityTimingString(abilityId, overrideRank, casterUnitTag)
 
-    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].hide then
-        local finalString = (iconFormatted .. "[" .. abilityId .. "] " .. nameFormatted .. ": HIDDEN LUI" .. cmxHIDE .. ": [S] " .. source .. " --> [T] " .. target .. " [R] " .. formattedResult)
-        finalString = MillisecondTimestampDebug(finalString)
-        if CHAT_SYSTEM.primaryContainer then
-            for k, cc in ipairs(CHAT_SYSTEM.containers) do
-                local chatContainer = cc
-                local chatWindow = cc.windows[2]
-                if chatContainer then
-                    chatContainer:AddEventMessageToWindow(chatWindow, finalString, CHAT_CATEGORY_SYSTEM)
-                end
-            end
-        end
-    end
+    -- Build and output the debug message
+    local finalString = string_format("%s [%d] %s: [S] %s --> [T] %s [D] %d%s [R] %s",
+        iconFormatted, abilityId, ability, source, target, duration, timingInfo,
+        LUIE.Data.DebugResults[result])
+
+    printtochat(MillisecondTimestampDebug(finalString))
 end
 
--- Account specific DEBUG for ArtOfShred (These are only registered to give me some additional debug options)
-function SpellCastBuffs.AuthorEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+---Handles debug output for buff/debuff effect changes
+---@param eventCode integer Event code (unused)
+---@param changeType EffectResult Type of effect change (gained/faded/refreshed)
+---@param effectSlot integer Slot index of the effect
+---@param effectName string Name of the effect
+---@param unitTag string Unit tag of affected entity
+---@param beginTime number Start time of the effect
+---@param endTime number End time of the effect
+---@param stackCount integer Number of effect stacks
+---@param iconName string Icon texture path
+---@param buffType string Deprecated buff type
+---@param effectType BuffEffectType Type of effect (buff/debuff)
+---@param abilityType AbilityType Type of ability
+---@param statusEffectType StatusEffectType Type of status effect
+---@param unitName string Name of affected unit
+---@param unitId integer Unique ID of affected unit
+---@param abilityId integer Unique ID of the ability
+---@param castByPlayer CombatUnitType Source type of the effect
+function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+    -- Skip if ability is filtered
+    if LUIE.Data.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
+        return
+    end
+
+    -- Format ability information
     local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
     local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
-    unitName = zo_strformat("<<C:1>>", unitName)
-    if unitName == LUIE.PlayerNameFormatted then
-        unitName = "Player"
-    end
-    unitName = unitName .. " (" .. unitTag .. ")"
+    -- Format unit name and check CMX hiding
+    local formattedUnitName = FormatEffectUnitName(unitName, unitTag)
+    local cmxHideStatus = GetCMXHideStatus(abilityId)
 
-    local cmxHIDE
-    if CMX and CMX.CustomAbilityHide and CMX.CustomAbilityHide[abilityId] then
-        cmxHIDE = " + HIDDEN CMX"
-    else
-        cmxHIDE = ""
-    end
-
-    local refreshOnly = ""
-    if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].refreshOnly then
-        refreshOnly = " |c00E200(Refresh Only - Hidden)|r "
-    end
-
+    -- Handle hidden effects
     if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].hide then
-        local finalString = (iconFormatted .. refreshOnly .. "|c00E200 [" .. abilityId .. "] " .. nameFormatted .. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] " .. unitName .. "|r")
-        finalString = MillisecondTimestampDebug(finalString)
-        if CHAT_SYSTEM.primaryContainer then
-            for k, cc in ipairs(CHAT_SYSTEM.containers) do
-                local chatContainer = cc
-                local chatWindow = cc.windows[2]
-                if chatContainer then
-                    chatContainer:AddEventMessageToWindow(chatWindow, finalString, CHAT_CATEGORY_SYSTEM)
-                end
-            end
-        end
+        local hiddenString = FormatHiddenEffectString(iconFormatted, abilityId, nameFormatted, cmxHideStatus, formattedUnitName)
+        CHAT_ROUTER:AddSystemMessage(MillisecondTimestampDebug(hiddenString))
+        return
     end
+
+    -- Calculate effect duration and get refresh status
+    local duration = (endTime - beginTime) * 1000
+    local refreshStatus = GetEffectRefreshStatus(abilityId)
+
+    -- Build and output the effect message based on change type
+    local finalString = FormatEffectChangeString(changeType, refreshStatus, iconFormatted, abilityId, nameFormatted, formattedUnitName, duration)
+    printtochat(MillisecondTimestampDebug(finalString))
+end
+
+---Author-specific debug handler for combat events. Only processes hidden abilities.
+---@param eventCode integer Event code (unused)
+---@param result ActionResult The result of the combat action (hit, miss, etc)
+---@param isError boolean Whether the action resulted in an error
+---@param abilityName string Name of the ability used
+---@param abilityGraphic integer Ability graphic ID (unused)
+---@param abilityActionSlotType ActionSlotType Type of action slot used
+---@param sourceName string Name of the ability source/caster
+---@param sourceType CombatUnitType Type of unit that is the source
+---@param targetName string Name of the ability target
+---@param targetType CombatUnitType Type of unit that is the target
+---@param hitValue integer Damage/healing value
+---@param powerType CombatMechanicFlags Type of resource affected
+---@param damageType DamageType Type of damage dealt
+---@param log boolean Whether to log this event
+---@param sourceUnitId integer Unique ID of source unit
+---@param targetUnitId integer Unique ID of target unit
+---@param abilityId integer Unique ID of the ability
+function SpellCastBuffs.AuthorCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+    -- Only process abilities that are marked as hidden in EffectOverride
+    if not (Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].hide) then
+        return
+    end
+
+    -- Format ability information
+    local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
+    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+    local source = FormatUnitName(zo_strformat("<<C:1>>", sourceName))
+    local target = FormatUnitName(zo_strformat("<<C:1>>", targetName))
+    local cmxStatus = GetCMXHideStatus(abilityId)
+
+    -- Build and send debug message to all chat windows
+    local finalString = FormatAuthorCombatString(
+        iconFormatted,
+        abilityId,
+        nameFormatted,
+        cmxStatus,
+        source,
+        target,
+        LUIE.Data.DebugResults[result]
+    )
+
+    SendToChatWindows(MillisecondTimestampDebug(finalString))
+end
+
+---Author-specific debug handler for effect changes. Only processes hidden effects.
+---@param eventCode integer Event code (unused)
+---@param changeType EffectResult Type of effect change (gained/faded/refreshed)
+---@param effectSlot integer Slot index of the effect
+---@param effectName string Name of the effect
+---@param unitTag string Unit tag of affected entity
+---@param beginTime number Start time of the effect
+---@param endTime number End time of the effect
+---@param stackCount integer Number of effect stacks
+---@param iconName string Icon texture path
+---@param buffType string Deprecated buff type
+---@param effectType BuffEffectType Type of effect (buff/debuff)
+---@param abilityType AbilityType Type of ability
+---@param statusEffectType StatusEffectType Type of status effect
+---@param unitName string Name of affected unit
+---@param unitId integer Unique ID of affected unit
+---@param abilityId integer Unique ID of the ability
+---@param castByPlayer CombatUnitType Source type of the effect
+function SpellCastBuffs.AuthorEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+    -- Only process effects that are marked as hidden in EffectOverride
+    if not (Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].hide) then
+        return
+    end
+
+    -- Format ability and unit information
+    local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
+    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+    local formattedUnitName = FormatEffectUnitName(unitName, unitTag)
+    local cmxStatus = GetCMXHideStatus(abilityId)
+    local refreshStatus = GetEffectRefreshStatus(abilityId)
+
+    -- Build and send debug message to all chat windows
+    local finalString = FormatHiddenEffectString(
+        iconFormatted .. refreshStatus,
+        abilityId,
+        nameFormatted,
+        cmxStatus,
+        formattedUnitName
+    )
+
+    SendToChatWindows(MillisecondTimestampDebug(finalString))
 end
 
 function SpellCastBuffs.TempSlashFilter()
