@@ -641,7 +641,7 @@ function CombatInfo.HookGCD()
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
         local isGamepad = IsInGamepadPreferredMode()
-        local _, duration, _, _ = GetSlotCooldownInfo(slotnum, hotbarCategory)
+        local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum, hotbarCategory)
         local isShowingCooldown = self.showingCooldown
         local isKeyboardUltimateSlot = not isGamepad and self.slot.slotNum == ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
         local usable = false
