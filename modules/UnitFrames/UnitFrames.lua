@@ -223,7 +223,7 @@ UnitFrames.Defaults =
 }
 
 ---@class (partial) LUIE_UnitFrames_SV
-UnitFrames.SV = nil
+UnitFrames.SV = ...
 
 UnitFrames.CustomFrames = {}
 UnitFrames.CustomFramesMovingState = false

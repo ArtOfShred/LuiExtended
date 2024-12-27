@@ -215,7 +215,7 @@ SpellCastBuffs.Defaults =
     ShowSharedEffects = true,
     ShowSharedMajorMinor = true,
 }
-SpellCastBuffs.SV = nil
+SpellCastBuffs.SV = ...
 
 SpellCastBuffs.EffectsList =
 {

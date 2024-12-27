@@ -364,7 +364,7 @@ CombatText.Defaults =
         hotcritical = 200,
     },
 }
-CombatText.SV = nil
+CombatText.SV = ...
 
 local function SavePosition(panel)
     local anchor = { panel:GetAnchor(0) }
