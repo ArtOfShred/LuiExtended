@@ -2176,6 +2176,10 @@ local strings =
     LUIE_STRING_LAM_CT_DEATH_COLOR_TP = "Set a color for notifications when a group member dies.",
 
     LUIE_STRING_LAM_CT_BLACKLIST_HEADER = "Ability Blacklist",
+
+    --LUIE_STRING_LAM_CUSTOM_ICONS_ENABLE = "Enable Custom Icons",
+    --LUIE_STRING_LAM_CUSTOM_ICONS_ENABLE_TP = "Enable or disable custom ability icons provided by LUIE.",
+    --LUIE_STRING_LAM_CUSTOM_ICONS_DESCRIPTION = "When enabled, LUIE will use custom icons for certain abilities to make them more distinct. Disable to use default game icons.",
 }
 
 for stringId, stringValue in pairs(strings) do
