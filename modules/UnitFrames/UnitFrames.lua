@@ -3,13 +3,13 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 -- Unit Frames namespace
----@class (partial) UnitFrames
+--- @class (partial) UnitFrames
 local UnitFrames = {}
----@type UI
+--- @type UI
 local UI = LUIE.UI
 
 local AbbreviateNumber = LUIE.AbbreviateNumber
@@ -30,9 +30,9 @@ local moduleName = LUIE.name .. "UnitFrames"
 local roleIcons =
 {
     [0] = "LuiExtended/media/unitframes/unitframes_class_none.dds",
-    [1] = "esoui/art/lfg/lfg_icon_dps.dds",
-    [4] = "esoui/art/lfg/lfg_icon_healer.dds",
-    [2] = "esoui/art/lfg/lfg_icon_tank.dds",
+    [1] = "/esoui/art/lfg/lfg_icon_dps.dds",
+    [4] = "/esoui/art/lfg/lfg_icon_healer.dds",
+    [2] = "/esoui/art/lfg/lfg_icon_tank.dds",
 }
 
 local leaderIcons =
@@ -222,7 +222,7 @@ UnitFrames.Defaults =
     CustomFormatCenterLabel = "Current + Shield - Trauma / Max (Percentage%)",
 }
 
----@class (partial) LUIE_UnitFrames_SV
+--- @class (partial) LUIE_UnitFrames_SV
 UnitFrames.SV = ...
 
 UnitFrames.CustomFrames = {}
@@ -340,13 +340,13 @@ local function CreateDecreasedArmorOverlay(parent, small)
     local control = UI:Control(parent, { CENTER, CENTER }, { 512, 32 }, false)
     control.smallTex = UI:Texture(control, { CENTER, CENTER }, { 512, 32 }, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_small.dds", 2, false)
     control.smallTex:SetDrawTier(DT_HIGH)
-    --control.smallTexGlow = UI:Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_small_glow.dds", 2, false)
-    --control.smallTexGlow:SetDrawTier(HIGH)
+    -- control.smallTexGlow = UI:Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_small_glow.dds", 2, false)
+    -- control.smallTexGlow:SetDrawTier(HIGH)
     if not small then
         control.normalTex = UI:Texture(control, { CENTER, CENTER }, { 512, 32 }, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_standard.dds", 2, false)
         control.normalTex:SetDrawTier(DT_HIGH)
-        --control.normalTexGlow = UI:Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_standard_glow.dds", 2, false)
-        --control.normalTexGlow:SetDrawTier(HIGH)
+        -- control.normalTexGlow = UI:Texture(control, {CENTER,CENTER}, {512,32}, "/EsoUI/Art/UnitAttributeVisualizer/attributeBar_dynamic_decreasedArmor_standard_glow.dds", 2, false)
+        -- control.normalTexGlow:SetDrawTier(HIGH)
     end
 
     return control
@@ -490,7 +490,7 @@ function UnitFrames.GroupFrames_OnMouseUp(self, button, upInside)
                 end
             end
 
-            --Cannot vote for yourself
+            -- Cannot vote for yourself
             if isLFG and not isPlayer then
                 AddMenuItem(GetString(SI_GROUP_LIST_MENU_VOTE_KICK_FROM_GROUP), function ()
                     BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, ZO_GROUP_ELECTION_DESCRIPTORS.NONE, unitTag)
@@ -498,7 +498,7 @@ function UnitFrames.GroupFrames_OnMouseUp(self, button, upInside)
             end
         end
 
-        --Per design, promoting doesn't expressly fall under the mantle of "group modification"
+        -- Per design, promoting doesn't expressly fall under the mantle of "group modification"
         if IsUnitGroupLeader("player") and not isPlayer and isOnline then
             AddMenuItem(GetString(SI_GROUP_LIST_MENU_PROMOTE_TO_LEADER), function ()
                 GroupPromote(unitTag)
@@ -709,7 +709,7 @@ local function CreateCustomFrames()
         sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
 
         -- Collect all together
-        ---@type LuiPlayerFrame
+        --- @type LuiPlayerFrame
         UnitFrames.CustomFrames.player =
         {
             ["unitTag"] = "player",
@@ -846,9 +846,9 @@ local function CreateCustomFrames()
             ["classIcon"] = UI:Texture(topInfo, { RIGHT, RIGHT, -1, 0 }, { 22, 22 }, nil, nil, false),
             ["className"] = UI:Label(topInfo, { BOTTOMRIGHT, TOPRIGHT, -1, -1 }, nil, { 2, 4 }, nil, "Class", false),
             ["friendIcon"] = UI:Texture(topInfo, { RIGHT, RIGHT, -20, 0 }, { 22, 22 }, nil, nil, false),
-            ["star1"] = UI:Texture(topInfo, { RIGHT, RIGHT, -28, -1 }, { 16, 16 }, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true),
-            ["star2"] = UI:Texture(topInfo, { RIGHT, RIGHT, -45, -1 }, { 16, 16 }, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true),
-            ["star3"] = UI:Texture(topInfo, { RIGHT, RIGHT, -62, -1 }, { 16, 16 }, "esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true),
+            ["star1"] = UI:Texture(topInfo, { RIGHT, RIGHT, -28, -1 }, { 16, 16 }, "/esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true),
+            ["star2"] = UI:Texture(topInfo, { RIGHT, RIGHT, -45, -1 }, { 16, 16 }, "/esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true),
+            ["star3"] = UI:Texture(topInfo, { RIGHT, RIGHT, -62, -1 }, { 16, 16 }, "/esoui/art/ava/ava_bgwindow_capturepointicon.dds", nil, true),
             ["botInfo"] = botInfo,
             ["buffAnchor"] = buffAnchor,
             ["title"] = UI:Label(botInfo, { TOPLEFT, TOPLEFT }, nil, { 0, 3 }, nil, "<Title>", false),
@@ -1511,7 +1511,7 @@ local function CreateCustomFrames()
                 -- assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
                 local size1 = UnitFrames.SV.GroupBarWidth
                 local size2 = UnitFrames.SV.GroupBarHeight
-                --elseif baseName == "RaidGroup" then
+                -- elseif baseName == "RaidGroup" then
                 --    size1 = UnitFrames.SV.RaidBarWidth
                 --    size2 = UnitFrames.SV.RaidBarHeight
                 if size1 ~= nil and size2 ~= nil then
@@ -2280,7 +2280,7 @@ end
 -- Runs on the EVENT_UNIT_CREATED listener.
 -- Used to create DefaultFrames UI controls and request delayed CustomFrames group frame update
 function UnitFrames.OnUnitCreated(eventCode, unitTag)
-    --d( string_format("[%s] OnUnitCreated: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
+    -- d( string_format("[%s] OnUnitCreated: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
     -- Create on-fly UI controls for default UI group member and reread his values
     if g_DefaultFrames.SmallGroup then
         UnitFrames.DefaultFramesCreateUnitGroupControls(unitTag)
@@ -2312,7 +2312,7 @@ end
 -- Runs on the EVENT_UNIT_DESTROYED listener.
 -- Used to request delayed CustomFrames group frame update
 function UnitFrames.OnUnitDestroyed(eventCode, unitTag)
-    --d( string_format("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
+    -- d( string_format("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
     -- Make sure we do not try to update bars on this unitTag before full group update is complete
     if "group" == zo_strsub(unitTag, 0, 5) then
         UnitFrames.CustomFrames[unitTag] = nil
@@ -2571,11 +2571,11 @@ function UnitFrames.OnReticleTargetChanged(eventCode)
         if UnitFrames.CustomFrames.reticleover then
             UnitFrames.CustomFrames.reticleover.hostile = false
             UnitFrames.CustomFrames.reticleover.skull:SetHidden(true)
-            UnitFrames.CustomFrames.reticleover.control:SetHidden(true) --UnitFrames.CustomFrames.reticleover.canHide )
+            UnitFrames.CustomFrames.reticleover.control:SetHidden(true) -- UnitFrames.CustomFrames.reticleover.canHide )
         end
         -- Hide second target frame
         if UnitFrames.CustomFrames.AvaPlayerTarget then
-            UnitFrames.CustomFrames.AvaPlayerTarget.control:SetHidden(true) --UnitFrames.CustomFrames.AvaPlayerTarget.canHide )
+            UnitFrames.CustomFrames.AvaPlayerTarget.control:SetHidden(true) -- UnitFrames.CustomFrames.AvaPlayerTarget.canHide )
         end
 
         -- Revert back the color of reticle to white
@@ -3035,7 +3035,7 @@ end
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
 function UnitFrames.UpdateInvulnerable(unitTag)
     if g_savedHealth[unitTag] == nil then
-        --d( "LUIE DEBUG: Stored health is nil: ", unitTag )
+        -- d( "LUIE DEBUG: Stored health is nil: ", unitTag )
         return
     end
 
@@ -3056,7 +3056,7 @@ end
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
 function UnitFrames.UpdateShield(unitTag, value, maxValue)
     if g_savedHealth[unitTag] == nil then
-        --d( "LUIE DEBUG: Stored health is nil: ", unitTag )
+        -- d( "LUIE DEBUG: Stored health is nil: ", unitTag )
         return
     end
 
@@ -3082,7 +3082,7 @@ end
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
 function UnitFrames.UpdateTrauma(unitTag, value, maxValue)
     if g_savedHealth[unitTag] == nil then
-        --d( "LUIE DEBUG: Stored health is nil: ", unitTag )
+        -- d( "LUIE DEBUG: Stored health is nil: ", unitTag )
         return
     end
 
@@ -3327,7 +3327,7 @@ end
 
 -- Runs on the EVENT_GROUP_MEMBER_CONNECTED_STATUS listener.
 function UnitFrames.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
-    --d( string_format("DC: %s - %s", unitTag, isOnline and "Online" or "Offline" ) )
+    -- d( string_format("DC: %s - %s", unitTag, isOnline and "Online" or "Offline" ) )
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag].dead then
         UnitFrames.CustomFramesSetDeadLabel(UnitFrames.CustomFrames[unitTag], isOnline and nil or strOffline)
     end
@@ -3356,7 +3356,7 @@ end
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
 -- This handler fires every time a valid unitTag dies or is resurrected
 function UnitFrames.OnDeath(eventCode, unitTag, isDead)
-    --d( string_format("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
+    -- d( string_format("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag].dead then
         UnitFrames.ResurrectionMonitor(unitTag)
     end
@@ -3390,7 +3390,7 @@ function UnitFrames.ResurrectionMonitor(unitTag)
     if not DoesUnitExist(unitTag) then
         return
     end
-    --if not ZO_Group_IsGroupUnitTag(unitTag) then return end
+    -- if not ZO_Group_IsGroupUnitTag(unitTag) then return end
     if not UnitFrames.CustomFrames[unitTag] then
         return
     end
@@ -3672,7 +3672,7 @@ function UnitFrames.CustomFramesSetupAlternative(isWerewolf, isSiege, isMounted)
             alt.icon:ClearAnchors()
             alt.icon:SetAnchor(LEFT, alt.backdrop, RIGHT, 2, 0)
         end
-        --alt.icon:ClearAnchors()
+        -- alt.icon:ClearAnchors()
     elseif recenter then
         if UnitFrames.SV.PlayerFrameOptions == 1 then
             UnitFrames.CustomFrames.player.botInfo:SetAnchor(TOP, nil, BOTTOM, 0, 2)
@@ -3817,7 +3817,7 @@ end
 
 -- Repopulate group members, but try to update only those, that require it
 function UnitFrames.CustomFramesGroupUpdate()
-    --d( string_format("[%s] GroupUpdate", GetTimeString()) )
+    -- d( string_format("[%s] GroupUpdate", GetTimeString()) )
     -- Unregister update function and clear local flag
     eventManager:UnregisterForUpdate(g_PendingUpdate.Group.name)
     g_PendingUpdate.Group.flag = false
@@ -3912,11 +3912,11 @@ function UnitFrames.CustomFramesGroupUpdate()
 
     -- Now we have local list with valid units and we are ready to sort it
     -- FIXME: Sorting is again hardcoded to be done always
-    --if not raid or UnitFrames.SV.RaidSort then
+    -- if not raid or UnitFrames.SV.RaidSort then
     table_sort(groupList, function (x, y)
         return x.unitName < y.unitName
     end)
-    --end
+    -- end
 
     -- Loop through sorted list and put unitTag references into CustomFrames table
     local m = 0
@@ -6194,5 +6194,5 @@ function UnitFrames.SocialUpdateFrames()
     UnitFrames.ReloadValues("reticleover")
 end
 
----@class (partial) UnitFrames
+--- @class (partial) UnitFrames
 LUIE.UnitFrames = UnitFrames

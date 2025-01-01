@@ -3,11 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 -- List of effects sourced by the player that damage self that should be shown
----@class (partial) LavaAlerts
+--- @class (partial) LavaAlerts
 local LavaAlerts =
 {
     -- Player
@@ -76,5 +76,5 @@ local LavaAlerts =
     [49052] = true, -- Pellingare Prison (Allene Pellingare)
 }
 
----@class (partial) LavaAlerts
+--- @class (partial) LavaAlerts
 LUIE.Data.CrowdControl.LavaAlerts = LavaAlerts

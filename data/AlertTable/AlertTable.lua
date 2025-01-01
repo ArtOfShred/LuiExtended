@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Unitnames = LUIE.Data.UnitNames
@@ -12,7 +12,7 @@ local Abilities = LUIE.Data.Abilities
 local ZoneTable = LUIE.Data.ZoneTable
 
 
----@class (partial) AlertTable
+--- @class (partial) AlertTable
 local AlertTable =
 {
 
@@ -147,7 +147,7 @@ local AlertTable =
     --------------------------------------------------
 
     -- Shared
-    --[39058] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Bear Trap (Bear Trap)
+    -- [39058] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_UNBREAKABLE }, -- Bear Trap (Bear Trap)
 
     -- Synergy
     [12439] =
@@ -824,7 +824,7 @@ local AlertTable =
         duration = 2000,
         sound = LUIE_ALERT_SOUND_TYPE_ST,
     },                                                                                                        -- Snipe (Archer) (TG DLC)
-    --[72220] = { block = true, dodge = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, sound = LUIE_ALERT_SOUND_TYPE_ST }, -- Snipe (Archer) (TG DLC) -- This is cast from stealth - so for the time being, maybe hide.
+    -- [72220] = { block = true, dodge = true, reflect = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 2000, sound = LUIE_ALERT_SOUND_TYPE_ST }, -- Snipe (Archer) (TG DLC) -- This is cast from stealth - so for the time being, maybe hide.
     [72222] = { power = true, auradetect = true, priority = 2, sound = LUIE_ALERT_SOUND_TYPE_POWER_DEFENSE }, -- Shadow Cloak (Archer) (TG DLC)
 
     [77472] = { power = true, auradetect = true, priority = 2, sound = LUIE_ALERT_SOUND_TYPE_POWER_DEFENSE }, -- Til Death (Bodyguard) (DB DLC)
@@ -1764,7 +1764,7 @@ local AlertTable =
         duration = 5100,
         sound = LUIE_ALERT_SOUND_TYPE_AOE,
     }, -- Poison Spray (Giant Spider)
-    --[4737] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_SNARE, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Encase (Giant Spider)
+    -- [4737] = { avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, cc = LUIE_CC_TYPE_SNARE, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Encase (Giant Spider)
     [13382] =
     {
         interrupt = true,
@@ -1952,7 +1952,7 @@ local AlertTable =
     },                                                                                                                 -- Swarmburst (Kotu Gava Broodmother)
 
     [87022] = { summon = true, auradetect = true, priority = 3, fakeName = "", sound = LUIE_ALERT_SOUND_TYPE_SUMMON }, -- Summon Swarm (Fetcherfly Nest)
-    --[85645] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Bombard (Fetcherfly Nest)
+    -- [85645] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, duration = 1000 }, -- Bombard (Fetcherfly Nest)
     [87125] =
     {
         avoid = true,
@@ -2005,7 +2005,7 @@ local AlertTable =
         fakeName = "",
         sound = LUIE_ALERT_SOUND_TYPE_DESTROY,
     }, -- Summon Dark Anchor (Daedric Synergy)
-    --[68449] = { avoid = true, refire = 1000, priority = 3, duration = 500, eventdetect = true, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Explosive Charge (Daedric Synergy) -- TODO: Needs result if ever enabled.
+    -- [68449] = { avoid = true, refire = 1000, priority = 3, duration = 500, eventdetect = true, sound = LUIE_ALERT_SOUND_TYPE_AOE }, -- Explosive Charge (Daedric Synergy) -- TODO: Needs result if ever enabled.
 
     [48121] =
     {
@@ -2187,7 +2187,7 @@ local AlertTable =
         duration = 1300,
         sound = LUIE_ALERT_SOUND_TYPE_AOE,
     }, -- Lava Geyser (Flame Atronach)
-    --[50216] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 2000, neverShowInterrupt = true }, -- Combustion (Flame Atronach)
+    -- [50216] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 2000, neverShowInterrupt = true }, -- Combustion (Flame Atronach)
 
     [5017] =
     {
@@ -2262,7 +2262,7 @@ local AlertTable =
         cc = LUIE_CC_TYPE_STAGGER,
         sound = LUIE_ALERT_SOUND_TYPE_AOE_CC,
     }, -- Tremor AOE (Flesh Colossus) ]]
-    --TODO: Removed (also - is this AOE?)
+    -- TODO: Removed (also - is this AOE?)
     [66869] =
     {
         block = true,
@@ -2294,7 +2294,7 @@ local AlertTable =
         cc = LUIE_CC_TYPE_STUN,
         sound = LUIE_ALERT_SOUND_TYPE_AOE_CC,
     }, -- Stumble Forward (Flesh Colossus) -- TODO: Is this AOE?
-    --[67772] = { power = true, priority = 2, auradetect = true, sound = LUIE_ALERT_SOUND_TYPE_POWER_DAMAGE }, -- Enraged (Flesh Colossus) -- TODO: Does this have an aura now?
+    -- [67772] = { power = true, priority = 2, auradetect = true, sound = LUIE_ALERT_SOUND_TYPE_POWER_DAMAGE }, -- Enraged (Flesh Colossus) -- TODO: Does this have an aura now?
     [49430] =
     {
         block = true,
@@ -2402,7 +2402,7 @@ local AlertTable =
         postCast = 1750,
         sound = LUIE_ALERT_SOUND_TYPE_TRAVELER,
     }, -- Lightning Onslaught (Spider Daedra)
-    --[89306] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Spiderling, cc = LUIE_CC_TYPE_SNARE, duration = 1000, postCast = 4000, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Web (Spiderling)
+    -- [89306] = { avoid = true, priority = 3, result = ACTION_RESULT_BEGIN, eventdetect = true, fakeName = Unitnames.NPC_Spiderling, cc = LUIE_CC_TYPE_SNARE, duration = 1000, postCast = 4000, sound = LUIE_ALERT_SOUND_TYPE_GROUND }, -- Web (Spiderling)
     [8782] =
     {
         block = true,
@@ -3065,7 +3065,7 @@ local AlertTable =
         duration = 2000,
         sound = LUIE_ALERT_SOUND_TYPE_HEAL,
     },                                                                                                                -- Convalescence (Lamia)
-    --[7831] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2500, duration = 5000 }, -- Harmony (Lamia)
+    -- [7831] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, refire = 2500, duration = 5000 }, -- Harmony (Lamia)
     [9680] = { summon = true, auradetect = true, priority = 2, fakeName = "", sound = LUIE_ALERT_SOUND_TYPE_SUMMON }, -- Summon Spectral Lamia
 
     [3860] =
@@ -3155,8 +3155,8 @@ local AlertTable =
         result = ACTION_RESULT_BEGIN,
         sound = LUIE_ALERT_SOUND_TYPE_DESTROY,
     }, -- Ice Pillar (Ogre Shaman)
-    --[64540] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 4000, sound = LUIE_ALERT_SOUND_TYPE_HEAL }, -- Freeze Wounds (Ogre Shaman)
-    --[53137] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 4000, sound = LUIE_ALERT_SOUND_TYPE_HEAL }, -- Freeze Wounds (Ogre Shaman)
+    -- [64540] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 4000, sound = LUIE_ALERT_SOUND_TYPE_HEAL }, -- Freeze Wounds (Ogre Shaman)
+    -- [53137] = { interrupt = true, priority = 3, eventdetect = true, result = ACTION_RESULT_BEGIN, duration = 4000, sound = LUIE_ALERT_SOUND_TYPE_HEAL }, -- Freeze Wounds (Ogre Shaman)
 
     [21582] =
     {
@@ -3498,11 +3498,11 @@ local AlertTable =
         duration = 800,
         sound = LUIE_ALERT_SOUND_TYPE_ST,
     },                                                                                                       -- Double Strike (Dwemer Spider)
-    --[7717] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 1600, neverShowInterrupt = true }, -- Detonation (Dwemer Spider)
+    -- [7717] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, duration = 1600, neverShowInterrupt = true }, -- Detonation (Dwemer Spider)
     [19970] = { power = true, priority = 3, auradetect = true, sound = LUIE_ALERT_SOUND_TYPE_POWER_DAMAGE }, -- Static Field (Dwemer Spider - Overcharge Synergy)
-    --[20207] = { interrupt = true, priority = 3, eventdetect = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
-    --[20505] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 2000, neverShowInterrupt = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
-    --[20222] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 2000, neverShowInterrupt = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    -- [20207] = { interrupt = true, priority = 3, eventdetect = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    -- [20505] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 2000, neverShowInterrupt = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
+    -- [20222] = { block = true, avoid = true, priority = 3, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 2000, neverShowInterrupt = true }, -- Overcharge (Dwemer Spider - Overcharge Synergy)
 
     [64479] =
     {
@@ -3645,7 +3645,7 @@ local AlertTable =
         refire = 500,
         sound = LUIE_ALERT_SOUND_TYPE_AOE_CC,
     }, -- Focused Charge (Clannfear - Snapjaw)
-    --[83016] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 1000, effectOnlyInterrupt = true, fakeName = Unitnames.NPC_Clannfear }, -- Necrotic Explosion (Clannfear - Snapjaw)
+    -- [83016] = { block = true, avoid = true, priority = 2, eventdetect = true, result = ACTION_RESULT_EFFECT_GAINED, refire = 250, duration = 1000, effectOnlyInterrupt = true, fakeName = Unitnames.NPC_Clannfear }, -- Necrotic Explosion (Clannfear - Snapjaw)
 
     -- World Boss - Nindaeril's Perch
     [83515] =
@@ -3857,7 +3857,7 @@ local AlertTable =
         duration = 5100,
         bossName = true,
     },                                                                                                                    -- Venom Spray (Old Widow Silk)
-    --[84159] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 100, postCast = 500 }, -- Spit Poison (Old Widow Silk)
+    -- [84159] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN, duration = 100, postCast = 500 }, -- Spit Poison (Old Widow Silk)
     [84161] = { avoid = true, priority = 1, auradetect = true, refire = 10000, bossName = true, hiddenDuration = 10000 }, -- Spit Poison (Old Widow Silk)
 
     -- World Boss - Mudcrab Beach
@@ -4409,7 +4409,7 @@ local AlertTable =
     -- Stage 3 - The Marsh
     [8244] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN },     -- Devastate (Corprus Husk)
     [8247] = { block = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN, refire = 1750 }, -- Vomit (Corprus Husk)
-    --[22109] = { avoid = true, priority = 3, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, refire = 250 }, -- Contaminate (Corprus Husk)
+    -- [22109] = { avoid = true, priority = 3, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true, refire = 250 }, -- Contaminate (Corprus Husk)
 
     [83493] = { avoid = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, refire = 1000 }, -- CLST - Poison Cloud (Poison Cloud)
 
@@ -4466,7 +4466,7 @@ local AlertTable =
 
     -- Stage 6 - The Grove
     [54608] = { dodge = true, priority = 1, result = ACTION_RESULT_BEGIN },               -- Drain Resource (Pacthunter Ranger)
-    --[54512] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true }, -- Regeneration Aura (Nature's Blessing)
+    -- [54512] = { power = true, priority = 1, result = ACTION_RESULT_EFFECT_GAINED, eventdetect = true }, -- Regeneration Aura (Nature's Blessing)
     [52820] = { block = true, dodge = true, priority = 1, result = ACTION_RESULT_BEGIN }, -- Acid Spray (Pishna Longshot)
     [52825] =
     {
@@ -4576,7 +4576,7 @@ local AlertTable =
     [67691] = { power = true, priority = 1, result = ACTION_RESULT_BEGIN, eventdetect = true, bossName = true },         -- Reunite (Maxus the Many)
 
     -- Stage 2 - Seht's Balcony
-    --[71047] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunderbolt (Clockwork Sentry)
+    -- [71047] = { block = true, avoid = true, priority = 3, result = ACTION_RESULT_BEGIN }, -- Thunderbolt (Clockwork Sentry)
     [72067] = { power = true, priority = 2, auradetect = true }, -- Energizing (Clockwork Sentry)
     [69364] = { avoid = true, priority = 1, auradetect = true }, -- Barrage Function (Centurion Champion)
     [66904] = { power = true, priority = 1, auradetect = true }, -- Full Defense (Centurion Champion)
@@ -6464,5 +6464,5 @@ local AlertTable =
     [83430] = { block = true, bs = true, dodge = true, priority = 3, result = ACTION_RESULT_BEGIN },           -- Skeletal Smash (Ice Wraith)
 }
 
----@class (partial) AlertTable
+--- @class (partial) AlertTable
 LUIE.Data.AlertTable = AlertTable

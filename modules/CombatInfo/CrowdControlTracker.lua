@@ -3,11 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
----@class (partial) CombatInfo
+--- @class (partial) CombatInfo
 local CombatInfo = LUIE.CombatInfo
----@class (partial) CrowdControlTracker
+--- @class (partial) CrowdControlTracker
 local CrowdControlTracker = CombatInfo.CrowdControlTracker
 
 local Effects = LUIE.Data.Effects
@@ -381,7 +381,7 @@ function CrowdControlTracker:OnCombat(eventCode, result, isError, abilityName, a
         return
     end
 
-    --51894
+    -- 51894
     -----------------DISORIENT PROCESSING-------------------------------
 
     if result == ACTION_RESULT_EFFECT_FADED and ((not malformedName and targetName == LUIE.PlayerNameRaw) or (malformedName and (targetName == LUIE.PlayerNameRaw .. "^Mx" or targetName == LUIE.PlayerNameRaw .. "^Fx"))) then
@@ -935,7 +935,8 @@ end
 
 function CrowdControlTracker:GetDefaultIcon(ccType)
     -- Define mapping of action results to icons
-    local iconMap = {
+    local iconMap =
+    {
         [ACTION_RESULT_STUNNED] = LUIE_CC_ICON_STUN,
         [ACTION_RESULT_KNOCKBACK] = LUIE_CC_ICON_KNOCKBACK,
         [ACTION_RESULT_LEVITATED] = LUIE_CC_ICON_PULL,
@@ -951,7 +952,7 @@ function CrowdControlTracker:GetDefaultIcon(ccType)
         [ACTION_RESULT_BLOCKED] = LUIE_CC_ICON_IMMUNE,
         [ACTION_RESULT_BLOCKED_DAMAGE] = LUIE_CC_ICON_IMMUNE,
     }
-    
+
     return iconMap[ccType]
 end
 
@@ -969,18 +970,19 @@ end
 
 function CrowdControlTracker:SetupDefaultIcon(abilityId, ccType)
     -- Map CC types to action results for special stun effects
-    local stunOverrideMap = {
+    local stunOverrideMap =
+    {
         [LUIE_CC_TYPE_KNOCKBACK] = ACTION_RESULT_KNOCKBACK,
         [LUIE_CC_TYPE_PULL] = ACTION_RESULT_LEVITATED,
     }
-    
+
     -- Override ccType for stun effects with special handling
-    if ccType == ACTION_RESULT_STUNNED 
-        and Effects.EffectOverride[abilityId] 
-        and Effects.EffectOverride[abilityId].cc then
+    if  ccType == ACTION_RESULT_STUNNED
+    and Effects.EffectOverride[abilityId]
+    and Effects.EffectOverride[abilityId].cc then
         ccType = stunOverrideMap[Effects.EffectOverride[abilityId].cc] or ccType
     end
-    
+
     return self:GetDefaultIcon(ccType)
 end
 
@@ -999,7 +1001,7 @@ function CrowdControlTracker:OnDraw(abilityId, abilityIcon, ccDuration, result, 
         return
     end
 
-    --Override icon with default if enabled
+    -- Override icon with default if enabled
     if CombatInfo.SV.cct.useDefaultIcon and result ~= ACTION_RESULT_AREA_EFFECT and self:ShouldUseDefaultIcon(abilityId) == true then
         abilityIcon = self:SetupDefaultIcon(abilityId, result)
     end
@@ -1246,16 +1248,17 @@ end
 
 function CrowdControlTracker:CCPriority(ccType)
     -- Map CC types to their priority tables
-    local priorityMap = {
-        [1] = PriorityOne,    -- STUN
-        [2] = PriorityTwo,    -- FEAR/CHARM
-        [3] = PriorityThree,  -- DISORIENT
-        [4] = PriorityFour,   -- SILENCE
-        [6] = PrioritySix,    -- ROOT
-        [7] = PrioritySeven,  -- AOE
-        [8] = PriorityEight,  -- SNARE
+    local priorityMap =
+    {
+        [1] = PriorityOne,   -- STUN
+        [2] = PriorityTwo,   -- FEAR/CHARM
+        [3] = PriorityThree, -- DISORIENT
+        [4] = PriorityFour,  -- SILENCE
+        [6] = PrioritySix,   -- ROOT
+        [7] = PrioritySeven, -- AOE
+        [8] = PriorityEight, -- SNARE
     }
-    
+
     return priorityMap[ccType]
 end
 
@@ -1464,8 +1467,8 @@ function CrowdControlTracker:VarReset()
     self.disorientsQueue = {}
     self.fearsQueue = {}
     self.negatesQueue = {}
-    --self.rootsQueue = {}
-    --self.snaresQueue = {}
+    -- self.rootsQueue = {}
+    -- self.snaresQueue = {}
     self.currentCC = 0
     PriorityOne = { endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = "" }
     PriorityTwo = { endTime = 0, abilityId = 0, abilityIcon = "", hitValue = 0, result = 0, abilityName = "" }

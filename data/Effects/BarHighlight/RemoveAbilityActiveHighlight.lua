@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,7 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- EFFECTS TABLE FOR BAR HIGHLIGHT RELATED OVERRIDES
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) RemoveAbilityActiveHighlight
+--- @class (partial) RemoveAbilityActiveHighlight
 local RemoveAbilityActiveHighlight =
 {
     -- Vampire
@@ -25,5 +25,5 @@ local RemoveAbilityActiveHighlight =
     [135841] = true, -- Sated Fury
 }
 
----@class (partial) RemoveAbilityActiveHighlight
+--- @class (partial) RemoveAbilityActiveHighlight
 LUIE.Data.Effects.RemoveAbilityActiveHighlight = RemoveAbilityActiveHighlight

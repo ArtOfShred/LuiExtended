@@ -3,17 +3,17 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 -- ChatAnnouncements namespace
----@class (partial) ChatAnnouncements
+--- @class (partial) ChatAnnouncements
 local ChatAnnouncements = LUIE.ChatAnnouncements
 
----@type Data
+--- @type Data
 local Data = LUIE.Data
----@type Effects
+--- @type Effects
 local Effects = Data.Effects
----@type Quests
+--- @type Quests
 local Quests = Data.Quests
 
 local ColorizeColors = ChatAnnouncements.Colors
@@ -178,11 +178,11 @@ end
 -- TODO: Check if there is an equivalency in one of the handlers for this
 local GUILD_SKILL_ICONS =
 {
-    [45] = "esoui/art/icons/mapkey/mapkey_fightersguild.dds",
-    [44] = "esoui/art/icons/mapkey/mapkey_magesguild.dds",
-    [55] = "esoui/art/icons/mapkey/mapkey_undaunted.dds",
-    [117] = "esoui/art/icons/mapkey/mapkey_thievesguild.dds",
-    [118] = "esoui/art/icons/mapkey/mapkey_darkbrotherhood.dds",
+    [45] = "/esoui/art/icons/mapkey/mapkey_fightersguild.dds",
+    [44] = "/esoui/art/icons/mapkey/mapkey_magesguild.dds",
+    [55] = "/esoui/art/icons/mapkey/mapkey_undaunted.dds",
+    [117] = "/esoui/art/icons/mapkey/mapkey_thievesguild.dds",
+    [118] = "/esoui/art/icons/mapkey/mapkey_darkbrotherhood.dds",
     [130] = "LuiExtended/media/unitframes/mapkey_psijicorder.dds",
 }
 

@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -37,7 +37,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Fake Stagger Effects - For debuffs applied on the player or on a target that don't need to check for a removal condition (Useful for effects like staggers where this is no way to break out of them for the short duration they are applied.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) FakeStagger
+--- @class (partial) FakeStagger
 local FakeStagger =
 {
     -- Player Basic
@@ -45,39 +45,39 @@ local FakeStagger =
     [141004] = { duration = 2000 }, -- Hard Dismount (Passenger Mount)
 
     -- Dual Wield
-    [126640] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Hidden Blade)
-    [126650] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Shrouded Daggers)
-    [126655] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Flying Blade)
+    [126640] = { icon = "/esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Hidden Blade)
+    [126650] = { icon = "/esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Shrouded Daggers)
+    [126655] = { icon = "/esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Flying Blade)
 
     -- Bow
-    [38649] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Poison Arrow (Venom Arrow)
+    [38649] = { icon = "/esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Poison Arrow (Venom Arrow)
 
     -- Destruction Staff
-    [48009] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Crushing Shock)
+    [48009] = { icon = "/esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Crushing Shock)
 
     -- On Player
-    [2874] = { duration = 433 },                                                                                        -- Staggered (Generic Stagger applied to player by many different NPC abilities)
-    [29402] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Power Bash (Stagger when hit with Power Bash)
-    [29765] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Uber Attack (Player staggers self by hitting Blocking NPC with Heavy Attack)
-    [68971] = { duration = 433 },                                                                                       -- Staggered (Echatere - Shockwave)
-    [12426] = { duration = 433 },                                                                                       -- Raven Storm (Hagraven)
-    [32698] = { duration = 433 },                                                                                       -- Pulverize (Lurcher - Pulverize)
-    [5349] = { duration = 433 },                                                                                        -- Stagger (Ogre - Shockwave)
-    [49405] = { duration = 433 },                                                                                       -- Rear Up (Mantikora)
-    [76133] = { duration = 433 },                                                                                       -- Stumble Forward (Flesh Colossus - Blocked)
-    [65755] = { duration = 600 },                                                                                       -- Staggered (Flesh Colossus - Block Pin)
-    [68826] = { duration = 600 },                                                                                       -- Staggered (Flesh Colossus - Block Sweep)
-    [74794] = { duration = 433 },                                                                                       -- Black Winter (Harvester)
-    [32023] = { duration = 433 },                                                                                       -- Generic Stagger Enemy (Bloodfiend)
-    [17206] = { duration = 433 },                                                                                       -- Bone Saw (Bone Colossus)
-    [45576] = { duration = 433 },                                                                                       -- Generic Stagger Enemy (Werewolf)
-    [69157] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Retaliation (Winterborn Warrior)
-    [69153] = { duration = 1000 },                                                                                      -- Retaliation (Winterborn Warrior)
-    [54050] = { duration = 500 },                                                                                       -- Divine Leap Stun (Vosh Rakh Devoted)
-    [77927] = { duration = 433 },                                                                                       -- Staggered (Bodyguard) (DB DLC)
-    [74483] = { duration = 1000 },                                                                                      -- Fiery Grip (Sentinel) (TG DLC)
-    [35115] = { duration = 1000 },                                                                                      -- Pull (Extended Chains) (Cyrodiil Guard T2)
-    [47020] = { duration = 1000 },                                                                                      -- Pull (Puncturing Chains) (Cyrodiil Guard T2)
+    [2874] = { duration = 433 },                                                                                         -- Staggered (Generic Stagger applied to player by many different NPC abilities)
+    [29402] = { icon = "/esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Power Bash (Stagger when hit with Power Bash)
+    [29765] = { icon = "/esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Uber Attack (Player staggers self by hitting Blocking NPC with Heavy Attack)
+    [68971] = { duration = 433 },                                                                                        -- Staggered (Echatere - Shockwave)
+    [12426] = { duration = 433 },                                                                                        -- Raven Storm (Hagraven)
+    [32698] = { duration = 433 },                                                                                        -- Pulverize (Lurcher - Pulverize)
+    [5349] = { duration = 433 },                                                                                         -- Stagger (Ogre - Shockwave)
+    [49405] = { duration = 433 },                                                                                        -- Rear Up (Mantikora)
+    [76133] = { duration = 433 },                                                                                        -- Stumble Forward (Flesh Colossus - Blocked)
+    [65755] = { duration = 600 },                                                                                        -- Staggered (Flesh Colossus - Block Pin)
+    [68826] = { duration = 600 },                                                                                        -- Staggered (Flesh Colossus - Block Sweep)
+    [74794] = { duration = 433 },                                                                                        -- Black Winter (Harvester)
+    [32023] = { duration = 433 },                                                                                        -- Generic Stagger Enemy (Bloodfiend)
+    [17206] = { duration = 433 },                                                                                        -- Bone Saw (Bone Colossus)
+    [45576] = { duration = 433 },                                                                                        -- Generic Stagger Enemy (Werewolf)
+    [69157] = { icon = "/esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Retaliation (Winterborn Warrior)
+    [69153] = { duration = 1000 },                                                                                       -- Retaliation (Winterborn Warrior)
+    [54050] = { duration = 500 },                                                                                        -- Divine Leap Stun (Vosh Rakh Devoted)
+    [77927] = { duration = 433 },                                                                                        -- Staggered (Bodyguard) (DB DLC)
+    [74483] = { duration = 1000 },                                                                                       -- Fiery Grip (Sentinel) (TG DLC)
+    [35115] = { duration = 1000 },                                                                                       -- Pull (Extended Chains) (Cyrodiil Guard T2)
+    [47020] = { duration = 1000 },                                                                                       -- Pull (Puncturing Chains) (Cyrodiil Guard T2)
 
     -- Quest
     [144339] = { duration = 433 }, -- Staggered (Prince Boar) - A Foe Most Porcine
@@ -103,11 +103,11 @@ local FakeStagger =
     [121476] = { duration = 433 }, -- Devastating Leap (Bone Flayer) (Bright Moons, Warm Sands)
 
     -- On Target
-    [86310] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 500 }, -- Stagger (Player Blocks charged NPC attack)
-    [21972] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 500 }, -- Stagger (Player interrupts NPC cast)
+    [86310] = { icon = "/esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 500 }, -- Stagger (Player Blocks charged NPC attack)
+    [21972] = { icon = "/esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 500 }, -- Stagger (Player interrupts NPC cast)
 
     -- Dragonstar Arena
-    [53290] = { icon = "esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Sovngarde Icemage)
+    [53290] = { icon = "/esoui/art/icons/ability_debuff_stagger.dds", name = Abilities.Innate_Stagger, duration = 433 }, -- Stagger (Sovngarde Icemage)
 
     -- Maelstrom Arena
     [72012] = { duration = 700 }, -- Stagger (Iceberg)
@@ -148,5 +148,5 @@ local FakeStagger =
     [109810] = { duration = 600 }, -- Frozen Aura (Icestalker)
 }
 
----@class (partial) FakeStagger
+--- @class (partial) FakeStagger
 LUIE.Data.Effects.FakeStagger = FakeStagger

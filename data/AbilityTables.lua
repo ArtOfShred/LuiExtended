@@ -3,11 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 -- AbilityTables namespace
----@class (partial) AbilityTables
+--- @class (partial) AbilityTables
 local AbilityTables =
 {
     -- ---------------------------------------------------
@@ -44,8 +44,8 @@ local AbilityTables =
     Innate_Mounted_Passenger = GetString(LUIE_STRING_SKILL_MOUNTED_PASSENGER),
     Innate_Vanity_Pet = GetString(SI_COLLECTIBLECATEGORYTYPE3),
     Innate_Assistant = GetString(SI_COLLECTIBLECATEGORYTYPE8),
-    --Innate_Sprint                     = 15614, -- Sprint
-    --Innate_Gallop                     = GetString(LUIE_STRING_SKILL_MOUNT_SPRINT), -- Gallop
+    -- Innate_Sprint                     = 15614, -- Sprint
+    -- Innate_Gallop                     = GetString(LUIE_STRING_SKILL_MOUNT_SPRINT), -- Gallop
     Innate_Brace = 29761,                                                              -- Brace
     Innate_Block = 2890,                                                               -- Block
     Innate_Bash = 21970,                                                               -- Bash
@@ -224,7 +224,7 @@ local AbilityTables =
 
     -- Mementos
     Memento_Almalexias_Lantern = GetCollectibleName(341),
-    --Memento_Battered_Bear_Trap        = GetCollectibleName(343),
+    -- Memento_Battered_Bear_Trap        = GetCollectibleName(343),
     Memento_Bonesnap_Binding_Stone = GetCollectibleName(348),
     Memento_Discourse_Amaranthine = GetCollectibleName(345),
     Menento_Lenas_Wand_of_Finding = GetCollectibleName(340),
@@ -1176,5 +1176,5 @@ for k, v in pairs(AbilityTables) do
 end
 
 -- Export string data to global namespace
----@class (partial) AbilityTables
+--- @class (partial) AbilityTables
 LUIE.Data.Abilities = AbilityTables

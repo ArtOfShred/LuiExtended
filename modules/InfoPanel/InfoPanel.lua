@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 -- InfoPanel namespace
 LUIE.InfoPanel = {}
@@ -30,7 +30,7 @@ local colors =
     GRAY = { r = 0.5, g = 0.5, b = 0.5 },
 }
 
---local fakeControl   = {}
+-- local fakeControl   = {}
 
 InfoPanel.Enabled = false
 InfoPanel.Defaults =
@@ -46,11 +46,11 @@ local infoPanelFontSize = 16
 local infoPanelFontStyle = "soft-shadow-thin"
 local g_infoPanelFont = string_format("%s|%d|%s", infoPanelFontFace, infoPanelFontSize, infoPanelFontStyle)
 
----@type TopLevelWindow
+--- @type TopLevelWindow
 local uiPanel = nil
----@type Control
+--- @type Control
 local uiTopRow = nil
----@type Control
+--- @type Control
 local uiBotRow = nil
 local uiClock = {}
 local uiGems = {}
@@ -128,7 +128,7 @@ local function CreateUIControls()
     uiPanel:SetDrawLayer(DL_BACKGROUND)
     uiPanel:SetDrawTier(DT_LOW)
     uiPanel:SetDrawLevel(DL_CONTROLS)
-    --uiPanel.bg = UI:Backdrop( uiPanel, "fill", nil, nil, nil, false )
+    -- uiPanel.bg = UI:Backdrop( uiPanel, "fill", nil, nil, nil, false )
 
     panelFragment = ZO_HUDFadeSceneFragment:New(uiPanel, 0, 0)
 
@@ -145,50 +145,50 @@ local function CreateUIControls()
     uiPanel.div:SetHeight(4)
 
     uiTopRow = UI:Control(uiPanel, { TOP, TOP, 0, 2 }, { 300, 20 }, false)
-    --uiTopRow.bg = UI:Backdrop( uiTopRow, "fill", nil, nil, nil, false )
+    -- uiTopRow.bg = UI:Backdrop( uiTopRow, "fill", nil, nil, nil, false )
 
     uiBotRow = UI:Control(uiPanel, { BOTTOM, BOTTOM, 0, -2 }, { 300, 20 }, false)
-    --uiBotRow.bg = UI:Backdrop( uiBotRow, "fill", nil, nil, nil, false )
+    -- uiBotRow.bg = UI:Backdrop( uiBotRow, "fill", nil, nil, nil, false )
 
     uiLatency.control = UI:Control(uiTopRow, nil, { 75, 20 }, false)
     uiLatency.icon = UI:Texture(uiLatency.control, { LEFT, LEFT }, { 24, 24 }, "/esoui/art/campaign/campaignbrowser_hipop.dds", nil, false)
     uiLatency.label = UI:Label(uiLatency.control, { LEFT, RIGHT, 0, 0, uiLatency.icon }, { 56, 20 }, { 0, 1 }, g_infoPanelFont, "11999 ms", false)
-    --uiLatency.bg = UI:Backdrop( uiLatency.control, "fill", nil, nil, nil, false )
+    -- uiLatency.bg = UI:Backdrop( uiLatency.control, "fill", nil, nil, nil, false )
 
     uiFps.label = UI:Label(uiTopRow, nil, { 50, 20 }, { 1, 1 }, g_infoPanelFont, "999 fps", false)
     uiFps.control = uiFps.label
-    --uiFps.bg = UI:Backdrop( uiFps.control, "fill", nil, nil, nil, false )
+    -- uiFps.bg = UI:Backdrop( uiFps.control, "fill", nil, nil, nil, false )
 
     uiClock.label = UI:Label(uiTopRow, nil, { 60, 20 }, { 1, 1 }, g_infoPanelFont, "88:88:88", false)
     uiClock.control = uiClock.label
-    --uiClock.bg = UI:Backdrop( uiClock.control, "fill", nil, nil, nil, false )
+    -- uiClock.bg = UI:Backdrop( uiClock.control, "fill", nil, nil, nil, false )
 
     uiGems.control = UI:Control(uiTopRow, nil, { 48, 20 }, false)
     uiGems.icon = UI:Texture(uiGems.control, { LEFT, LEFT }, { 16, 16 }, nil, nil, false)
     uiGems.label = UI:Label(uiGems.control, { LEFT, RIGHT, 2, 0, uiGems.icon }, { 32, 20 }, { 0, 1 }, g_infoPanelFont, "8/88", false)
-    --uiGems.bg = UI:Backdrop( uiGems.control, "fill", nil, nil, nil, false )
+    -- uiGems.bg = UI:Backdrop( uiGems.control, "fill", nil, nil, nil, false )
 
     uiFeedTimer.control = UI:Control(uiBotRow, nil, { 96, 20 }, false)
     uiFeedTimer.icon = UI:Texture(uiFeedTimer.control, { LEFT, LEFT }, { 28, 28 }, "/esoui/art/mounts/tabicon_mounts_up.dds", nil, false)
     uiFeedTimer.label = UI:Label(uiFeedTimer.control, { LEFT, RIGHT, 0, 0, uiFeedTimer.icon }, { 68, 20 }, { 0, 1 }, g_infoPanelFont, GetString(LUIE_STRING_PNL_TRAINNOW), false)
-    --uiFeedTimer.bg = UI:Backdrop( uiFeedTimer.control, "fill", nil, nil, nil, false )
+    -- uiFeedTimer.bg = UI:Backdrop( uiFeedTimer.control, "fill", nil, nil, nil, false )
 
     uiArmour.control = UI:Control(uiBotRow, nil, { 55, 20 }, false)
     uiArmour.icon = UI:Texture(uiArmour.control, { LEFT, LEFT }, { 24, 24 }, "/esoui/art/progression/progression_indexicon_armor_up.dds", nil, false)
     uiArmour.label = UI:Label(uiArmour.control, { LEFT, RIGHT, 0, 0, uiArmour.icon }, { 41, 20 }, { 0, 1 }, g_infoPanelFont, "100%", false)
-    --uiArmour.bg = UI:Backdrop( uiArmour.control, "fill", nil, nil, nil, false )
+    -- uiArmour.bg = UI:Backdrop( uiArmour.control, "fill", nil, nil, nil, false )
 
     uiWeapons.control = UI:Control(uiBotRow, nil, { 46, 20 }, false)
     uiWeapons.main = UI:Texture(uiWeapons.control, { LEFT, LEFT }, { 30, 30 }, "/esoui/art/progression/icon_1handplusrune.dds", nil, false)
     uiWeapons.swap = UI:Texture(uiWeapons.control, { RIGHT, RIGHT, 5 }, { 30, 30 }, "/esoui/art/progression/icon_1handplusrune.dds", nil, false)
     uiWeapons.main.slotIndex = EQUIP_SLOT_MAIN_HAND
     uiWeapons.swap.slotIndex = EQUIP_SLOT_BACKUP_MAIN
-    --uiWeapons.bg = UI:Backdrop( uiWeapons.control, "fill", nil, nil, nil, false )
+    -- uiWeapons.bg = UI:Backdrop( uiWeapons.control, "fill", nil, nil, nil, false )
 
     uiBags.control = UI:Control(uiBotRow, nil, { 78, 20 }, false)
     uiBags.icon = UI:Texture(uiBags.control, { LEFT, LEFT }, { 28, 28 }, "/esoui/art/inventory/inventory_tabicon_misc_up.dds", nil, false)
     uiBags.label = UI:Label(uiBags.control, { LEFT, RIGHT, 0, 0, uiBags.icon }, { 50, 20 }, { 0, 1 }, g_infoPanelFont, "888/888", false)
-    --uiBags.bg = UI:Backdrop( uiBags.control, "fill", nil, nil, nil, false )
+    -- uiBags.bg = UI:Backdrop( uiBags.control, "fill", nil, nil, nil, false )
 end
 
 -- Rearranges panel elements. Called from Initialize and settings menu.

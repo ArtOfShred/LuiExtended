@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 local g_ElementMovingEnabled
 
@@ -469,8 +469,8 @@ function LUIE.CreateSettings()
     --     type = "checkbox",
     --     name = GetString(LUIE_STRING_LAM_CUSTOM_ICONS_ENABLE),
     --     tooltip = GetString(LUIE_STRING_LAM_CUSTOM_ICONS_ENABLE_TP),
-    --     getFunc = function() 
-    --         return Settings.CustomIcons_Enabled 
+    --     getFunc = function()
+    --         return Settings.CustomIcons_Enabled
     --     end,
     --     setFunc = function(value)
     --         Settings.CustomIcons_Enabled = value

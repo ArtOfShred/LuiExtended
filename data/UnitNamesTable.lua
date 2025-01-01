@@ -3,10 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) UnitNames
+--- @class (partial) UnitNames
 local UnitNames =
 {
 
@@ -628,5 +628,5 @@ local UnitNames =
     Boss_Icestalker = "Icestalker",
 }
 
----@class (partial) UnitNames
+--- @class (partial) UnitNames
 LUIE.Data.UnitNames = UnitNames

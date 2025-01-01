@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -13,12 +13,12 @@ local Abilities = LUIE.Data.Abilities
 
 local zo_strformat = zo_strformat
 
----@class (partial) KeepUpgradeNameFix
+--- @class (partial) KeepUpgradeNameFix
 local KeepUpgradeNameFix =
 {
     [Abilities.Keep_Upgrade_Food_Mage_Abilities] = Abilities.Keep_Upgrade_Food_Mage_Abilities_Fix,
 }
 
 
----@class (partial) KeepUpgradeNameFix
+--- @class (partial) KeepUpgradeNameFix
 LUIE.Data.Effects.KeepUpgradeNameFix = KeepUpgradeNameFix

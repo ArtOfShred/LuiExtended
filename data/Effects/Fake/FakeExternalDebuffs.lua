@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -36,7 +36,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Fake Debuffs applied onto the player by NPCs or Events (Hostile)
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) FakeExternalDebuffs
+--- @class (partial) FakeExternalDebuffs
 local FakeExternalDebuffs =
 {
 
@@ -64,13 +64,13 @@ local FakeExternalDebuffs =
 
     [32246] = { duration = 0 },    -- Searing Steam (Steam Trap) -- Stros M'Kai
 
-    --[66153] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Trial of Flame', duration = 1500}, -- Trial of Flame (Wrothgar - Old Orsinium)
-    --[32246] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Steam Trap', duration = 2000}, -- Laser Snare (Steam Trap)
+    -- [66153] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Trial of Flame', duration = 1500}, -- Trial of Flame (Wrothgar - Old Orsinium)
+    -- [32246] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Steam Trap', duration = 2000}, -- Laser Snare (Steam Trap)
 
     -- Quest Traps
     -- TODO: Orsinium
-    --[64535] = {icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', name = 'Chilling Wind', duration = 2000}, -- Chilling Wind (Orsinium - Sorrow's Kiss)
-    --[67586] = {icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = 'Avalanche', duration = 2500}, -- Avalanche (Orsinium - Sorrow's Kiss)
+    -- [64535] = {icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', name = 'Chilling Wind', duration = 2000}, -- Chilling Wind (Orsinium - Sorrow's Kiss)
+    -- [67586] = {icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = 'Avalanche', duration = 2500}, -- Avalanche (Orsinium - Sorrow's Kiss)
 
     -- Justice NPC's
     [63160] = { duration = 2000 },                     -- Heavy Blow Knockdown (Justice Guard)
@@ -81,7 +81,7 @@ local FakeExternalDebuffs =
     [63168] = { duration = 3500, ignoreBegin = true }, -- Cage Talons (Justice Guard 1H + 2H)
 
     -- Standard NPC Abilities
-    [29401] = { duration = 3000 }, --Power Bash (NPC Disorient)
+    [29401] = { duration = 3000 }, -- Power Bash (NPC Disorient)
     [14926] = { duration = 2000 }, -- Charge (Human NPC)
     [10650] = { duration = 0 },    -- Oil Drenched
     [79930] = { duration = 2500 }, -- Lunge (Tracker) (Morrowind)
@@ -91,8 +91,8 @@ local FakeExternalDebuffs =
     [74336] = { duration = 2000 },                     -- Bog Burst (Haj Mota)
     [14523] = { duration = 6000, ignoreBegin = true }, -- Helljoint (Wolf)
     [85394] = { duration = 8000 },                     -- Slash (Cliff Strider Matriach)
-    [55862] = { duration = 8000 },                     --Storm Bound (Wamasu - Boss) (DOT)
-    [55863] = { duration = 8000 },                     --Storm Bound (Wamasu - Boss) (SNARE)
+    [55862] = { duration = 8000 },                     -- Storm Bound (Wamasu - Boss) (DOT)
+    [55863] = { duration = 8000 },                     -- Storm Bound (Wamasu - Boss) (SNARE)
 
     -- Daedra
     [50023] = { duration = 4000, ignoreBegin = true }, -- Lightning Rod (Air Atronach)
@@ -303,5 +303,5 @@ local FakeExternalDebuffs =
     [109808] = { duration = 0 },     -- Frostbite (Icestalker)
 }
 
----@class (partial) FakeExternalDebuffs
+--- @class (partial) FakeExternalDebuffs
 LUIE.Data.Effects.FakeExternalDebuffs = FakeExternalDebuffs

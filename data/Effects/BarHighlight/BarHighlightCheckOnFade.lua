@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -24,7 +24,7 @@ local zo_strformat = zo_strformat
 -- If durationMod value is set to an ID, this value will be subtracted from the final duration (UNUSED)
 -- Note that any secondary id's for Bar Highlight in the table above will set their id to the original tracked id here
 -- Note all effects will check unitTag unless an id2Tag or id3Tag are specified in which case they will switch unitTags when searching for other ids.
----@class (partial) BarHighlightCheckOnFade
+--- @class (partial) BarHighlightCheckOnFade
 local BarHighlightCheckOnFade =
 {
 
@@ -45,7 +45,7 @@ local BarHighlightCheckOnFade =
     [85552] = { id1 = 85552, unitTag = "player" },                      -- Living Vines (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
     [85850] = { id1 = 85850, unitTag = "player" },                      -- Leeching Vines (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
     [85851] = { id1 = 85851, unitTag = "player" },                      -- Living Trellis (If player mouses over target with this ability and mouses off and has this ability on themselves, we want to resume that)
-    --[85807] = { id1 = 91819, unitTag = "player" }, -- Healing Thicket -- TODO: Doesn't work for some reason
+    -- [85807] = { id1 = 91819, unitTag = "player" }, -- Healing Thicket -- TODO: Doesn't work for some reason
 
     -- Necromancer
     [121513] = { id1 = 121513, id2 = 143915, id3 = 143917, unitTag = "reticleover" }, -- Minor Maim --> Grave Grasp / Minor Maim
@@ -59,11 +59,11 @@ local BarHighlightCheckOnFade =
     [126667] = { id1 = 61665, unitTag = "player" }, -- Flying Blade --> Major Bruality
 
     -- Bow
-    --[100302] = { id1 = 38707, id2 = 100302, unitTag = "reticleover" }, -- Piercing Spray --> Bombard / Bombard / Piercing Spray
+    -- [100302] = { id1 = 38707, id2 = 100302, unitTag = "reticleover" }, -- Piercing Spray --> Bombard / Bombard / Piercing Spray
     [100302] = { id1 = 38703, id2 = 100302, unitTag = "reticleover" }, -- Piercing Spray --> Acid Spray / Piercing Spray
 
-    --113627] = { id1 = 28887, id2 = 113627, unitTag = "reticleover" }, -- Virulent Shot --> Scatter Shot / Virulent Shot
-    --113627] = { id1 = 38674, id2 = 113627, unitTag = "reticleover" }, -- Virulent Shot --> Magnum Shot / Virulent Shot
+    -- 113627] = { id1 = 28887, id2 = 113627, unitTag = "reticleover" }, -- Virulent Shot --> Scatter Shot / Virulent Shot
+    -- 113627] = { id1 = 38674, id2 = 113627, unitTag = "reticleover" }, -- Virulent Shot --> Magnum Shot / Virulent Shot
     [113627] = { id1 = 131688, id2 = 113627, unitTag = "reticleover" }, -- Virulent Shot --> Draining Shot / Virulent Shot
 
     -- Medium Armor
@@ -94,5 +94,5 @@ local BarHighlightCheckOnFade =
     [116366] = { duration = 116374, durationMod = 116366, unitTag = "player" }, -- Pariah's Resolve
 }
 
----@class (partial) BarHighlightCheckOnFade
+--- @class (partial) BarHighlightCheckOnFade
 LUIE.Data.Effects.BarHighlightCheckOnFade = BarHighlightCheckOnFade

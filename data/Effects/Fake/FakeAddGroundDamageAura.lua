@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -39,7 +39,7 @@ local zo_strformat = zo_strformat
 -- type = BUFF_EFFECT_TYPE_BUFF or BUFF_EFFECT_TYPE_DEBUFF
 -- merge = Simple merge functionality for id's - these will be considered the same ID so as not to display multiple auras (for effects that have consecutive hits with different id's like Pestilent Colossus)
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) AddGroundDamageAura
+--- @class (partial) AddGroundDamageAura
 local AddGroundDamageAura =
 {
 
@@ -166,15 +166,15 @@ local AddGroundDamageAura =
     [62990] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Blockade of Storms
     [62951] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Blockade of Frost
 
-    [83626] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Fire Storm
-    [83631] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Thunder Storm
-    [83629] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Ice Storm
-    [85127] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Fiery Rage
-    [85131] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Thunderous Rage
-    [85129] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Icy Rage
-    [83683] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Eye of Flame
-    [83687] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Eye of Lightning
-    [83685] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, --Eye of Frost
+    [83626] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fire Storm
+    [83631] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Thunder Storm
+    [83629] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ice Storm
+    [85127] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Fiery Rage
+    [85131] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Thunderous Rage
+    [85129] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Icy Rage
+    [83683] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Eye of Flame
+    [83687] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Eye of Lightning
+    [83685] = { duration = 1100, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Eye of Frost
 
     -- Restoration Staff
     [28386] = { duration = 1100, type = BUFF_EFFECT_TYPE_BUFF }, -- Grand Healing
@@ -434,5 +434,5 @@ local AddGroundDamageAura =
 }
 
 
----@class (partial) AddGroundDamageAura
+--- @class (partial) AddGroundDamageAura
 LUIE.Data.Effects.AddGroundDamageAura = AddGroundDamageAura

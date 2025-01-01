@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 -- CrowdControl.aoePlayerUltimate
@@ -15,7 +15,7 @@ local LUIE = LUIE
 -- CrowdControl.aoeNormal
 -- Increment by 1 here if we want to change priority. Best way to do this is +1 for a new ability, and shared morphs or other damage sources from a shared attack don't increment.
 -- Priority system doesn't support gaps so NEVER more than +1 here, also the FIRST ability in each tier needs to be +0 to prevent skips if a category is disabled in the options.
----@class (partial) aoeNPCBoss
+--- @class (partial) aoeNPCBoss
 local aoeNPCBoss =
 {
 
@@ -87,7 +87,7 @@ local aoeNPCBoss =
     [42601] = 1, -- Necrotic Circle (Canonreeve Oraneth)
 
     -- Elden Hollow II
-    --[34377] = 1, -- Flame Geyser (Dubroze the Infestor)
+    -- [34377] = 1, -- Flame Geyser (Dubroze the Infestor)
     [32972] = 1, -- Consuming Shadow (Murklight)
     [33050] = 1, -- Eclipse (Murklight)
     [33103] = 1, -- Spout Shadow (The Shadow Guard)
@@ -169,5 +169,5 @@ local aoeNPCBoss =
     [25213] = 1, -- Whirlwind Function (The Guardian's Strength)
 }
 
----@class (partial) aoeNPCBoss
+--- @class (partial) aoeNPCBoss
 LUIE.Data.CrowdControl.aoeNPCBoss = aoeNPCBoss

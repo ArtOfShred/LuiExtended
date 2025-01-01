@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Unitnames = LUIE.Data.UnitNames
@@ -11,7 +11,7 @@ local Zonenames = LUIE.Data.ZoneNames
 local Abilities = LUIE.Data.Abilities
 local ZoneTable = LUIE.Data.ZoneTable
 
----@class (partial) AlertZoneOverride
+--- @class (partial) AlertZoneOverride
 local AlertZoneOverride =
 {
 
@@ -121,7 +121,7 @@ local AlertZoneOverride =
         [Zonenames.Zone_Tanzelwil] = Unitnames.NPC_Ancestral_Tempest, -- Tanzelwil
         [416] = Unitnames.NPC_Ancestral_Tempest,                      -- Inner Tanzelwil
         [810] = Unitnames.Elite_Canonreeve_Malanie,                   -- Smuggler's Tunnel (Auridon)
-        --[Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Tempest, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
+        -- [Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Tempest, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
         [392] = Unitnames.NPC_Skeletal_Tempest,                       -- The Vault of Exile (Auridon)
         [394] = Unitnames.Elite_Uricantar,                            -- Ezduiin Undercroft (Auridon)
 
@@ -183,7 +183,7 @@ local AlertZoneOverride =
 
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Cutthroat,                -- Mathiisen (Auridon)
         [810] = Unitnames.NPC_Heritance_Cutthroat,                                     -- Smuggler's Tunnel (Auridon)
-        --[Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Striker, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
+        -- [Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Striker, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
         [392] = Unitnames.NPC_Skeletal_Striker,                                        -- The Vault of Exile (Auridon)
         [Zonenames.Zone_Soulfire_Plateau] = Unitnames.NPC_Skeletal_Slayer,             -- Soulfire Plateau (Auridon)
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Cutthroat,                -- Silsailen (Auridon)
@@ -214,7 +214,7 @@ local AlertZoneOverride =
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye,              -- South Beacon (Auridon)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye,                 -- Mathiisen (Auridon)
         [810] = Unitnames.NPC_Heritance_Deadeye,                                      -- Smuggler's Tunnel (Auridon)
-        --[Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Archer, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
+        -- [Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Archer, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
         [392] = Unitnames.NPC_Skeletal_Archer,                                        -- The Vault of Exile (Auridon)
         [Zonenames.Zone_Soulfire_Plateau] = Unitnames.NPC_Skeletal_Archer,            -- Soulfire Plateau (Auridon)
         [Zonenames.Zone_Hightide_Keep] = Unitnames.NPC_Skeletal_Archer,               -- Hightide Keep (Auridon)
@@ -255,7 +255,7 @@ local AlertZoneOverride =
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye,              -- South Beacon (Auridon)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye,                 -- Mathiisen (Auridon)
         [810] = Unitnames.NPC_Heritance_Deadeye,                                      -- Smuggler's Tunnel (Auridon)
-        --[Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Archer, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
+        -- [Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Archer, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
         [392] = Unitnames.NPC_Skeletal_Archer,                                        -- The Vault of Exile (Auridon)
         [Zonenames.Zone_Soulfire_Plateau] = Unitnames.NPC_Skeletal_Archer,            -- Soulfire Plateau (Auridon)
         [Zonenames.Zone_Hightide_Keep] = Unitnames.NPC_Skeletal_Archer,               -- Hightide Keep (Auridon)
@@ -296,7 +296,7 @@ local AlertZoneOverride =
         [Zonenames.Zone_South_Beacon] = Unitnames.NPC_Sea_Viper_Deadeye,              -- South Beacon (Auridon)
         [Zonenames.Zone_Mathiisen] = Unitnames.NPC_Heritance_Deadeye,                 -- Mathiisen (Auridon)
         [810] = Unitnames.NPC_Heritance_Deadeye,                                      -- Smuggler's Tunnel (Auridon)
-        --[Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Archer, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
+        -- [Zonenames.Zone_Castle_Rilis] = Unitnames.NPC_Skeletal_Archer, -- Castle Rilis (Auridon) -- Can't, elite here stops this from working
         [392] = Unitnames.NPC_Skeletal_Archer,                                        -- The Vault of Exile (Auridon)
         [Zonenames.Zone_Soulfire_Plateau] = Unitnames.NPC_Skeletal_Archer,            -- Soulfire Plateau (Auridon)
         [Zonenames.Zone_Hightide_Keep] = Unitnames.NPC_Skeletal_Archer,               -- Hightide Keep (Auridon)
@@ -331,9 +331,9 @@ local AlertZoneOverride =
         [681] = Unitnames.NPC_Flame_Atronach, -- City of Ash II
     },
 
-    --[88554] = { -- Summon the Dead (Necromancer)
+    -- [88554] = { -- Summon the Dead (Necromancer)
     --
-    --},
+    -- },
     [88555] =
     {                                                                                 -- Summon the Dead (Necromancer)
         [Zonenames.Zone_Tower_of_the_Vale] = Unitnames.Elite_Sanessalmo,              -- Tower of the Vale (Auridon)
@@ -347,7 +347,7 @@ local AlertZoneOverride =
         [Zonenames.Zone_Hectahame_Arboretum] = Unitnames.NPC_Veiled_Necromancer,      -- Hectahame Arboretum
         [Zonenames.Zone_Hectahame_Ritual_Chamber] = Unitnames.NPC_Veiled_Necromancer, -- Hectahame Ritual Chamber
     },
-    --[88556] = { -- Summon the Dead (Necromancer)
+    -- [88556] = { -- Summon the Dead (Necromancer)
     --
 
     [13397] =
@@ -356,10 +356,10 @@ local AlertZoneOverride =
         [932] = Unitnames.NPC_Spiderkith_Broodnurse, -- Crypt of Hearts II
     },
 
-    --},
+    -- },
     [10805] =
     {                                                                          -- Ignite (Synergy)
-        --QUESTS
+        -- QUESTS
         [1013] = Unitnames.NPC_Dessicated_Fire_Mage,                           -- Summerset (The Mind Trap)
         -- Auridon
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary,       -- Silsailen (Auridon)
@@ -422,7 +422,7 @@ local AlertZoneOverride =
     },
     [47095] =
     {                                                                          -- Fire Rune (Fire Mage)
-        --QUESTS
+        -- QUESTS
         [1013] = Unitnames.NPC_Dessicated_Fire_Mage,                           -- Summerset (The Mind Trap)
         -- Auridon
         [Zonenames.Zone_Silsailen] = Unitnames.NPC_Heritance_Incendiary,       -- Silsailen (Auridon)
@@ -936,5 +936,5 @@ local AlertZoneOverride =
     },
 }
 
----@class (partial) AlertZoneOverride
+--- @class (partial) AlertZoneOverride
 LUIE.Data.AlertZoneOverride = AlertZoneOverride

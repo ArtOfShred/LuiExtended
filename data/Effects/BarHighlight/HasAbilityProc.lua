@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -20,11 +20,11 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- List of abilities flagged to display a Proc highlight / sound notification when an ability with a matching name appears as a buff.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) HasAbilityProc
+--- @class (partial) HasAbilityProc
 local HasAbilityProc =
 {
     [Abilities.Skill_Crystal_Fragments] = 46327,
 }
 
----@class (partial) HasAbilityProc
+--- @class (partial) HasAbilityProc
 LUIE.Data.Effects.HasAbilityProc = HasAbilityProc

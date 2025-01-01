@@ -3,14 +3,14 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 -- Just a copy of esoui/ingame/skillsadvisor/gamepad/skillsadvisor_suggestions_gamepad.lua, this is the easiest way to override for custom ability icons.
 local table_insert = table.insert
 function LUIE.InitializeHooksSkillAdvisor()
     --------------
-    --Initialize--
+    -- Initialize--
     --------------
     local SKILLS_ADVISOR_SUGGESTIONS_HEADER_DATA = 1
     local SKILLS_ADVISOR_SUGGESTIONS_DATA = 2
@@ -100,7 +100,7 @@ function LUIE.InitializeHooksSkillAdvisor()
                 end,
             },
             {
-                --Ethereal binds show no text, the name field is used to help identify the keybind when debugging. This text does not have to be localized.
+                -- Ethereal binds show no text, the name field is used to help identify the keybind when debugging. This text does not have to be localized.
                 name = "Gamepad Skill Advisor Previous Category",
                 keybind = "UI_SHORTCUT_LEFT_TRIGGER",
                 ethereal = true,
@@ -112,7 +112,7 @@ function LUIE.InitializeHooksSkillAdvisor()
                 end,
             },
             {
-                --Ethereal binds show no text, the name field is used to help identify the keybind when debugging. This text does not have to be localized.
+                -- Ethereal binds show no text, the name field is used to help identify the keybind when debugging. This text does not have to be localized.
                 name = "Gamepad Skill Advisor Next Category",
                 keybind = "UI_SHORTCUT_RIGHT_TRIGGER",
                 ethereal = true,
@@ -252,7 +252,7 @@ function LUIE.InitializeHooksSkillAdvisor()
 
     function SkillsAdvisorSuggestions_Gamepad:GamepadSingleLineAbilityEntryTemplateSetup(control, data, selected, reselectingDuringRebuild, enabled, active)
         ZO_SharedGamepadEntry_OnSetup(control, data, selected, reselectingDuringRebuild, enabled, active)
-        ---@diagnostic disable-next-line: undefined-global
+        --- @diagnostic disable-next-line: undefined-global
         ZO_GamepadSkillEntryTemplate_Setup(control, data, selected, activated, ZO_SKILL_ABILITY_DISPLAY_VIEW)
     end
 

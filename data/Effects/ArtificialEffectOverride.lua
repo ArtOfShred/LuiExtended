@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -20,7 +20,7 @@ end
 --------------------------------------------------------------------------------------------------------------------------------
 -- Using a separate chart for ZOS Artificial Effects just in case this is significantly expanded at any point -- Overrides Artificial Effect id name or icon.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) ArtificialEffectOverride
+--- @class (partial) ArtificialEffectOverride
 local ArtificialEffectOverride =
 {
     [0] = { name = ESO_Plus_Member(), tooltip = Tooltips.Innate_ESO_Plus },                                             -- ESO Plus (used for Active Effects window)
@@ -30,5 +30,5 @@ local ArtificialEffectOverride =
     [4] = { tooltip = Tooltips.Innate_Battleground_Deserter },                                                          -- Battleground Deserter Penalty
 }
 
----@class (partial) ArtificialEffectOverride
+--- @class (partial) ArtificialEffectOverride
 LUIE.Data.Effects.ArtificialEffectOverride = ArtificialEffectOverride

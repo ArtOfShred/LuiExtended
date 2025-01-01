@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -17,7 +17,7 @@ local zo_strformat = zo_strformat
 -- EFFECTS TABLE FOR BAR HIGHLIGHT RELATED OVERRIDES
 --------------------------------------------------------------------------------------------------------------------------------
 
----@class (partial) BarHighlightStack
+--- @class (partial) BarHighlightStack
 local BarHighlightStack =
 {
 
@@ -34,5 +34,5 @@ local BarHighlightStack =
     [178028] = 1, -- Deep Fissure
 }
 
----@class (partial) BarHighlightStack
+--- @class (partial) BarHighlightStack
 LUIE.Data.Effects.BarHighlightStack = BarHighlightStack

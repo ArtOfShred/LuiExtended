@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 LUIE.CombatTextPointEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CombatTextPointEventViewer = LUIE.CombatTextPointEventViewer
@@ -11,7 +11,7 @@ local CombatTextPointEventViewer = LUIE.CombatTextPointEventViewer
 local poolTypes = LUIE.Data.CombatTextConstants.poolType
 local eventType = LUIE.Data.CombatTextConstants.eventType
 local pointTypes = LUIE.Data.CombatTextConstants.pointType
----@diagnostic disable-next-line: duplicate-set-field
+--- @diagnostic disable-next-line: duplicate-set-field
 function CombatTextPointEventViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
     obj:RegisterCallback(eventType.POINT, function (...)
@@ -25,12 +25,12 @@ end
 function CombatTextPointEventViewer:OnEvent(pointType, value)
     local Settings = LUIE.CombatText.SV
 
-    --Label setup
+    -- Label setup
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
 
     local size, color, text
     ---------------------------------------------------------------------------------------------------------------------------------------
-    --//POINTS//--
+    -- //POINTS//--
     ---------------------------------------------------------------------------------------------------------------------------------------
     if pointType == pointTypes.ALLIANCE_POINTS then
         color = Settings.colors.pointsAlliance
@@ -45,7 +45,7 @@ function CombatTextPointEventViewer:OnEvent(pointType, value)
         size = Settings.fontSizes.point
         text = self:FormatString(Settings.formats.pointsChampion, { value = value, text = GetString(LUIE_STRING_LAM_CT_SHARED_POINTS_CHAMPION) })
         ---------------------------------------------------------------------------------------------------------------------------------------
-        --//COMBAT STATE//--
+        -- //COMBAT STATE//--
         ---------------------------------------------------------------------------------------------------------------------------------------
     elseif pointType == pointTypes.IN_COMBAT then
         color = Settings.colors.inCombat
@@ -60,12 +60,12 @@ function CombatTextPointEventViewer:OnEvent(pointType, value)
     self:PrepareLabel(control.label, size, color, text)
     self:ControlLayout(control)
 
-    --Control setup
+    -- Control setup
     control:SetAnchor(CENTER, LUIE_CombatText_Point, TOP, 0, self.locationOffset * (Settings.fontSizes.point + 5))
     self.locationOffset = self.locationOffset + 1
     self.activePoints = self.activePoints + 1
 
-    --Get animation
+    -- Get animation
     local animationPoolType
     if pointType == pointTypes.IN_COMBAT or pointType == pointTypes.OUT_COMBAT then
         animationPoolType = poolTypes.ANIMATION_COMBATSTATE
@@ -76,7 +76,7 @@ function CombatTextPointEventViewer:OnEvent(pointType, value)
     animation:Apply(control)
     animation:Play()
 
-    --Add items back into pool after animation
+    -- Add items back into pool after animation
     zo_callLater(function ()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)

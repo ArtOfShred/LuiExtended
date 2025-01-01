@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,7 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- EFFECTS TABLE FOR BAR HIGHLIGHT RELATED OVERRIDES
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) IsBloodFrenzy
+--- @class (partial) IsBloodFrenzy
 local IsBloodFrenzy =
 {
     [172418] = true, -- Blood Frenzy
@@ -24,5 +24,5 @@ local IsBloodFrenzy =
     [172648] = true, -- Sated Fury
 }
 
----@class (partial) IsBloodFrenzy
+--- @class (partial) IsBloodFrenzy
 LUIE.Data.Effects.IsBloodFrenzy = IsBloodFrenzy

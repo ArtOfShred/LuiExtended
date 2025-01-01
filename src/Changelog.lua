@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local zo_strformat = zo_strformat
@@ -14,7 +14,7 @@ local changelogMessages =
     "|cFFA500LuiExtended Version 6.7.9.1|r",
     "",
     "|cFFFF00General:|r",
-    "[*] fixed some bugs, introduced some other bugs, fixed/ reverted reintroduced bug fixes. So fun right?!" ,
+    "[*] fixed some bugs, introduced some other bugs, fixed/ reverted reintroduced bug fixes. So fun right?!",
     "",
 }
 

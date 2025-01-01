@@ -3,10 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) CombatInfo
+--- @class (partial) CombatInfo
 local CombatInfo = LUIE.CombatInfo
 local CrowdControlTracker = CombatInfo.CrowdControlTracker
 local AbilityAlerts = CombatInfo.AbilityAlerts
@@ -67,7 +67,7 @@ local function loadDialogButtons()
         LUIE.RegisterDialogueButton(dialog.identifier, dialog.title, dialog.text, dialog.callback)
     end
 end
----@diagnostic disable-next-line: duplicate-set-field
+--- @diagnostic disable-next-line: duplicate-set-field
 function CombatInfo.CreateSettings()
     -- Load LibAddonMenu
     local LAM = LibAddonMenu2

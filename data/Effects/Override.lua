@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -56,7 +56,7 @@ local zo_strformat = zo_strformat
     - ccMergedType = LUIE_CC_TYPE_* -- Set this ability to show this CC type ONLY when "merged" (hideReduce) effects are enabled. This would mean for example the dot for throw dagger would show as a snare since the effects are merged.
     - isPlayerAbility = true -- Set this ability to be a "Player Ability" for the purpose of determining if a generic CC icon should be used for the ability
 --]]
----@class (partial) EffectOverride
+--- @class (partial) EffectOverride
 local EffectOverride =
 {
 
@@ -2032,8 +2032,8 @@ local EffectOverride =
     ----------------------------------------------------------------
 
     -- Dark Magic
-    --[31386] = { icon = 'esoui/art/icons/ability_sorcerer_030.dds' }, -- Unholy Knowledge
-    --[45176] = { icon = 'esoui/art/icons/ability_sorcerer_030.dds' }, -- Unholy Knowledge
+    -- [31386] = { icon = 'esoui/art/icons/ability_sorcerer_030.dds' }, -- Unholy Knowledge
+    -- [45176] = { icon = 'esoui/art/icons/ability_sorcerer_030.dds' }, -- Unholy Knowledge
 
     [31378] = { icon = "/esoui/art/icons/ability_sorcerer_024.dds" },                                                                                                              -- Persistance
     [45165] = { icon = "/esoui/art/icons/ability_sorcerer_024.dds" },                                                                                                              -- Persistance
@@ -2065,8 +2065,8 @@ local EffectOverride =
     [31421] = { icon = "/esoui/art/icons/ability_sorcerer_068.dds" },                        -- Energized (Energized - Rank 1)
     [45190] = { icon = "/esoui/art/icons/ability_sorcerer_068.dds" },                        -- Energized (Energized - Rank 2)
 
-    --[31422] = { icon = 'esoui/art/icons/ability_sorcerer_054.dds' }, -- Amplitude (Amplitude - Rank 1)
-    --[45192] = { icon = 'esoui/art/icons/ability_sorcerer_054.dds' }, -- Amplitude (Amplitude - Rank 2)
+    -- [31422] = { icon = 'esoui/art/icons/ability_sorcerer_054.dds' }, -- Amplitude (Amplitude - Rank 1)
+    -- [45192] = { icon = 'esoui/art/icons/ability_sorcerer_054.dds' }, -- Amplitude (Amplitude - Rank 2)
 
     [31425] = { icon = "/esoui/art/icons/ability_sorcerer_070.dds" }, -- Expert Mage (Expert Mage - Rank 1)
     [45195] = { icon = "/esoui/art/icons/ability_sorcerer_070.dds" }, -- Expert Mage (Expert Mage - Rank 2)
@@ -2270,9 +2270,9 @@ local EffectOverride =
     [31757] = { icon = "/esoui/art/icons/ability_templar_032.dds" },                                                                                                                   -- Sacred Ground
     [45207] = { icon = "/esoui/art/icons/ability_templar_032.dds" },                                                                                                                   -- Sacred Ground
     [31759] = { icon = "LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds", forcedContainer = "short", groundLabel = true, tooltip = Tooltips.Skill_Sacred_Ground }, -- Minor Mending (Sacred Ground - Rank 1 & 2)
-    --[80195] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
-    --[80230] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
-    --[80261] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
+    -- [80195] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
+    -- [80230] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
+    -- [80261] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', duration = 0, groundLabel = true, tooltip = Tooltips.Generic_Snare_No_Dur, tooltipValue2 = 40 }, -- Sacred Ground (Sacred Ground - Rank 1 & 2)
     [31760] = { icon = "/esoui/art/icons/ability_templar_014.dds" },                                                                  -- Light Weaver
     [45208] = { icon = "/esoui/art/icons/ability_templar_014.dds" },                                                                  -- Light Weaver
     [52703] = { icon = "LuiExtended/media/icons/abilities/ability_templar_light_weaver.dds", name = Abilities.Passive_Light_Weaver }, -- Light Weaver Ultimate (Light Weaver - Rank 1 & 2)
@@ -3113,17 +3113,17 @@ local EffectOverride =
     [83686] = { tooltip = Tooltips.Skill_Eye_of_Lightning },                                   -- Eye of Lightning (Eye of the Storm)
     [83684] = { tooltip = Tooltips.Skill_Eye_of_Frost },                                       -- Eye of Frost (Eye of the Storm)
 
-    [83626] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 },  --Fire Storm
-    [83631] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, --Thunder Storm
-    [83629] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 1 }, --Ice Storm
+    [83626] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 },  -- Fire Storm
+    [83631] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Thunder Storm
+    [83629] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 1 }, -- Ice Storm
 
-    [85127] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 },  --Fiery Rage
-    [85131] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, --Thunderous Rage
-    [85129] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 1 }, --Icy Rage
+    [85127] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 },  -- Fiery Rage
+    [85131] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Thunderous Rage
+    [85129] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 1 }, -- Icy Rage
 
-    [83683] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 },  --Eye of Flame
-    [83687] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, --Eye of Lightning
-    [83685] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 1 }, --Eye of Frost
+    [83683] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Fire, tooltipValue2 = 1 },  -- Eye of Flame
+    [83687] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Shock, tooltipValue2 = 1 }, -- Eye of Lightning
+    [83685] = { groundLabel = true, tooltip = Tooltips.Generic_AOE_Frost, tooltipValue2 = 1 }, -- Eye of Frost
 
     -----------------------------------------
     -- RESTORATION STAFF ACTIVES ------------
@@ -3773,13 +3773,13 @@ local EffectOverride =
     -- Guard / Mystic Guard / Stalwart Guard
     [61511] = { duration = 0, forcedContainer = "short", tooltip = Tooltips.Skill_Guard_Other }, -- Guard (Guard)
     [80923] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self, toggle = true },              -- Guard (Guard)
-    [78338] = { icon = "/esoui/art/icons/ability_ava_guard.dds" },                               -- Guard (Guard)
+    [78338] = { icon = "/esoui/art/icons/ability_warrior_001.dds" },                             -- active: Guard (Guard)
     [61536] = { duration = 0, forcedContainer = "short", tooltip = Tooltips.Skill_Guard_Other }, -- Mystic Guard (Mystic Guard)
     [80947] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self, toggle = true },              -- Mystic Guard (Mystic Guard)
-    [81415] = { icon = "/esoui/art/icons/ability_ava_mystic_guard.dds" },                        -- Mystic Guard (Mystic Guard)
+    [81415] = { icon = "/esoui/art/icons/ability_warrior_001.dds" },                             -- active: Mystic Guard (Mystic Guard)
     [61529] = { duration = 0, forcedContainer = "short", tooltip = Tooltips.Skill_Guard_Other }, -- Stalwart Guard (Stalwart Guard)
     [80983] = { duration = 0, tooltip = Tooltips.Skill_Guard_Self, toggle = true },              -- Stalwart Guard (Stalwart Guard)
-    [81420] = { icon = "/esoui/art/icons/ability_ava_stalwart_guard.dds" },                      -- Stalwart Guard (Stalwart Guard)
+    [81420] = { icon = "/esoui/art/icons/ability_warrior_001.dds" },                             -- active: Stalwart Guard (Stalwart Guard)
 
     -- Skill_Revealing_Flare
 
@@ -5792,10 +5792,10 @@ local EffectOverride =
     [126947] = { hide = true },                                                                                                                           -- Thrash (Prince Boar) - A Foe Most Porcine
     [144351] = { hide = true },                                                                                                                           -- Thrash (Prince Boar) - A Foe Most Porcine
 
-    --[144340] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds' }, -- Thrash (Prince Boar) - A Foe Most Porcine
-    --[144338] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds', name = Abilities.Skill_Thrash }, -- Knockback (Prince Boar) - A Foe Most Porcine
-    --[144337] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds', name = Abilities.Skill_Thrash, tooltip = Tooltips.Generic_Knockback }, -- Stun (Prince Boar) - A Foe Most Porcine
-    --[144339] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger, cc = LUIE_CC_TYPE_STAGGER }, -- Staggered (Prince Boar) - A Foe Most Porcine
+    -- [144340] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds' }, -- Thrash (Prince Boar) - A Foe Most Porcine
+    -- [144338] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds', name = Abilities.Skill_Thrash }, -- Knockback (Prince Boar) - A Foe Most Porcine
+    -- [144337] = { icon = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds', name = Abilities.Skill_Thrash, tooltip = Tooltips.Generic_Knockback }, -- Stun (Prince Boar) - A Foe Most Porcine
+    -- [144339] = { name = Abilities.Innate_Stagger, tooltip = Tooltips.Generic_Stagger, cc = LUIE_CC_TYPE_STAGGER }, -- Staggered (Prince Boar) - A Foe Most Porcine
 
     ----------------------------------------------------------------
     -- New Life Festival
@@ -6635,7 +6635,7 @@ local EffectOverride =
 
     -- Retaking the Pass
     [45650] = { hide = true }, -- Indaenir's Spell
-    --[29504] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_shadow_wood.dds', name = Abilities.Skill_Shadow_Wood, tooltip = Tooltips.Skill_Shadow_Wood }, -- Q4546 Shade Layer
+    -- [29504] = { icon = 'LuiExtended/media/icons/abilities/ability_quest_shadow_wood.dds', name = Abilities.Skill_Shadow_Wood, tooltip = Tooltips.Skill_Shadow_Wood }, -- Q4546 Shade Layer
 
     -- The Blight of the Bosmer
     [34499] = { icon = "LuiExtended/media/icons/abilities/ability_quest_absorb_corruption.dds", name = Abilities.Skill_Disperse_Corruption }, -- Corruption Beam (Generic Invisible Target)
@@ -7155,7 +7155,7 @@ local EffectOverride =
     [56759] = { icon = "/esoui/art/icons/ability_1handed_001_b.dds", tooltip = Tooltips.Skill_Deep_Slash_NPC },                                                                                                           -- Deep Slash (Sovngarde Brawler)
     [56760] = { icon = "/esoui/art/icons/ability_1handed_001_b.dds", tooltip = Tooltips.Skill_Deep_Slash_NPC, hideReduce = true },                                                                                        -- Deep Slash (Sovngarde Brawler)
 
-    --[53341] = { icon = "/esoui/art/icons/ability_wrothgar_bitingcold.dds" }, -- Biting Cold (Biting Cold)
+    -- [53341] = { icon = "/esoui/art/icons/ability_wrothgar_bitingcold.dds" }, -- Biting Cold (Biting Cold)
     [53342] = { icon = "/esoui/art/icons/ability_wrothgar_bitingcold.dds" },                                                                                                                                              -- Biting Cold (Biting Cold)
     [53341] = { icon = "/esoui/art/icons/ability_wrothgar_bitingcold.dds", unbreakable = 1, stack = 1, stackAdd = 1, stackMax = 8, tooltip = Tooltips.Skill_Biting_Cold, groundLabel = true },                            -- Biting Cold (Biting Cold)
     [60421] = { icon = "/esoui/art/icons/ability_wrothgar_bitingcold.dds", unbreakable = 1, stack = 1, stackAdd = 1, tooltip = Tooltips.Skill_Biting_Cold_Vet, groundLabel = true },                                      -- Biting Cold (Biting Cold)
@@ -7273,7 +7273,7 @@ local EffectOverride =
     [54608] = { icon = "LuiExtended/media/icons/abilities/ability_spell_draining_poison.dds", name = Abilities.Skill_Draining_Poison, hide = true },                                       -- Drain Resource (Pacthunter Ranger)
     [60442] = { icon = "LuiExtended/media/icons/abilities/ability_spell_draining_poison.dds", type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Draining_Poison }, -- Draining Poison (Pacthunter Ranger)
 
-    --[54512] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_natures_blessing.dds', name = Abilities.Skill_Natures_Blessing }, -- Regeneration Aura (Nature's Blessing)
+    -- [54512] = { icon = 'LuiExtended/media/icons/abilities/ability_dungeon_natures_blessing.dds', name = Abilities.Skill_Natures_Blessing }, -- Regeneration Aura (Nature's Blessing)
     [54513] = { icon = "LuiExtended/media/icons/abilities/ability_dungeon_natures_blessing.dds", name = Abilities.Skill_Natures_Blessing },                                                                                             -- Restore Stamina (Nature's Blessing)
     [54514] = { icon = "LuiExtended/media/icons/abilities/ability_dungeon_natures_blessing.dds", name = Abilities.Skill_Natures_Blessing },                                                                                             -- Restore Magicka (Nature's Blessing)
     [56575] = { icon = "LuiExtended/media/icons/abilities/ability_dungeon_natures_blessing.dds", name = Abilities.Skill_Natures_Blessing, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1, tooltip = Tooltips.Skill_Natures_Blessing }, -- Nature's Grasp (Nature's Blessing)
@@ -8904,40 +8904,40 @@ local EffectOverride =
     [116683] = { hide = true },                                                                                                                                                                                       -- U23-DUN1 B N Intro (Skeevaton)
 }
 
----@class EffectOverrideData
----@field icon string? # Path to icon file (e.g. "iconpath.dds")
----@field passiveIcon string? # Path to icon file (e.g. "iconpath.dds")
----@field name string? # Ability name from Abilities enum
----@field type integer? # BUFF_EFFECT_TYPE_BUFF or BUFF_EFFECT_TYPE_DEBUFF - Fix/change effect type (Mostly for making undispellable debuffs show properly)
----@field unbreakable integer? # Set to 1 to display as unbreakable (unremoveable debuff)
----@field forcedContainer ("short"|"long")? # Forces buff to appear in specified container (long only applies when long container exists)
----@field groundLabel boolean? # Display "G" ground label to indicate result of standing in ground aura
----@field toggle boolean? # Display "T" toggle label to indicate toggled effect
----@field stack number? # Static stack count (or starting stack count if stackAdd/stackMax set)
----@field stackAdd number? # Amount to increment stack by when effect triggers
----@field stackMax number? # Maximum number of stacks allowed
----@field hide boolean? # Hide this aura from displaying
----@field hideGround boolean? # Hide if ground effect damaging auras shown - prioritizes damage aura display even if immune to other effects
----@field hideReduce boolean? # Hide if "HIDE PAIRED AURAS" enabled - merges similar effects to reduce UI clutter
----@field duration number? # Modify duration display: negative = subtract seconds, 0 = show until fade
----@field noDuplicate boolean? # Only show latest cast for effects that create new aura each cast
----@field refreshOnly boolean? # Only show when duration refreshed - hides travel time auras
----@field tooltip string? # Custom tooltip from Tooltips enum
----@field tooltipOther string? # Custom tooltip when effect not on player
----@field tooltipVeteran string? # Custom tooltip for Veteran difficulty
----@field tooltipValue2Id integer?
----@field tooltipValue2 (number|string)? # Value for 2nd tooltip input field
----@field tooltipValue3 (number|string)? # Value for 3rd tooltip input field 
----@field tooltipValue2Mod number? # For deriving values like snare duration from either buff
----@field dynamicTooltip boolean? # Use custom dynamic tooltip function for this ability ID
----@field cc integer? # LUIE_CC_TYPE_* value for CC type
----@field ccMergedType integer? # CC type to show only when effects merged
----@field isPlayerAbility boolean? # Mark as player ability for generic CC icon usage
----@field isDisguise boolean?
----@field displayStacks boolean?
----@field maxStacks integer?
----@field internalStack integer?
+--- @class EffectOverrideData
+--- @field icon string? # Path to icon file (e.g. "iconpath.dds")
+--- @field passiveIcon string? # Path to icon file (e.g. "iconpath.dds")
+--- @field name string? # Ability name from Abilities enum
+--- @field type integer? # BUFF_EFFECT_TYPE_BUFF or BUFF_EFFECT_TYPE_DEBUFF - Fix/change effect type (Mostly for making undispellable debuffs show properly)
+--- @field unbreakable integer? # Set to 1 to display as unbreakable (unremoveable debuff)
+--- @field forcedContainer ("short"|"long")? # Forces buff to appear in specified container (long only applies when long container exists)
+--- @field groundLabel boolean? # Display "G" ground label to indicate result of standing in ground aura
+--- @field toggle boolean? # Display "T" toggle label to indicate toggled effect
+--- @field stack number? # Static stack count (or starting stack count if stackAdd/stackMax set)
+--- @field stackAdd number? # Amount to increment stack by when effect triggers
+--- @field stackMax number? # Maximum number of stacks allowed
+--- @field hide boolean? # Hide this aura from displaying
+--- @field hideGround boolean? # Hide if ground effect damaging auras shown - prioritizes damage aura display even if immune to other effects
+--- @field hideReduce boolean? # Hide if "HIDE PAIRED AURAS" enabled - merges similar effects to reduce UI clutter
+--- @field duration number? # Modify duration display: negative = subtract seconds, 0 = show until fade
+--- @field noDuplicate boolean? # Only show latest cast for effects that create new aura each cast
+--- @field refreshOnly boolean? # Only show when duration refreshed - hides travel time auras
+--- @field tooltip string? # Custom tooltip from Tooltips enum
+--- @field tooltipOther string? # Custom tooltip when effect not on player
+--- @field tooltipVeteran string? # Custom tooltip for Veteran difficulty
+--- @field tooltipValue2Id integer?
+--- @field tooltipValue2 (number|string)? # Value for 2nd tooltip input field
+--- @field tooltipValue3 (number|string)? # Value for 3rd tooltip input field
+--- @field tooltipValue2Mod number? # For deriving values like snare duration from either buff
+--- @field dynamicTooltip boolean? # Use custom dynamic tooltip function for this ability ID
+--- @field cc integer? # LUIE_CC_TYPE_* value for CC type
+--- @field ccMergedType integer? # CC type to show only when effects merged
+--- @field isPlayerAbility boolean? # Mark as player ability for generic CC icon usage
+--- @field isDisguise boolean?
+--- @field displayStacks boolean?
+--- @field maxStacks integer?
+--- @field internalStack integer?
 
----@class (partial) EffectOverride
----@field [integer] EffectOverrideData
+--- @class (partial) EffectOverride
+--- @field [integer] EffectOverrideData
 LUIE.Data.Effects.EffectOverride = EffectOverride

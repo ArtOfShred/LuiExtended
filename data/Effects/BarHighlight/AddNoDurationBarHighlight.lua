@@ -3,10 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
+--- @class (partial) Effects
 local Effects = LUIE.Data.Effects
 
 local Tooltips = LUIE.Data.Tooltips
@@ -23,7 +23,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- We don't add bar highlights for 0 duration abilities, a few abilities with dynamic durations show as 0 duration so we need this override table.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) AddNoDurationBarHighlight
+--- @class (partial) AddNoDurationBarHighlight
 local AddNoDurationBarHighlight =
 {
 
@@ -34,5 +34,5 @@ local AddNoDurationBarHighlight =
     [118814] = true, -- Enduring Undeath
 }
 
----@class (partial) AddNoDurationBarHighlight
+--- @class (partial) AddNoDurationBarHighlight
 LUIE.Data.Effects.AddNoDurationBarHighlight = AddNoDurationBarHighlight

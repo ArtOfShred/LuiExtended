@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -23,7 +23,7 @@ local zo_strformat = zo_strformat
 
 -- Also track this id on bar highlight
 -- SECONDARY ID = ORIGINAL BAR HIGHLIGHT ID
----@class (partial) BarHighlightExtraId
+--- @class (partial) BarHighlightExtraId
 local BarHighlightExtraId =
 {
 
@@ -64,11 +64,11 @@ local BarHighlightExtraId =
 
     -- Werewolf
     [32633] = 137257, -- Roar --> Off Balance
-    [39114] = 137312, --> Deafening Roar --> Off Balance -- TODO: Could possibly track Major Breach/Minor Maim
+    [39114] = 137312, -- > Deafening Roar --> Off Balance -- TODO: Could possibly track Major Breach/Minor Maim
 
     -- Vampire
     [138130] = 138098, -- Stupefy
 }
 
----@class (partial) BarHighlightExtraId
+--- @class (partial) BarHighlightExtraId
 LUIE.Data.Effects.BarHighlightExtraId = BarHighlightExtraId

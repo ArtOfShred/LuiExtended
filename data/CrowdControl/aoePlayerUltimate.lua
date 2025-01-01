@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 -- CrowdControl.aoePlayerUltimate
@@ -15,7 +15,7 @@ local LUIE = LUIE
 -- CrowdControl.aoeNormal
 -- Increment by 1 here if we want to change priority. Best way to do this is +1 for a new ability, and shared morphs or other damage sources from a shared attack don't increment.
 -- Priority system doesn't support gaps so NEVER more than +1 here, also the FIRST ability in each tier needs to be +0 to prevent skips if a category is disabled in the options.
----@class (partial) aoePlayerUltimate
+--- @class (partial) aoePlayerUltimate
 local aoePlayerUltimate =
 {
 
@@ -58,15 +58,15 @@ local aoePlayerUltimate =
     [191889] = 1, -- The Languid Eye (The Languid Eye, Duration?)
 
     -- Destruction Staff
-    [85127] = 1, --Fiery Rage
-    [85131] = 0, --Thunderous Rage
-    [85129] = 0, --Icy Rage
-    [83683] = 1, --Eye of Flame
-    [83687] = 0, --Eye of Lightning
-    [83685] = 0, --Eye of Frost
-    [83626] = 1, --Fire Storm
-    [83631] = 0, --Thunder Storm
-    [83629] = 0, --Ice Storm
+    [85127] = 1, -- Fiery Rage
+    [85131] = 0, -- Thunderous Rage
+    [85129] = 0, -- Icy Rage
+    [83683] = 1, -- Eye of Flame
+    [83687] = 0, -- Eye of Lightning
+    [83685] = 0, -- Eye of Frost
+    [83626] = 1, -- Fire Storm
+    [83631] = 0, -- Thunder Storm
+    [83629] = 0, -- Ice Storm
 
     -- Mages Guild
     [63429] = 1, -- Meteor
@@ -80,5 +80,5 @@ local aoePlayerUltimate =
     [116669] = 1, -- Ebony Cyclone (Ruinous Cyclone)
 }
 
----@class (partial) aoePlayerUltimate
+--- @class (partial) aoePlayerUltimate
 LUIE.Data.CrowdControl.aoePlayerUltimate = aoePlayerUltimate

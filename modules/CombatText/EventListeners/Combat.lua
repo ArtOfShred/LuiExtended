@@ -3,11 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
----@class (partial) CombatTextCombatEventListener : CombatTextEventListener
+--- @class (partial) CombatTextCombatEventListener : CombatTextEventListener
 LUIE.CombatTextCombatEventListener = LUIE.CombatTextEventListener:Subclass()
----@class (partial) CombatTextCombatEventListener
+--- @class (partial) CombatTextCombatEventListener
 local CombatTextCombatEventListener = LUIE.CombatTextCombatEventListener
 
 local Effects = LUIE.Data.Effects
@@ -24,7 +24,7 @@ local isWarned =
     charmed = false,
 }
 
----@diagnostic disable-next-line: duplicate-set-field
+--- @diagnostic disable-next-line: duplicate-set-field
 function CombatTextCombatEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_PLAYER_ACTIVATED, function ()
@@ -102,22 +102,22 @@ function CombatTextCombatEventListener:OnCombatIn(...)
     end
 
     ---------------------------------------------------------------------------------------------------------------------------------------
-    --//RESULTS//--
+    -- //RESULTS//--
     ---------------------------------------------------------------------------------------------------------------------------------------
-    --Damage
+    -- Damage
     local isDamage, isDamageCritical, isDot, isDotCritical = CombatTextConstants.isDamage[resultType], CombatTextConstants.isDamageCritical[resultType], CombatTextConstants.isDot[resultType], CombatTextConstants.isDotCritical[resultType]
-    --Healing
+    -- Healing
     local isHealing, isHealingCritical, isHot, isHotCritical = CombatTextConstants.isHealing[resultType], CombatTextConstants.isHealingCritical[resultType], CombatTextConstants.isHot[resultType], CombatTextConstants.isHotCritical[resultType]
-    --Energize & Drain
+    -- Energize & Drain
     local isEnergize, isDrain = CombatTextConstants.isEnergize[resultType], CombatTextConstants.isDrain[resultType]
-    --Mitigation
+    -- Mitigation
     local isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted = CombatTextConstants.isMiss[resultType], CombatTextConstants.isImmune[resultType], CombatTextConstants.isParried[resultType], CombatTextConstants.isReflected[resultType], CombatTextConstants.isDamageShield[resultType], CombatTextConstants.isDodged[resultType], CombatTextConstants.isBlocked[resultType], CombatTextConstants.isInterrupted[resultType]
-    --Crowd Control
+    -- Crowd Control
     local isDisoriented, isFeared, isOffBalanced, isSilenced, isStunned, isCharmed = CombatTextConstants.isDisoriented[resultType], CombatTextConstants.isFeared[resultType], CombatTextConstants.isOffBalanced[resultType], CombatTextConstants.isSilenced[resultType], CombatTextConstants.isStunned[resultType], CombatTextConstants.isCharmed[resultType]
-    --Overflow
+    -- Overflow
     local overkill, overheal = (Settings.common.overkill and overflow > 0 and (isDamage or isDamageCritical or isDot or isDotCritical)), (Settings.common.overheal and overflow > 0 and (isHealing or isHealingCritical or isHot or isHotCritical))
     ---------------------------------------------------------------------------------------------------------------------------------------
-    --//COMBAT TRIGGERS//--
+    -- //COMBAT TRIGGERS//--
     ---------------------------------------------------------------------------------------------------------------------------------------
     if (isDodged and togglesInOut.showDodged) or (isMiss and togglesInOut.showMiss) or (isImmune and togglesInOut.showImmune) or (isReflected and togglesInOut.showReflected) or (isDamageShield and togglesInOut.showDamageShield) or (isParried and togglesInOut.showParried) or (isBlocked and togglesInOut.showBlocked) or (isInterrupted and togglesInOut.showInterrupted) or (isDot and togglesInOut.showDot and (hitValue > 0 or overkill)) or (isDotCritical and togglesInOut.showDot and (hitValue > 0 or overkill)) or (isHot and togglesInOut.showHot and (hitValue > 0 or overheal)) or (isHotCritical and togglesInOut.showHot and (hitValue > 0 or overheal)) or (isHealing and togglesInOut.showHealing and (hitValue > 0 or overheal)) or (isHealingCritical and togglesInOut.showHealing and (hitValue > 0 or overheal)) or (isDamage and togglesInOut.showDamage and (hitValue > 0 or overkill)) or (isDamageCritical and togglesInOut.showDamage and (hitValue > 0 or overkill)) or (isEnergize and togglesInOut.showEnergize and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA)) or (isEnergize and togglesInOut.showUltimateEnergize and powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE) or (isDrain and togglesInOut.showDrain and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA)) then
         if overkill or overheal then
@@ -130,22 +130,22 @@ function CombatTextCombatEventListener:OnCombatIn(...)
         end
     end
     ---------------------------------------------------------------------------------------------------------------------------------------
-    --//CROWD CONTROL TRIGGERS//--
+    -- //CROWD CONTROL TRIGGERS//--
     ---------------------------------------------------------------------------------------------------------------------------------------
-    if isWarned.combat then --Only show CC/Debuff events when in combat
-        --Disoriented
+    if isWarned.combat then -- Only show CC/Debuff events when in combat
+        -- Disoriented
         if isDisoriented and togglesInOut.showDisoriented then
             if isWarned.disoriented then
-                PlaySound("Ability_Failed") --will play a sound every disoriented event afterwards, as any failed action during a CC retriggers the event, causing text flood if buttons are spammed
+                PlaySound("Ability_Failed") -- will play a sound every disoriented event afterwards, as any failed action during a CC retriggers the event, causing text flood if buttons are spammed
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.DISORIENTED, combatType)
                 isWarned.disoriented = true
                 zo_callLater(function ()
                     isWarned.disoriented = false
                 end, 1000)
-            end --1 second buffer
+            end -- 1 second buffer
         end
-        --Feared
+        -- Feared
         if isFeared and togglesInOut.showFeared then
             if isWarned.feared then
                 PlaySound("Ability_Failed")
@@ -155,9 +155,9 @@ function CombatTextCombatEventListener:OnCombatIn(...)
                 zo_callLater(function ()
                     isWarned.feared = false
                 end, 1000)
-            end --1 second buffer
+            end -- 1 second buffer
         end
-        --OffBalanced
+        -- OffBalanced
         if isOffBalanced and togglesInOut.showOffBalanced then
             if isWarned.offBalanced then
                 PlaySound("Ability_Failed")
@@ -167,9 +167,9 @@ function CombatTextCombatEventListener:OnCombatIn(...)
                 zo_callLater(function ()
                     isWarned.offBalanced = false
                 end, 1000)
-            end --1 second buffer
+            end -- 1 second buffer
         end
-        --Silenced
+        -- Silenced
         if isSilenced and togglesInOut.showSilenced then
             if isWarned.silenced then
                 PlaySound("Ability_Failed")
@@ -179,9 +179,9 @@ function CombatTextCombatEventListener:OnCombatIn(...)
                 zo_callLater(function ()
                     isWarned.silenced = false
                 end, 1000)
-            end --1 second buffer
+            end -- 1 second buffer
         end
-        --Stunned
+        -- Stunned
         if isStunned and togglesInOut.showStunned then
             if isWarned.stunned then
                 PlaySound("Ability_Failed")
@@ -191,9 +191,9 @@ function CombatTextCombatEventListener:OnCombatIn(...)
                 zo_callLater(function ()
                     isWarned.stunned = false
                 end, 1000)
-            end --1 second buffer
+            end -- 1 second buffer
         end
-        --Charmed
+        -- Charmed
         if isCharmed and togglesInOut.showCharmed then
             if isWarned.charmed then
                 PlaySound("Ability_Failed")
@@ -203,7 +203,7 @@ function CombatTextCombatEventListener:OnCombatIn(...)
                 zo_callLater(function ()
                     isWarned.charmed = false
                 end, 1000)
-            end --1 second buffer
+            end -- 1 second buffer
         end
     end
 end
@@ -226,22 +226,22 @@ function CombatTextCombatEventListener:OnCombatOut(...)
     end
 
     ---------------------------------------------------------------------------------------------------------------------------------------
-    --//RESULTS//--
+    -- //RESULTS//--
     ---------------------------------------------------------------------------------------------------------------------------------------
-    --Damage
+    -- Damage
     local isDamage, isDamageCritical, isDot, isDotCritical = CombatTextConstants.isDamage[resultType], CombatTextConstants.isDamageCritical[resultType], CombatTextConstants.isDot[resultType], CombatTextConstants.isDotCritical[resultType]
-    --Healing
+    -- Healing
     local isHealing, isHealingCritical, isHot, isHotCritical = CombatTextConstants.isHealing[resultType], CombatTextConstants.isHealingCritical[resultType], CombatTextConstants.isHot[resultType], CombatTextConstants.isHotCritical[resultType]
-    --Energize & Drain
+    -- Energize & Drain
     local isEnergize, isDrain = CombatTextConstants.isEnergize[resultType], CombatTextConstants.isDrain[resultType]
-    --Mitigation
+    -- Mitigation
     local isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted = CombatTextConstants.isMiss[resultType], CombatTextConstants.isImmune[resultType], CombatTextConstants.isParried[resultType], CombatTextConstants.isReflected[resultType], CombatTextConstants.isDamageShield[resultType], CombatTextConstants.isDodged[resultType], CombatTextConstants.isBlocked[resultType], CombatTextConstants.isInterrupted[resultType]
-    --Crowd Control
+    -- Crowd Control
     local isDisoriented, isFeared, isOffBalanced, isSilenced, isStunned, isCharmed = CombatTextConstants.isDisoriented[resultType], CombatTextConstants.isFeared[resultType], CombatTextConstants.isOffBalanced[resultType], CombatTextConstants.isSilenced[resultType], CombatTextConstants.isStunned[resultType], CombatTextConstants.isCharmed[resultType]
-    --Overflow
+    -- Overflow
     local overkill, overheal = (Settings.common.overkill and overflow > 0 and (isDamage or isDamageCritical or isDot or isDotCritical)), (Settings.common.overheal and overflow > 0 and (isHealing or isHealingCritical or isHot or isHotCritical))
     ---------------------------------------------------------------------------------------------------------------------------------------
-    --//COMBAT TRIGGERS//--
+    -- //COMBAT TRIGGERS//--
     ---------------------------------------------------------------------------------------------------------------------------------------
 
     if (isDodged and togglesInOut.showDodged) or (isMiss and togglesInOut.showMiss) or (isImmune and togglesInOut.showImmune) or (isReflected and togglesInOut.showReflected) or (isDamageShield and togglesInOut.showDamageShield) or (isParried and togglesInOut.showParried) or (isBlocked and togglesInOut.showBlocked) or (isInterrupted and togglesInOut.showInterrupted) or (isDot and togglesInOut.showDot and (hitValue > 0 or overkill)) or (isDotCritical and togglesInOut.showDot and (hitValue > 0 or overkill)) or (isHot and togglesInOut.showHot and (hitValue > 0 or overheal)) or (isHotCritical and togglesInOut.showHot and (hitValue > 0 or overheal)) or (isHealing and togglesInOut.showHealing and (hitValue > 0 or overheal)) or (isHealingCritical and togglesInOut.showHealing and (hitValue > 0 or overheal)) or (isDamage and togglesInOut.showDamage and (hitValue > 0 or overkill)) or (isDamageCritical and togglesInOut.showDamage and (hitValue > 0 or overkill)) or (isEnergize and togglesInOut.showEnergize and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA)) or (isEnergize and togglesInOut.showUltimateEnergize and powerType == COMBAT_MECHANIC_FLAGS_ULTIMATE) or (isDrain and togglesInOut.showDrain and (powerType == COMBAT_MECHANIC_FLAGS_MAGICKA or powerType == COMBAT_MECHANIC_FLAGS_STAMINA)) then
@@ -249,28 +249,28 @@ function CombatTextCombatEventListener:OnCombatOut(...)
             hitValue = hitValue + overflow
         end
         if not Effects.EffectHideSCT[abilityId] then                                                         -- Check if ability is on the hide list
-            if (Settings.toggles.inCombatOnly and isWarned.combat) or not Settings.toggles.inCombatOnly then --Check if 'in combat only' is ticked
+            if (Settings.toggles.inCombatOnly and isWarned.combat) or not Settings.toggles.inCombatOnly then -- Check if 'in combat only' is ticked
                 self:TriggerEvent(CombatTextConstants.eventType.COMBAT, combatType, powerType, hitValue, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
             end
         end
     end
     ---------------------------------------------------------------------------------------------------------------------------------------
-    --//CROWD CONTROL TRIGGERS//--
+    -- //CROWD CONTROL TRIGGERS//--
     ---------------------------------------------------------------------------------------------------------------------------------------
-    if isWarned.combat then --Only show CC/Debuff events when in combat
-        --Disoriented
+    if isWarned.combat then -- Only show CC/Debuff events when in combat
+        -- Disoriented
         if isDisoriented and togglesInOut.showDisoriented then
             if isWarned.disoriented then
-                PlaySound("Ability_Failed") --will play a sound every disoriented event afterwards, as any failed action during a CC retriggers the event, causing text flood if buttons are spammed
+                PlaySound("Ability_Failed") -- will play a sound every disoriented event afterwards, as any failed action during a CC retriggers the event, causing text flood if buttons are spammed
             else
                 self:TriggerEvent(CombatTextConstants.eventType.CROWDCONTROL, CombatTextConstants.crowdControlType.DISORIENTED, combatType)
                 isWarned.disoriented = true
                 zo_callLater(function ()
                     isWarned.disoriented = false
                 end, 1000)
-            end --1 second buffer
+            end -- 1 second buffer
         end
-        --Feared
+        -- Feared
         if isFeared and togglesInOut.showFeared then
             if isWarned.feared then
                 PlaySound("Ability_Failed")
@@ -280,9 +280,9 @@ function CombatTextCombatEventListener:OnCombatOut(...)
                 zo_callLater(function ()
                     isWarned.feared = false
                 end, 1000)
-            end --1 second buffer
+            end -- 1 second buffer
         end
-        --OffBalanced
+        -- OffBalanced
         if isOffBalanced and togglesInOut.showOffBalanced then
             if isWarned.offBalanced then
                 PlaySound("Ability_Failed")
@@ -292,9 +292,9 @@ function CombatTextCombatEventListener:OnCombatOut(...)
                 zo_callLater(function ()
                     isWarned.offBalanced = false
                 end, 1000)
-            end --1 second buffer
+            end -- 1 second buffer
         end
-        --Silenced
+        -- Silenced
         if isSilenced and togglesInOut.showSilenced then
             if isWarned.silenced then
                 PlaySound("Ability_Failed")
@@ -304,9 +304,9 @@ function CombatTextCombatEventListener:OnCombatOut(...)
                 zo_callLater(function ()
                     isWarned.silenced = false
                 end, 1000)
-            end --1 second buffer
+            end -- 1 second buffer
         end
-        --Stunned
+        -- Stunned
         if isStunned and togglesInOut.showStunned then
             if isWarned.stunned then
                 PlaySound("Ability_Failed")
@@ -316,9 +316,9 @@ function CombatTextCombatEventListener:OnCombatOut(...)
                 zo_callLater(function ()
                     isWarned.stunned = false
                 end, 1000)
-            end --1 second buffer
+            end -- 1 second buffer
         end
-        --Charmed
+        -- Charmed
         if isCharmed and togglesInOut.showCharmed then
             if isWarned.charmed then
                 PlaySound("Ability_Failed")
@@ -328,13 +328,13 @@ function CombatTextCombatEventListener:OnCombatOut(...)
                 zo_callLater(function ()
                     isWarned.charmed = false
                 end, 1000)
-            end --1 second buffer
+            end -- 1 second buffer
         end
     end
 end
 
 ---------------------------------------------------------------------------------------------------------------------------------------
---//COMBAT STATE EVENTS & TRIGGERS//--
+-- //COMBAT STATE EVENTS & TRIGGERS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
 function CombatTextCombatEventListener:CombatState(inCombat)
     local Settings = LUIE.CombatText.SV

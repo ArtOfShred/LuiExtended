@@ -46,7 +46,7 @@ local strings =
     LUIE_STRING_SKILL_FALL_DAMAGE = "Урон от падения",
     LUIE_STRING_SKILL_ABSORBING_SKYSHARD = "Поглощение небесного осколка",
     LUIE_STRING_SKILL_RECEIVING_BOON = "Получение бонуса Мундуса",
-    --LUIE_STRING_SKILL_MOUNT_SPRINT =                         "Галоп",
+    -- LUIE_STRING_SKILL_MOUNT_SPRINT =                         "Галоп",
     LUIE_STRING_SKILL_AYLEID_WELL = "Айлейдский колодец",
     LUIE_STRING_SKILL_AYLEID_WELL_TP = "Повышение здоровья на |cFFFFFF10|r% в течение |cFFFFFF10|r минут.",
     LUIE_STRING_SKILL_AYLEID_WELL_FORTIFIED = "Усиленный Айлейдский колодец",
@@ -57,8 +57,8 @@ local strings =
     LUIE_STRING_SKILL_HIDDEN_TP = "Crouched and concealed from sight.\n\nMovement speed reduced by |cFFFFFF<<1>>|r%.\n\nWhile hidden and moving, costs |cFFFFFF<<2>>|r Stamina every |cFFFFFF0.5|r seconds and Stamina Recovery is disabled.",
     LUIE_STRING_SKILL_HIDDEN_NO_SPEED_TP = "Crouched and concealed from sight.\n\nWhile hidden and moving, costs |cFFFFFF<<1>>|r Stamina every |cFFFFFF0.5|r seconds and Stamina Recovery is disabled.",
     LUIE_STRING_SKILL_INVISIBLE_TP = "Сокрыты от чужих глаз магией или окружающей средой.",
-    --LUIE_STRING_SKILL_SPRINT_TP =                            "Спринт, скорость передвижения увеличена на |cFFFFFF40|r%.\n\nРасходуется Запас сил при движении.",
-    --LUIE_STRING_SKILL_GALLOP_TP =                            "Галоп, скорость передвижения увеличена на |cFFFFFF30|r%.\n\nРасходуется Запас сил ездового животного при движении.",
+    -- LUIE_STRING_SKILL_SPRINT_TP =                            "Спринт, скорость передвижения увеличена на |cFFFFFF40|r%.\n\nРасходуется Запас сил при движении.",
+    -- LUIE_STRING_SKILL_GALLOP_TP =                            "Галоп, скорость передвижения увеличена на |cFFFFFF30|r%.\n\nРасходуется Запас сил ездового животного при движении.",
     LUIE_STRING_SKILL_BRACE_TP = "Brace for attack, reducing damage taken by |cFFFFFF<<1>>|r% and movement speed by |cFFFFFF<<2>>|r% while granting immunity to Stun and Knockback effects.\n\nDrains |cFFFFFF<<3>>|r <<4>> on a successful block.",
     LUIE_STRING_SKILL_RESURRECTION_IMMUNITY_TP = "Reviving. Immune to damage and all negative effects.",
     LUIE_STRING_SKILL_TAUNT_TP = "Спровоцирован.",
@@ -324,8 +324,8 @@ local strings =
 
     -- Ravage Potions / Poisons
     LUIE_STRING_SKILL_GENERIC_RAVAGE_HEALTH_POTION_TP = "Afflicted with unmitigable SUBSTRING every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThis damage cannot be absorbed by a damage shield.",
-    --LUIE_STRING_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP =     "Increase the cost of Magicka abilities by |cFFFFFF60|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
-    --LUIE_STRING_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP =     "Increase the cost of Stamina abilities by |cFFFFFF60|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    -- LUIE_STRING_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP =     "Increase the cost of Magicka abilities by |cFFFFFF60|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
+    -- LUIE_STRING_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP =     "Increase the cost of Stamina abilities by |cFFFFFF60|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     LUIE_STRING_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP = "Increase the cost of Magicka abilities by |cFFFFFF10|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
     LUIE_STRING_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP = "Increase the cost of Stamina abilities by |cFFFFFF10|r% for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
@@ -962,7 +962,7 @@ local strings =
     LUIE_STRING_SKILL_SET_TAVAS_FAVOR = "Generating |cFFFFFF4|r Ultimate every |cFFFFFF1|r second for |cFFFFFF3|r seconds.",
     LUIE_STRING_SKILL_SET_VARENS_LEGACY = "Your next direct damage area of effect attack used within |cFFFFFF<<1>>|r seconds deals |cFFFFFF3290|r additional damage.",
     LUIE_STRING_SKILL_SET_MECHANICAL_ACUITY = "Повышает шанс критического удара Заклинанием и Оружием до |cFFFFFF100|r% в течение |cFFFFFF<<1>>|r секунд.",
-    --LUIE_STRING_SKILL_SET_SENCHE_RAHTS_GRIT =                "Increase healing received by |cFFFFFF6|r% and Physical and Spell Resistance by |cFFFFFF2585|r for |cFFFFFF<<1>>|r seconds.",
+    -- LUIE_STRING_SKILL_SET_SENCHE_RAHTS_GRIT =                "Increase healing received by |cFFFFFF6|r% and Physical and Spell Resistance by |cFFFFFF2585|r for |cFFFFFF<<1>>|r seconds.",
     LUIE_STRING_SKILL_SET_VASTARIES_TUTELAGE = "Increase Weapon and Spell Damage by |cFFFFFF258|r and reduce the cost of non-Ultimate abilities by |cFFFFFF10|r% for |cFFFFFF<<1>>|r seconds.",
     LUIE_STRING_SKILL_SET_SLOADS_TP = "Taking |cFFFFFF3|r% of your Max Health as Oblivion Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nThis effect can deal a maximum of |cFFFFFF3000|r Oblivion Damage per tick.",
     LUIE_STRING_SKILL_SET_GRAVE_STAKE_COLLECTOR_TP = "When you touch the grave-stake, restore |cFFFFFF4564|r Stamina and Magicka.\n\nOnly one grave-stake can appear at a time.",
@@ -1034,13 +1034,13 @@ local strings =
     LUIE_STRING_SKILL_SET_HARMFUL_WINDS = "Harmful Winds",
     LUIE_STRING_SKILL_SET_RELEQUEN_TP = "Afflicted with Physical Damage every |cFFFFFF1|r second for |cFFFFFF<<1>>|r seconds, stacking up to |cFFFFFF10|r times when your attacker damages you with a Light or Heavy Attack.",
     LUIE_STRING_SKILL_SET_KYNES_BLESSING_TP = "You and group members standing in the |cFFFFFF8|r meter radius of Kyne's Blessing restore |cFFFFFF420|r Stamina and Magicka every |cFFFFFF1|r second.",
-    --LUIE_STRING_SKILL_SET_KYNES_BLESSING_GROUND_TP =       "Restoring |cFFFFFF399|r Stamina and Magicka every |cFFFFFF1|r second.",
+    -- LUIE_STRING_SKILL_SET_KYNES_BLESSING_GROUND_TP =       "Restoring |cFFFFFF399|r Stamina and Magicka every |cFFFFFF1|r second.",
     LUIE_STRING_SKILL_SET_GIANTS_ENDURANCE_TP = "Increase Weapon Damage by |cFFFFFF41|r, stacking up to |cFFFFFF10|r times when you deal Critical Damage.\n\nCompleting a fully-charged Heavy Attack removes Giant's Endurance and grants Giant's Might for |cFFFFFF15|r seconds, increasing your Weapon Damage by |cFFFFFF63|r per stack removed.\n\nYou can only gain a stack of Giant's Endurance once every half second.",
     LUIE_STRING_SKILL_SET_GIANTS_MIGHT_TP = "Increase Weapon Damage by |cFFFFFF63|r per stack of Giant's Endurance consumed for |cFFFFFF<<1>>|r seconds.",
     LUIE_STRING_SKILL_ROAR_OF_ALKOSH_TP = "Reduce Physical and Spell Resistance by the initial damage done by Roar of Alkosh for |cFFFFFF10|r seconds.",
 
     -- Battleground Sets
-    --LUIE_STRING_SKILL_SET_COWARDS_GEAR_TP =                  "While Sprinting you gain Major Expedition and Major Protection.",
+    -- LUIE_STRING_SKILL_SET_COWARDS_GEAR_TP =                  "While Sprinting you gain Major Expedition and Major Protection.",
     LUIE_STRING_SKILL_SET_VANGUARDS_CHALLENGE_TP = "Deal |cFFFFFF35|r% more damage to the player that taunted you, but |cFFFFFF35|r% less damage to all other players for |cFFFFFF<<1>>|r <<1[second/seconds]>>.",
 
     -- Imperial City Sets
@@ -1155,7 +1155,7 @@ local strings =
     LUIE_STRING_SKILL_CLEAVE_STANCE_TP = "Cleaving with wild abandon for |cFFFFFF<<1>>|r seconds.",
     LUIE_STRING_SKILL_DEFENSIVE_WARD_TP = "Reduce damage taken by |cFFFFFF75|r% for |cFFFFFF<<1>>|r seconds as long as the channel is maintained.",
     LUIE_STRING_SKILL_SOUL_TETHER_NPC_TP = "Afflicted with Magic Damage every |cFFFFFF1|r second for |cFFFFFF8|r seconds.\n\nStunned for |cFFFFFF2|r seconds.",
-    --LUIE_STRING_SKILL_FOCUSED_HEALING_TP =                   "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.\n\nHealing doubles in power after |cFFFFFF2|r seconds.",
+    -- LUIE_STRING_SKILL_FOCUSED_HEALING_TP =                   "Healing every |cFFFFFF0.5|r seconds for |cFFFFFF<<1>>|r seconds while the channel is maintained.\n\nHealing doubles in power after |cFFFFFF2|r seconds.",
     LUIE_STRING_SKILL_RITE_OF_PASSAGE_NPC_TP = "Reduce damage taken by |cFFFFFF80|r% while the channel is maintained.",
     LUIE_STRING_SKILL_INJECT_LARVA_TP = "You have been injected with a wasp larva. At the end of its |cFFFFFF<<1>>|r second gestation, it will burst out of you, dealing Physical Damage and spawning a Young Wasp.",
     LUIE_STRING_SKILL_THROW_DAGGER_TP = "Afflicted with Bleed Damage every |cFFFFFF1|r second for |cFFFFFF8|r seconds.\n\nMovement Speed reduced by |cFFFFFF40|r% for |cFFFFFF4|r seconds.",
@@ -1358,7 +1358,7 @@ local strings =
     LUIE_STRING_SKILL_ENTROPY_NPC_TP = "Afflicted with Magic Damage every |cFFFFFF2|r seconds for |cFFFFFF<<1>>|r seconds.\n\nYour attacker heals every |cFFFFFF6|r seconds while Entropy remains active.",
 
     LUIE_STRING_SKILL_BECKON_GATHWEN = "Beckon Gathwen",
-    --LUIE_STRING_SKILL_DRAINING_BITE_TP =                     "Afflicted with Bleed Damage every |cFFFFFF0.2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nYour attacker heals at the end of this duration.",
+    -- LUIE_STRING_SKILL_DRAINING_BITE_TP =                     "Afflicted with Bleed Damage every |cFFFFFF0.2|r seconds for |cFFFFFF<<1>>|r <<1[second/seconds]>>.\n\nYour attacker heals at the end of this duration.",
     LUIE_STRING_SKILL_MOLTEN_PILLAR_INCALESCENCE = "Molten Pillar Incalescence",
     LUIE_STRING_SKILL_MOLTEN_PILLAR_TP = "Enemies within |cFFFFFF3|r meters of the pillar are hindered by sweltering heat, reducing their Movement Speed by |cFFFFFF60|r%.\n\nThe Ogre Shaman's Blazing Bolts will shackle any hindered targets, inflicting them with a |cFFFFFF4|r second immobilize.",
 

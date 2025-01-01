@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,7 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- When a gain event or faded event fires for this id in the world, we add a buff aura to a specific unit name. Only usable for unique boss effects.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) AddNameOnEvent
+--- @class (partial) AddNameOnEvent
 local AddNameOnEvent =
 {
 
@@ -26,5 +26,5 @@ local AddNameOnEvent =
     [52166] = { name = Unitnames.Boss_Ilambris_Amalgam, id = 53593 }, -- Fire Form -- Ilambris Amalgam (Crypt of Hearts II)
 }
 
----@class (partial) AddNameOnEvent
+--- @class (partial) AddNameOnEvent
 LUIE.Data.Effects.AddNameOnEvent = AddNameOnEvent

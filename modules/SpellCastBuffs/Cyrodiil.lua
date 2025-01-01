@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local SpellCastBuffs = LUIE.SpellCastBuffs
@@ -52,7 +52,7 @@ function SpellCastBuffs.LoadBattleSpiritTarget()
             type = 1,
             id = abilityId,
             name = Abilities.Skill_Battle_Spirit,
-            icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
+            icon = "/esoui/art/icons/artificialeffect_battle-spirit.dds",
             tooltip = tooltip,
             dur = 0,
             starts = 1,

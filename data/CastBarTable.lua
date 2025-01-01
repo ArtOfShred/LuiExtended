@@ -3,12 +3,12 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
---local Abilities = LUIE.Data.Abilities --unused local
+-- local Abilities = LUIE.Data.Abilities --unused local
 
----@class (partial) CastBarTable
+--- @class (partial) CastBarTable
 local CastBarTable =
 {
     --------------------------------------------------------------------------------------------------------------------------------
@@ -128,7 +128,7 @@ local CastBarTable =
     BreakCastOnMove =
     {
         -- Fake
-        --[999999] = true, -- Used for any interact based casts
+        -- [999999] = true, -- Used for any interact based casts
 
         -- Innate
         [6811] = true,  -- Recall
@@ -265,7 +265,7 @@ local CastBarTable =
         [86792] = true, -- Eating (High Hrothgar Festival Mints)
         [43700] = true, -- Wand of Finding (Lena's Wand of Finding)
         [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
-        --[21112] = true, -- Q4220 PC Forced to L0
+        -- [21112] = true, -- Q4220 PC Forced to L0
 
         [113432] = true, -- 68235 Stun (Nascent Indrik)
         [148079] = true, -- 68235 Stun (Unstable Morpholith)
@@ -589,7 +589,7 @@ local CastBarTable =
         [46762] = 4500, -- Drinking Contest (The Great Tree)
         [22448] = 3000, -- Q4266 Tie up Hendil (The First Patient)
         [21393] = 2500, -- Q4220 PC Chooses to Rescue (The Mallari-Mora)
-        --[21112] = 1500, -- Q4220 PC Forced to L0
+        -- [21112] = 1500, -- Q4220 PC Forced to L0
         [22271] = 3000, -- Teleport Scroll AB (Depths of Madness)
         [23187] = 2000, -- Q4236 PC Untie Palith (The Veiled Choice)
         [47301] = 3000, -- Stunned (Passage Denied)
@@ -1074,7 +1074,7 @@ local CastBarTable =
         [22271] = true, -- Teleport Scroll AB (Depths of Madness)
         [21968] = true, -- Binding Bear... (Silent Village)
         [21393] = true, -- Q4220 PC Chooses to Rescue (The Mallari-Mora)
-        --[21112] = true, -- Q4220 PC Forced to L0
+        -- [21112] = true, -- Q4220 PC Forced to L0
         [22931] = true, -- Freeing Spirit... (An Act of Kindness)
         [23187] = true, -- Q4236 PC Untie Palith (The Veiled Choice)
         [47301] = true, -- Stunned (Passage Denied)
@@ -1229,5 +1229,5 @@ CastBarTable.InteractCast = {
     --
 }
 
----@class (partial) CastBarTable
+--- @class (partial) CastBarTable
 LUIE.Data.CastBarTable = CastBarTable

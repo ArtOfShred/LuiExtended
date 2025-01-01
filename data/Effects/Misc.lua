@@ -3,10 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Effects
+--- @class (partial) Effects
 local Effects = LUIE.Data.Effects
 
 local Tooltips = LUIE.Data.Tooltips
@@ -383,7 +383,7 @@ Effects.DebuffDisplayOverrideId =
     [126597] = true, -- Touch of Z'en (Z'en's)
     [126631] = true, -- Blight Seed (Azureblight)
     [80990] = true,  -- Shadowrend (Shadowrend)
-    [81034] = true,  --Shadowrend (Shadowrend)
+    [81034] = true,  -- Shadowrend (Shadowrend)
     [80866] = true,  -- Tremorscale (Tremorscale)
     [100302] = true, -- Piercing Spray (Asylum Bow)
     [34384] = true,  -- The Morag Tong (of the Morag Tong)
@@ -495,5 +495,5 @@ Effects.DebuffDisplayOverrideMajorMinor =
     [61725] = true,  -- Major Maim
     [61727] = true,  -- Major Defile
     [147643] = true, -- Major Cowardice
-    --[145977] = true, -- Major Brittle
+    -- [145977] = true, -- Major Brittle
 }

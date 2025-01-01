@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -38,12 +38,12 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Fake debuffs applied onto a target by the player
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) FakePlayerDebuffs
+--- @class (partial) FakePlayerDebuffs
 local FakePlayerDebuffs =
 {
     -- JUSTICE NPCS
     -- Disabled: Duration is too long and Guard always CC breaks. Maybe setup a calllater removal function?
-    --[63194] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = Abilities.Skill_Stonefist, duration = 6000 }, -- Flame Shard (Justice Guard 2H) -- If the player reflects
+    -- [63194] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = Abilities.Skill_Stonefist, duration = 6000 }, -- Flame Shard (Justice Guard 2H) -- If the player reflects
 
     ----------------------------------------------------------------
     -- PLAYER ABILITIES --------------------------------------------
@@ -68,5 +68,5 @@ local FakePlayerDebuffs =
     [75706] = { duration = 1100, overrideDuration = true }, -- Bahraha's Curse -- Note: We add 100 ms to buffer here because it doesn't really matter and stops flashing
 }
 
----@class (partial) FakePlayerDebuffs
+--- @class (partial) FakePlayerDebuffs
 LUIE.Data.Effects.FakePlayerDebuffs = FakePlayerDebuffs

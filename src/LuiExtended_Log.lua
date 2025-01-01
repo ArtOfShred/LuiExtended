@@ -1,44 +1,50 @@
----@class (partial) LuiExtended
+--- @meta
+
+--- @class (partial) LuiExtended
+--- @field name string The addon name
+--- @field log_to_chat boolean Whether to output logs to chat
+--- @field logger LibDebugLogger|NOP The logger instance
 local LUIE = LUIE
 
---[[
-    If Sirinsidiator's LibDebugLogger is installed, then return a logger from that. If not, return a NOP replacement.
-    How To Use: Insert anywhere you would use d or error
-    local Debug = LUIE.Debug
-    local Info = LUIE.Info
-    local Error = LUIE.Error
-    local Warn = LUIE.Warn
-]]
+--- @class NOP
+--- @field Debug fun(self: NOP, message: string, ...: any)
+--- @field Info fun(self: NOP, message: string, ...: any)
+--- @field Warn fun(self: NOP, message: string, ...: any)
+--- @field Error fun(self: NOP, message: string, ...: any)
+--- @field Verbose fun(self: NOP, message: string, ...: any)
 local NOP = {}
 
---[[
-    Debug logger function that does nothing.
-]]
-function NOP:Debug(...) end
+--- Debug logger function that does nothing
+--- @param message string The message to log
+--- @param ... any Additional values to format into message
+function NOP:Debug(message, ...) end
 
---[[
-    Info logger function that does nothing.
-]]
-function NOP:Info(...) end
+--- Info logger function that does nothing
+--- @param message string The message to log
+--- @param ... any Additional values to format into message
+function NOP:Info(message, ...) end
 
---[[
-    Warn logger function that does nothing.
-]]
-function NOP:Warn(...) end
+--- Warning logger function that does nothing
+--- @param message string The message to log
+--- @param ... any Additional values to format into message
+function NOP:Warn(message, ...) end
 
---[[
-    Error logger function that does nothing.
-]]
-function NOP:Error(...) end
+--- Error logger function that does nothing
+--- @param message string The message to log
+--- @param ... any Additional values to format into message
+function NOP:Error(message, ...) end
+
+--- Verbose logger function that does nothing
+--- @param message string The message to log
+--- @param ... any Additional values to format into message
+function NOP:Verbose(message, ...) end
 
 local string_format = string.format
 
 LUIE.log_to_chat = false
 
---[[
-    Retrieves the logger object.
-    @return table: The logger object.
-]]
+--- Retrieves the logger object
+--- @return table|NOP logger The logger object
 function LUIE.Logger()
     local self = LUIE
     if not self.logger then
@@ -52,49 +58,51 @@ function LUIE.Logger()
     return self.logger
 end
 
---[[
-    Logs a message with a specified color.
-    @param color string: The color code for the log message.
-    @param ...: Variable number of arguments to be formatted and logged.
-]]
+--- Logs a message with a specified color
+--- @param color string The color code for the log message
+--- @param ... any Variable number of arguments to be formatted and logged
 function LUIE.Log(color, ...)
     if LUIE.log_to_chat then
-        d("|c" .. color .. LUIE.name .. ": " .. string_format(...) .. "|r")
+        CHAT_ROUTER:AddSystemMessage("|c" .. color .. LUIE.name .. ": " .. string_format(...) .. "|r")
     end
 end
 
---[[
-    Logs a debug message.
-    @param ...: Variable number of arguments to be formatted and logged.
-]]
-function LUIE.Debug(...)
+--- Logs a debug message
+--- @param message string The message to log
+--- @param ... any Additional values to format into message
+function LUIE.Debug(message, ...)
     LUIE.Log("FF666666", ...)
-    LUIE.Logger():Debug(...)
+    LUIE.Logger():Debug(message, ...)
 end
 
---[[
-    Logs an info message.
-    @param ...: Variable number of arguments to be formatted and logged.
-]]
-function LUIE.Info(...)
+--- Logs an info message
+--- @param message string The message to log
+--- @param ... any Additional values to format into message
+function LUIE.Info(message, ...)
     LUIE.Log("FF999999", ...)
-    LUIE.Logger():Info(...)
+    LUIE.Logger():Info(message, ...)
 end
 
---[[
-    Logs a warning message.
-    @param ...: Variable number of arguments to be formatted and logged.
-]]
-function LUIE.Warn(...)
+--- Logs a warning message
+--- @param message string The message to log
+--- @param ... any Additional values to format into message
+function LUIE.Warn(message, ...)
     LUIE.Log("FFFF8800", ...)
-    LUIE.Logger():Warn(...)
+    LUIE.Logger():Warn(message, ...)
 end
 
---[[
-    Logs an error message.
-    @param ...: Variable number of arguments to be formatted and logged.
-]]
-function LUIE.Error(...)
+--- Logs an error message
+--- @param message string The message to log
+--- @param ... any Additional values to format into message
+function LUIE.Error(message, ...)
     LUIE.Log("FFFF6666", ...)
-    LUIE.Logger():Error(...)
+    LUIE.Logger():Error(message, ...)
+end
+
+--- Logs a verbose message
+--- @param message string The message to log
+--- @param ... any Additional values to format into message
+function LUIE.Verbose(message, ...)
+    LUIE.Log("FF777575", ...)
+    LUIE.Logger():Verbose(message, ...)
 end

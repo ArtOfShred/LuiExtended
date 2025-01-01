@@ -3,17 +3,17 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) IgnoreList
+--- @class (partial) IgnoreList
 local IgnoreList =
 {
     -- PVP
     [178127] = true, -- Diseased
     [178118] = true, -- Overcharged
     [21927] = true,  -- Minor Defile
-    --[88402] = true, -- Minor Magickasteal -- TODO: This id isn't the heal anymore so don't think this is needed here
+    -- [88402] = true, -- Minor Magickasteal -- TODO: This id isn't the heal anymore so don't think this is needed here
     [148798] = true, -- Minor Magickasteal
     [40079] = true,  -- Radiating Regeneration
     [57468] = true,  -- Radiating Regeneration
@@ -110,5 +110,5 @@ local IgnoreList =
     [85656] = true,  -- Harry
 }
 
----@class (partial) IgnoreList
+--- @class (partial) IgnoreList
 LUIE.Data.CrowdControl.IgnoreList = IgnoreList

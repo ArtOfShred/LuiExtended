@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,7 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- EFFECTS TABLE FOR BAR HIGHLIGHT RELATED OVERRIDES
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) IsGrimFocus
+--- @class (partial) IsGrimFocus
 local IsGrimFocus =
 {
     [122585] = true, -- Grim Focus
@@ -24,5 +24,5 @@ local IsGrimFocus =
     [122586] = true, -- Merciless Resolve
 }
 
----@class (partial) IsGrimFocus
+--- @class (partial) IsGrimFocus
 LUIE.Data.Effects.IsGrimFocus = IsGrimFocus

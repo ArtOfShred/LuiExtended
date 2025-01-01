@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -38,7 +38,7 @@ local zo_strformat = zo_strformat
 -- Fake offline auras created by the player
 -- ground == true - Set the target to ground instead of player.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) FakePlayerOfflineAura
+--- @class (partial) FakePlayerOfflineAura
 local FakePlayerOfflineAura =
 {
     -- Sets
@@ -56,5 +56,5 @@ local FakePlayerOfflineAura =
 }
 
 
----@class (partial) FakePlayerOfflineAura
+--- @class (partial) FakePlayerOfflineAura
 LUIE.Data.Effects.FakePlayerOfflineAura = FakePlayerOfflineAura

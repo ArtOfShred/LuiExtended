@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,7 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Hide this ID from appearing in any way on Combat Cloud Text - Useful for spammy ids.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) EffectHideSCT
+--- @class (partial) EffectHideSCT
 local EffectHideSCT =
 {
     -- Player - Basic
@@ -302,5 +302,5 @@ local EffectHideSCT =
     [6107] = true, -- Lightning Storm (Yalorasse the Speaker)
 }
 
----@class (partial) EffectHideSCT
+--- @class (partial) EffectHideSCT
 LUIE.Data.Effects.EffectHideSCT = EffectHideSCT

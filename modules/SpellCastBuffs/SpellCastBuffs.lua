@@ -3,16 +3,16 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 -- SpellCastBuffs namespace
 LUIE.SpellCastBuffs = {}
 local SpellCastBuffs = LUIE.SpellCastBuffs
 
 local UI = LUIE.UI
----@type Data
+--- @type Data
 local Data = LUIE.Data
----@type Effects
+--- @type Effects
 local Effects = Data.Effects
 local Abilities = LUIE.Data.Abilities
 local Tooltips = LUIE.Data.Tooltips
@@ -21,7 +21,7 @@ local printToChat = LUIE.PrintToChat
 local zo_strformat = zo_strformat
 local table_insert = table.insert
 local table_sort = table.sort
---local displayName = GetDisplayName()
+-- local displayName = GetDisplayName()
 local eventManager = GetEventManager()
 local sceneManager = SCENE_MANAGER
 local windowManager = GetWindowManager()
@@ -163,8 +163,8 @@ SpellCastBuffs.Defaults =
     StealthStateTarget = true,
     DisguiseStatePlayer = true,
     DisguiseStateTarget = true,
-    --ShowSprint                          = true,
-    --ShowGallop                          = true,
+    -- ShowSprint                          = true,
+    -- ShowGallop                          = true,
     ShowResurrectionImmunity = true,
     ShowRecall = true,
     ShowWerewolf = true,
@@ -265,7 +265,7 @@ local function EaseOutQuad(t, b, c, d)
     return -c * t * (t - 2) + b
 end
 
----@type table<number, string>
+--- @type table<number, string>
 local oakensoul =
 {
     [61665] = "Major Brutality",
@@ -287,7 +287,7 @@ local oakensoul =
     [147417] = "Minor Courage",
 }
 
----@return boolean
+--- @return boolean
 local function OakensoulEquipped()
     if GetItemLinkItemId(GetItemLink(BAG_WORN, 11, LINK_STYLE_DEFAULT)) == 187658 or GetItemLinkItemId(GetItemLink(BAG_WORN, 12, LINK_STYLE_DEFAULT)) == 187658 then
         return true
@@ -295,8 +295,8 @@ local function OakensoulEquipped()
     return false
 end
 
----@param buffId number
----@return boolean
+--- @param buffId number
+--- @return boolean
 local function IsOakensoul(buffId)
     if OakensoulEquipped() then
         for id in pairs(oakensoul) do
@@ -313,7 +313,7 @@ local function UpdateEffectOnSkillUpdate(overrideRank, casterUnitTag)
     Effects.EffectOverride[40465].tooltip = zo_strformat(GetString(LUIE_STRING_SKILL_SCALDING_RUNE_TP), ((GetAbilityDuration(40468, overrideRank, casterUnitTag) or 0) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8))
 end
 
----@param abilityId integer
+--- @param abilityId integer
 function SpellCastBuffs.ShouldUseDefaultIcon(abilityId)
     if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].cc then
         if SpellCastBuffs.SV.DefaultIconOptions == 1 then
@@ -581,7 +581,7 @@ function SpellCastBuffs.Initialize(enabled)
         uiTlw[v]:SetDrawLevel(DL_CONTROLS)
         if uiTlw[v].preview == nil then
             -- Create background areas for preview position purposes
-            --uiTlw[v].preview = UI:Backdrop( uiTlw[v], "fill", nil, nil, nil, true )
+            -- uiTlw[v].preview = UI:Backdrop( uiTlw[v], "fill", nil, nil, nil, true )
             uiTlw[v].preview = UI:Texture(uiTlw[v], "fill", nil, "/esoui/art/miscellaneous/inset_bg.dds", DL_BACKGROUND, true)
             uiTlw[v].previewLabel = UI:Label(uiTlw[v].preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", windowTitles[v] .. (SpellCastBuffs.SV.lockPositionToUnitFrames and (v ~= "player_long" and v ~= "prominentbuffs" and v ~= "prominentdebuffs") and " (locked)" or ""), false)
 
@@ -1248,7 +1248,7 @@ function SpellCastBuffs.ResetSingleIcon(container, buff, AnchorItem)
     local frameSize = 2 * buffSize + 4
 
     buff:SetHidden(true)
-    --buff:SetAlpha( 1 )
+    -- buff:SetAlpha( 1 )
     buff:SetDimensions(buffSize, buffSize)
     buff.frame:SetDimensions(frameSize, frameSize)
     buff.back:SetHidden(SpellCastBuffs.SV.GlowIcons)
@@ -2030,23 +2030,23 @@ end
 
 -- Runs on the EVENT_EFFECT_CHANGED listener.
 -- This handler fires every long-term effect added or removed
----@param eventCode integer
----@param changeType EffectResult
----@param effectSlot integer
----@param effectName string
----@param unitTag string
----@param beginTime integer
----@param endTime integer
----@param stackCount integer
----@param iconName string
----@param deprecatedBuffType string
----@param effectType BuffEffectType
----@param abilityType AbilityType
----@param statusEffectType StatusEffectType
----@param unitName string
----@param unitId integer
----@param abilityId integer
----@param castByPlayer CombatUnitType
+--- @param eventCode integer
+--- @param changeType EffectResult
+--- @param effectSlot integer
+--- @param effectName string
+--- @param unitTag string
+--- @param beginTime integer
+--- @param endTime integer
+--- @param stackCount integer
+--- @param iconName string
+--- @param deprecatedBuffType string
+--- @param effectType BuffEffectType
+--- @param abilityType AbilityType
+--- @param statusEffectType StatusEffectType
+--- @param unitName string
+--- @param unitId integer
+--- @param abilityId integer
+--- @param castByPlayer CombatUnitType
 function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, deprecatedBuffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     -- Bail out if this is an effect from Oakensoul
     if IsOakensoul(abilityId) and unitTag == "player" and (SpellCastBuffs.SV.HideOakenSoul == true) then
@@ -2211,7 +2211,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
         end
     end
 
-    --Override icon with default if enabled
+    -- Override icon with default if enabled
     if SpellCastBuffs.SV.UseDefaultIcon and SpellCastBuffs.ShouldUseDefaultIcon(abilityId) == true then
         iconName = SpellCastBuffs.GetDefaultIcon(Effects.EffectOverride[abilityId].cc)
     end
@@ -2290,7 +2290,7 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
         ]]
         --
 
-        --EffectCreateSkillAura
+        -- EffectCreateSkillAura
         if Effects.EffectCreateSkillAura[abilityId] then
             if not Effects.EffectCreateSkillAura[abilityId].requiredStack or (Effects.EffectCreateSkillAura[abilityId].requiredStack and stackCount == Effects.EffectCreateSkillAura[abilityId].requiredStack) then
                 local id = Effects.EffectCreateSkillAura[abilityId].abilityId
@@ -2372,7 +2372,8 @@ function SpellCastBuffs.OnEffectChanged(eventCode, changeType, effectSlot, effec
 end
 
 -- Constants for artificial effect types
-local ARTIFICIAL_EFFECTS = {
+local ARTIFICIAL_EFFECTS =
+{
     ESO_PLUS = 0,
     BATTLE_SPIRIT = 1,
     BATTLE_SPIRIT_IC = 2,
@@ -2380,8 +2381,10 @@ local ARTIFICIAL_EFFECTS = {
 }
 
 -- Configuration for special effect durations
-local EFFECT_DURATIONS = {
-    [ARTIFICIAL_EFFECTS.BG_DESERTER] = {
+local EFFECT_DURATIONS =
+{
+    [ARTIFICIAL_EFFECTS.BG_DESERTER] =
+    {
         duration = 300000,
         effectType = BUFF_EFFECT_TYPE_BUFF
     }
@@ -2415,7 +2418,7 @@ local function handleEffectRemoval(effectId)
     if effectId == ARTIFICIAL_EFFECTS.BATTLE_SPIRIT or effectId == ARTIFICIAL_EFFECTS.BATTLE_SPIRIT_IC then
         removeEffect = 999014
     end
-    
+
     local displayName = GetDisplayName()
     local context = SpellCastBuffs.DetermineContextSimple("player1", removeEffect, displayName)
     SpellCastBuffs.EffectsList[context][removeEffect] = nil
@@ -2423,7 +2426,8 @@ end
 
 -- Creates effect data structure
 local function createEffectData(effectId, displayName, iconFile, effectType, startTime, endTime, duration, tooltip, artificial)
-    return {
+    return
+    {
         target = SpellCastBuffs.DetermineTarget("player1"),
         type = effectType,
         id = effectId,
@@ -2462,8 +2466,8 @@ function SpellCastBuffs.ArtificialEffectUpdate(eventCode, effectId)
     -- Process active artificial effects
     for activeEffectId in ZO_GetNextActiveArtificialEffectIdIter do
         -- Skip if effect should be ignored based on settings
-        if (activeEffectId == ARTIFICIAL_EFFECTS.ESO_PLUS and SpellCastBuffs.SV.IgnoreEsoPlusPlayer) or 
-           ((activeEffectId == ARTIFICIAL_EFFECTS.BATTLE_SPIRIT or activeEffectId == ARTIFICIAL_EFFECTS.BATTLE_SPIRIT_IC) and 
+        if (activeEffectId == ARTIFICIAL_EFFECTS.ESO_PLUS and SpellCastBuffs.SV.IgnoreEsoPlusPlayer) or
+        ((activeEffectId == ARTIFICIAL_EFFECTS.BATTLE_SPIRIT or activeEffectId == ARTIFICIAL_EFFECTS.BATTLE_SPIRIT_IC) and
             SpellCastBuffs.SV.IgnoreBattleSpiritPlayer) then
             return
         end
@@ -2480,11 +2484,11 @@ function SpellCastBuffs.ArtificialEffectUpdate(eventCode, effectId)
 
         -- Process effects and get tooltips
         local effectId, tooltip, artificial = handleBattleSpiritEffectId(activeEffectId)
-        
+
         -- Create and store effect
         local context = SpellCastBuffs.DetermineContextSimple("player1", effectId, displayName)
         SpellCastBuffs.EffectsList[context][effectId] = createEffectData(
-            effectId, displayName, iconFile, effectType, startTime, 
+            effectId, displayName, iconFile, effectType, startTime,
             endTime, duration, tooltip, artificial
         )
     end
@@ -2975,7 +2979,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
             end
         end
 
-        --Override icon with default if enabled
+        -- Override icon with default if enabled
         if SpellCastBuffs.SV.UseDefaultIcon and SpellCastBuffs.ShouldUseDefaultIcon(abilityId) == true then
             iconName = SpellCastBuffs.GetDefaultIcon(Effects.EffectOverride[abilityId].cc)
         end
@@ -3333,7 +3337,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         end
         if not DoesUnitExist("reticleover") then
         end
-        --if GetUnitReaction("reticleover") ~= UNIT_REACTION_HOSTILE then return end
+        -- if GetUnitReaction("reticleover") ~= UNIT_REACTION_HOSTILE then return end
         local displayName = GetDisplayName()
         local unitTag = displayName
         if IsUnitDead(unitTag) then
@@ -3341,7 +3345,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         end
         iconName = Effects.FakePlayerDebuffs[abilityId].icon or GetAbilityIcon(abilityId)
 
-        --Override icon with default if enabled
+        -- Override icon with default if enabled
         if SpellCastBuffs.SV.UseDefaultIcon and SpellCastBuffs.ShouldUseDefaultIcon(abilityId) == true then
             iconName = SpellCastBuffs.GetDefaultIcon(Effects.EffectOverride[abilityId].cc)
         end
@@ -3356,7 +3360,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         local source = zo_strformat("<<C:1>>", sourceName)
         local target = zo_strformat("<<C:1>>", targetName)
         local unitName = zo_strformat("<<C:1>>", GetUnitName("reticleover"))
-        --if unitName ~= target then return end
+        -- if unitName ~= target then return end
         if source == LUIE.PlayerNameFormatted and target ~= nil then
             if SpellCastBuffs.SV.HideTargetDebuffs then
                 return
@@ -3635,7 +3639,7 @@ end
 function SpellCastBuffs.RestoreSavedFakeEffects()
     -- Restore Ground Effects
     for _, effectsList in pairs({ SpellCastBuffs.EffectsList["ground"], SpellCastBuffs.EffectsList["saved"] }) do
-        --local container = containerRouting[context]
+        -- local container = containerRouting[context]
         for k, v in pairs(effectsList) do
             if v.savedName ~= nil then
                 local unitName = zo_strformat("<<C:1>>", GetUnitName("reticleover"))
@@ -3971,7 +3975,7 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
         -- Perform manual alignment
         if not uiTlw[container].iconHolder then
             if
-                iconsNum ~= uiTlw[container].prevIconsCount and index == next_row_break --[[and horizontal orientation of container]]
+            iconsNum ~= uiTlw[container].prevIconsCount and index == next_row_break --[[and horizontal orientation of container]]
             then
                 -- Padding of first icon in a row
                 local anchor, leftPadding
@@ -4100,7 +4104,7 @@ function SpellCastBuffs.updateIcons(currentTime, sortedList, container)
 
         -- Now possibly fade out expiring icon
         if SpellCastBuffs.SV.FadeOutIcons and remain ~= nil and remain < 2000 then
-            --buff:SetAlpha( 0.05 + remain/2106 )
+            -- buff:SetAlpha( 0.05 + remain/2106 )
             buff:SetAlpha(EaseOutQuad(remain, 0, 1, 2000))
         end
     end

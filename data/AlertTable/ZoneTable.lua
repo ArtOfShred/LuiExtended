@@ -3,14 +3,14 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Unitnames = LUIE.Data.UnitNames
 local Zonenames = LUIE.Data.ZoneNames
 local Abilities = LUIE.Data.Abilities
 
----@class (partial) ZoneTable
+--- @class (partial) ZoneTable
 local ZoneTable =
 {
 
@@ -19,5 +19,5 @@ local ZoneTable =
     [63179] = { block = true, dodge = true, interrupt = true, reflect = true, priority = 2, result = ACTION_RESULT_BEGIN, duration = 1000, cc = LUIE_CC_TYPE_STUN, sound = LUIE_ALERT_SOUND_TYPE_ST_CC }, -- Flame Shard (Justice Guard 2H)
 }
 
----@class (partial) ZoneTable
+--- @class (partial) ZoneTable
 LUIE.Data.ZoneTable = ZoneTable

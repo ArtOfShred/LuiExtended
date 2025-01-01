@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Unitnames = LUIE.Data.UnitNames
@@ -12,7 +12,7 @@ local Abilities = LUIE.Data.Abilities
 local ZoneTable = LUIE.Data.ZoneTable
 
 -- When a certain boss in in range if this id is cast, use the specified name as the source (There are some cases where bosses have uniquely named abilities as other enemies in the dungeon so this is a way to have both show properly).
----@class (partial) AlertBossNameConvert
+--- @class (partial) AlertBossNameConvert
 local AlertBossNameConvert =
 {
     -- Focused Healing (Healer)
@@ -100,5 +100,5 @@ local AlertBossNameConvert =
     },
 }
 
----@class (partial) AlertBossNameConvert
+--- @class (partial) AlertBossNameConvert
 LUIE.Data.AlertBossNameConvert = AlertBossNameConvert

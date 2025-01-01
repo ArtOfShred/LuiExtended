@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -13,7 +13,7 @@ local Abilities = LUIE.Data.Abilities
 
 local zo_strformat = zo_strformat
 
----@class (partial) KeepUpgradeOverride
+--- @class (partial) KeepUpgradeOverride
 local KeepUpgradeOverride =
 {
     [Abilities.Keep_Upgrade_Food_Guard_Range] = "LuiExtended/media/icons/keepupgrade/upgrade_food_guard_range.dds",
@@ -34,5 +34,5 @@ local KeepUpgradeOverride =
     [Abilities.Keep_Upgrade_Food_Guard_Abilities] = "LuiExtended/media/icons/keepupgrade/upgrade_food_guard.dds",
 }
 
----@class (partial) KeepUpgradeOverride
+--- @class (partial) KeepUpgradeOverride
 LUIE.Data.Effects.KeepUpgradeOverride = KeepUpgradeOverride

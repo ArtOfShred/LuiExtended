@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 -- TODO: Update id's here with fake ids probably, to set different icons etc for Prominent add/remove
 

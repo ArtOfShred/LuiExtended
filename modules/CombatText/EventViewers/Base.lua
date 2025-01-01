@@ -3,10 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class CombatTextEventViewer : ZO_InitializingObject
+--- @class CombatTextEventViewer : ZO_InitializingObject
 local CombatTextEventViewer = ZO_InitializingObject:Subclass()
 local CombatText = LUIE.CombatText
 local string_format = string.format
@@ -248,7 +248,7 @@ function CombatTextEventViewer:ControlLayout(control, abilityId, combatType, sou
             end
         end
 
-        --Override icon with default if enabled
+        -- Override icon with default if enabled
         if Settings.common.useDefaultIcon and self:ShouldUseDefaultIcon(abilityId) == true then
             iconPath = self:GetDefaultIcon(Effects.EffectOverride[abilityId].cc)
         end
