@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,7 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- When GetZoneId(GetCurrentMapZoneIndex()) matches this filter, customize the ability based off this criteria.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) ZoneDataOverride
+--- @class (partial) ZoneDataOverride
 local ZoneDataOverride =
 {
 
@@ -444,5 +444,5 @@ local ZoneDataOverride =
     },
 }
 
----@class (partial) ZoneDataOverride
+--- @class (partial) ZoneDataOverride
 LUIE.Data.Effects.ZoneDataOverride = ZoneDataOverride

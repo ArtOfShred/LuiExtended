@@ -3,14 +3,14 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) BlacklistPresets
----@field public MinorBuffs table<number, boolean>
----@field public MajorBuffs table<number, boolean>
----@field public MinorDebuffs table<number, boolean>
----@field public MajorDebuffs table<number, boolean>
+--- @class (partial) BlacklistPresets
+--- @field public MinorBuffs table<number, boolean>
+--- @field public MajorBuffs table<number, boolean>
+--- @field public MinorDebuffs table<number, boolean>
+--- @field public MajorDebuffs table<number, boolean>
 local BlacklistPresets =
 {
     -- Minor Buffs
@@ -88,5 +88,5 @@ local BlacklistPresets =
     },
 }
 
----@class (partial) BlacklistPresets
+--- @class (partial) BlacklistPresets
 LUIE.Data.AbilityBlacklistPresets = BlacklistPresets

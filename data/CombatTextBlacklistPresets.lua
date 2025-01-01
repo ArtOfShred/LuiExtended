@@ -3,10 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) BlacklistPresets
+--- @class (partial) BlacklistPresets
 local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
 
 -- Sets

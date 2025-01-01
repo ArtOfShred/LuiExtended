@@ -3,11 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal
----@class (partial) ReversedLogic
+--- @class (partial) ReversedLogic
 local ReversedLogic =
 {
     -- Quests
@@ -23,5 +23,5 @@ local ReversedLogic =
     [34848] = true, -- Primal Sweep -- Wayrest Sewers
 }
 
----@class (partial) ReversedLogic
+--- @class (partial) ReversedLogic
 LUIE.Data.CrowdControl.ReversedLogic = ReversedLogic

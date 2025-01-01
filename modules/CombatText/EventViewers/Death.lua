@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 LUIE.CombatTextDeathViewer = LUIE.CombatTextEventViewer:Subclass()
 local CombatTextDeathViewer = LUIE.CombatTextDeathViewer
@@ -12,7 +12,7 @@ local poolTypes = LUIE.Data.CombatTextConstants.poolType
 local eventType = LUIE.Data.CombatTextConstants.eventType
 
 local zo_strformat = zo_strformat
----@diagnostic disable-next-line: duplicate-set-field
+--- @diagnostic disable-next-line: duplicate-set-field
 function CombatTextDeathViewer:New(...)
     local obj = LUIE.CombatTextEventViewer:New(...)
     obj:RegisterCallback(eventType.DEATH, function (...)
@@ -28,12 +28,12 @@ function CombatTextDeathViewer:OnEvent(unitTag)
 
     local name = zo_strformat("<<C:1>>", GetUnitName(unitTag))
 
-    --Label setup
+    -- Label setup
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
 
     local size, color, text
     ---------------------------------------------------------------------------------------------------------------------------------------
-    --//POINTS//--
+    -- //POINTS//--
     ---------------------------------------------------------------------------------------------------------------------------------------
     color = Settings.colors.death
     size = Settings.fontSizes.death
@@ -42,12 +42,12 @@ function CombatTextDeathViewer:OnEvent(unitTag)
     self:PrepareLabel(control.label, size, color, text)
     self:ControlLayout(control)
 
-    --Control setup
+    -- Control setup
     control:SetAnchor(CENTER, LUIE_CombatText_Point, TOP, 0, self.locationOffset * (Settings.fontSizes.death + 5))
     self.locationOffset = self.locationOffset + 1
     self.activePoints = self.activePoints + 1
 
-    --Get animation
+    -- Get animation
     local animationPoolType = poolTypes.ANIMATION_DEATH
     local animation, animationPoolKey = self.poolManager:GetPoolObject(animationPoolType)
 
@@ -59,7 +59,7 @@ function CombatTextDeathViewer:OnEvent(unitTag)
     animation:Apply(control)
     animation:Play()
 
-    --Add items back into pool after animation
+    -- Add items back into pool after animation
     zo_callLater(function ()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)

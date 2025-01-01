@@ -3,10 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) CombatTextConstants
+--- @class (partial) CombatTextConstants
 local CombatTextConstants =
 {
     -- Damage & Healing
@@ -205,5 +205,5 @@ local CombatTextConstants =
     directionType = { "up", "down" },
     iconSide = { "none", "left", "right" },
 }
----@class (partial) CombatTextConstants
+--- @class (partial) CombatTextConstants
 LUIE.Data.CombatTextConstants = CombatTextConstants

@@ -3,22 +3,22 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) Quests
----@field ItemIgnoreTurnIn table :TODO
----@field ItemReceivedMessage table<number, string>
----@field ItemRemovedInDialogueMessage table<number, string>
----@field ItemRemovedMessage table<number, string>
----@field QuestAdvancedOverride table<string, string>
----@field QuestItemHideLoot table<number, boolean>
----@field QuestItemHideRemove table<number, boolean>
----@field QuestItemMaxQuantityAdd table<number, boolean>
----@field QuestItemMerge table<number, table[]>
----@field QuestItemModifyOnAdd table<number, function>
----@field QuestItemModifyOnRemove table<number, function>
----@field QuestObjectiveCompleteOverride table<string, string>
+--- @class (partial) Quests
+--- @field ItemIgnoreTurnIn table :TODO
+--- @field ItemReceivedMessage table<number, string>
+--- @field ItemRemovedInDialogueMessage table<number, string>
+--- @field ItemRemovedMessage table<number, string>
+--- @field QuestAdvancedOverride table<string, string>
+--- @field QuestItemHideLoot table<number, boolean>
+--- @field QuestItemHideRemove table<number, boolean>
+--- @field QuestItemMaxQuantityAdd table<number, boolean>
+--- @field QuestItemMerge table<number, table[]>
+--- @field QuestItemModifyOnAdd table<number, function>
+--- @field QuestItemModifyOnRemove table<number, function>
+--- @field QuestObjectiveCompleteOverride table<string, string>
 local Quests =
 {
     -- List of Quest Items to ignore when Looted (Alot of quest items swap out for different id's mid quest and it looks silly having a ton of messages print)
@@ -185,15 +185,15 @@ local Quests =
     },
 
     -- Message to override when an item is removed.
-    --LUIE_QUEST_MESSAGE_TURNIN = 1
-    --LUIE_QUEST_MESSAGE_USE = 2
-    --LUIE_QUEST_MESSAGE_EXHAUST = 3
-    --LUIE_QUEST_MESSAGE_OFFER = 4
-    --LUIE_QUEST_MESSAGE_DISCARD = 5
-    --LUIE_QUEST_MESSAGE_CONFISCATE = 6
-    --LUIE_QUEST_MESSAGE_OPEN = 11
-    --LUIE_QUEST_MESSAGE_ADMINISTER = 12
-    --LUIE_QUEST_MESSAGE_PLACE = 13
+    -- LUIE_QUEST_MESSAGE_TURNIN = 1
+    -- LUIE_QUEST_MESSAGE_USE = 2
+    -- LUIE_QUEST_MESSAGE_EXHAUST = 3
+    -- LUIE_QUEST_MESSAGE_OFFER = 4
+    -- LUIE_QUEST_MESSAGE_DISCARD = 5
+    -- LUIE_QUEST_MESSAGE_CONFISCATE = 6
+    -- LUIE_QUEST_MESSAGE_OPEN = 11
+    -- LUIE_QUEST_MESSAGE_ADMINISTER = 12
+    -- LUIE_QUEST_MESSAGE_PLACE = 13
     ItemRemovedMessage =
     {
 
@@ -258,11 +258,11 @@ local Quests =
     },
 
     -- Message to override when an item is received.
-    --LUIE_QUEST_MESSAGE_COMBINE = 7
-    --LUIE_QUEST_MESSAGE_MIX = 8
-    --LUIE_QUEST_MESSAGE_BUNDLE = 9
-    --LUIE_QUEST_MESSAGE_LOOT = 10
-    --LUIE_QUEST_MESSAGE_STEAL = 14
+    -- LUIE_QUEST_MESSAGE_COMBINE = 7
+    -- LUIE_QUEST_MESSAGE_MIX = 8
+    -- LUIE_QUEST_MESSAGE_BUNDLE = 9
+    -- LUIE_QUEST_MESSAGE_LOOT = 10
+    -- LUIE_QUEST_MESSAGE_STEAL = 14
     ItemReceivedMessage =
     {
 
@@ -383,5 +383,5 @@ Quests.QuestItemModifyOnRemove =
         Quests.QuestItemHideRemove[3818] = true
     end, -- Dwemer Device (Tip of the Spearhead)
 }
----@class (partial) Quests
+--- @class (partial) Quests
 LUIE.Data.Quests = Quests

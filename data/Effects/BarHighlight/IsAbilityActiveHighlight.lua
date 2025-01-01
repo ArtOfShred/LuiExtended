@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,7 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- EFFECTS TABLE FOR BAR HIGHLIGHT RELATED OVERRIDES
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) IsAbilityActiveHighlight
+--- @class (partial) IsAbilityActiveHighlight
 local IsAbilityActiveHighlight =
 {
     -- Support
@@ -25,5 +25,5 @@ local IsAbilityActiveHighlight =
     [81420] = true, -- Stalwart Guard (Stalwart Guard)
 }
 
----@class (partial) IsAbilityActiveHighlight
+--- @class (partial) IsAbilityActiveHighlight
 LUIE.Data.Effects.IsAbilityActiveHighlight = IsAbilityActiveHighlight

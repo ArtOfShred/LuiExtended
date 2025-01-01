@@ -3,29 +3,29 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local zo_strformat = zo_strformat
 
---Params for GetAbilityDescription
+-- Params for GetAbilityDescription
 local override = nil
 local csunittag = "player"
 
---From /esoui/lang/en_client.lua
---SI_DAMAGETYPE0 = "None"
---SI_DAMAGETYPE1 = "Generic"
---SI_DAMAGETYPE2 = "Physical"
---SI_DAMAGETYPE3 = "Flame"
---SI_DAMAGETYPE4 = "Shock"
---SI_DAMAGETYPE5 = "Daedric"
---SI_DAMAGETYPE6 = "Frost"
---SI_DAMAGETYPE7 = "Earth"
---SI_DAMAGETYPE8 = "Magic"
---SI_DAMAGETYPE9 = "Drowning"
---SI_DAMAGETYPE10 = "Disease"
---SI_DAMAGETYPE11 = "Poison"
---SI_DAMAGETYPE12 = "Bleed"
+-- From /esoui/lang/en_client.lua
+-- SI_DAMAGETYPE0 = "None"
+-- SI_DAMAGETYPE1 = "Generic"
+-- SI_DAMAGETYPE2 = "Physical"
+-- SI_DAMAGETYPE3 = "Flame"
+-- SI_DAMAGETYPE4 = "Shock"
+-- SI_DAMAGETYPE5 = "Daedric"
+-- SI_DAMAGETYPE6 = "Frost"
+-- SI_DAMAGETYPE7 = "Earth"
+-- SI_DAMAGETYPE8 = "Magic"
+-- SI_DAMAGETYPE9 = "Drowning"
+-- SI_DAMAGETYPE10 = "Disease"
+-- SI_DAMAGETYPE11 = "Poison"
+-- SI_DAMAGETYPE12 = "Bleed"
 
 -- Local Damagetypes for easy use
 local PhysicalDamage = GetString(SI_DAMAGETYPE2) .. " Damage" -- TODO: Localize
@@ -38,7 +38,7 @@ local PoisonDamage = GetString(SI_DAMAGETYPE11) .. " Damage"  -- TODO: Localize
 local BleedDamage = GetString(SI_DAMAGETYPE12) .. " Damage"   -- TODO: Localize
 local OblivionDamage = "Oblivion Damage"                      -- TODO: Localize
 
----@class (partial) Tooltips
+--- @class (partial) Tooltips
 local Tooltips =
 {
     ----------------------------------------------------------------
@@ -237,7 +237,7 @@ local Tooltips =
     Generic_AOE_Heal = GetString(LUIE_STRING_SKILL_GENERIC_GROUND_HEAL_TP),
 
     Generic_Off_Balance = GetString(LUIE_STRING_SKILL_GENERIC_OFF_BALANCE_TP),
-    --Generic_Off_Balance_No_Dur                      = GetString(LUIE_STRING_SKILL_GENERIC_OFF_BALANCE_NO_DUR_TP),
+    -- Generic_Off_Balance_No_Dur                      = GetString(LUIE_STRING_SKILL_GENERIC_OFF_BALANCE_NO_DUR_TP),
     Generic_Off_Balance_Immunity = GetString(LUIE_STRING_SKILL_GENERIC_OFF_BALANCE_IMMUNITY_TP),
     Generic_Major_Vulnerability_Immunity = GetString(LUIE_STRING_SKILL_GENERIC_MAJOR_VULNERABILITY_IMMUNITY_TP),
     Generic_Immobilize = GetString(LUIE_STRING_SKILL_GENERIC_IMMOBILIZE_TP),
@@ -254,7 +254,7 @@ local Tooltips =
     Generic_Silence = GetString(LUIE_STRING_SKILL_GENERIC_SILENCE_TP),
     Generic_Silence_No_Dur = GetString(LUIE_STRING_SKILL_GENERIC_SILENCE_NO_DUR_TP),
     Generic_Disorient = GetString(LUIE_STRING_SKILL_GENERIC_DISORIENT_TP),
-    --Generic_Disorient_No_Dur                        = GetString(LUIE_STRING_SKILL_GENERIC_DISORIENT_NO_DUR_TP),
+    -- Generic_Disorient_No_Dur                        = GetString(LUIE_STRING_SKILL_GENERIC_DISORIENT_NO_DUR_TP),
 
     Generic_CC_Immunity = GetString(LUIE_STRING_SKILL_GENERIC_CC_IMMUNITY_TP),
     Generic_Scary_Immunities = GetString(LUIE_STRING_SKILL_GENERIC_SCARY_IMMUNITIES_TP),
@@ -266,8 +266,8 @@ local Tooltips =
 
     Generic_Ravage_Health_Potion = zo_strgsub(GetString(LUIE_STRING_SKILL_GENERIC_RAVAGE_HEALTH_POTION_TP), "SUBSTRING", PoisonDamage),
     Generic_Gradual_Ravage_Health_Potion = zo_strgsub(GetString(LUIE_STRING_SKILL_GENERIC_RAVAGE_HEALTH_POTION_TP), "SUBSTRING", BleedDamage),
-    --Generic_Ravage_Magicka_Potion                   = GetString(LUIE_STRING_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP),
-    --Generic_Ravage_Stamina_Potion                   = GetString(LUIE_STRING_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP),
+    -- Generic_Ravage_Magicka_Potion                   = GetString(LUIE_STRING_SKILL_GENERIC_RAVAGE_MAGICKA_POTION_TP),
+    -- Generic_Ravage_Stamina_Potion                   = GetString(LUIE_STRING_SKILL_GENERIC_RAVAGE_STAMINA_POTION_TP),
     Generic_Ravage_Magicka_Poison = GetString(LUIE_STRING_SKILL_GENERIC_RAVAGE_MAGICKA_POISON_TP),
     Generic_Ravage_Stamina_Poison = GetString(LUIE_STRING_SKILL_GENERIC_RAVAGE_STAMINA_POISON_TP),
 
@@ -297,8 +297,8 @@ local Tooltips =
     Innate_Snare_Immobilize_Immunity = GetString(LUIE_STRING_SKILL_SNARE_IMMOBILIZE_IMMUNITY_TP),
     Innate_Dodge_Fatigue = GetString(LUIE_STRING_SKILL_DODGE_FATIGUE_TP),
     Innate_Invisible = GetString(LUIE_STRING_SKILL_INVISIBLE_TP),
-    --Innate_Sprint                                   = GetString(LUIE_STRING_SKILL_SPRINT_TP),
-    --Innate_Gallop                                   = GetString(LUIE_STRING_SKILL_GALLOP_TP),
+    -- Innate_Sprint                                   = GetString(LUIE_STRING_SKILL_SPRINT_TP),
+    -- Innate_Gallop                                   = GetString(LUIE_STRING_SKILL_GALLOP_TP),
     Innate_Resurrection_Immunity = GetString(LUIE_STRING_SKILL_RESURRECTION_IMMUNITY_TP),
     Innate_Taunt = GetString(LUIE_STRING_SKILL_TAUNT_TP),
     Innate_Taunt_Other = GetString(LUIE_STRING_SKILL_TAUNT_OTHER_TP),
@@ -629,14 +629,14 @@ local Tooltips =
     Set_Relequen = GetString(LUIE_STRING_SKILL_SET_RELEQUEN_TP),
 
     Set_Kynes_Blessing = GetString(LUIE_STRING_SKILL_SET_KYNES_BLESSING_TP),
-    --Set_Kynes_Blessing_Ground                     = GetString(LUIE_STRING_SKILL_SET_KYNES_BLESSING_GROUND_TP),
+    -- Set_Kynes_Blessing_Ground                     = GetString(LUIE_STRING_SKILL_SET_KYNES_BLESSING_GROUND_TP),
     Set_Giants_Endurance = GetString(LUIE_STRING_SKILL_SET_GIANTS_ENDURANCE_TP),
     Set_Giants_Might = GetString(LUIE_STRING_SKILL_SET_GIANTS_MIGHT_TP),
     Set_Roar_of_Alkosh = GetString(LUIE_STRING_SKILL_ROAR_OF_ALKOSH_TP),
 
     -- Battleground Sets
     Set_Vanguards_Challenge = GetString(LUIE_STRING_SKILL_SET_VANGUARDS_CHALLENGE_TP),
-    --Set_Cowards_Gear                                = GetString(LUIE_STRING_SKILL_SET_COWARDS_GEAR_TP),
+    -- Set_Cowards_Gear                                = GetString(LUIE_STRING_SKILL_SET_COWARDS_GEAR_TP),
 
     -- Imperial City Sets
     Set_Galerions_Revenge = GetString(LUIE_STRING_SKILL_SET_GALERIONS_REVENGE_TP),
@@ -1214,7 +1214,7 @@ local Tooltips =
     Skill_Cleave_Stance = GetString(LUIE_STRING_SKILL_CLEAVE_STANCE_TP),
     Skill_Defensive_Ward = GetString(LUIE_STRING_SKILL_DEFENSIVE_WARD_TP),
     Skill_Soul_Tether_NPC = GetString(LUIE_STRING_SKILL_SOUL_TETHER_NPC_TP),
-    --Skill_Focused_Healing                           = GetString(LUIE_STRING_SKILL_FOCUSED_HEALING_TP),
+    -- Skill_Focused_Healing                           = GetString(LUIE_STRING_SKILL_FOCUSED_HEALING_TP),
     Skill_Rite_of_Passage_NPC = GetString(LUIE_STRING_SKILL_RITE_OF_PASSAGE_NPC_TP),
     Skill_Throw_Dagger = GetString(LUIE_STRING_SKILL_THROW_DAGGER_TP),
     Skill_Agony = GetString(LUIE_STRING_SKILL_AGONY_TP),
@@ -1531,11 +1531,11 @@ local Tooltips =
     Keep_Upgrade_Food_Guard_Abilities = GetString(LUIE_STRING_KEEP_UPGRADE_FOOD_GUARD_ABILITIES_TP),
 }
 
----@class (partial) Tooltips
+--- @class (partial) Tooltips
 LUIE.Data.Tooltips = Tooltips
 
----@param armorType any
----@return integer counter
+--- @param armorType any
+--- @return integer counter
 local function GetEquippedArmorPieces(armorType)
     local counter = 0
     for i = 0, 16 do

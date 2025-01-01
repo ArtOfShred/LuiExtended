@@ -3,14 +3,14 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local pairs = pairs
 
 LUIE.CombatTextPoolManager = ZO_InitializingObject:Subclass()
 local CombatTextPoolManager = LUIE.CombatTextPoolManager
----@diagnostic disable-next-line: duplicate-set-field
+--- @diagnostic disable-next-line: duplicate-set-field
 function CombatTextPoolManager:New()
     local obj = setmetatable({}, self)
     self.pools = {}

@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,14 +16,14 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- This will create an effect on the player or target when X skill is detected as active. SpellCastBuffs creates the buff by the name listed here, this way if 3 or 4 effects all need to display for 1 ability, it will only show the one aura.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) EffectCreateSkillAura
+--- @class (partial) EffectCreateSkillAura
 local EffectCreateSkillAura =
 {
     -- Required:
     -- abilityId = #
     -- Optional:
-    --name = '' -- Add a custom name
-    --icon = '' -- Add a custom icon
+    -- name = '' -- Add a custom name
+    -- icon = '' -- Add a custom icon
     -- removeOnEnd = true -- Remove this aura when one of these effects ends.
     -- requiredStack = number -- Requires this number of stacks to apply
 
@@ -33,5 +33,5 @@ local EffectCreateSkillAura =
     [72725] = { removeOnEnd = true, abilityId = 28301 }, -- Fool Me Once (Sentinel) (TG DLC)
 }
 
----@class (partial) EffectCreateSkillAura
+--- @class (partial) EffectCreateSkillAura
 LUIE.Data.Effects.EffectCreateSkillAura = EffectCreateSkillAura

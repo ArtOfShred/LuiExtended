@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,7 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- EFFECTS TABLE FOR BAR HIGHLIGHT RELATED OVERRIDES
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) IsAbilityActiveGlow
+--- @class (partial) IsAbilityActiveGlow
 local IsAbilityActiveGlow =
 {
 
@@ -29,5 +29,5 @@ local IsAbilityActiveGlow =
     [137164] = true, -- Feral Carnage (Feral Pounce)
 }
 
----@class (partial) IsAbilityActiveGlow
+--- @class (partial) IsAbilityActiveGlow
 LUIE.Data.Effects.IsAbilityActiveGlow = IsAbilityActiveGlow

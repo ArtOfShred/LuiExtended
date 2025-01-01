@@ -1,14 +1,14 @@
----@diagnostic disable: duplicate-index
+--- @diagnostic disable: duplicate-index
 --[[
     LuiExtended
     License: The MIT License (MIT)
 ]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 -- For debug function - convert result reason codes to string value
----@class DebugResults
+--- @class DebugResults
 local DebugResults =
 {
     [-1] = "INVALID",
@@ -137,5 +137,5 @@ local DebugResults =
     [1073741856] = "HOT!",
 }
 
----@type DebugResults
+--- @type DebugResults
 LUIE.Data.DebugResults = DebugResults

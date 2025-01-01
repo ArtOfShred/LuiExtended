@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local string_format = string.format
@@ -28,133 +28,144 @@ function LUIE.SetupAlertFrameVisibility()
     ZO_AlertTextNotification:SetHidden(LUIE.SV.HideAlertFrame)
 end
 
----Returns a formatted timestamp based on the provided time string and format string.
----@param timeStr string: The time string in the format "HH:MM:SS".
----@param formatStr string|nil (optional): The format string for the timestamp. If not provided, the default format from LUIE.ChatAnnouncements.SV.TimeStampFormat will be used.
----@return string: The formatted timestamp.
-local function CreateTimestamp(timeStr, formatStr)
-    formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat
+do
+    --- Returns a formatted timestamp based on the provided time string and format string.
+    --- @param timeStr string: The time string in the format "HH:MM:SS".
+    --- @param formatStr string|nil (optional): The format string for the timestamp. If not provided, the default format from LUIE.ChatAnnouncements.SV.TimeStampFormat will be used.
+    --- @return string: The formatted timestamp.
+    local function CreateTimestamp(timeStr, formatStr)
+        formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat
 
-    -- split up default timestamp
-    local hours, minutes, seconds = zo_strmatch(timeStr, "([^:]+):([^:]+):([^:]+)")
-    local hoursNoLead = tonumber(hours) -- hours without leading zero
-    local hours12NoLead = (hoursNoLead - 1) % 12 + 1
-    local hours12 = hours12NoLead < 10 and "0" .. hours12NoLead or tostring(hours12NoLead)
-    local pUp = hoursNoLead >= 12 and "PM" or "AM"
-    local pLow = hoursNoLead >= 12 and "pm" or "am"
+        -- split up default timestamp
+        local hours, minutes, seconds = zo_strmatch(timeStr, "([^:]+):([^:]+):([^:]+)")
+        local hoursNoLead = tonumber(hours) -- hours without leading zero
+        local hours12NoLead = (hoursNoLead - 1) % 12 + 1
+        local hours12 = hours12NoLead < 10 and "0" .. hours12NoLead or tostring(hours12NoLead)
+        local pUp = hoursNoLead >= 12 and "PM" or "AM"
+        local pLow = hoursNoLead >= 12 and "pm" or "am"
 
-    -- create new timestamp using substitutions
-    local timestamp = formatStr
-    timestamp = zo_strgsub(timestamp, "HH", hours)
-    timestamp = zo_strgsub(timestamp, "H", tostring(hoursNoLead))
-    timestamp = zo_strgsub(timestamp, "hh", hours12)
-    timestamp = zo_strgsub(timestamp, "h", tostring(hours12NoLead))
-    timestamp = zo_strgsub(timestamp, "m", minutes)
-    timestamp = zo_strgsub(timestamp, "s", seconds)
-    timestamp = zo_strgsub(timestamp, "A", pUp)
-    timestamp = zo_strgsub(timestamp, "a", pLow)
+        -- create new timestamp using substitutions
+        local timestamp = formatStr
+        timestamp = zo_strgsub(timestamp, "HH", hours)
+        timestamp = zo_strgsub(timestamp, "H", tostring(hoursNoLead))
+        timestamp = zo_strgsub(timestamp, "hh", hours12)
+        timestamp = zo_strgsub(timestamp, "h", tostring(hours12NoLead))
+        timestamp = zo_strgsub(timestamp, "m", minutes)
+        timestamp = zo_strgsub(timestamp, "s", seconds)
+        timestamp = zo_strgsub(timestamp, "A", pUp)
+        timestamp = zo_strgsub(timestamp, "a", pLow)
 
-    return timestamp
-end
-
-LUIE.CreateTimestamp = CreateTimestamp
-
-
---- Helper function to format a message with an optional timestamp.
----@param msg string: The message to be formatted.
----@param doTimestamp boolean: If true, a timestamp will be added to the formatted message.
----@param lineNumber? number: The current line number for the chat message.
----@param chanCode? number: The chat channel code.
----@return string: The formatted message.
-local function FormatMessage(msg, doTimestamp, lineNumber, chanCode)
-    local formattedMsg = msg or ""
-    if doTimestamp then
-        local timestring = GetTimeString()
-        local timestamp = CreateTimestamp(timestring, nil)
-
-        -- Make timestamp clickable if lineNumber and chanCode are provided
-        local timestampText
-        if lineNumber and chanCode then
-            timestampText = ZO_LinkHandler_CreateLink(timestamp, nil, "LUIE", lineNumber .. ":" .. chanCode)
-        else
-            timestampText = timestamp
-        end
-
-        -- Format with color and brackets
-        local timestampFormatted = string_format("|c%s[%s]|r ", LUIE.TimeStampColorize, timestampText)
-
-        -- Combine timestamp with message
-        formattedMsg = timestampFormatted .. formattedMsg
+        return timestamp
     end
-    return formattedMsg
+
+    LUIE.CreateTimestamp = CreateTimestamp
 end
 
-LUIE.FormatMessage = FormatMessage
+
+do
+    --- Helper function to format a message with an optional timestamp.
+    --- @param msg string: The message to be formatted.
+    --- @param doTimestamp boolean: If true, a timestamp will be added to the formatted message.
+    --- @param lineNumber? number: The current line number for the chat message.
+    --- @param chanCode? number: The chat channel code.
+    --- @return string: The formatted message.
+    local function FormatMessage(msg, doTimestamp, lineNumber, chanCode)
+        local formattedMsg = msg or ""
+        if doTimestamp then
+            local timestring = GetTimeString()
+            local timestamp = LUIE.CreateTimestamp(timestring, nil)
+
+            -- Make timestamp clickable if lineNumber and chanCode are provided
+            local timestampText
+            if lineNumber and chanCode then
+                timestampText = ZO_LinkHandler_CreateLink(timestamp, nil, "LUIE", lineNumber .. ":" .. chanCode)
+            else
+                timestampText = timestamp
+            end
+
+            -- Format with color and brackets
+            local timestampFormatted = string_format("|c%s[%s]|r ", LUIE.TimeStampColorize, timestampText)
+
+            -- Combine timestamp with message
+            formattedMsg = timestampFormatted .. formattedMsg
+        end
+        return formattedMsg
+    end
+
+    LUIE.FormatMessage = FormatMessage
+end
 
 --- Hides or shows all LUIE components.
----@param hidden boolean: If true, all components will be hidden. If false, all components will be shown.
+--- @param hidden boolean: If true, all components will be hidden. If false, all components will be shown.
 function LUIE.ToggleVisibility(hidden)
     for _, control in pairs(LUIE.Components) do
         control:SetHidden(hidden)
     end
 end
 
---- Adds a system message to the chat.
----@param messageOrFormatter string: The message to be printed.
----@param ... string: Variable number of arguments to be passed to CHAT_ROUTER:AddSystemMessage.
-function LUIE.AddSystemMessage(messageOrFormatter, ...)
-    local formattedMessage
-    if select("#", ...) > 0 then
-        -- Escape '%' characters to prevent illegal format specifiers.
-        local safeFormat = zo_strgsub(messageOrFormatter, "%%", "%%%%")
-        formattedMessage = string_format(safeFormat, ...)
-    else
-        formattedMessage = messageOrFormatter
+do
+    --- Adds a system message to the chat.
+    --- @param messageOrFormatter string: The message to be printed.
+    --- @param ... string: Variable number of arguments to be passed to CHAT_ROUTER:AddSystemMessage.
+    local function AddSystemMessage(messageOrFormatter, ...)
+        local formattedMessage
+        if select("#", ...) > 0 then
+            -- Escape '%' characters to prevent illegal format specifiers.
+            local safeFormat = zo_strgsub(messageOrFormatter, "%%", "%%%%")
+            formattedMessage = string_format(safeFormat, ...)
+        else
+            formattedMessage = messageOrFormatter
+        end
+        CHAT_ROUTER:AddSystemMessage(formattedMessage)
     end
-    CHAT_ROUTER:AddSystemMessage(formattedMessage)
+    LUIE.AddSystemMessage = AddSystemMessage
 end
 
---- Easy Print to Chat.
---- Prints a message to the chat.
----@param msg string: The message to be printed.
----@param isSystem? boolean: If true, the message is considered a system message.
-function LUIE.PrintToChat(msg, isSystem)
-    if CHAT_SYSTEM.primaryContainer then
-        if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
-            if not LUIE.ChatAnnouncements.SV.ChatBypassFormat and CHAT_SYSTEM.primaryContainer then
-                -- Add timestamps if bypass is not enabled
-                local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                LUIE.AddSystemMessage(formattedMsg)
-            else
-                LUIE.AddSystemMessage(msg)
-            end
-        else
-            -- If we have system messages sent to display in all windows then just print to all windows at once, otherwise send messages to individual tabs.
-            if isSystem and LUIE.ChatAnnouncements.SV.ChatSystemAll then
-                if not LUIE.ChatAnnouncements.SV.ChatBypassFormat then
+do
+    --- Easy Print to Chat.
+    --- Prints a message to the chat.
+    --- @param msg string: The message to be printed.
+    --- @param isSystem? boolean: If true, the message is considered a system message.
+    local function PrintToChat(msg, isSystem)
+        local AddSystemMessage = LUIE.AddSystemMessage
+        local FormatMessage = LUIE.FormatMessage
+        if CHAT_SYSTEM.primaryContainer then
+            if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
+                if not LUIE.ChatAnnouncements.SV.ChatBypassFormat and CHAT_SYSTEM.primaryContainer then
                     -- Add timestamps if bypass is not enabled
                     local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                    LUIE.AddSystemMessage(formattedMsg)
+                    AddSystemMessage(formattedMsg)
                 else
-                    LUIE.AddSystemMessage(msg)
+                    AddSystemMessage(msg)
                 end
             else
-                for k, cc in ipairs(CHAT_SYSTEM.containers) do
-                    for i = 1, #cc.windows do
-                        if LUIE.ChatAnnouncements.SV.ChatTab[i] == true then
-                            local chatContainer = cc
-                            if chatContainer then
-                                local chatWindow = cc.windows[i]
-                                local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                                -- Don't print into the Combat Metrics Log window if CMX is enabled.
-                                local flagHide = false
-                                if CMX and CMX.db and CMX.db.chatLog then
-                                    if chatContainer:GetTabName(i) == CMX.db.chatLog.name then
-                                        flagHide = true
+                -- If we have system messages sent to display in all windows then just print to all windows at once, otherwise send messages to individual tabs.
+                if isSystem and LUIE.ChatAnnouncements.SV.ChatSystemAll then
+                    if not LUIE.ChatAnnouncements.SV.ChatBypassFormat then
+                        -- Add timestamps if bypass is not enabled
+                        local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+                        AddSystemMessage(formattedMsg)
+                    else
+                        AddSystemMessage(msg)
+                    end
+                else
+                    for k, cc in ipairs(CHAT_SYSTEM.containers) do
+                        for i = 1, #cc.windows do
+                            if LUIE.ChatAnnouncements.SV.ChatTab[i] == true then
+                                local chatContainer = cc
+                                if chatContainer then
+                                    local chatWindow = cc.windows[i]
+                                    local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+                                    -- Don't print into the Combat Metrics Log window if CMX is enabled.
+                                    local flagHide = false
+                                    if CMX and CMX.db and CMX.db.chatLog then
+                                        if chatContainer:GetTabName(i) == CMX.db.chatLog.name then
+                                            flagHide = true
+                                        end
                                     end
-                                end
-                                if not flagHide then
-                                    chatContainer:AddEventMessageToWindow(chatWindow, formattedMsg, CHAT_CATEGORY_SYSTEM)
+                                    if not flagHide then
+                                        chatContainer:AddEventMessageToWindow(chatWindow, formattedMsg, CHAT_CATEGORY_SYSTEM)
+                                    end
                                 end
                             end
                         end
@@ -163,18 +174,18 @@ function LUIE.PrintToChat(msg, isSystem)
             end
         end
     end
+    LUIE.PrintToChat = PrintToChat
 end
 
---- Returns a formatted number with commas.
---- Function to abbreviate a number by shortening and adding commas.
----@param number number: The number to be abbreviated.
----@param shorten? boolean: Whether to shorten the number or not.
----@param comma? boolean: Whether to add commas or not.
----@return number|string: The formatted number with commas.
+--- Formats a number with optional shortening and localized separators.
+--- @param number number The number to format
+--- @param shorten? boolean Whether to abbreviate large numbers (e.g. 1.5M)
+--- @param comma? boolean Whether to add localized digit separators
+--- @return string|number The formatted number
 function LUIE.AbbreviateNumber(number, shorten, comma)
+    -- Handle shortening for large numbers
     if number > 0 and shorten then
-        local value
-        local suffix
+        local value, suffix
         if number >= 1000000000 then
             value = number / 1000000000
             suffix = "G"
@@ -187,38 +198,39 @@ function LUIE.AbbreviateNumber(number, shorten, comma)
         else
             value = number
         end
-        -- If we could not convert even to "G", return full number
+
+        -- Format the value
         if value >= 1000 then
-            if comma then
-                value = ZO_LocalizeDecimalNumber(number)
-                return value
-            else
-                return number
-            end
-        elseif value >= 100 or suffix == nil then
-            value = string_format("%d", value)
+            -- Number too large even for G suffix, return full number
+            return comma and ZO_CommaDelimitDecimalNumber(number) or number
+        end
+
+        -- Format with 0 or 1 decimal places based on size
+        local formattedValue
+        if value >= 100 or not suffix then
+            formattedValue = zo_strformat("<<1>>", zo_floor(value))
         else
-            value = string_format("%.1f", value)
+            formattedValue = zo_strformat("<<f:1>>", value) -- Uses 1 decimal place
         end
-        if suffix ~= nil then
-            value = value .. suffix
-        end
-        return value
+
+        -- Add suffix if we have one
+        return suffix and (formattedValue .. suffix) or formattedValue
     end
-    -- Add commas if needed
+
+    -- Just add separators if requested
     if comma then
-        local value = ZO_LocalizeDecimalNumber(number)
-        return value
+        return ZO_CommaDelimitDecimalNumber(number)
     end
+
     return number
 end
 
 --- Takes an input with a name identifier, title, text, and callback function to create a dialogue button.
----@param identifier string: The identifier for the dialogue button.
----@param title string: The title text for the dialogue button.
----@param text string: The main text for the dialogue button.
----@param callback function: The callback function to be executed when the button is clicked.
----@return table identifier: The created dialogue button table.
+--- @param identifier string: The identifier for the dialogue button.
+--- @param title string: The title text for the dialogue button.
+--- @param text string: The main text for the dialogue button.
+--- @param callback function: The callback function to be executed when the button is clicked.
+--- @return table identifier: The created dialogue button table.
 function LUIE.RegisterDialogueButton(identifier, title, text, callback)
     ESO_Dialogs[identifier] =
     {
@@ -263,7 +275,7 @@ function LUIE.UpdateGuildData()
 end
 
 --- Simple function to check the veteran difficulty.
----@return boolean: Returns true if the player is in a veteran dungeon or using veteran difficulty, false otherwise.
+--- @return boolean: Returns true if the player is in a veteran dungeon or using veteran difficulty, false otherwise.
 function LUIE.ResolveVeteranDifficulty()
     if GetGroupSize() <= 1 and IsUnitUsingVeteranDifficulty("player") then
         return true
@@ -275,7 +287,7 @@ function LUIE.ResolveVeteranDifficulty()
 end
 
 --- Simple function that checks if the player is in a PVP zone.
----@return boolean: Returns true if the player is PvP flagged, false otherwise.
+--- @return boolean: Returns true if the player is PvP flagged, false otherwise.
 function LUIE.ResolvePVPZone()
     if IsUnitPvPFlagged("player") then
         return true
@@ -285,8 +297,8 @@ function LUIE.ResolvePVPZone()
 end
 
 --- Pulls the name for the current morph of a skill.
----@param abilityId number: The AbilityId of the skill.
----@return string abilityName: The name of the current morph of the skill.
+--- @param abilityId number: The AbilityId of the skill.
+--- @return string abilityName: The name of the current morph of the skill.
 function LUIE.GetSkillMorphName(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local abilityName = GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
@@ -294,8 +306,8 @@ function LUIE.GetSkillMorphName(abilityId)
 end
 
 --- Pulls the icon for the current morph of a skill.
----@param abilityId number: The AbilityId of the skill.
----@return string abilityIcon: The icon path of the current morph of the skill.
+--- @param abilityId number: The AbilityId of the skill.
+--- @return string abilityIcon: The icon path of the current morph of the skill.
 function LUIE.GetSkillMorphIcon(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local abilityIcon = select(2, GetSkillAbilityInfo(skillType, skillIndex, abilityIndex))
@@ -303,8 +315,8 @@ function LUIE.GetSkillMorphIcon(abilityId)
 end
 
 --- Pulls the AbilityId for the current morph of a skill.
----@param abilityId number: The AbilityId of the skill.
----@return number morphAbilityId: The AbilityId of the current morph of the skill.
+--- @param abilityId number: The AbilityId of the skill.
+--- @return number morphAbilityId: The AbilityId of the current morph of the skill.
 function LUIE.GetSkillMorphAbilityId(abilityId)
     local skillType, skillIndex, abilityIndex, morphChoice, rankIndex = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local morphAbilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, false)
@@ -312,9 +324,9 @@ function LUIE.GetSkillMorphAbilityId(abilityId)
 end
 
 --- Function to update the syntax for default Mundus Stone tooltips we pull (in order to retain scaling).
----@param abilityId number: The ID of the ability.
----@param tooltipText string: The original tooltip text.
----@return string tooltipText: The updated tooltip text.
+--- @param abilityId number: The ID of the ability.
+--- @param tooltipText string: The original tooltip text.
+--- @return string tooltipText: The updated tooltip text.
 function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     -- Update syntax for The Lady, The Lover, and the Thief Mundus stones since they aren't consistent with other buffs.
     if abilityId == 13976 or abilityId == 13981 then -- The Lady / The Lover
@@ -327,9 +339,9 @@ function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     return tooltipText
 end
 
----@param index number
----@param bar? HotBarCategory
----@return number actionId
+--- @param index number
+--- @param bar? HotBarCategory
+--- @return number actionId
 function LUIE.GetSlotTrueBoundId(index, bar)
     bar = bar or GetActiveHotbarCategory()
     local id = GetSlotBoundId(index, bar)

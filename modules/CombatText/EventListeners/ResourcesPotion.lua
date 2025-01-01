@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 LUIE.CombatTextResourcesPotionEventListener = LUIE.CombatTextEventListener:Subclass()
 local CombatTextResourcesPotionEventListener = LUIE.CombatTextResourcesPotionEventListener
@@ -12,7 +12,7 @@ local eventType = LUIE.Data.CombatTextConstants.eventType
 local resourceType = LUIE.Data.CombatTextConstants.resourceType
 
 local inCooldown = false
----@diagnostic disable-next-line: duplicate-set-field
+--- @diagnostic disable-next-line: duplicate-set-field
 function CombatTextResourcesPotionEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForUpdate("PotionCooldown", 100, function ()

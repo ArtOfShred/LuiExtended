@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,12 +16,12 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Supports the above table by determining stack counts if needed.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) AddStackOnEvent
+--- @class (partial) AddStackOnEvent
 local AddStackOnEvent =
 {
 
     [28759] = 0, -- Essence Siphon (Keeper Voranil) -- Note: Set to 0 here due to this event firing twice.
 }
 
----@class (partial) AddStackOnEvent
+--- @class (partial) AddStackOnEvent
 LUIE.Data.Effects.AddStackOnEvent = AddStackOnEvent

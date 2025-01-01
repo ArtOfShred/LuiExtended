@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,7 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Table of effects to adjust only based off a specific target - this allows us to override the name/icon or hide an effect only when the source is a specific NPC. Used to change icons for attacks with the same id coming from different types of animals, etc...
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) EffectOverrideByName
+--- @class (partial) EffectOverrideByName
 local EffectOverrideByName =
 {
     [10618] =
@@ -457,5 +457,5 @@ local EffectOverrideByName =
     },
 }
 
----@class (partial) EffectOverrideByName
+--- @class (partial) EffectOverrideByName
 LUIE.Data.Effects.EffectOverrideByName = EffectOverrideByName

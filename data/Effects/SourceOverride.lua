@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -19,7 +19,7 @@ local zo_strformat = zo_strformat
 -- pet = '' -- Change or remove pet name
 -- removePlayer = true -- If for some reason a damage effect is sourced from the player, set it to not be flagged as isPlayer == true in order to stop AVA rank, etc from showing.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) EffectSourceOverride
+--- @class (partial) EffectSourceOverride
 local EffectSourceOverride =
 {
 
@@ -142,12 +142,12 @@ local EffectSourceOverride =
     [51883] = { pet = "" }, -- Creeping Storm (Creeping Storm)
 }
 
----@class EffectSourceOverrideData
----@field source (string | integer)?
----@field pet (string | integer )?
----@field addSource boolean?
----@field removePlayer boolean?
+--- @class EffectSourceOverrideData
+--- @field source (string | integer)?
+--- @field pet (string | integer )?
+--- @field addSource boolean?
+--- @field removePlayer boolean?
 
----@class (partial) EffectSourceOverride
----@field [integer] EffectSourceOverrideData
+--- @class (partial) EffectSourceOverride
+--- @field [integer] EffectSourceOverrideData
 LUIE.Data.Effects.EffectSourceOverride = EffectSourceOverride

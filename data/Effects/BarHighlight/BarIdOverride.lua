@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -20,7 +20,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- When a bar ability proc with a matching id appears, change the icon.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) BarIdOverride
+--- @class (partial) BarIdOverride
 local BarIdOverride =
 {
     -- Dragonknight
@@ -33,14 +33,14 @@ local BarIdOverride =
     [126659] = "LuiExtended/media/icons/abilities/ability_weapon_flying_blade_jump.dds", -- Flying Blade (Flying Blade)
 
     -- Sorcerer
-    [108840] = "esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds", -- Summon Unstable Familiar (Summon Unstable Familiar)
-    [108845] = "esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds",    -- Winged Twilight Restore (Summon Winged Twilight)
+    [108840] = "/esoui/art/icons/ability_sorcerer_unstable_fimiliar_summoned.dds", -- Summon Unstable Familiar (Summon Unstable Familiar)
+    [108845] = "/esoui/art/icons/ability_sorcerer_lightning_prey_summoned.dds",    -- Winged Twilight Restore (Summon Winged Twilight)
 
     -- Support
-    [78338] = "esoui/art/icons/ability_ava_guard.dds",          -- Guard (Guard)
-    [81415] = "esoui/art/icons/ability_ava_mystic_guard.dds",   -- Mystic Guard (Mystic Guard)
-    [81420] = "esoui/art/icons/ability_ava_stalwart_guard.dds", -- Stalwart Guard (Stalwart Guard)
+    [78338] = "/esoui/art/icons/ability_warrior_001.dds", -- Guard (Guard)
+    [81415] = "/esoui/art/icons/ability_warrior_001.dds", -- Mystic Guard (Mystic Guard)
+    [81420] = "/esoui/art/icons/ability_warrior_001.dds", -- Stalwart Guard (Stalwart Guard)
 }
 
----@class (partial) BarIdOverride
+--- @class (partial) BarIdOverride
 LUIE.Data.Effects.BarIdOverride = BarIdOverride

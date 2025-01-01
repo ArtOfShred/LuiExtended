@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,7 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- If one of these ability Names is applied then we set the buffSlot for ON_EFFECT_CHANGED to be a single name identifier to prevent more than one aura from appearing. Only works with unlimited duration or equal duration effects.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) EffectMergeName
+--- @class (partial) EffectMergeName
 local EffectMergeName =
 {
     [Abilities.Skill_Overcharge] = "MERGED_EFFECT_OVERCHARGE",
@@ -24,5 +24,5 @@ local EffectMergeName =
     [Abilities.Skill_Boss_CC_Immunity] = "MERGED_EFFECT_BOSS_IMMUNITIES", -- Scary Immunities
 }
 
----@class (partial) EffectMergeName
+--- @class (partial) EffectMergeName
 LUIE.Data.Effects.EffectMergeName = EffectMergeName

@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Unitnames = LUIE.Data.UnitNames
@@ -12,7 +12,7 @@ local Abilities = LUIE.Data.Abilities
 local ZoneTable = LUIE.Data.ZoneTable
 
 -- Map Name override - Sometimes we need to use GetMapName() instead of Location Name or ZoneId
----@class (partial) AlertMapOverride
+--- @class (partial) AlertMapOverride
 local AlertMapOverride =
 {
     -- Slam (Great Bear)
@@ -23,5 +23,5 @@ local AlertMapOverride =
     },
 }
 
----@class (partial) AlertMapOverride
+--- @class (partial) AlertMapOverride
 LUIE.Data.AlertMapOverride = AlertMapOverride

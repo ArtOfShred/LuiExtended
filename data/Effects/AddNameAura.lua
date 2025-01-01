@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,7 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- When a target name matches a string here, add id's in the table with the name and icon specified. We use this primarily to add CC Immunity buffs for bosses.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) AddNameAura
+--- @class (partial) AddNameAura
 local AddNameAura =
 {
 
@@ -115,7 +115,7 @@ local AddNameAura =
     [Unitnames.Boss_Old_Widow_Silk] = { [1] = { id = 33097 } }, -- Spider Nest (Stormhaven)
     [Unitnames.Boss_Titanclaw] = { [1] = { id = 33097 } },      -- Mudcrab Beach (Stormhaven)
     [Unitnames.Boss_Brood_Queen] = { [1] = { id = 33097 } },    -- Dreugh Waters (Stormhaven)
-    --[Unitnames.Boss_Cousin_Scrag] = { [1] = { id = 33097 } }, -- Scrag's Larder (Stormhaven)
+    -- [Unitnames.Boss_Cousin_Scrag] = { [1] = { id = 33097 } }, -- Scrag's Larder (Stormhaven)
 
     -- Rivenspire
     [Unitnames.Boss_Aesar_the_Hatespinner] = { [1] = { id = 33097 } }, -- Aesar's Web (Rivenspire)
@@ -183,8 +183,8 @@ local AddNameAura =
 
     -- NPC's
     [Unitnames.NPC_Ice_Barrier] = { [1] = { id = 33097 } },
-    --[Unitnames.NPC_Aura_of_Protection] = { [1] = { id = 33097 } }, -- TODO: Not actually CC immune despite CC not doing anything (maybe switch to knockback immunity eventually)
-    --['Ice Pillar'] = { [1] = { id = 33097 } }, -- TODO: Not actually CC immune despite CC not doing anything (maybe switch to knockback immunity eventually)
+    -- [Unitnames.NPC_Aura_of_Protection] = { [1] = { id = 33097 } }, -- TODO: Not actually CC immune despite CC not doing anything (maybe switch to knockback immunity eventually)
+    -- ['Ice Pillar'] = { [1] = { id = 33097 } }, -- TODO: Not actually CC immune despite CC not doing anything (maybe switch to knockback immunity eventually)
 
     -- Bosses
     ["War Chief Ozozai"] = { [1] = { id = 33097 } },
@@ -405,5 +405,5 @@ local AddNameAura =
     [Unitnames.Boss_Icestalker] = { [1] = { id = 33097 } },   -- Icestalker
 }
 
----@class (partial) AddNameAura
+--- @class (partial) AddNameAura
 LUIE.Data.Effects.AddNameAura = AddNameAura

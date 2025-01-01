@@ -3,14 +3,14 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 LUIE.CombatTextPointsExperienceEventListener = LUIE.CombatTextEventListener:Subclass()
 local CombatTextPointsExperienceEventListener = LUIE.CombatTextPointsExperienceEventListener
 
 local eventType = LUIE.Data.CombatTextConstants.eventType
 local pointType = LUIE.Data.CombatTextConstants.pointType
----@diagnostic disable-next-line: duplicate-set-field
+--- @diagnostic disable-next-line: duplicate-set-field
 function CombatTextPointsExperienceEventListener:New()
     local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_EXPERIENCE_UPDATE, function (...)

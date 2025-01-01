@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -20,18 +20,18 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Adds this aura to a list of fake Ground auras to display when the player casts them
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) EffectGroundDisplay
+--- @class (partial) EffectGroundDisplay
 local EffectGroundDisplay =
 {
     -- Required:
     -- buff, debuff, ground = true/false -- Choose whether this effect shows up in any of these containers
     -- Optional:
-    --name = '' -- Add a custom name
-    --icon = '' -- Add a custom icon
-    --stackAdd = # -- How many stacks to add when this effect begins (used for Ground Mines)
-    --stackRemove = # -- How many stacks to remove when this effect ends (used for Ground Mines)
-    --stackReset = # -- Maximum stack counter (used for Ground Mines)
-    --noRemove = true -- Do not end this aura on EFFECT_RESULT_FADED
+    -- name = '' -- Add a custom name
+    -- icon = '' -- Add a custom icon
+    -- stackAdd = # -- How many stacks to add when this effect begins (used for Ground Mines)
+    -- stackRemove = # -- How many stacks to remove when this effect ends (used for Ground Mines)
+    -- stackReset = # -- Maximum stack counter (used for Ground Mines)
+    -- noRemove = true -- Do not end this aura on EFFECT_RESULT_FADED
 
     -- Cyrodiil
     [88714] = { icon = "LuiExtended/media/icons/abilities/ability_ava_siege_meatbag_catapult.dds", name = Abilities.Skill_Meatbag_Catapult, buff = false, debuff = false, ground = true },          -- Meatbag (Meatbag Catapult)
@@ -53,12 +53,12 @@ local EffectGroundDisplay =
     [102093] = { icon = "LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds", buff = false, debuff = false, ground = true },                                                                             -- Thurvokun
     [59594] = { icon = "LuiExtended/media/icons/abilities/ability_spell_soul_rupture.dds", name = Abilities.Set_Nerieneth, buff = false, debuff = false, ground = true },                                                 -- Crypt of Hearts Item Set (Nerien'eth)
     [80545] = { icon = "LuiExtended/media/icons/abilities/ability_set_sellistrix.dds", buff = false, debuff = false, ground = true },                                                                                     -- Sellistrix (Sellistrix)
-    --[102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', buff = true, debuff = false, ground = false }, -- Zaan -- Buff icon for Zaan, may reimplement if I add a way to override tooltips for these.
+    -- [102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', buff = true, debuff = false, ground = false }, -- Zaan -- Buff icon for Zaan, may reimplement if I add a way to override tooltips for these.
 
     -- Crafted Sets
     [75930] = { icon = "LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds", name = Abilities.Set_Eternal_Hunt, buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 7 }, -- Daedric Mines (Eternal Hunt)
     [71671] = { icon = "LuiExtended/media/icons/abilities/ability_set_morkuldin_summon.dds", buff = true, debuff = false, ground = false },                                                                               -- Morkuldin (Morkuldin)
-    [113181] = { icon = "esoui/art/icons/mm_teaser.dds", buff = true, debuff = false, ground = false },                                                                                                                   -- Grave-Stake Collector (Grave-Stake Collector)
+    [113181] = { icon = "/esoui/art/icons/mm_teaser.dds", buff = true, debuff = false, ground = false },                                                                                                                  -- Grave-Stake Collector (Grave-Stake Collector)
     [121915] = { icon = "LuiExtended/media/icons/abilities/ability_set_honors_scorn.dds", name = Abilities.Set_Honors_Scorn, buff = false, debuff = false, ground = true },                                               -- Coldharbour's Favorite (Coldharbour's Favorite)
     [121912] = { icon = "LuiExtended/media/icons/abilities/ability_set_honors_love.dds", name = Abilities.Set_Honors_Love, buff = true, debuff = false, ground = false },                                                 -- Coldharbour's Favorite (Coldharbour's Favorite)
 
@@ -68,7 +68,7 @@ local EffectGroundDisplay =
     [135659] = { icon = "LuiExtended/media/icons/abilities/ability_set_winters_respite.dds", buff = true, debuff = false, ground = false },                                           -- Winter's Respite (of Winter's Respite)
     -- Dungeon Sets
     [97538] = { icon = "LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds", buff = true, debuff = false, ground = false },                                               -- Draugr's Rest
-    [102106] = { icon = "esoui/art/icons/achievement_bossflavoreasy.dds", name = Abilities.Set_Plague_Slinger, buff = false, debuff = false, ground = true },                         -- Skeever Corpse
+    [102106] = { icon = "/esoui/art/icons/achievement_bossflavoreasy.dds", name = Abilities.Set_Plague_Slinger, buff = false, debuff = false, ground = true },                        -- Skeever Corpse
     [97908] = { icon = "LuiExtended/media/icons/abilities/ability_set_hagravens_garden.dds", buff = true, debuff = false, ground = false },                                           -- Hagraven's Garden (Hagraven's)
     [67205] = { icon = "LuiExtended/media/icons/abilities/ability_set_leeching_plate.dds", buff = false, debuff = false, ground = true },                                             -- Leeching Plate (of Leeching)
     [84354] = { icon = "LuiExtended/media/icons/abilities/ability_innate_web_green.dds", buff = false, debuff = false, ground = true },                                               -- Hand of Mephala (of Mephala's Hand)
@@ -116,26 +116,26 @@ local EffectGroundDisplay =
     [36485] = { buff = true, debuff = false, ground = false },                                                -- Veil of Blades (Veil of Blades)
 
     -- Sorcerer
-    [24830] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3, icon = "esoui/art/icons/ability_sorcerer_daedric_mines.dds" },                                               -- Daedric Mines (Daedric Mines)
-    [24847] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3, icon = "esoui/art/icons/ability_sorcerer_daedric_tomb.dds", name = Abilities.Skill_Daedric_Tomb },           -- Daedric Mines (Daedric Tomb)
-    [25158] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 5, icon = "esoui/art/icons/ability_sorcerer_daedric_minefield.dds", name = Abilities.Skill_Daedric_Minefield }, -- Daedric Mines (Daedric Minefield)
-    [27706] = { buff = false, debuff = false, ground = true },                                                                                                                                                           -- Negate Magic (Negate Magic)
-    [28341] = { buff = false, debuff = false, ground = true },                                                                                                                                                           -- Suppression Field (Suppression Field)
-    [28348] = { buff = false, debuff = false, ground = true },                                                                                                                                                           -- Absorption Field (Absorption Field)
-    [23182] = { buff = false, debuff = false, ground = true },                                                                                                                                                           -- Lightning Splash (Lightning Splash)
-    [23200] = { buff = false, debuff = false, ground = true },                                                                                                                                                           -- Liquid Lightning (Liquid Lightning)
-    [23205] = { buff = false, debuff = false, ground = true },                                                                                                                                                           -- Lightning Flood (Lightning Flood)
-    [23279] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_intercept.dds", name = Abilities.Skill_Intercept, buff = true, debuff = false, ground = false },                                              -- Ball of Lightning (Ball of Lightning)
+    [24830] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3, icon = "/esoui/art/icons/ability_sorcerer_daedric_mines.dds" },                                               -- Daedric Mines (Daedric Mines)
+    [24847] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3, icon = "/esoui/art/icons/ability_sorcerer_daedric_tomb.dds", name = Abilities.Skill_Daedric_Tomb },           -- Daedric Mines (Daedric Tomb)
+    [25158] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 5, icon = "/esoui/art/icons/ability_sorcerer_daedric_minefield.dds", name = Abilities.Skill_Daedric_Minefield }, -- Daedric Mines (Daedric Minefield)
+    [27706] = { buff = false, debuff = false, ground = true },                                                                                                                                                            -- Negate Magic (Negate Magic)
+    [28341] = { buff = false, debuff = false, ground = true },                                                                                                                                                            -- Suppression Field (Suppression Field)
+    [28348] = { buff = false, debuff = false, ground = true },                                                                                                                                                            -- Absorption Field (Absorption Field)
+    [23182] = { buff = false, debuff = false, ground = true },                                                                                                                                                            -- Lightning Splash (Lightning Splash)
+    [23200] = { buff = false, debuff = false, ground = true },                                                                                                                                                            -- Liquid Lightning (Liquid Lightning)
+    [23205] = { buff = false, debuff = false, ground = true },                                                                                                                                                            -- Lightning Flood (Lightning Flood)
+    [23279] = { icon = "LuiExtended/media/icons/abilities/ability_sorcerer_intercept.dds", name = Abilities.Skill_Intercept, buff = true, debuff = false, ground = false },                                               -- Ball of Lightning (Ball of Lightning)
 
     -- Templar
-    [95933] = { icon = "esoui/art/icons/ability_templar_sun_strike.dds", buff = false, debuff = false, ground = true },        -- Spear Shards (Spear Shards)
-    [95957] = { icon = "esoui/art/icons/ability_templar_light_strike.dds", buff = false, debuff = false, ground = true },      -- Luminous Shards (Luminous Shards)
-    [26880] = { icon = "esoui/art/icons/ability_templarsun_thrust.dds", buff = false, debuff = false, ground = true },         -- Blazing Spear (Blazing Spear)
-    [21976] = { icon = "esoui/art/icons/ability_templar_nova.dds", buff = false, debuff = false, ground = true },              -- Nova (Nova)
-    [22003] = { icon = "esoui/art/icons/ability_templar_solar_prison.dds", buff = false, debuff = false, ground = true },      -- Solar Prison (Solar Prison)
-    [22001] = { icon = "esoui/art/icons/ability_templar_solar_disturbance.dds", buff = false, debuff = false, ground = true }, -- Solar Disturbance (Solar Disturbance)
+    [95933] = { icon = "/esoui/art/icons/ability_templar_sun_strike.dds", buff = false, debuff = false, ground = true },        -- Spear Shards (Spear Shards)
+    [95957] = { icon = "/esoui/art/icons/ability_templar_light_strike.dds", buff = false, debuff = false, ground = true },      -- Luminous Shards (Luminous Shards)
+    [26880] = { icon = "/esoui/art/icons/ability_templarsun_thrust.dds", buff = false, debuff = false, ground = true },         -- Blazing Spear (Blazing Spear)
+    [21976] = { icon = "/esoui/art/icons/ability_templar_nova.dds", buff = false, debuff = false, ground = true },              -- Nova (Nova)
+    [22003] = { icon = "/esoui/art/icons/ability_templar_solar_prison.dds", buff = false, debuff = false, ground = true },      -- Solar Prison (Solar Prison)
+    [22001] = { icon = "/esoui/art/icons/ability_templar_solar_disturbance.dds", buff = false, debuff = false, ground = true }, -- Solar Disturbance (Solar Disturbance)
 
-    [22234] = { buff = true, debuff = false, ground = false },                                                                 -- Rune Focus (Rune Focus)
+    [22234] = { buff = true, debuff = false, ground = false },                                                                  -- Rune Focus (Rune Focus)
 
     -- Used only to flag abilities for Tooltips
     [22265] = { buff = false, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual)
@@ -157,25 +157,25 @@ local EffectGroundDisplay =
     [86183] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 3 }, -- Frozen Retreat (Frozen Retreat)
 
     -- Necromancer
-    [115252] = { buff = false, debuff = false, ground = true },                                                         -- Boneyard (Boneyard)
-    [117805] = { buff = false, debuff = false, ground = true },                                                         -- Unnerving Boneyard (Unnerving Boneyard)
-    [117850] = { buff = false, debuff = false, ground = true },                                                         -- Avid Boneyard (Avid Boneyard)
+    [115252] = { buff = false, debuff = false, ground = true },                                                          -- Boneyard (Boneyard)
+    [117805] = { buff = false, debuff = false, ground = true },                                                          -- Unnerving Boneyard (Unnerving Boneyard)
+    [117850] = { buff = false, debuff = false, ground = true },                                                          -- Avid Boneyard (Avid Boneyard)
 
-    [116445] = { buff = false, debuff = false, ground = true },                                                         -- Shocking Siphon (Shocking Siphon)
-    [118764] = { buff = false, debuff = false, ground = true },                                                         -- Detonating Siphon (Detonating Siphon)
-    [118009] = { buff = false, debuff = false, ground = true },                                                         -- Mystic Siphon (Mystic Siphon)
+    [116445] = { buff = false, debuff = false, ground = true },                                                          -- Shocking Siphon (Shocking Siphon)
+    [118764] = { buff = false, debuff = false, ground = true },                                                          -- Detonating Siphon (Detonating Siphon)
+    [118009] = { buff = false, debuff = false, ground = true },                                                          -- Mystic Siphon (Mystic Siphon)
 
-    [122174] = { buff = false, debuff = false, ground = true },                                                         -- Frozen Colossus (Frozen Colossus)
-    [122395] = { buff = false, debuff = false, ground = true },                                                         -- Pestilent Colossus (Pestilent Colossus)
-    [122388] = { buff = false, debuff = false, ground = true },                                                         -- Glacial Colossus (Glacial Colossus)
+    [122174] = { buff = false, debuff = false, ground = true },                                                          -- Frozen Colossus (Frozen Colossus)
+    [122395] = { buff = false, debuff = false, ground = true },                                                          -- Pestilent Colossus (Pestilent Colossus)
+    [122388] = { buff = false, debuff = false, ground = true },                                                          -- Glacial Colossus (Glacial Colossus)
 
-    [115093] = { buff = true, debuff = false, ground = false },                                                         -- Bone Totem (Bone Totem)
-    [118380] = { buff = true, debuff = false, ground = false },                                                         -- Remote Totem (Remote Totem)
-    [118404] = { buff = true, debuff = false, ground = false },                                                         -- Agony Totem (Agony Totem)
+    [115093] = { buff = true, debuff = false, ground = false },                                                          -- Bone Totem (Bone Totem)
+    [118380] = { buff = true, debuff = false, ground = false },                                                          -- Remote Totem (Remote Totem)
+    [118404] = { buff = true, debuff = false, ground = false },                                                          -- Agony Totem (Agony Totem)
 
-    [115326] = { buff = true, debuff = false, ground = false, icon = "esoui/art/icons/ability_necromancer_016.dds" },   -- Life amid Death (Life amid Death)
-    [118022] = { buff = true, debuff = false, ground = false, icon = "esoui/art/icons/ability_necromancer_016_a.dds" }, -- Renewing Undeath (Renewing Undeath)
-    [118814] = { buff = true, debuff = false, ground = false, icon = "esoui/art/icons/ability_necromancer_016_b.dds" }, -- Enduring Undeath (Enduring Undeath)
+    [115326] = { buff = true, debuff = false, ground = false, icon = "/esoui/art/icons/ability_necromancer_016.dds" },   -- Life amid Death (Life amid Death)
+    [118022] = { buff = true, debuff = false, ground = false, icon = "/esoui/art/icons/ability_necromancer_016_a.dds" }, -- Renewing Undeath (Renewing Undeath)
+    [118814] = { buff = true, debuff = false, ground = false, icon = "/esoui/art/icons/ability_necromancer_016_b.dds" }, -- Enduring Undeath (Enduring Undeath)
 
     ---------------------------
     -- Two-Handed -------------
@@ -232,12 +232,12 @@ local EffectGroundDisplay =
     -- Mages Guild ------------
     ---------------------------
 
-    [31632] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 },        -- Fire Rune (Fire Rune)
-    [40470] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 },        -- Volcanic Rune (Volcanic Rune)
-    [40465] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 },        -- Scalding Rune (Scalding Rune)
-    [63430] = { icon = "esoui/art/icons/ability_mageguild_005.dds", buff = false, debuff = false, ground = true },   -- Meteor (Meteor)
-    [63456] = { icon = "esoui/art/icons/ability_mageguild_005_b.dds", buff = false, debuff = false, ground = true }, -- Ice Comet (Ice Comet)
-    [63473] = { icon = "esoui/art/icons/ability_mageguild_005_a.dds", buff = false, debuff = false, ground = true }, -- Shooting Star (Shooting Star)
+    [31632] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 },         -- Fire Rune (Fire Rune)
+    [40470] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 },         -- Volcanic Rune (Volcanic Rune)
+    [40465] = { buff = false, debuff = false, ground = true, stackAdd = 1, stackRemove = 1, stackReset = 1 },         -- Scalding Rune (Scalding Rune)
+    [63430] = { icon = "/esoui/art/icons/ability_mageguild_005.dds", buff = false, debuff = false, ground = true },   -- Meteor (Meteor)
+    [63456] = { icon = "/esoui/art/icons/ability_mageguild_005_b.dds", buff = false, debuff = false, ground = true }, -- Ice Comet (Ice Comet)
+    [63473] = { icon = "/esoui/art/icons/ability_mageguild_005_a.dds", buff = false, debuff = false, ground = true }, -- Shooting Star (Shooting Star)
 
     ---------------------------
     -- Psijic Order -----------
@@ -264,9 +264,9 @@ local EffectGroundDisplay =
     -- Assault ----------------
     ---------------------------
 
-    [38549] = { icon = "esoui/art/icons/ability_ava_001.dds", buff = false, debuff = false, ground = true },                                          -- Caltrops (Caltrops)
-    [40265] = { icon = "esoui/art/icons/ability_ava_001_a.dds", buff = false, debuff = false, ground = true },                                        -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
-    [40251] = { icon = "esoui/art/icons/ability_ava_001_b.dds", name = Abilities.Skill_Razor_Caltrops, buff = false, debuff = false, ground = true }, -- Caltrops (Razor Caltrops)
+    [38549] = { icon = "/esoui/art/icons/ability_ava_001.dds", buff = false, debuff = false, ground = true },                                          -- Caltrops (Caltrops)
+    [40265] = { icon = "/esoui/art/icons/ability_ava_001_a.dds", buff = false, debuff = false, ground = true },                                        -- Anti-Cavalry Caltrops (Anti-Cavalry Caltrops)
+    [40251] = { icon = "/esoui/art/icons/ability_ava_001_b.dds", name = Abilities.Skill_Razor_Caltrops, buff = false, debuff = false, ground = true }, -- Caltrops (Razor Caltrops)
 
     ---------------------------
     -- Support ----------------
@@ -281,5 +281,5 @@ local EffectGroundDisplay =
     [61526] = { buff = false, debuff = false, ground = true },                                         -- Blinding Flare (Blinding Flare)
 }
 
----@class (partial) EffectGroundDisplay
+--- @class (partial) EffectGroundDisplay
 LUIE.Data.Effects.EffectGroundDisplay = EffectGroundDisplay

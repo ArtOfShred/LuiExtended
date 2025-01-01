@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -36,7 +36,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Fake Buffs applied onto the player by NPCs or Events (Friendly)
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) FakeExternalBuffs
+--- @class (partial) FakeExternalBuffs
 local FakeExternalBuffs =
 {
 
@@ -55,5 +55,5 @@ local FakeExternalBuffs =
     [32614] = { duration = 0 }, -- Empowered (Mystic Guardian)
 }
 
----@class (partial) FakeExternalBuffs
+--- @class (partial) FakeExternalBuffs
 LUIE.Data.Effects.FakeExternalBuffs = FakeExternalBuffs

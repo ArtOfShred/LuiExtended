@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 LUIE.CombatTextPool = ZO_ObjectPool:Subclass()
 local CombatTextPool = LUIE.CombatTextPool
@@ -16,9 +16,9 @@ local even = ZO_GenerateCubicBezierEase(0.63, 1.2, 0.83, 1)
 
 local easeOutIn = function (progress)
     progress = progress < 0.5 and progress * 2 or (1 - progress) * 2
-    return zo_sqrt(1 - ((1 - progress)^2))
+    return zo_sqrt(1 - ((1 - progress) ^ 2))
 end
----@diagnostic disable-next-line: duplicate-set-field
+--- @diagnostic disable-next-line: duplicate-set-field
 function CombatTextPool:New(poolType)
     -- Check if poolType is not nil or empty
     if not poolType then
@@ -113,7 +113,7 @@ function CombatTextPool:CreateNewAnimation()
         end,
         [poolTypes.ANIMATION_ELLIPSE_Y] = function ()
             anim:Alpha(nil, 0, 1, animationSpeed * 50)
-            anim:Move("scrollY", 0, 0, animationSpeed * 2500) --for delay and easying function will be used defaults (0, ZO_LinearEase)
+            anim:Move("scrollY", 0, 0, animationSpeed * 2500) -- for delay and easying function will be used defaults (0, ZO_LinearEase)
             anim:Alpha("fadeOut", 1, 0, animationSpeed * 500, animationSpeed * 1800, slowFast)
         end,
         [poolTypes.ANIMATION_ELLIPSE_X_CRIT] = function ()

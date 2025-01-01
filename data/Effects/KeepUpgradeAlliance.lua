@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -13,7 +13,7 @@ local Abilities = LUIE.Data.Abilities
 
 local zo_strformat = zo_strformat
 
----@class (partial) KeepUpgradeAlliance
+--- @class (partial) KeepUpgradeAlliance
 local KeepUpgradeAlliance =
 {
     [Abilities.Keep_Upgrade_Food_Honor_Guard_Abilities] =
@@ -25,5 +25,5 @@ local KeepUpgradeAlliance =
 }
 
 
----@class (partial) KeepUpgradeAlliance
+--- @class (partial) KeepUpgradeAlliance
 LUIE.Data.Effects.KeepUpgradeAlliance = KeepUpgradeAlliance

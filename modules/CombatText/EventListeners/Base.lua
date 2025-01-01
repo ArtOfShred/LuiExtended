@@ -3,10 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) CombatTextEventListener : ZO_InitializingObject
+--- @class (partial) CombatTextEventListener : ZO_InitializingObject
 local CombatTextEventListener = ZO_InitializingObject:Subclass()
 
 local callbackManager = CALLBACK_MANAGER
@@ -14,24 +14,24 @@ local eventManager = GetEventManager()
 
 local moduleName = LUIE.name .. "CombatText"
 
----@type integer
+--- @type integer
 local eventPostfix = 1 -- Used to create unique name when registering multiple times to the same game event
 
----@return CombatTextEventListener
+--- @return CombatTextEventListener
 function CombatTextEventListener:New()
     local obj = setmetatable({}, self)
     return obj
 end
 
----@param event any
----@param func fun(...)
----@param ... any
+--- @param event any
+--- @param func fun(...)
+--- @param ... any
 function CombatTextEventListener:RegisterForEvent(event, func, ...)
     eventManager:RegisterForEvent(moduleName .. "Event" .. event .. "_" .. eventPostfix, event, function (eventCode, ...)
         func(...)
     end)
 
-    ---@type any[]
+    --- @type any[]
     local filters = { ... }
     local filtersCount = select("#", ...)
     if filtersCount > 0 then
@@ -43,18 +43,18 @@ function CombatTextEventListener:RegisterForEvent(event, func, ...)
     eventPostfix = eventPostfix + 1
 end
 
----@param name any
----@param timer any
----@param func fun(...)
----@param ... any
+--- @param name any
+--- @param timer any
+--- @param func fun(...)
+--- @param ... any
 function CombatTextEventListener:RegisterForUpdate(name, timer, func, ...)
     eventManager:RegisterForUpdate(moduleName .. "Event" .. name .. "_" .. eventPostfix, timer, func)
 end
 
----@param ... any
+--- @param ... any
 function CombatTextEventListener:TriggerEvent(...)
     callbackManager:FireCallbacks(...)
 end
 
----@class (partial) CombatTextEventListener
+--- @class (partial) CombatTextEventListener
 LUIE.CombatTextEventListener = CombatTextEventListener

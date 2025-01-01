@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -18,7 +18,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 
 -- Table of all Major / Minor Effects (Used by CombatInfo Bar Highlight to override the 0 duration on these abilities)
----@class (partial) MajorMinor
+--- @class (partial) MajorMinor
 local MajorMinor =
 {
     -- Major / Minor Buffs
@@ -89,5 +89,5 @@ local MajorMinor =
     [61737] = true, -- Empower
 }
 
----@class (partial) MajorMinor
+--- @class (partial) MajorMinor
 LUIE.Data.Effects.MajorMinor = MajorMinor

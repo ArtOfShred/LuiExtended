@@ -6,17 +6,17 @@
 -- Global Variables
 
 -- LUIE_CC_ICON
-LUIE_CC_ICON_STUN = "esoui/art/icons/ability_debuff_stun.dds"
--- LUIE_CC_ICON_KNOCKDOWN = "esoui/art/icons/ability_debuff_stun.dds" -- Knockdown's are considered stuns
-LUIE_CC_ICON_KNOCKBACK = "esoui/art/icons/ability_debuff_knockback.dds"
-LUIE_CC_ICON_PULL = "esoui/art/icons/ability_debuff_levitate.dds"
-LUIE_CC_ICON_DISORIENT = "esoui/art/icons/ability_debuff_disorient.dds"
-LUIE_CC_ICON_FEAR = "esoui/art/icons/ability_debuff_fear.dds"
-LUIE_CC_ICON_CHARM = "esoui/art/icons/ability_buff_minor_expedition.dds" -- Temporary icon until I can identify the game's correct charm icon
-LUIE_CC_ICON_STAGGER = "esoui/art/icons/ability_debuff_stagger.dds"
-LUIE_CC_ICON_SILENCE = "esoui/art/icons/ability_debuff_silence.dds"
-LUIE_CC_ICON_SNARE = "esoui/art/icons/ability_debuff_snare.dds"
-LUIE_CC_ICON_ROOT = "esoui/art/icons/ability_debuff_root.dds"
+LUIE_CC_ICON_STUN = "/esoui/art/icons/ability_debuff_stun.dds"
+-- LUIE_CC_ICON_KNOCKDOWN = "/esoui/art/icons/ability_debuff_stun.dds" -- Knockdown's are considered stuns
+LUIE_CC_ICON_KNOCKBACK = "/esoui/art/icons/ability_debuff_knockback.dds"
+LUIE_CC_ICON_PULL = "/esoui/art/icons/ability_debuff_levitate.dds"
+LUIE_CC_ICON_DISORIENT = "/esoui/art/icons/ability_debuff_disorient.dds"
+LUIE_CC_ICON_FEAR = "/esoui/art/icons/ability_debuff_fear.dds"
+LUIE_CC_ICON_CHARM = "/esoui/art/icons/ability_buff_minor_expedition.dds" -- Temporary icon until I can identify the game's correct charm icon
+LUIE_CC_ICON_STAGGER = "/esoui/art/icons/ability_debuff_stagger.dds"
+LUIE_CC_ICON_SILENCE = "/esoui/art/icons/ability_debuff_silence.dds"
+LUIE_CC_ICON_SNARE = "/esoui/art/icons/ability_debuff_snare.dds"
+LUIE_CC_ICON_ROOT = "/esoui/art/icons/ability_debuff_root.dds"
 LUIE_CC_ICON_IMMUNE = "LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds"
 
 -- LUIE_CC_TYPE

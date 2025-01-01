@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -20,7 +20,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Replaces the tracking ID on an ability bar ability with a different id for the purpose of tracking effect duration on Bar Highlight tracker.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) BarHighlightOverride
+--- @class (partial) BarHighlightOverride
 local BarHighlightOverride =
 {
     -- Optional
@@ -95,8 +95,8 @@ local BarHighlightOverride =
     [25267] = { newId = 34736 }, -- Concealed Weapon
     [25375] = { newId = 25376 }, -- Shadow Cloak
     [25380] = { newId = 62141 }, -- Shadowy Disguise
-    --[25352] = { }, -- Aspect of Terror -- TODO: Disabled because API won't return correct duration for Fear
-    --[37470] = { }, -- Mass Hysteria -- TODO: Disabled because API won't return correct duration for Fear
+    -- [25352] = { }, -- Aspect of Terror -- TODO: Disabled because API won't return correct duration for Fear
+    -- [37470] = { }, -- Mass Hysteria -- TODO: Disabled because API won't return correct duration for Fear
     [33211] = { showFakeAura = true, noRemove = true },                -- Summon Shade
     [35434] = { showFakeAura = true, noRemove = true },                -- Dark Shade --> Summon Shade
     [35441] = { showFakeAura = true, noRemove = true },                -- Shadow Image --> Shadow
@@ -348,7 +348,7 @@ local BarHighlightOverride =
     [28869] = { newId = 44540 },  -- Poison Arrow
     [38645] = { newId = 44545 },  -- Venom Arrow
     [38660] = { newId = 44549 },  -- Poison Injection
-    --[83465] = { newId = 55131, showFakeAura = true, duration = 4000 }, -- Rapid Fire --> CC Immunity
+    -- [83465] = { newId = 55131, showFakeAura = true, duration = 4000 }, -- Rapid Fire --> CC Immunity
     [85257] = { newId = 85261 },  -- Toxic Barrage
     [85451] = { newId = 85458 },  -- Ballista
 
@@ -359,15 +359,15 @@ local BarHighlightOverride =
     [46340] = { newId = 100306 }, -- Force Shock --> Concentrated Force (*VAS Destro*)
     [46348] = { newId = 100306 }, -- Crushing Shock --> Concentrated Force (*VAS Destro*)
     [46356] = { newId = 100306 }, -- Force Pulse --> Concentrated Force (*VAS Destro*)
-    --[28807] = { newId = 28807 }, -- Wall of Fire
-    --[28854] = { newId = 28854 }, -- Wall of Storms
-    --[28849] = { newId = 28849 }, -- Wall of Frost
-    --[39053] = { newId = 39053 }, -- Unstable Wall of Fire
-    --[39073] = { newId = 39073 }, -- Unstable Wall of Storms
-    --[39067] = { newId = 39067 }, -- Unstable Wall of Frost
-    --[39012] = { newId = 39012 }, -- Blockade of Fire
-    --[39018] = { newId = 39018 }, -- Blockade of Storms
-    --[39028] = { newId = 39028 }, -- Blockade of Frost
+    -- [28807] = { newId = 28807 }, -- Wall of Fire
+    -- [28854] = { newId = 28854 }, -- Wall of Storms
+    -- [28849] = { newId = 28849 }, -- Wall of Frost
+    -- [39053] = { newId = 39053 }, -- Unstable Wall of Fire
+    -- [39073] = { newId = 39073 }, -- Unstable Wall of Storms
+    -- [39067] = { newId = 39067 }, -- Unstable Wall of Frost
+    -- [39012] = { newId = 39012 }, -- Blockade of Fire
+    -- [39018] = { newId = 39018 }, -- Blockade of Storms
+    -- [39028] = { newId = 39028 }, -- Blockade of Frost
     [29073] = { newId = 62648 },  -- Flame Touch
     [29089] = { newId = 62722 },  -- Shock Touch
     [29078] = { newId = 62692 },  -- Frost Touch
@@ -429,9 +429,9 @@ local BarHighlightOverride =
     [40328] = { newId = 126895 }, -- Soul Splitting Trap (Soul Splitting Trap)
     [40317] = { newId = 126897 }, -- Consuming Trap (Consuming Trap)
 
-    --[39270] = { newId = 55131, showFakeAura = true, duration = 5000 }, -- Soul Strike --> CC Immunity
-    --[40420] = { newId = 55131, showFakeAura = true, duration = 6000 }, -- Soul Assault --> CC Immunity
-    --[40414] = { newId = 55131, showFakeAura = true, duration = 5000 }, -- Shatter Soul --> CC Immunity
+    -- [39270] = { newId = 55131, showFakeAura = true, duration = 5000 }, -- Soul Strike --> CC Immunity
+    -- [40420] = { newId = 55131, showFakeAura = true, duration = 6000 }, -- Soul Assault --> CC Immunity
+    -- [40414] = { newId = 55131, showFakeAura = true, duration = 5000 }, -- Shatter Soul --> CC Immunity
 
     ---------------------------
     -- Vampire ----------------
@@ -557,5 +557,5 @@ local BarHighlightOverride =
     [116095] = { newId = 116366 }, -- Pariah's Resolve
 }
 
----@class (partial) BarHighlightOverride
+--- @class (partial) BarHighlightOverride
 LUIE.Data.Effects.BarHighlightOverride = BarHighlightOverride

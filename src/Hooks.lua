@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 local type, pairs, ipairs = type, pairs, ipairs
 local zo_strformat = zo_strformat
@@ -17,7 +17,7 @@ local HIDE_COUNT = 0
 local overrideActiveRank = nil
 local overrideCasterUnitTag = "player"
 
----@type table<integer, string>
+--- @type table<integer, string>
 local buffTypes =
 {
     [LUIE_BUFF_TYPE_BUFF] = GetString(LUIE_STRING_BUFF_TYPE_BUFF),
@@ -42,17 +42,17 @@ function LUIE.InitializeHooks()
 
     local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
     --- Hook for Icon/Name changes.
-    ---@param skillType SkillType
-    ---@param skillIndex luaindex
-    ---@param abilityIndex luaindex
-    ---@return string name
-    ---@return textureName texture
-    ---@return luaindex earnedRank
-    ---@return bool passive
-    ---@return bool ultimate
-    ---@return bool purchased
-    ---@return luaindex|nil progressionIndex
-    ---@return integer rank
+    --- @param skillType SkillType
+    --- @param skillIndex luaindex
+    --- @param abilityIndex luaindex
+    --- @return string name
+    --- @return textureName texture
+    --- @return luaindex earnedRank
+    --- @return bool passive
+    --- @return bool ultimate
+    --- @return bool purchased
+    --- @return luaindex|nil progressionIndex
+    --- @return integer rank
     GetSkillAbilityInfo = function (skillType, skillIndex, abilityIndex)
         local name, texture, earnedRank, passive, ultimate, purchased, progressionIndex, rankIndex = zos_GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
         local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, true)
@@ -67,12 +67,12 @@ function LUIE.InitializeHooks()
 
     local zos_GetSkillAbilityNextUpgradeInfo = GetSkillAbilityNextUpgradeInfo
     --- Hook for Icon/Name changes.
-    ---@param skillType SkillType
-    ---@param skillIndex luaindex
-    ---@param abilityIndex luaindex
-    ---@return string name
-    ---@return textureName texture
-    ---@return luaindex|nil earnedRank
+    --- @param skillType SkillType
+    --- @param skillIndex luaindex
+    --- @param abilityIndex luaindex
+    --- @return string name
+    --- @return textureName texture
+    --- @return luaindex|nil earnedRank
     GetSkillAbilityNextUpgradeInfo = function (skillType, skillIndex, abilityIndex)
         local name, texture, earnedRank = zos_GetSkillAbilityNextUpgradeInfo(skillType, skillIndex, abilityIndex)
         local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex, true)
@@ -87,21 +87,21 @@ function LUIE.InitializeHooks()
 
     local zos_GetUnitBuffInfo = GetUnitBuffInfo
     --- Hook for Icon/Name changes.
-    ---@param unitTag string
-    ---@param buffIndex luaindex
-    ---@return string buffName
-    ---@return number timeStarted
-    ---@return number timeEnding
-    ---@return integer buffSlot
-    ---@return integer stackCount
-    ---@return textureName iconFilename
-    ---@return string deprecatedBuffType
-    ---@return BuffEffectType effectType
-    ---@return AbilityType abilityType
-    ---@return StatusEffectType statusEffectType
-    ---@return integer abilityId
-    ---@return bool canClickOff
-    ---@return bool castByPlayer
+    --- @param unitTag string
+    --- @param buffIndex luaindex
+    --- @return string buffName
+    --- @return number timeStarted
+    --- @return number timeEnding
+    --- @return integer buffSlot
+    --- @return integer stackCount
+    --- @return textureName iconFilename
+    --- @return string deprecatedBuffType
+    --- @return BuffEffectType effectType
+    --- @return AbilityType abilityType
+    --- @return StatusEffectType statusEffectType
+    --- @return integer abilityId
+    --- @return bool canClickOff
+    --- @return bool castByPlayer
     GetUnitBuffInfo = function (unitTag, buffIndex)
         local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = zos_GetUnitBuffInfo(unitTag, buffIndex)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].name then
@@ -118,8 +118,8 @@ function LUIE.InitializeHooks()
     local zos_DoesKillingAttackHaveAttacker = DoesKillingAttackHaveAttacker -- Change Icon or Name (additional support for Zone based changes, and source attacker/pet changes).
 
     --- Override function for DoesKillingAttackHaveAttacker.
-    ---@param index luaindex
-    ---@return bool hasAttacker
+    --- @param index luaindex
+    --- @return bool hasAttacker
     DoesKillingAttackHaveAttacker = function (index)
         local hasAttacker = zos_DoesKillingAttackHaveAttacker(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
@@ -132,16 +132,16 @@ function LUIE.InitializeHooks()
     end
 
     --- Override function for GetKillingAttackerInfo.
-    ---@param index luaindex
-    ---@return string attackerRawName
-    ---@return integer attackerChampionPoints
-    ---@return integer attackerLevel
-    ---@return integer attackerAvARank
-    ---@return bool isPlayer
-    ---@return bool isBoss
-    ---@return Alliance alliance
-    ---@return string minionName
-    ---@return string attackerDisplayName
+    --- @param index luaindex
+    --- @return string attackerRawName
+    --- @return integer attackerChampionPoints
+    --- @return integer attackerLevel
+    --- @return integer attackerAvARank
+    --- @return bool isPlayer
+    --- @return bool isBoss
+    --- @return Alliance alliance
+    --- @return string minionName
+    --- @return string attackerDisplayName
     GetKillingAttackerInfo = function (index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
@@ -174,16 +174,16 @@ function LUIE.InitializeHooks()
     end
 
     --- Override function for GetKillingAttackInfo.
-    ---@param index luaindex
-    ---@return string|nil attackName
-    ---@return integer|nil attackDamage
-    ---@return textureName|nil attackIcon
-    ---@return bool|nil wasKillingBlow
-    ---@return integer|nil castTimeAgoMS
-    ---@return integer|nil durationMS
-    ---@return integer|nil numAttackHits
-    ---@return integer|nil abilityId
-    ---@return textureName|nil abilityFxIcon
+    --- @param index luaindex
+    --- @return string|nil attackName
+    --- @return integer|nil attackDamage
+    --- @return textureName|nil attackIcon
+    --- @return bool|nil wasKillingBlow
+    --- @return integer|nil castTimeAgoMS
+    --- @return integer|nil durationMS
+    --- @return integer|nil numAttackHits
+    --- @return integer|nil abilityId
+    --- @return textureName|nil abilityFxIcon
     GetKillingAttackInfo = function (index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
@@ -281,8 +281,8 @@ function LUIE.InitializeHooks()
     LUIE.GetAbilityIcon = GetAbilityIcon -- Used only for PTS testing
     local zos_GetAbilityIcon = GetAbilityIcon
     --- Hook support for Custom Ability Icons (Helps normalize with other addons)
-    ---@param abilityId integer
-    ---@return textureName icon
+    --- @param abilityId integer
+    --- @return textureName icon
     GetAbilityIcon = function (abilityId)
         local icon = zos_GetAbilityIcon(abilityId)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].icon then
@@ -294,9 +294,9 @@ function LUIE.InitializeHooks()
     LUIE.GetAbilityName = GetAbilityName -- Used only for PTS testing
     local zos_GetAbilityName = GetAbilityName
     --- Hook support for Custom Ability Names (Helps normalize with other addons)
-    ---@param abilityId integer
-    ---@param casterUnitTag? string
-    ---@return string abilityName
+    --- @param abilityId integer
+    --- @param casterUnitTag? string
+    --- @return string abilityName
     GetAbilityName = function (abilityId, casterUnitTag)
         local abilityName = zos_GetAbilityName(abilityId)
         if LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].name then
@@ -308,13 +308,13 @@ function LUIE.InitializeHooks()
     LUIE.GetArtificialEffectInfo = GetArtificialEffectInfo -- Used only for PTS testing
     local zos_GetArtificialEffectInfo = GetArtificialEffectInfo
     --- Hook support for ArtificialffectId's
-    ---@param artificialEffectId integer
-    ---@return string displayName
-    ---@return textureName icon
-    ---@return BuffEffectType effectType
-    ---@return integer sortOrder
-    ---@return number timeStartedS
-    ---@return number timeEndingS
+    --- @param artificialEffectId integer
+    --- @return string displayName
+    --- @return textureName icon
+    --- @return BuffEffectType effectType
+    --- @return integer sortOrder
+    --- @return number timeStartedS
+    --- @return number timeEndingS
     GetArtificialEffectInfo = function (artificialEffectId)
         local displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding = zos_GetArtificialEffectInfo(artificialEffectId)
         if LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId].icon then
@@ -328,8 +328,8 @@ function LUIE.InitializeHooks()
 
     local zos_GetArtificialEffectTooltipText = GetArtificialEffectTooltipText
     --- Hook support to pull custom tooltips for ArtificialEffectId's
-    ---@param artificialEffectId integer
-    ---@return string tooltipText
+    --- @param artificialEffectId integer
+    --- @return string tooltipText
     GetArtificialEffectTooltipText = function (artificialEffectId)
         local tooltip
         if LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Data.Effects.ArtificialEffectOverride[artificialEffectId].tooltip then
@@ -342,7 +342,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook synergy popup Icon/Name (to fix inconsistencies and add custom icons for some Quest/Encounter based Synergies)
-    ---@diagnostic disable-next-line: duplicate-set-field
+    --- @diagnostic disable-next-line: duplicate-set-field
     ZO_Synergy.OnSynergyAbilityChanged = function (self)
         local hasSynergy, synergyName, iconFilename, prompt = GetCurrentSynergyInfo()
 
@@ -381,14 +381,14 @@ function LUIE.InitializeHooks()
     local function EffectsRowComparator(left, right)
         local leftIsArtificial, rightIsArtificial = left.isArtificial, right.isArtificial
         if leftIsArtificial ~= rightIsArtificial then
-            --Artificial before real
+            -- Artificial before real
             return leftIsArtificial
         else
             if leftIsArtificial then
-                --Both artificial, use def defined sort order
+                -- Both artificial, use def defined sort order
                 return left.sortOrder < right.sortOrder
             else
-                --Both real, use time
+                -- Both real, use time
                 return left.time.endTime < right.time.endTime
             end
         end
@@ -541,8 +541,8 @@ function LUIE.InitializeHooks()
                 for i = 1, #trackBuffs do
                     local buff = trackBuffs[i]
                     if buff.buffSlot > 0 and buff.buffName ~= "" and
-                        not (LUIE.Data.Effects.EffectOverride[buff.abilityId] and LUIE.Data.Effects.EffectOverride[buff.abilityId].hide) and
-                        not buff.markForRemove then
+                    not (LUIE.Data.Effects.EffectOverride[buff.abilityId] and LUIE.Data.Effects.EffectOverride[buff.abilityId].hide) and
+                    not buff.markForRemove then
                         -- Process tooltip values
                         local timer = buff.endTime - buff.startTime
                         local value2, value3 = 0, 0
@@ -646,14 +646,14 @@ function LUIE.InitializeHooks()
 
         self.mainList:Clear()
 
-        --Level Up Reward
+        -- Level Up Reward
         if HasPendingLevelUpReward() then
             self.mainList:AddEntry("ZO_GamepadNewMenuEntryTemplate", self.claimRewardsEntry)
         elseif HasUpcomingLevelUpReward() then
             self.mainList:AddEntry("ZO_GamepadMenuEntryTemplate", self.upcomingRewardsEntry)
         end
 
-        --Title
+        -- Title
         self.mainList:AddEntryWithHeader("ZO_GamepadStatTitleRow", self.titleEntry)
 
         -- Attributes
@@ -672,7 +672,7 @@ function LUIE.InitializeHooks()
         -- Active Effects--
         self.numActiveEffects = 0
 
-        --Artificial effects
+        -- Artificial effects
         local sortedArtificialEffectsTable = {}
         for effectId in ZO_GetNextActiveArtificialEffectIdIter do
             -- Skip ESO Plus buff (effectId == 0)
@@ -703,7 +703,7 @@ function LUIE.InitializeHooks()
             self:AddActiveEffectData(data)
         end
 
-        --Real Effects
+        -- Real Effects
         local numBuffs = GetNumBuffs("player")
         local hasActiveEffects = numBuffs > 0
         if hasActiveEffects then
@@ -892,7 +892,7 @@ function LUIE.InitializeHooks()
                     end
                 end
 
-                local endLine = buffTypes[buffType] ---@type string
+                local endLine = buffTypes[buffType] --- @type string
                 contentDescription = contentDescription .. "\nType: " .. endLine
             end
         end
@@ -1060,7 +1060,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook Skills Advisor (Keyboard) and use this variable to refresh the abilityData one time on initialization. We don't want to reload any more after that.
-    ---@diagnostic disable-next-line: duplicate-set-field
+    --- @diagnostic disable-next-line: duplicate-set-field
     ZO_SkillsAdvisor_Suggestions_Keyboard.SetupAbilityEntry = function (self, control, skillProgressionData)
         local skillData = skillProgressionData:GetSkillData()
         local isPassive = skillData:IsPassive()
@@ -1170,7 +1170,7 @@ function LUIE.InitializeHooks()
     }
 
     -- Hook to make Activation Highlight Effect play indefinitely instead of animation only once
-    ---@diagnostic disable-next-line: duplicate-set-field
+    --- @diagnostic disable-next-line: duplicate-set-field
     ActionButton.UpdateActivationHighlight = function (self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or self.button.hotbarCategory
@@ -1210,7 +1210,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook to add AVA Guard Ability + Morphs into Toggle Highlights
-    ---@diagnostic disable-next-line: duplicate-set-field
+    --- @diagnostic disable-next-line: duplicate-set-field
     ActionButton.UpdateState = function (self)
         local slotnum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or self.button.hotbarCategory
@@ -1444,7 +1444,7 @@ function LUIE.InitializeHooks()
     }
 
     -- Hook Campaign Bonuses Data Table
-    ---@diagnostic disable-next-line: duplicate-set-field
+    --- @diagnostic disable-next-line: duplicate-set-field
     ZO_CampaignBonuses_Shared.CreateDataTable = function (self)
         self:BuildMasterList()
 
@@ -1478,7 +1478,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook Campaign Bonuses Build Master List
-    ---@diagnostic disable-next-line: duplicate-set-field
+    --- @diagnostic disable-next-line: duplicate-set-field
     ZO_CampaignBonuses_Shared.BuildMasterList = function (self)
         self.masterList = {}
 
@@ -1518,7 +1518,7 @@ function LUIE.InitializeHooks()
             index = zo_min(index, count)
             local scoreIndex = index - startIndex + 1
             local countText = scoreIndex
-            ---@diagnostic disable-next-line: redundant-parameter
+            --- @diagnostic disable-next-line: redundant-parameter
             local abilityId = info.abilityFunction(index, self.campaignId)
             local name = GetAbilityName(abilityId)
             local icon = (LUIE.Data.Effects.EffectOverride[abilityId] and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon) and LUIE.Data.Effects.EffectOverride[abilityId].passiveIcon or GetAbilityIcon(abilityId)                                                  -- Get Updated LUIE AbilityIcon here
@@ -1577,7 +1577,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook Campaign Bonuses Manager (we add abilityId, name, and the description to the control to carry over to the OnMouseEnter tooltip function)
-    ---@diagnostic disable-next-line: duplicate-set-field
+    --- @diagnostic disable-next-line: duplicate-set-field
     function ZO_CampaignBonusesManager:SetupBonusesEntry(control, data)
         ZO_SortFilterList.SetupRow(self, control, data)
 
@@ -1691,7 +1691,7 @@ function LUIE.InitializeHooks()
     end
 
     -- Hook AVA Keep Upgrade
-    ---@diagnostic disable-next-line: duplicate-set-field
+    --- @diagnostic disable-next-line: duplicate-set-field
     ZO_MapKeepUpgrade_Shared.RefreshLevels = function (self)
         self.levelsGridList:ClearGridList()
 
@@ -2031,7 +2031,7 @@ function LUIE.InitializeHooks()
         advisementLabel:SetColor(ZO_SKILLS_ADVISOR_ADVISED_COLOR:UnpackRGBA())
 
         local function SetupUpgradeAbilityDialog(dialog, skillData)
-            --Only passives upgrade
+            -- Only passives upgrade
             assert(skillData:IsPassive())
 
             local skillPointAllocator = skillData:GetPointAllocator()
@@ -2097,7 +2097,7 @@ function LUIE.InitializeHooks()
 
         local DOUBLE_FRAME_THICKNESS = 9
         local SINGLE_FRAME_THICKNESS = 5
-        --Circle Frame (Passive)
+        -- Circle Frame (Passive)
         local circleFrameTexture = control.circleFrame
         if circleFrameTexture then
             if isPassive then
@@ -2118,7 +2118,7 @@ function LUIE.InitializeHooks()
             end
         end
 
-        --Edge Frame (Active)
+        -- Edge Frame (Active)
         local SKILLS_ADVISOR_ACTIVE_DOUBLE_FRAME_WIDTH = 128
         local SKILLS_ADVISOR_ACTIVE_DOUBLE_FRAME_HEIGHT = 16
         local edgeFrameBackdrop = control.edgeFrame
@@ -2143,7 +2143,7 @@ function LUIE.InitializeHooks()
     local function SetBindingTextForSkill(keybindLabel, skillData, overrideSlotIndex, overrideHotbar)
         ZO_Keybindings_UnregisterLabelForBindingUpdate(keybindLabel)
 
-        --The spot where the keybind goes is occupied by the decrease button in the respec modes
+        -- The spot where the keybind goes is occupied by the decrease button in the respec modes
         if SKILLS_AND_ACTION_BAR_MANAGER:GetSkillPointAllocationMode() == SKILL_POINT_ALLOCATION_MODE_PURCHASE_ONLY and skillData:IsActive() then
             local actionSlotIndex = overrideSlotIndex or skillData:GetSlotOnCurrentHotbar()
             if actionSlotIndex then
@@ -2171,7 +2171,7 @@ function LUIE.InitializeHooks()
     local function SetupIndicatorsForSkill(leftIndicator, rightIndicator, skillData, showIncrease, showDecrease, showNew)
         local indicatorRightWidth = 0
 
-        --If we don't have a left indicator then we aren't going to have a right indicator either, so exit the function
+        -- If we don't have a left indicator then we aren't going to have a right indicator either, so exit the function
         if not leftIndicator then
             return indicatorRightWidth
         end
@@ -2195,7 +2195,7 @@ function LUIE.InitializeHooks()
             rightIndicator:ClearIcons()
         end
 
-        --Increase (Morph, Purchase, Increase Rank) Icon
+        -- Increase (Morph, Purchase, Increase Rank) Icon
         local increaseAction = ZO_SKILL_POINT_ACTION.NONE
         local isMorph = ZO_ActiveSkillProgressionData:IsMorph()
         if showIncrease then
@@ -2209,18 +2209,18 @@ function LUIE.InitializeHooks()
             increaseMultiIcon:AddIcon(ZO_Skills_GetGamepadSkillPointActionIcon(increaseAction))
         end
 
-        --Decrease (Unmorph, Sell, Decrease Rank)
+        -- Decrease (Unmorph, Sell, Decrease Rank)
         if showDecrease then
             local decreaseAction = skillPointAllocator:GetDecreaseSkillAction()
             if decreaseAction ~= ZO_SKILL_POINT_ACTION.NONE then
                 decreaseMultiIcon:AddIcon(ZO_Skills_GetGamepadSkillPointActionIcon(decreaseAction))
             end
 
-            --Always carve out space for the decrease icon even if it isn't active so the name doesn't dance around as it appears and disappears
+            -- Always carve out space for the decrease icon even if it isn't active so the name doesn't dance around as it appears and disappears
             indicatorRightWidth = 40
         end
 
-        --New Indicator
+        -- New Indicator
         if showNew then
             if skillData:HasUpdatedStatus() then
                 leftIndicator:AddIcon("EsoUI/Art/Inventory/newItem_icon.dds")
@@ -2342,5 +2342,5 @@ function LUIE.InitializeHooks()
         control.label:SetWidth(labelWidth)
     end
 
-    --end
+    -- end
 end

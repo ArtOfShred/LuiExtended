@@ -3,10 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) ZoneNames
+--- @class (partial) ZoneNames
 local ZoneNames =
 {
 
@@ -61,5 +61,5 @@ local ZoneNames =
     Zone_Tempest_Island = "Tempest Island",
 }
 
----@class (partial) ZoneNames
+--- @class (partial) ZoneNames
 LUIE.Data.ZoneNames = ZoneNames

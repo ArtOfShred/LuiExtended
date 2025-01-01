@@ -3,11 +3,11 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
----@class (partial) CombatInfo
+--- @class (partial) CombatInfo
 local CombatInfo = LUIE.CombatInfo
----@class (partial) AbilityAlerts
+--- @class (partial) AbilityAlerts
 local AbilityAlerts = CombatInfo.AbilityAlerts
 
 local UI = LUIE.UI
@@ -399,8 +399,8 @@ function AbilityAlerts.AlertUpdate(currentTime)
                 alert.data.postCast = nil
                 alert.data.available = true
             elseif remain <= 0 then
-                --alert:SetHidden(true)
-                --alert.data = { }
+                -- alert:SetHidden(true)
+                -- alert.data = { }
                 if postCast <= 0 then
                     local duration = 1000 - (postCast * -1)
                     local progress = duration / 1000
@@ -426,11 +426,11 @@ function AbilityAlerts.AlertInterrupt(eventCode, resultType, isError, abilityNam
             targetName = zo_strformat("<<C:1>>", targetName)
 
             -- DEBUG
-            --d("NORMAL INTERRUPT DETECTED")
-            --d("abilityId: " .. abilityId)
-            --d("Source Unit Id: " .. alert.data.sourceUnitId)
-            --d("targetUnitId: " .. targetUnitId)
-            --d("targetName: " .. targetName)
+            -- d("NORMAL INTERRUPT DETECTED")
+            -- d("abilityId: " .. abilityId)
+            -- d("Source Unit Id: " .. alert.data.sourceUnitId)
+            -- d("targetUnitId: " .. targetUnitId)
+            -- d("targetName: " .. targetName)
 
             local currentTime = GetGameTimeMilliseconds()
             local remain = alert.data.duration - currentTime
@@ -620,7 +620,7 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier
             alert:SetAlpha(1)
             alert.data.available = false
             alert.icon.cd:SetFillColor(unpack(borderColor))
-            --alert.icon.cd:SetHidden(not crowdControl)
+            -- alert.icon.cd:SetHidden(not crowdControl)
             drawLocation = 1 -- As long as this text is filling an available spot, we reset the draw over location to slot 1. If all slots are filled then the draw over code below will cycle and handle abilities.
             AbilityAlerts.RealignAlerts(i)
             return
@@ -657,7 +657,7 @@ function AbilityAlerts.SetupSingleAlertFrame(abilityId, textPrefix, textModifier
     alert:SetAlpha(1)
     alert.data.available = false
     alert.icon.cd:SetFillColor(unpack(borderColor))
-    --alert.icon.cd:SetHidden(not crowdControl)
+    -- alert.icon.cd:SetHidden(not crowdControl)
     drawLocation = drawLocation + 1
     if drawLocation > 3 then
         drawLocation = 1
@@ -709,7 +709,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         refireDelay[abilityId] = true
         zo_callLater(function ()
             refireDelay[abilityId] = nil
-        end, Alerts[abilityId].refire) --buffer by X time
+        end, Alerts[abilityId].refire) -- buffer by X time
     end
 
     -- Auto refire for auras to stop events when both reticleover and the unit exist
@@ -723,7 +723,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         end
         zo_callLater(function ()
             refireDelay[abilityId] = nil
-        end, refireTime) --buffer by X time
+        end, refireTime) -- buffer by X time
     end
 
     -- Get Ability Name & Icon
@@ -789,7 +789,7 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         end
     end
 
-    --Override icon with default if enabled
+    -- Override icon with default if enabled
     if Settings.toggles.useDefaultIcon and AbilityAlerts.ShouldUseDefaultIcon(abilityId) == true then
         abilityIcon = AbilityAlerts.GetDefaultIcon(Alerts[abilityId].cc)
     end
@@ -997,8 +997,8 @@ local function CheckInterruptEvent(unitId, abilityId, resultType)
                 local remain = alert.data.duration - currentTime
 
                 -- DEBUG
-                --d("EFFECT INTERRUPTED")
-                --d("Current Duration: " .. remain)
+                -- d("EFFECT INTERRUPTED")
+                -- d("Current Duration: " .. remain)
 
                 if (alert.data.sourceUnitId == unitId and (not alert.data.showDuration == false or alert.data.alwaysShowInterrupt)) and remain > 0 and (not alert.data.neverShowInterrupt or deathResults[resultType]) then
                     alert.data = {}
@@ -1108,7 +1108,7 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
         end
     end
 
-    --Override icon with default if enabled
+    -- Override icon with default if enabled
     if Settings.toggles.useDefaultIcon and AbilityAlerts.ShouldUseDefaultIcon(abilityId) == true then
         abilityIcon = AbilityAlerts.GetDefaultIcon(Alerts[abilityId].cc)
     end
@@ -1132,7 +1132,7 @@ function AbilityAlerts.OnCombatIn(eventCode, resultType, isError, abilityName, a
                 refireDelay[abilityId] = true
                 zo_callLater(function ()
                     refireDelay[abilityId] = nil
-                end, 1000) --buffer by X time
+                end, 1000) -- buffer by X time
                 return
             end
 
@@ -1185,7 +1185,7 @@ function AbilityAlerts.OnCombatAlert(eventCode, resultType, isError, abilityName
                 refireDelay[abilityId] = true
                 zo_callLater(function ()
                     refireDelay[abilityId] = nil
-                end, 1000) --buffer by X time
+                end, 1000) -- buffer by X time
                 return
             end
 

@@ -4,13 +4,13 @@
 --]]
 
 -- LUIE namespace
----@class (partial) LuiExtended
----@field __index LuiExtended
+--- @class (partial) LuiExtended
+--- @field __index LuiExtended
 LUIE = {}
 LUIE.__index = LUIE
 LUIE.__newindex = NewIndexHandler
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 LUIE.tag = "LUIE"
@@ -28,7 +28,7 @@ LUIE.SV = ...
 LUIE.SVVer = 2
 LUIE.SVName = "LUIESV"
 
---LUIE.Data = {};
+-- LUIE.Data = {};
 LUIE.Components = {}
 
 -- Default Settings
@@ -38,7 +38,7 @@ LUIE.Defaults =
     StartupInfo = false,
     HideAlertFrame = false,
     AlertFrameAlignment = 3,
-    --CustomIcons_Enabled = true,
+    -- CustomIcons_Enabled = true,
     HideXPBar = false,
     TempAlertHome = false,
     TempAlertCampaign = false,

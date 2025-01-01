@@ -3,10 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class CombatTextCombatCloudEventViewer : CombatTextEventViewer, ZO_InitializingObject
+--- @class CombatTextCombatCloudEventViewer : CombatTextEventViewer, ZO_InitializingObject
 local CombatTextCombatCloudEventViewer = LUIE.CombatTextEventViewer:Subclass()
 LUIE.CombatTextCombatCloudEventViewer = CombatTextCombatCloudEventViewer
 
@@ -90,7 +90,7 @@ function CombatTextCombatCloudEventViewer:View(combatType, powerType, value, abi
         offsetX, offsetY = zo_random(-radiusW * 0.5, radiusW * 0.5), zo_random(-radiusH * 0.5, radiusH * 0.5)
     elseif isDot or isHot then                               -- http://www.mathopenref.com/coordgeneralellipse.html
         offsetX = zo_random(-radiusW * 0.95, radiusW * 0.95) -- Make radiusW a bit smaller to avoid horizontal animations
-        offsetY = zo_sqrt(radiusH^2 * (1 - (offsetX^2 / radiusW^2)))
+        offsetY = zo_sqrt(radiusH ^ 2 * (1 - (offsetX ^ 2 / radiusW ^ 2)))
         if combatType == CombatTextConstants.combatType.OUTGOING then
             offsetY = -offsetY
         end

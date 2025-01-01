@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 -- CrowdControl.aoePlayerUltimate
@@ -15,7 +15,7 @@ local LUIE = LUIE
 -- CrowdControl.aoeNormal
 -- Increment by 1 here if we want to change priority. Best way to do this is +1 for a new ability, and shared morphs or other damage sources from a shared attack don't increment.
 -- Priority system doesn't support gaps so NEVER more than +1 here, also the FIRST ability in each tier needs to be +0 to prevent skips if a category is disabled in the options.
----@class (partial) aoePlayerNormal
+--- @class (partial) aoePlayerNormal
 local aoePlayerNormal =
 {
 
@@ -34,7 +34,7 @@ local aoePlayerNormal =
     [221173] = 1, -- Warden's Contingency (Warden Scribing Class Charm Initial Cast)
     [221174] = 0, -- Warden's Contingency (Warden Scribing Class Charm Initial Cast)
 
-    --[130406] = 0, -- Arctic Blast (Arctic Blast)
+    -- [130406] = 0, -- Arctic Blast (Arctic Blast)
     [88783] = 1, -- Impaling Shards (Impaling Shards)
     [88791] = 0, -- Gripping Shards (Gripping Shards)
     [88802] = 0, -- Winter's Revenge (Winter's Revenge)
@@ -61,9 +61,9 @@ local aoePlayerNormal =
     [117809] = 0, -- Unnerving Boneyard (Unnerving Boneyard)
     [117854] = 0, -- Avid Boneyard (Avid Boneyard)
 
-    --[116410] = 1, -- Shocking Siphon (Shocking Siphon)
-    --[118766] = 0, -- Detonating Siphon (Detonating Siphon)
-    --[118011] = 0, -- Mystic Siphon (Mystic Siphon)
+    -- [116410] = 1, -- Shocking Siphon (Shocking Siphon)
+    -- [118766] = 0, -- Detonating Siphon (Detonating Siphon)
+    -- [118011] = 0, -- Mystic Siphon (Mystic Siphon)
 
     -- Arcanist
     [194844] = 0,   -- Fatecarver Snare (Exhausting Fatecarver)
@@ -151,5 +151,5 @@ local aoePlayerNormal =
 
 }
 
----@class (partial) aoePlayerNormal
+--- @class (partial) aoePlayerNormal
 LUIE.Data.CrowdControl.aoePlayerNormal = aoePlayerNormal

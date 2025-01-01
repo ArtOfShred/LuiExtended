@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 local SlashCommands = LUIE.SlashCommands
 
@@ -187,8 +187,8 @@ function SlashCommands.SlashGuildKick(option)
             compareDisplay = compareDisplay,
             compareCharacter = compareCharacter,
         }
-        --d(compareDisplay .. compareCharacter)
-        --d("comparing vs... " .. compareChar)
+        -- d(compareDisplay .. compareCharacter)
+        -- d("comparing vs... " .. compareChar)
     end
 
     local finalName = ""

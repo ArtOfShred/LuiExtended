@@ -3,7 +3,7 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
 local Tooltips = LUIE.Data.Tooltips
@@ -16,7 +16,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- Data for icon & description to show for the fake Disguise buff applied to the player.
 --------------------------------------------------------------------------------------------------------------------------------
----@class (partial) DisguiseIcons
+--- @class (partial) DisguiseIcons
 local DisguiseIcons =
 {
     -- Required:
@@ -56,7 +56,7 @@ local DisguiseIcons =
     [71090] = { icon = "LuiExtended/media/icons/disguises/disguise_servants_outfit.dds", description = "as a servant of the Iron Wheel.", id = 27649 }, -- TODO: Check this ID is right
     [71541] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", description = "as a Castle Kvatch sentinel.", id = nil },              -- NO ICON (Not sure it exists)
     [71789] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", description = "as a Castle Kvatch sentinel.", id = nil },              -- NO ICON (Not sure it exists)
-    --[79332] = { icon = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', description = 'as a monk.' }, -- HAS AN AURA SO NOT NECESSARY (Note - we make an exception to HIDE this itemId to prevent errors)
+    -- [79332] = { icon = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', description = 'as a monk.' }, -- HAS AN AURA SO NOT NECESSARY (Note - we make an exception to HIDE this itemId to prevent errors)
     [79505] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", description = "as a Sentinel Guard.", id = nil },                      -- NO ICON (Not sure it exists)
     [94209] = { icon = "LuiExtended/media/icons/disguises/disguise_scarlet_judges_regalia.dds", description = "as The Scarlet Judge.", id = 85204 },
 
@@ -64,5 +64,5 @@ local DisguiseIcons =
     [55262] = { icon = "LuiExtended/media/icons/disguises/disguise_generic.dds", description = "by the Earring of Disguise.", id = nil }, -- Compatibility - for Arenthia quest is player is wearing a Guild Tabard
 }
 
----@class (partial) DisguiseIcons
+--- @class (partial) DisguiseIcons
 LUIE.Data.Effects.DisguiseIcons = DisguiseIcons

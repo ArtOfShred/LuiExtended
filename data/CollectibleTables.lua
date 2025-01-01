@@ -3,10 +3,10 @@
     License: The MIT License (MIT)
 --]]
 
----@class (partial) LuiExtended
+--- @class (partial) LuiExtended
 local LUIE = LUIE
 
----@class (partial) CollectibleTables
+--- @class (partial) CollectibleTables
 local CollectibleTables =
 {
     -- Banker
@@ -79,5 +79,5 @@ for name, table in pairs(CollectibleTables) do
     end
 end
 
----@class (partial) CollectibleTables
+--- @class (partial) CollectibleTables
 LUIE.Data.CollectibleTables = CollectibleTables
