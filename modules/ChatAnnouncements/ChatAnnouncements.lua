@@ -4415,22 +4415,25 @@ local delayedItemPool = {}    -- Store items we are counting up when the player 
 local delayedItemPoolOut = {} -- Stacks for outbound delayed item pool
 
 function ChatAnnouncements.ItemCounterDelay(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot, alwaysFirst, delay)
-    -- Return if we have an invalid itemId
-    if itemId == 0 then
+    -- Return if we have an invalid itemId or stack
+    if itemId == 0 or not stack then
         if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@dack_janiels" then
             d("Item counter returned invalid items")
         end
         return
     end
-    if delayedItemPool[itemId] then
-        stack = delayedItemPool[itemId].stack + stack -- Add stack count first, only if item already exists.
+
+    -- Add stack counts if item exists in pool, with nil check
+    if delayedItemPool[itemId] and delayedItemPool[itemId].stack then
+        stack = delayedItemPool[itemId].stack + stack
     end
-    delayedItemPool[itemId] =
-    {
+
+    -- Save parameters to delayed item pool
+    delayedItemPool[itemId] = {
         icon = icon,
         itemType = itemType,
         itemLink = itemLink,
-        stack = stack,
+        stack = stack or 0, -- Provide default value if nil
         receivedBy = receivedBy,
         logPrefix = logPrefix,
         gainOrLoss = gainOrLoss,
@@ -4438,7 +4441,7 @@ function ChatAnnouncements.ItemCounterDelay(icon, stack, itemType, itemId, itemL
         groupLoot = groupLoot,
         alwaysFirst = alwaysFirst,
         delay = delay,
-    } -- Save relevant parameters
+    }
 
     -- Pass along all values to SendDelayedItems()
     eventManager:UnregisterForUpdate(moduleName .. "SendDelayedItems")
