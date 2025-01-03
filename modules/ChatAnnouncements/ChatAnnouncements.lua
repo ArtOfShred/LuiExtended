@@ -4418,7 +4418,7 @@ function ChatAnnouncements.ItemCounterDelay(icon, stack, itemType, itemId, itemL
     -- Return if we have an invalid itemId or stack
     if itemId == 0 or not stack then
         if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@dack_janiels" then
-            d("Item counter returned invalid items")
+            LUIE.Debug("Item counter returned invalid items")
         end
         return
     end
