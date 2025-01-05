@@ -11,7 +11,7 @@ local strings =
     -- LuiExtended
     LUIE_STRING_ERROR_FONT = "LUI Extended: Es gab ein Problem bei der Auswahl der benötigten Schriftart. Standard wiederhergestellt.",
     LUIE_STRING_ERROR_SOUND = "LUI Extended: Es gab ein Problem bei der Auswahl des benötigten Sounds. Standard wiederhergestellt.",
-
+    LUIE_STRING_LAM_PROFILE_COPY_ERROR = "LUI Extended: Es gab ein Problem. Der Profil für dieses Charakter wurde nicht gefunden.",
     -- Shared
     LUIE_STRING_CUSTOM_LIST_AURA_BLACKLIST = "Aura Blacklist",
     LUIE_STRING_CUSTOM_LIST_CASTBAR_BLACKLIST = "Cast Bar Blacklist",
@@ -610,5 +610,5 @@ local strings =
 
 for stringId, stringValue in pairs(strings) do
     ZO_CreateStringId(stringId, stringValue)
-    SafeAddVersion(stringId, 1)
+    SafeAddVersion(stringId, 2)
 end

@@ -11,6 +11,7 @@ local strings =
     -- LuiExtended
     LUIE_STRING_ERROR_FONT = "LUI Extended: There was a problem with selecting required font. Falling back to default.",
     LUIE_STRING_ERROR_SOUND = "LUI Extended: There was a problem with selecting required sound. Falling back to default.",
+    LUIE_STRING_LAM_PROFILE_COPY_ERROR = "LUI Extended: There was a problem. The profile for this character was not found.",
 
     -- Shared
     LUIE_STRING_CUSTOM_LIST_AURA_BLACKLIST = "Aura Blacklist",

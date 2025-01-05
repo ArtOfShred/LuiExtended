@@ -29,32 +29,55 @@ function LUIE.SetupAlertFrameVisibility()
 end
 
 do
+    -- Get milliseconds from game time
+    local function getCurrentMillisecondsFormatted()
+        local currentTimeMs = GetGameTimeMilliseconds()
+        if currentTimeMs == nil then return end
+        return string_format("%03d", currentTimeMs % 1000)
+    end
+
     --- Returns a formatted timestamp based on the provided time string and format string.
     --- @param timeStr string: The time string in the format "HH:MM:SS".
     --- @param formatStr string|nil (optional): The format string for the timestamp. If not provided, the default format from LUIE.ChatAnnouncements.SV.TimeStampFormat will be used.
+    --- @param milliseconds string|nil
     --- @return string: The formatted timestamp.
-    local function CreateTimestamp(timeStr, formatStr)
+    local function CreateTimestamp(timeStr, formatStr, milliseconds)
+        local showTimestamp = LUIE.ChatAnnouncements.SV.TimeStamp
+        if showTimestamp then
+            milliseconds = milliseconds or getCurrentMillisecondsFormatted()
+        end
+        if milliseconds == nil then milliseconds = "" end
         formatStr = formatStr or LUIE.ChatAnnouncements.SV.TimeStampFormat
 
         -- split up default timestamp
-        local hours, minutes, seconds = zo_strmatch(timeStr, "([^:]+):([^:]+):([^:]+)")
+        local hours, minutes, seconds = zo_strmatch(timeStr, "([^%:]+):([^%:]+):([^%:]+)")
         local hoursNoLead = tonumber(hours) -- hours without leading zero
         local hours12NoLead = (hoursNoLead - 1) % 12 + 1
-        local hours12 = hours12NoLead < 10 and "0" .. hours12NoLead or tostring(hours12NoLead)
-        local pUp = hoursNoLead >= 12 and "PM" or "AM"
-        local pLow = hoursNoLead >= 12 and "pm" or "am"
+        local hours12
+        if (hours12NoLead < 10) then
+            hours12 = "0" .. hours12NoLead
+        else
+            hours12 = hours12NoLead
+        end
+        local pUp = "AM"
+        local pLow = "am"
+        if (hoursNoLead >= 12) then
+            pUp = "PM"
+            pLow = "pm"
+        end
 
-        -- create new timestamp using substitutions
+        -- create new one
+        -- >If you add new formats make sure to update the tooltip at LUIE_STRING_LAM_CA_TIMESTAMPFORMAT_TP too
         local timestamp = formatStr
         timestamp = zo_strgsub(timestamp, "HH", hours)
-        timestamp = zo_strgsub(timestamp, "H", tostring(hoursNoLead))
+        timestamp = zo_strgsub(timestamp, "H", hoursNoLead)
         timestamp = zo_strgsub(timestamp, "hh", hours12)
-        timestamp = zo_strgsub(timestamp, "h", tostring(hours12NoLead))
+        timestamp = zo_strgsub(timestamp, "h", hours12NoLead)
         timestamp = zo_strgsub(timestamp, "m", minutes)
         timestamp = zo_strgsub(timestamp, "s", seconds)
         timestamp = zo_strgsub(timestamp, "A", pUp)
         timestamp = zo_strgsub(timestamp, "a", pLow)
-
+        timestamp = zo_strgsub(timestamp, "xy", milliseconds)
         return timestamp
     end
 

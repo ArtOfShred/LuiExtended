@@ -5,6 +5,7 @@
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
+---@class (partial) LUIE.SpellCastBuffs
 local SpellCastBuffs = LUIE.SpellCastBuffs
 
 local Abilities = LUIE.Data.Abilities

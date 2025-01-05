@@ -20,8 +20,8 @@ LUIE.author = "ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder"
 LUIE.website = "https://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github = "https://github.com/ArtOfShredLuiExtended"
 LUIE.feedback = "https://github.com/ArtOfShredLuiExtended/issues"
-LUIE.translation = "https://github.com/ArtOfShredLuiExtended/tree/develop/i18n"
-LUIE.donation = "https://www.paypal.me/ArtOfShred"
+--LUIE.translation = "https://github.com/ArtOfShredLuiExtended/tree/develop/i18n"
+--LUIE.donation = "https://www.paypal.me/ArtOfShred"
 
 -- Saved variables options
 LUIE.SV = ...
@@ -30,6 +30,9 @@ LUIE.SVName = "LUIESV"
 
 -- LUIE.Data = {};
 LUIE.Components = {}
+
+--- @class (partial) Data
+LUIE.Data = LuiData.Data
 
 -- Default Settings
 LUIE.Defaults =
@@ -153,3 +156,8 @@ LUIE.StatusbarTextures =
     ["Smooth"] = "LuiExtended/media/unitframes/textures/Smooth.dds",
     ["Plain"] = "LuiExtended/media/unitframes/textures/Plain.dds",
 }
+
+LUIE.PlayerNameRaw = GetRawUnitName("player")
+LUIE.PlayerNameFormatted = zo_strformat("<<C:1>>", GetUnitName("player"))
+LUIE.PlayerDisplayName = zo_strformat("<<C:1>>", GetUnitDisplayName("player"))
+LUIE.PlayerFaction = GetUnitAlliance("player")

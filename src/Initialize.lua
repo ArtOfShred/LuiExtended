@@ -5,6 +5,7 @@
 
 --- @class (partial) LuiExtended
 --- @field Combat LUIE.CombatInfo
+--- @field SpellCastBuffs LUIE.SpellCastBuffs
 local LUIE = LUIE
 
 local zo_strformat = zo_strformat
@@ -128,10 +129,36 @@ local function RegisterEvents()
     end
 end
 
+
+local function CreateSettings()
+    LUIE.CreateSettings()
+    LUIE.ChatAnnouncements.CreateSettings()
+    LUIE.CombatInfo.CreateSettings()
+    LUIE.CombatText.CreateSettings()
+    LUIE.InfoPanel.CreateSettings()
+    LUIE.UnitFrames.CreateSettings()
+    LUIE.SpellCastBuffs.CreateSettings()
+    LUIE.SlashCommands.CreateSettings()
+    LUIE.SlashCommands.MigrateSettings()
+end
+
+local function Initialize()
+    -- Initialize this addon modules according to user preferences
+    LUIE.ChatAnnouncements.Initialize(LUIE.SV.ChatAnnouncements_Enable)
+    LUIE.CombatInfo.Initialize(LUIE.SV.CombatInfo_Enabled)
+    LUIE.CombatText.Initialize(LUIE.SV.CombatText_Enabled)
+    LUIE.InfoPanel.Initialize(LUIE.SV.InfoPanel_Enabled)
+    LUIE.UnitFrames.Initialize(LUIE.SV.UnitFrames_Enabled)
+    LUIE.SpellCastBuffs.Initialize(LUIE.SV.SpellCastBuff_Enable)
+    LUIE.SlashCommands.Initialize(LUIE.SV.SlashCommands_Enable)
+end
+
 --[[
     LuiExtended Initialization.
 ]]
-local function OnAddonOnLoaded(eventCode, addonName)
+
+-- Hook initialization
+eventManager:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, function (eventCode, addonName)
     -- Only initialize our own addon
     if LUIE.name ~= addonName then
         return
@@ -147,35 +174,15 @@ local function OnAddonOnLoaded(eventCode, addonName)
     LUIE.InitializeHooks()
     -- Toggle Alert Frame Visibility if needed
     LUIE.SetupAlertFrameVisibility()
-    LUIE.PlayerNameRaw = GetRawUnitName("player")
-    LUIE.PlayerNameFormatted = zo_strformat("<<C:1>>", GetUnitName("player"))
-    LUIE.PlayerDisplayName = zo_strformat("<<C:1>>", GetUnitDisplayName("player"))
-    LUIE.PlayerFaction = GetUnitAlliance("player")
-    -- Initialize this addon modules according to user preferences
-    LUIE.ChatAnnouncements.Initialize(LUIE.SV.ChatAnnouncements_Enable)
-    LUIE.CombatInfo.Initialize(LUIE.SV.CombatInfo_Enabled)
-    LUIE.CombatText.Initialize(LUIE.SV.CombatText_Enabled)
-    LUIE.InfoPanel.Initialize(LUIE.SV.InfoPanel_Enabled)
-    LUIE.UnitFrames.Initialize(LUIE.SV.UnitFrames_Enabled)
-    LUIE.SpellCastBuffs.Initialize(LUIE.SV.SpellCastBuff_Enable)
-    LUIE.SlashCommands.Initialize(LUIE.SV.SlashCommands_Enable)
+
+    Initialize()
+
     -- Load Timestamp Color
     LUIE.UpdateTimeStampColor()
     -- Create settings menus for our addon
-    LUIE.CreateSettings()
-    LUIE.ChatAnnouncements.CreateSettings()
-    LUIE.CombatInfo.CreateSettings()
-    LUIE.CombatText.CreateSettings()
-    LUIE.InfoPanel.CreateSettings()
-    LUIE.UnitFrames.CreateSettings()
-    LUIE.SpellCastBuffs.CreateSettings()
-    LUIE.SlashCommands.CreateSettings()
-    LUIE.SlashCommands.MigrateSettings()
+    CreateSettings()
     -- Display changelog screen
     LUIE.ChangelogScreen()
     -- Register global event listeners
     RegisterEvents()
-end
-
--- Hook initialization
-eventManager:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, OnAddonOnLoaded)
+end)

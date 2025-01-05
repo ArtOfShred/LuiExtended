@@ -9,6 +9,7 @@ local strings =
 {
 
     -- Settings
+    LUIE_STRING_LAM_PROFILE_COPY_ERROR = "LUI Extended: 发生错误。找不到此角色的配置文件。",
     LUIE_STRING_LAM_COMPATIBILITY_WARNING = "如果存在兼容性问题，请禁用此选项。",
     LUIE_STRING_LAM_FONT = "字体",
     LUIE_STRING_LAM_FONT_SIZE = "字体大小",
@@ -18,8 +19,8 @@ local strings =
     LUIE_STRING_LAM_RELOADUI_WARNING = "需要重载用户界面以生效",
     LUIE_STRING_LAM_RELOADUI_SLASH_WARNING = "禁用命令需要重载用户界面以生效",
     LUIE_STRING_LAM_RESETPOSITION = "恢复默认位置",
-    -- LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT =                   "Alert Text Alignment",
-    -- LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT_TP =                "Set the Alignment for Alert Text (normally displayed anchored to the right in the top right corner of the screen).",
+    -- LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT = "警报文本对齐",
+    -- LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT_TP = "设置警报文本的对齐方式（通常显示在屏幕右上角并右对齐）。",
     LUIE_STRING_LAM_ALERT_HIDE_ALL = "禁用警报",
     LUIE_STRING_LAM_ALERT_HIDE_ALL_TP = "禁用右上角提示信息",
     LUIE_STRING_LAM_HIDE_EXPERIENCE_BAR = "隐藏经验条/技能经验条",
@@ -2179,5 +2180,5 @@ local strings =
 }
 for stringId, stringValue in pairs(strings) do
     ZO_CreateStringId(stringId, stringValue)
-    SafeAddVersion(stringId, 1)
+    SafeAddVersion(stringId, 2)
 end

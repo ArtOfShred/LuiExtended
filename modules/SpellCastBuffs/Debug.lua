@@ -5,46 +5,76 @@
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
+---@class (partial) LUIE.SpellCastBuffs
 local SpellCastBuffs = LUIE.SpellCastBuffs
-
 local Effects = LUIE.Data.Effects
+local AUTHORIZED_USERS = SpellCastBuffs.AUTHORIZED_USERS
 
+-- Core Lua function localizations
 local pairs = pairs
 local string_format = string.format
 local zo_strformat = zo_strformat
-local zo_strgsub = zo_strgsub
-local printtochat = LUIE.PrintToChat
+local zo_iconFormat = zo_iconFormat
 
--- Add millisecond timestamp to ability debug
---- @param message string Message to add timestamp to
+-- Constants
+local EFFECT_CHANGE_TYPES =
+{
+    GAINED = 1,
+    FADED = 2,
+    REFRESHED = 3,
+}
+
+-- Convert RGB (0.5607843137, 0.5607843137, 0.5607843137) to hex
+-- 0.5607843137 * 255 ≈ 143 (8F in hex)
+local DEFAULT_TIMESTAMP_COLOR = "8F8F8F"
+
+local MESSAGE_COLORS =
+{
+    TIMESTAMP = LUIE.TimeStampColorize or DEFAULT_TIMESTAMP_COLOR,
+    SUCCESS = "|c00E200",
+}
+
+local DEBUG_COMMANDS =
+{
+    ["/filter"] = SpellCastBuffs.TempSlashFilter,
+    ["/ground"] = SpellCastBuffs.TempSlashGround,
+    ["/zonecheck"] = SpellCastBuffs.TempSlashZoneCheck,
+    ["/abilitydump"] = SpellCastBuffs.TempSlashCheckRemovedAbilities,
+}
+
+-- Utility Functions
+--- @param message string Message to format with timestamp
 --- @return string Formatted message with timestamp
-local function MillisecondTimestampDebug(message)
-    local currentTime = GetGameTimeMilliseconds()
-    local timestamp = FormatTimeMilliseconds(currentTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_MILLISECONDS_NO_HOURS_OR_DAYS, TIME_FORMAT_DIRECTION_NONE)
-    timestamp = zo_strgsub(timestamp, "HH", "")
-    timestamp = zo_strgsub(timestamp, "H ", ":")
-    timestamp = zo_strgsub(timestamp, "hh", "")
-    timestamp = zo_strgsub(timestamp, "h ", ":")
-    timestamp = zo_strgsub(timestamp, "m ", ":")
-    timestamp = zo_strgsub(timestamp, "s ", ":")
-    timestamp = zo_strgsub(timestamp, "A", "")
-    timestamp = zo_strgsub(timestamp, "a", "")
-    timestamp = zo_strgsub(timestamp, "ms", "")
-    message = string_format("|c%s[%s]|r %s", LUIE.TimeStampColorize, timestamp, message)
-    return message
+local function FormatDebugMessage(message)
+    -- If pChat is enabled and showing timestamps, don't add our own
+    if pChat and pChat.db and pChat.db.showTimestamp then
+        return message
+    end
+    return LUIE.FormatMessage(message, true)
 end
 
---- Format unit name for debug messages
+--- Format unit name for effect messages
 --- @param name string Raw unit name
 --- @return string Formatted name
 local function FormatUnitName(name)
-    if name == LUIE.PlayerNameFormatted then
+    if name == LUIE.PlayerDisplayName then
         return "Player"
     elseif name == "" then
         return "NIL"
-    else
-        return name
     end
+    return zo_strformat("<<C:1>>", name)
+end
+
+--- Format unit name for effect messages
+--- @param unitName string Raw unit name
+--- @param unitTag string Unit tag
+--- @return string Formatted name with tag
+local function FormatEffectUnitName(unitName, unitTag)
+    local formatted = zo_strformat("<<C:1>>", unitName)
+    if formatted == LUIE.PlayerDisplayName then
+        formatted = "Player"
+    end
+    return formatted .. " (" .. unitTag .. ")"
 end
 
 --- @param abilityId integer Unique ID of the ability
@@ -58,23 +88,8 @@ local function GetAbilityTimingString(abilityId, overrideRank, casterUnitTag)
     return castStr .. chanStr
 end
 
--- Helper functions for effect debug messages
-
---- Format unit name for effect messages
---- @param unitName string Raw unit name
---- @param unitTag string Unit tag
---- @return string Formatted name with tag
-local function FormatEffectUnitName(unitName, unitTag)
-    local formatted = zo_strformat("<<C:1>>", unitName)
-    if formatted == LUIE.PlayerNameFormatted then
-        formatted = "Player"
-    end
-    return formatted .. " (" .. unitTag .. ")"
-end
-
---- Check if ability is hidden in Combat Metrics
---- @param abilityId integer Ability ID to check
---- @return string Hide status string
+--- @param abilityId integer Unique ID of the ability
+--- @return string CMX hide status string
 local function GetCMXHideStatus(abilityId)
     if CMX and CMX.CustomAbilityHide and CMX.CustomAbilityHide[abilityId] then
         return " + HIDDEN CMX"
@@ -82,66 +97,80 @@ local function GetCMXHideStatus(abilityId)
     return ""
 end
 
---- Format message for hidden effects
---- @param icon string Formatted ability icon
---- @param abilityId integer Ability ID
---- @param name string Ability name
---- @param cmxStatus string CMX hide status
---- @param unitName string Formatted unit name
---- @return string Formatted message
-local function FormatHiddenEffectString(icon, abilityId, name, cmxStatus, unitName)
-    return string_format("%s|c00E200 [%d] %s: HIDDEN LUI%s: [Tag] %s|r",
-        icon, abilityId, name, cmxStatus, unitName)
-end
-
---- Get refresh status string for effects
---- @param abilityId integer Ability ID to check
+--- @param abilityId integer Unique ID of the ability
 --- @return string Refresh status string
 local function GetEffectRefreshStatus(abilityId)
     if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].refreshOnly then
-        return " |c00E200(Hidden)|r "
+        return " " .. MESSAGE_COLORS.SUCCESS .. "(Hidden)|r "
     end
     return ""
 end
 
---- Format effect change message based on change type
---- @param changeType integer Type of effect change
+-- Message Formatters
+--- @class EffectChangeFormatter
+local EffectChangeFormatter =
+{
+    [EFFECT_CHANGE_TYPES.GAINED] = function (duration)
+        return MESSAGE_COLORS.SUCCESS .. "Gained:|r", string_format(" [Dur] %d", duration)
+    end,
+    [EFFECT_CHANGE_TYPES.FADED] = function ()
+        return MESSAGE_COLORS.SUCCESS .. "Faded:|r", ""
+    end,
+    [EFFECT_CHANGE_TYPES.REFRESHED] = function (duration)
+        return MESSAGE_COLORS.SUCCESS .. "Refreshed:|r", string_format(" [Dur] %d", duration)
+    end,
+}
+
+--- @param changeType integer Effect change type (gained/faded/refreshed)
 --- @param refreshStatus string Refresh status string
---- @param icon string Formatted ability icon
---- @param abilityId integer Ability ID
---- @param name string Ability name
---- @param unitName string Formatted unit name
---- @param duration number Effect duration
---- @return string Formatted message
+--- @param icon string Icon texture path
+--- @param abilityId integer Unique ID of the ability
+--- @param name string Name of the ability
+--- @param unitName string Name of the unit
+--- @param duration integer Duration of the effect
+--- @return string Formatted debug string
 local function FormatEffectChangeString(changeType, refreshStatus, icon, abilityId, name, unitName, duration)
-    local prefix
-    local suffix = ""
-
-    if changeType == 1 then
-        prefix = "|c00E200Gained:|r"
-        suffix = string_format(" [Dur] %d", duration)
-    elseif changeType == 2 then
-        prefix = "|c00E200Faded:|r"
-    else
-        prefix = "|c00E200Refreshed:|r"
-        suffix = string_format(" [Dur] %d", duration)
-    end
-
+    local prefix, suffix = EffectChangeFormatter[changeType](duration)
     return string_format("%s %s%s [%d] %s: [Tag] %s%s", prefix, refreshStatus, icon, abilityId, name, unitName, suffix)
 end
 
---- Format author-specific combat debug message
---- @param icon string Formatted ability icon
---- @param abilityId integer Ability ID
---- @param name string Ability name
---- @param cmxStatus string CMX hide status
---- @param source string Source name
---- @param target string Target name
---- @param result string Formatted result
---- @return string Formatted message
+--- @param icon string Icon texture path
+--- @param abilityId integer Unique ID of the ability
+--- @param name string Name of the ability
+--- @param cmxStatus string CMX status string
+--- @param unitName string Name of the unit
+--- @return string Formatted debug string
+local function FormatHiddenEffectString(icon, abilityId, name, cmxStatus, unitName)
+    return string_format("%s%s [%d] %s: HIDDEN LUI%s: [Tag] %s|r", icon, MESSAGE_COLORS.SUCCESS, abilityId, name, cmxStatus, unitName)
+end
+
+--- @param icon string Icon texture path
+--- @param abilityId integer Unique ID of the ability
+--- @param name string Name of the ability
+--- @param cmxStatus string CMX status string
+--- @param source string Source unit name
+--- @param target string Target unit name
+--- @param result string Debug result string
+--- @return string Formatted debug string
 local function FormatAuthorCombatString(icon, abilityId, name, cmxStatus, source, target, result)
-    return string_format("%s[%d] %s: HIDDEN LUI%s: [S] %s --> [T] %s [R] %s",
-        icon, abilityId, name, cmxStatus, source, target, result)
+    return string_format("%s[%d] %s: HIDDEN LUI%s: [S] %s --> [T] %s [R] %s", icon, abilityId, name, cmxStatus, source, target, result)
+end
+
+-- Event Handlers
+--- @param abilityId integer Unique ID of the ability
+--- @return boolean True if the ability should be skipped, false otherwise
+local function ShouldSkipAbility(abilityId)
+    return LUIE.Data.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter
+end
+
+--- @param abilityId integer Unique ID of the ability
+--- @return table<string, string> Ability information with icon and name
+local function FormatAbilityInfo(abilityId)
+    return
+    {
+        icon = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16),
+        name = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+    }
 end
 
 --- Send message to all chat windows
@@ -157,6 +186,7 @@ local function SendToChatWindows(message)
         end
     end
 end
+
 
 --- Handles debug output for combat events, displaying detailed information about ability usage
 --- @param eventCode integer Event code (unused)
@@ -179,30 +209,17 @@ end
 --- @param overrideRank integer? Rank override for the ability
 --- @param casterUnitTag string? Unit tag of the caster
 function SpellCastBuffs.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overrideRank, casterUnitTag)
-    -- Skip if ability is filtered
-    if LUIE.Data.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
-        return
-    end
+    if ShouldSkipAbility(abilityId) then return end
 
-    -- Format ability information
-    local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
-    local ability = zo_strformat("<<C:1>>", nameFormatted)
-
-    -- Format source and target names
-    local source = FormatUnitName(zo_strformat("<<C:1>>", sourceName))
-    local target = FormatUnitName(zo_strformat("<<C:1>>", targetName))
-
-    -- Get ability timing information
+    local ability = FormatAbilityInfo(abilityId)
+    local source = FormatUnitName(sourceName)
+    local target = FormatUnitName(targetName)
     local duration = GetAbilityDuration(abilityId, overrideRank, casterUnitTag) or 0
     local timingInfo = GetAbilityTimingString(abilityId, overrideRank, casterUnitTag)
 
-    -- Build and output the debug message
-    local finalString = string_format("%s [%d] %s: [S] %s --> [T] %s [D] %d%s [R] %s",
-        iconFormatted, abilityId, ability, source, target, duration, timingInfo,
-        LUIE.Data.DebugResults[result])
+    local message = string_format("%s [%d] %s: [S] %s --> [T] %s [D] %d%s [R] %s", ability.icon, abilityId, ability.name, source, target, duration, timingInfo, LUIE.Data.DebugResults[result])
 
-    printtochat(MillisecondTimestampDebug(finalString))
+    CHAT_ROUTER:AddSystemMessage(FormatDebugMessage(message))
 end
 
 --- Handles debug output for buff/debuff effect changes
@@ -224,33 +241,20 @@ end
 --- @param abilityId integer Unique ID of the ability
 --- @param castByPlayer CombatUnitType Source type of the effect
 function SpellCastBuffs.EventEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    -- Skip if ability is filtered
-    if LUIE.Data.DebugAuras[abilityId] and SpellCastBuffs.SV.ShowDebugFilter then
-        return
-    end
+    if ShouldSkipAbility(abilityId) then return end
 
-    -- Format ability information
-    local iconFormatted = zo_iconFormat(GetAbilityIcon(abilityId), 16, 16)
-    local nameFormatted = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
-
-    -- Format unit name and check CMX hiding
+    local ability = FormatAbilityInfo(abilityId)
     local formattedUnitName = FormatEffectUnitName(unitName, unitTag)
-    local cmxHideStatus = GetCMXHideStatus(abilityId)
 
-    -- Handle hidden effects
     if Effects.EffectOverride[abilityId] and Effects.EffectOverride[abilityId].hide then
-        local hiddenString = FormatHiddenEffectString(iconFormatted, abilityId, nameFormatted, cmxHideStatus, formattedUnitName)
-        CHAT_ROUTER:AddSystemMessage(MillisecondTimestampDebug(hiddenString))
+        local message = FormatHiddenEffectString(ability.icon, abilityId, ability.name, GetCMXHideStatus(abilityId), formattedUnitName)
+        CHAT_ROUTER:AddSystemMessage(FormatDebugMessage(message))
         return
     end
 
-    -- Calculate effect duration and get refresh status
     local duration = (endTime - beginTime) * 1000
-    local refreshStatus = GetEffectRefreshStatus(abilityId)
-
-    -- Build and output the effect message based on change type
-    local finalString = FormatEffectChangeString(changeType, refreshStatus, iconFormatted, abilityId, nameFormatted, formattedUnitName, duration)
-    printtochat(MillisecondTimestampDebug(finalString))
+    local message = FormatEffectChangeString(changeType, GetEffectRefreshStatus(abilityId), ability.icon, abilityId, ability.name, formattedUnitName, duration)
+    CHAT_ROUTER:AddSystemMessage(FormatDebugMessage(message))
 end
 
 --- Author-specific debug handler for combat events. Only processes hidden abilities.
@@ -292,10 +296,9 @@ function SpellCastBuffs.AuthorCombatDebug(eventCode, result, isError, abilityNam
         cmxStatus,
         source,
         target,
-        LUIE.Data.DebugResults[result]
-    )
+        LUIE.Data.DebugResults[result])
 
-    SendToChatWindows(MillisecondTimestampDebug(finalString))
+    SendToChatWindows(FormatDebugMessage(finalString))
 end
 
 --- Author-specific debug handler for effect changes. Only processes hidden effects.
@@ -338,75 +341,70 @@ function SpellCastBuffs.AuthorEffectDebug(eventCode, changeType, effectSlot, eff
         formattedUnitName
     )
 
-    SendToChatWindows(MillisecondTimestampDebug(finalString))
+    SendToChatWindows(FormatDebugMessage(finalString))
 end
 
+-- Slash Command Implementations
 function SpellCastBuffs.TempSlashFilter()
-    local filter = LUIE.SpellCastBuffs.SV.ShowDebugFilter
-
-    if filter == true then
-        LUIE.SpellCastBuffs.SV.ShowDebugFilter = false
-        d("LUIE --- Ability Debug Filter Disabled ---")
-    else
-        LUIE.SpellCastBuffs.SV.ShowDebugFilter = true
-        d("LUIE --- Ability Debug Filter Enabled ---")
-    end
+    SpellCastBuffs.SV.ShowDebugFilter = not SpellCastBuffs.SV.ShowDebugFilter
+    local status = SpellCastBuffs.SV.ShowDebugFilter and "Enabled" or "Disabled"
+    CHAT_ROUTER:AddSystemMessage(string_format("LUIE --- Ability Debug Filter %s ---", status))
 end
 
 function SpellCastBuffs.TempSlashGround()
-    local ground = LUIE.SpellCastBuffs.SV.GroundDamageAura
-
-    if ground == true then
-        LUIE.SpellCastBuffs.SV.GroundDamageAura = false
-        d("LUIE --- Ground Damage Auras Disabled ---")
-    else
-        LUIE.SpellCastBuffs.SV.GroundDamageAura = true
-        d("LUIE --- Ground Damage Auras Enabled ---")
-    end
-
+    SpellCastBuffs.SV.GroundDamageAura = not SpellCastBuffs.SV.GroundDamageAura
+    local status = SpellCastBuffs.SV.GroundDamageAura and "Enabled" or "Disabled"
+    CHAT_ROUTER:AddSystemMessage(string_format("LUIE --- Ground Damage Auras %s ---", status))
     LUIE.SpellCastBuffs.ReloadEffects("player")
 end
 
 function SpellCastBuffs.TempSlashZoneCheck()
-    printtochat("--------------------")
-    printtochat("ZONE & MAP INFO:")
-    printtochat("--------------------")
     local zoneid = GetZoneId(GetCurrentMapZoneIndex())
-    printtochat("Zone Id: " .. zoneid)
     local locName = GetPlayerLocationName()
-    printtochat("Location Name: " .. locName)
-    printtochat("--------------------")
     local mapid = GetCurrentMapId()
-    printtochat("Map Id: " .. mapid)
     local mapindex = GetCurrentMapIndex()
-    if mapindex then -- this value can return nil
-        printtochat("Map Index: " .. mapindex)
-    else
-        printtochat("Map Index: nil")
-    end
-    printtochat("--------------------")
     local name, mapType, mapContentType, zoneIndex, description = GetMapInfoById(mapid)
-    printtochat("Map Name: " .. name)
-    printtochat("Map Type: " .. mapType)
-    printtochat("Map Content Type: " .. mapContentType)
-    printtochat("Zone Index: " .. zoneIndex)
-    printtochat("Description: " .. description)
-    printtochat("--------------------")
-end
 
-function SpellCastBuffs.TempSlashCheckRemovedAbilities()
-    d("Removed AbilityIds:")
-    for k, v in pairs(LUIE.Data.DebugAuras) do
-        if not DoesAbilityExist(k) then
-            d(k)
+    local info =
+    {
+        { "--------------------" },
+        { "ZONE & MAP INFO:" },
+        { "--------------------" },
+        { "Zone Id:",            zoneid },
+        { "Location Name:",      locName },
+        { "--------------------" },
+        { "Map Id:",             mapid },
+        { "Map Index:",          mapindex or "nil" },
+        { "--------------------" },
+        { "Map Name:",           name },
+        { "Map Type:",           mapType },
+        { "Map Content Type:",   mapContentType },
+        { "Zone Index:",         zoneIndex },
+        { "Description:",        description },
+        { "--------------------" },
+    }
+
+    for _, v in ipairs(info) do
+        if #v == 1 then
+            CHAT_ROUTER:AddSystemMessage(v[1])
+        else
+            CHAT_ROUTER:AddSystemMessage(string_format("%s %s", v[1], v[2]))
         end
     end
 end
 
-local displayName = GetDisplayName()
-if displayName == "@ArtOfShred" or displayName == "@ArtOfShredPTS" or displayName == "@ArtOfShredLegacy" or displayName == "@HammerOfGlory" or displayName == "@dack_janiels" then
-    SLASH_COMMANDS["/filter"] = SpellCastBuffs.TempSlashFilter
-    SLASH_COMMANDS["/ground"] = SpellCastBuffs.TempSlashGround
-    SLASH_COMMANDS["/zonecheck"] = SpellCastBuffs.TempSlashZoneCheck
-    SLASH_COMMANDS["/abilitydump"] = SpellCastBuffs.TempSlashCheckRemovedAbilities
+function SpellCastBuffs.TempSlashCheckRemovedAbilities()
+    CHAT_ROUTER:AddSystemMessage("Removed AbilityIds:")
+    for abilityId in pairs(LUIE.Data.DebugAuras) do
+        if not DoesAbilityExist(abilityId) then
+            CHAT_ROUTER:AddSystemMessage(tostring(abilityId))
+        end
+    end
+end
+
+-- Initialize debug commands for authorized users
+if AUTHORIZED_USERS[GetDisplayName()] then
+    for command, handler in pairs(DEBUG_COMMANDS) do
+        SLASH_COMMANDS[command] = handler
+    end
 end

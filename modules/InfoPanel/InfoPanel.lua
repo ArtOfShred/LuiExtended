@@ -6,8 +6,11 @@
 --- @class (partial) LuiExtended
 local LUIE = LUIE
 -- InfoPanel namespace
-LUIE.InfoPanel = {}
-local InfoPanel = LUIE.InfoPanel
+--- @class (partial) LUIE.InfoPanel
+local InfoPanel = {}
+InfoPanel.__index = InfoPanel
+--- @class (partial) LUIE.InfoPanel
+LUIE.InfoPanel = InfoPanel
 
 local UI = LUIE.UI
 

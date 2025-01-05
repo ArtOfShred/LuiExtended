@@ -7,7 +7,7 @@
 local LUIE = LUIE
 local CampaignNames = {}
 
-
+--- @class (partial) LUIE.SlashCommands
 local SlashCommands = LUIE.SlashCommands
 
 local printToChat = LUIE.PrintToChat

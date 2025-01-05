@@ -5,6 +5,7 @@
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
+--- @class (partial) LUIE.CombatText
 local CombatText = LUIE.CombatText
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
@@ -139,7 +140,7 @@ function CombatText.CreateSettings()
         donation = LUIE.donation,
         slashCommand = "/luict",
         registerForRefresh = true,
-        registerForDefaults = false,
+        registerForDefaults = true,
     }
 
     local optionsDataCombatText = {}

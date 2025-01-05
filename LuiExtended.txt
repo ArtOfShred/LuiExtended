@@ -4,13 +4,10 @@
 ## APIVersion: 101044 101045
 ## AddOnVersion: 6793
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buff & Debuff Tracking, Chat Announcements and Slash Commands.
-## DependsOn: LibAddonMenu-2.0>=37 LibMediaProvider-1.0>=32
+## DependsOn: LuiData>=6793 LibAddonMenu-2.0>=37 LibMediaProvider-1.0>=32
 ## OptionalDependsOn: LibChatMessage>=113 pChat>=10005090 CombatMetrics>=10518
 ## OptionalDependsOn: LibDebugLogger>=263 DolgubonsLazyWritCreator LibLazyCrafting>=4012 LootLog>=406050
 ## SavedVariables: LUIESV
-
-#Load addon constant values
-data/Globals.lua
 
 #Load addon language strings
 i18n/en.lua
@@ -40,90 +37,6 @@ frontend/CombatText.xml
 frontend/CrowdControlTracker.xml
 
 src/Unlock.lua
-
-data/_data_namespace.lua
-data/AbilityTables.lua
-data/Tooltips.lua
-data/UnitNamesTable.lua
-data/ZoneNamesTable.lua
-# Effects
-data/Effects/KeepUpgradeOverride.lua
-data/Effects/KeepUpgradeTooltip.lua
-data/Effects/MapDataOverride.lua
-data/Effects/MergeId.lua
-data/Effects/MergeName.lua
-data/Effects/Misc.lua
-data/Effects/Override.lua
-data/Effects/OverrideByName.lua
-data/Effects/PullDuration.lua
-data/Effects/SourceOverride.lua
-data/Effects/SynergyNameOverride.lua
-data/Effects/TooltipUseDefault.lua
-data/Effects/ZoneBuffs.lua
-data/Effects/ZoneDataOverride.lua
-data/Effects/AddNameAura.lua
-data/Effects/AddNameOnBossEngaged.lua
-data/Effects/AddNameOnEvent.lua
-data/Effects/AddStackOnEvent.lua
-data/Effects/ArtificialEffectOverride.lua
-data/Effects/AssistantIcons.lua
-# BarHighlight
-data/Effects/BarHighlight/AddNoDurationBarHighlight.lua
-data/Effects/BarHighlight/BarHighlightCheckOnFade.lua
-data/Effects/BarHighlight/BarHighlightDestroFix.lua
-data/Effects/BarHighlight/BarHighlightExtraId.lua
-data/Effects/BarHighlight/BarHighlightOverride.lua
-data/Effects/BarHighlight/BarHighlightStack.lua
-data/Effects/BarHighlight/BarIdOverride.lua
-data/Effects/BarHighlight/HasAbilityProc.lua
-data/Effects/BarHighlight/IsAbilityActiveGlow.lua
-data/Effects/BarHighlight/IsAbilityActiveHighlight.lua
-data/Effects/BarHighlight/IsBloodFrenzy.lua
-data/Effects/BarHighlight/IsGrimFocus.lua
-data/Effects/BarHighlight/MajorMinor.lua
-data/Effects/BarHighlight/RemoveAbilityActiveHighlight.lua
-data/Effects/CreateSkillAura.lua
-data/Effects/DisguiseIcons.lua
-# Fake
-data/Effects/Fake/FakeAddGroundDamageAura.lua
-data/Effects/Fake/FakeEffectGroundDisplay.lua
-data/Effects/Fake/FakeExternalBuffs.lua
-data/Effects/Fake/FakeExternalDebuffs.lua
-data/Effects/Fake/FakePlayerBuffs.lua
-data/Effects/Fake/FakePlayerDebuffs.lua
-data/Effects/Fake/FakePlayerOfflineAura.lua
-data/Effects/Fake/FakeStagger.lua
-data/Effects/HideSCT.lua
-data/Effects/KeepUpgradeAlliance.lua
-data/Effects/KeepUpgradeNameFix.lua
-data/CastBarTable.lua
-data/CollectibleTables.lua
-data/CombatTextConstants.lua
-# Alert Table
-data/AlertTable/AlertTable.lua
-data/AlertTable/BossNameConvert.lua
-data/AlertTable/MapOverride.lua
-data/AlertTable/ZoneOverride.lua
-data/AlertTable/ZoneTable.lua
-# CrowdControl
-data/CrowdControl/aoeNPCBoss.lua
-data/CrowdControl/aoeNPCElite.lua
-data/CrowdControl/aoeNPCNormal.lua
-data/CrowdControl/aoePlayerNormal.lua
-data/CrowdControl/aoePlayerSet.lua
-data/CrowdControl/aoePlayerUltimate.lua
-data/CrowdControl/aoeTraps.lua
-data/CrowdControl/IgnoreList.lua
-data/CrowdControl/LavaAlerts.lua
-data/CrowdControl/ReversedLogic.lua
-data/CrowdControl/SpecialCC.lua
-data/Quests.lua
-data/PetNames.lua
-data/AbilityBlacklistPresets.lua
-data/CombatTextBlacklistPresets.lua
-## Debug
-data/Debug/DebugAuras.lua
-data/Debug/DebugResults.lua
 
 modules/ChatAnnouncements/ChatAnnouncements.lua
 modules/ChatAnnouncements/ChatAnnouncementsExperience.lua

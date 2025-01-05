@@ -47,7 +47,7 @@ function ChatAnnouncements.CreateSettings()
         donation = LUIE.donation,
         slashCommand = "/luica",
         registerForRefresh = true,
-        registerForDefaults = false,
+        registerForDefaults = true,
     }
 
     local optionsDataChatAnnouncements = {}

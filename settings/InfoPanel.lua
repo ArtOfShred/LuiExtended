@@ -5,6 +5,7 @@
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
+--- @class (partial) LUIE.InfoPanel
 local InfoPanel = LUIE.InfoPanel
 
 local zo_strformat = zo_strformat
@@ -33,7 +34,7 @@ function InfoPanel.CreateSettings()
         donation = LUIE.donation,
         slashCommand = "/luiip",
         registerForRefresh = true,
-        registerForDefaults = false,
+        registerForDefaults = true,
     }
 
     local optionsDataInfoPanel = {}

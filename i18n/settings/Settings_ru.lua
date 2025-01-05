@@ -18,8 +18,8 @@ local strings =
     LUIE_STRING_LAM_RELOADUI_WARNING = "Потребуется перезагрузка UI.",
     LUIE_STRING_LAM_RELOADUI_SLASH_WARNING = "При отключении команды чата вам нужно будет перезагрузить интерфейс.",
     LUIE_STRING_LAM_RESETPOSITION = "Сбросить положение",
-    -- LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT =                   "Alert Text Alignment",
-    -- LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT_TP =                "Set the Alignment for Alert Text (normally displayed anchored to the right in the top right corner of the screen).",
+    -- LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT = "Выравнивание текста оповещений",
+    -- LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT_TP = "Устанавливает выравнивание для текста оповещений (обычно отображается в правом верхнем углу экрана).",
     LUIE_STRING_LAM_ALERT_HIDE_ALL = "Hide Alerts",
     LUIE_STRING_LAM_ALERT_HIDE_ALL_TP = "Hide Alerts that normally appear in the top right corner of the screen.",
     LUIE_STRING_LAM_HIDE_EXPERIENCE_BAR = "Скрыть появление полоски Опыта/Навыков",
@@ -2178,5 +2178,5 @@ local strings =
 
 for stringId, stringValue in pairs(strings) do
     ZO_CreateStringId(stringId, stringValue)
-    SafeAddVersion(stringId, 1)
+    SafeAddVersion(stringId, 2)
 end

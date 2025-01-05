@@ -6,8 +6,11 @@
 --- @class (partial) LuiExtended
 local LUIE = LUIE
 -- SpellCastBuffs namespace
-LUIE.SpellCastBuffs = {}
-local SpellCastBuffs = LUIE.SpellCastBuffs
+---@class (partial) LUIE.SpellCastBuffs
+local SpellCastBuffs = {}
+SpellCastBuffs.__index = SpellCastBuffs
+---@class (partial) LUIE.SpellCastBuffs
+LUIE.SpellCastBuffs = SpellCastBuffs
 
 local UI = LUIE.UI
 --- @type Data
@@ -727,18 +730,41 @@ function SpellCastBuffs.RegisterWerewolfEvents()
     end
 end
 
+local AUTHORIZED_USERS =
+{
+    ["@ArtOfShred"] = true,
+    ["@ArtOfShredPTS"] = true,
+    ["@ArtOfShredLegacy"] = true,
+    ["@HammerOfGlory"] = true,
+    ["@Dack_janiels"] = true,
+}
+SpellCastBuffs.AUTHORIZED_USERS = AUTHORIZED_USERS
+
 function SpellCastBuffs.RegisterDebugEvents()
+    -- Unregister existing events
     eventManager:UnregisterForEvent(moduleName .. "DebugCombat", EVENT_COMBAT_EVENT)
     eventManager:UnregisterForEvent(moduleName .. "DebugEffect", EVENT_EFFECT_CHANGED)
+    -- eventManager:UnregisterForEvent(moduleName .. "DebugCast", EVENT_BEGIN_CAST_ACTION)
+    -- eventManager:UnregisterForEvent(moduleName .. "DebugCastEnd", EVENT_END_CAST_ACTION)
+    -- eventManager:UnregisterForEvent(moduleName .. "DebugUnit", EVENT_UNIT_CREATED)
+    -- eventManager:UnregisterForEvent(moduleName .. "DebugUnitChanged", EVENT_UNIT_CHANGED)
+    -- eventManager:UnregisterForEvent(moduleName .. "DebugUnitRemoved", EVENT_UNIT_DESTROYED)
+
+    -- Register standard debug events if enabled
     if SpellCastBuffs.SV.ShowDebugCombat then
         eventManager:RegisterForEvent(moduleName .. "DebugCombat", EVENT_COMBAT_EVENT, SpellCastBuffs.EventCombatDebug)
+        -- eventManager:RegisterForEvent(moduleName .. "DebugCast", EVENT_BEGIN_CAST_ACTION, SpellCastBuffs.EventCastStart)
+        -- eventManager:RegisterForEvent(moduleName .. "DebugCastEnd", EVENT_END_CAST_ACTION, SpellCastBuffs.EventCastEnd)
+        -- eventManager:RegisterForEvent(moduleName .. "DebugUnit", EVENT_UNIT_CREATED, SpellCastBuffs.EventUnitAdded)
+        -- eventManager:RegisterForEvent(moduleName .. "DebugUnitChanged", EVENT_UNIT_CHANGED, SpellCastBuffs.EventUnitChanged)
+        -- eventManager:RegisterForEvent(moduleName .. "DebugUnitRemoved", EVENT_UNIT_DESTROYED, SpellCastBuffs.EventUnitRemoved)
     end
     if SpellCastBuffs.SV.ShowDebugEffect then
         eventManager:RegisterForEvent(moduleName .. "DebugEffect", EVENT_EFFECT_CHANGED, SpellCastBuffs.EventEffectDebug)
     end
 
-    -- Debugs only enabled for my accounts
-    if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" then
+    -- Author-specific debug events
+    if AUTHORIZED_USERS[LUIE.PlayerDisplayName] then
         eventManager:RegisterForEvent(moduleName .. "AuthorDebugCombat", EVENT_COMBAT_EVENT, SpellCastBuffs.AuthorCombatDebug)
         eventManager:RegisterForEvent(moduleName .. "AuthorDebugEffect", EVENT_EFFECT_CHANGED, SpellCastBuffs.AuthorEffectDebug)
     end

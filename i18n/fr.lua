@@ -11,6 +11,7 @@ local strings =
     -- LuiExtended
     LUIE_STRING_ERROR_FONT = "LUI Extended: Un problème est survenu lors de la sélection de la police. Retour à la configuration par défaut.",
     LUIE_STRING_ERROR_SOUND = "LUI Extended: Un problème est survenu lors de la sélection du son. Retour à la configuration par défaut.",
+    LUIE_STRING_LAM_PROFILE_COPY_ERROR = "LUI Extended: Un problème est survenu. Le profil pour ce personnage n'a pas été trouvé.",
 
     -- Shared
     LUIE_STRING_CUSTOM_LIST_AURA_BLACKLIST = "Blacklist des auras",
@@ -610,5 +611,5 @@ local strings =
 
 for stringId, stringValue in pairs(strings) do
     ZO_CreateStringId(stringId, stringValue)
-    SafeAddVersion(stringId, 1)
+    SafeAddVersion(stringId, 2)
 end

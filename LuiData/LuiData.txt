@@ -1,0 +1,94 @@
+## Title: LuiData
+## Author: ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder
+## Version: 6.7.9.3
+## APIVersion: 101044 101045
+## AddOnVersion: 6793
+## Description: Provides data for LuiExtended.
+## IsLibrary: 1
+
+#Load addon constant values
+Globals.lua
+
+_data_namespace.lua
+AbilityTables.lua
+Tooltips.lua
+UnitNamesTable.lua
+ZoneNamesTable.lua
+# Effects
+Effects/KeepUpgradeOverride.lua
+Effects/KeepUpgradeTooltip.lua
+Effects/MapDataOverride.lua
+Effects/MergeId.lua
+Effects/MergeName.lua
+Effects/Misc.lua
+Effects/Override.lua
+Effects/OverrideByName.lua
+Effects/PullDuration.lua
+Effects/SourceOverride.lua
+Effects/SynergyNameOverride.lua
+Effects/TooltipUseDefault.lua
+Effects/ZoneBuffs.lua
+Effects/ZoneDataOverride.lua
+Effects/AddNameAura.lua
+Effects/AddNameOnBossEngaged.lua
+Effects/AddNameOnEvent.lua
+Effects/AddStackOnEvent.lua
+Effects/ArtificialEffectOverride.lua
+Effects/AssistantIcons.lua
+# BarHighlight
+Effects/BarHighlight/AddNoDurationBarHighlight.lua
+Effects/BarHighlight/BarHighlightCheckOnFade.lua
+Effects/BarHighlight/BarHighlightDestroFix.lua
+Effects/BarHighlight/BarHighlightExtraId.lua
+Effects/BarHighlight/BarHighlightOverride.lua
+Effects/BarHighlight/BarHighlightStack.lua
+Effects/BarHighlight/BarIdOverride.lua
+Effects/BarHighlight/HasAbilityProc.lua
+Effects/BarHighlight/IsAbilityActiveGlow.lua
+Effects/BarHighlight/IsAbilityActiveHighlight.lua
+Effects/BarHighlight/IsBloodFrenzy.lua
+Effects/BarHighlight/IsGrimFocus.lua
+Effects/BarHighlight/MajorMinor.lua
+Effects/BarHighlight/RemoveAbilityActiveHighlight.lua
+Effects/CreateSkillAura.lua
+Effects/DisguiseIcons.lua
+# Fake
+Effects/Fake/FakeAddGroundDamageAura.lua
+Effects/Fake/FakeEffectGroundDisplay.lua
+Effects/Fake/FakeExternalBuffs.lua
+Effects/Fake/FakeExternalDebuffs.lua
+Effects/Fake/FakePlayerBuffs.lua
+Effects/Fake/FakePlayerDebuffs.lua
+Effects/Fake/FakePlayerOfflineAura.lua
+Effects/Fake/FakeStagger.lua
+Effects/HideSCT.lua
+Effects/KeepUpgradeAlliance.lua
+Effects/KeepUpgradeNameFix.lua
+CastBarTable.lua
+CollectibleTables.lua
+CombatTextConstants.lua
+# Alert Table
+AlertTable/AlertTable.lua
+AlertTable/BossNameConvert.lua
+AlertTable/MapOverride.lua
+AlertTable/ZoneOverride.lua
+AlertTable/ZoneTable.lua
+# CrowdControl
+CrowdControl/aoeNPCBoss.lua
+CrowdControl/aoeNPCElite.lua
+CrowdControl/aoeNPCNormal.lua
+CrowdControl/aoePlayerNormal.lua
+CrowdControl/aoePlayerSet.lua
+CrowdControl/aoePlayerUltimate.lua
+CrowdControl/aoeTraps.lua
+CrowdControl/IgnoreList.lua
+CrowdControl/LavaAlerts.lua
+CrowdControl/ReversedLogic.lua
+CrowdControl/SpecialCC.lua
+Quests.lua
+PetNames.lua
+AbilityBlacklistPresets.lua
+CombatTextBlacklistPresets.lua
+## Debug
+Debug/DebugAuras.lua
+Debug/DebugResults.lua

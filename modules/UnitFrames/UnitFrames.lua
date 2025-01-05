@@ -9,6 +9,7 @@ local LUIE = LUIE
 -- Unit Frames namespace
 --- @class (partial) UnitFrames
 local UnitFrames = {}
+UnitFrames.__index = UnitFrames
 --- @type UI
 local UI = LUIE.UI
 
@@ -1644,26 +1645,42 @@ local defaultPos = {}
 function UnitFrames.CustomFramesApplyBarAlignment()
     if UnitFrames.CustomFrames["player"] then
         local hpBar = UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_HEALTH]
-        if hpBar then
-            hpBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignPlayerHealth - 1)
-            hpBar.trauma:SetBarAlignment(UnitFrames.SV.BarAlignPlayerHealth - 1)
+        if hpBar and hpBar.bar then
+            -- Ensure we have a valid alignment value, default to 1 if nil
+            local healthAlignment = UnitFrames.SV.BarAlignPlayerHealth or 1
+            hpBar.bar:SetBarAlignment(healthAlignment - 1)
+            if hpBar.trauma then
+                hpBar.trauma:SetBarAlignment(healthAlignment - 1)
+            end
         end
+        
         local magBar = UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_MAGICKA]
-        if magBar then
-            magBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignPlayerMagicka - 1)
+        if magBar and magBar.bar then
+            local magickaAlignment = UnitFrames.SV.BarAlignPlayerMagicka or 1
+            magBar.bar:SetBarAlignment(magickaAlignment - 1)
         end
+        
         local stamBar = UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_STAMINA]
-        if stamBar then
-            stamBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignPlayerStamina - 1)
+        if stamBar and stamBar.bar then
+            local staminaAlignment = UnitFrames.SV.BarAlignPlayerStamina or 1
+            stamBar.bar:SetBarAlignment(staminaAlignment - 1)
         end
     end
+    
     if UnitFrames.CustomFrames["reticleover"] then
         local hpBar = UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH]
-        if hpBar then
-            hpBar.bar:SetBarAlignment(UnitFrames.SV.BarAlignTarget - 1)
-            hpBar.trauma:SetBarAlignment(UnitFrames.SV.BarAlignTarget - 1)
-            hpBar.invulnerable:SetBarAlignment(UnitFrames.SV.BarAlignTarget - 1)
-            hpBar.invulnerableInlay:SetBarAlignment(UnitFrames.SV.BarAlignTarget - 1)
+        if hpBar and hpBar.bar then
+            local targetAlignment = UnitFrames.SV.BarAlignTarget or 1
+            hpBar.bar:SetBarAlignment(targetAlignment - 1)
+            if hpBar.trauma then
+                hpBar.trauma:SetBarAlignment(targetAlignment - 1)
+            end
+            if hpBar.invulnerable then
+                hpBar.invulnerable:SetBarAlignment(targetAlignment - 1)
+            end
+            if hpBar.invulnerableInlay then
+                hpBar.invulnerableInlay:SetBarAlignment(targetAlignment - 1)
+            end
         end
     end
 end

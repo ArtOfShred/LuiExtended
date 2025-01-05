@@ -6,7 +6,7 @@
 --- @class (partial) LuiExtended
 local LUIE = LUIE
 -- TODO: Update id's here with fake ids probably, to set different icons etc for Prominent add/remove
-
+---@class (partial) LUIE.SpellCastBuffs
 local SpellCastBuffs = LUIE.SpellCastBuffs
 
 local Effects = LUIE.Data.Effects

@@ -172,7 +172,7 @@ function UnitFrames.CreateSettings()
         donation = LUIE.donation,
         slashCommand = "/luiuf",
         registerForRefresh = true,
-        registerForDefaults = false,
+        registerForDefaults = true,
     }
 
     local optionsDataUnitFrames = {}

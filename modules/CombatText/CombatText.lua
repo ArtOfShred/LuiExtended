@@ -6,8 +6,11 @@
 --- @class (partial) LuiExtended
 local LUIE = LUIE
 -- CombatText namespace
-LUIE.CombatText = {}
-local CombatText = LUIE.CombatText
+--- @class (partial) LUIE.CombatText
+local CombatText = {}
+CombatText.__index = CombatText
+--- @class (partial) LUIE.CombatText
+LUIE.CombatText = CombatText
 
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 

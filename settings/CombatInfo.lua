@@ -142,7 +142,7 @@ function CombatInfo.CreateSettings()
         donation = LUIE.donation,
         slashCommand = "/luici",
         registerForRefresh = true,
-        registerForDefaults = false,
+        registerForDefaults = true,
     }
 
     local optionsDataCombatInfo = {}

@@ -5,6 +5,7 @@
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
+---@class (partial) LUIE.SpellCastBuffs
 local SpellCastBuffs = LUIE.SpellCastBuffs
 local BlacklistPresets = LUIE.Data.AbilityBlacklistPresets
 
@@ -178,7 +179,7 @@ function SpellCastBuffs.CreateSettings()
         donation = LUIE.donation,
         slashCommand = "/luiscb",
         registerForRefresh = true,
-        registerForDefaults = false,
+        registerForDefaults = true,
     }
 
     local optionsDataBuffsDebuffs = {}

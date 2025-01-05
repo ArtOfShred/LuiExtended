@@ -18,8 +18,8 @@ local strings =
     LUIE_STRING_LAM_RELOADUI_WARNING = "Cela nécessite un rechargement de l'interface.",
     LUIE_STRING_LAM_RELOADUI_SLASH_WARNING = "La désactivation d'une commande 'slash' nécessite un rechargement de l'interface.",
     LUIE_STRING_LAM_RESETPOSITION = "Réinitialiser les positions des cadres de messages",
-    -- LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT =                   "Alert Text Alignment",
-    -- LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT_TP =                "Set the Alignment for Alert Text (normally displayed anchored to the right in the top right corner of the screen).",
+    -- LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT = "Alert Text Alignment",
+    -- LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT_TP = "Définir l'alignement des alertes (normalement affichées ancrées à droite en haut à droite de l'écran).",
     LUIE_STRING_LAM_ALERT_HIDE_ALL = "Cacher les alertes",
     LUIE_STRING_LAM_ALERT_HIDE_ALL_TP = "Cacher les alertes qui apparaissent normalement dans le coin en haut et à droite de l'écran.",
     LUIE_STRING_LAM_HIDE_EXPERIENCE_BAR = "Cacher la barre de progression de l'expérience et des compétences",
@@ -2178,5 +2178,5 @@ local strings =
 
 for stringId, stringValue in pairs(strings) do
     ZO_CreateStringId(stringId, stringValue)
-    SafeAddVersion(stringId, 1)
+    SafeAddVersion(stringId, 2)
 end

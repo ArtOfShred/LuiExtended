@@ -149,6 +149,7 @@ end
 --- Sets the delay for an animation step
 --- @param step Animation The animation step
 --- @param delay number The delay in milliseconds
+--- @return fun(step:Animation, delay:number):nil
 function CombatTextAnimation:SetStepDelay(step, delay)
     return self.timeline:SetAnimationOffset(step, delay)
 end
