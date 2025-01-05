@@ -92,7 +92,7 @@ function LUIE.CreateSettings()
             end
         end
         if not sourceCharacter or not targetCharacter then
-            d("LUIE - Unable to copy Character Profile Data.") -- TODO: localization
+            CHAT_ROUTER:AddSystemMessage(GetString(LUIE_STRING_LAM_PROFILE_COPY_ERROR))
             return
         else
             CopyTable(sourceCharacter, targetCharacter)
@@ -441,19 +441,19 @@ function LUIE.CreateSettings()
         width = "full",
     }
 
-    --[[
-    -- Alert Text Alignment
-    optionsData[#optionsData + 1] = {
-        type = "dropdown",
-        name = GetString(LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT),
-        tooltip = GetString(LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT_TP),
-        choices = alignmentOptions,
-        getFunc = function() return alignmentOptions[Settings.AlertFrameAlignment] end,
-        setFunc = function(value) Settings.AlertFrameAlignment = alignmentOptionsKeys[value] end,
-        width = "full",
-        default = Defaults.AlertFrameAlignment,
-    }
-    ]]
+    -- -- Alert Text Alignment
+    -- optionsData[#optionsData + 1] =
+    -- {
+    --     type = "dropdown",
+    --     name = GetString(LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT),
+    --     tooltip = GetString(LUIE_STRING_LAM_ALERT_TEXT_ALIGNMENT_TP),
+    --     choices = alignmentOptions,
+    --     getFunc = function () return alignmentOptions[Settings.AlertFrameAlignment] end,
+    --     setFunc = function (value) Settings.AlertFrameAlignment = alignmentOptionsKeys[value] end,
+    --     width = "full",
+    --     default = Defaults.AlertFrameAlignment,
+    -- }
+
     --
     -- Modules Header
     optionsData[#optionsData + 1] =
