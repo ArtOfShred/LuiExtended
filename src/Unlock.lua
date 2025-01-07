@@ -12,7 +12,8 @@ local UI = LUIE.UI
 local sceneManager = SCENE_MANAGER
 
 local firstRun = true
-local savedHiddenStates = {}
+local g_LUIE_Movers = {}
+local g_framesUnlocked = false
 
 --- Table of UI elements to unlock for moving.
 --- Constraints for some elements need to be adjusted - using values from Azurah.
@@ -42,28 +43,19 @@ local defaultPanels =
     [ZO_ReticleContainerInteract] = { GetString(LUIE_STRING_DEFAULT_FRAME_RETICLE_CONTAINER_INTERACT) }
 }
 
---- Our custom mover frames
-local g_LUIE_Movers = {}
-local g_framesUnlocked = false
-
 --- Replace the template function for certain elements to also use custom positions
 --- @param object table The object containing the template function to be replaced
 --- @param functionName string The name of the template function to be replaced
 --- @param frameName string The name of the frame associated with the template function
 local function ReplaceDefaultTemplate(object, functionName, frameName)
-    --- @type function
     local zos_function = object[functionName]
     object[functionName] = function (self)
-        local result = zos_function(self)    -- Get Original Function results
-        local frameData = LUIE.SV[frameName] -- Get LUIE Saved Frame Data
-        -- Apply positional setup
+        local result = zos_function(self)
+        local frameData = LUIE.SV[frameName]
         if frameData then
-            local x = frameData[1]
-            local y = frameData[2]
-            --- @type Control
             local frame = _G[frameName]
             frame:ClearAnchors()
-            frame:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, x, y)
+            frame:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, frameData[1], frameData[2])
         end
         return result
     end
@@ -73,16 +65,11 @@ end
 --- @param oldState number The previous state of the UI scene
 --- @param newState number The new state of the UI scene
 local function sceneChange(oldState, newState)
-    if g_framesUnlocked then
-        local isHidden = false
-        if newState == SCENE_SHOWN then
-            isHidden = true
-        elseif newState == SCENE_HIDDEN then
-            isHidden = false
-        end
-        for k, v in pairs(g_LUIE_Movers) do
-            v:SetHidden(isHidden)
-        end
+    if not g_framesUnlocked then return end
+
+    local isHidden = (newState == SCENE_SHOWN)
+    for _, v in pairs(g_LUIE_Movers) do
+        v:SetHidden(isHidden)
     end
 end
 

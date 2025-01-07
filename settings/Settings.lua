@@ -456,12 +456,12 @@ function LUIE.CreateSettings()
 
     --
     -- Modules Header
-    optionsData[#optionsData + 1] =
-    {
-        type = "header",
-        name = GetString(LUIE_STRING_LAM_MODULEHEADER),
-        width = "full",
-    }
+    -- optionsData[#optionsData + 1] =
+    -- {
+    --     type = "header",
+    --     name = GetString(LUIE_STRING_LAM_MODULEHEADER),
+    --     width = "full",
+    -- }
 
     -- -- Custom Icons Toggle
     -- optionsData[#optionsData + 1] =

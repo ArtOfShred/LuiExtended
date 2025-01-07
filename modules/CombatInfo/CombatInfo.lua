@@ -339,11 +339,11 @@ local g_actionBarActiveWeaponPair = GetActiveWeaponPairInfo() -- Toggled on when
 local g_backbarButtons = {}                                   -- Table to hold backbar buttons
 local g_activeWeaponSwapInProgress = false                    -- Toggled on when weapon swapping, TODO: maybe not needed
 local g_castbarWorldMapFix = false                            -- Fix for viewing the World Map changing the player coordinates for some reason
-
-local ACTION_BAR = _G["ZO_ActionBar1"]
-local BAR_INDEX_START = 3
-local BAR_INDEX_END = 8
-local BACKBAR_INDEX_END = 7 -- Separate index for backbar as long as we're not using an ultimate button.
+local ACTION_BAR_META = ZO_ActionBar1
+local ACTION_BAR = ACTION_BAR_META
+local BAR_INDEX_START = ACTION_BAR_FIRST_NORMAL_SLOT_INDEX + 1
+local BAR_INDEX_END = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
+local BACKBAR_INDEX_END = ACTION_BAR_ULTIMATE_SLOT_INDEX -- Separate index for backbar as long as we're not using an ultimate button.
 local BACKBAR_INDEX_OFFSET = 50
 
 -- Quickslot
@@ -637,51 +637,24 @@ end
 
 function CombatInfo.HookGCD()
     -- Hook to update GCD support
-    --- @diagnostic disable-next-line: duplicate-set-field
-    ActionButton.UpdateUsable = function (self)
-        local slotnum = self:GetSlot()
+    ZO_PreHook(ActionButton, "UpdateCooldown", function (self, options)
+        local slotNum = self:GetSlot()
         local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
-        local isGamepad = IsInGamepadPreferredMode()
-        local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum, hotbarCategory)
-        local isShowingCooldown = self.showingCooldown
-        local isKeyboardUltimateSlot = not isGamepad and self.slot.slotNum == ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
-        local usable = false
-        if not self.useFailure and not isShowingCooldown then
-            usable = true
-        elseif isKeyboardUltimateSlot and self.costFailureOnly and not isShowingCooldown then
-            usable = true
-            -- Fix to grey out potions
-        elseif IsSlotItemConsumable(slotnum, hotbarCategory) and duration <= 1000 and not self.useFailure then
-            usable = true
-        end
-
-        if usable ~= self.usable or isGamepad ~= self.isGamepad then
-            self.usable = usable
-            self.isGamepad = isGamepad
-        end
-        -- Have to move this out of conditional to fix desaturation from getting stuck on icons.
-        local useDesaturation = (isShowingCooldown and CombatInfo.SV.GlobalDesat)
-        ZO_ActionSlot_SetUnusable(self.icon, not usable, useDesaturation)
-    end
-
-    -- Hook to update GCD support
-    --- @diagnostic disable-next-line: duplicate-set-field
-    ActionButton.UpdateCooldown = function (self, options)
-        local slotnum = self:GetSlot()
-        local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
-        local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum, hotbarCategory)
+        local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotNum, hotbarCategory)
         local isInCooldown = duration > 0
-        local slotType = GetSlotType(slotnum, hotbarCategory)
+        local slotType = GetSlotType(slotNum, hotbarCategory)
         local showGlobalCooldownForCollectible = global and slotType == ACTION_TYPE_COLLECTIBLE and globalSlotType == ACTION_TYPE_COLLECTIBLE
         local showCooldown = isInCooldown and (CombatInfo.SV.GlobalShowGCD or not global or showGlobalCooldownForCollectible)
-        local updateChromaQuickslot = ((slotType ~= ACTION_TYPE_ABILITY) or (slotType ~= ACTION_TYPE_CRAFTED_ABILITY)) and ZO_RZCHROMA_EFFECTS
+        local updateChromaQuickslot = (slotType ~= ACTION_TYPE_ABILITY or slotType ~= ACTION_TYPE_CRAFTED_ABILITY) and ZO_RZCHROMA_EFFECTS
         local NO_LEADING_EDGE = false
+
         self.cooldown:SetHidden(not showCooldown)
 
         if showCooldown then
-            -- For items with a long CD we need to be sure not to hide the countdown radial timer, so if the duration is the 1 sec GCD, then we don't turn off the cooldown animation.
-            if not IsSlotItemConsumable(slotnum, hotbarCategory) or duration > 1000 or CombatInfo.SV.GlobalPotion then
+            -- Only show cooldown animation for non-consumables or if duration > 1sec or if potion cooldowns are enabled
+            if not IsSlotItemConsumable(slotNum, hotbarCategory) or duration > 1000 or CombatInfo.SV.GlobalPotion then
                 self.cooldown:StartCooldown(remain, duration, CooldownMethod[CombatInfo.SV.GlobalMethod], nil, NO_LEADING_EDGE)
+
                 if self.cooldownCompleteAnim.animation then
                     self.cooldownCompleteAnim.animation:GetTimeline():PlayInstantlyToStart()
                 end
@@ -696,36 +669,38 @@ function CombatInfo.HookGCD()
                     self.cooldown:SetHidden(false)
                 end
 
-                self.slot:SetHandler("OnUpdate", function ()
-                    self:RefreshCooldown()
-                end)
+                self.slot:SetHandler("OnUpdate", function () self:RefreshCooldown() end, "CooldownUpdate")
+
                 if updateChromaQuickslot then
                     ZO_RZCHROMA_EFFECTS:RemoveKeybindActionEffect("ACTION_BUTTON_9")
                 end
             end
         else
-            if CombatInfo.SV.GlobalFlash then
-                if self.showingCooldown then
-                    -- Stop flash from appearing on potion/ultimate if toggled off.
-                    if not IsSlotItemConsumable(slotnum, hotbarCategory) or duration > 1000 or CombatInfo.SV.GlobalPotion then
-                        self.cooldownCompleteAnim.animation = self.cooldownCompleteAnim.animation or CreateSimpleAnimation(ANIMATION_TEXTURE, self.cooldownCompleteAnim)
-                        local anim = self.cooldownCompleteAnim.animation
+            if CombatInfo.SV.GlobalFlash and self.showingCooldown then
+                -- Only show flash animation for non-consumables or if duration > 1sec or if potion cooldowns are enabled
+                if not IsSlotItemConsumable(slotNum, hotbarCategory) or duration > 1000 or CombatInfo.SV.GlobalPotion then
+                    if options ~= FORCE_SUPPRESS_COOLDOWN_SOUND then
+                        PlaySound(SOUNDS.ABILITY_READY)
+                    end
 
-                        self.cooldownCompleteAnim:SetHidden(false)
-                        self.cooldown:SetHidden(false)
+                    self.cooldownCompleteAnim.animation = self.cooldownCompleteAnim.animation or CreateSimpleAnimation(ANIMATION_TEXTURE, self.cooldownCompleteAnim)
+                    local anim = self.cooldownCompleteAnim.animation
 
-                        anim:SetImageData(16, 1)
-                        anim:SetFramerate(30)
-                        anim:GetTimeline():PlayFromStart()
+                    self.cooldownCompleteAnim:SetHidden(false)
+                    self.cooldown:SetHidden(false)
 
-                        if updateChromaQuickslot then
-                            ZO_RZCHROMA_EFFECTS:AddKeybindActionEffect("ACTION_BUTTON_9")
-                        end
+                    anim:SetImageData(16, 1)
+                    anim:SetFramerate(30)
+                    anim:GetTimeline():PlayFromStart()
+
+                    if updateChromaQuickslot then
+                        ZO_RZCHROMA_EFFECTS:AddKeybindActionEffect("ACTION_BUTTON_9")
                     end
                 end
             end
+
             self.icon.percentComplete = 1
-            self.slot:SetHandler("OnUpdate", nil)
+            self.slot:SetHandler("OnUpdate", nil, "CooldownUpdate")
             self.cooldown:ResetCooldown()
         end
 
@@ -744,17 +719,61 @@ function CombatInfo.HookGCD()
             self.icon:SetDesaturation(0)
         end
 
-        local textColor
-        if CombatInfo.SV.GlobalLabelColor then
-            textColor = showCooldown and INTERFACE_TEXT_COLOR_FAILED or INTERFACE_TEXT_COLOR_SELECTED
-        else
-            textColor = INTERFACE_TEXT_COLOR_SELECTED
-        end
+        local textColor = CombatInfo.SV.GlobalLabelColor and
+            (showCooldown and INTERFACE_TEXT_COLOR_FAILED or INTERFACE_TEXT_COLOR_SELECTED) or
+            INTERFACE_TEXT_COLOR_SELECTED
         self.buttonText:SetColor(GetInterfaceColor(INTERFACE_COLOR_TYPE_TEXT_COLORS, textColor))
 
         self.isGlobalCooldown = global
         self:UpdateUsable()
-    end
+        return true
+    end)
+
+    -- Hook to update GCD support
+    ZO_PreHook(ActionButton, "UpdateUsable", function (self)
+        local slotNum = self:GetSlot()
+        local hotbarCategory = self.slot.slotNum == 1 and HOTBAR_CATEGORY_QUICKSLOT_WHEEL or g_hotbarCategory
+        local isGamepad = IsInGamepadPreferredMode()
+        local isShowingCooldown = self.showingCooldown
+        local isKeyboardUltimateSlot = not isGamepad and ZO_ActionBar_IsUltimateSlot(slotNum, hotbarCategory)
+        local usable = false
+
+        -- Check basic usability conditions
+        if not self.useFailure and not isShowingCooldown then
+            usable = true
+        elseif isKeyboardUltimateSlot and self.costFailureOnly and not isShowingCooldown then
+            usable = true
+            -- Custom fix for potions
+        elseif IsSlotItemConsumable(slotNum, hotbarCategory) and not self.useFailure then
+            local remain, duration = GetSlotCooldownInfo(slotNum, hotbarCategory)
+            if duration <= 1000 then
+                usable = true
+            end
+        end
+
+        -- Check stack count for items
+        local slotType = GetSlotType(slotNum, hotbarCategory)
+        local stackEmpty = false
+        if slotType == ACTION_TYPE_ITEM then
+            local stackCount = GetSlotItemCount(slotNum, hotbarCategory)
+            if stackCount <= 0 then
+                stackEmpty = true
+                usable = false
+            end
+        end
+
+        -- Update usability state
+        if usable ~= self.usable or isGamepad ~= self.isGamepad then
+            self.usable = usable
+            self.isGamepad = isGamepad
+        end
+
+        -- Apply desaturation based on settings and state
+        local useDesaturation = (isShowingCooldown and CombatInfo.SV.GlobalDesat) or stackEmpty
+        ZO_ActionSlot_SetUnusable(self.icon, not usable, useDesaturation)
+
+        return true
+    end)
 end
 
 -- Helper function to get override ability duration.

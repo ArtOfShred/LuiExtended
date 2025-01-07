@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 --[[
     LuiExtended
     License: The MIT License (MIT)
@@ -1653,20 +1654,20 @@ function UnitFrames.CustomFramesApplyBarAlignment()
                 hpBar.trauma:SetBarAlignment(healthAlignment - 1)
             end
         end
-        
+
         local magBar = UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_MAGICKA]
         if magBar and magBar.bar then
             local magickaAlignment = UnitFrames.SV.BarAlignPlayerMagicka or 1
             magBar.bar:SetBarAlignment(magickaAlignment - 1)
         end
-        
+
         local stamBar = UnitFrames.CustomFrames["player"][COMBAT_MECHANIC_FLAGS_STAMINA]
         if stamBar and stamBar.bar then
             local staminaAlignment = UnitFrames.SV.BarAlignPlayerStamina or 1
             stamBar.bar:SetBarAlignment(staminaAlignment - 1)
         end
     end
-    
+
     if UnitFrames.CustomFrames["reticleover"] then
         local hpBar = UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH]
         if hpBar and hpBar.bar then
@@ -2835,8 +2836,7 @@ function UnitFrames.UpdateStaticControls(unitFrame)
     -- If unitFrame has unit title label control
     if unitFrame.title ~= nil then
         local title = GetUnitCaption(unitFrame.unitTag)
-        local option
-        local ava
+        local ava = ""
         if unitFrame.isPlayer then
             title = GetUnitTitle(unitFrame.unitTag)
             ava = GetAvARankName(GetUnitGender(unitFrame.unitTag), unitFrame.avaRankValue)
@@ -2943,97 +2943,184 @@ function UnitFrames.MenuUpdatePlayerFrameOptions(option)
     UnitFrames.CustomFramesApplyLayoutPlayer()
 end
 
--- Updates single attribute.
--- Usually called from OnPowerUpdate handler.
-function UnitFrames.UpdateAttribute(unitTag, powerType, attributeFrame, powerValue, powerEffectiveMax, isTraumaFlag, forceInit)
-    if attributeFrame == nil then
-        return
+--- Updates the invulnerable bar overlay if it exists
+--- @param attributeFrame table The frame containing the attribute UI elements
+--- @param params table Parameters containing all necessary values for invulnerable bar updates
+local function UpdateInvulnerableBar(attributeFrame, params)
+    if not attributeFrame.invulnerable then return end
+
+    local showInvulnerable = (params.isUnwaveringPower == 1 and params.powerValue > 0) or params.isGuard
+
+    if showInvulnerable then
+        -- Show invulnerable overlay
+        attributeFrame.invulnerable:SetMinMax(0, params.powerEffectiveMax)
+        attributeFrame.invulnerable:SetValue(params.powerValue)
+        attributeFrame.invulnerable:SetHidden(false)
+        attributeFrame.invulnerableInlay:SetMinMax(0, params.powerEffectiveMax)
+        attributeFrame.invulnerableInlay:SetValue(params.powerValue)
+        attributeFrame.invulnerableInlay:SetHidden(false)
+        attributeFrame.bar:SetHidden(true)
+    else
+        -- Hide invulnerable overlay
+        attributeFrame.invulnerable:SetHidden(true)
+        attributeFrame.invulnerableInlay:SetHidden(true)
+        attributeFrame.bar:SetHidden(false)
     end
+end
 
-    local pct = zo_floor(100 * powerValue / powerEffectiveMax)
+--- Formats the attribute text string with the given parameters
+--- @param format string The format string to use
+--- @param params table Parameters containing values for text formatting
+--- @return string formatted The formatted text string
+local function FormatAttributeText(format, params)
+    local str = zo_strgsub(format, "Percentage", tostring(params.percentValue))
+    str = zo_strgsub(str, "Max", AbbreviateNumber(params.powerEffectiveMax, UnitFrames.SV.ShortenNumbers, true))
+    str = zo_strgsub(str, "Current", AbbreviateNumber(params.powerValue, UnitFrames.SV.ShortenNumbers, true))
+    str = zo_strgsub(str, "+ Shield", params.shield and ("+ " .. AbbreviateNumber(params.shield, UnitFrames.SV.ShortenNumbers, true)) or "")
+    str = zo_strgsub(str, "- Trauma", params.trauma and ("- (" .. AbbreviateNumber(params.trauma, UnitFrames.SV.ShortenNumbers, true) .. ")") or "")
+    str = zo_strgsub(str, "Nothing", "")
+    return zo_strgsub(str, "  ", " ")
+end
 
-    -- Update Shield / Trauma values IF this is the health bar
-    local shield = (powerType == COMBAT_MECHANIC_FLAGS_HEALTH and g_savedHealth[unitTag][4] > 0) and g_savedHealth[unitTag][4] or nil
-    local trauma = (powerType == COMBAT_MECHANIC_FLAGS_HEALTH and g_savedHealth[unitTag][5] > 0) and g_savedHealth[unitTag][5] or nil
-    local isUnwaveringPower = (GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_UNWAVERING_POWER, STAT_MITIGATION, ATTRIBUTE_HEALTH, COMBAT_MECHANIC_FLAGS_HEALTH) or 0)
-    local isGuard = (UnitFrames.CustomFrames and UnitFrames.CustomFrames["reticleover"] and attributeFrame == UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] and IsUnitInvulnerableGuard("reticleover"))
-
-    -- Adjust health bar value to subtract the trauma bar value
-    local adjustedBarValue = powerValue
-    if powerType == COMBAT_MECHANIC_FLAGS_HEALTH and trauma then
-        adjustedBarValue = powerValue - trauma
-        if adjustedBarValue < 0 then
-            adjustedBarValue = 0
-        end
+--- Gets the appropriate color for a label based on unit status and health percentage
+--- @param attributeFrame table The frame containing the attribute UI elements
+--- @param params table Parameters containing values for color determination
+--- @return table color The color to use for the label
+local function GetLabelColor(attributeFrame, params)
+    if (params.isUnwaveringPower == 1 and params.powerValue > 0) or params.isGuard then
+        return attributeFrame.color or { 1, 1, 1 }
+    else
+        return (params.percentValue < (attributeFrame.threshold or g_defaultThreshold))
+            and { 1, 0.25, 0.38 }
+            or attributeFrame.color
+            or { 1, 1, 1 }
     end
+end
 
+--- Updates the text labels for an attribute frame
+--- @param attributeFrame table The frame containing the attribute UI elements
+--- @param params table Parameters containing all necessary values for label updates
+local function UpdateAttributeLabels(attributeFrame, params)
     for _, label in pairs({ "label", "labelOne", "labelTwo" }) do
-        if attributeFrame[label] ~= nil then
-            -- Format specific to selected label
+        if attributeFrame[label] then
+            -- Get label format and create display string
             local fmt = tostring(attributeFrame[label].fmt or UnitFrames.SV.Format)
-            local str = zo_strgsub(fmt, "Percentage", tostring(pct))
-            str = zo_strgsub(str, "Max", AbbreviateNumber(powerEffectiveMax, UnitFrames.SV.ShortenNumbers, true))
-            str = zo_strgsub(str, "Current", AbbreviateNumber(powerValue, UnitFrames.SV.ShortenNumbers, true))
-            str = zo_strgsub(str, "+ Shield", shield and ("+ " .. AbbreviateNumber(shield, UnitFrames.SV.ShortenNumbers, true)) or "")
-            str = zo_strgsub(str, "- Trauma", trauma and ("- (" .. AbbreviateNumber(trauma, UnitFrames.SV.ShortenNumbers, true) .. ")") or "")
-            str = zo_strgsub(str, "Nothing", "")
-            str = zo_strgsub(str, "  ", " ")
+            local displayText = FormatAttributeText(fmt, params)
 
-            -- Change text
-            if isGuard and label == "labelOne" then
-                attributeFrame[label]:SetText(" - Invulnerable - ")
-            else
-                attributeFrame[label]:SetText(str)
+            -- Handle special case for guard label
+            if params.isGuard and label == "labelOne" then
+                displayText = " - Invulnerable - "
             end
 
-            -- Don't update if dead
-            if (label == "labelOne" or label == "labelTwo") and UnitFrames.CustomFrames and UnitFrames.CustomFrames["reticleover"] and attributeFrame == UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] and powerValue == 0 then
+            attributeFrame[label]:SetText(displayText)
+
+            -- Handle visibility for dead reticleover target
+            if (label == "labelOne" or label == "labelTwo") and
+            UnitFrames.CustomFrames and
+            UnitFrames.CustomFrames["reticleover"] and
+            attributeFrame == UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] and
+            params.powerValue == 0 then
                 attributeFrame[label]:SetHidden(true)
             end
-            -- If the unit is Invulnerable or a Guard show don't show a low HP color
-            if (isUnwaveringPower == 1 and powerValue > 0) or isGuard then
-                attributeFrame[label]:SetColor(unpack(attributeFrame.color or { 1, 1, 1 }))
-            else
-                -- And color it RED if attribute value is lower than the threshold
-                attributeFrame[label]:SetColor(unpack((pct < (attributeFrame.threshold or g_defaultThreshold)) and { 1, 0.25, 0.38 } or attributeFrame.color or { 1, 1, 1 }))
-            end
+
+            -- Set label color based on unit status and health percentage
+            local color = GetLabelColor(attributeFrame, params)
+            attributeFrame[label]:SetColor(unpack(color))
+        end
+    end
+end
+
+--- Updates the status bars for an attribute frame
+--- @param attributeFrame table The frame containing the attribute UI elements
+--- @param params table Parameters containing all necessary values for bar updates
+local function UpdateAttributeBars(attributeFrame, params)
+    if not attributeFrame.bar then return end
+
+    -- Update main and trauma bars
+    if UnitFrames.SV.CustomSmoothBar and not params.isTraumaFlag then
+        -- Smooth transition for bar updates
+        ZO_StatusBar_SmoothTransition(attributeFrame.bar, params.adjustedBarValue, params.powerEffectiveMax, params.forceInit, nil, 250)
+        if params.trauma then
+            ZO_StatusBar_SmoothTransition(attributeFrame.trauma, params.powerValue, params.powerEffectiveMax, params.forceInit, nil, 250)
+        end
+    else
+        -- Instant bar updates
+        attributeFrame.bar:SetMinMax(0, params.powerEffectiveMax)
+        attributeFrame.bar:SetValue(params.adjustedBarValue)
+        if params.trauma then
+            attributeFrame.trauma:SetMinMax(0, params.powerEffectiveMax)
+            attributeFrame.trauma:SetValue(params.powerValue)
         end
     end
 
-    -- If attribute has also custom statusBar, update its value
-    if attributeFrame.bar ~= nil then
-        if UnitFrames.SV.CustomSmoothBar and not isTraumaFlag then
-            -- Make it twice faster then default UI ones: last argument .085
-            ZO_StatusBar_SmoothTransition(attributeFrame.bar, adjustedBarValue, powerEffectiveMax, forceInit, nil, 250)
-            if trauma then
-                ZO_StatusBar_SmoothTransition(attributeFrame.trauma, powerValue, powerEffectiveMax, forceInit, nil, 250)
-            end
-        else
-            attributeFrame.bar:SetMinMax(0, powerEffectiveMax)
-            attributeFrame.bar:SetValue(adjustedBarValue)
-            if trauma then
-                attributeFrame.trauma:SetMinMax(0, powerEffectiveMax)
-                attributeFrame.trauma:SetValue(powerValue)
-            end
-        end
+    -- Update invulnerable bar if it exists
+    UpdateInvulnerableBar(attributeFrame, params)
+end
 
-        -- If there is an invulnerable bar on this frame, then modify it if based on if Unwavering Power is active on the frame
-        if attributeFrame.invulnerable then
-            if (isUnwaveringPower == 1 and powerValue > 0) or isGuard then
-                attributeFrame.invulnerable:SetMinMax(0, powerEffectiveMax)
-                attributeFrame.invulnerable:SetValue(powerValue)
-                attributeFrame.invulnerable:SetHidden(false)
-                attributeFrame.invulnerableInlay:SetMinMax(0, powerEffectiveMax)
-                attributeFrame.invulnerableInlay:SetValue(powerValue)
-                attributeFrame.invulnerableInlay:SetHidden(false)
-                attributeFrame.bar:SetHidden(true)
-            else
-                attributeFrame.invulnerable:SetHidden(true)
-                attributeFrame.invulnerableInlay:SetHidden(true)
-                attributeFrame.bar:SetHidden(false)
-            end
+
+
+--- Updates attribute values and visuals for unit frames
+--- @param unitTag string The unit identifier (e.g. "player", "reticleover")
+--- @param powerType integer The type of power/attribute being updated (e.g. COMBAT_MECHANIC_FLAGS_HEALTH)
+--- @param attributeFrame table The frame containing the attribute UI elements
+--- @param powerValue integer Current value of the power/attribute
+--- @param powerEffectiveMax integer Maximum value of the power/attribute
+--- @param isTraumaFlag boolean Whether this update is triggered by trauma changes
+--- @param forceInit boolean Whether to force initialization of the status bar
+function UnitFrames.UpdateAttribute(unitTag, powerType, attributeFrame, powerValue, powerEffectiveMax, isTraumaFlag, forceInit)
+    if not attributeFrame then return end
+
+    -- Calculate base values
+    local percentValue = zo_floor(100 * powerValue / powerEffectiveMax)
+    local isHealthBar = (powerType == COMBAT_MECHANIC_FLAGS_HEALTH)
+
+    -- Initialize health-specific values
+    local params =
+    {
+        unitTag = unitTag,
+        powerType = powerType,
+        powerValue = powerValue,
+        powerEffectiveMax = powerEffectiveMax,
+        percentValue = percentValue,
+        shield = nil,
+        trauma = nil,
+        isGuard = false,
+        isUnwaveringPower = 0,
+        adjustedBarValue = powerValue,
+        isTraumaFlag = isTraumaFlag,
+        forceInit = forceInit,
+    }
+
+    -- Health-specific calculations
+    if isHealthBar then
+        -- Get shield and trauma values
+        params.shield = (g_savedHealth[unitTag][4] > 0) and g_savedHealth[unitTag][4] or nil
+        params.trauma = (g_savedHealth[unitTag][5] > 0) and g_savedHealth[unitTag][5] or nil
+
+        -- Check for unwavering power
+        params.isUnwaveringPower = GetUnitAttributeVisualizerEffectInfo(
+            unitTag,
+            ATTRIBUTE_VISUAL_UNWAVERING_POWER,
+            STAT_MITIGATION,
+            ATTRIBUTE_HEALTH,
+            COMBAT_MECHANIC_FLAGS_HEALTH
+        ) or 0
+
+        -- Check for invulnerable guard
+        params.isGuard = UnitFrames.CustomFrames and
+            UnitFrames.CustomFrames["reticleover"] and
+            attributeFrame == UnitFrames.CustomFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH] and
+            IsUnitInvulnerableGuard("reticleover")
+
+        -- Calculate adjusted bar value for trauma
+        if params.trauma then
+            params.adjustedBarValue = math.max(0, powerValue - params.trauma)
         end
     end
+
+    -- Update UI elements
+    UpdateAttributeLabels(attributeFrame, params)
+    UpdateAttributeBars(attributeFrame, params)
 end
 
 -- Updates title for unit if changed, and also re-anchors buffs or toggles display on/off if the unitTag had no title selected previously
@@ -3099,7 +3186,6 @@ end
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
 function UnitFrames.UpdateTrauma(unitTag, value, maxValue)
     if g_savedHealth[unitTag] == nil then
-        -- d( "LUIE DEBUG: Stored health is nil: ", unitTag )
         return
     end
 
@@ -3344,7 +3430,6 @@ end
 
 -- Runs on the EVENT_GROUP_MEMBER_CONNECTED_STATUS listener.
 function UnitFrames.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
-    -- d( string_format("DC: %s - %s", unitTag, isOnline and "Online" or "Offline" ) )
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag].dead then
         UnitFrames.CustomFramesSetDeadLabel(UnitFrames.CustomFrames[unitTag], isOnline and nil or strOffline)
     end
@@ -3373,7 +3458,6 @@ end
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
 -- This handler fires every time a valid unitTag dies or is resurrected
 function UnitFrames.OnDeath(eventCode, unitTag, isDead)
-    -- d( string_format("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
     if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag].dead then
         UnitFrames.ResurrectionMonitor(unitTag)
     end
@@ -3407,7 +3491,6 @@ function UnitFrames.ResurrectionMonitor(unitTag)
     if not DoesUnitExist(unitTag) then
         return
     end
-    -- if not ZO_Group_IsGroupUnitTag(unitTag) then return end
     if not UnitFrames.CustomFrames[unitTag] then
         return
     end

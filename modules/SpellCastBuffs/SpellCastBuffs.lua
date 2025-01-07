@@ -736,7 +736,7 @@ local AUTHORIZED_USERS =
     ["@ArtOfShredPTS"] = true,
     ["@ArtOfShredLegacy"] = true,
     ["@HammerOfGlory"] = true,
-    ["@Dack_janiels"] = true,
+    --["@Dack_janiels"] = true,
 }
 SpellCastBuffs.AUTHORIZED_USERS = AUTHORIZED_USERS
 
