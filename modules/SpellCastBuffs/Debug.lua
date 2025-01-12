@@ -1,11 +1,11 @@
---[[
-    LuiExtended
-    License: The MIT License (MIT)
---]]
+-- -----------------------------------------------------------------------------
+--  LuiExtended                                                               --
+--  Distributed under The MIT License (MIT) (see LICENSE file)                --
+-- -----------------------------------------------------------------------------
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
----@class (partial) LUIE.SpellCastBuffs
+--- @class (partial) LUIE.SpellCastBuffs
 local SpellCastBuffs = LUIE.SpellCastBuffs
 local Effects = LUIE.Data.Effects
 local AUTHORIZED_USERS = SpellCastBuffs.AUTHORIZED_USERS
@@ -50,7 +50,7 @@ local function FormatDebugMessage(message)
     if pChat and pChat.db and pChat.db.showTimestamp then
         return message
     end
-    return LUIE.FormatMessage(message, true)
+    return LUIE.FormatMessage(message, true, nil, CHAT_CATEGORY_SYSTEM)
 end
 
 --- Format unit name for effect messages
@@ -180,9 +180,9 @@ local function SendToChatWindows(message)
 
     for _, cc in ipairs(CHAT_SYSTEM.containers) do
         local chatContainer = cc
-        local chatWindow = cc.windows[2]
+        local chatWindow = cc.windows[3]
         if chatContainer then
-            chatContainer:AddEventMessageToWindow(chatWindow, message, CHAT_CATEGORY_SYSTEM)
+            chatContainer:AddEventMessageToWindow(chatWindow, FormatDebugMessage(message), CHAT_CATEGORY_SYSTEM)
         end
     end
 end

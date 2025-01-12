@@ -1,11 +1,11 @@
---[[
-    LuiExtended
-    License: The MIT License (MIT)
---]]
+-- -----------------------------------------------------------------------------
+--  LuiExtended                                                               --
+--  Distributed under The MIT License (MIT) (see LICENSE file)                --
+-- -----------------------------------------------------------------------------
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
----@class (partial) LUIE.SpellCastBuffs
+--- @class (partial) LUIE.SpellCastBuffs
 local SpellCastBuffs = LUIE.SpellCastBuffs
 
 local eventManager = GetEventManager()

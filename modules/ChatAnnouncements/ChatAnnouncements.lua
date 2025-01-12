@@ -1,7 +1,7 @@
---[[
-    LuiExtended
-    License: The MIT License (MIT)
---]]
+-- -----------------------------------------------------------------------------
+--  LuiExtended                                                               --
+--  Distributed under The MIT License (MIT) (see LICENSE file)                --
+-- -----------------------------------------------------------------------------
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
@@ -917,13 +917,13 @@ local ChatEventFormattersDelete =
 
 function ChatAnnouncements.SlayChatHandlers()
     -- Unregister ZOS handlers for events we need to modify
-    for eventCode, _ in pairs(ChatEventFormattersDelete) do
+    for eventCode, _ in hpairs(ChatEventFormattersDelete) do
         eventManager:UnregisterForEvent("ChatRouter", eventCode)
     end
 
     -- Slay these events in case LibChatMessage is active and hooks them
     local ChatEventFormatters = ZO_ChatSystem_GetEventHandlers()
-    for eventType, _ in pairs(ChatEventFormattersDelete) do
+    for eventType, _ in hpairs(ChatEventFormattersDelete) do
         ChatEventFormatters[eventType] = nil
     end
 end
@@ -998,8 +998,8 @@ function ChatAnnouncements.Initialize(enabled)
     -- Stop other chat handlers from registering, then stop them again a few more times just in case.
     ChatAnnouncements.SlayChatHandlers()
     -- Call this again a few times shortly after load just in case.
-    zo_callLater(ChatAnnouncements.SlayChatHandlers, 1000)
-    zo_callLater(ChatAnnouncements.SlayChatHandlers, 5000)
+    zo_callLater(ChatAnnouncements.SlayChatHandlers, 100)
+    -- zo_callLater(ChatAnnouncements.SlayChatHandlers, 5000)
 end
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -4429,7 +4429,8 @@ function ChatAnnouncements.ItemCounterDelay(icon, stack, itemType, itemId, itemL
     end
 
     -- Save parameters to delayed item pool
-    delayedItemPool[itemId] = {
+    delayedItemPool[itemId] =
+    {
         icon = icon,
         itemType = itemType,
         itemLink = itemLink,

@@ -1,7 +1,7 @@
---[[
-    LuiExtended
-    License: The MIT License (MIT)
---]]
+-- -----------------------------------------------------------------------------
+--  LuiExtended                                                               --
+--  Distributed under The MIT License (MIT) (see LICENSE file)                --
+-- -----------------------------------------------------------------------------
 
 -- LUIE namespace
 --- @class (partial) LuiExtended
@@ -15,7 +15,7 @@ local LUIE = LUIE
 
 LUIE.tag = "LUIE"
 LUIE.name = "LuiExtended"
-LUIE.version = "6.7.9.3"
+LUIE.version = "6.8.0"
 LUIE.author = "ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder"
 LUIE.website = "https://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github = "https://github.com/ArtOfShredLuiExtended"

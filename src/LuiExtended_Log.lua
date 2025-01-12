@@ -1,4 +1,7 @@
---- @meta
+-- -----------------------------------------------------------------------------
+--  LuiExtended                                                               --
+--  Distributed under The MIT License (MIT) (see LICENSE file)                --
+-- -----------------------------------------------------------------------------
 
 --- @class (partial) LuiExtended
 --- @field name string The addon name

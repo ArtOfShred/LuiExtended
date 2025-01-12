@@ -1,7 +1,7 @@
---[[
-    LuiExtended
-    License: The MIT License (MIT)
---]]
+-- -----------------------------------------------------------------------------
+--  LuiExtended                                                               --
+--  Distributed under The MIT License (MIT) (see LICENSE file)                --
+-- -----------------------------------------------------------------------------
 
 -- Addon Settings Menu localization
 -- Translation by: KiriX

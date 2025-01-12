@@ -1,15 +1,15 @@
---[[
-    LuiExtended
-    License: The MIT License (MIT)
---]]
+-- -----------------------------------------------------------------------------
+--  LuiExtended                                                               --
+--  Distributed under The MIT License (MIT) (see LICENSE file)                --
+-- -----------------------------------------------------------------------------
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
 -- SpellCastBuffs namespace
----@class (partial) LUIE.SpellCastBuffs
+--- @class (partial) LUIE.SpellCastBuffs
 local SpellCastBuffs = {}
 SpellCastBuffs.__index = SpellCastBuffs
----@class (partial) LUIE.SpellCastBuffs
+--- @class (partial) LUIE.SpellCastBuffs
 LUIE.SpellCastBuffs = SpellCastBuffs
 
 local UI = LUIE.UI
@@ -736,7 +736,7 @@ local AUTHORIZED_USERS =
     ["@ArtOfShredPTS"] = true,
     ["@ArtOfShredLegacy"] = true,
     ["@HammerOfGlory"] = true,
-    --["@Dack_janiels"] = true,
+    ["@Dack_janiels"] = true,
 }
 SpellCastBuffs.AUTHORIZED_USERS = AUTHORIZED_USERS
 
@@ -744,27 +744,16 @@ function SpellCastBuffs.RegisterDebugEvents()
     -- Unregister existing events
     eventManager:UnregisterForEvent(moduleName .. "DebugCombat", EVENT_COMBAT_EVENT)
     eventManager:UnregisterForEvent(moduleName .. "DebugEffect", EVENT_EFFECT_CHANGED)
-    -- eventManager:UnregisterForEvent(moduleName .. "DebugCast", EVENT_BEGIN_CAST_ACTION)
-    -- eventManager:UnregisterForEvent(moduleName .. "DebugCastEnd", EVENT_END_CAST_ACTION)
-    -- eventManager:UnregisterForEvent(moduleName .. "DebugUnit", EVENT_UNIT_CREATED)
-    -- eventManager:UnregisterForEvent(moduleName .. "DebugUnitChanged", EVENT_UNIT_CHANGED)
-    -- eventManager:UnregisterForEvent(moduleName .. "DebugUnitRemoved", EVENT_UNIT_DESTROYED)
-
     -- Register standard debug events if enabled
     if SpellCastBuffs.SV.ShowDebugCombat then
         eventManager:RegisterForEvent(moduleName .. "DebugCombat", EVENT_COMBAT_EVENT, SpellCastBuffs.EventCombatDebug)
-        -- eventManager:RegisterForEvent(moduleName .. "DebugCast", EVENT_BEGIN_CAST_ACTION, SpellCastBuffs.EventCastStart)
-        -- eventManager:RegisterForEvent(moduleName .. "DebugCastEnd", EVENT_END_CAST_ACTION, SpellCastBuffs.EventCastEnd)
-        -- eventManager:RegisterForEvent(moduleName .. "DebugUnit", EVENT_UNIT_CREATED, SpellCastBuffs.EventUnitAdded)
-        -- eventManager:RegisterForEvent(moduleName .. "DebugUnitChanged", EVENT_UNIT_CHANGED, SpellCastBuffs.EventUnitChanged)
-        -- eventManager:RegisterForEvent(moduleName .. "DebugUnitRemoved", EVENT_UNIT_DESTROYED, SpellCastBuffs.EventUnitRemoved)
     end
     if SpellCastBuffs.SV.ShowDebugEffect then
         eventManager:RegisterForEvent(moduleName .. "DebugEffect", EVENT_EFFECT_CHANGED, SpellCastBuffs.EventEffectDebug)
     end
 
     -- Author-specific debug events
-    if AUTHORIZED_USERS[LUIE.PlayerDisplayName] then
+    if AUTHORIZED_USERS[LUIE.PlayerDisplayName] and SpellCastBuffs.SV.ShowDebugEffect and SpellCastBuffs.SV.ShowDebugEffect then
         eventManager:RegisterForEvent(moduleName .. "AuthorDebugCombat", EVENT_COMBAT_EVENT, SpellCastBuffs.AuthorCombatDebug)
         eventManager:RegisterForEvent(moduleName .. "AuthorDebugEffect", EVENT_EFFECT_CHANGED, SpellCastBuffs.AuthorEffectDebug)
     end
@@ -1421,7 +1410,9 @@ end
 
 -- Right Click Cancel Buff function
 function SpellCastBuffs.Buff_OnMouseUp(self, button, upInside)
+    --- @diagnostic disable-next-line: undefined-field
     if upInside and button == MOUSE_BUTTON_INDEX_RIGHT and self.buffSlot then
+        --- @diagnostic disable-next-line: undefined-field
         CancelBuff(self.buffSlot)
     end
 end

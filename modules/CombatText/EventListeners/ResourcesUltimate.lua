@@ -1,7 +1,7 @@
---[[
-    LuiExtended
-    License: The MIT License (MIT)
---]]
+-- -----------------------------------------------------------------------------
+--  LuiExtended                                                               --
+--  Distributed under The MIT License (MIT) (see LICENSE file)                --
+-- -----------------------------------------------------------------------------
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
@@ -19,7 +19,7 @@ function CombatTextResourcesUltimateEventListener:New()
     obj:RegisterForEvent(EVENT_ACTION_SLOTS_FULL_UPDATE, function ()
         self:UpdateMaximum()
     end)
-    obj:RegisterForEvent(EVENT_ACTION_SLOT_STATE_UPDATED, function ()
+    obj:RegisterForEvent(EVENT_HOTBAR_SLOT_STATE_UPDATED, function ()
         self:UpdateMaximum()
     end)
     self.powerInfo = { maximum = 0, wasNotified = false }

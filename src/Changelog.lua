@@ -1,7 +1,7 @@
---[[
-    LuiExtended
-    License: The MIT License (MIT)
---]]
+-- -----------------------------------------------------------------------------
+--  LuiExtended                                                               --
+--  Distributed under The MIT License (MIT) (see LICENSE file)                --
+-- -----------------------------------------------------------------------------
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
@@ -9,9 +9,10 @@ local LUIE = LUIE
 local zo_strformat = zo_strformat
 local table_concat = table.concat
 
-local changelogMessages = {
+local changelogMessages =
+{
     -- Version Header
-    "|cFFA500LuiExtended Version 6.7.9.3|r",
+    "|cFFA500LuiExtended Version 6.8.0|r",
     "",
     -- General Changes
     "|cFFFF00General:|r",

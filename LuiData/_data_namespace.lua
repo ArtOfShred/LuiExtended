@@ -1,8 +1,7 @@
---- @diagnostic disable: missing-fields
---[[
-    LuiExtended
-    License: The MIT License (MIT)
---]]
+-- -----------------------------------------------------------------------------
+--  LuiExtended                                                               --
+--  Distributed under The MIT License (MIT) (see LICENSE file)                --
+-- -----------------------------------------------------------------------------
 
 --- @class (partial) LuiData
 LuiData = {}
@@ -210,5 +209,3 @@ LuiData.Data =
     --- @class (partial) ZoneTable
     ZoneTable = {},
 }
-
-

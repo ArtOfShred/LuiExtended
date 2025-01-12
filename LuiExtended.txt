@@ -1,24 +1,20 @@
 ## Title: |c00C000Lui Extended|r
 ## Author: ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder
-## Version: 6.7.9.3
+## Version: 6.8.0
 ## APIVersion: 101044 101045
-## AddOnVersion: 6793
+## AddOnVersion: 6800
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buff & Debuff Tracking, Chat Announcements and Slash Commands.
-## DependsOn: LuiData>=6793 LibAddonMenu-2.0>=37 LibMediaProvider-1.0>=32
+## DependsOn: LuiData>=6800 LibAddonMenu-2.0>=37 LibMediaProvider-1.0>=32
 ## OptionalDependsOn: LibChatMessage>=113 pChat>=10005090 CombatMetrics>=10518
 ## OptionalDependsOn: LibDebugLogger>=263 DolgubonsLazyWritCreator LibLazyCrafting>=4012 LootLog>=406050
 ## SavedVariables: LUIESV
 
-#Load addon language strings
 i18n/en.lua
-i18n/$(language).lua
-
-#Load addon settings strings
 i18n/settings/Settings_en.lua
-i18n/settings/Settings_$(language).lua
-
-#Load addon skills strings
 i18n/skills/Skills_en.lua
+
+i18n/$(language).lua
+i18n/settings/Settings_$(language).lua
 i18n/skills/Skills_$(language).lua
 
 #Addon base functions and code

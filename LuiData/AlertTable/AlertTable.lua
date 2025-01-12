@@ -1,7 +1,7 @@
---[[
-    LuiExtended
-    License: The MIT License (MIT)
---]]
+-- -----------------------------------------------------------------------------
+--  LuiExtended                                                               --
+--  Distributed under The MIT License (MIT) (see LICENSE file)                --
+-- -----------------------------------------------------------------------------
 
 --- @class (partial) LuiExtended
 local LUIE = LuiData
@@ -11,55 +11,53 @@ local Zonenames = LUIE.Data.ZoneNames
 local Abilities = LUIE.Data.Abilities
 local ZoneTable = LUIE.Data.ZoneTable
 
+-- SET A PRIORITY
+-- priority = 1-3: (1 = ARENA/DUNGEON/TRIAL, 2 = ELITE NPC/QUEST BOSS, 3 = NORMAL NPC)
+
+-- MITIGATION ALERTS
+-- block = true -- Show a Block Alert
+-- bs = true -- Add indicator for Block Stagger to effect
+-- dodge = true -- Show a Dodge Alert
+-- avoid = true -- Show an Avoid Alert
+-- interrupt = true -- Show an Interrupt Alert
+-- reflect = true -- Show a Reflect Alert (not implemented) TODO: Implement
+-- unmit = true -- Show an unmitigable alert
+
+-- MISC ALERTS
+-- power = true -- Show a power alert
+-- summon = true -- Show a summon alert
+-- destroy = true -- Show a destroy alert
+
+-- RESULT / FILTERING
+-- result = ACTION_RESULT_TYPE -- The action result for combat events to detect
+-- eventdetect = true -- Detect combat events without a source or target for abilities not directly targeting the player
+-- auradetect = true -- Detect aura application rather than using targeting info - can omit result field if this is true
+
+-- SOURCE NAME MODIFICATION
+-- fakeName = string -- Set this name for the source
+-- bossName = true -- Use the name of the current BOSS target frame for this ability source if possible
+-- bossMatch = NAME -- If there are multiple bosses, look for this name and use it as the source if possible
+-- noForcedNameOverride = true -- Only fill in a name here if the name is missing, this gets around a few minor limitations
+
+-- CC TYPE
+-- cc = LUIE_CC_TYPE_STUN/LUIE_CC_TYPE_DISORIENT/LUIE_CC_TYPE_FEAR/LUIE_CC_TYPE_STAGGER/LUIE_CC_TYPE_SILENCE/LUIE_CC_TYPE_SNARE/LUIE_CC_TYPE_UNBREAKABLE -- If applicable set the CC type of this effect here
+
+-- DURATION
+-- duration = timeMs -- Set the duration in MS here for the cast IF applicable, power/summon/destroy alerts shouldn't use durations, and very long events can omit duration as well (long ground effects are a good case for this)
+
+-- OTHER MODIFIERS
+-- refire = "x" -- refire duration
+-- ignoreRefresh = true -- Ignores refresh event here
+-- neverShowInterrupt = true -- Never show an interrupt event here
+-- effectOnlyInterrupt = true -- Show an interrupt only when this effect fades early off a unit. Used for abilities that a target casts on another target.
+-- alwaysShowInterrupt = true -- Show an interrupt even if this effect doesn't display a duration.
+-- noSelf = true -- Do not show this alert if you are the target/source of it. This is used for warning party members of attacks they have to help you deal with.
+-- durationOnlyIfTarget = true -- Only show a duration timer if the player is the target, this makes some events we can't detect interrupts for less annoying for other players if they get interrupted early.
+-- hideIfNoSource = true -- Hide if this event has no source name (this factors in after all name overrides including zone ones).
 
 --- @class (partial) AlertTable
 local AlertTable =
 {
-
-    -- SET A PRIORITY
-    -- priority = 1-3: (1 = ARENA/DUNGEON/TRIAL, 2 = ELITE NPC/QUEST BOSS, 3 = NORMAL NPC)
-
-    -- MITIGATION ALERTS
-    -- block = true -- Show a Block Alert
-    -- bs = true -- Add indicator for Block Stagger to effect
-    -- dodge = true -- Show a Dodge Alert
-    -- avoid = true -- Show an Avoid Alert
-    -- interrupt = true -- Show an Interrupt Alert
-    -- reflect = true -- Show a Reflect Alert (not implemented) TODO: Implement
-    -- unmit = true -- Show an unmitigable alert
-
-    -- MISC ALERTS
-    -- power = true -- Show a power alert
-    -- summon = true -- Show a summon alert
-    -- destroy = true -- Show a destroy alert
-
-    -- RESULT / FILTERING
-    -- result = ACTION_RESULT_TYPE -- The action result for combat events to detect
-    -- eventdetect = true -- Detect combat events without a source or target for abilities not directly targeting the player
-    -- auradetect = true -- Detect aura application rather than using targeting info - can omit result field if this is true
-
-    -- SOURCE NAME MODIFICATION
-    -- fakeName = string -- Set this name for the source
-    -- bossName = true -- Use the name of the current BOSS target frame for this ability source if possible
-    -- bossMatch = NAME -- If there are multiple bosses, look for this name and use it as the source if possible
-    -- noForcedNameOverride = true -- Only fill in a name here if the name is missing, this gets around a few minor limitations
-
-    -- CC TYPE
-    -- cc = LUIE_CC_TYPE_STUN/LUIE_CC_TYPE_DISORIENT/LUIE_CC_TYPE_FEAR/LUIE_CC_TYPE_STAGGER/LUIE_CC_TYPE_SILENCE/LUIE_CC_TYPE_SNARE/LUIE_CC_TYPE_UNBREAKABLE -- If applicable set the CC type of this effect here
-
-    -- DURATION
-    -- duration = timeMs -- Set the duration in MS here for the cast IF applicable, power/summon/destroy alerts shouldn't use durations, and very long events can omit duration as well (long ground effects are a good case for this)
-
-    -- OTHER MODIFIERS
-    -- refire = "x" -- refire duration
-    -- ignoreRefresh = true -- Ignores refresh event here
-    -- neverShowInterrupt = true -- Never show an interrupt event here
-    -- effectOnlyInterrupt = true -- Show an interrupt only when this effect fades early off a unit. Used for abilities that a target casts on another target.
-    -- alwaysShowInterrupt = true -- Show an interrupt even if this effect doesn't display a duration.
-    -- noSelf = true -- Do not show this alert if you are the target/source of it. This is used for warning party members of attacks they have to help you deal with.
-    -- durationOnlyIfTarget = true -- Only show a duration timer if the player is the target, this makes some events we can't detect interrupts for less annoying for other players if they get interrupted early.
-    -- hideIfNoSource = true -- Hide if this event has no source name (this factors in after all name overrides including zone ones).
-
     --------------------------------------------------
     -- JUSTICE NPC'S ---------------------------------
     --------------------------------------------------
