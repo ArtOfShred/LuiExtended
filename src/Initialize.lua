@@ -17,7 +17,7 @@ if not LMP then
 end
 
 -- Reference to CALLBACK_MANAGER for registering callbacks
-local cm = CALLBACK_MANAGER
+local cm = LUIE.callbackObject
 
 --[[
     Load saved settings.

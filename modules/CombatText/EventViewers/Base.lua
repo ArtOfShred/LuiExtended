@@ -13,7 +13,7 @@ local string_format = string.format
 local Effects = LUIE.Data.Effects
 local CombatTextConstants = LUIE.Data.CombatTextConstants
 
-local callbackManager = CALLBACK_MANAGER
+local callbackManager = LUIE.callbackObject
 
 CombatTextEventViewer.resourceNames = setmetatable({},
     {

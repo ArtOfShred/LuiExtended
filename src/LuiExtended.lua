@@ -9,6 +9,7 @@
 LUIE = {}
 LUIE.__index = LUIE
 LUIE.__newindex = NewIndexHandler
+LUIE.callbackObject = ZO_CallbackObject:New()
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE

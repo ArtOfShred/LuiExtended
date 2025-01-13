@@ -9,7 +9,7 @@ local LUIE = LUIE
 --- @class (partial) CombatTextEventListener : ZO_InitializingObject
 local CombatTextEventListener = ZO_InitializingObject:Subclass()
 
-local callbackManager = CALLBACK_MANAGER
+local callbackManager = LUIE.callbackObject
 local eventManager = GetEventManager()
 
 local moduleName = LUIE.name .. "CombatText"

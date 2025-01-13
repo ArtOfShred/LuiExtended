@@ -17,7 +17,7 @@ local zo_strformat = zo_strformat
 local globalIconOptions = { "All Crowd Control", "NPC CC Only", "Player CC Only" }
 local globalIconOptionsKeys = { ["All Crowd Control"] = 1, ["NPC CC Only"] = 2, ["Player CC Only"] = 3 }
 
-local callbackManager = CALLBACK_MANAGER
+local callbackManager = LUIE.callbackObject
 
 local Blacklist, BlacklistValues = {}, {}
 
