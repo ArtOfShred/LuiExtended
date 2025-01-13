@@ -4,17 +4,18 @@
 ## APIVersion: 101044 101045
 ## AddOnVersion: 6800
 ## Description: Provides data for LuiExtended.
-## IsLibrary: 1
+## IsLibrary: true
+## DisableSavedVariablesAutoSaving: 0
 
-#Load addon constant values
-Globals.lua
-
+# Core Data Files
 _data_namespace.lua
+Globals.lua
 AbilityTables.lua
 Tooltips.lua
 UnitNamesTable.lua
 ZoneNamesTable.lua
-# Effects
+
+# Effects - Core
 Effects/KeepUpgradeOverride.lua
 Effects/KeepUpgradeTooltip.lua
 Effects/MapDataOverride.lua
@@ -35,7 +36,8 @@ Effects/AddNameOnEvent.lua
 Effects/AddStackOnEvent.lua
 Effects/ArtificialEffectOverride.lua
 Effects/AssistantIcons.lua
-# BarHighlight
+
+# Effects - Bar Highlight
 Effects/BarHighlight/AddNoDurationBarHighlight.lua
 Effects/BarHighlight/BarHighlightCheckOnFade.lua
 Effects/BarHighlight/BarHighlightDestroFix.lua
@@ -50,9 +52,12 @@ Effects/BarHighlight/IsBloodFrenzy.lua
 Effects/BarHighlight/IsGrimFocus.lua
 Effects/BarHighlight/MajorMinor.lua
 Effects/BarHighlight/RemoveAbilityActiveHighlight.lua
+
+# Effects - Misc
 Effects/CreateSkillAura.lua
 Effects/DisguiseIcons.lua
-# Fake
+
+# Effects - Fake Effects
 Effects/Fake/FakeAddGroundDamageAura.lua
 Effects/Fake/FakeEffectGroundDisplay.lua
 Effects/Fake/FakeExternalBuffs.lua
@@ -61,19 +66,25 @@ Effects/Fake/FakePlayerBuffs.lua
 Effects/Fake/FakePlayerDebuffs.lua
 Effects/Fake/FakePlayerOfflineAura.lua
 Effects/Fake/FakeStagger.lua
+
+# Effects - Keep Upgrades
 Effects/HideSCT.lua
 Effects/KeepUpgradeAlliance.lua
 Effects/KeepUpgradeNameFix.lua
+
+# Combat and Collectibles
 CastBarTable.lua
 CollectibleTables.lua
 CombatTextConstants.lua
-# Alert Table
+
+# Alert System
 AlertTable/AlertTable.lua
 AlertTable/BossNameConvert.lua
 AlertTable/MapOverride.lua
 AlertTable/ZoneOverride.lua
 AlertTable/ZoneTable.lua
-# CrowdControl
+
+# Crowd Control
 CrowdControl/aoeNPCBoss.lua
 CrowdControl/aoeNPCElite.lua
 CrowdControl/aoeNPCNormal.lua
@@ -85,10 +96,13 @@ CrowdControl/IgnoreList.lua
 CrowdControl/LavaAlerts.lua
 CrowdControl/ReversedLogic.lua
 CrowdControl/SpecialCC.lua
+
+# Misc Data
 Quests.lua
 PetNames.lua
 AbilityBlacklistPresets.lua
 CombatTextBlacklistPresets.lua
-## Debug
+
+# Debug
 Debug/DebugAuras.lua
 Debug/DebugResults.lua

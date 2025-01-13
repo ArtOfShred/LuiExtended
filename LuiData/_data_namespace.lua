@@ -8,7 +8,7 @@ LuiData = {}
 LuiData.__index = LuiData
 LuiData.__name = "LuiData"
 LuiData.__newindex = NewIndexHandler
-LuiData.version = "6.7.9.3"
+LuiData.version = "6.8.0"
 
 --- @class CrowdControl
 --- @field aoeNPCBoss table

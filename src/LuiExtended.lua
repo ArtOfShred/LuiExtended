@@ -20,8 +20,8 @@ LUIE.author = "ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder"
 LUIE.website = "https://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github = "https://github.com/ArtOfShredLuiExtended"
 LUIE.feedback = "https://github.com/ArtOfShredLuiExtended/issues"
-LUIE.translation = ""
-LUIE.donation = ""
+LUIE.translation = "https://github.com/ArtOfShred/LuiExtended/tree/translations"
+LUIE.donation = "https://paypal.me/dakjaniels"
 
 -- Saved variables options
 LUIE.SV = ...

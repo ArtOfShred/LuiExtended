@@ -2,7 +2,7 @@
 
 Beta Builds will be available for testing periodically in the [GitHub Releases Section][1]. I'll usually mention in the esoui comments a test build is available.
 
-You can submit any issues or feature requests in the [Github Issues Section][2], [ESOUI Comments][3], or reach out to me via email at [ithproductions@gmail.com][4].
+You can submit any issues or feature requests in the [Github Issues Section][2], [ESOUI Comments][3], or reach out to me via email at [dakjaniels@outlook.com][4].
 
 ## What I need feedback on
 
@@ -34,5 +34,5 @@ You can submit any issues or feature requests in the [Github Issues Section][2],
 [1]: https://github.com/ArtOfShred/LuiExtended/releases
 [2]: https://github.com/ArtOfShred/LuiExtended/issues
 [3]: https://www.esoui.com/downloads/info818-LuiExtended.html#comments
-[4]: mailto:ithproductions@gmail.com
-[5]: https://github.com/ArtOfShred/LuiExtended/blob/master/i18n/README.md
+[4]: mailto:dakjaniels@outlook.com
+[5]: https://github.com/ArtOfShred/LuiExtended/blob/master/lang/README.md
