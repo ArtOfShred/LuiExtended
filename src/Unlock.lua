@@ -3,18 +3,19 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
+-- -----------------------------------------------------------------------------
 --- @class (partial) LuiExtended
 --- @field UI table UI utilities
 --- @field SV table Saved variables
 local LUIE = LUIE
-
+-- -----------------------------------------------------------------------------
 local UI = LUIE.UI
 local sceneManager = SCENE_MANAGER
-
+-- -----------------------------------------------------------------------------
 local firstRun = true
 local g_LUIE_Movers = {}
 local g_framesUnlocked = false
-
+-- -----------------------------------------------------------------------------
 --- Table of UI elements to unlock for moving.
 --- Constraints for some elements need to be adjusted - using values from Azurah.
 --- @type table<Control, {[integer]:string, [integer]:number?, [integer]:number?}>
@@ -42,7 +43,7 @@ local defaultPanels =
     -- [ZO_EndDunBuffTracker_Gamepad] = { GetString(LUIE_STRING_DEFAULT_FRAME_ENDLESS_DUNGEON_TRACKER), 400, 400 }, -- Needs custom template applied
     [ZO_ReticleContainerInteract] = { GetString(LUIE_STRING_DEFAULT_FRAME_RETICLE_CONTAINER_INTERACT) }
 }
-
+-- -----------------------------------------------------------------------------
 --- Replace the template function for certain elements to also use custom positions
 --- @param object table The object containing the template function to be replaced
 --- @param functionName string The name of the template function to be replaced
@@ -60,7 +61,7 @@ local function ReplaceDefaultTemplate(object, functionName, frameName)
         return result
     end
 end
-
+-- -----------------------------------------------------------------------------
 --- Run when the UI scene changes to hide the unlocked elements if we're in the Addon Settings Menu
 --- @param oldState number The previous state of the UI scene
 --- @param newState number The new state of the UI scene
@@ -72,7 +73,7 @@ local function sceneChange(oldState, newState)
         v:SetHidden(isHidden)
     end
 end
-
+-- -----------------------------------------------------------------------------
 --- Helper function to adjust an element
 --- @param k Control The element to be adjusted
 --- @param v {[1]:string, [2]:number?, [3]:number?} The table containing adjustment values
@@ -85,7 +86,7 @@ local function adjustElement(k, v)
         k:SetHeight(v[3])
     end
 end
-
+-- -----------------------------------------------------------------------------
 --- Helper function to set the anchor of an element
 --- @param k Control The element to set the anchor for
 --- @param frameName string The name of the frame associated with the element
@@ -119,7 +120,7 @@ local function setAnchor(k, frameName)
         end
     end
 end
-
+-- -----------------------------------------------------------------------------
 --- Called when an element mover is adjusted and on initialization to update all positions
 function LUIE.SetElementPosition()
     for k, v in pairs(defaultPanels) do
@@ -136,6 +137,7 @@ function LUIE.SetElementPosition()
     end
 end
 
+-- -----------------------------------------------------------------------------
 --- Helper function to create a top-level window
 --- @param k Control The element to create the top-level window for
 --- @param v {[1]:string, [2]:number?, [3]:number?} The table containing window configuration values
@@ -152,7 +154,7 @@ local function createTopLevelWindow(k, v, point, relativePoint, offsetX, offsetY
     tlw.previewLabel = UI:Label(tlw.preview, { CENTER, CENTER }, nil, nil, "ZoFontGameMedium", v[1], false)
     return tlw
 end
-
+-- -----------------------------------------------------------------------------
 --- Setup Movers for Elements, called by the menu unlock settings
 --- @param state boolean The state indicating whether the elements are unlocked or not
 function LUIE.SetupElementMover(state)
@@ -203,6 +205,7 @@ function LUIE.SetupElementMover(state)
     firstRun = false
 end
 
+-- -----------------------------------------------------------------------------
 --- Reset the position of windows. Called from the Settings Menu
 function LUIE.ResetElementPosition()
     for k, v in pairs(defaultPanels) do
@@ -211,3 +214,5 @@ function LUIE.ResetElementPosition()
     end
     ReloadUI("ingame")
 end
+
+-- -----------------------------------------------------------------------------

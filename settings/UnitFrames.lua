@@ -5,6 +5,11 @@
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
+
+local FontsList = LUIE.Media.FontList
+local SoundsList = LUIE.Media.SoundList
+local StatusbarTexturesList = LUIE.Media.StatusbarTexturesList
+
 --- @class (partial) UnitFrames
 local UnitFrames = LUIE.UnitFrames
 local PetNames = LUIE.Data.PetNames
@@ -13,52 +18,96 @@ local zo_strformat = zo_strformat
 local table_insert = table.insert
 local g_FramesMovingEnabled = false -- Helper local flag
 
-local nameDisplayOptions = { "@UserID", "Character Name", "Character Name @UserID" }
-local nameDisplayOptionsKeys = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
+local nameDisplayOptions =
+{
+    GetString(LUIE_STRING_LAM_UF_NAMEDISPLAY_USERID),
+    GetString(LUIE_STRING_LAM_UF_NAMEDISPLAY_CHARNAME),
+    GetString(LUIE_STRING_LAM_UF_NAMEDISPLAY_CHARNAME_USERID)
+}
+local nameDisplayOptionsKeys =
+{
+    [GetString(LUIE_STRING_LAM_UF_NAMEDISPLAY_USERID)] = 1,
+    [GetString(LUIE_STRING_LAM_UF_NAMEDISPLAY_CHARNAME)] = 2,
+    [GetString(LUIE_STRING_LAM_UF_NAMEDISPLAY_CHARNAME_USERID)] = 3
+}
+
 local raidIconOptions =
 {
-    "No Icons",
-    "Class Icons Only",
-    "Role Icons Only",
-    "Class Icon in PVP, Role in PVE",
-    "Class Icon in PVE, Role in PVP",
+    GetString(LUIE_STRING_LAM_UF_RAIDICON_NONE),
+    GetString(LUIE_STRING_LAM_UF_RAIDICON_CLASS_ONLY),
+    GetString(LUIE_STRING_LAM_UF_RAIDICON_ROLE_ONLY),
+    GetString(LUIE_STRING_LAM_UF_RAIDICON_CLASS_PVP_ROLE_PVE),
+    GetString(LUIE_STRING_LAM_UF_RAIDICON_CLASS_PVE_ROLE_PVP)
 }
 local raidIconOptionsKeys =
 {
-    ["No Icons"] = 1,
-    ["Class Icons Only"] = 2,
-    ["Role Icons Only"] = 3,
-    ["Class Icon in PVP, Role in PVE"] = 4,
-    ["Class Icon in PVE, Role in PVP"] = 5,
+    [GetString(LUIE_STRING_LAM_UF_RAIDICON_NONE)] = 1,
+    [GetString(LUIE_STRING_LAM_UF_RAIDICON_CLASS_ONLY)] = 2,
+    [GetString(LUIE_STRING_LAM_UF_RAIDICON_ROLE_ONLY)] = 3,
+    [GetString(LUIE_STRING_LAM_UF_RAIDICON_CLASS_PVP_ROLE_PVE)] = 4,
+    [GetString(LUIE_STRING_LAM_UF_RAIDICON_CLASS_PVE_ROLE_PVP)] = 5
 }
-local playerFrameOptions = { "Vertical Stacked Frames", "Separated Horizontal Frames", "Pyramid" }
-local playerFrameOptionsKeys = { ["Vertical Stacked Frames"] = 1, ["Separated Horizontal Frames"] = 2, ["Pyramid"] = 3 }
-local resolutionOptions = { "1080p", "1440p", "4K" }
-local resolutionOptionsKeys = { ["1080p"] = 1, ["1440p"] = 2, ["4K"] = 3 }
-local alignmentOptions = { "Left to Right (Default)", "Right to Left", "Center" }
-local alignmentOptionsKeys = { ["Left to Right (Default)"] = 1, ["Right to Left"] = 2, ["Center"] = 3 }
+
+local playerFrameOptions =
+{
+    GetString(LUIE_STRING_LAM_UF_PLAYERFRAME_VERTICAL),
+    GetString(LUIE_STRING_LAM_UF_PLAYERFRAME_HORIZONTAL),
+    GetString(LUIE_STRING_LAM_UF_PLAYERFRAME_PYRAMID)
+}
+local playerFrameOptionsKeys =
+{
+    [GetString(LUIE_STRING_LAM_UF_PLAYERFRAME_VERTICAL)] = 1,
+    [GetString(LUIE_STRING_LAM_UF_PLAYERFRAME_HORIZONTAL)] = 2,
+    [GetString(LUIE_STRING_LAM_UF_PLAYERFRAME_PYRAMID)] = 3
+}
+
+local resolutionOptions =
+{
+    GetString(LUIE_STRING_LAM_UF_RESOLUTION_1080P),
+    GetString(LUIE_STRING_LAM_UF_RESOLUTION_1440P),
+    GetString(LUIE_STRING_LAM_UF_RESOLUTION_4K)
+}
+local resolutionOptionsKeys =
+{
+    [GetString(LUIE_STRING_LAM_UF_RESOLUTION_1080P)] = 1,
+    [GetString(LUIE_STRING_LAM_UF_RESOLUTION_1440P)] = 2,
+    [GetString(LUIE_STRING_LAM_UF_RESOLUTION_4K)] = 3
+}
+
+local alignmentOptions =
+{
+    GetString(LUIE_STRING_LAM_UF_ALIGNMENT_LEFT_RIGHT),
+    GetString(LUIE_STRING_LAM_UF_ALIGNMENT_RIGHT_LEFT),
+    GetString(LUIE_STRING_LAM_UF_ALIGNMENT_CENTER)
+}
+local alignmentOptionsKeys =
+{
+    [GetString(LUIE_STRING_LAM_UF_ALIGNMENT_LEFT_RIGHT)] = 1,
+    [GetString(LUIE_STRING_LAM_UF_ALIGNMENT_RIGHT_LEFT)] = 2,
+    [GetString(LUIE_STRING_LAM_UF_ALIGNMENT_CENTER)] = 3
+}
 
 local formatOptions =
 {
-    "Nothing",
-    "Current",
-    "Current + Shield",
-    "Current - Trauma",
-    "Current + Shield - Trauma",
-    "Max",
-    "Percentage%",
-    "Current / Max",
-    "Current + Shield / Max",
-    "Current - Trauma / Max",
-    "Current + Shield - Trauma / Max",
-    "Current / Max (Percentage%)",
-    "Current + Shield / Max (Percentage%)",
-    "Current - Trauma / Max (Percentage%)",
-    "Current + Shield - Trauma / Max (Percentage%)",
-    "Current (Percentage%)",
-    "Current + Shield (Percentage%)",
-    "Current - Trauma (Percentage%)",
-    "Current + Shield - Trauma (Percentage%)",
+    GetString(LUIE_STRING_LAM_UF_FORMAT_NOTHING),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_TRAUMA),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_TRAUMA),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_MAX),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_PERCENTAGE),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_MAX),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_MAX),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_TRAUMA_MAX),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_TRAUMA_MAX),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_MAX_PERCENTAGE),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_MAX_PERCENTAGE),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_TRAUMA_MAX_PERCENTAGE),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_TRAUMA_MAX_PERCENTAGE),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_PERCENTAGE),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_PERCENTAGE),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_TRAUMA_PERCENTAGE),
+    GetString(LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_TRAUMA_PERCENTAGE)
 }
 
 local Whitelist, WhitelistValues = {}, {}
@@ -110,54 +159,6 @@ function UnitFrames.CreateSettings()
 
     -- Load Dialog Buttons
     loadDialogButtons()
-
-    local FontsList = {}
-    local LMP = LibMediaProvider
-    if LMP then
-        -- Add LUIE fonts first
-        for f, _ in pairs(LUIE.Fonts) do
-            table_insert(FontsList, f)
-        end
-        -- Add LMP fonts
-        for _, font in ipairs(LMP:List(LMP.MediaType.FONT)) do
-            -- Only add if not already in list
-            if not LUIE.Fonts[font] then
-                table_insert(FontsList, font)
-            end
-        end
-    end
-
-    -- Get sounds from LibMediaProvider
-    local SoundsList = {}
-    if LMP then
-        -- Add LUIE sounds first
-        for sound, _ in pairs(LUIE.Sounds) do
-            table_insert(SoundsList, sound)
-        end
-        -- Add LMP sounds
-        for _, sound in ipairs(LMP:List(LMP.MediaType.SOUND)) do
-            -- Only add if not already in list
-            if not LUIE.Sounds[sound] then
-                table_insert(SoundsList, sound)
-            end
-        end
-    end
-
-    -- Get statusbar textures from LibMediaProvider
-    local StatusbarTexturesList = {}
-    if LMP then
-        -- Add LUIE textures first
-        for key, _ in pairs(LUIE.StatusbarTextures) do
-            table_insert(StatusbarTexturesList, key)
-        end
-        -- Add LMP statusbar textures
-        for _, texture in ipairs(LMP:List(LMP.MediaType.STATUSBAR)) do
-            -- Only add if not already in list
-            if not LUIE.StatusbarTextures[texture] then
-                table_insert(StatusbarTexturesList, texture)
-            end
-        end
-    end
 
     local panelDataUnitFrames =
     {
@@ -474,7 +475,24 @@ function UnitFrames.CreateSettings()
                 type = "dropdown",
                 name = GetString(LUIE_STRING_LAM_FONT_STYLE),
                 tooltip = GetString(LUIE_STRING_LAM_UF_DFRAMES_FONT_STYLE_TP),
-                choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
+                choices =
+                {
+                    "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_NORMAL) .. "|r",
+                    "|cEEEEEE" .. GetString(LUIE_FONT_STYLE_OUTLINE) .. "|r",
+                    "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_THICK_OUTLINE) .. "|r",
+                    "|c888888" .. GetString(LUIE_FONT_STYLE_SHADOW) .. "|r",
+                    "|c666666" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THICK) .. "|r",
+                    "|c777777" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THIN) .. "|r",
+                },
+                choicesValues =
+                {
+                    GetString(LUIE_FONT_STYLE_VALUE_NORMAL),
+                    GetString(LUIE_FONT_STYLE_VALUE_OUTLINE),
+                    GetString(LUIE_FONT_STYLE_VALUE_THICK_OUTLINE),
+                    GetString(LUIE_FONT_STYLE_VALUE_SHADOW),
+                    GetString(LUIE_FONT_STYLE_VALUE_SOFT_SHADOW_THICK),
+                    GetString(LUIE_FONT_STYLE_VALUE_SOFT_SHADOW_THIN),
+                },
                 sort = "name-up",
                 getFunc = function ()
                     return Settings.DefaultFontStyle
@@ -638,7 +656,24 @@ function UnitFrames.CreateSettings()
                 type = "dropdown",
                 name = GetString(LUIE_STRING_LAM_FONT_STYLE),
                 tooltip = GetString(LUIE_STRING_LAM_UF_CFRAMES_FONT_STYLE_TP),
-                choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
+                choices =
+                {
+                    "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_NORMAL) .. "|r",
+                    "|cEEEEEE" .. GetString(LUIE_FONT_STYLE_OUTLINE) .. "|r",
+                    "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_THICK_OUTLINE) .. "|r",
+                    "|c888888" .. GetString(LUIE_FONT_STYLE_SHADOW) .. "|r",
+                    "|c666666" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THICK) .. "|r",
+                    "|c777777" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THIN) .. "|r",
+                },
+                choicesValues =
+                {
+                    GetString(LUIE_FONT_STYLE_VALUE_NORMAL),
+                    GetString(LUIE_FONT_STYLE_VALUE_OUTLINE),
+                    GetString(LUIE_FONT_STYLE_VALUE_THICK_OUTLINE),
+                    GetString(LUIE_FONT_STYLE_VALUE_SHADOW),
+                    GetString(LUIE_FONT_STYLE_VALUE_SOFT_SHADOW_THICK),
+                    GetString(LUIE_FONT_STYLE_VALUE_SOFT_SHADOW_THIN),
+                },
                 sort = "name-up",
                 getFunc = function ()
                     return Settings.CustomFontStyle

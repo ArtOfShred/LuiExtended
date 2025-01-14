@@ -4,9 +4,6 @@
 -- -----------------------------------------------------------------------------
 
 --- @class (partial) LuiExtended
---- @field name string The addon name
---- @field log_to_chat boolean Whether to output logs to chat
---- @field logger LibDebugLogger|NOP The logger instance
 local LUIE = LUIE
 
 --- @class NOP

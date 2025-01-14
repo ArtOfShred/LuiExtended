@@ -7,12 +7,29 @@
 -- Translation by: <default>
 local strings =
 {
+    -- Font Strings
+    LUIE_STRING_LAM_FONT = "Font",
+    LUIE_STRING_LAM_FONT_SIZE = "Font Size",
+    LUIE_STRING_LAM_FONT_OUTLINE = "Font Outline",
+    -- Font Style Strings
+    LUIE_STRING_LAM_FONT_STYLE = "Font Style",
+    LUIE_FONT_STYLE_NORMAL = "Normal",
+    LUIE_FONT_STYLE_OUTLINE = "Outline",
+    LUIE_FONT_STYLE_THICK_OUTLINE = "Thick Outline",
+    LUIE_FONT_STYLE_SHADOW = "Shadow",
+    LUIE_FONT_STYLE_SOFT_SHADOW_THICK = "Soft Shadow Thick",
+    LUIE_FONT_STYLE_SOFT_SHADOW_THIN = "Soft Shadow Thin",
+
+    -- Font Style Values (these don't need translation but good to keep with related strings)
+    LUIE_FONT_STYLE_VALUE_NORMAL = "normal",
+    LUIE_FONT_STYLE_VALUE_OUTLINE = "outline",
+    LUIE_FONT_STYLE_VALUE_THICK_OUTLINE = "thick-outline",
+    LUIE_FONT_STYLE_VALUE_SHADOW = "shadow",
+    LUIE_FONT_STYLE_VALUE_SOFT_SHADOW_THICK = "soft-shadow-thick",
+    LUIE_FONT_STYLE_VALUE_SOFT_SHADOW_THIN = "soft-shadow-thin",
 
     -- Settings
     LUIE_STRING_LAM_COMPATIBILITY_WARNING = "Disable this option if you are having compatibility issues with other addons.",
-    LUIE_STRING_LAM_FONT = "Font",
-    LUIE_STRING_LAM_FONT_SIZE = "Font Size",
-    LUIE_STRING_LAM_FONT_STYLE = "Font Style",
     LUIE_STRING_LAM_RELOADUI = "Reload UI",
     LUIE_STRING_LAM_RELOADUI_BUTTON = "This will reload the UI.",
     LUIE_STRING_LAM_RELOADUI_WARNING = "Will need to reload the UI.",
@@ -1701,6 +1718,53 @@ local strings =
     LUIE_STRING_LAM_UF_WHITELIST_ADD_WARDEN_TP = "Add Feral Guardian, Eternal Guardian, and Wild Guardian to the whitelist.",
     LUIE_STRING_LAM_UF_WHITELIST_CLEAR = "Clear Whitelist",
     LUIE_STRING_LAM_UF_WHITELIST_CLEAR_TP = "Remove all entries from the whitelist.",
+    -- Name Display Options
+    LUIE_STRING_LAM_UF_NAMEDISPLAY_USERID = "@UserID",
+    LUIE_STRING_LAM_UF_NAMEDISPLAY_CHARNAME = "Character Name",
+    LUIE_STRING_LAM_UF_NAMEDISPLAY_CHARNAME_USERID = "Character Name @UserID",
+
+    -- Raid Icon Options
+    LUIE_STRING_LAM_UF_RAIDICON_NONE = "No Icons",
+    LUIE_STRING_LAM_UF_RAIDICON_CLASS_ONLY = "Class Icons Only",
+    LUIE_STRING_LAM_UF_RAIDICON_ROLE_ONLY = "Role Icons Only",
+    LUIE_STRING_LAM_UF_RAIDICON_CLASS_PVP_ROLE_PVE = "Class Icon in PVP, Role in PVE",
+    LUIE_STRING_LAM_UF_RAIDICON_CLASS_PVE_ROLE_PVP = "Class Icon in PVE, Role in PVP",
+
+    -- Player Frame Options
+    LUIE_STRING_LAM_UF_PLAYERFRAME_VERTICAL = "Vertical Stacked Frames",
+    LUIE_STRING_LAM_UF_PLAYERFRAME_HORIZONTAL = "Separated Horizontal Frames",
+    LUIE_STRING_LAM_UF_PLAYERFRAME_PYRAMID = "Pyramid",
+
+    -- Resolution Options
+    LUIE_STRING_LAM_UF_RESOLUTION_1080P = "1080p",
+    LUIE_STRING_LAM_UF_RESOLUTION_1440P = "1440p",
+    LUIE_STRING_LAM_UF_RESOLUTION_4K = "4K",
+
+    -- Alignment Options
+    LUIE_STRING_LAM_UF_ALIGNMENT_LEFT_RIGHT = "Left to Right (Default)",
+    LUIE_STRING_LAM_UF_ALIGNMENT_RIGHT_LEFT = "Right to Left",
+    LUIE_STRING_LAM_UF_ALIGNMENT_CENTER = "Center",
+
+    -- Format Options
+    LUIE_STRING_LAM_UF_FORMAT_NOTHING = "Nothing",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT = "Current",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD = "Current + Shield",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_TRAUMA = "Current - Trauma",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_TRAUMA = "Current + Shield - Trauma",
+    LUIE_STRING_LAM_UF_FORMAT_MAX = "Max",
+    LUIE_STRING_LAM_UF_FORMAT_PERCENTAGE = "Percentage%",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_MAX = "Current / Max",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_MAX = "Current + Shield / Max",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_TRAUMA_MAX = "Current - Trauma / Max",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_TRAUMA_MAX = "Current + Shield - Trauma / Max",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_MAX_PERCENTAGE = "Current / Max (Percentage%)",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_MAX_PERCENTAGE = "Current + Shield / Max (Percentage%)",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_TRAUMA_MAX_PERCENTAGE = "Current - Trauma / Max (Percentage%)",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_TRAUMA_MAX_PERCENTAGE = "Current + Shield - Trauma / Max (Percentage%)",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_PERCENTAGE = "Current (Percentage%)",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_PERCENTAGE = "Current + Shield (Percentage%)",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_TRAUMA_PERCENTAGE = "Current - Trauma (Percentage%)",
+    LUIE_STRING_LAM_UF_FORMAT_CURRENT_SHIELD_TRAUMA_PERCENTAGE = "Current + Shield - Trauma (Percentage%)",
 
     -- Module: Combat Text
     LUIE_STRING_LAM_CT = "Combat Text",

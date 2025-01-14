@@ -25,6 +25,7 @@ src/Functions.lua
 src/Hooks-SkillsAdvisor.lua
 src/Hooks.lua
 src/Initialize.lua
+src/Media.lua
 src/UI.lua
 src/Changelog.lua
 bindings/Bindings.xml

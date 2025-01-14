@@ -3,13 +3,15 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
+-- -----------------------------------------------------------------------------
 --- @class (partial) LuiExtended
 local LUIE = LUIE
-
+-- -----------------------------------------------------------------------------
 local windowManager = GetWindowManager()
-
+-- -----------------------------------------------------------------------------
 --- @class UI
 --- @field __index UI
+--- @field isInDebug boolean # Flag to control debug naming mode
 --- @field TopLevel fun(self:UI, anchors?: table, dims?: table): TopLevelWindow # Creates a top-level window control
 --- @field Control fun(self:UI, parent: userdata, anchors?: table|string, dims?: table|string, hidden?: boolean, name?: string): Control|nil # Creates a basic UI control
 --- @field Texture fun(self:UI, parent: userdata, anchors?: table|"fill", dims?: table|"inherit", texture?: string, drawlayer?: integer, hidden?: boolean): TextureControl|nil # Creates a texture control
@@ -19,7 +21,10 @@ local windowManager = GetWindowManager()
 --- @field Label fun(self:UI, parent: userdata, anchors?: table|"fill", dims?: table|"inherit", align?: table, font?: string, text?: string, hidden?: boolean, name?: string): LabelControl|nil # Creates a label control
 local UI = {}
 UI.__index = UI
-
+-- -----------------------------------------------------------------------------
+-- Debug flag - exposed through UI for testing
+UI.isInDebug = false
+-- -----------------------------------------------------------------------------
 -- Local control counters
 local controlCounters =
 {
@@ -31,15 +36,18 @@ local controlCounters =
     StatusBar = 0,
     Label = 0,
 }
-
+-- -----------------------------------------------------------------------------
 --- Gets a unique control name for UI elements
 --- @param controlType string The type of control to generate a name for
---- @return string uniqueName The generated unique control name
+--- @return string|nil uniqueName The generated unique control name or nil if not in debug mode
 local function GetUniqueControlName(controlType)
+    if not UI.isInDebug then
+        return nil
+    end
     controlCounters[controlType] = controlCounters[controlType] + 1
     return string.format("LUIE_%s_Unique_%d", controlType, controlCounters[controlType])
 end
-
+-- -----------------------------------------------------------------------------
 --- Creates an empty top-level window control
 --- @param anchors? table Array of anchor points: [point, relativeTo, relativePoint, offsetX, offsetY]
 --- @param dims? table Array of dimensions: [width, height]
@@ -61,6 +69,7 @@ function UI:TopLevel(anchors, dims)
     return tlw
 end
 
+-- -----------------------------------------------------------------------------
 --- Creates a basic UI control element
 --- @param parent userdata The parent control
 --- @param anchors? table|"fill" Array of anchor points or "fill" to fill parent
@@ -91,6 +100,7 @@ function UI:Control(parent, anchors, dims, hidden, name)
     return c
 end
 
+-- -----------------------------------------------------------------------------
 --- Creates a texture control element
 --- @param parent userdata The parent control to attach the texture to
 --- @param anchors? table|"fill" Array of anchor points [point, relativeTo, relativePoint, offsetX, offsetY] or "fill" to fill parent
@@ -128,6 +138,7 @@ function UI:Texture(parent, anchors, dims, texture, drawlayer, hidden)
     return t
 end
 
+-- -----------------------------------------------------------------------------
 --- Creates a backdrop control element
 --- @param parent userdata The parent control to attach the backdrop to
 --- @param anchors? table|"fill" Array of anchor points [point, relativeTo, relativePoint, offsetX, offsetY] or "fill" to fill parent
@@ -165,6 +176,7 @@ function UI:Backdrop(parent, anchors, dims, center, edge, hidden)
     return bg
 end
 
+-- -----------------------------------------------------------------------------
 --- Creates a chat-style backdrop control element
 --- @param parent userdata The parent control to attach the backdrop to
 --- @param anchors? table|"fill" Array of anchor points [point, relativeTo, relativePoint, offsetX, offsetY] or "fill" to fill parent
@@ -205,6 +217,7 @@ function UI:ChatBackdrop(parent, anchors, dims, color, edge_size, hidden)
     return bg
 end
 
+-- -----------------------------------------------------------------------------
 --- Creates a status bar control element
 --- @param parent userdata The parent control to attach the status bar to
 --- @param anchors? table|"fill" Array of anchor points [point, relativeTo, relativePoint, offsetX, offsetY] or "fill" to fill parent
@@ -239,6 +252,7 @@ function UI:StatusBar(parent, anchors, dims, color, hidden)
     return sb
 end
 
+-- -----------------------------------------------------------------------------
 --- Creates a label control element
 --- @param parent userdata The parent control to attach the label to
 --- @param anchors? table|"fill" Array of anchor points [point, relativeTo, relativePoint, offsetX, offsetY] or "fill" to fill parent
@@ -280,5 +294,6 @@ function UI:Label(parent, anchors, dims, align, font, text, hidden, name)
     return label
 end
 
+-- -----------------------------------------------------------------------------
 --- @type UI
 LUIE.UI = UI
