@@ -5,10 +5,10 @@
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
-
+-- -----------------------------------------------------------------------------
 local zo_strformat = zo_strformat
 local table_concat = table.concat
-
+-- -----------------------------------------------------------------------------
 local changelogMessages =
 {
     -- Version Header
@@ -22,7 +22,7 @@ local changelogMessages =
     "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Fixed chat announcements for crafting items and materials to properly display all entries",
     "",
 }
-
+-- -----------------------------------------------------------------------------
 -- Hide toggle called by the menu or xml button
 function LUIE.ToggleChangelog(option)
     LUIE_Changelog:ClearAnchors()
@@ -30,6 +30,7 @@ function LUIE.ToggleChangelog(option)
     LUIE_Changelog:SetHidden(option)
 end
 
+-- -----------------------------------------------------------------------------
 -- Called on initialize
 function LUIE.ChangelogScreen()
     -- concat messages into one string
@@ -51,3 +52,5 @@ function LUIE.ChangelogScreen()
     -- Set version to current version
     LUIESV.Default[GetDisplayName()]["$AccountWide"].WelcomeVersion = LUIE.version
 end
+
+-- -----------------------------------------------------------------------------

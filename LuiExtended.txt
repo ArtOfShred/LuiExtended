@@ -39,6 +39,7 @@ frontend/CrowdControlTracker.xml
 src/Unlock.lua
 
 # Modules - Chat Announcements
+modules/ChatAnnouncements/ChatAnnouncementsConstants.lua
 modules/ChatAnnouncements/ChatAnnouncements.lua
 modules/ChatAnnouncements/ChatAnnouncementsExperience.lua
 
@@ -71,6 +72,7 @@ modules/CombatText/EventViewers/Points.lua
 modules/CombatText/EventViewers/Resources.lua
 
 # Modules - Combat Info
+modules/CombatInfo/CombatInfoConstants.lua
 modules/CombatInfo/CombatInfo.lua
 modules/CombatInfo/AbilityAlerts.lua
 modules/CombatInfo/CrowdControlTracker.lua
@@ -94,6 +96,7 @@ modules/SlashCommands/Guild.lua
 modules/SlashCommands/Social.lua
 
 # Modules - Unit Frames
+modules/UnitFrames/UnitFramesConstants.lua
 modules/UnitFrames/UnitFrames.lua
 
 # Settings
