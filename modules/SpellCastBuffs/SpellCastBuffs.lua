@@ -736,7 +736,7 @@ local AUTHORIZED_USERS =
     ["@ArtOfShredPTS"] = true,
     ["@ArtOfShredLegacy"] = true,
     ["@HammerOfGlory"] = true,
-    ["@Dack_janiels"] = true,
+    ["@dack_janiels"] = true,
 }
 SpellCastBuffs.AUTHORIZED_USERS = AUTHORIZED_USERS
 
@@ -1533,7 +1533,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                     elseif Effects.EffectOverride[control.effectId].tooltipValue2Mod then
                         value2 = zo_floor(duration + Effects.EffectOverride[control.effectId].tooltipValue2Mod + 0.5)
                     elseif Effects.EffectOverride[control.effectId].tooltipValue2Id then
-                        value2 = zo_floor((GetAbilityDuration(Effects.EffectOverride[control.effectId].tooltipValue2Id) or 0) + 0.5) / 1000
+                        value2 = zo_floor((GetAbilityDuration(Effects.EffectOverride[control.effectId].tooltipValue2Id, nil, "player" or nil) or 0) + 0.5) / 1000
                     else
                         value2 = 0
                     end
@@ -1575,8 +1575,8 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
 
                 -- Display Default Description if no internal effect description is present
                 if tooltipText == "" or tooltipText == nil then
-                    if GetAbilityDescription(control.effectId) ~= "" then
-                        tooltipText = GetAbilityDescription(control.effectId)
+                    if GetAbilityDescription(control.effectId, nil, "player" or nil) ~= "" then
+                        tooltipText = GetAbilityDescription(control.effectId, nil, "player" or nil)
                     end
                 end
 
