@@ -5,29 +5,27 @@
 
 --- @class (partial) LuiExtended
 local LUIE = LUIE
-
+-- -----------------------------------------------------------------------------
 local string_format = string.format
 
---[[
-    Called from the menu and on initialization to update the timestamp color when changed.
-]]
+-- -----------------------------------------------------------------------------
+--- Called from the menu and on initialization to update the timestamp color when changed.
 LUIE.TimeStampColorize = nil
 
---[[
-    Updates the timestamp color based on the value in LUIE.ChatAnnouncements.SV.TimeStampColor.
-]]
+-- -----------------------------------------------------------------------------
+--- Updates the timestamp color based on the value in LUIE.ChatAnnouncements.SV.TimeStampColor.
 function LUIE.UpdateTimeStampColor()
     LUIE.TimeStampColorize = ZO_ColorDef:New(unpack(LUIE.ChatAnnouncements.SV.TimeStampColor)):ToHex()
 end
 
---[[
-    Toggle the display of the Alert Frame.
-    Sets the visibility of the ZO_AlertTextNotification based on the value of LUIE.SV.HideAlertFrame.
-]]
+-- -----------------------------------------------------------------------------
+--- Toggle the display of the Alert Frame.
+--- Sets the visibility of the ZO_AlertTextNotification based on the value of LUIE.SV.HideAlertFrame.
 function LUIE.SetupAlertFrameVisibility()
     ZO_AlertTextNotification:SetHidden(LUIE.SV.HideAlertFrame)
 end
 
+-- -----------------------------------------------------------------------------
 do
     -- Get milliseconds from game time
     local function getCurrentMillisecondsFormatted()
@@ -40,7 +38,7 @@ do
     --- @param timeStr string: The time string in the format "HH:MM:SS".
     --- @param formatStr string|nil (optional): The format string for the timestamp. If not provided, the default format from LUIE.ChatAnnouncements.SV.TimeStampFormat will be used.
     --- @param milliseconds string|nil
-    --- @return string: The formatted timestamp.
+    --- @return string @ The formatted timestamp.
     local function CreateTimestamp(timeStr, formatStr, milliseconds)
         local showTimestamp = LUIE.ChatAnnouncements.SV.TimeStamp
         if showTimestamp then
@@ -84,7 +82,7 @@ do
     LUIE.CreateTimestamp = CreateTimestamp
 end
 
-
+-- -----------------------------------------------------------------------------
 do
     --- Helper function to format a message with an optional timestamp.
     --- @param msg string: The message to be formatted.
@@ -117,7 +115,7 @@ do
 
     LUIE.FormatMessage = FormatMessage
 end
-
+-- -----------------------------------------------------------------------------
 --- Hides or shows all LUIE components.
 --- @param hidden boolean: If true, all components will be hidden. If false, all components will be shown.
 function LUIE.ToggleVisibility(hidden)
@@ -126,6 +124,7 @@ function LUIE.ToggleVisibility(hidden)
     end
 end
 
+-- -----------------------------------------------------------------------------
 do
     --- Adds a system message to the chat.
     --- @param messageOrFormatter string: The message to be printed.
@@ -143,7 +142,7 @@ do
     end
     LUIE.AddSystemMessage = AddSystemMessage
 end
-
+-- -----------------------------------------------------------------------------
 do
     --- Easy Print to Chat.
     --- Prints a message to the chat.
@@ -159,7 +158,7 @@ do
                     local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
                     AddSystemMessage(formattedMsg)
                 else
-                    AddSystemMessage(msg)
+                    CHAT_ROUTER:AddSystemMessage(msg)
                 end
             else
                 -- If we have system messages sent to display in all windows then just print to all windows at once, otherwise send messages to individual tabs.
@@ -169,7 +168,7 @@ do
                         local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
                         AddSystemMessage(formattedMsg)
                     else
-                        AddSystemMessage(msg)
+                        CHAT_ROUTER:AddSystemMessage(msg)
                     end
                 else
                     for k, cc in ipairs(CHAT_SYSTEM.containers) do
@@ -199,7 +198,7 @@ do
     end
     LUIE.PrintToChat = PrintToChat
 end
-
+-- -----------------------------------------------------------------------------
 --- Formats a number with optional shortening and localized separators.
 --- @param number number The number to format
 --- @param shorten? boolean Whether to abbreviate large numbers (e.g. 1.5M)
@@ -248,6 +247,7 @@ function LUIE.AbbreviateNumber(number, shorten, comma)
     return number
 end
 
+-- -----------------------------------------------------------------------------
 --- Takes an input with a name identifier, title, text, and callback function to create a dialogue button.
 --- @param identifier string: The identifier for the dialogue button.
 --- @param title string: The title text for the dialogue button.
@@ -284,6 +284,7 @@ function LUIE.RegisterDialogueButton(identifier, title, text, callback)
     return ESO_Dialogs[identifier]
 end
 
+-- -----------------------------------------------------------------------------
 --- Function to update guild data.
 --- Retrieves information about each guild the player is a member of and stores it in LUIE.GuildIndexData table.
 function LUIE.UpdateGuildData()
@@ -297,6 +298,7 @@ function LUIE.UpdateGuildData()
     end
 end
 
+-- -----------------------------------------------------------------------------
 --- Simple function to check the veteran difficulty.
 --- @return boolean: Returns true if the player is in a veteran dungeon or using veteran difficulty, false otherwise.
 function LUIE.ResolveVeteranDifficulty()
@@ -309,6 +311,7 @@ function LUIE.ResolveVeteranDifficulty()
     end
 end
 
+-- -----------------------------------------------------------------------------
 --- Simple function that checks if the player is in a PVP zone.
 --- @return boolean: Returns true if the player is PvP flagged, false otherwise.
 function LUIE.ResolvePVPZone()
@@ -319,6 +322,7 @@ function LUIE.ResolvePVPZone()
     end
 end
 
+-- -----------------------------------------------------------------------------
 --- Pulls the name for the current morph of a skill.
 --- @param abilityId number: The AbilityId of the skill.
 --- @return string abilityName: The name of the current morph of the skill.
@@ -328,6 +332,7 @@ function LUIE.GetSkillMorphName(abilityId)
     return abilityName
 end
 
+-- -----------------------------------------------------------------------------
 --- Pulls the icon for the current morph of a skill.
 --- @param abilityId number: The AbilityId of the skill.
 --- @return string abilityIcon: The icon path of the current morph of the skill.
@@ -337,6 +342,7 @@ function LUIE.GetSkillMorphIcon(abilityId)
     return abilityIcon
 end
 
+-- -----------------------------------------------------------------------------
 --- Pulls the AbilityId for the current morph of a skill.
 --- @param abilityId number: The AbilityId of the skill.
 --- @return number morphAbilityId: The AbilityId of the current morph of the skill.
@@ -346,6 +352,7 @@ function LUIE.GetSkillMorphAbilityId(abilityId)
     return morphAbilityId -- renamed local (abilityId) to avoid naming conflicts with the parameter
 end
 
+-- -----------------------------------------------------------------------------
 --- Function to update the syntax for default Mundus Stone tooltips we pull (in order to retain scaling).
 --- @param abilityId number: The ID of the ability.
 --- @param tooltipText string: The original tooltip text.
@@ -362,6 +369,7 @@ function LUIE.UpdateMundusTooltipSyntax(abilityId, tooltipText)
     return tooltipText
 end
 
+-- -----------------------------------------------------------------------------
 --- @param index number
 --- @param bar? HotBarCategory
 --- @return number actionId
@@ -373,4 +381,11 @@ function LUIE.GetSlotTrueBoundId(index, bar)
         id = GetAbilityIdForCraftedAbilityId(id)
     end
     return id
+end
+
+-- -----------------------------------------------------------------------------
+
+-- Add this if not already.
+if not SLASH_COMMANDS["/rl"] then
+    SLASH_COMMANDS["/rl"] = ReloadUI
 end
