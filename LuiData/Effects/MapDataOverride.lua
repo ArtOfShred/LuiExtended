@@ -14,7 +14,7 @@ local Abilities = LUIE.Data.Abilities
 local zo_strformat = zo_strformat
 
 --- @class (partial) MapDataOverride
---- @field [integer] { [string]: { icon: string } } # Maps ability IDs to zone-specific icon overrides
+--- @field [integer] { [string]: { icon: string, name: string, hide: boolean } } # Maps ability IDs to zone-specific icon overrides
 local MapDataOverride =
 {
     [70355] = { [Zonenames.Zone_Deepwood_Barrow] = { icon = "LuiExtended/media/icons/abilities/ability_bear_bite_w.dds" } },               -- Bite (Great Bear)

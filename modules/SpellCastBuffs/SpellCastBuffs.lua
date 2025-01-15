@@ -1749,7 +1749,7 @@ function SpellCastBuffs.CreateSingleIcon(container, AnchorItem, effectType)
             }
 
             -- Setup bar properties
-            buff.bar.backdrop:SetEdgeTexture("", 8, 2, 2)
+            buff.bar.backdrop:SetEdgeTexture("", 8, 2, 2, 2)
             buff.bar.backdrop:SetDrawLayer(DL_BACKGROUND)
             buff.bar.backdrop:SetDrawLevel(DL_CONTROLS)
             buff.bar.bar:SetMinMax(0, 1)
