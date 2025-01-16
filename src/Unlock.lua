@@ -170,6 +170,7 @@ function LUIE.SetupElementMover(state)
             end
             -- Create a top-level window for backbar buttons.
             local isValidAnchor, point, relativeTo, relativePoint, offsetX, offsetY, anchorConstrains = k:GetAnchor()
+            if not isValidAnchor then return end
             -- Default Alert text doesn't really align with the frame so we just move this visually on initial setup.
             if k == ZO_AlertTextNotification then
                 local frameName = k:GetName()
@@ -179,6 +180,7 @@ function LUIE.SetupElementMover(state)
                     relativePoint = TOPRIGHT
                     offsetX = 0
                     offsetY = 0
+                    anchorConstrains = anchorConstrains or ANCHOR_CONSTRAINS_XY
                 end
             end
             --- @type TopLevelWindow
