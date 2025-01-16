@@ -389,3 +389,130 @@ end
 if not SLASH_COMMANDS["/rl"] then
     SLASH_COMMANDS["/rl"] = ReloadUI
 end
+
+-- -----------------------------------------------------------------------------
+---
+--- @param conditionType QuestConditionType
+--- @return string
+function LUIE.GetQuestConditionTypeName(conditionType)
+    local conditionTypes =
+    {
+        [1] = "QUEST_CONDITION_TYPE_KILL_MONSTER",
+        [2] = "QUEST_CONDITION_TYPE_INTERACT_MONSTER",
+        [3] = "QUEST_CONDITION_TYPE_PLAYER_DEATH",
+        [4] = "QUEST_CONDITION_TYPE_TIMER",
+        [5] = "QUEST_CONDITION_TYPE_GOTO_POINT",
+        [6] = "QUEST_CONDITION_TYPE_COLLECT_ITEM",
+        [7] = "QUEST_CONDITION_TYPE_GIVE_ITEM",
+        [8] = "QUEST_CONDITION_TYPE_INTERACT_OBJECT",
+        [9] = "QUEST_CONDITION_TYPE_TALK_TO",
+        [10] = "QUEST_CONDITION_TYPE_NPC_GOAL",
+        [11] = "QUEST_CONDITION_TYPE_USE_QUEST_ITEM",
+        [12] = "QUEST_CONDITION_TYPE_NPC_GOAL_FAIL",
+        [13] = "QUEST_CONDITION_TYPE_FOLLOWER_LOST",
+        [14] = "QUEST_CONDITION_TYPE_INTERACT_OBJECT_IN_STATE",
+        [15] = "QUEST_CONDITION_TYPE_TRANSITION_INTERACT_OBJECT",
+        [16] = "QUEST_CONDITION_TYPE_PLAYER_LOGOUT",
+        [17] = "QUEST_CONDITION_TYPE_SCRIPT_ACTION",
+        [18] = "QUEST_CONDITION_TYPE_ABILITY_USED_ON_NPC",
+        [19] = "QUEST_CONDITION_TYPE_ABILITY_TYPE_USED_ON_NPC",
+        [20] = "QUEST_CONDITION_TYPE_ENTER_SUBZONE",
+        [21] = "QUEST_CONDITION_TYPE_EXIT_SUBZONE",
+        [22] = "QUEST_CONDITION_TYPE_ABILITY_USED_ON_TABLE",
+        [23] = "QUEST_CONDITION_TYPE_ABILITY_TYPE_USED_ON_TABLE",
+        [24] = "QUEST_CONDITION_TYPE_KILL_MONSTER_TABLE",
+        [25] = "QUEST_CONDITION_TYPE_DECONSTRUCT_ITEM",
+        [26] = "QUEST_CONDITION_TYPE_KILL_ENEMY_PLAYERS",
+        [27] = "QUEST_CONDITION_TYPE_KILL_ENEMY_GUARDS",
+        [28] = "QUEST_CONDITION_TYPE_CAPTURE_KEEP_TYPE",
+        [29] = "QUEST_CONDITION_TYPE_CAPTURE_SPECIFIC_KEEP",
+        [30] = "QUEST_CONDITION_TYPE_HAS_ITEM",
+        [31] = "QUEST_CONDITION_TYPE_CRAFT_ITEM",
+        [32] = "QUEST_CONDITION_TYPE_PICKPOCKET_ITEM",
+        [33] = "QUEST_CONDITION_TYPE_EQUIP_ITEM",
+        [34] = "QUEST_CONDITION_TYPE_LEAVE_REVIVE_COUNTER_LIST",
+        [35] = "QUEST_CONDITION_TYPE_EVENT_SUCCESS",
+        [36] = "QUEST_CONDITION_TYPE_EVENT_FAIL",
+        [37] = "QUEST_CONDITION_TYPE_FOLLOWER_GAINED",
+        [38] = "QUEST_CONDITION_TYPE_INTERACT_SIMPLE_OBJECT",
+        [39] = "QUEST_CONDITION_TYPE_INTERACT_SIMPLE_OBJECT_IN_STATE",
+        [40] = "QUEST_CONDITION_TYPE_ARTIFACT_CAPTURED",
+        [41] = "QUEST_CONDITION_TYPE_ARTIFACT_RETURNED",
+        [42] = "QUEST_CONDITION_TYPE_KILL_ENEMY_PLAYERS_OF_CLASS",
+        [43] = "QUEST_CONDITION_TYPE_KILL_ENEMY_PLAYERS_WHILE_DEFENDING_KEEP",
+        [44] = "QUEST_CONDITION_TYPE_GATHER_ITEM",
+        [45] = "QUEST_CONDITION_TYPE_ADVANCE_COMPLETABLE_SIBLINGS",
+        [46] = "QUEST_CONDITION_TYPE_SELL_LAUNDER_ITEM",
+        [47] = "QUEST_CONDITION_TYPE_KILL_BOUNTY_CLASSIFICATION_TYPE",
+        [48] = "QUEST_CONDITION_TYPE_CRAFT_RANDOM_WRIT_ITEM",
+        [49] = "QUEST_CONDITION_TYPE_GATHER_ITEM_TYPE",
+        [50] = "QUEST_CONDITION_TYPE_BATTLEGROUND_PARTICIPATION",
+        [51] = "QUEST_CONDITION_TYPE_BATTLEGROUND_VICTORY",
+        [52] = "QUEST_CONDITION_TYPE_BATTLEGROUND_EARNED_POINTS",
+        [53] = "QUEST_CONDITION_TYPE_GATHER_ITEM_TRAIT",
+        [54] = "QUEST_CONDITION_TYPE_CAPTURE_KEEP_TYPE_UNIQUE_KEEPS",
+        [55] = "QUEST_CONDITION_TYPE_SUMMONED_COMPANION",
+        [56] = "QUEST_CONDITION_TYPE_DISMISSED_COMPANION",
+        [57] = "QUEST_CONDITION_TYPE_LEVEL_UP",
+        [58] = "QUEST_CONDITION_TYPE_EARN_CHAMPION_POINT",
+        [60] = "QUEST_CONDITION_TYPE_UNEARTH_ANTIQUITY",
+        [61] = "QUEST_CONDITION_TYPE_LOOT_TREASURE_CHEST",
+        [62] = "QUEST_CONDITION_TYPE_VENDOR_GOLD_TRANSACTION",
+        [63] = "QUEST_CONDITION_TYPE_GUILD_TRADER_GOLD_TRANSACTION",
+        [64] = "QUEST_CONDITION_TYPE_ENTER_ZONE",
+        [65] = "QUEST_CONDITION_TYPE_TRIBUTE_WON_MATCH_MONSTER",
+        [66] = "QUEST_CONDITION_TYPE_TRIBUTE_LOST_MATCH_MONSTER",
+        [67] = "QUEST_CONDITION_TYPE_TRIBUTE_WON_MATCH_PLAYER",
+        [68] = "QUEST_CONDITION_TYPE_TRIBUTE_LOST_MATCH_PLAYER",
+        [69] = "QUEST_CONDITION_TYPE_READ_BOOK",
+        [70] = "QUEST_CONDITION_TYPE_KILL_MONSTER_TYPE",
+        [71] = "QUEST_CONDITION_TYPE_MAX_VALUE"
+    }
+    return conditionTypes[conditionType] or string_format("UNKNOWN_CONDITION_TYPE_%d", conditionType)
+end
+
+-- -----------------------------------------------------------------------------
+--- Utility function to handle font setup and validation
+--- @param fontNameKey string: The key for the font name.
+--- @param fontStyleKey string|nil: The key for the font style (optional).
+--- @param fontSizeKey string|nil: The key for the font size (optional).
+--- @param settings table: The settings table containing the font settings.
+--- @param defaultFont string: The default font name.
+--- @param defaultStyle string|nil: The default font style (optional).
+--- @param defaultSize number|nil: The default font size (optional).
+--- @return string: The formatted font string.
+function LUIE.SetupFont(fontNameKey, fontStyleKey, fontSizeKey, settings, defaultFont, defaultStyle, defaultSize)
+    -- Handle font name
+    local fontName = LUIE.Fonts[settings[fontNameKey]]
+    if not fontName or fontName == "" then
+        LUIE.PrintToChat(GetString(LUIE_STRING_ERROR_FONT), true)
+        fontName = defaultFont
+    end
+
+    -- Handle font size and style - if keys aren't provided, don't try to access them in settings
+    local fontSize = fontSizeKey and ((settings[fontSizeKey] and settings[fontSizeKey] > 0) and settings[fontSizeKey] or defaultSize)
+    local fontStyle = fontStyleKey and ((settings[fontStyleKey] and settings[fontStyleKey] ~= "") and settings[fontStyleKey] or defaultStyle)
+
+    -- Build the font string based on what parameters are available
+    if fontSize and fontStyle then
+        return fontName .. "|" .. fontSize .. "|" .. fontStyle
+    elseif fontSize then
+        return fontName .. "|" .. fontSize
+    else
+        return fontName
+    end
+end
+
+-- -----------------------------------------------------------------------------
+--- Helper function to generate font string with appropriate shadow style based on size
+--- @param fontName string: The name of the font.
+--- @param fontSize number: The size of the font.
+--- @param overrideShadowStyle? string: The shadow style to override.
+--- @return string: The formatted font string.
+function LUIE.GetFormattedFontString(fontName, fontSize, overrideShadowStyle)
+    local shadowStyle = overrideShadowStyle
+    if not shadowStyle then
+        shadowStyle = fontSize <= 14 and "soft-shadow-thin" or "soft-shadow-thick"
+    end
+    return ("%s|%d|%s"):format(fontName, fontSize, shadowStyle)
+end

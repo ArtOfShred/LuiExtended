@@ -804,46 +804,56 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
         end
     end
 
-    -- Override by location name if it exists or map id here (location name takes priority over zone id)
+    -- Override by location name if it exists or map id here
     if AlertsZone[abilityId] then
         local index = GetZoneId(GetCurrentMapZoneIndex())
         local zoneName = GetPlayerLocationName()
         if AlertsZone[abilityId][zoneName] then
             unitName = AlertsZone[abilityId][zoneName]
-            -- Debug for my accounts
-            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
-                d("Zone Name: " .. zoneName .. ": " .. unitName)
+            if LUIE.IsDevDebugEnabled() then
+                LUIE.Debug([[Zone Name Override:
+    Location: %s
+    Unit Name: %s
+    Ability ID: %d]], zoneName, unitName, abilityId)
             end
         elseif AlertsZone[abilityId][index] then
             unitName = AlertsZone[abilityId][index]
-            -- Debug for my accounts
-            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
-                d(index .. ": " .. unitName)
-            end
-        end
-    end
-    -- Override by map name here (have to run this after we check location name and zone id)
-    if AlertsMap[abilityId] then
-        local mapName = GetMapName()
-        if AlertsMap[abilityId][mapName] then
-            unitName = AlertsMap[abilityId][mapName]
-            -- Debug for my accounts
-            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
-                d("Map Name: " .. mapName .. ": " .. unitName)
+            if LUIE.IsDevDebugEnabled() then
+                LUIE.Debug([[Zone ID Override:
+    Zone ID: %d
+    Unit Name: %s
+    Ability ID: %d]], index, unitName, abilityId)
             end
         end
     end
 
-    -- Match boss names if present
+    -- Override by map name
+    if AlertsMap[abilityId] then
+        local mapName = GetMapName()
+        if AlertsMap[abilityId][mapName] then
+            unitName = AlertsMap[abilityId][mapName]
+            if LUIE.IsDevDebugEnabled() then
+                LUIE.Debug([[Map Name Override:
+    Map: %s
+    Unit Name: %s
+    Ability ID: %d]], mapName, unitName, abilityId)
+            end
+        end
+    end
+
+    -- Match boss names
     if Alerts[abilityId].bossMatch then
         for x = 1, #Alerts[abilityId].bossMatch do
             for i = 1, 4 do
                 local bossName = DoesUnitExist("boss" .. i) and zo_strformat("<<C:1>>", GetUnitName("boss" .. i)) or ""
                 if bossName == Alerts[abilityId].bossMatch[x] then
                     unitName = Alerts[abilityId].bossMatch[x]
-                    -- Debug for my accounts
-                    if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
-                        d("Boss Match: " .. unitName)
+                    if LUIE.IsDevDebugEnabled() then
+                        LUIE.Debug([[Boss Name Match:
+    Boss Name: %s
+    Boss Index: %d
+    Match Index: %d
+    Ability ID: %d]], bossName, i, x, abilityId)
                     end
                 end
             end
@@ -855,19 +865,26 @@ function AbilityAlerts.ProcessAlert(abilityId, unitName, sourceUnitId)
             local bossName = DoesUnitExist("boss" .. i) and zo_strformat("<<C:1>>", GetUnitName("boss" .. i)) or ""
             if AlertsConvert[abilityId][bossName] then
                 unitName = AlertsConvert[abilityId][bossName]
-                if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
-                    d("Boss Enemy with adds detected, converting name of NPC source to: " .. unitName)
+                if LUIE.IsDevDebugEnabled() then
+                    LUIE.Debug([[Boss Add Conversion:
+    Original Boss: %s
+    Converted Name: %s
+    Boss Index: %d
+    Ability ID: %d]], bossName, unitName, i, abilityId)
                 end
             end
         end
     end
 
-    -- If an ability is flagged to not replace an override name if the source already exists, then use that name after checking its not nil.
+    -- No forced name override check
     if Alerts[abilityId].noForcedNameOverride then
         if savedName ~= "" and savedName ~= nil then
             unitName = savedName
-            if LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
-                d("noForcedNameOverride override detected for enemy, using default name: " .. unitName)
+            if LUIE.IsDevDebugEnabled() then
+                LUIE.Debug([[Name Override Prevented:
+    Original Name: %s
+    Ability ID: %d
+    Override Type: noForcedNameOverride]], savedName, abilityId)
             end
         end
     end

@@ -75,3 +75,42 @@ LUIE.PlayerDisplayName = zo_strformat("<<C:1>>", GetUnitDisplayName("player"))
 -- -----------------------------------------------------------------------------
 LUIE.PlayerFaction = GetUnitAlliance("player")
 -- -----------------------------------------------------------------------------
+
+-- DEVS
+local DEVS =
+{
+    ["@ArtOfShred"] =
+    {
+        enabled = true,
+        debug = true,
+    },
+    ["@ArtOfShredPTS"] =
+    {
+        enabled = true,
+        debug = true,
+    },
+    ["@ArtOfShredLegacy"] =
+    {
+        enabled = true,
+        debug = true,
+    },
+    ["@HammerOfGlory"] =
+    {
+        enabled = true,
+        debug = true,
+    },
+    ["@dack_janiels"] =
+    {
+        enabled = true,
+        debug = false,
+    },
+}
+LUIE.DEVS = DEVS
+-- -----------------------------------------------------------------------------
+-- Helper function to check if debug is enabled for current user
+function LUIE.IsDevDebugEnabled()
+    local currentUser = GetDisplayName()
+    return DEVS[currentUser] and DEVS[currentUser].enabled and DEVS[currentUser].debug
+end
+-- -----------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------

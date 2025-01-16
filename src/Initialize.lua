@@ -1,46 +1,72 @@
 -- -----------------------------------------------------------------------------
---  LuiExtended                                                               --
---  Distributed under The MIT License (MIT) (see LICENSE file)                --
+--  LuiExtended
+--  Distributed under The MIT License (MIT) (see LICENSE file)
 -- -----------------------------------------------------------------------------
 
 --- @class (partial) LuiExtended
+--- @field name string The addon name
+--- @field author string The addon author
+--- @field version string The addon version
+--- @field SVName string SavedVariables name
+--- @field SVVer number SavedVariables version
+--- @field Defaults table Default settings
+--- @field SV table Current saved variables
 local LUIE = LUIE
 
+-- Local references for better performance
 local zo_strformat = zo_strformat
 local eventManager = GetEventManager()
 
--- Load saved settings.
+--- Loads and initializes saved variables for the addon
+--- @return nil
 local function LoadSavedVars()
-    -- Addon options
+    -- Initialize account-wide settings first
     LUIE.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, nil, LUIE.Defaults)
+
+    -- Override with character-specific settings if enabled
     if LUIE.SV.CharacterSpecificSV then
         LUIE.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, nil, LUIE.Defaults)
     end
 end
 
--- Startup Info string.
+--- Handles the player activation event and displays startup information
+--- @return nil
 local function LoadScreen()
+    -- Cleanup event listener
     eventManager:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
-    -- Set Positions for moved Default UI elements
+
+    -- Initialize UI element positions
     LUIE.SetElementPosition()
+
+    -- Display startup message if enabled
     if not LUIE.SV.StartupInfo then
-        LUIE.PrintToChat(zo_strformat("|cFFFFFF<<1>> by|r |c00C000<<2>>|r |cFFFFFFv<<3>>|r", LUIE.name, LUIE.author, LUIE.version), true)
+        LUIE.PrintToChat(zo_strformat("|cFFFFFF<<1>> by|r |c00C000<<2>>|r |cFFFFFFv<<3>>|r",
+            LUIE.name, LUIE.author, LUIE.version), true)
     end
 end
 
--- Register events.
+--- Registers all necessary event handlers for the addon
+--- @return nil
 local function RegisterEvents()
+    -- Register player activation handler
     eventManager:RegisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED, LoadScreen)
-    -- Existing event registrations
+
+    -- Register guild-related events if needed features are enabled
     if LUIE.SV.SlashCommands_Enable or LUIE.SV.ChatAnnouncements_Enable then
         LUIE.UpdateGuildData()
-        eventManager:RegisterForEvent(LUIE.name .. "ChatAnnouncements", EVENT_GUILD_SELF_JOINED_GUILD, LUIE.UpdateGuildData)
-        eventManager:RegisterForEvent(LUIE.name .. "ChatAnnouncements", EVENT_GUILD_SELF_LEFT_GUILD, LUIE.UpdateGuildData)
+        local eventNamespace = LUIE.name .. "ChatAnnouncements"
+        eventManager:RegisterForEvent(eventNamespace, EVENT_GUILD_SELF_JOINED_GUILD, LUIE.UpdateGuildData)
+        eventManager:RegisterForEvent(eventNamespace, EVENT_GUILD_SELF_LEFT_GUILD, LUIE.UpdateGuildData)
     end
 end
 
+--- Creates and initializes all addon settings menus
+--- @return nil
 local function CreateSettings()
+    -- Initialize core settings
     LUIE.CreateSettings()
+
+    -- Initialize module-specific settings
     LUIE.ChatAnnouncements.CreateSettings()
     LUIE.CombatInfo.CreateSettings()
     LUIE.CombatText.CreateSettings()
@@ -48,11 +74,15 @@ local function CreateSettings()
     LUIE.UnitFrames.CreateSettings()
     LUIE.SpellCastBuffs.CreateSettings()
     LUIE.SlashCommands.CreateSettings()
+
+    -- Handle settings migration
     LUIE.SlashCommands.MigrateSettings()
 end
 
+--- Initializes all addon modules based on user preferences
+--- @return nil
 local function Initialize()
-    -- Initialize this addon modules according to user preferences
+    -- Initialize each module with its enabled state from saved variables
     LUIE.ChatAnnouncements.Initialize(LUIE.SV.ChatAnnouncements_Enable)
     LUIE.CombatInfo.Initialize(LUIE.SV.CombatInfo_Enabled)
     LUIE.CombatText.Initialize(LUIE.SV.CombatText_Enabled)
@@ -62,29 +92,81 @@ local function Initialize()
     LUIE.SlashCommands.Initialize(LUIE.SV.SlashCommands_Enable)
 end
 
--- LuiExtended Initialization.
-eventManager:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, function (eventCode, addonName)
-    -- Only initialize our own addon
-    if LUIE.name ~= addonName then
-        return
-    end
-    -- Once we know it's ours, lets unregister the event listener
+-- Main Initialization Handler
+--- @param eventCode number The event code that triggered this callback
+--- @param addonName string The name of the addon that was loaded
+local function OnAddonLoaded(eventCode, addonName)
+    -- Only proceed if this is our addon
+    if LUIE.name ~= addonName then return end
+
+    -- Cleanup event listener
     eventManager:UnregisterForEvent(addonName, eventCode)
-    -- Load saved variables
+
+    -- Initialize addon components in sequence
     LoadSavedVars()
-    -- Initialize Hooks
     LUIE.InitializeHooks()
-    -- Toggle Alert Frame Visibility if needed
     LUIE.SetupAlertFrameVisibility()
-
     Initialize()
-
-    -- Load Timestamp Color
     LUIE.UpdateTimeStampColor()
-    -- Create settings menus for our addon
     CreateSettings()
-    -- Display changelog screen
     LUIE.ChangelogScreen()
-    -- Register global event listeners
     RegisterEvents()
-end)
+end
+
+-- Register the addon loaded event handler
+eventManager:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, OnAddonLoaded)
+
+-- Optional Profiling Support (Commented out by default)
+--[[
+local AddonProfiler = _G["AddonProfiler"]
+
+local function OnAddonLoadedWithProfiling(eventCode, addonName)
+    if LUIE.name ~= addonName then return end
+
+    if AddonProfiler then
+        AddonProfiler:Start(LUIE.name)
+        AddonProfiler:MarkEvent("Initialization Start")
+    end
+
+    eventManager:UnregisterForEvent(addonName, eventCode)
+
+    -- Profile initialization sequence
+    if AddonProfiler then AddonProfiler:MarkEvent("SavedVars Start") end
+    LoadSavedVars()
+    if AddonProfiler then AddonProfiler:MarkEvent("SavedVars End") end
+
+    if AddonProfiler then AddonProfiler:MarkEvent("Hooks Start") end
+    LUIE.InitializeHooks()
+    if AddonProfiler then AddonProfiler:MarkEvent("Hooks End") end
+
+    if AddonProfiler then AddonProfiler:MarkEvent("AlertFrame Start") end
+    LUIE.SetupAlertFrameVisibility()
+    if AddonProfiler then AddonProfiler:MarkEvent("AlertFrame End") end
+
+    if AddonProfiler then AddonProfiler:MarkEvent("Main Initialize Start") end
+    Initialize()
+    if AddonProfiler then AddonProfiler:MarkEvent("Main Initialize End") end
+
+    if AddonProfiler then AddonProfiler:MarkEvent("TimeStamp Start") end
+    LUIE.UpdateTimeStampColor()
+    if AddonProfiler then AddonProfiler:MarkEvent("TimeStamp End") end
+
+    if AddonProfiler then AddonProfiler:MarkEvent("Settings Start") end
+    CreateSettings()
+    if AddonProfiler then AddonProfiler:MarkEvent("Settings End") end
+
+    if AddonProfiler then AddonProfiler:MarkEvent("Changelog Start") end
+    LUIE.ChangelogScreen()
+    if AddonProfiler then AddonProfiler:MarkEvent("Changelog End") end
+
+    if AddonProfiler then AddonProfiler:MarkEvent("Events Start") end
+    RegisterEvents()
+    if AddonProfiler then AddonProfiler:MarkEvent("Events End") end
+
+    if AddonProfiler then
+        AddonProfiler:MarkEvent("Initialization Complete")
+        zo_callLater(function() AddonProfiler:Stop() end, 1000)
+    end
+end
+]]
+--

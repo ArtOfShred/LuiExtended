@@ -7,6 +7,7 @@
 local LUIE = LUIE
 -- ChatAnnouncements namespace
 --- @class (partial) ChatAnnouncements
+--- @field SV ChatAnnouncementsSV
 LUIE.ChatAnnouncements = {}
 
 --- @class (partial) ChatAnnouncements

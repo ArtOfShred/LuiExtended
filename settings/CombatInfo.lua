@@ -10,7 +10,7 @@ local FontsList = LUIE.Media.FontList
 local SoundsList = LUIE.Media.SoundList
 local StatusbarTexturesList = LUIE.Media.StatusbarTexturesList
 
---- @class (partial) CombatInfo
+--- @class LUIE.CombatInfo
 local CombatInfo = LUIE.CombatInfo
 local CrowdControlTracker = CombatInfo.CrowdControlTracker
 local AbilityAlerts = CombatInfo.AbilityAlerts
@@ -71,7 +71,7 @@ local function loadDialogButtons()
         LUIE.RegisterDialogueButton(dialog.identifier, dialog.title, dialog.text, dialog.callback)
     end
 end
---- @diagnostic disable-next-line: duplicate-set-field
+
 function CombatInfo.CreateSettings()
     -- Load LibAddonMenu
     local LAM = LibAddonMenu2
@@ -3305,22 +3305,21 @@ function CombatInfo.CreateSettings()
             },
             {
                 -- Display Method
-                -- TODO: Change theses to displayOptions + better punctuation
                 type = "dropdown",
                 name = GetString(LUIE_STRING_LAM_CI_CCT_DISPLAY_STYLE),
                 tooltip = GetString(LUIE_STRING_LAM_CI_CCT_DISPLAY_STYLE_TP),
-                choices = { "Both icon and text", "Icon only", "Text only" },
+                choices = { "Display: Icon & Text", "Display: Icon", "Display: Text" },
                 getFunc = function ()
                     if Settings.cct.showOptions == "all" then
-                        return "Both icon and text"
+                        return "Display: Icon & Text"
                     elseif Settings.cct.showOptions == "icon" then
-                        return "Icon only"
+                        return "Display: Icon"
                     elseif Settings.cct.showOptions == "text" then
-                        return "Text only"
+                        return "Display: Text"
                     end
                 end,
                 setFunc = function (newValue)
-                    if newValue == "Both icon and text" then
+                    if newValue == "Display: Icon & Text" then
                         Settings.cct.showOptions = "all"
                     elseif newValue == "Icon only" then
                         Settings.cct.showOptions = "icon"

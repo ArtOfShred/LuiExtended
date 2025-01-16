@@ -37,7 +37,6 @@ LUIE.Fonts =
     ["ArchivoNarrow SemiBold"] = "LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-SemiBold.slug",
     ["ArchivoNarrow SemiBoldItalic"] = "LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-SemiBoldItalic.slug",
     ["Bazooka"] = "LuiExtended/media/fonts/Bazooka/bazooka.slug",
-    ["Consolas"] = "/EsoUI/Common/Fonts/consola.slug",
     ["Cooline"] = "LuiExtended/media/fonts/Cooline/cooline.slug",
     ["Diogenes"] = "LuiExtended/media/fonts/Diogenes/diogenes.slug",
     ["EnigmaBold"] = "LuiExtended/media/fonts/Enigma/EnigmaBold.slug",
@@ -55,17 +54,11 @@ LUIE.Fonts =
     ["Metamorphous"] = "LuiExtended/media/fonts/Metamorphous/metamorphous.slug",
     ["Porky"] = "LuiExtended/media/fonts/Porky/porky.slug",
     ["ProFontWindows"] = "LuiExtended/media/fonts/ProFontWindows/ProFontWindows.slug",
-    ["ProseAntique"] = ZoFontBookPaper:GetFontInfo(),
     ["Roboto Bold Italic"] = "LuiExtended/media/fonts/Roboto/Roboto-BoldItalic.slug",
     ["Roboto Bold"] = "LuiExtended/media/fonts/Roboto/Roboto-Bold.slug",
-    ["Skyrim Handwritten"] = ZoFontBookLetter:GetFontInfo(),
     ["Talisman"] = "LuiExtended/media/fonts/Talisman/talisman.slug",
     ["Trajan Pro Bold"] = "LuiExtended/media/fonts/TrajanPro/TrajanProBold.slug",
-    ["Trajan Pro"] = ZoFontBookTablet:GetFontInfo(),
     ["Transformers"] = "LuiExtended/media/fonts/Transformers/transformers.slug",
-    ["Univers 55"] = "/EsoUI/Common/Fonts/univers55.slug",
-    ["Univers 57"] = ZoFontGame:GetFontInfo(),
-    ["Univers 67"] = ZoFontWinH1:GetFontInfo(),
     ["Yellowjacket"] = "LuiExtended/media/fonts/Yellowjacket/yellowjacket.slug",
 }
 -- -----------------------------------------------------------------------------
@@ -256,17 +249,59 @@ function LUIE.UpdateBackgroundTextures()
 end
 
 -- -----------------------------------------------------------------------------
+-- Add ESO built-in fonts
+local function GetGameFonts()
+    local fonts = {}
+    for varname, value in zo_insecurePairs(_G) do
+        if type(value) == "userdata" and value.GetFontInfo then
+            local face, size, option = value:GetFontInfo()
+            if face then
+                -- Store the complete font information
+                fonts[varname] = {
+                    path = face,
+                    size = size,
+                    option = option or "none",  -- Default to "none" if no option
+                    fullString = string.format("%s|%d|%s", face, size, option or "none")
+                }
+            end
+        end
+    end
+    return fonts
+end
+
+-- Merge game fonts with our custom fonts
+local function MergeGameFonts()
+    local gameFonts = GetGameFonts()
+    for name, fontInfo in pairs(gameFonts) do
+        if not LUIE.Fonts[name] then
+            LUIE.Fonts[name] = fontInfo.path
+        end
+        -- Store the complete font information in a separate table for reference
+        if not LUIE.FontInfo then LUIE.FontInfo = {} end
+        LUIE.FontInfo[name] = {
+            path = fontInfo.path,
+            size = fontInfo.size,
+            option = fontInfo.option,
+            fullString = fontInfo.fullString
+        }
+    end
+end
+
+-- -----------------------------------------------------------------------------
 -- Load all media
 local function LoadMedia()
+    MergeGameFonts()
     LUIE.UpdateFonts()
     LUIE.UpdateSounds()
     LUIE.UpdateStatusbarTextures()
     LUIE.UpdateBorderTextures()
     LUIE.UpdateBackgroundTextures()
 end
+
 -- -----------------------------------------------------------------------------
 -- Initialize media on load
 LoadMedia()
+
 -- -----------------------------------------------------------------------------
 -- Register callback for media updates
 local function OnMediaRegistered(mediatype, key)
@@ -284,6 +319,7 @@ local function OnMediaRegistered(mediatype, key)
         mapping.update()
     end
 end
+
 -- -----------------------------------------------------------------------------
 cm:RegisterCallback("LibMediaProvider_Registered", OnMediaRegistered)
 -- -----------------------------------------------------------------------------

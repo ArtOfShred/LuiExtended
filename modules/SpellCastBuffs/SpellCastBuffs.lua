@@ -730,16 +730,6 @@ function SpellCastBuffs.RegisterWerewolfEvents()
     end
 end
 
-local AUTHORIZED_USERS =
-{
-    ["@ArtOfShred"] = true,
-    ["@ArtOfShredPTS"] = true,
-    ["@ArtOfShredLegacy"] = true,
-    ["@HammerOfGlory"] = true,
-    ["@dack_janiels"] = true,
-}
-SpellCastBuffs.AUTHORIZED_USERS = AUTHORIZED_USERS
-
 function SpellCastBuffs.RegisterDebugEvents()
     -- Unregister existing events
     eventManager:UnregisterForEvent(moduleName .. "DebugCombat", EVENT_COMBAT_EVENT)
@@ -753,7 +743,7 @@ function SpellCastBuffs.RegisterDebugEvents()
     end
 
     -- Author-specific debug events
-    if AUTHORIZED_USERS[LUIE.PlayerDisplayName] and SpellCastBuffs.SV.ShowDebugEffect and SpellCastBuffs.SV.ShowDebugEffect then
+    if LUIE.DEVS[GetDisplayName()] and SpellCastBuffs.SV.ShowDebugEffect and SpellCastBuffs.SV.ShowDebugEffect then
         eventManager:RegisterForEvent(moduleName .. "AuthorDebugCombat", EVENT_COMBAT_EVENT, SpellCastBuffs.AuthorCombatDebug)
         eventManager:RegisterForEvent(moduleName .. "AuthorDebugEffect", EVENT_EFFECT_CHANGED, SpellCastBuffs.AuthorEffectDebug)
     end

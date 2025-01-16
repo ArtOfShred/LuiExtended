@@ -7,6 +7,7 @@
 local LUIE = LUIE
 --- @class (partial) LUIE.SlashCommands
 local SlashCommands = LUIE.SlashCommands
+--- @type CollectibleTables
 local CollectibleTables = LUIE.Data.CollectibleTables
 
 local pairs = pairs
@@ -17,6 +18,9 @@ local function GetFormattedCollectibleName(id)
     return zo_strformat("<<1>>", GetCollectibleName(id)) -- Remove ^M and ^F
 end
 
+--- @param collectibleTable CollectibleTables
+--- @return table options
+--- @return table optionKeys
 local function CreateOptions(collectibleTable)
     local options = {}
     local optionKeys = {}
@@ -795,7 +799,7 @@ function SlashCommands.CreateSettings()
     }
 
     -- Holiday XP Buffs are applied by the event now and not an item. No need to have these settings. Commented, maybe we can repurpose the code.
-    --[[     -- Slash Commands - Holiday XP Events Commands Options Submenu
+    -- Slash Commands - Holiday XP Events Commands Options Submenu
     optionsDataSlashCommands[#optionsDataSlashCommands + 1] =
     {
         type = "submenu",
@@ -867,7 +871,7 @@ function SlashCommands.CreateSettings()
                 warning = GetString(LUIE_STRING_LAM_RELOADUI_SLASH_WARNING),
             },
         },
-    } ]]
+    }
 
     -- Register the settings panel
     if LUIE.SV.SlashCommands_Enable then

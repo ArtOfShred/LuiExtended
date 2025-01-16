@@ -9,6 +9,9 @@
 ## OptionalDependsOn: LibDebugLogger>=263 DolgubonsLazyWritCreator LibLazyCrafting>=4012 LootLog>=406050
 ## SavedVariables: LUIESV
 
+# Addon Profiler
+;src/AddonProfiler.lua
+
 # Language Files
 lang/en.lua
 lang/settings/Settings_en.lua
@@ -26,6 +29,7 @@ src/Hooks-SkillsAdvisor.lua
 src/Hooks.lua
 src/Initialize.lua
 src/Media.lua
+src/fonts.xml
 src/UI.lua
 src/Changelog.lua
 bindings/Bindings.xml
@@ -46,8 +50,8 @@ modules/ChatAnnouncements/ChatAnnouncementsExperience.lua
 # Modules - Combat Text
 modules/CombatText/CombatText.lua
 modules/CombatText/Animation.lua
-modules/CombatText/Pool.lua
 modules/CombatText/PoolManager.lua
+modules/CombatText/Pool.lua
 
 # Combat Text - Event Listeners
 modules/CombatText/EventListeners/Base.lua

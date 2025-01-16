@@ -118,6 +118,12 @@ function CombatTextPool:New(poolType)
     end
 
     obj.poolType = poolType
+    
+    -- Register this pool with the PoolManager
+    if LUIE.CombatTextPoolManager then
+        LUIE.CombatTextPoolManager:RegisterPool(poolType, obj)
+    end
+    
     return obj
 end
 
