@@ -827,7 +827,7 @@ local function CreateCustomFrames()
         sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
         sceneManager:GetScene("loot"):AddFragment(fragment)
 
-        for i = 1, 24 do
+        for i = 1, 12 do
             local unitTag = "RaidGroup" .. i
             local control = UI:Control(raid, nil, nil, false)
             local rhb = UI:Backdrop(control, "fill", nil, nil, nil, false)
@@ -970,7 +970,7 @@ local function CreateCustomFrames()
         sceneManager:GetScene("siegeBarUI"):AddFragment(fragment)
         sceneManager:GetScene("loot"):AddFragment(fragment)
 
-        for i = 1, 6 do
+        for i = 1, 7 do
             local unitTag = "boss" .. i
             local control = UI:Control(bosses, nil, nil, false)
             local bhb = UI:Backdrop(control, "fill", nil, nil, nil, false)
@@ -1047,7 +1047,7 @@ local function CreateCustomFrames()
 
         -- Now we have to anchor all bars to their backdrops
         local shieldOverlay = (baseName == "RaidGroup" or baseName == "boss") or not UnitFrames.SV.CustomShieldBarSeparate
-        for i = 0, 24 do
+        for i = 0, 12 do
             local unitTag = (i == 0) and baseName or (baseName .. i)
             if UnitFrames.CustomFrames[unitTag] then
                 for _, powerType in pairs(
@@ -1163,7 +1163,7 @@ local function CreateCustomFrames()
     end
 
     if UnitFrames.SV.RaidEnableRegen then
-        for i = 1, 24 do
+        for i = 1, 12 do
             local unitTag = "RaidGroup" .. i
             if UnitFrames.CustomFrames[unitTag] then
                 for _, powerType in pairs(
@@ -1189,7 +1189,7 @@ local function CreateCustomFrames()
     end
 
     if UnitFrames.SV.BossEnableRegen then
-        for i = 0, 6 do
+        for i = 1, 7 do
             local unitTag = "boss" .. i
             if UnitFrames.CustomFrames[unitTag] then
                 for _, powerType in pairs(
@@ -1252,7 +1252,7 @@ local function CreateCustomFrames()
     end
 
     if UnitFrames.SV.RaidEnableArmor then
-        for i = 1, 24 do
+        for i = 1, 12 do
             local unitTag = "RaidGroup" .. i
             if UnitFrames.CustomFrames[unitTag] then
                 -- Assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
@@ -1270,7 +1270,7 @@ local function CreateCustomFrames()
     end
 
     if UnitFrames.SV.BossEnableArmor then
-        for i = 0, 6 do
+        for i = 1, 7 do
             local unitTag = "boss" .. i
             if UnitFrames.CustomFrames[unitTag] then
                 -- Assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
@@ -1344,7 +1344,7 @@ local function CreateCustomFrames()
     end
 
     if UnitFrames.SV.RaidEnablePower then
-        for i = 1, 24 do
+        for i = 1, 12 do
             local unitTag = "RaidGroup" .. i
             if UnitFrames.CustomFrames[unitTag] then
                 -- assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
@@ -1366,7 +1366,7 @@ local function CreateCustomFrames()
     end
 
     if UnitFrames.SV.BossEnablePower then
-        for i = 1, 6 do
+        for i = 1, 7 do
             local unitTag = "boss" .. i
             if UnitFrames.CustomFrames[unitTag] then
                 -- assume that unitTag DO have [COMBAT_MECHANIC_FLAGS_HEALTH] field
@@ -1389,7 +1389,7 @@ local function CreateCustomFrames()
 
     -- Animate Power Glow for all frames that have it displayed
     for _, baseName in pairs({ "player", "reticleover", "AvaPlayerTarget", "boss", "SmallGroup", "RaidGroup" }) do
-        for i = 0, 24 do
+        for i = 0, 12 do
             local unitTag = (i == 0) and baseName or (baseName .. i)
             if UnitFrames.CustomFrames[unitTag] then
                 if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
@@ -1585,13 +1585,13 @@ function UnitFrames.Initialize(enabled)
     g_savedHealth.controlledsiege = { 1, 1, 1, 0, 0 }
     g_savedHealth.reticleover = { 1, 1, 1, 0, 0 }
     g_savedHealth.companion = { 1, 1, 1, 0, 0 }
-    for i = 1, 24 do
+    for i = 1, 12 do
         g_savedHealth["group" .. i] = { 1, 1, 1, 0, 0 }
     end
-    for i = 1, 6 do
+    for i = 1, 7 do
         g_savedHealth["boss" .. i] = { 1, 1, 1, 0, 0 }
     end
-    for i = 1, 6 do
+    for i = 1, 7 do
         g_savedHealth["playerpet" .. i] = { 1, 1, 1, 0, 0 }
     end
 
@@ -1864,7 +1864,7 @@ function UnitFrames.CustomFramesFormatLabels(menu)
     end
 
     -- Format Raid Labels
-    for i = 1, 24 do
+    for i = 1, 12 do
         local unitTag = "RaidGroup" .. i
         if UnitFrames.CustomFrames[unitTag] then
             if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
@@ -1880,7 +1880,7 @@ function UnitFrames.CustomFramesFormatLabels(menu)
     end
 
     -- Format Boss Labels
-    for i = 1, 6 do
+    for i = 1, 7 do
         local unitTag = "boss" .. i
         if UnitFrames.CustomFrames[unitTag] then
             if UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
@@ -1920,7 +1920,7 @@ function UnitFrames.OnPlayerActivated(eventCode)
 
     -- Create UI elements for default group members frames
     if g_DefaultFrames.SmallGroup then
-        for i = 1, 24 do
+        for i = 1, 12 do
             local unitTag = "group" .. i
             if DoesUnitExist(unitTag) then
                 UnitFrames.DefaultFramesCreateUnitGroupControls(unitTag)
@@ -1934,7 +1934,7 @@ function UnitFrames.OnPlayerActivated(eventCode)
 
         -- Else we need to manually scan and update DefaultFrames
     elseif g_DefaultFrames.SmallGroup then
-        for i = 1, 24 do
+        for i = 1, 12 do
             local unitTag = "group" .. i
             if DoesUnitExist(unitTag) then
                 UnitFrames.ReloadValues(unitTag)
@@ -3757,7 +3757,7 @@ function UnitFrames.CustomFramesGroupUpdate()
     -- First we query all group unitTag for existence and save them to local list
     -- At the same time we will calculate how many group members we have and then will hide rest of custom control elements
     local n = 0 -- counter used to reference custom frames. it always continuous while games unitTag could have gaps
-    for i = 1, 24 do
+    for i = 1, 12 do
         local unitTag = "group" .. i
         if DoesUnitExist(unitTag) then
             -- Save this member for later sorting
@@ -3860,7 +3860,7 @@ function UnitFrames.CustomFramesUnreferenceGroupControl(groupType, first)
     if groupType == "SmallGroup" then
         last = 4
     elseif groupType == "RaidGroup" then
-        last = 24
+        last = 12
     else
         return
     end
@@ -3878,7 +3878,7 @@ function UnitFrames.OnBossesChanged(eventCode)
         return
     end
 
-    for i = 1, 6 do
+    for i = 1, 7 do
         local unitTag = "boss" .. i
         if DoesUnitExist(unitTag) then
             UnitFrames.CustomFrames[unitTag].control:SetHidden(false)
@@ -3891,7 +3891,7 @@ end
 
 function UnitFrames.ResetCompassBarMenu()
     if UnitFrames.SV.DefaultFramesNewBoss == 2 then
-        for i = 1, 6 do
+        for i = 1, 7 do
             local unitTag = "boss" .. i
             if DoesUnitExist(unitTag) then
                 COMPASS_FRAME:SetBossBarActive(true)
@@ -4311,7 +4311,7 @@ function UnitFrames.CustomFramesApplyColors(isMenu)
     -- After color is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs({ "player", "reticleover", "boss", "AvaPlayerTarget" }) do
         shield[4] = (UnitFrames.SV.CustomShieldBarSeparate and not (baseName == "boss")) and 0.9 or (UnitFrames.SV.ShieldAlpha / 100)
-        for i = 0, 6 do
+        for i = 0, 7 do
             local unitTag = (i == 0) and baseName or (baseName .. i)
             if UnitFrames.CustomFrames[unitTag] then
                 local unitFrame = UnitFrames.CustomFrames[unitTag]
@@ -5002,7 +5002,7 @@ function UnitFrames.CustomFramesApplyTexture()
         UnitFrames.CustomFrames.SmallGroup1.tlw:SetHidden(false)
     end
     if UnitFrames.CustomFrames.RaidGroup1 then
-        for i = 1, 24 do
+        for i = 1, 12 do
             local unitTag = "RaidGroup" .. i
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
@@ -5022,7 +5022,7 @@ function UnitFrames.CustomFramesApplyTexture()
         UnitFrames.CustomFrames.PetGroup1.tlw:SetHidden(false)
     end
     if UnitFrames.CustomFrames.boss1 then
-        for i = 1, 6 do
+        for i = 1, 7 do
             local unitTag = "boss" .. i
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].backdrop:SetCenterTexture(texture)
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].bar:SetTexture(texture)
@@ -5071,7 +5071,7 @@ function UnitFrames.DefaultFramesApplyFont(unitTag)
     else
         applyDefaultFont("player")
         applyDefaultFont("reticleover")
-        for i = 0, 24 do
+        for i = 0, 12 do
             applyDefaultFont("group" .. i)
         end
     end
@@ -5100,13 +5100,22 @@ function UnitFrames.DefaultFramesApplyColor()
     -- Apply setting for all possible unitTags
     applyDefaultColor("player")
     applyDefaultColor("reticleover")
-    for i = 0, 24 do
+    for i = 0, 12 do
         applyDefaultColor("group" .. i)
     end
 end
 
 -- Apply selected font for all known label on custom unit frames
 function UnitFrames.CustomFramesApplyFont()
+    -- Helper function to generate font string with appropriate shadow style based on size
+    local function GetFormattedFontString(fontName, fontSize, overrideShadowStyle)
+        local shadowStyle = overrideShadowStyle
+        if not shadowStyle then
+            shadowStyle = fontSize <= 14 and "soft-shadow-thin" or "soft-shadow-thick"
+        end
+        return ("%s|%d|%s"):format(fontName, fontSize, shadowStyle)
+    end
+
     -- First try selecting font face
     local fontName = LUIE.Fonts[UnitFrames.SV.CustomFontFace]
     if not fontName or fontName == "" then
@@ -5114,12 +5123,13 @@ function UnitFrames.CustomFramesApplyFont()
         fontName = "$(MEDIUM_FONT)"
     end
 
-    local fontStyle = (UnitFrames.SV.CustomFontStyle and UnitFrames.SV.CustomFontStyle ~= "") and UnitFrames.SV.CustomFontStyle or "soft-shadow-thin"
+    -- Use saved shadow style if specified, otherwise will use size-based default
+    local fontStyle = UnitFrames.SV.CustomFontStyle ~= "" and UnitFrames.SV.CustomFontStyle or nil
     local sizeCaption = (UnitFrames.SV.CustomFontOther and UnitFrames.SV.CustomFontOther > 0) and UnitFrames.SV.CustomFontOther or 16
     local sizeBars = (UnitFrames.SV.CustomFontBars and UnitFrames.SV.CustomFontBars > 0) and UnitFrames.SV.CustomFontBars or 14
 
-    local __mkFont = function (size)
-        return zo_strformat("<<1>>|<<2>>|<<3>>", fontName, size, fontStyle)
+    local function __mkFont(size)
+        return GetFormattedFontString(fontName, size, fontStyle)
     end
 
     -- After fonts is applied unhide frames, so player can see changes even from menu
@@ -5134,7 +5144,7 @@ function UnitFrames.CustomFramesApplyFont()
             "AvaPlayerTarget",
             "PetGroup",
         }) do
-        for i = 0, 24 do
+        for i = 0, 12 do
             local unitTag = (i == 0) and baseName or (baseName .. i)
             if UnitFrames.CustomFrames[unitTag] then
                 local unitFrame = UnitFrames.CustomFrames[unitTag]
@@ -5706,25 +5716,38 @@ function UnitFrames.CustomFramesApplyLayoutGroup(unhide)
     end
 end
 
--- Set dimensions of custom raid frame and anchors or raid group members
+-- Set dimensions of custom raid frame and anchors for raid group members
 function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
     if not UnitFrames.CustomFrames.RaidGroup1 then
         return
     end
 
+    -- Layout configuration
     local spacerHeight = 3
-    local itemsPerColumn = (UnitFrames.SV.RaidLayout == "6 x 2") and 2 or (UnitFrames.SV.RaidLayout == "3 x 4") and 4 or (UnitFrames.SV.RaidLayout == "2 x 6") and 6 or 12
+    local itemsPerColumn = (UnitFrames.SV.RaidLayout == "6 x 2") and 2
+        or (UnitFrames.SV.RaidLayout == "3 x 4") and 4
+        or (UnitFrames.SV.RaidLayout == "2 x 6") and 6
+        or 12 -- Default to 1 x 12
 
+    -- Calculate frame dimensions
     local raid = UnitFrames.CustomFrames.RaidGroup1.tlw
-    local rhb = nil -- TODO: Not sure what changing the anchors below to the proper "rhb" would do so leaving this here (everything already works)
-    raid:SetDimensions(UnitFrames.SV.RaidBarWidth * (12 / itemsPerColumn) + (UnitFrames.SV.RaidSpacers and spacerHeight * (itemsPerColumn / 4) or 0), UnitFrames.SV.RaidBarHeight * itemsPerColumn)
+    local rhb = nil -- Health bar reference for anchoring
 
+    -- Calculate total width including spacers
+    local totalWidth = UnitFrames.SV.RaidBarWidth * (12 / itemsPerColumn)
+    if UnitFrames.SV.RaidSpacers then
+        totalWidth = totalWidth + (spacerHeight * (itemsPerColumn / 4))
+    end
+
+    -- Set main frame dimensions
+    raid:SetDimensions(totalWidth, UnitFrames.SV.RaidBarHeight * itemsPerColumn)
+
+    -- Preview dimensions
     local groupWidth = UnitFrames.SV.RaidBarWidth * (zo_floor(0.5 + 12 / itemsPerColumn))
     local groupHeight = UnitFrames.SV.RaidBarHeight * zo_min(12, itemsPerColumn)
-
     raid.preview:SetDimensions(groupWidth, groupHeight)
 
-    -- Insert player into list if it matches the currentRole
+    -- Role-based sorting
     local function insertRole(list, currentRole)
         for index = 1, GetGroupSize() do
             local playerRole = GetGroupMemberSelectedRole(GetGroupUnitTagByIndex(index))
@@ -5734,20 +5757,20 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
         end
     end
 
-    -- Create a list of players and insert the players according to their role
+    -- Create sorted player list by role if enabled
     local playerList = {}
-
-    -- depreciated table function
-    -- table.foreach({ LFG_ROLE_TANK, LFG_ROLE_HEAL, LFG_ROLE_DPS, LFG_ROLE_INVALID }, function(_, value) insertRole(playerList, value) end)
-
-    local roles = { LFG_ROLE_TANK, LFG_ROLE_HEAL, LFG_ROLE_DPS, LFG_ROLE_INVALID }
-    for _, value in ipairs(roles) do
-        insertRole(playerList, value)
+    if UnitFrames.SV.SortRoleRaid then
+        local roles = { LFG_ROLE_TANK, LFG_ROLE_HEAL, LFG_ROLE_DPS, LFG_ROLE_INVALID }
+        for _, value in ipairs(roles) do
+            insertRole(playerList, value)
+        end
     end
 
-    local column = 0 -- 0,1,2,3,4,5
-    local row = 0    -- 1,2,3,...,12
+    -- Layout frames
+    local column = 0
+    local row = 0
     for i = 1, GetGroupSize() do
+        -- Update row/column position
         if row == itemsPerColumn then
             column = column + 1
             row = 1
@@ -5755,77 +5778,85 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
             row = row + 1
         end
 
+        -- Get correct player index based on role sorting
         local index = UnitFrames.SV.SortRoleRaid and playerList[i] or i
         local unitFrame = UnitFrames.CustomFrames["RaidGroup" .. index]
         local unitTag = GetGroupUnitTagByIndex(index)
 
+        -- Calculate frame position with spacers
+        local xOffset = UnitFrames.SV.RaidBarWidth * column
+        local yOffset = UnitFrames.SV.RaidBarHeight * (row - 1)
+        if UnitFrames.SV.RaidSpacers then
+            yOffset = yOffset + (spacerHeight * (zo_floor((i - 1) / 4) - zo_floor(column * itemsPerColumn / 4)))
+        end
+
+        -- Position and size the frame
         unitFrame.control:ClearAnchors()
-        unitFrame.control:SetAnchor(TOPLEFT, raid, TOPLEFT, UnitFrames.SV.RaidBarWidth * column, UnitFrames.SV.RaidBarHeight * (row - 1) + (UnitFrames.SV.RaidSpacers and spacerHeight * (zo_floor((i - 1) / 4) - zo_floor(column * itemsPerColumn / 4)) or 0))
+        unitFrame.control:SetAnchor(TOPLEFT, raid, TOPLEFT, xOffset, yOffset)
         unitFrame.control:SetDimensions(UnitFrames.SV.RaidBarWidth, UnitFrames.SV.RaidBarHeight)
 
+        -- Handle role/class icons
         local role = GetGroupMemberSelectedRole(unitTag)
 
         -- If we have icons set to display
         if UnitFrames.SV.RaidIconOptions > 1 then
+            local nameWidth = UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip - 27
+            local nameHeight = UnitFrames.SV.RaidBarHeight - 2
+
             if UnitFrames.SV.RaidIconOptions == 2 then -- Class Icon Only
-                unitFrame.name:SetDimensions(UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip - 27, UnitFrames.SV.RaidBarHeight - 2)
+                unitFrame.name:SetDimensions(nameWidth, nameHeight)
                 unitFrame.name:SetAnchor(LEFT, rhb, LEFT, 22, 0)
                 unitFrame.roleIcon:SetHidden(true)
                 unitFrame.classIcon:SetHidden(false)
-            end
-            if UnitFrames.SV.RaidIconOptions == 3 then -- Role Icon Only
-                if role then
-                    unitFrame.name:SetDimensions(UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip - 27, UnitFrames.SV.RaidBarHeight - 2)
-                    unitFrame.name:SetAnchor(LEFT, rhb, LEFT, 22, 0)
-                    unitFrame.roleIcon:SetHidden(false)
-                    unitFrame.classIcon:SetHidden(true)
-                end
-            end
-            if UnitFrames.SV.RaidIconOptions == 4 then -- Class PVP, Role PVE
+            elseif UnitFrames.SV.RaidIconOptions == 3 and role then -- Role Icon Only
+                unitFrame.name:SetDimensions(nameWidth, nameHeight)
+                unitFrame.name:SetAnchor(LEFT, rhb, LEFT, 22, 0)
+                unitFrame.roleIcon:SetHidden(false)
+                unitFrame.classIcon:SetHidden(true)
+            elseif UnitFrames.SV.RaidIconOptions == 4 then -- Class PVP, Role PVE
                 if LUIE.ResolvePVPZone() then
-                    unitFrame.name:SetDimensions(UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip - 27, UnitFrames.SV.RaidBarHeight - 2)
+                    unitFrame.name:SetDimensions(nameWidth, nameHeight)
                     unitFrame.name:SetAnchor(LEFT, rhb, LEFT, 22, 0)
                     unitFrame.roleIcon:SetHidden(true)
                     unitFrame.classIcon:SetHidden(false)
-                elseif not LUIE.ResolvePVPZone() and role then
-                    unitFrame.name:SetDimensions(UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip - 27, UnitFrames.SV.RaidBarHeight - 2)
+                elseif role then
+                    unitFrame.name:SetDimensions(nameWidth, nameHeight)
                     unitFrame.name:SetAnchor(LEFT, rhb, LEFT, 22, 0)
                     unitFrame.roleIcon:SetHidden(false)
                     unitFrame.classIcon:SetHidden(true)
                 else
-                    -- Fallback if neither condition is true then we clear the frame
-                    unitFrame.name:SetDimensions(UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip - 10, UnitFrames.SV.RaidBarHeight - 2)
+                    unitFrame.name:SetDimensions(UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip - 10, nameHeight)
                     unitFrame.name:SetAnchor(LEFT, rhb, LEFT, 5, 0)
                     unitFrame.roleIcon:SetHidden(true)
                     unitFrame.classIcon:SetHidden(true)
                 end
-            end
-            if UnitFrames.SV.RaidIconOptions == 5 then -- Class PVE, Role PVP
+            elseif UnitFrames.SV.RaidIconOptions == 5 then -- Class PVE, Role PVP
                 if LUIE.ResolvePVPZone() and role then
-                    unitFrame.name:SetDimensions(UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip - 27, UnitFrames.SV.RaidBarHeight - 2)
+                    unitFrame.name:SetDimensions(nameWidth, nameHeight)
                     unitFrame.name:SetAnchor(LEFT, rhb, LEFT, 22, 0)
                     unitFrame.roleIcon:SetHidden(false)
                     unitFrame.classIcon:SetHidden(true)
                 elseif not LUIE.ResolvePVPZone() then
-                    unitFrame.name:SetDimensions(UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip - 27, UnitFrames.SV.RaidBarHeight - 2)
+                    unitFrame.name:SetDimensions(nameWidth, nameHeight)
                     unitFrame.name:SetAnchor(LEFT, rhb, LEFT, 22, 0)
                     unitFrame.roleIcon:SetHidden(true)
                     unitFrame.classIcon:SetHidden(false)
                 else
-                    -- Fallback if neither condition is true then we clear the frame
-                    unitFrame.name:SetDimensions(UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip - 10, UnitFrames.SV.RaidBarHeight - 2)
+                    unitFrame.name:SetDimensions(UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip - 10, nameHeight)
                     unitFrame.name:SetAnchor(LEFT, rhb, LEFT, 5, 0)
                     unitFrame.roleIcon:SetHidden(true)
                     unitFrame.classIcon:SetHidden(true)
                 end
             end
         else
+            -- No icons
             unitFrame.name:SetDimensions(UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip - 10, UnitFrames.SV.RaidBarHeight - 2)
             unitFrame.name:SetAnchor(LEFT, rhb, LEFT, 5, 0)
             unitFrame.roleIcon:SetHidden(true)
             unitFrame.classIcon:SetHidden(true)
         end
 
+        -- Handle leader icon
         if IsUnitGroupLeader(unitTag) then
             unitFrame.name:SetDimensions(UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip - 27, UnitFrames.SV.RaidBarHeight - 2)
             unitFrame.name:SetAnchor(LEFT, rhb, LEFT, 22, 0)
@@ -5836,15 +5867,18 @@ function UnitFrames.CustomFramesApplyLayoutRaid(unhide)
             unitFrame.leader:SetTexture(leaderIcons[0])
         end
 
+        -- Set health label and dead text dimensions
         unitFrame.dead:SetDimensions(UnitFrames.SV.RaidBarWidth - 50, UnitFrames.SV.RaidBarHeight - 2)
         unitFrame[COMBAT_MECHANIC_FLAGS_HEALTH].label:SetDimensions(UnitFrames.SV.RaidBarWidth - 50, UnitFrames.SV.RaidBarHeight - 2)
 
+        -- Handle offline state
         if not IsUnitOnline(unitTag) then
             unitFrame.name:SetDimensions(UnitFrames.SV.RaidBarWidth - UnitFrames.SV.RaidNameClip, UnitFrames.SV.RaidBarHeight - 2)
             unitFrame.name:SetAnchor(LEFT, rhb, LEFT, 5, 0)
             unitFrame.classIcon:SetHidden(true)
         end
     end
+
     if unhide then
         raid:SetHidden(false)
     end
@@ -5905,7 +5939,7 @@ function UnitFrames.CustomFramesApplyLayoutBosses()
 
     bosses:SetDimensions(UnitFrames.SV.BossBarWidth, UnitFrames.SV.BossBarHeight * 6 + 2 * 5)
 
-    for i = 1, 6 do
+    for i = 1, 7 do
         local unitFrame = UnitFrames.CustomFrames["boss" .. i]
 
         unitFrame.control:ClearAnchors()
@@ -5977,7 +6011,7 @@ function UnitFrames.CustomFramesApplyInCombat()
     end
 
     -- Set boss transparency
-    for i = 1, 6 do
+    for i = 1, 7 do
         local unitTag = "boss" .. i
         if UnitFrames.CustomFrames[unitTag] then
             UnitFrames.CustomFrames[unitTag].control:SetAlpha(idle and oocAlphaBoss or incAlphaBoss)
@@ -6003,7 +6037,7 @@ function UnitFrames.CustomFramesGroupAlpha()
         end
     end
 
-    for i = 1, 24 do
+    for i = 1, 12 do
         local unitTag = "RaidGroup" .. i
         if UnitFrames.CustomFrames[unitTag] then
             UnitFrames.CustomFrames[unitTag].control:SetAlpha(IsUnitInGroupSupportRange(UnitFrames.CustomFrames[unitTag].unitTag) and alphaGroup or (alphaGroup / 2))
@@ -6021,7 +6055,7 @@ function UnitFrames.CustomFramesReloadControlsMenu(player, group, raid)
     UnitFrames.UpdateStaticControls(UnitFrames.CustomFrames["reticleover"])
     UnitFrames.UpdateStaticControls(g_AvaCustFrames["reticleover"])
 
-    for i = 1, 24 do
+    for i = 1, 12 do
         local unitTag = "group" .. i
         UnitFrames.UpdateStaticControls(g_DefaultFrames[unitTag])
         UnitFrames.UpdateStaticControls(UnitFrames.CustomFrames[unitTag])
@@ -6046,7 +6080,7 @@ function UnitFrames.CustomFramesReloadExecuteMenu()
         g_AvaCustFrames["reticleover"][COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_targetThreshold
     end
 
-    for i = 1, 6 do
+    for i = 1, 7 do
         local unitTag = "boss" .. i
         if UnitFrames.CustomFrames[unitTag] and UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH] then
             UnitFrames.CustomFrames[unitTag][COMBAT_MECHANIC_FLAGS_HEALTH].threshold = g_targetThreshold
@@ -6071,39 +6105,163 @@ function UnitFrames.CustomFramesReloadLowResourceThreshold()
 end
 
 --[[----------------------------------------------------------
- * DEBUG FUNCTIONS
+    DEBUG FUNCTIONS
 --]]
 ----------------------------------------------------------
 
-function UnitFrames.CustomFramesDebugGroup()
-    for i = 1, 4 do
-        local unitTag = "SmallGroup" .. i
-        UnitFrames.CustomFrames[unitTag].unitTag = "player"
-        UnitFrames.CustomFrames[unitTag].control:SetHidden(false)
-        UnitFrames.UpdateStaticControls(UnitFrames.CustomFrames[unitTag])
+-- Constants
+local UNIT_FRAMES =
+{
+    SMALL_GROUP =
+    {
+        prefix = "SmallGroup",
+        size = 4,
+        special =
+        {
+            first =
+            {
+                friendIcon =
+                {
+                    texture = "/esoui/art/campaign/campaignbrowser_friends.dds"
+                }
+            }
+        }
+    },
+    RAID_GROUP =
+    {
+        prefix = "RaidGroup",
+        size = 12
+    },
+    PET_GROUP =
+    {
+        prefix = "PetGroup",
+        size = 7
+    },
+    BOSS =
+    {
+        prefix = "boss",
+        size = 7
+    },
+    SINGLE =
+    {
+        PLAYER = "player",
+        TARGET = "reticleover",
+        COMPANION = "companion"
+    }
+}
+
+-- Helper function to debug a single frame
+local function DebugSingleFrame(frameType)
+    local frame = UnitFrames.CustomFrames[frameType]
+    if not frame then return end
+
+    frame.unitTag = UNIT_FRAMES.SINGLE.PLAYER
+    frame.control:SetHidden(false)
+    UnitFrames.UpdateStaticControls(frame)
+end
+
+local function DebugMultipleFrames(frameConfig)
+    local raidContainer = UnitFrames.CustomFrames.RaidGroup1.tlw
+    if raidContainer then
+        -- Make container visible
+        raidContainer:SetHidden(false)
+
+        -- Position container
+        raidContainer:ClearAnchors()
+        raidContainer:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, 100, 100)
+
+        -- Get dimensions from saved variables
+        local frameWidth = UnitFrames.SV.RaidBarWidth
+        local frameHeight = UnitFrames.SV.RaidBarHeight
+        local spacing = 0 -- Remove spacing between frames for tight stacking
+
+        -- Set container size
+        raidContainer:SetDimensions(frameWidth, frameHeight * frameConfig.size)
+
+        -- Position frames
+        for i = 1, frameConfig.size do
+            local unitTag = frameConfig.prefix .. i
+            local frame = UnitFrames.CustomFrames[unitTag]
+            if frame then
+                frame.unitTag = UNIT_FRAMES.SINGLE.PLAYER
+                frame.control:SetHidden(false)
+
+                -- Position frame with no spacing
+                frame.control:ClearAnchors()
+                frame.control:SetAnchor(TOPLEFT, raidContainer, TOPLEFT, 0, (i - 1) * frameHeight)
+                frame.control:SetDimensions(frameWidth, frameHeight)
+
+                -- Ensure name label is properly set
+                if frame.name then
+                    frame.name:SetText("DEBUG") -- Set consistent name for debug
+                    frame.name:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+                end
+
+                UnitFrames.UpdateStaticControls(frame)
+            end
+        end
     end
-    UnitFrames.CustomFrames.SmallGroup1.friendIcon:SetHidden(false)
-    UnitFrames.CustomFrames.SmallGroup1.friendIcon:SetTexture("/esoui/art/campaign/campaignbrowser_friends.dds")
-    UnitFrames.OnLeaderUpdate(nil, "SmallGroup1")
+
+    -- Handle special cases
+    if frameConfig.special and frameConfig.special.first then
+        local firstFrame = UnitFrames.CustomFrames[frameConfig.prefix .. "1"]
+        if firstFrame then
+            for component, settings in pairs(frameConfig.special.first) do
+                if firstFrame[component] then
+                    firstFrame[component]:SetHidden(false)
+                    if settings.texture then
+                        firstFrame[component]:SetTexture(settings.texture)
+                    end
+                end
+            end
+        end
+    end
+
+    if frameConfig.prefix == UNIT_FRAMES.SMALL_GROUP.prefix or
+    frameConfig.prefix == UNIT_FRAMES.RAID_GROUP.prefix then
+        UnitFrames.OnLeaderUpdate(nil, frameConfig.prefix .. "1")
+    end
+end
+
+-- Debug Functions
+function UnitFrames.CustomFramesDebugGroup()
+    DebugMultipleFrames(UNIT_FRAMES.SMALL_GROUP)
 end
 
 function UnitFrames.CustomFramesDebugRaid()
-    for i = 1, 24 do
-        local unitTag = "RaidGroup" .. i
-        UnitFrames.CustomFrames[unitTag].unitTag = "player"
-        UnitFrames.CustomFrames[unitTag].control:SetHidden(false)
-        UnitFrames.UpdateStaticControls(UnitFrames.CustomFrames[unitTag])
-    end
-    UnitFrames.OnLeaderUpdate(nil, "RaidGroup1")
+    DebugMultipleFrames(UNIT_FRAMES.RAID_GROUP)
+end
+
+function UnitFrames.CustomFramesDebugPlayer()
+    DebugSingleFrame(UNIT_FRAMES.SINGLE.PLAYER)
+end
+
+function UnitFrames.CustomFramesDebugTarget()
+    DebugSingleFrame(UNIT_FRAMES.SINGLE.TARGET)
+end
+
+function UnitFrames.CustomFramesDebugPets()
+    DebugMultipleFrames(UNIT_FRAMES.PET_GROUP)
+end
+
+function UnitFrames.CustomFramesDebugBosses()
+    DebugMultipleFrames(UNIT_FRAMES.BOSS)
+end
+
+function UnitFrames.CustomFramesDebugCompanion()
+    DebugSingleFrame(UNIT_FRAMES.SINGLE.COMPANION)
 end
 
 -- Updates group frames when a relevant social change event happens
 function UnitFrames.SocialUpdateFrames()
-    for i = 1, 24 do
+    -- Update all group frames
+    for i = 1, UNIT_FRAMES.RAID_GROUP.size do
         local unitTag = "group" .. i
         if DoesUnitExist(unitTag) then
             UnitFrames.ReloadValues(unitTag)
         end
     end
-    UnitFrames.ReloadValues("reticleover")
+
+    -- Update target frame
+    UnitFrames.ReloadValues(UNIT_FRAMES.SINGLE.TARGET)
 end
