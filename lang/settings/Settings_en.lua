@@ -10,6 +10,8 @@ local strings =
     -- Font Strings
     LUIE_STRING_LAM_FONT = "Font",
     LUIE_STRING_LAM_FONT_SIZE = "Font Size",
+    LUIE_STRING_LAM_CT_FONT_SIZE_TP = "Font Size", -- placeholder
+    LUIE_STRING_LAM_CT_FONT_STYLE_TP = "Font Outline",
     LUIE_STRING_LAM_FONT_OUTLINE = "Font Outline",
     -- Font Style Strings
     LUIE_STRING_LAM_FONT_STYLE = "Font Style",
