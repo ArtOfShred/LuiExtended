@@ -7,6 +7,8 @@
 -- Translation by: <default>
 local strings =
 {
+    -- Missing Base Game Settings
+    LUIE_STRING_LAM_MISSINGBASEGAMESETTINGS = "Missing Base Game Settings",
     -- Font Strings
     LUIE_STRING_LAM_FONT = "Font",
     LUIE_STRING_LAM_FONT_SIZE = "Font Size",

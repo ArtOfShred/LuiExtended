@@ -472,6 +472,114 @@ function LUIE.GetQuestConditionTypeName(conditionType)
 end
 
 -- -----------------------------------------------------------------------------
+--- Converts a quest type to its string name representation
+--- @param questType QuestType
+--- @return string
+function LUIE.GetQuestTypeName(questType)
+    local questTypes =
+    {
+        [QUEST_TYPE_NONE] = "QUEST_TYPE_NONE",
+        [QUEST_TYPE_GROUP] = "QUEST_TYPE_GROUP",
+        [QUEST_TYPE_MAIN_STORY] = "QUEST_TYPE_MAIN_STORY",
+        [QUEST_TYPE_GUILD] = "QUEST_TYPE_GUILD",
+        [QUEST_TYPE_CRAFTING] = "QUEST_TYPE_CRAFTING",
+        [QUEST_TYPE_DUNGEON] = "QUEST_TYPE_DUNGEON",
+        [QUEST_TYPE_RAID] = "QUEST_TYPE_RAID",
+        [QUEST_TYPE_AVA] = "QUEST_TYPE_AVA",
+        [QUEST_TYPE_CLASS] = "QUEST_TYPE_CLASS",
+        [QUEST_TYPE_AVA_GROUP] = "QUEST_TYPE_AVA_GROUP",
+        [QUEST_TYPE_AVA_GRAND] = "QUEST_TYPE_AVA_GRAND",
+        [QUEST_TYPE_HOLIDAY_EVENT] = "QUEST_TYPE_HOLIDAY_EVENT",
+        [QUEST_TYPE_BATTLEGROUND] = "QUEST_TYPE_BATTLEGROUND",
+        [QUEST_TYPE_PROLOGUE] = "QUEST_TYPE_PROLOGUE",
+        [QUEST_TYPE_UNDAUNTED_PLEDGE] = "QUEST_TYPE_UNDAUNTED_PLEDGE",
+        [QUEST_TYPE_COMPANION] = "QUEST_TYPE_COMPANION",
+        [QUEST_TYPE_TRIBUTE] = "QUEST_TYPE_TRIBUTE",
+        [QUEST_TYPE_SCRIBING] = "QUEST_TYPE_SCRIBING",
+    }
+    return questTypes[questType] or string_format("UNKNOWN_QUEST_TYPE_%d", questType)
+end
+
+-- -----------------------------------------------------------------------------
+--- Valid item types for deconstruction
+local DECONSTRUCTIBLE_ITEM_TYPES =
+{
+    [ITEMTYPE_ADDITIVE] = true,
+    [ITEMTYPE_ARMOR_BOOSTER] = true,
+    [ITEMTYPE_ARMOR_TRAIT] = true,
+    [ITEMTYPE_BLACKSMITHING_BOOSTER] = true,
+    [ITEMTYPE_BLACKSMITHING_MATERIAL] = true,
+    [ITEMTYPE_BLACKSMITHING_RAW_MATERIAL] = true,
+    [ITEMTYPE_CLOTHIER_BOOSTER] = true,
+    [ITEMTYPE_CLOTHIER_MATERIAL] = true,
+    [ITEMTYPE_CLOTHIER_RAW_MATERIAL] = true,
+    [ITEMTYPE_ENCHANTING_RUNE_ASPECT] = true,
+    [ITEMTYPE_ENCHANTING_RUNE_ESSENCE] = true,
+    [ITEMTYPE_ENCHANTING_RUNE_POTENCY] = true,
+    [ITEMTYPE_ENCHANTMENT_BOOSTER] = true,
+    [ITEMTYPE_FISH] = true,
+    [ITEMTYPE_GLYPH_ARMOR] = true,
+    [ITEMTYPE_GLYPH_JEWELRY] = true,
+    [ITEMTYPE_GLYPH_WEAPON] = true,
+    [ITEMTYPE_GROUP_REPAIR] = true,
+    [ITEMTYPE_INGREDIENT] = true,
+    [ITEMTYPE_JEWELRYCRAFTING_BOOSTER] = true,
+    [ITEMTYPE_JEWELRYCRAFTING_MATERIAL] = true,
+    [ITEMTYPE_JEWELRYCRAFTING_RAW_BOOSTER] = true,
+    [ITEMTYPE_JEWELRYCRAFTING_RAW_MATERIAL] = true,
+    [ITEMTYPE_JEWELRY_RAW_TRAIT] = true,
+    [ITEMTYPE_JEWELRY_TRAIT] = true,
+    [ITEMTYPE_POISON_BASE] = true,
+    [ITEMTYPE_POTION_BASE] = true,
+    [ITEMTYPE_RAW_MATERIAL] = true,
+    [ITEMTYPE_REAGENT] = true,
+    [ITEMTYPE_STYLE_MATERIAL] = true,
+    [ITEMTYPE_WEAPON] = true,
+    [ITEMTYPE_WEAPON_BOOSTER] = true,
+    [ITEMTYPE_WEAPON_TRAIT] = true,
+    [ITEMTYPE_WOODWORKING_BOOSTER] = true,
+    [ITEMTYPE_WOODWORKING_MATERIAL] = true,
+    [ITEMTYPE_WOODWORKING_RAW_MATERIAL] = true,
+}
+
+-- -----------------------------------------------------------------------------
+--- Valid crafting types for deconstruction
+local DECONSTRUCTIBLE_CRAFTING_TYPES =
+{
+    [CRAFTING_TYPE_BLACKSMITHING] = true,
+    [CRAFTING_TYPE_CLOTHIER] = true,
+    [CRAFTING_TYPE_WOODWORKING] = true,
+    [CRAFTING_TYPE_JEWELRYCRAFTING] = true,
+}
+
+-- -----------------------------------------------------------------------------
+--- Get the current crafting mode, accounting for both keyboard and gamepad UI
+--- @return number The current crafting mode
+function LUIE.GetMode()
+    if SCENE_MANAGER:IsShowingBaseScene() then
+        -- Gamepad UI
+        return SMITHING_GAMEPAD and SMITHING_GAMEPAD.mode or SMITHING.mode
+    else
+        -- Keyboard UI
+        return SMITHING.mode
+    end
+end
+
+-- -----------------------------------------------------------------------------
+--- Checks if an item type is valid for deconstruction in the current crafting context
+--- @param itemType number The item type to check
+--- @return boolean Returns true if the item can be deconstructed in current context
+function LUIE.ResolveCraftingUsed(itemType)
+    local craftingType = GetCraftingInteractionType()
+    local DECONSTRUCTION_MODE = 4
+
+    -- Check if current crafting type allows deconstruction and we're in deconstruction mode
+    return DECONSTRUCTIBLE_CRAFTING_TYPES[craftingType]
+        and LUIE.GetMode() == DECONSTRUCTION_MODE
+        and DECONSTRUCTIBLE_ITEM_TYPES[itemType] or false
+end
+
+-- -----------------------------------------------------------------------------
 --- Utility function to handle font setup and validation
 --- @param fontNameKey string: The key for the font name.
 --- @param fontStyleKey string|nil: The key for the font style (optional).

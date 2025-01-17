@@ -426,71 +426,53 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 function ChatAnnouncements.RegisterColorEvents()
-    local SV = ChatAnnouncements.SV
+    local SV = ChatAnnouncements.SV -- store the SV table in a local variable for better performance
 
-    local colorMappings =
-    {
-        -- Currency colors
-        { target = "CurrencyColorize",                   source = { "Currency", "CurrencyColor" } },
-        { target = "CurrencyUpColorize",                 source = { "Currency", "CurrencyColorUp" } },
-        { target = "CurrencyDownColorize",               source = { "Currency", "CurrencyColorDown" } },
-        { target = "CurrencyGoldColorize",               source = { "Currency", "CurrencyGoldColor" } },
-        { target = "CurrencyAPColorize",                 source = { "Currency", "CurrencyAPColor" } },
-        { target = "CurrencyTVColorize",                 source = { "Currency", "CurrencyTVColor" } },
-        { target = "CurrencyWVColorize",                 source = { "Currency", "CurrencyWVColor" } },
-        { target = "CurrencyOutfitTokenColorize",        source = { "Currency", "CurrencyOutfitTokenColor" } },
-        { target = "CurrencyUndauntedColorize",          source = { "Currency", "CurrencyUndauntedColor" } },
-        { target = "CurrencyTransmuteColorize",          source = { "Currency", "CurrencyTransmuteColor" } },
-        { target = "CurrencyEventColorize",              source = { "Currency", "CurrencyEventColor" } },
-        { target = "CurrencyCrownsColorize",             source = { "Currency", "CurrencyCrownsColor" } },
-        { target = "CurrencyCrownGemsColorize",          source = { "Currency", "CurrencyCrownGemsColor" } },
-        { target = "CurrencyEndeavorsColorize",          source = { "Currency", "CurrencyEndeavorsColor" } },
-        { target = "CurrencyEndlessColorize",            source = { "Currency", "CurrencyEndlessColor" } },
-        -- Collectible colors
-        { target = "CollectibleColorize1",               source = { "Collectibles", "CollectibleColor1" } },
-        { target = "CollectibleColorize2",               source = { "Collectibles", "CollectibleColor2" } },
-        { target = "CollectibleUseColorize",             source = { "Collectibles", "CollectibleUseColor" } },
-        -- Disguise alert color
-        { target = "DisguiseAlertColorize",              source = { "Notify", "DisguiseAlertColor" } },
-        -- Achievement colors
-        { target = "AchievementColorize1",               source = { "Achievement", "AchievementColor1" } },
-        { target = "AchievementColorize2",               source = { "Achievement", "AchievementColor2" } },
-        -- Lorebook colors
-        { target = "LorebookColorize1",                  source = { "Lorebooks", "LorebookColor1" } },
-        { target = "LorebookColorize2",                  source = { "Lorebooks", "LorebookColor2" } },
-        -- Experience colors
-        { target = "ExperienceMessageColorize",          source = { "XP", "ExperienceColorMessage" } },
-        { target = "ExperienceNameColorize",             source = { "XP", "ExperienceColorName" } },
-        { target = "ExperienceLevelUpColorize",          source = { "XP", "ExperienceLevelUpColor" } },
-        -- Skill colors
-        { target = "SkillPointColorize1",                source = { "Skills", "SkillPointColor1" } },
-        { target = "SkillPointColorize2",                source = { "Skills", "SkillPointColor2" } },
-        { target = "SkillLineColorize",                  source = { "Skills", "SkillLineColor" } },
-        { target = "SkillGuildColorize",                 source = { "Skills", "SkillGuildColor" } },
-        { target = "SkillGuildColorizeFG",               source = { "Skills", "SkillGuildColorFG" } },
-        { target = "SkillGuildColorizeMG",               source = { "Skills", "SkillGuildColorMG" } },
-        { target = "SkillGuildColorizeUD",               source = { "Skills", "SkillGuildColorUD" } },
-        { target = "SkillGuildColorizeTG",               source = { "Skills", "SkillGuildColorTG" } },
-        { target = "SkillGuildColorizeDB",               source = { "Skills", "SkillGuildColorDB" } },
-        { target = "SkillGuildColorizePO",               source = { "Skills", "SkillGuildColorPO" } },
-        -- Quest colors
-        { target = "QuestColorLocNameColorize",          source = { "Quests", "QuestColorLocName" } },
-        { target = "QuestColorLocDescriptionColorize",   source = { "Quests", "QuestColorLocDescription" } },
-        { target = "QuestColorQuestNameColorize",        source = { "Quests", "QuestColorName" } },
-        { target = "QuestColorQuestDescriptionColorize", source = { "Quests", "QuestColorDescription" } },
-        -- Storage colors
-        { target = "StorageRidingColorize",              source = { "Notify", "StorageRidingColor" } },
-        { target = "StorageRidingBookColorize",          source = { "Notify", "StorageRidingBookColor" } },
-        { target = "StorageBagColorize",                 source = { "Notify", "StorageBagColor" } },
-        -- Guild color
-        { target = "GuildColorize",                      source = { "Social", "GuildColor" } },
-        -- Antiquity color
-        { target = "AntiquityColorize",                  source = { "Antiquities", "AntiquityColor" } },
-    }
-
-    for _, mapping in ipairs(colorMappings) do
-        ColorizeColors[mapping.target] = ZO_ColorDef:New(unpack(SV[mapping.source[1]][mapping.source[2]]))
-    end
+    ColorizeColors.CurrencyColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyColor))
+    ColorizeColors.CurrencyUpColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyColorUp))
+    ColorizeColors.CurrencyDownColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyColorDown))
+    ColorizeColors.CollectibleColorize1 = ZO_ColorDef:New(unpack(SV.Collectibles.CollectibleColor1))
+    ColorizeColors.CollectibleColorize2 = ZO_ColorDef:New(unpack(SV.Collectibles.CollectibleColor2))
+    ColorizeColors.CollectibleUseColorize = ZO_ColorDef:New(unpack(SV.Collectibles.CollectibleUseColor))
+    ColorizeColors.CurrencyGoldColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyGoldColor))
+    ColorizeColors.CurrencyAPColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyAPColor))
+    ColorizeColors.CurrencyTVColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyTVColor))
+    ColorizeColors.CurrencyWVColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyWVColor))
+    ColorizeColors.CurrencyOutfitTokenColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyOutfitTokenColor))
+    ColorizeColors.CurrencyUndauntedColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyUndauntedColor))
+    ColorizeColors.CurrencyTransmuteColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyTransmuteColor))
+    ColorizeColors.CurrencyEventColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyEventColor))
+    ColorizeColors.CurrencyCrownsColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyCrownsColor))
+    ColorizeColors.CurrencyCrownGemsColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyCrownGemsColor))
+    ColorizeColors.CurrencyEndeavorsColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyEndeavorsColor))
+    ColorizeColors.CurrencyEndlessColorize = ZO_ColorDef:New(unpack(SV.Currency.CurrencyEndlessColor))
+    ColorizeColors.DisguiseAlertColorize = ZO_ColorDef:New(unpack(SV.Notify.DisguiseAlertColor))
+    ColorizeColors.AchievementColorize1 = ZO_ColorDef:New(unpack(SV.Achievement.AchievementColor1))
+    ColorizeColors.AchievementColorize2 = ZO_ColorDef:New(unpack(SV.Achievement.AchievementColor2))
+    ColorizeColors.LorebookColorize1 = ZO_ColorDef:New(unpack(SV.Lorebooks.LorebookColor1))
+    ColorizeColors.LorebookColorize2 = ZO_ColorDef:New(unpack(SV.Lorebooks.LorebookColor2))
+    ColorizeColors.ExperienceMessageColorize = ZO_ColorDef:New(unpack(SV.XP.ExperienceColorMessage)):ToHex()
+    ColorizeColors.ExperienceNameColorize = ZO_ColorDef:New(unpack(SV.XP.ExperienceColorName)):ToHex()
+    ColorizeColors.ExperienceLevelUpColorize = ZO_ColorDef:New(unpack(SV.XP.ExperienceLevelUpColor))
+    ColorizeColors.SkillPointColorize1 = ZO_ColorDef:New(unpack(SV.Skills.SkillPointColor1))
+    ColorizeColors.SkillPointColorize2 = ZO_ColorDef:New(unpack(SV.Skills.SkillPointColor2))
+    ColorizeColors.SkillLineColorize = ZO_ColorDef:New(unpack(SV.Skills.SkillLineColor))
+    ColorizeColors.SkillGuildColorize = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColor)):ToHex()
+    ColorizeColors.SkillGuildColorizeFG = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorFG)):ToHex()
+    ColorizeColors.SkillGuildColorizeMG = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorMG)):ToHex()
+    ColorizeColors.SkillGuildColorizeUD = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorUD)):ToHex()
+    ColorizeColors.SkillGuildColorizeTG = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorTG)):ToHex()
+    ColorizeColors.SkillGuildColorizeDB = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorDB)):ToHex()
+    ColorizeColors.SkillGuildColorizePO = ZO_ColorDef:New(unpack(SV.Skills.SkillGuildColorPO)):ToHex()
+    ColorizeColors.QuestColorLocNameColorize = ZO_ColorDef:New(unpack(SV.Quests.QuestColorLocName)):ToHex()
+    ColorizeColors.QuestColorLocDescriptionColorize = ZO_ColorDef:New(unpack(SV.Quests.QuestColorLocDescription)):ToHex()
+    ColorizeColors.QuestColorQuestNameColorize = ZO_ColorDef:New(unpack(SV.Quests.QuestColorName))
+    ColorizeColors.QuestColorQuestDescriptionColorize = ZO_ColorDef:New(unpack(SV.Quests.QuestColorDescription)):ToHex()
+    ColorizeColors.StorageRidingColorize = ZO_ColorDef:New(unpack(SV.Notify.StorageRidingColor))
+    ColorizeColors.StorageRidingBookColorize = ZO_ColorDef:New(unpack(SV.Notify.StorageRidingBookColor))
+    ColorizeColors.StorageBagColorize = ZO_ColorDef:New(unpack(SV.Notify.StorageBagColor))
+    ColorizeColors.GuildColorize = ZO_ColorDef:New(unpack(SV.Social.GuildColor))
+    ColorizeColors.AntiquityColorize = ZO_ColorDef:New(unpack(SV.Antiquities.AntiquityColor))
 end
 
 function ChatAnnouncements.RegisterSocialEvents()
@@ -3726,9 +3708,7 @@ end
 -- Simple posthook into ZOS crafting mode functions, based off MultiCraft, thanks Ayantir!
 function ChatAnnouncements.CraftModeOverrides()
     -- Get SMITHING mode
-    g_smithing.GetMode = function ()
-        return SMITHING.mode
-    end
+    g_smithing.GetMode = LUIE.GetMode
 
     -- Get ENCHANTING mode
     g_enchanting.GetMode = function ()
@@ -4285,322 +4265,391 @@ function ChatAnnouncements.Dummy()
     -- LUIE.ChatAnnouncements.InventoryUpdateCraft(0, BAG_VIRTUAL, 46142, true, nil, INVENTORY_UPDATE_REASON_DEFAULT, 66)
 end
 
--- Item State Management
-local ItemStateManager =
-{
-    inventoryStacks = {},
-    bankStacks = {},
-    banksubStacks = {},
-    houseBags = {},
-
-    updateItemState = function (self, bagId, slotId, itemData)
-        local container = self:getContainerForBag(bagId)
-        if container then
-            container[slotId] = itemData
-        end
-    end,
-
-    removeItemState = function (self, bagId, slotId)
-        local container = self:getContainerForBag(bagId)
-        if container and container[slotId] then
-            container[slotId] = nil
-        end
-    end,
-
-    getItemState = function (self, bagId, slotId)
-        local container = self:getContainerForBag(bagId)
-        return container and container[slotId]
-    end,
-
-    getContainerForBag = function (self, bagId)
-        if bagId == BAG_BACKPACK then
-            return self.inventoryStacks
-        elseif bagId == BAG_BANK then
-            return self.bankStacks
-        elseif bagId == BAG_SUBSCRIBER_BANK then
-            return self.banksubStacks
-        elseif bagId > 6 and bagId < 16 then
-            return self.houseBags[bagId]
-        end
-        return nil
-    end
-}
-
--- Utility Functions
-local function getItemDetails(bagId, slotId)
-    local icon, stack = GetItemInfo(bagId, slotId)
-    local itemType = GetItemType(bagId, slotId)
-    local itemId = GetItemId(bagId, slotId)
-    local itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
-    return
-    {
-        icon = icon,
-        stack = stack,
-        itemType = itemType,
-        itemId = itemId,
-        itemLink = itemLink
-    }
-end
-
-local function determineUpdateContext(bagId, stackCountChange)
-    local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and (stackCountChange > 0 and 1 or 2) or (stackCountChange > 0 and 3 or 4)
-    local logPrefix
-    if bagId == BAG_BACKPACK then
-        logPrefix = g_bankBag == 1 and
-            (stackCountChange > 0 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdraw or ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit) or
-            (stackCountChange > 0 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawStorage or ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositStorage)
-    else
-        logPrefix = stackCountChange > 0 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit or ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositStorage
-    end
-    return gainOrLoss, logPrefix
-end
-
--- Bag Update Handlers
-local function handleBagUpdate(bagId, slotId, stackCountChange)
-    local receivedBy = ""
-    local itemState = ItemStateManager:getItemState(bagId, slotId)
-    local currentDetails = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT) ~= "" and getItemDetails(bagId, slotId) or nil
-
-    -- Handle item removal
-    if itemState and not currentDetails then
-        if g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowDestroy then
-            local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
-            ChatAnnouncements.ItemPrinter(
-                itemState.icon,
-                math.abs(stackCountChange),
-                itemState.itemType,
-                itemState.itemId,
-                itemState.itemLink,
-                receivedBy,
-                ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy,
-                gainOrLoss,
-                false
-            )
-        end
-        ItemStateManager:removeItemState(bagId, slotId)
-        return
-    end
-
-    -- Handle new or updated item
-    if currentDetails then
-        local gainOrLoss, logPrefix = determineUpdateContext(bagId, stackCountChange)
-        if (g_bankOn or g_InventoryOn) and math.abs(stackCountChange) > 0 then
-            ChatAnnouncements.ItemPrinter(
-                currentDetails.icon,
-                math.abs(stackCountChange),
-                currentDetails.itemType,
-                currentDetails.itemId,
-                currentDetails.itemLink,
-                receivedBy,
-                logPrefix,
-                gainOrLoss,
-                false
-            )
-        end
-        ItemStateManager:updateItemState(bagId, slotId, currentDetails)
-    end
-end
-
 function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     local Debug = LUIE.Debug
-    -- Early return for non-default updates
-    if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then return end
+
+    -- End right now if this is any other reason (durability loss, etc)
+    if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then
+        return
+    end
 
     -- local traceback = debug.traceback("Inventory Update" .. " eventCode: " .. tostring(eventCode) .. " bagId: " .. tostring(bagId) .. " slotId: " .. tostring(slotId) .. " isNewItem: " .. tostring(isNewItem) .. " itemSoundCategory: " .. tostring(itemSoundCategory) .. " inventoryUpdateReason: " .. tostring(inventoryUpdateReason) .. " stackCountChange: " .. tostring(stackCountChange), 2)
 
     -- Debug(traceback)
 
-    local function ResolveCraftingUsed(itemType)
-        local craftingType = GetCraftingInteractionType()
-        local smithingMode = g_smithing.GetMode()
+    local ResolveCraftingUsed = LUIE.ResolveCraftingUsed
 
-        local validItemTypes =
-        {
-            [ITEMTYPE_ADDITIVE] = true,
-            [ITEMTYPE_ARMOR_BOOSTER] = true,
-            [ITEMTYPE_ARMOR_TRAIT] = true,
-            [ITEMTYPE_BLACKSMITHING_BOOSTER] = true,
-            [ITEMTYPE_BLACKSMITHING_MATERIAL] = true,
-            [ITEMTYPE_BLACKSMITHING_RAW_MATERIAL] = true,
-            [ITEMTYPE_CLOTHIER_BOOSTER] = true,
-            [ITEMTYPE_CLOTHIER_MATERIAL] = true,
-            [ITEMTYPE_CLOTHIER_RAW_MATERIAL] = true,
-            [ITEMTYPE_ENCHANTING_RUNE_ASPECT] = true,
-            [ITEMTYPE_ENCHANTING_RUNE_ESSENCE] = true,
-            [ITEMTYPE_ENCHANTING_RUNE_POTENCY] = true,
-            [ITEMTYPE_ENCHANTMENT_BOOSTER] = true,
-            [ITEMTYPE_FISH] = true,
-            [ITEMTYPE_GLYPH_ARMOR] = true,
-            [ITEMTYPE_GLYPH_JEWELRY] = true,
-            [ITEMTYPE_GLYPH_WEAPON] = true,
-            [ITEMTYPE_GROUP_REPAIR] = true,
-            [ITEMTYPE_INGREDIENT] = true,
-            [ITEMTYPE_JEWELRYCRAFTING_BOOSTER] = true,
-            [ITEMTYPE_JEWELRYCRAFTING_MATERIAL] = true,
-            [ITEMTYPE_JEWELRYCRAFTING_RAW_BOOSTER] = true,
-            [ITEMTYPE_JEWELRYCRAFTING_RAW_MATERIAL] = true,
-            [ITEMTYPE_JEWELRY_RAW_TRAIT] = true,
-            [ITEMTYPE_JEWELRY_TRAIT] = true,
-            [ITEMTYPE_POISON_BASE] = true,
-            [ITEMTYPE_POTION_BASE] = true,
-            [ITEMTYPE_RAW_MATERIAL] = true,
-            [ITEMTYPE_REAGENT] = true,
-            [ITEMTYPE_STYLE_MATERIAL] = true,
-            [ITEMTYPE_WEAPON] = true,
-            [ITEMTYPE_WEAPON_BOOSTER] = true,
-            [ITEMTYPE_WEAPON_TRAIT] = true,
-            [ITEMTYPE_WOODWORKING_BOOSTER] = true,
-            [ITEMTYPE_WOODWORKING_MATERIAL] = true,
-            [ITEMTYPE_WOODWORKING_RAW_MATERIAL] = true,
-        }
-
-        if (craftingType == CRAFTING_TYPE_BLACKSMITHING or craftingType == CRAFTING_TYPE_CLOTHIER or craftingType == CRAFTING_TYPE_WOODWORKING or craftingType == CRAFTING_TYPE_JEWELRYCRAFTING) and smithingMode == 4 then
-            return validItemTypes[itemType] or false
-        end
-    end
-
-    -- Initialize message context
-    local receivedBy = "LUIE_RECEIVE_CRAFT"
+    local receivedBy = "LUIE_RECEIVE_CRAFT" -- This keyword tells our item printer to print the items in a list separated by commas, to conserve space for the display of crafting mats consumed.
     local logPrefixPos = ChatAnnouncements.SV.ContextMessages.CurrencyMessageCraft
     local logPrefixNeg = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
 
-    -- Set crafting-specific prefixes
-    local craftingType = GetCraftingInteractionType()
-    if craftingType == CRAFTING_TYPE_ENCHANTING then
+    -- Get string values from our crafting hook function
+    if GetCraftingInteractionType() == CRAFTING_TYPE_ENCHANTING then
         logPrefixPos = g_enchant_prefix_pos[g_enchanting.GetMode()]
         logPrefixNeg = g_enchant_prefix_neg[g_enchanting.GetMode()]
-    elseif craftingType == CRAFTING_TYPE_BLACKSMITHING or craftingType == CRAFTING_TYPE_CLOTHIER or
-           craftingType == CRAFTING_TYPE_WOODWORKING or craftingType == CRAFTING_TYPE_JEWELRYCRAFTING then
+    end
+    if GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING or GetCraftingInteractionType() == CRAFTING_TYPE_JEWELRYCRAFTING then
         logPrefixPos = g_smithing_prefix_pos[g_smithing.GetMode()]
         logPrefixNeg = g_smithing_prefix_neg[g_smithing.GetMode()]
     end
 
-    -- Default overrides
-    logPrefixPos = logPrefixPos or ChatAnnouncements.SV.ContextMessages.CurrencyMessageCraft
-    logPrefixNeg = logPrefixNeg or ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeconstruct
+    -- If the hook function didn't return a string value (for example because the player was in Gamepad mode), then we use a default override.
+    if logPrefixPos == nil then
+        logPrefixPos = ChatAnnouncements.SV.ContextMessages.CurrencyMessageCraft
+    end
+    if logPrefixNeg == nil then
+        logPrefixNeg = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeconstruct
+    end
 
     if CheckLibLazyCraftingActive() then
         logPrefixPos = ChatAnnouncements.SV.ContextMessages.CurrencyMessageCraft
         logPrefixNeg = ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse
     end
 
-    -- Handle regular bags
-    if bagId == BAG_WORN or bagId == BAG_BACKPACK or bagId == BAG_BANK or bagId == BAG_SUBSCRIBER_BANK then
-        local itemState = ItemStateManager:getItemState(bagId, slotId)
-        local currentDetails = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT) ~= "" and getItemDetails(bagId, slotId) or nil
+    if bagId == BAG_WORN then
+        local gainOrLoss
+        local logPrefix
+        local icon
+        local stack
+        local itemType
+        local itemId
+        local itemLink
+        local removed
+        -- NEW ITEM
+        if not g_equippedStacks[slotId] then
+            icon, stack = GetItemInfo(bagId, slotId)
+            itemType = GetItemType(bagId, slotId)
+            itemId = GetItemId(bagId, slotId)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            g_equippedStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+            logPrefix = logPrefixPos
+            ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            -- EXISTING ITEM
+        elseif g_equippedStacks[slotId] then
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            if itemLink == nil or itemLink == "" then
+                -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
+                icon = g_equippedStacks[slotId].icon
+                stack = g_equippedStacks[slotId].stack
+                itemType = g_equippedStacks[slotId].itemType
+                itemId = g_equippedStacks[slotId].itemId
+                itemLink = g_equippedStacks[slotId].itemLink
+                removed = true
+            else
+                -- If we get a value for itemLink, then we want to use bag info to fill in the blanks
+                icon, stack = GetItemInfo(bagId, slotId)
+                itemType = GetItemType(bagId, slotId)
+                itemId = GetItemId(bagId, slotId)
+                removed = false
+            end
 
-        -- Handle new item
-        if not itemState and currentDetails then
-            local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
-            ItemStateManager:updateItemState(bagId, slotId, currentDetails)
-            ChatAnnouncements.ItemCounterDelay(
-                currentDetails.icon,
-                stackCountChange,
-                currentDetails.itemType,
-                currentDetails.itemId,
-                currentDetails.itemLink,
-                receivedBy,
-                logPrefixPos,
-                gainOrLoss,
-                false,
-                nil,
-                false,
-                true
-            )
-            return
-        end
-
-        -- Handle existing item
-        if itemState then
-            -- Handle item removal
-            if not currentDetails then
-                if g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowDestroy then
-                    local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
-                    ChatAnnouncements.ItemPrinter(
-                        itemState.icon,
-                        math.abs(stackCountChange),
-                        itemState.itemType,
-                        itemState.itemId,
-                        itemState.itemLink,
-                        receivedBy,
-                        ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy,
-                        gainOrLoss,
-                        false
-                    )
+            -- STACK COUNT CHANGE = 0 (UPGRADE)
+            if stackCountChange == 0 then
+                g_oldItem = { itemLink = g_equippedStacks[slotId].itemLink, icon = icon }
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+                logPrefix = logPrefixPos
+                ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                -- STACK COUNT INCREMENTED UP
+            elseif stackCountChange > 0 then
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+                logPrefix = logPrefixPos
+                if itemId == 33753 then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
                 end
-                ItemStateManager:removeItemState(bagId, slotId)
-                return
+                ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                -- STACK COUNT INCREMENTED DOWN
+            elseif stackCountChange < 0 then
+                local change = stackCountChange * -1
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
+                if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
+                    if itemType == ITEMTYPE_FISH then
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                    end
+                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
             end
 
-            -- Handle stack changes
-            local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and (stackCountChange > 0 and 1 or 2) or (stackCountChange > 0 and 3 or 4)
-            local logPrefix = stackCountChange > 0 and logPrefixPos or logPrefixNeg
-
-            if currentDetails.itemType == ITEMTYPE_FISH then
-                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
-            elseif currentDetails.itemId == 33753 then
-                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+            if removed then
+                if g_equippedStacks[slotId] then
+                    g_equippedStacks[slotId] = nil
+                end
+            else
+                g_equippedStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
             end
-
-            if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then
-                ChatAnnouncements.ItemCounterDelay(
-                    currentDetails.icon,
-                    math.abs(stackCountChange),
-                    currentDetails.itemType,
-                    currentDetails.itemId,
-                    currentDetails.itemLink,
-                    receivedBy,
-                    logPrefix,
-                    gainOrLoss,
-                    false,
-                    nil,
-                    stackCountChange < 0,
-                    true
-                )
-            end
-
-            ItemStateManager:updateItemState(bagId, slotId, currentDetails)
         end
     end
 
-    -- Handle virtual bag
-    if bagId == BAG_VIRTUAL then
-        local itemLink = tostring(ChatAnnouncements.GetItemLinkFromItemId(slotId))
-        local currentDetails =
-        {
-            icon = GetItemLinkInfo(itemLink),
-            itemType = GetItemLinkItemType(itemLink),
-            itemId = slotId,
-            itemLink = itemLink,
-            quality = GetItemLinkQuality(itemLink)
-        }
-
-        local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and (stackCountChange > 0 and 1 or 2) or (stackCountChange > 0 and 3 or 4)
-        local logPrefix = ResolveCraftingUsed(currentDetails.itemType) and
-            (stackCountChange > 0 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive or ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse) or
-            (stackCountChange > 0 and logPrefixPos or logPrefixNeg)
-
-        if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then
-            if currentDetails.itemType == ITEMTYPE_FISH then
-                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
-            elseif currentDetails.itemId == 33753 then
-                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+    if bagId == BAG_BACKPACK then
+        local gainOrLoss
+        local logPrefix
+        local icon
+        local stack
+        local itemType
+        local itemId
+        local itemLink
+        local removed
+        -- NEW ITEM
+        if not g_inventoryStacks[slotId] then
+            icon, stack = GetItemInfo(bagId, slotId)
+            itemType = GetItemType(bagId, slotId)
+            itemId = GetItemId(bagId, slotId)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            g_inventoryStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+            logPrefix = logPrefixPos
+            -- ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
+            -- EXISTING ITEM
+        elseif g_inventoryStacks[slotId] then
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            -- For item removal, we save whatever the currently indexed item is here.
+            local removedIcon = g_inventoryStacks[slotId].icon
+            local removedItemType = g_inventoryStacks[slotId].itemType
+            local removedItemId = g_inventoryStacks[slotId].itemId
+            local removedItemLink = g_inventoryStacks[slotId].itemLink
+            if itemLink == nil or itemLink == "" then
+                -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
+                icon = g_inventoryStacks[slotId].icon
+                stack = g_inventoryStacks[slotId].stack
+                itemType = g_inventoryStacks[slotId].itemType
+                itemId = g_inventoryStacks[slotId].itemId
+                itemLink = g_inventoryStacks[slotId].itemLink
+                removed = true
+            else
+                -- If we get a value for itemLink, then we want to use bag info to fill in the blanks
+                icon, stack = GetItemInfo(bagId, slotId)
+                itemType = GetItemType(bagId, slotId)
+                itemId = GetItemId(bagId, slotId)
+                removed = false
             end
 
-            ChatAnnouncements.ItemCounterDelay(
-                currentDetails.icon,
-                math.abs(stackCountChange),
-                currentDetails.itemType,
-                currentDetails.itemId,
-                currentDetails.itemLink,
-                receivedBy,
-                logPrefix,
-                gainOrLoss,
-                false,
-                nil,
-                stackCountChange < 0,
-                true
-            )
+            -- STACK COUNT CHANGE = 0 (UPGRADE)
+            if stackCountChange == 0 then
+                g_oldItem = { itemLink = g_inventoryStacks[slotId].itemLink, icon = icon }
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+                logPrefix = logPrefixPos
+                ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                -- STACK COUNT INCREMENTED UP
+            elseif stackCountChange > 0 then
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+                logPrefix = logPrefixPos
+                if itemId == 33753 then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+                end
+                -- ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
+                -- STACK COUNT INCREMENTED DOWN
+            elseif stackCountChange < 0 then
+                local change = stackCountChange * -1
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                logPrefix = ResolveCraftingUsed(removedItemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
+                if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
+                    -- ChatAnnouncements.ItemPrinter(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    if removedItemType == ITEMTYPE_FISH then
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                    end
+                    ChatAnnouncements.ItemCounterDelay(removedIcon, change, removedItemType, removedItemId, removedItemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true, true)
+                end
+            end
+
+            if removed then
+                if g_inventoryStacks[slotId] then
+                    g_inventoryStacks[slotId] = nil
+                end
+            else
+                g_inventoryStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            end
+        end
+    end
+
+    if bagId == BAG_BANK then
+        local gainOrLoss
+        local logPrefix
+        local icon
+        local stack
+        local itemType
+        local itemId
+        local itemLink
+        local removed
+        -- NEW ITEM
+        if not g_bankStacks[slotId] then
+            icon, stack = GetItemInfo(bagId, slotId)
+            itemType = GetItemType(bagId, slotId)
+            itemId = GetItemId(bagId, slotId)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            g_bankStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+            logPrefix = logPrefixPos
+            ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            -- EXISTING ITEM
+        elseif g_bankStacks[slotId] then
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            if itemLink == nil or itemLink == "" then
+                -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
+                icon = g_bankStacks[slotId].icon
+                stack = g_bankStacks[slotId].stack
+                itemType = g_bankStacks[slotId].itemType
+                itemId = g_bankStacks[slotId].itemId
+                itemLink = g_bankStacks[slotId].itemLink
+                removed = true
+            else
+                -- If we get a value for itemLink, then we want to use bag info to fill in the blanks
+                icon, stack = GetItemInfo(bagId, slotId)
+                itemType = GetItemType(bagId, slotId)
+                itemId = GetItemId(bagId, slotId)
+                removed = false
+            end
+
+            -- STACK COUNT CHANGE = 0 (UPGRADE)
+            if stackCountChange == 0 then
+                g_oldItem = { itemLink = g_bankStacks[slotId].itemLink, icon = icon }
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+                logPrefix = logPrefixPos
+                ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                -- STACK COUNT INCREMENTED UP
+            elseif stackCountChange > 0 then
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+                logPrefix = logPrefixPos
+                if itemId == 33753 then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+                end
+                -- ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
+                -- STACK COUNT INCREMENTED DOWN
+            elseif stackCountChange < 0 then
+                local change = stackCountChange * -1
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
+                if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
+                    -- ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                    if itemType == ITEMTYPE_FISH then
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                    end
+                    ChatAnnouncements.ItemCounterDelay(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true, true)
+                end
+            end
+
+            if removed then
+                if g_bankStacks[slotId] then
+                    g_bankStacks[slotId] = nil
+                end
+            else
+                g_bankStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            end
+        end
+    end
+
+    if bagId == BAG_SUBSCRIBER_BANK then
+        local gainOrLoss
+        local logPrefix
+        local icon
+        local stack
+        local itemType
+        local itemId
+        local itemLink
+        local removed
+        -- NEW ITEM
+        if not g_banksubStacks[slotId] then
+            icon, stack = GetItemInfo(bagId, slotId)
+            itemType = GetItemType(bagId, slotId)
+            itemId = GetItemId(bagId, slotId)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            g_banksubStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+            logPrefix = logPrefixPos
+            ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            -- EXISTING ITEM
+        elseif g_banksubStacks[slotId] then
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            if itemLink == nil or itemLink == "" then
+                -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
+                icon = g_banksubStacks[slotId].icon
+                stack = g_banksubStacks[slotId].stack
+                itemType = g_banksubStacks[slotId].itemType
+                itemId = g_banksubStacks[slotId].itemId
+                itemLink = g_banksubStacks[slotId].itemLink
+                removed = true
+            else
+                -- If we get a value for itemLink, then we want to use bag info to fill in the blanks
+                icon, stack = GetItemInfo(bagId, slotId)
+                itemType = GetItemType(bagId, slotId)
+                itemId = GetItemId(bagId, slotId)
+                removed = false
+            end
+
+            -- STACK COUNT CHANGE = 0 (UPGRADE)
+            if stackCountChange == 0 then
+                g_oldItem = { itemLink = g_banksubStacks[slotId].itemLink, icon = icon }
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+                logPrefix = logPrefixPos
+                ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                -- STACK COUNT INCREMENTED UP
+            elseif stackCountChange > 0 then
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+                logPrefix = logPrefixPos
+                if itemId == 33753 then
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+                end
+                -- ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                ChatAnnouncements.ItemCounterDelay(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, false, true)
+                -- STACK COUNT INCREMENTED DOWN
+            elseif stackCountChange < 0 then
+                local change = stackCountChange * -1
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
+                if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
+                    if itemType == ITEMTYPE_FISH then
+                        logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+                    end
+                    ChatAnnouncements.ItemCounterDelay(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, true, true)
+                end
+            end
+
+            if removed then
+                if g_banksubStacks[slotId] then
+                    g_banksubStacks[slotId] = nil
+                end
+            else
+                g_banksubStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            end
+        end
+    end
+
+    if bagId == BAG_VIRTUAL then
+        local gainOrLoss
+        local logPrefix
+        local itemLink = tostring(ChatAnnouncements.GetItemLinkFromItemId(slotId))
+        local icon = GetItemLinkInfo(itemLink)
+        local itemType = GetItemLinkItemType(itemLink)
+        local itemId = slotId
+        local itemQuality = GetItemLinkQuality(itemLink)
+        local change
+        local alwaysFirst
+
+        if stackCountChange > 0 then
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+            logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive or logPrefixPos
+            change = stackCountChange
+            alwaysFirst = false
+        end
+
+        if stackCountChange < 0 then
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+            logPrefix = ResolveCraftingUsed(itemType) and ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
+            change = stackCountChange * -1
+            alwaysFirst = true
+        end
+
+        if logPrefix ~= ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse or ChatAnnouncements.SV.Inventory.LootShowCraftUse then
+            if itemType == ITEMTYPE_FISH then
+                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageFillet
+            end
+            if itemId == 33753 then
+                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive
+            end
+            ChatAnnouncements.ItemCounterDelay(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false, nil, alwaysFirst, true)
         end
     end
 
@@ -4609,133 +4658,489 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
 end
 
 function ChatAnnouncements.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-    if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then return end
+    -- End right now if this is any other reason (durability loss, etc)
+    if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then
+        return
+    end
 
-    -- Handle the update based on bag type
-    if bagId == BAG_BACKPACK or bagId == BAG_BANK or bagId == BAG_SUBSCRIBER_BANK or (bagId > 6 and bagId < 16) then
-        handleBagUpdate(bagId, slotId, stackCountChange)
-    elseif bagId == BAG_VIRTUAL then
+    local receivedBy = ""
+    if bagId == BAG_BACKPACK then
+        local gainOrLoss
+        local logPrefix
+        local icon
+        local stack
+        local itemType
+        local itemId
+        local itemLink
+        local removed
+        -- NEW ITEM
+        if not g_inventoryStacks[slotId] then
+            icon, stack = GetItemInfo(bagId, slotId)
+            itemType = GetItemType(bagId, slotId)
+            itemId = GetItemId(bagId, slotId)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            g_inventoryStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+            logPrefix = g_bankBag == 1 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdraw or ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawStorage
+            if g_InventoryOn then
+                ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            end
+            -- EXISTING ITEM
+        elseif g_inventoryStacks[slotId] then
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            if itemLink == nil or itemLink == "" then
+                -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
+                icon = g_inventoryStacks[slotId].icon
+                stack = g_inventoryStacks[slotId].stack
+                itemType = g_inventoryStacks[slotId].itemType
+                itemId = g_inventoryStacks[slotId].itemId
+                itemLink = g_inventoryStacks[slotId].itemLink
+                removed = true
+            else
+                -- If we get a value for itemLink, then we want to use bag info to fill in the blanks
+                icon, stack = GetItemInfo(bagId, slotId)
+                itemType = GetItemType(bagId, slotId)
+                itemId = GetItemId(bagId, slotId)
+                removed = false
+            end
+
+            -- STACK COUNT INCREMENTED UP
+            if stackCountChange > 0 then
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+                logPrefix = g_bankBag == 1 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdraw or ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawStorage
+                if g_InventoryOn then
+                    ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                -- STACK COUNT INCREMENTED DOWN
+            elseif stackCountChange < 0 then
+                local change = stackCountChange * -1
+                if g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowDestroy then
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy
+                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                if g_InventoryOn and not g_itemWasDestroyed then
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = g_bankBag == 1 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit or ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositStorage
+                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+            end
+
+            if removed then
+                if g_inventoryStacks[slotId] then
+                    g_inventoryStacks[slotId] = nil
+                end
+            else
+                g_inventoryStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            end
+
+            if not g_itemWasDestroyed then
+                g_bankOn = true
+            end
+            if not g_itemWasDestroyed then
+                g_InventoryOn = false
+            end
+            if not g_itemWasDestroyed then
+                zo_callLater(ChatAnnouncements.BankFixer, 50)
+            end
+        end
+    end
+
+    if bagId == BAG_BANK then
+        local gainOrLoss
+        local logPrefix
+        local icon
+        local stack
+        local itemType
+        local itemId
+        local itemLink
+        local removed
+        -- NEW ITEM
+        if not g_bankStacks[slotId] then
+            icon, stack = GetItemInfo(bagId, slotId)
+            itemType = GetItemType(bagId, slotId)
+            itemId = GetItemId(bagId, slotId)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            g_bankStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit
+            if g_bankOn then
+                ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            end
+            -- EXISTING ITEM
+        elseif g_bankStacks[slotId] then
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            if itemLink == nil or itemLink == "" then
+                -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
+                icon = g_bankStacks[slotId].icon
+                stack = g_bankStacks[slotId].stack
+                itemType = g_bankStacks[slotId].itemType
+                itemId = g_bankStacks[slotId].itemId
+                itemLink = g_bankStacks[slotId].itemLink
+                removed = true
+            else
+                -- If we get a value for itemLink, then we want to use bag info to fill in the blanks
+                icon, stack = GetItemInfo(bagId, slotId)
+                itemType = GetItemType(bagId, slotId)
+                itemId = GetItemId(bagId, slotId)
+                removed = false
+            end
+
+            -- STACK COUNT INCREMENTED UP
+            if stackCountChange > 0 then
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit
+                if g_bankOn then
+                    ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                -- STACK COUNT INCREMENTED DOWN
+            elseif stackCountChange < 0 then
+                local change = stackCountChange * -1
+                if g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowDestroy then
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy
+                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                if g_bankOn and not g_itemWasDestroyed then
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit
+                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+            end
+
+            if removed then
+                if g_bankStacks[slotId] then
+                    g_bankStacks[slotId] = nil
+                end
+            else
+                g_bankStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            end
+
+            if not g_itemWasDestroyed then
+                g_InventoryOn = true
+            end
+            if not g_itemWasDestroyed then
+                g_bankOn = false
+            end
+            if not g_itemWasDestroyed then
+                zo_callLater(ChatAnnouncements.BankFixer, 50)
+            end
+        end
+    end
+
+    if bagId == BAG_SUBSCRIBER_BANK then
+        local gainOrLoss
+        local logPrefix
+        local icon
+        local stack
+        local itemType
+        local itemId
+        local itemLink
+        local removed
+        -- NEW ITEM
+        if not g_banksubStacks[slotId] then
+            icon, stack = GetItemInfo(bagId, slotId)
+            itemType = GetItemType(bagId, slotId)
+            itemId = GetItemId(bagId, slotId)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            g_banksubStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit
+            if g_bankOn then
+                ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            end
+            -- EXISTING ITEM
+        elseif g_banksubStacks[slotId] then
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            if itemLink == nil or itemLink == "" then
+                -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
+                icon = g_banksubStacks[slotId].icon
+                stack = g_banksubStacks[slotId].stack
+                itemType = g_banksubStacks[slotId].itemType
+                itemId = g_banksubStacks[slotId].itemId
+                itemLink = g_banksubStacks[slotId].itemLink
+                removed = true
+            else
+                -- If we get a value for itemLink, then we want to use bag info to fill in the blanks
+                icon, stack = GetItemInfo(bagId, slotId)
+                itemType = GetItemType(bagId, slotId)
+                itemId = GetItemId(bagId, slotId)
+                removed = false
+            end
+
+            -- STACK COUNT INCREMENTED UP
+            if stackCountChange > 0 then
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit
+                if g_bankOn then
+                    ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                -- STACK COUNT INCREMENTED DOWN
+            elseif stackCountChange < 0 then
+                local change = stackCountChange * -1
+                if g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowDestroy then
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy
+                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                if g_bankOn and not g_itemWasDestroyed then
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit
+                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+            end
+
+            if removed then
+                if g_banksubStacks[slotId] then
+                    g_banksubStacks[slotId] = nil
+                end
+            else
+                g_banksubStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            end
+
+            if not g_itemWasDestroyed then
+                g_InventoryOn = true
+            end
+            if not g_itemWasDestroyed then
+                g_bankOn = false
+            end
+            if not g_itemWasDestroyed then
+                zo_callLater(ChatAnnouncements.BankFixer, 50)
+            end
+        end
+    end
+
+    if bagId > 6 and bagId < 16 then
+        local gainOrLoss
+        local logPrefix
+        local icon
+        local stack
+        local itemType
+        local itemId
+        local itemLink
+        local removed
+        -- NEW ITEM
+        if not g_houseBags[bagId][slotId] then
+            icon, stack = GetItemInfo(bagId, slotId)
+            itemType = GetItemType(bagId, slotId)
+            itemId = GetItemId(bagId, slotId)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            g_houseBags[bagId][slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositStorage
+            if g_bankOn then
+                ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            end
+            -- EXISTING ITEM
+        elseif g_houseBags[bagId][slotId] then
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            if itemLink == nil or itemLink == "" then
+                -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
+                icon = g_houseBags[bagId][slotId].icon
+                stack = g_houseBags[bagId][slotId].stack
+                itemType = g_houseBags[bagId][slotId].itemType
+                itemId = g_houseBags[bagId][slotId].itemId
+                itemLink = g_houseBags[bagId][slotId].itemLink
+                removed = true
+            else
+                -- If we get a value for itemLink, then we want to use bag info to fill in the blanks
+                icon, stack = GetItemInfo(bagId, slotId)
+                itemType = GetItemType(bagId, slotId)
+                itemId = GetItemId(bagId, slotId)
+                removed = false
+            end
+
+            -- STACK COUNT INCREMENTED UP
+            if stackCountChange > 0 then
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositStorage
+                if g_bankOn then
+                    ChatAnnouncements.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                -- STACK COUNT INCREMENTED DOWN
+            elseif stackCountChange < 0 then
+                local change = stackCountChange * -1
+                if g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowDestroy then
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy
+                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                if g_bankOn and not g_itemWasDestroyed then
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositStorage
+                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+            end
+
+            if removed then
+                if g_houseBags[bagId][slotId] then
+                    g_houseBags[bagId][slotId] = nil
+                end
+            else
+                g_houseBags[bagId][slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            end
+
+            if not g_itemWasDestroyed then
+                g_InventoryOn = true
+            end
+            if not g_itemWasDestroyed then
+                g_bankOn = false
+            end
+            if not g_itemWasDestroyed then
+                zo_callLater(ChatAnnouncements.BankFixer, 50)
+            end
+        end
+    end
+
+    if bagId == BAG_VIRTUAL then
+        local gainOrLoss
+        local stack
+        local logPrefix
         local itemLink = tostring(ChatAnnouncements.GetItemLinkFromItemId(slotId))
         local icon = GetItemLinkInfo(itemLink)
         local itemType = GetItemLinkItemType(itemLink)
-        local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and (stackCountChange > 0 and 1 or 2) or (stackCountChange > 0 and 3 or 4)
-        local logPrefix = g_bankBag == 1 and
-            (stackCountChange > 0 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdraw or ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit) or
-            (stackCountChange > 0 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawStorage or ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositStorage)
+        local itemId = slotId
+        local itemQuality = GetItemLinkQuality(itemLink)
 
-        ChatAnnouncements.ItemPrinter(icon, math.abs(stackCountChange), itemType, slotId, itemLink, "", logPrefix, gainOrLoss, false)
-    end
+        if stackCountChange < 1 then
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+            logPrefix = g_bankBag == 1 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit or ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositStorage
+            stack = stackCountChange * -1
+        else
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+            logPrefix = g_bankBag == 1 and ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdraw or ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawStorage
+            stack = stackCountChange
+        end
 
-    -- Reset state flags
-    if not g_itemWasDestroyed then
-        g_InventoryOn = bagId ~= BAG_BACKPACK
-        g_bankOn = bagId == BAG_BACKPACK
-        zo_callLater(ChatAnnouncements.BankFixer, 50)
+        ChatAnnouncements.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
     end
 
     g_itemWasDestroyed = false
     g_lockpickBroken = false
 end
 
--- Add new utility function for guild bank context
-local function determineGuildBankContext(stackCountChange)
-    local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and (stackCountChange > 0 and 1 or 2) or (stackCountChange > 0 and 3 or 4)
-    local logPrefix = stackCountChange > 0
-        and ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawGuild
-        or ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositGuild
-    return gainOrLoss, logPrefix
-end
-
--- Add new handler for guild bank operations
-local function handleGuildBankUpdate(bagId, slotId, stackCountChange)
-    local receivedBy = ""
-    local itemState = ItemStateManager:getItemState(bagId, slotId)
-    local currentDetails = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT) ~= "" and getItemDetails(bagId, slotId) or nil
-
-    -- Handle new item
-    if not itemState and currentDetails then
-        ItemStateManager:updateItemState(bagId, slotId, currentDetails)
-        local gainOrLoss, logPrefix = determineGuildBankContext(stackCountChange)
-
-        g_guildBankCarry =
-        {
-            icon = currentDetails.icon,
-            stack = currentDetails.stack,
-            gainOrLoss = gainOrLoss,
-            logPrefix = logPrefix,
-            receivedBy = receivedBy,
-            itemLink = currentDetails.itemLink,
-            itemId = currentDetails.itemId,
-            itemType = currentDetails.itemType
-        }
-        return
-    end
-
-    -- Handle existing item
-    if itemState then
-        if not currentDetails then
-            -- Item was removed
-            if g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowDestroy then
-                local gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
-                ChatAnnouncements.ItemPrinter(
-                    itemState.icon,
-                    math.abs(stackCountChange),
-                    itemState.itemType,
-                    itemState.itemId,
-                    itemState.itemLink,
-                    receivedBy,
-                    ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy,
-                    gainOrLoss,
-                    false
-                )
-            end
-            ItemStateManager:removeItemState(bagId, slotId)
-            return
-        end
-
-        -- Handle stack changes
-        local gainOrLoss, logPrefix = determineGuildBankContext(stackCountChange)
-
-        g_guildBankCarry =
-        {
-            icon = currentDetails.icon,
-            stack = currentDetails.stack,
-            gainOrLoss = gainOrLoss,
-            logPrefix = logPrefix,
-            receivedBy = receivedBy,
-            itemLink = currentDetails.itemLink,
-            itemId = currentDetails.itemId,
-            itemType = currentDetails.itemType
-        }
-
-        ItemStateManager:updateItemState(bagId, slotId, currentDetails)
-    end
-end
-
 function ChatAnnouncements.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-    if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then return end
-
-    -- Handle the update based on bag type
+    local receivedBy = ""
+    ---------------------------------- INVENTORY ----------------------------------
     if bagId == BAG_BACKPACK then
-        handleGuildBankUpdate(bagId, slotId, stackCountChange)
-    elseif bagId == BAG_VIRTUAL then
+        local gainOrLoss
+        local logPrefix
+        local icon
+        local stack
+        local itemType
+        local itemId
+        local itemLink
+        local removed
+
+        if not g_inventoryStacks[slotId] then -- NEW ITEM
+            local icon1, stack1 = GetItemInfo(bagId, slotId)
+            itemType = GetItemType(bagId, slotId)
+            itemId = GetItemId(bagId, slotId)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            g_inventoryStacks[slotId] = { icon = icon1, stack = stack1, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawGuild
+            g_guildBankCarry = {}
+            g_guildBankCarry.icon = icon1
+            g_guildBankCarry.stack = stack1
+            g_guildBankCarry.gainOrLoss = gainOrLoss
+            g_guildBankCarry.logPrefix = logPrefix
+            g_guildBankCarry.receivedBy = receivedBy
+            g_guildBankCarry.itemLink = itemLink
+            g_guildBankCarry.itemId = itemId
+            g_guildBankCarry.itemType = itemType
+        elseif g_inventoryStacks[slotId] then -- EXISTING ITEM
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[ChatAnnouncements.SV.BracketOptionItem])
+            if itemLink == nil or itemLink == "" then
+                -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
+                icon = g_inventoryStacks[slotId].icon
+                stack = g_inventoryStacks[slotId].stack
+                itemType = g_inventoryStacks[slotId].itemType
+                itemId = g_inventoryStacks[slotId].itemId
+                itemLink = g_inventoryStacks[slotId].itemLink
+                removed = true
+            else
+                -- If we get a value for itemLink, then we want to use bag info to fill in the blanks
+                icon, stack = GetItemInfo(bagId, slotId)
+                itemType = GetItemType(bagId, slotId)
+                itemId = GetItemId(bagId, slotId)
+                removed = false
+            end
+
+            if stackCountChange > 0 then -- STACK COUNT INCREMENTED UP
+                gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+                logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawGuild
+                g_guildBankCarry = {}
+                g_guildBankCarry.icon = icon
+                g_guildBankCarry.stack = stack
+                g_guildBankCarry.gainOrLoss = gainOrLoss
+                g_guildBankCarry.logPrefix = logPrefix
+                g_guildBankCarry.receivedBy = receivedBy
+                g_guildBankCarry.itemLink = itemLink
+                g_guildBankCarry.itemId = itemId
+                g_guildBankCarry.itemType = itemType
+            elseif stackCountChange < 0 then
+                local change = stackCountChange * -1
+                if g_itemWasDestroyed and ChatAnnouncements.SV.Inventory.LootShowDestroy then
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy
+                    ChatAnnouncements.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                if not g_itemWasDestroyed then
+                    gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositGuild
+                    g_guildBankCarry = {}
+                    g_guildBankCarry.icon = icon
+                    g_guildBankCarry.stack = stack
+                    g_guildBankCarry.gainOrLoss = gainOrLoss
+                    g_guildBankCarry.logPrefix = logPrefix
+                    g_guildBankCarry.receivedBy = receivedBy
+                    g_guildBankCarry.itemLink = itemLink
+                    g_guildBankCarry.itemId = itemId
+                    g_guildBankCarry.itemType = itemType
+                end
+            end
+
+            if removed then
+                if g_inventoryStacks[slotId] then
+                    g_inventoryStacks[slotId] = nil
+                end
+            else
+                g_inventoryStacks[slotId] = { icon = icon, stack = stack, itemId = itemId, itemType = itemType, itemLink = itemLink }
+            end
+        end
+    end
+
+    ---------------------------------- CRAFTING BAG ----------------------------------
+    if bagId == BAG_VIRTUAL then
+        local gainOrLoss
+        local stack
+        local logPrefix
         local itemLink = tostring(ChatAnnouncements.GetItemLinkFromItemId(slotId))
         local icon = GetItemLinkInfo(itemLink)
         local itemType = GetItemLinkItemType(itemLink)
-        local gainOrLoss, logPrefix = determineGuildBankContext(stackCountChange)
-        local stack = math.abs(stackCountChange)
+        local itemId = slotId
+        local itemQuality = GetItemLinkQuality(itemLink)
 
-        g_guildBankCarry =
-        {
-            icon = icon,
-            stack = stack,
-            gainOrLoss = gainOrLoss,
-            logPrefix = logPrefix,
-            receivedBy = "",
-            itemLink = itemLink,
-            itemId = slotId,
-            itemType = itemType
-        }
+        if stackCountChange < 1 then
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 2 or 4
+            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositGuild
+            stack = stackCountChange * -1
+        else
+            gainOrLoss = ChatAnnouncements.SV.Currency.CurrencyContextColor and 1 or 3
+            logPrefix = ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawGuild
+            stack = stackCountChange
+        end
+
+        g_guildBankCarry = {}
+        g_guildBankCarry.icon = icon
+        g_guildBankCarry.stack = stack
+        g_guildBankCarry.gainOrLoss = gainOrLoss
+        g_guildBankCarry.logPrefix = logPrefix
+        g_guildBankCarry.receivedBy = receivedBy
+        g_guildBankCarry.itemLink = itemLink
+        g_guildBankCarry.itemId = itemId
+        g_guildBankCarry.itemType = itemType
     end
 
     g_itemWasDestroyed = false
@@ -7265,14 +7670,14 @@ function ChatAnnouncements.HookFunction()
         -- Debug for DEVS
         if LUIE.IsDevDebugEnabled() then
             LUIE.Debug([[Quest Completed:
-        Name: %s
-        Type: %d
-        Instance: %d
-        Level: %d
-        XP: %d -> %d
-        CP: %d]],
+    Name: %s
+    Type: %s (%d)
+    Instance: %d
+    Level: %d
+    XP: %d -> %d
+    CP: %d]],
                 questName,
-                questType,
+                LUIE.GetQuestTypeName(questType), questType,
                 instanceDisplayType,
                 level,
                 previousExperience,
@@ -7410,11 +7815,12 @@ function ChatAnnouncements.HookFunction()
                         LUIE.Debug([[Active Writ Quest Found:
     Quest: %s
     Index: %d
-    Type: %d
+    Type: %s (%d)
     Is Writ: %s
     Suppress Active: %s]],
                             questName,
                             questIndex,
+                            LUIE.GetQuestTypeName(questType),
                             questType,
                             tostring(isQuestWritQuest(questIndex)),
                             tostring(WritCreater:GetSettings().suppressQuestAnnouncements)

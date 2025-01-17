@@ -171,12 +171,6 @@ local function FormatDurationSeconds(remain)
     return string_format((CombatInfo.SV.BarMillis and ((remain < CombatInfo.SV.BarMillisThreshold * 1000) or CombatInfo.SV.BarMillisAboveTen)) and "%.1f" or "%.1d", remain / 1000)
 end
 
-local function SetAbilityBarTimersDisabled()
-    if tonumber(GetSetting(SETTING_TYPE_UI, UI_SETTING_SHOW_ACTION_BAR_TIMERS)) == 1 then
-        SetSetting(SETTING_TYPE_UI, UI_SETTING_SHOW_ACTION_BAR_TIMERS, "false")
-    end
-end
-
 -- Module initialization
 function CombatInfo.Initialize(enabled)
     -- Load settings
@@ -192,10 +186,6 @@ function CombatInfo.Initialize(enabled)
         return
     end
     CombatInfo.Enabled = true
-
-    if CombatInfo.SV.BarShowLabel == true then
-        SetAbilityBarTimersDisabled()
-    end
 
     CombatInfo.ApplyFont()
     CombatInfo.ApplyProcSound()
