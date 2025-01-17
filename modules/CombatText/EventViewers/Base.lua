@@ -304,7 +304,7 @@ function CombatTextEventViewer:PrepareLabel(label, fontSize, color, text)
     local Settings = LUIE.CombatText.SV
     label:SetText(text)
     label:SetColor(unpack(color))
-    label:SetFont(string_format("%s|%d|%s", Settings.fontFaceApplied, fontSize, Settings.fontOutline))
+    label:SetFont(string_format("%s|%d|%s", Settings.fontFaceApplied, fontSize, Settings.fontStyle))
     label:SetAlpha(Settings.common.transparencyValue / 100)
 end
 

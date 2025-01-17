@@ -78,7 +78,7 @@ SpellCastBuffs.Defaults =
     },
     IconSize = 40,
     LabelPosition = 0,
-    BuffFontFace = "ArchivoNarrow Bold",
+    BuffFontFace = "Univers 67",
     BuffFontStyle = "outline",
     BuffFontSize = 16,
     BuffShowLabel = true,
@@ -186,7 +186,7 @@ SpellCastBuffs.Defaults =
     HideReduce = true,
     GroundDamageAura = true,
     ProminentLabel = true,
-    ProminentLabelFontFace = "ArchivoNarrow Bold",
+    ProminentLabelFontFace = "Univers 67",
     ProminentLabelFontStyle = "outline",
     ProminentLabelFontSize = 16,
     ProminentProgress = true,
@@ -1865,7 +1865,7 @@ function SpellCastBuffs.ApplyFont()
     local fontName = LUIE.Fonts[SpellCastBuffs.SV.BuffFontFace]
     if not fontName or fontName == "" then
         LUIE.Debug(GetString(LUIE_STRING_ERROR_FONT))
-        fontName = "$(MEDIUM_FONT)"
+        fontName = "Univers 67"
     end
     local fontStyle = (SpellCastBuffs.SV.BuffFontStyle and SpellCastBuffs.SV.BuffFontStyle ~= "") and SpellCastBuffs.SV.BuffFontStyle or "outline"
     local fontSize = (SpellCastBuffs.SV.BuffFontSize and SpellCastBuffs.SV.BuffFontSize > 0) and SpellCastBuffs.SV.BuffFontSize or 17
@@ -1875,7 +1875,7 @@ function SpellCastBuffs.ApplyFont()
     local prominentName = LUIE.Fonts[SpellCastBuffs.SV.ProminentLabelFontFace]
     if not prominentName or prominentName == "" then
         LUIE.Debug(GetString(LUIE_STRING_ERROR_FONT))
-        prominentName = "$(MEDIUM_FONT)"
+        prominentName = "Univers 67"
     end
     local prominentStyle = (SpellCastBuffs.SV.ProminentLabelFontStyle and SpellCastBuffs.SV.ProminentLabelFontStyle ~= "") and SpellCastBuffs.SV.ProminentLabelFontStyle or "outline"
     local prominentSize = (SpellCastBuffs.SV.ProminentLabelFontSize and SpellCastBuffs.SV.ProminentLabelFontSize > 0) and SpellCastBuffs.SV.ProminentLabelFontSize or 17

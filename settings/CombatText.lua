@@ -3117,7 +3117,7 @@ function CombatText.CreateSettings()
                 -- Font Face Dropdown
                 type = "dropdown",
                 scrollable = true,
-                name = GetString(LUIE_STRING_LAM_CT_FONT_FACE),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_FONT)),
                 tooltip = GetString(LUIE_STRING_LAM_CT_FONT_FACE_TP),
                 choices = FontsList,
                 sort = "name-up",
@@ -3128,22 +3128,77 @@ function CombatText.CreateSettings()
                     Settings.fontFace = var
                     CombatText.ApplyFont()
                 end,
+                width = "full",
                 default = Defaults.fontFace,
             },
             {
-                -- Font Outline Dropdown
-                type = "dropdown",
-                name = GetString(LUIE_STRING_LAM_CT_FONT_OUTLINE),
-                tooltip = GetString(LUIE_STRING_LAM_CT_FONT_OUTLINE_TP),
-                choices = CombatTextConstants.outlineType,
+                -- Font Size
+                type = "slider",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_FONT_SIZE)),
+                tooltip = GetString(LUIE_STRING_LAM_CT_FONT_SIZE_TP),
+                min = 8,
+                max = 72,
+                step = 1,
                 getFunc = function ()
-                    return Settings.fontOutline
+                    return Settings.fontSize
                 end,
-                setFunc = function (var)
-                    Settings.fontOutline = var
+                setFunc = function (value)
+                    Settings.fontSize = value
+                    -- Update all font sizes proportionally
+                    Settings.fontSizes.damage = value
+                    Settings.fontSizes.damagecritical = value
+                    Settings.fontSizes.healing = value
+                    Settings.fontSizes.healingcritical = value
+                    Settings.fontSizes.dot = math.floor(value * 0.8)
+                    Settings.fontSizes.dotcritical = math.floor(value * 0.8)
+                    Settings.fontSizes.hot = math.floor(value * 0.8)
+                    Settings.fontSizes.hotcritical = math.floor(value * 0.8)
+                    Settings.fontSizes.gainLoss = value
+                    Settings.fontSizes.mitigation = value
+                    Settings.fontSizes.crowdControl = math.floor(value * 0.8)
+                    Settings.fontSizes.combatState = math.floor(value * 0.75)
+                    Settings.fontSizes.death = value
+                    Settings.fontSizes.point = math.floor(value * 0.75)
+                    Settings.fontSizes.resource = value
+                    Settings.fontSizes.readylabel = value
                     CombatText.ApplyFont()
                 end,
-                default = Defaults.fontOutline,
+                width = "full",
+                default = Defaults.fontSize,
+            },
+            {
+                -- Font Style
+                type = "dropdown",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_FONT_STYLE)),
+                tooltip = GetString(LUIE_STRING_LAM_CT_FONT_STYLE_TP),
+                choices =
+                {
+                    "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_NORMAL) .. "|r",
+                    "|cEEEEEE" .. GetString(LUIE_FONT_STYLE_OUTLINE) .. "|r",
+                    "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_THICK_OUTLINE) .. "|r",
+                    "|c888888" .. GetString(LUIE_FONT_STYLE_SHADOW) .. "|r",
+                    "|c666666" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THICK) .. "|r",
+                    "|c777777" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THIN) .. "|r",
+                },
+                choicesValues =
+                {
+                    GetString(LUIE_FONT_STYLE_VALUE_NORMAL),
+                    GetString(LUIE_FONT_STYLE_VALUE_OUTLINE),
+                    GetString(LUIE_FONT_STYLE_VALUE_THICK_OUTLINE),
+                    GetString(LUIE_FONT_STYLE_VALUE_SHADOW),
+                    GetString(LUIE_FONT_STYLE_VALUE_SOFT_SHADOW_THICK),
+                    GetString(LUIE_FONT_STYLE_VALUE_SOFT_SHADOW_THIN),
+                },
+                sort = "name-up",
+                getFunc = function ()
+                    return Settings.fontStyle
+                end,
+                setFunc = function (var)
+                    Settings.fontStyle = var
+                    CombatText.ApplyFont()
+                end,
+                width = "full",
+                default = Defaults.fontStyle,
             },
             {
                 -- Test Font Button

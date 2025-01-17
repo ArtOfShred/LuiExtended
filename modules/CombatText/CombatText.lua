@@ -193,8 +193,9 @@ CombatText.Defaults =
     staminaThreshold = 35,
 
     -- Font defaults
-    fontFace = "ArchivoNarrow Bold",
-    fontOutline = "soft-shadow-thick",
+    fontFace = "Univers 67",
+    fontStyle = "soft-shadow-thick",
+    fontSize = 26,
     fontSizes =
     {
         -- Combat
@@ -448,12 +449,18 @@ function CombatText.RemoveFromCustomList(list, input)
 end
 
 function CombatText.ApplyFont()
+    -- Fetch the font name from the LUIE.Fonts table
     local fontName = LUIE.Fonts[LUIE.CombatText.SV.fontFace]
-    LUIE.CombatText.SV.fontFaceApplied = fontName
+
+    -- If the font name is not found or is an empty string, log an error message
     if not fontName or fontName == "" then
         LUIE.Debug(GetString(LUIE_STRING_ERROR_FONT))
-        LUIE.CombatText.SV.fontFaceApplied = "$(MEDIUM_FONT)"
+        -- Set the font face to a default bold font
+        fontName = "Univers 67"
     end
+
+    -- Set the applied font face to the fetched or default font name
+    LUIE.CombatText.SV.fontFaceApplied = fontName
 end
 
 -- Module initialization
@@ -483,7 +490,7 @@ function CombatText.Initialize(enabled)
             _G[k]:SetAnchor(s.point, Combattext, s.relativePoint, s.offsetX, s.offsetY)
             _G[k]:SetDimensions(unpack(s.dimensions))
             _G[k]:SetHandler("OnMouseUp", SavePosition)
-            _G[k .. "_Label"]:SetFont(LUIE.CombatText.SV.fontFaceApplied .. "|26|" .. LUIE.CombatText.SV.fontOutline)
+            _G[k .. "_Label"]:SetFont(LUIE.CombatText.SV.fontFaceApplied .. "|26|" .. LUIE.CombatText.SV.fontStyle)
             _G[k .. "_Label"]:SetText(panelTitles[k])
         else
             LUIE.CombatText.SV.panels[k] = nil

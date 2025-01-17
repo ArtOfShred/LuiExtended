@@ -956,7 +956,7 @@ function CombatInfo.ApplyFont()
         local fontName = LUIE.Fonts[CombatInfo.SV[fontNameKey]]
         if not fontName or fontName == "" then
             LUIE.Debug(GetString(LUIE_STRING_ERROR_FONT))
-            fontName = "$(MEDIUM_FONT)"
+            fontName = "Univers 67"
         end
         local fontStyle = (CombatInfo.SV[fontStyleKey] and CombatInfo.SV[fontStyleKey] ~= "") and CombatInfo.SV[fontStyleKey] or defaultFontStyle
         local fontSize = (CombatInfo.SV[fontSizeKey] and CombatInfo.SV[fontSizeKey] > 0) and CombatInfo.SV[fontSizeKey] or defaultFontSize

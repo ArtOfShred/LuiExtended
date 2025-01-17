@@ -201,6 +201,9 @@ local function SendToChatWindows(message)
     for _, container in ipairs(CHAT_SYSTEM.containers) do
         if container then
             local chatWindow = container.windows[3]
+            if chatWindow == nil then
+                chatWindow = container.windows[1]
+            end
             container:AddEventMessageToWindow(chatWindow, formattedMessage, CHAT_CATEGORY_SYSTEM)
         end
     end

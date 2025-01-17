@@ -5106,7 +5106,7 @@ function UnitFrames.CustomFramesApplyFont()
     local fontName = LUIE.Fonts[UnitFrames.SV.CustomFontFace]
     if not fontName or fontName == "" then
         LUIE.Debug(GetString(LUIE_STRING_ERROR_FONT))
-        fontName = "$(MEDIUM_FONT)"
+        fontName = "Univers 67"
     end
 
     local fontStyle = (UnitFrames.SV.CustomFontStyle and UnitFrames.SV.CustomFontStyle ~= "") and UnitFrames.SV.CustomFontStyle or "soft-shadow-thin"
