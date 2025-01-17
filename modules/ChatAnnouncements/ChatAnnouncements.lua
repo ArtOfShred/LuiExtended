@@ -3170,7 +3170,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
             if newValue < questItemIndex[itemId].stack then
                 -- Easy temporary debug for my accounts only
                 if LUIE.IsDevDebugEnabled() then
-                    d(itemId .. " Removed")
+                    LUIE.Debug(itemId .. " Removed")
                 end
                 --
 
@@ -3239,7 +3239,7 @@ function ChatAnnouncements.ResolveQuestItemChange()
             if newValue > questItemIndex[itemId].stack then
                 -- Easy debug for my devs only
                 if LUIE.IsDevDebugEnabled() then
-                    d(itemId .. " Added")
+                    LUIE.Debug(itemId .. " Added")
                 end
                 --
                 countChange = newValue - questItemIndex[itemId].stack
@@ -4359,7 +4359,7 @@ end
 local function handleBagUpdate(bagId, slotId, stackCountChange)
     local receivedBy = ""
     local itemState = ItemStateManager:getItemState(bagId, slotId)
-    local currentDetails = GetItemLink(bagId, slotId) ~= "" and getItemDetails(bagId, slotId) or nil
+    local currentDetails = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT) ~= "" and getItemDetails(bagId, slotId) or nil
 
     -- Handle item removal
     if itemState and not currentDetails then
@@ -4487,7 +4487,7 @@ function ChatAnnouncements.InventoryUpdateCraft(eventCode, bagId, slotId, isNewI
     -- Handle regular bags
     if bagId == BAG_WORN or bagId == BAG_BACKPACK or bagId == BAG_BANK or bagId == BAG_SUBSCRIBER_BANK then
         local itemState = ItemStateManager:getItemState(bagId, slotId)
-        local currentDetails = GetItemLink(bagId, slotId) ~= "" and getItemDetails(bagId, slotId) or nil
+        local currentDetails = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT) ~= "" and getItemDetails(bagId, slotId) or nil
 
         -- Handle new item
         if not itemState and currentDetails then
@@ -4650,7 +4650,7 @@ end
 local function handleGuildBankUpdate(bagId, slotId, stackCountChange)
     local receivedBy = ""
     local itemState = ItemStateManager:getItemState(bagId, slotId)
-    local currentDetails = GetItemLink(bagId, slotId) ~= "" and getItemDetails(bagId, slotId) or nil
+    local currentDetails = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT) ~= "" and getItemDetails(bagId, slotId) or nil
 
     -- Handle new item
     if not itemState and currentDetails then

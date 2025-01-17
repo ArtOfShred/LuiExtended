@@ -102,7 +102,7 @@ local DEVS =
     ["@dack_janiels"] =
     {
         enabled = true,
-        debug = false,
+        debug = true,
     },
 }
 LUIE.DEVS = DEVS

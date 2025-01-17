@@ -193,8 +193,8 @@ CombatText.Defaults =
     staminaThreshold = 35,
 
     -- Font defaults
-    fontFace = [[Univers 67]],
-    fontOutline = [[soft-shadow-thick]],
+    fontFace = "ArchivoNarrow Bold",
+    fontOutline = "soft-shadow-thick",
     fontSizes =
     {
         -- Combat
@@ -451,7 +451,7 @@ function CombatText.ApplyFont()
     local fontName = LUIE.Fonts[LUIE.CombatText.SV.fontFace]
     LUIE.CombatText.SV.fontFaceApplied = fontName
     if not fontName or fontName == "" then
-        printToChat(GetString(LUIE_STRING_ERROR_FONT), true)
+        LUIE.Debug(GetString(LUIE_STRING_ERROR_FONT))
         LUIE.CombatText.SV.fontFaceApplied = "$(MEDIUM_FONT)"
     end
 end

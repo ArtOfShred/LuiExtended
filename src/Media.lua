@@ -27,39 +27,41 @@ LUIE.BackgroundTextures =
 -- -----------------------------------------------------------------------------
 LUIE.Fonts =
 {
-    ["Adventure"] = "LuiExtended/media/fonts/Adventure/adventure.slug",
-    ["ArchivoNarrow Bold"] = "LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Bold.slug",
-    ["ArchivoNarrow BoldItalic"] = "LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-BoldItalic.slug",
-    ["ArchivoNarrow Italic"] = "LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Italic.slug",
-    ["ArchivoNarrow Medium"] = "LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Medium.slug",
-    ["ArchivoNarrow MediumItalic"] = "LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-MediumItalic.slug",
-    ["ArchivoNarrow Regular"] = "LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-Regular.slug",
-    ["ArchivoNarrow SemiBold"] = "LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-SemiBold.slug",
-    ["ArchivoNarrow SemiBoldItalic"] = "LuiExtended/media/fonts/ArchivoNarrow/ArchivoNarrow-SemiBoldItalic.slug",
-    ["Bazooka"] = "LuiExtended/media/fonts/Bazooka/bazooka.slug",
-    ["Cooline"] = "LuiExtended/media/fonts/Cooline/cooline.slug",
-    ["Diogenes"] = "LuiExtended/media/fonts/Diogenes/diogenes.slug",
-    ["EnigmaBold"] = "LuiExtended/media/fonts/Enigma/EnigmaBold.slug",
-    ["EnigmaReg"] = "LuiExtended/media/fonts/Enigma/EnigmaReg.slug",
-    ["FORCED SQUARE"] = "LuiExtended/media/fonts/ForcedSquare/FORCED_SQUARE.slug",
-    ["Fontin Bold"] = "LuiExtended/media/fonts/Fontin/fontin_sans_b.slug",
-    ["Fontin Italic"] = "LuiExtended/media/fonts/Fontin/fontin_sans_i.slug",
-    ["Fontin Regular"] = "LuiExtended/media/fonts/Fontin/fontin_sans_r.slug",
-    ["Fontin SmallCaps"] = "LuiExtended/media/fonts/Fontin/fontin_sans_sc.slug",
-    ["Futura Condensed Bold"] = "/EsoUI/Common/Fonts/FTN87.slug",
-    ["Futura Condensed Light"] = "/EsoUI/Common/Fonts/FTN47.slug",
-    ["Futura Condensed"] = "/EsoUI/Common/Fonts/FTN57.slug",
-    ["Ginko"] = "LuiExtended/media/fonts/Ginko/ginko.slug",
-    ["Heroic"] = "LuiExtended/media/fonts/Heroic/heroic.slug",
-    ["Metamorphous"] = "LuiExtended/media/fonts/Metamorphous/metamorphous.slug",
-    ["Porky"] = "LuiExtended/media/fonts/Porky/porky.slug",
-    ["ProFontWindows"] = "LuiExtended/media/fonts/ProFontWindows/ProFontWindows.slug",
-    ["Roboto Bold Italic"] = "LuiExtended/media/fonts/Roboto/Roboto-BoldItalic.slug",
-    ["Roboto Bold"] = "LuiExtended/media/fonts/Roboto/Roboto-Bold.slug",
-    ["Talisman"] = "LuiExtended/media/fonts/Talisman/talisman.slug",
-    ["Trajan Pro Bold"] = "LuiExtended/media/fonts/TrajanPro/TrajanProBold.slug",
-    ["Transformers"] = "LuiExtended/media/fonts/Transformers/transformers.slug",
-    ["Yellowjacket"] = "LuiExtended/media/fonts/Yellowjacket/yellowjacket.slug",
+    ["Adventure"] = "$(LUIE_ADVENTURE)|$(LUIE_16)|soft-shadow-thick",
+    ["ArchivoNarrow Bold"] = "$(LUIE_ARCHIVO_BOLD)|$(LUIE_16)|soft-shadow-thick",
+    ["ArchivoNarrow BoldItalic"] = "$(LUIE_ARCHIVO_BOLDITALIC)|$(LUIE_16)|soft-shadow-thin",
+    ["ArchivoNarrow Italic"] = "$(LUIE_ARCHIVO_ITALIC)|$(LUIE_16)|soft-shadow-thin",
+    ["ArchivoNarrow Medium"] = "$(LUIE_ARCHIVO_MEDIUM)|$(LUIE_16)|soft-shadow-thin",
+    ["ArchivoNarrow MediumItalic"] = "$(LUIE_ARCHIVO_MEDIUMITALIC)|$(LUIE_16)|soft-shadow-thin",
+    ["ArchivoNarrow Regular"] = "$(LUIE_ARCHIVO_REGULAR)|$(LUIE_16)|soft-shadow-thin",
+    ["ArchivoNarrow SemiBold"] = "$(LUIE_ARCHIVO_SEMIBOLD)|$(LUIE_16)|soft-shadow-thin",
+    ["ArchivoNarrow SemiBoldItalic"] = "$(LUIE_ARCHIVO_SEMIBOLDITALIC)|$(LUIE_16)|soft-shadow-thin",
+    ["Bazooka"] = "$(LUIE_BAZOOKA)|$(LUIE_16)|soft-shadow-thick",
+    ["Cooline"] = "$(LUIE_COOLINE)|$(LUIE_16)|soft-shadow-thick",
+    ["Diogenes"] = "$(LUIE_DIOGENES)|$(LUIE_16)|soft-shadow-thick",
+    ["EnigmaBold"] = "$(LUIE_ENIGMA_BOLD)|$(LUIE_16)|soft-shadow-thick",
+    ["EnigmaReg"] = "$(LUIE_ENIGMA_REGULAR)|$(LUIE_16)|soft-shadow-thin",
+    ["FORCED SQUARE"] = "$(LUIE_FORCED_SQUARE)|$(LUIE_16)|soft-shadow-thick",
+    ["Fontin Bold"] = "$(LUIE_FONTIN_BOLD)|$(LUIE_16)|soft-shadow-thick",
+    ["Fontin Italic"] = "$(LUIE_FONTIN_ITALIC)|$(LUIE_16)|soft-shadow-thin",
+    ["Fontin Regular"] = "$(LUIE_FONTIN_REGULAR)|$(LUIE_16)|soft-shadow-thin",
+    ["Fontin SmallCaps"] = "$(LUIE_FONTIN_SMALLCAPS)|$(LUIE_16)|soft-shadow-thin",
+    ["Ginko"] = "$(LUIE_GINKO)|$(LUIE_16)|soft-shadow-thick",
+    ["Heroic"] = "$(LUIE_HEROIC)|$(LUIE_16)|soft-shadow-thick",
+    ["Metamorphous"] = "$(LUIE_METAMORPHOUS)|$(LUIE_16)|soft-shadow-thick",
+    ["Porky"] = "$(LUIE_PORKY)|$(LUIE_16)|soft-shadow-thick",
+    ["ProFontWindows"] = "$(LUIE_PROFONT)|$(LUIE_16)|soft-shadow-thick",
+    ["Roboto Bold Italic"] = "$(LUIE_ROBOTO_BOLDITALIC)|$(LUIE_16)|soft-shadow-thin",
+    ["Roboto Bold"] = "$(LUIE_ROBOTO_BOLD)|$(LUIE_16)|soft-shadow-thick",
+    ["Talisman"] = "$(LUIE_TALISMAN)|$(LUIE_16)|soft-shadow-thick",
+    ["Trajan Pro Bold"] = "$(LUIE_TRAJAN_BOLD)|$(LUIE_16)|soft-shadow-thick",
+    ["Transformers"] = "$(LUIE_TRANSFORMERS)|$(LUIE_16)|soft-shadow-thick",
+    ["Yellowjacket"] = "$(LUIE_YELLOWJACKET)|$(LUIE_16)|soft-shadow-thick",
+    ["ProseAntique"] = "$(ANTIQUE_FONT)|20",
+    ["Skyrim Handwritten"] = "$(HANDWRITTEN_FONT)|20",
+    ["Trajan Pro"] = "$(STONE_TABLET_FONT)|30|soft-shadow-thick",
+    ["Univers 57"] = "$(MEDIUM_FONT)|$(KB_18)|soft-shadow-thin",
+    ["Univers 67"] = "$(BOLD_FONT)|$(KB_30)|soft-shadow-thick",
 }
 -- -----------------------------------------------------------------------------
 LUIE.Sounds =
@@ -205,7 +207,9 @@ LUIE.Media =
 -- Helper function to update media lists
 local function UpdateMediaList(mediaType, luieSource, mediaList)
     -- Add LUIE media first
+    -- LUIE.Debug("Updating media list for type: " .. mediaType)
     for key, path in pairs(luieSource) do
+        -- LUIE.Debug("Registering " .. mediaType .. ": " .. key .. " -> " .. path)
         LMP:Register(mediaType, key, path)
         table_insert(mediaList, key)
     end
@@ -250,52 +254,58 @@ end
 
 -- -----------------------------------------------------------------------------
 -- Add ESO built-in fonts
-local function GetGameFonts()
-    local fonts = {}
-    for varname, value in zo_insecurePairs(_G) do
-        if type(value) == "userdata" and value.GetFontInfo then
-            local face, size, option = value:GetFontInfo()
-            if face then
-                -- Store the complete font information
-                fonts[varname] = {
-                    path = face,
-                    size = size,
-                    option = option or "none",  -- Default to "none" if no option
-                    fullString = string.format("%s|%d|%s", face, size, option or "none")
-                }
-            end
-        end
-    end
-    return fonts
-end
+-- local function GetGameFonts()
+--     local fonts = {}
+--     for varname, value in zo_insecurePairs(_G) do
+--         if type(value) == "userdata" and value.GetFontInfo then
+--             local face, size, option = value:GetFontInfo()
+--             if face then
+--                 -- Store the complete font information
+--                 fonts[varname] =
+--                 {
+--                     path = face,
+--                     size = size,
+--                     option = option or "none", -- Default to "none" if no option
+--                     fullString = string.format("%s|%d|%s", face, size, option or "none")
+--                 }
+--             end
+--         end
+--     end
+--     return fonts
+-- end
 
--- Merge game fonts with our custom fonts
-local function MergeGameFonts()
-    local gameFonts = GetGameFonts()
-    for name, fontInfo in pairs(gameFonts) do
-        if not LUIE.Fonts[name] then
-            LUIE.Fonts[name] = fontInfo.path
-        end
-        -- Store the complete font information in a separate table for reference
-        if not LUIE.FontInfo then LUIE.FontInfo = {} end
-        LUIE.FontInfo[name] = {
-            path = fontInfo.path,
-            size = fontInfo.size,
-            option = fontInfo.option,
-            fullString = fontInfo.fullString
-        }
-    end
-end
+-- -- Merge game fonts with our custom fonts
+-- local function MergeGameFonts()
+--     local gameFonts = GetGameFonts()
+--     for name, fontInfo in pairs(gameFonts) do
+--         if not LUIE.Fonts[name] then
+--             LUIE.Fonts[name] = fontInfo.path
+--         end
+--         -- Store the complete font information in a separate table for reference
+--         if not LUIE.FontInfo then LUIE.FontInfo = {} end
+--         LUIE.FontInfo[name] =
+--         {
+--             path = fontInfo.path,
+--             size = fontInfo.size,
+--             option = fontInfo.option,
+--             fullString = fontInfo.fullString
+--         }
+--     end
+-- end
 
 -- -----------------------------------------------------------------------------
 -- Load all media
 local function LoadMedia()
-    MergeGameFonts()
+    -- LUIE.Debug("Starting media load...")
+    -- MergeGameFonts()
+    -- LUIE.Debug("Merged game fonts")
     LUIE.UpdateFonts()
+    -- LUIE.Debug("Updated fonts")
     LUIE.UpdateSounds()
     LUIE.UpdateStatusbarTextures()
     LUIE.UpdateBorderTextures()
     LUIE.UpdateBackgroundTextures()
+    -- LUIE.Debug("Media load complete")
 end
 
 -- -----------------------------------------------------------------------------
@@ -305,6 +315,7 @@ LoadMedia()
 -- -----------------------------------------------------------------------------
 -- Register callback for media updates
 local function OnMediaRegistered(mediatype, key)
+    -- LUIE.Debug("Media registered: " .. mediatype .. " - " .. key)
     local mediaMap =
     {
         [MEDIA_TYPES.FONT] = { update = LUIE.UpdateFonts },

@@ -1396,7 +1396,7 @@ function AbilityAlerts.ApplyFontAlert()
     -- Setup Alerts Font
     local alertFontName = LUIE.Fonts[CombatInfo.SV.alerts.toggles.alertFontFace]
     if not alertFontName or alertFontName == "" then
-        printToChat(GetString(LUIE_STRING_ERROR_FONT), true)
+        LUIE.Debug(GetString(LUIE_STRING_ERROR_FONT))
         alertFontName = "$(MEDIUM_FONT)"
     end
 

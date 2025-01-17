@@ -2242,6 +2242,97 @@ local strings =
     -- LUIE_STRING_LAM_CUSTOM_ICONS_ENABLE = "Enable Custom Icons",
     -- LUIE_STRING_LAM_CUSTOM_ICONS_ENABLE_TP = "Enable or disable custom ability icons provided by LUIE.",
     -- LUIE_STRING_LAM_CUSTOM_ICONS_DESCRIPTION = "When enabled, LUIE will use custom icons for certain abilities to make them more distinct. Disable to use default game icons.",
+
+    -- Unit Frames Format Strings
+    LUIE_STRING_UF_FORMAT_DEFAULT = "Current + Shield - Trauma (Percentage%)",
+    LUIE_STRING_UF_FORMAT_PT_ONE = "Current + Shield - Trauma / Max",
+    LUIE_STRING_UF_FORMAT_GROUP_ONE = "Current + Shield - Trauma / Max",
+    LUIE_STRING_UF_FORMAT_PT_TWO = "Percentage%",
+    LUIE_STRING_UF_FORMAT_GROUP_TWO = "Percentage%",
+    LUIE_STRING_UF_FORMAT_RAID = "Current (Percentage%)",
+    LUIE_STRING_UF_FORMAT_BOSS = "Percentage%",
+    LUIE_STRING_UF_FORMAT_PET = "Current (Percentage%)",
+    LUIE_STRING_UF_FORMAT_COMPANION = "Current (Percentage%)",
+    LUIE_STRING_UF_FORMAT_CENTER_LABEL = "Current + Shield - Trauma / Max (Percentage%)",
+
+    -- Unit Frames Font Settings
+    LUIE_STRING_UF_FONT_DEFAULT = "ArchivoNarrow Bold",
+    LUIE_STRING_UF_FONT_STYLE_DEFAULT = "soft-shadow-thick",
+    LUIE_STRING_UF_FONT_STYLE_CUSTOM = "soft-shadow-thin",
+
+    -- Unit Frames Texture Settings
+    LUIE_STRING_UF_TEXTURE_DEFAULT = "Minimalistic",
+
+    -- Unit Frames Title Priority
+    LUIE_STRING_UF_TITLE_PRIORITY = "Title",
+
+    -- Unit Frames Raid Layout
+    LUIE_STRING_UF_RAID_LAYOUT = "1 x 12",
+
+    -- Unit Frames Color Descriptions
+    LUIE_STRING_UF_COLOR_HEALTH = "Health Bar Color",
+    LUIE_STRING_UF_COLOR_SHIELD = "Shield Bar Color",
+    LUIE_STRING_UF_COLOR_TRAUMA = "Trauma Bar Color",
+    LUIE_STRING_UF_COLOR_MAGICKA = "Magicka Bar Color",
+    LUIE_STRING_UF_COLOR_STAMINA = "Stamina Bar Color",
+    LUIE_STRING_UF_COLOR_INVULNERABLE = "Invulnerable Bar Color",
+    LUIE_STRING_UF_COLOR_DPS = "DPS Role Color",
+    LUIE_STRING_UF_COLOR_HEALER = "Healer Role Color",
+    LUIE_STRING_UF_COLOR_TANK = "Tank Role Color",
+    LUIE_STRING_UF_COLOR_DRAGONKNIGHT = "Dragonknight Class Color",
+    LUIE_STRING_UF_COLOR_NIGHTBLADE = "Nightblade Class Color",
+    LUIE_STRING_UF_COLOR_SORCERER = "Sorcerer Class Color",
+    LUIE_STRING_UF_COLOR_TEMPLAR = "Templar Class Color",
+    LUIE_STRING_UF_COLOR_WARDEN = "Warden Class Color",
+    LUIE_STRING_UF_COLOR_NECROMANCER = "Necromancer Class Color",
+    LUIE_STRING_UF_COLOR_ARCANIST = "Arcanist Class Color",
+    LUIE_STRING_UF_COLOR_PLAYER = "Player Frame Color",
+    LUIE_STRING_UF_COLOR_FRIENDLY = "Friendly Frame Color",
+    LUIE_STRING_UF_COLOR_HOSTILE = "Hostile Frame Color",
+    LUIE_STRING_UF_COLOR_NEUTRAL = "Neutral Frame Color",
+    LUIE_STRING_UF_COLOR_GUARD = "Guard Frame Color",
+    LUIE_STRING_UF_COLOR_COMPANION = "Companion Frame Color",
+    LUIE_STRING_UF_COLOR_PET = "Pet Frame Color",
+
+    -- Unit Frames Numeric Constants
+    LUIE_STRING_UF_DEFAULT_TRANSPARENCY = "Default Transparency",
+    LUIE_STRING_UF_DEFAULT_FONT_SIZE = "Default Font Size",
+    LUIE_STRING_UF_CUSTOM_FONT_BARS = "Custom Font Size for Bars",
+    LUIE_STRING_UF_CUSTOM_FONT_OTHER = "Custom Font Size for Other Elements",
+    LUIE_STRING_UF_SHIELD_BAR_HEIGHT = "Shield Bar Height",
+    LUIE_STRING_UF_BAR_WIDTH = "Bar Width",
+    LUIE_STRING_UF_BAR_HEIGHT = "Bar Height",
+    LUIE_STRING_UF_BAR_SPACING = "Bar Spacing",
+    LUIE_STRING_UF_NAME_CLIP = "Name Clip Length",
+    LUIE_STRING_UF_LOW_RESOURCE = "Low Resource Threshold",
+    LUIE_STRING_UF_SHIELD_ALPHA = "Shield Bar Alpha",
+    LUIE_STRING_UF_EXECUTE_PERCENTAGE = "Execute Threshold Percentage",
+
+    -- Unit Frames Setting Tooltips
+    LUIE_STRING_UF_DEFAULT_TRANSPARENCY_TP = "Set the default transparency for unit frames when out of combat.",
+    LUIE_STRING_UF_DEFAULT_FONT_SIZE_TP = "Set the default font size for unit frame text.",
+    LUIE_STRING_UF_CUSTOM_FONT_BARS_TP = "Set the font size for custom bar text.",
+    LUIE_STRING_UF_CUSTOM_FONT_OTHER_TP = "Set the font size for other UI elements.",
+    LUIE_STRING_UF_SHIELD_BAR_HEIGHT_TP = "Set the height of the shield bar overlay.",
+    LUIE_STRING_UF_BAR_WIDTH_TP = "Set the width of the unit frame bars.",
+    LUIE_STRING_UF_BAR_HEIGHT_TP = "Set the height of the unit frame bars.",
+    LUIE_STRING_UF_BAR_SPACING_TP = "Set the spacing between unit frame bars.",
+    LUIE_STRING_UF_NAME_CLIP_TP = "Set the maximum length for displayed names before they are clipped.",
+    LUIE_STRING_UF_LOW_RESOURCE_TP = "Set the percentage threshold for when resources are considered low.",
+    LUIE_STRING_UF_SHIELD_ALPHA_TP = "Set the transparency of the shield bar overlay.",
+    LUIE_STRING_UF_EXECUTE_PERCENTAGE_TP = "Set the health percentage threshold for execute phase indication.",
+
+    -- Unit Frames Format String Tooltips
+    LUIE_STRING_UF_FORMAT_DEFAULT_TP = "Default format for unit frame values showing current health, shield, trauma and percentage.",
+    LUIE_STRING_UF_FORMAT_PT_ONE_TP = "Format for primary party/trial frame values showing current values and maximum.",
+    LUIE_STRING_UF_FORMAT_GROUP_ONE_TP = "Format for primary group frame values showing current values and maximum.",
+    LUIE_STRING_UF_FORMAT_PT_TWO_TP = "Format for secondary party/trial frame values showing percentage only.",
+    LUIE_STRING_UF_FORMAT_GROUP_TWO_TP = "Format for secondary group frame values showing percentage only.",
+    LUIE_STRING_UF_FORMAT_RAID_TP = "Format for raid frame values showing current health and percentage.",
+    LUIE_STRING_UF_FORMAT_BOSS_TP = "Format for boss frame values showing percentage only.",
+    LUIE_STRING_UF_FORMAT_PET_TP = "Format for pet frame values showing current health and percentage.",
+    LUIE_STRING_UF_FORMAT_COMPANION_TP = "Format for companion frame values showing current health and percentage.",
+    LUIE_STRING_UF_FORMAT_CENTER_LABEL_TP = "Format for center label values showing current values, maximum and percentage.",
 }
 
 for stringId, stringValue in pairs(strings) do

@@ -78,7 +78,7 @@ SpellCastBuffs.Defaults =
     },
     IconSize = 40,
     LabelPosition = 0,
-    BuffFontFace = "Fontin Regular",
+    BuffFontFace = "ArchivoNarrow Bold",
     BuffFontStyle = "outline",
     BuffFontSize = 16,
     BuffShowLabel = true,
@@ -186,7 +186,7 @@ SpellCastBuffs.Defaults =
     HideReduce = true,
     GroundDamageAura = true,
     ProminentLabel = true,
-    ProminentLabelFontFace = "Univers 67",
+    ProminentLabelFontFace = "ArchivoNarrow Bold",
     ProminentLabelFontStyle = "outline",
     ProminentLabelFontSize = 16,
     ProminentProgress = true,
@@ -743,7 +743,7 @@ function SpellCastBuffs.RegisterDebugEvents()
     end
 
     -- Author-specific debug events
-    if LUIE.DEVS[GetDisplayName()] and SpellCastBuffs.SV.ShowDebugEffect and SpellCastBuffs.SV.ShowDebugEffect then
+    if LUIE.IsDevDebugEnabled() and SpellCastBuffs.SV.ShowDebugEffect and SpellCastBuffs.SV.ShowDebugEffect then
         eventManager:RegisterForEvent(moduleName .. "AuthorDebugCombat", EVENT_COMBAT_EVENT, SpellCastBuffs.AuthorCombatDebug)
         eventManager:RegisterForEvent(moduleName .. "AuthorDebugEffect", EVENT_EFFECT_CHANGED, SpellCastBuffs.AuthorEffectDebug)
     end
@@ -1864,7 +1864,7 @@ function SpellCastBuffs.ApplyFont()
     -- Font setup for standard Buffs & Debuffs
     local fontName = LUIE.Fonts[SpellCastBuffs.SV.BuffFontFace]
     if not fontName or fontName == "" then
-        printToChat(GetString(LUIE_STRING_ERROR_FONT), true)
+        LUIE.Debug(GetString(LUIE_STRING_ERROR_FONT))
         fontName = "$(MEDIUM_FONT)"
     end
     local fontStyle = (SpellCastBuffs.SV.BuffFontStyle and SpellCastBuffs.SV.BuffFontStyle ~= "") and SpellCastBuffs.SV.BuffFontStyle or "outline"
@@ -1874,7 +1874,7 @@ function SpellCastBuffs.ApplyFont()
     -- Font Setup for Prominent Buffs & Debuffs
     local prominentName = LUIE.Fonts[SpellCastBuffs.SV.ProminentLabelFontFace]
     if not prominentName or prominentName == "" then
-        printToChat(GetString(LUIE_STRING_ERROR_FONT), true)
+        LUIE.Debug(GetString(LUIE_STRING_ERROR_FONT))
         prominentName = "$(MEDIUM_FONT)"
     end
     local prominentStyle = (SpellCastBuffs.SV.ProminentLabelFontStyle and SpellCastBuffs.SV.ProminentLabelFontStyle ~= "") and SpellCastBuffs.SV.ProminentLabelFontStyle or "outline"
