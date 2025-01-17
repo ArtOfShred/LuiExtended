@@ -12,6 +12,8 @@
 # Addon Profiler
 ;src/AddonProfiler.lua
 
+src/fonts.xml
+
 # Language Files
 lang/en.lua
 lang/settings/Settings_en.lua
@@ -28,7 +30,6 @@ src/Functions.lua
 src/Hooks-SkillsAdvisor.lua
 src/Hooks.lua
 src/Initialize.lua
-src/fonts.xml
 src/Media.lua
 src/UI.lua
 src/Changelog.lua
