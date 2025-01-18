@@ -39,12 +39,13 @@ InfoPanel.Enabled = false
 InfoPanel.Defaults =
 {
     ClockFormat = "HH:m:s",
+	panelScale = 100,
 }
 InfoPanel.SV = ...
 InfoPanel.panelUnlocked = false
 
 -- UI elements
-local infoPanelFontFace = "/EsoUI/Common/Fonts/Univers67.slug"
+local infoPanelFontFace = "$(LUIE_BOLD_FONT)"
 local infoPanelFontSize = 16
 local infoPanelFontStyle = "soft-shadow-thin"
 local g_infoPanelFont = string_format("%s|%d|%s", infoPanelFontFace, infoPanelFontSize, infoPanelFontStyle)
