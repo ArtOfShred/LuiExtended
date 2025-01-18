@@ -405,7 +405,8 @@ function CombatText.AddToCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == CombatText.SV.blacklist and GetString(LUIE_STRING_CUSTOM_LIST_CT_BLACKLIST) or ""
     if id and id > 0 then
-        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
+        local cachedName = ZO_CachedStrFormat(SI_ABILITY_NAME, GetAbilityName(id))
+        local name = cachedName -- zo_strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil and name ~= "" then
             local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
@@ -432,7 +433,8 @@ function CombatText.RemoveFromCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == CombatText.SV.blacklist and GetString(LUIE_STRING_CUSTOM_LIST_CT_BLACKLIST) or ""
     if id and id > 0 then
-        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
+        local cachedName = ZO_CachedStrFormat(SI_ABILITY_NAME, GetAbilityName(id))
+        local name = cachedName -- zo_strformat("<<C:1>>", GetAbilityName(id))
         local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
         list[id] = nil
         CHAT_SYSTEM:Maximize()

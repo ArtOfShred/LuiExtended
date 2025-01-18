@@ -5724,6 +5724,7 @@ function LUIE.HandleClickEvent(rawLink, mouseButton, linkText, linkStyle, linkTy
 end
 
 -- Used by functions calling bar updates
+---@param barParams CenterScreenPlayerProgressBarParams
 local function ValidateProgressBarParams(barParams)
     local barType = barParams:GetParams()
     if not (barType and PLAYER_PROGRESS_BAR:GetBarTypeInfoByBarType(barType)) then

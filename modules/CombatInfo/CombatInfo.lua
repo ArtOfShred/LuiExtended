@@ -655,7 +655,8 @@ function CombatInfo.AddToCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == CombatInfo.SV.blacklist and GetString(LUIE_STRING_CUSTOM_LIST_CASTBAR_BLACKLIST) or ""
     if id and id > 0 then
-        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
+        local cachedName = ZO_CachedStrFormat(SI_ABILITY_NAME, GetAbilityName(id))
+        local name = cachedName -- zo_strformat("<<C:1>>", GetAbilityName(id))
         if name ~= nil and name ~= "" then
             local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
@@ -682,7 +683,8 @@ function CombatInfo.RemoveFromCustomList(list, input)
     local id = tonumber(input)
     local listRef = list == CombatInfo.SV.blacklist and GetString(LUIE_STRING_CUSTOM_LIST_CASTBAR_BLACKLIST) or ""
     if id and id > 0 then
-        local name = zo_strformat("<<C:1>>", GetAbilityName(id))
+        local cachedName = ZO_CachedStrFormat(SI_ABILITY_NAME, GetAbilityName(id))
+        local name = cachedName -- zo_strformat("<<C:1>>", GetAbilityName(id))
         local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
         list[id] = nil
         CHAT_SYSTEM:Maximize()
@@ -1941,7 +1943,8 @@ function CombatInfo.OnCombatEvent(eventCode, result, isError, abilityName, abili
     end
 
     local icon = GetAbilityIcon(abilityId)
-    local name = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+    local cachedName = ZO_CachedStrFormat(SI_ABILITY_NAME, GetAbilityName(abilityId))
+    local name = cachedName -- zo_strformat("<<C:1>>", GetAbilityName(abilityId))
 
     -- Return if ability not marked as cast or ability is blacklisted
     if not Castbar.IsCast[abilityId] or CombatInfo.SV.blacklist[abilityId] or CombatInfo.SV.blacklist[name] then
@@ -2233,7 +2236,8 @@ function CombatInfo.BarSlotUpdate(slotNum, wasfullUpdate, onlyProc)
         end
     end
 
-    local abilityName = Effects.EffectOverride[ability_id] and Effects.EffectOverride[ability_id].name or GetAbilityName(ability_id)
+    local cachedName = ZO_CachedStrFormat(SI_ABILITY_NAME, GetAbilityName(ability_id))
+    local abilityName = Effects.EffectOverride[ability_id] and Effects.EffectOverride[ability_id].name or cachedName
     local duration = GetUpdatedAbilityDuration(ability_id) or 0
 
     local currentTime = GetGameTimeMilliseconds()

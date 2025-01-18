@@ -96,13 +96,21 @@ end
 --- @param eventCode number The event code that triggered this callback
 --- @param addonName string The name of the addon that was loaded
 local function OnAddonLoaded(eventCode, addonName)
-    -- Only proceed if this is our addon
-    if LUIE.name ~= addonName then return end
+    if LUIE.name ~= addonName then
+        return
+    end
 
-    -- Cleanup event listener
     eventManager:UnregisterForEvent(addonName, eventCode)
+    -- -----------------------------------------------------------------------------
+    LUIE.PlayerNameRaw = GetRawUnitName("player")
+    -- -----------------------------------------------------------------------------
+    LUIE.PlayerNameFormatted = zo_strformat(SI_UNIT_NAME, GetUnitName("player"))
+    -- -----------------------------------------------------------------------------
+    LUIE.PlayerDisplayName = zo_strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
+    -- -----------------------------------------------------------------------------
+    LUIE.PlayerFaction = GetUnitAlliance("player")
+    -- -----------------------------------------------------------------------------
 
-    -- Initialize addon components in sequence
     LoadSavedVars()
     LUIE.InitializeHooks()
     LUIE.SetupAlertFrameVisibility()

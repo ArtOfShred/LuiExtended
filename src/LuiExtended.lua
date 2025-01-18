@@ -66,51 +66,60 @@ LUIE.Defaults =
     ChatAnnouncements_Enable = true,
     SlashCommands_Enable = true,
 }
--- -----------------------------------------------------------------------------
-LUIE.PlayerNameRaw = GetRawUnitName("player")
--- -----------------------------------------------------------------------------
-LUIE.PlayerNameFormatted = zo_strformat("<<C:1>>", GetUnitName("player"))
--- -----------------------------------------------------------------------------
-LUIE.PlayerDisplayName = zo_strformat("<<C:1>>", GetUnitDisplayName("player"))
--- -----------------------------------------------------------------------------
-LUIE.PlayerFaction = GetUnitAlliance("player")
--- -----------------------------------------------------------------------------
 
--- DEVS
-local DEVS =
-{
-    ["@ArtOfShred"] =
+local function readonlytable(t)
+    return setmetatable({},
+        {
+            __index = t,
+            __newindex = function(_, key, value)
+                error("Attempt to modify read-only table")
+            end,
+            __metatable = false
+        })
+end
+
+--- @class DevEntry
+--- @field enabled boolean Whether this developer has special access enabled
+--- @field debug boolean Whether debug mode is enabled for this developer
+
+--- @type table<string, DevEntry>
+local DEVS = readonlytable
     {
-        enabled = true,
-        debug = true,
-    },
-    ["@ArtOfShredPTS"] =
-    {
-        enabled = true,
-        debug = true,
-    },
-    ["@ArtOfShredLegacy"] =
-    {
-        enabled = true,
-        debug = true,
-    },
-    ["@HammerOfGlory"] =
-    {
-        enabled = true,
-        debug = true,
-    },
-    ["@dack_janiels"] =
-    {
-        enabled = true,
-        debug = true,
-    },
-}
+        ["@ArtOfShred"] =
+        {
+            enabled = true,
+            debug = true,
+        },
+        ["@ArtOfShredPTS"] =
+        {
+            enabled = true,
+            debug = true,
+        },
+        ["@ArtOfShredLegacy"] =
+        {
+            enabled = true,
+            debug = true,
+        },
+        ["@HammerOfGlory"] =
+        {
+            enabled = true,
+            debug = true,
+        },
+        ["@dack_janiels"] =
+        {
+            enabled = true,
+            debug = true,
+        },
+    }
+
+--- @type table<string, DevEntry>
 LUIE.DEVS = DEVS
 -- -----------------------------------------------------------------------------
 -- Helper function to check if debug is enabled for current user
 function LUIE.IsDevDebugEnabled()
-    local currentUser = GetDisplayName()
+    local currentUser = zo_strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
     return DEVS[currentUser] and DEVS[currentUser].enabled and DEVS[currentUser].debug
 end
+
 -- -----------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------

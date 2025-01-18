@@ -55,14 +55,6 @@ local MESSAGE_COLORS =
     TIMESTAMP = LUIE.TimeStampColorize or DEFAULT_TIMESTAMP_COLOR,
     SUCCESS = "|c00E200",
 }
--- -----------------------------------------------------------------------------
-local DEBUG_COMMANDS =
-{
-    ["/filter"] = SpellCastBuffs.TempSlashFilter,
-    ["/ground"] = SpellCastBuffs.TempSlashGround,
-    ["/zonecheck"] = SpellCastBuffs.TempSlashZoneCheck,
-    ["/abilitydump"] = SpellCastBuffs.TempSlashCheckRemovedAbilities,
-}
 
 -- -----------------------------------------------------------------------------
 -- Utility Functions
@@ -363,6 +355,14 @@ function SpellCastBuffs.TempSlashGround()
     LUIE.SpellCastBuffs.ReloadEffects("player")
 end
 
+local function FormatCoords(number)
+    return ("%05.02f"):format(zo_round(number * 10000) / 100)
+end
+
+local function FormatGPSCoords(number)
+    return zo_round(number * 100000)
+end
+
 -- -----------------------------------------------------------------------------
 --- Outputs current zone and map information to chat.
 --- Retrieves and displays:
@@ -370,12 +370,43 @@ end
 --- - Map ID and index
 --- - Map name, type, content type
 --- - Zone index and description
+--- - GPS coordinates for player
 function SpellCastBuffs.TempSlashZoneCheck()
+    -- Set map to player location and handle callback
+    if SetMapToPlayerLocation() == SET_MAP_RESULT_MAP_CHANGED then
+        LUIE.callbackObject:FireCallbacks("OnWorldMapChanged")
+    end
+
     local zoneid = GetZoneId(GetCurrentMapZoneIndex())
     local locName = GetPlayerLocationName()
     local mapid = GetCurrentMapId()
     local mapindex = GetCurrentMapIndex()
     local name, mapType, mapContentType, zoneIndex, description = GetMapInfoById(mapid)
+
+    -- Get coordinates at different map levels
+    local mapX, mapY = GetMapPlayerPosition("player")
+    local zoneX, zoneY = mapX, mapY
+    local worldX, worldY = mapX, mapY
+    local mapName = GetMapName()
+    local zoneName = mapName
+
+    -- Handle dungeon/subzone cases
+    if GetMapContentType() == MAP_CONTENT_DUNGEON or GetMapType() == MAPTYPE_SUBZONE then
+        MapZoomOut()
+        zoneName = GetMapName()
+        zoneX, zoneY = GetMapPlayerPosition("player")
+    end
+
+    -- Get world coordinates (except for Coldharbour)
+    if not (mapindex == 23 or GetCurrentMapIndex() == 23) then
+        SetMapToMapListIndex(1) -- Tamriel
+        worldX, worldY = GetMapPlayerPosition("player")
+    end
+
+    -- Reset map to player location
+    if SetMapToPlayerLocation() == SET_MAP_RESULT_MAP_CHANGED then
+        LUIE.callbackObject:FireCallbacks("OnWorldMapChanged")
+    end
 
     local info =
     {
@@ -387,6 +418,11 @@ function SpellCastBuffs.TempSlashZoneCheck()
         { "--------------------" },
         { "Map Id:",             mapid },
         { "Map Index:",          mapindex or "nil" },
+        { "--------------------" },
+        { "GPS Coordinates:" },
+        { "Map:",                string_format("%s: %s×%s", mapName, FormatCoords(mapX), FormatCoords(mapY)) },
+        { "Zone:",               string_format("%s: %s×%s", zoneName, FormatCoords(zoneX), FormatCoords(zoneY)) },
+        { "World:",              string_format("Tamriel: %s×%s", FormatCoords(worldX), FormatCoords(worldY)) },
         { "--------------------" },
         { "Map Name:",           name },
         { "Map Type:",           mapType },
@@ -412,6 +448,17 @@ function SpellCastBuffs.TempSlashCheckRemovedAbilities()
         end
     end
 end
+
+-- -----------------------------------------------------------------------------
+-- Slash Commands
+-- -----------------------------------------------------------------------------
+local DEBUG_COMMANDS =
+{
+    ["/filter"] = SpellCastBuffs.TempSlashFilter,
+    ["/ground"] = SpellCastBuffs.TempSlashGround,
+    ["/zonecheck"] = SpellCastBuffs.TempSlashZoneCheck,
+    ["/abilitydump"] = SpellCastBuffs.TempSlashCheckRemovedAbilities,
+}
 
 -- -----------------------------------------------------------------------------
 --- Initializes debug slash commands for authorized users only
