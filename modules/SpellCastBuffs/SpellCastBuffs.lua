@@ -313,7 +313,7 @@ end
 
 local function UpdateEffectOnSkillUpdate(overrideRank, casterUnitTag)
     -- Mages Guild
-    Effects.EffectOverride[40465].tooltip = zo_strformat(GetString(LUIE_STRING_SKILL_SCALDING_RUNE_TP), ((GetAbilityDuration(40468, overrideRank, casterUnitTag) or 0) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8))
+    Effects.EffectOverride[40465].tooltip = zo_strformat(GetString(LUIE_STRING_SKILL_SCALDING_RUNE_TP), ((LUIE.GetAbilityDuration(40468, overrideRank, casterUnitTag) or 0) / 1000) + GetNumPassiveSkillRanks(GetSkillLineIndicesFromSkillLineId(44), select(2, GetSkillLineIndicesFromSkillLineId(44)), 8))
 end
 
 --- @param abilityId integer
@@ -1523,7 +1523,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
                     elseif Effects.EffectOverride[control.effectId].tooltipValue2Mod then
                         value2 = zo_floor(duration + Effects.EffectOverride[control.effectId].tooltipValue2Mod + 0.5)
                     elseif Effects.EffectOverride[control.effectId].tooltipValue2Id then
-                        value2 = zo_floor((GetAbilityDuration(Effects.EffectOverride[control.effectId].tooltipValue2Id, nil, "player" or nil) or 0) + 0.5) / 1000
+                        value2 = zo_floor((LUIE.GetAbilityDuration(Effects.EffectOverride[control.effectId].tooltipValue2Id, nil, "player" or nil) or 0) + 0.5) / 1000
                     else
                         value2 = 0
                     end
@@ -3068,7 +3068,7 @@ function SpellCastBuffs.OnCombatEventIn(eventCode, result, isError, abilityName,
         effectName = Effects.FakePlayerBuffs[abilityId].name or GetAbilityName(abilityId)
         duration = Effects.FakePlayerBuffs[abilityId].duration
         if duration == "GET" then
-            duration = GetAbilityDuration(abilityId, overrideRank, casterUnitTag) or 0
+            duration = LUIE.GetAbilityDuration(abilityId, overrideRank, casterUnitTag) or 0
         end
         local finalId = Effects.FakePlayerBuffs[abilityId].shiftId or abilityId
         if Effects.FakePlayerBuffs[abilityId].shiftId then
@@ -3268,7 +3268,7 @@ function SpellCastBuffs.OnCombatEventOut(eventCode, result, isError, abilityName
         effectName = Effects.FakePlayerOfflineAura[abilityId].name or GetAbilityName(abilityId)
         duration = Effects.FakePlayerOfflineAura[abilityId].duration
         if duration == "GET" then
-            duration = GetAbilityDuration(abilityId, overrideRank, casterUnitTag) or 0
+            duration = LUIE.GetAbilityDuration(abilityId, overrideRank, casterUnitTag) or 0
         end
         local finalId = Effects.FakePlayerOfflineAura[abilityId].shiftId or abilityId
         if Effects.FakePlayerOfflineAura[abilityId].shiftId then
