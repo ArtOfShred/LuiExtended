@@ -2556,7 +2556,7 @@ function UnitFrames.UpdateStaticControls(unitFrame)
     -- If unitFrame has unit classIcon control
     if unitFrame.classIcon ~= nil then
         local unitDifficulty = GetUnitDifficulty(unitFrame.unitTag)
-        local classIcon = ZO_GetPlatformClassIcon(GetUnitClassId(unitFrame.unitTag))
+        local classIcon = LUIE.GetClassIcon(GetUnitClassId(unitFrame.unitTag))
         local showClass = (unitFrame.isPlayer and classIcon ~= nil) or (unitDifficulty > 1)
         if unitFrame.isPlayer then
             unitFrame.classIcon:SetTexture(classIcon)
@@ -5214,7 +5214,7 @@ function UnitFrames.CustomFramesApplyLayoutPlayer(unhide)
         local phb = player[COMBAT_MECHANIC_FLAGS_HEALTH]  -- Not a backdrop
         local pmb = player[COMBAT_MECHANIC_FLAGS_MAGICKA] -- Not a backdrop
         local psb = player[COMBAT_MECHANIC_FLAGS_STAMINA] -- Not a backdrop
-        local alt = player.alternative                    -- Not a backdrop
+        local alt = player.alternative    -- Not a backdrop
 
         if UnitFrames.SV.PlayerFrameOptions == 1 then
             if not UnitFrames.SV.HideBarMagicka and not UnitFrames.SV.HideBarStamina then
