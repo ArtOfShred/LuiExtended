@@ -384,6 +384,19 @@ function LUIE.GetSlotTrueBoundId(index, bar)
 end
 
 -- -----------------------------------------------------------------------------
+---
+--- @param abilityId integer
+--- @param overrideActiveRank boolean? -- Defaults to nil
+--- @param overrideCasterUnitTag string? -- Defaults to "player"
+--- @return integer durationMs
+function LUIE.GetAbilityDuration(abilityId, overrideActiveRank, overrideCasterUnitTag)
+    abilityId = abilityId or error("An abilityId must be provided to this function!")
+    overrideActiveRank = overrideActiveRank or nil
+    overrideCasterUnitTag = overrideCasterUnitTag or "player"
+    return GetAbilityDuration(abilityId, overrideActiveRank, overrideCasterUnitTag)
+end
+
+-- -----------------------------------------------------------------------------
 
 -- Add this if not already.
 if not SLASH_COMMANDS["/rl"] then
@@ -628,18 +641,113 @@ end
 -- -----------------------------------------------------------------------------
 
 local CLASS_ICONS = {}
-local GAMEPAD_CLASS_ICONS = {}
 
 for i = 1, GetNumClasses() do
-    local classId, _, _, _, _, _, keyboardIcon, gamepadIcon = GetClassInfo(i)
-    CLASS_ICONS[classId] = keyboardIcon
-    GAMEPAD_CLASS_ICONS[classId] = gamepadIcon
+    local classId, lore, normalIconKeyboard, pressedIconKeyboard, mouseoverIconKeyboard, isSelectable, ingameIconKeyboard, ingameIconGamepad, normalIconGamepad, pressedIconGamepad = GetClassInfo(i)
+    CLASS_ICONS[classId] = ingameIconGamepad
 end
 
 LUIE.CLASS_ICONS = CLASS_ICONS
-LUIE.GAMEPAD_CLASS_ICONS = GAMEPAD_CLASS_ICONS
 
 function LUIE.GetClassIcon(classId)
-    return GAMEPAD_CLASS_ICONS[classId]
+    return CLASS_ICONS[classId]
 end
+
 -- -----------------------------------------------------------------------------
+
+--- @param armorType any
+--- @return integer counter
+local function GetEquippedArmorPieces(armorType)
+    local counter = 0
+    for i = 0, 16 do
+        local itemLink = GetItemLink(BAG_WORN, i, LINK_STYLE_DEFAULT)
+        if GetItemLinkArmorType(itemLink) == armorType then
+            counter = counter + 1
+        end
+    end
+    return counter
+end
+
+-- Tooltip handler definitions
+local TooltipHandlers =
+{
+    -- Brace
+    [974] = function ()
+        local _, _, mitigation = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_BLOCK_MITIGATION)
+        local _, _, speed = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_BLOCK_SPEED)
+        local _, cost = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_BLOCK_COST)
+
+        -- Get weapon type for resource determination
+        local function getActiveWeaponType()
+            local weaponPair = GetActiveWeaponPairInfo()
+            if weaponPair == ACTIVE_WEAPON_PAIR_MAIN then
+                return GetItemWeaponType(BAG_WORN, EQUIP_SLOT_MAIN_HAND)
+            elseif weaponPair == ACTIVE_WEAPON_PAIR_BACKUP then
+                return GetItemWeaponType(BAG_WORN, EQUIP_SLOT_BACKUP_MAIN)
+            end
+            return WEAPONTYPE_NONE
+        end
+
+        -- Determine resource type based on weapon and skills
+        local function getResourceType()
+            local weaponType = getActiveWeaponType()
+            if weaponType == WEAPONTYPE_FROST_STAFF then
+                local skillType, skillIndex, abilityIndex = GetSpecificSkillAbilityKeysByAbilityId(30948)
+                local purchased = select(6, GetSkillAbilityInfo(skillType, skillIndex, abilityIndex))
+                if purchased then
+                    return GetString(SI_ATTRIBUTES2) -- Magicka
+                end
+            end
+            return GetString(SI_ATTRIBUTES3) -- Stamina
+        end
+
+        local finalSpeed = 100 - speed
+        local roundedMitigation = zo_floor(mitigation * 100 + 0.5) / 100
+        return zo_strformat(GetString(LUIE_STRING_SKILL_BRACE_TP), roundedMitigation, finalSpeed, cost, getResourceType())
+    end,
+
+    -- Crouch
+    [20299] = function ()
+        local _, _, speed = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_SNEAK_SPEED_REDUCTION)
+        local _, cost = GetAdvancedStatValue(ADVANCED_STAT_DISPLAY_TYPE_SNEAK_COST)
+
+        if speed <= 0 or speed >= 100 then
+            return zo_strformat(GetString(LUIE_STRING_SKILL_HIDDEN_NO_SPEED_TP), cost)
+        end
+        return zo_strformat(GetString(LUIE_STRING_SKILL_HIDDEN_TP), 100 - speed, cost)
+    end,
+
+    -- Unchained
+    [98316] = function ()
+        local duration = (LUIE.GetAbilityDuration(98316) or 0) / 1000
+        local pointsSpent = GetNumPointsSpentOnChampionSkill(64) * 1.1
+        local adjustPoints = pointsSpent == 0 and 55 or zo_floor(pointsSpent * 100 + 0.5) / 100
+        return zo_strformat(GetString(LUIE_STRING_SKILL_UNCHAINED_TP), duration, adjustPoints)
+    end,
+
+    -- Medium Armor Evasion
+    [150057] = function ()
+        local counter = GetEquippedArmorPieces(ARMORTYPE_MEDIUM) * 2
+        return zo_strformat(GetString(LUIE_STRING_SKILL_MEDIUM_ARMOR_EVASION), counter)
+    end,
+
+    -- Unstoppable Brute
+    [126582] = function ()
+        local counter = GetEquippedArmorPieces(ARMORTYPE_HEAVY) * 5
+        local duration = (LUIE.GetAbilityDuration(126582) or 0) / 1000
+        return zo_strformat(GetString(LUIE_STRING_SKILL_UNSTOPPABLE_BRUTE), duration, counter)
+    end,
+
+    -- Immovable
+    [126583] = function ()
+        local counter = GetEquippedArmorPieces(ARMORTYPE_HEAVY) * 5
+        local duration = (LUIE.GetAbilityDuration(126583) or 0) / 1000
+        return zo_strformat(GetString(LUIE_STRING_SKILL_IMMOVABLE), duration, counter, 65 + counter)
+    end,
+}
+
+-- Returns dynamic tooltips when called by Tooltip function
+function LUIE.DynamicTooltip(abilityId)
+    local handler = TooltipHandlers[abilityId]
+    return handler and handler()
+end
