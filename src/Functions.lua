@@ -625,6 +625,8 @@ function LUIE.GetFormattedFontString(fontName, fontSize, overrideShadowStyle)
     return ("%s|%d|%s"):format(fontName, fontSize, shadowStyle)
 end
 
+-- -----------------------------------------------------------------------------
+
 local CLASS_ICONS = {}
 local GAMEPAD_CLASS_ICONS = {}
 
@@ -640,3 +642,4 @@ LUIE.GAMEPAD_CLASS_ICONS = GAMEPAD_CLASS_ICONS
 function LUIE.GetClassIcon(classId)
     return GAMEPAD_CLASS_ICONS[classId]
 end
+-- -----------------------------------------------------------------------------
