@@ -61,8 +61,6 @@ function AddonProfiler:CaptureMemoryState(tag, state)
         local delta = self.memoryStates[tag].after - self.memoryStates[tag].before
         local cpuElapsed = os.rawclock() - self.memoryStates[tag].cpuTime
 
-        -- Refactored output formatting into a separate function
-        -- This improves readability and reusability
         self:OutputMemoryProfileResult(tag, self.memoryStates[tag].before, self.memoryStates[tag].after, delta, cpuElapsed)
     end
 end
@@ -158,12 +156,10 @@ function AddonProfiler:OutputResults(results)
     if self.memoryStates["Total"] then
         local totalDelta = self.memoryStates["Total"].after - self.memoryStates["Total"].before
         local cpuElapsed = os_rawclock() - self.memoryStates["Total"].cpuTime
-        -- Using the refactored output function for consistency
         self:OutputMemoryProfileResult("Total", self.memoryStates["Total"].before, self.memoryStates["Total"].after, totalDelta, cpuElapsed)
     end
 
-    -- Refactored detailed profiling results output
-    -- This improves organization and readability
+    -- Detailed Profiling Results
     self:OutputDetailedProfilingResults(results)
 end
 
@@ -221,8 +217,6 @@ function AddonProfiler:OutputDetailedProfilingResults(results)
 
     for i = 1, math.min(6, #memSorted) do
         local entry = memSorted[i]
-        -- Refactored memory change formatting into a separate function
-        -- This improves readability and reusability
         local indicator = self:FormatMemoryChangeIndicator(entry.delta)
         d(string.format("%s %s: %s %.2f KB", BULLET, entry.tag, indicator, math.abs(entry.delta)))
     end
@@ -278,5 +272,5 @@ function AddonProfiler:OutputMemoryBreakdown()
     end
 end
 
--- Make the AddonProfiler globally accessible
+-- AddonProfiler Global
 rawset(_G, "AddonProfiler", AddonProfiler)
