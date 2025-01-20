@@ -23,7 +23,6 @@ local CollectibleTables =
     -- Merchants
     Merchants =
     {
-        [300] = "Pirharri",
         [301] = "Nuzimeh",
         [6378] = "Fezez",
         [8995] = "Peddler",
