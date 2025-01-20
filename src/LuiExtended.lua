@@ -67,6 +67,7 @@ LUIE.Defaults =
     SlashCommands_Enable = true,
 }
 
+-- -----------------------------------------------------------------------------
 local function readonlytable(t)
     return setmetatable({},
         {
@@ -121,5 +122,4 @@ function LUIE.IsDevDebugEnabled()
     return DEVS[currentUser] and DEVS[currentUser].enabled and DEVS[currentUser].debug
 end
 
--- -----------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------
