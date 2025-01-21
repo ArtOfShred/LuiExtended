@@ -16,11 +16,11 @@ local changelogMessages =
     "",
     -- General Changes
     "|cFFFF00General:|r",
-    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t LUIE's data has been moved into the LuiData library, this is included with LuiExtended.\nThis was a 8 second gain in loading time in my testing.",
-    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Added more bar textures to use on our custom frames.",
-    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Improved font registration for our custom fonts.",
-    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Using cached strings for the combat text module. This should improve performance.",
-    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Code cleanup and improvements.",
+    "* LUIE's data has been moved into the LuiData library, this is included with LuiExtended.\nThis was a 8 second gain in loading time in my testing.",
+    "* Added more bar textures to use on our custom frames.",
+    "* Improved font registration for our custom fonts.",
+    "* Using cached strings for the combat text module. This should improve performance.",
+    "* Code cleanup and improvements.",
     "",
 }
 -- -----------------------------------------------------------------------------
