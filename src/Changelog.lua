@@ -12,14 +12,15 @@ local table_concat = table.concat
 local changelogMessages =
 {
     -- Version Header
-    "|cFFA500LuiExtended Version 6.8.0|r",
+    "|cFFA500LuiExtended Version 6.8.1|r",
     "",
     -- General Changes
     "|cFFFF00General:|r",
-    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Fix for operator + is not supported for number + nil error in chat announcements.",
-    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Added UI mover for Interact Text (affects default 'E' keybind position)",
-    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Fixed active guard ability toggle icon not displaying",
-    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Fixed chat announcements for crafting items and materials to properly display all entries",
+    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t LUIE's data has been moved into the LuiData library, this is included with LuiExtended.\nThis was a 8 second gain in loading time in my testing.",
+    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Added more bar textures to use on our custom frames.",
+    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Improved font registration for our custom fonts.",
+    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Using cached strings for the combat text module. This should improve performance.",
+    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Code cleanup and improvements.",
     "",
 }
 -- -----------------------------------------------------------------------------
