@@ -10,6 +10,27 @@ local LUIE = LuiData
 --- @class (partial) AbilityTables
 local AbilityTables =
 {
+
+    -- Dragonknight Cyrodiil Templates
+    Skill_Vengeance_Standard = 237627,         -- Vengeance Dragonknight Standard
+    Skill_Vengeance_Lava_Whip = 237606,        -- Vengeance Lava Whip
+    Skill_Vengeance_Searing_Strike = 237607,   -- Vengeance Searing Strike
+    Skill_Vengeance_Fiery_Breath = 237615,     -- Vengeance Fiery Breath
+    Skill_Vengeance_Fiery_Grip = 237620,       -- Vengeance Fiery Grip
+    Skill_Vengeance_Inferno = 237624,          -- Vengeance Inferno
+    Skill_Vengeance_Dragon_Leap = 237648,      -- Vengeance Dragon Leap
+    Skill_Vengeance_Spiked_Armor = 237630,     -- Vengeance Spiked Armor
+    Skill_Vengeance_Dark_Talons = 237636,      -- Vengeance Dark Talons
+    Skill_Vengeance_Dragon_Blood = 237638,     -- Vengeance Dragon Blood
+    Skill_Vengeance_Protective_Scale = 237639, -- Vengeance Protective Scale
+    Skill_Vengeance_Inhale = 237641,           -- Vengeance Inhale
+    Skill_Vengeance_Magma_Armor = 237790,      -- Vengeance Magma Armor
+    Skill_Vengeance_Stonefist = 237781,        -- Vengeance Stonefist
+    Skill_Vengeance_Molten_Weapons = 237782,   -- Vengeance Molten Weapons
+    Skill_Vengeance_Obsidian_Shield = 237785,  -- Vengeance Obsidian Shield
+    Skill_Vengeance_Petrify = 237787,          -- Vengeance Petrify
+    Skill_Vengeance_Ash_Cloud = 237788,        -- Vengeance Ash Cloud
+
     -- ---------------------------------------------------
     -- GENERIC BUFFS & DEBUFFS ---------------------------
     -- ---------------------------------------------------

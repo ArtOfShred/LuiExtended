@@ -12,15 +12,11 @@ local table_concat = table.concat
 local changelogMessages =
 {
     -- Version Header
-    "|cFFA500LuiExtended Version 6.8.1|r",
+    "|cFFA500LuiExtended Version 6.8.2|r",
     "",
     -- General Changes
     "|cFFFF00General:|r",
-    "* LUIE's data has been moved into the LuiData library, this is included with LuiExtended.\nThis was a 8 second gain in loading time in my testing.",
-    "* Added more bar textures to use on our custom frames.",
-    "* Improved font registration for our custom fonts.",
-    "* Using cached strings for the combat text module. This should improve performance.",
-    "* Code cleanup and improvements.",
+    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Font fixes.",
     "",
 }
 -- -----------------------------------------------------------------------------

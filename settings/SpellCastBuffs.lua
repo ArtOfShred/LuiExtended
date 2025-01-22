@@ -6,9 +6,53 @@
 --- @class (partial) LuiExtended
 local LUIE = LUIE
 
-local FontsList = LUIE.Media.FontList
-local SoundsList = LUIE.Media.SoundList
-local StatusbarTexturesList = LUIE.Media.StatusbarTexturesList
+local FontsList = {}
+local LMP = LibMediaProvider
+if LMP then
+    -- Add LUIE fonts first
+    for f, _ in pairs(LUIE.Fonts) do
+        table.insert(FontsList, f)
+    end
+    -- Add LMP fonts
+    for _, font in ipairs(LMP:List(LMP.MediaType.FONT)) do
+        -- Only add if not already in list
+        if not LUIE.Fonts[font] then
+            table.insert(FontsList, font)
+        end
+    end
+end
+
+-- Get sounds from LibMediaProvider
+local SoundsList = {}
+if LMP then
+    -- Add LUIE sounds first
+    for sound, _ in pairs(LUIE.Sounds) do
+        table.insert(SoundsList, sound)
+    end
+    -- Add LMP sounds
+    for _, sound in ipairs(LMP:List(LMP.MediaType.SOUND)) do
+        -- Only add if not already in list
+        if not LUIE.Sounds[sound] then
+            table.insert(SoundsList, sound)
+        end
+    end
+end
+
+-- Get statusbar textures from LibMediaProvider
+local StatusbarTexturesList = {}
+if LMP then
+    -- Add LUIE textures first
+    for key, _ in pairs(LUIE.StatusbarTextures) do
+        table.insert(StatusbarTexturesList, key)
+    end
+    -- Add LMP statusbar textures
+    for _, texture in ipairs(LMP:List(LMP.MediaType.STATUSBAR)) do
+        -- Only add if not already in list
+        if not LUIE.StatusbarTextures[texture] then
+            table.insert(StatusbarTexturesList, texture)
+        end
+    end
+end
 
 --- @class (partial) LUIE.SpellCastBuffs
 local SpellCastBuffs = LUIE.SpellCastBuffs
@@ -1459,7 +1503,8 @@ function SpellCastBuffs.CreateSettings()
                 type = "dropdown",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_FONT_STYLE)),
                 tooltip = GetString(LUIE_STRING_LAM_BUFF_FONTSTYLE_TP),
-                choices = {
+                choices =
+                {
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_NORMAL) .. "|r",
                     "|cEEEEEE" .. GetString(LUIE_FONT_STYLE_OUTLINE) .. "|r",
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_THICK_OUTLINE) .. "|r",
@@ -1467,7 +1512,8 @@ function SpellCastBuffs.CreateSettings()
                     "|c666666" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THICK) .. "|r",
                     "|c777777" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THIN) .. "|r",
                 },
-                choicesValues = {
+                choicesValues =
+                {
                     GetString(LUIE_FONT_STYLE_VALUE_NORMAL),
                     GetString(LUIE_FONT_STYLE_VALUE_OUTLINE),
                     GetString(LUIE_FONT_STYLE_VALUE_THICK_OUTLINE),
@@ -2960,7 +3006,8 @@ function SpellCastBuffs.CreateSettings()
                 type = "dropdown",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_BUFF_PROM_FONTSTYLE)),
                 tooltip = GetString(LUIE_STRING_LAM_BUFF_PROM_FONTSTYLE_TP),
-                choices = {
+                choices =
+                {
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_NORMAL) .. "|r",
                     "|cEEEEEE" .. GetString(LUIE_FONT_STYLE_OUTLINE) .. "|r",
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_THICK_OUTLINE) .. "|r",
@@ -2968,7 +3015,8 @@ function SpellCastBuffs.CreateSettings()
                     "|c666666" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THICK) .. "|r",
                     "|c777777" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THIN) .. "|r",
                 },
-                choicesValues = {
+                choicesValues =
+                {
                     GetString(LUIE_FONT_STYLE_VALUE_NORMAL),
                     GetString(LUIE_FONT_STYLE_VALUE_OUTLINE),
                     GetString(LUIE_FONT_STYLE_VALUE_THICK_OUTLINE),

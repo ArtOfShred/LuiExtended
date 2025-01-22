@@ -6,10 +6,6 @@
 --- @class (partial) LuiExtended
 local LUIE = LUIE
 
-local FontsList = LUIE.Media.FontList
-local SoundsList = LUIE.Media.SoundList
-local StatusbarTexturesList = LUIE.Media.StatusbarTexturesList
-
 --- @class (partial) ChatAnnouncements
 local ChatAnnouncements = LUIE.ChatAnnouncements
 
