@@ -3,8 +3,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 -- AbilityTables namespace
 --- @class (partial) AbilityTables
@@ -1198,4 +1198,4 @@ end
 
 -- Export string data to global namespace
 --- @class (partial) AbilityTables
-LUIE.Data.Abilities = AbilityTables
+LuiData.Data.Abilities = AbilityTables

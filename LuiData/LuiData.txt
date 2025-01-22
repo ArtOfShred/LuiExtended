@@ -1,11 +1,14 @@
 ## Title: LuiData
 ## Author: ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder
-## Version: 6.8.2
+## Version: 6.8.3
 ## APIVersion: 101044 101045
-## AddOnVersion: 6802
+## AddOnVersion: 6803
 ## Description: Provides data for LuiExtended.
 ## IsLibrary: true
 ## DisableSavedVariablesAutoSaving: 0
+
+lang/Skills_en.lua
+lang/Skills_$(language).lua
 
 # Core Data Files
 _data_namespace.lua

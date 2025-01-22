@@ -3,13 +3,13 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
-local Tooltips = LUIE.Data.Tooltips
-local Unitnames = LUIE.Data.UnitNames
-local Zonenames = LUIE.Data.ZoneNames
-local Abilities = LUIE.Data.Abilities
+local Tooltips = LuiData.Data.Tooltips
+local Unitnames = LuiData.Data.UnitNames
+local Zonenames = LuiData.Data.ZoneNames
+local Abilities = LuiData.Data.Abilities
 
 local zo_strformat = zo_strformat
 
@@ -212,4 +212,4 @@ local FakePlayerBuffs =
 }
 
 --- @class (partial) FakePlayerBuffs
-LUIE.Data.Effects.FakePlayerBuffs = FakePlayerBuffs
+LuiData.Data.Effects.FakePlayerBuffs = FakePlayerBuffs

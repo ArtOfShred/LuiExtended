@@ -3,8 +3,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 --- @class (partial) CombatTextConstants
 local CombatTextConstants =
@@ -206,4 +206,4 @@ local CombatTextConstants =
     iconSide = { "none", "left", "right" },
 }
 --- @class (partial) CombatTextConstants
-LUIE.Data.CombatTextConstants = CombatTextConstants
+LuiData.Data.CombatTextConstants = CombatTextConstants

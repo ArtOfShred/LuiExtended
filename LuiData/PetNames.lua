@@ -3,8 +3,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 --- @class (partial) PetNames
 --- @field Assistants table<string, boolean>
@@ -73,4 +73,4 @@ local PetNames =
     },
 }
 --- @class (partial) PetNames
-LUIE.Data.PetNames = PetNames
+LuiData.Data.PetNames = PetNames

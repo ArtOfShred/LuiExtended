@@ -3,13 +3,13 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
-local Unitnames = LUIE.Data.UnitNames
-local Zonenames = LUIE.Data.ZoneNames
-local Abilities = LUIE.Data.Abilities
-local ZoneTable = LUIE.Data.ZoneTable
+local Unitnames = LuiData.Data.UnitNames
+local Zonenames = LuiData.Data.ZoneNames
+local Abilities = LuiData.Data.Abilities
+local ZoneTable = LuiData.Data.ZoneTable
 
 --- @class (partial) AlertZoneOverride
 local AlertZoneOverride =
@@ -937,4 +937,4 @@ local AlertZoneOverride =
 }
 
 --- @class (partial) AlertZoneOverride
-LUIE.Data.AlertZoneOverride = AlertZoneOverride
+LuiData.Data.AlertZoneOverride = AlertZoneOverride

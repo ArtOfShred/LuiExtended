@@ -3,10 +3,10 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
--- local Abilities = LUIE.Data.Abilities --unused local
+-- local Abilities = LuiData.Data.Abilities --unused local
 
 --- @class (partial) CastBarTable
 local CastBarTable =
@@ -1230,4 +1230,4 @@ CastBarTable.InteractCast = {
 }
 
 --- @class (partial) CastBarTable
-LUIE.Data.CastBarTable = CastBarTable
+LuiData.Data.CastBarTable = CastBarTable

@@ -3,8 +3,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 -- Not implemented - list of abilities that ACTION_RESULT_GAINED_DURATION fires in the opposite order of normal
 --- @class (partial) ReversedLogic
@@ -24,4 +24,4 @@ local ReversedLogic =
 }
 
 --- @class (partial) ReversedLogic
-LUIE.Data.CrowdControl.ReversedLogic = ReversedLogic
+LuiData.Data.CrowdControl.ReversedLogic = ReversedLogic

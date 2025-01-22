@@ -3,8 +3,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 --- @class (partial) Quests
 --- @field ItemIgnoreTurnIn table :TODO
@@ -384,4 +384,4 @@ Quests.QuestItemModifyOnRemove =
     end, -- Dwemer Device (Tip of the Spearhead)
 }
 --- @class (partial) Quests
-LUIE.Data.Quests = Quests
+LuiData.Data.Quests = Quests

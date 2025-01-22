@@ -3,13 +3,13 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
-local Unitnames = LUIE.Data.UnitNames
-local Zonenames = LUIE.Data.ZoneNames
-local Abilities = LUIE.Data.Abilities
-local ZoneTable = LUIE.Data.ZoneTable
+local Unitnames = LuiData.Data.UnitNames
+local Zonenames = LuiData.Data.ZoneNames
+local Abilities = LuiData.Data.Abilities
+local ZoneTable = LuiData.Data.ZoneTable
 
 -- SET A PRIORITY
 -- priority = 1-3: (1 = ARENA/DUNGEON/TRIAL, 2 = ELITE NPC/QUEST BOSS, 3 = NORMAL NPC)
@@ -6463,4 +6463,4 @@ local AlertTable =
 }
 
 --- @class (partial) AlertTable
-LUIE.Data.AlertTable = AlertTable
+LuiData.Data.AlertTable = AlertTable

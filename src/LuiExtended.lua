@@ -7,6 +7,7 @@
 ---
 --- @class (partial) LuiExtended
 --- @field __index LuiExtended
+--- @field Data LuiData
 --- @field Combat LUIE.CombatInfo
 --- @field SpellCastBuffs LUIE.SpellCastBuffs
 --- @field name string The addon name
@@ -21,7 +22,7 @@ local LUIE = LUIE
 -- -----------------------------------------------------------------------------
 LUIE.tag = "LUIE"
 LUIE.name = "LuiExtended"
-LUIE.version = "6.8.2"
+LUIE.version = "6.8.3"
 LUIE.author = "ArtOfShred, DakJaniels, psypanda, Saenic & SpellBuilder"
 LUIE.website = "https://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github = "https://github.com/ArtOfShred/LuiExtended"
@@ -40,7 +41,11 @@ LUIE.callbackObject = ZO_CallbackObject:New()
 -- Components
 LUIE.Components = {}
 -- -----------------------------------------------------------------------------
---- @class (partial) Data
+local LuiData = LuiData
+if not LuiData then
+    error("LuiData is not enabled", 2)
+end
+--- @class (partial) LuiData
 LUIE.Data = LuiData.Data
 -- -----------------------------------------------------------------------------
 -- Default Settings

@@ -3,13 +3,6 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiData
-LuiData = {}
-LuiData.__index = LuiData
-LuiData.__name = "LuiData"
-LuiData.__newindex = NewIndexHandler
-LuiData.version = "6.8.0"
-
 --- @class CrowdControl
 --- @field aoeNPCBoss table
 --- @field aoeNPCElite table
@@ -80,7 +73,7 @@ LuiData.version = "6.8.0"
 --- @field AlertZoneOverride AlertZoneOverride
 --- @field CastBarTable CastBarTable
 --- @field CollectibleTables CollectibleTables
---- @field CombatTextBlacklistPresets BlacklistPresets
+--- @field CombatTextBlacklistPresets CombatTextBlacklistPresets
 --- @field CombatTextConstants CombatTextConstants
 --- @field CrowdControl CrowdControl
 --- @field DebugResults DebugResults
@@ -92,120 +85,141 @@ LuiData.version = "6.8.0"
 --- @field UnitNames UnitNames
 --- @field ZoneNames ZoneNames
 --- @field ZoneTable ZoneTable
-LuiData.Data =
+
+
+--- @class (partial) LuiData
+LuiData =
 {
-    Abilities = {},
-    AbilityBlacklistPresets = {},
-    AlertBossNameConvert = {},
-    AlertMapOverride = {},
-    AlertTable = {},
-    AlertZoneOverride = {},
-    CastBarTable = {},
-    CollectibleTables = {},
-    CombatTextBlacklistPresets = {},
-    CombatTextConstants = {},
-    CrowdControl =
+    __name = "LuiData",
+    version = "6.8.3",
+    Data = --- @class (partial) Data
     {
-        IgnoreList = {},
-        LavaAlerts = {},
-        ReversedLogic = {},
-        SpecialCC = {},
-        aoeNPCBoss = {},
-        aoeNPCElite = {},
-        aoeNPCNormal = {},
-        aoePlayerNormal = {},
-        aoePlayerSet = {},
-        aoePlayerUltimate = {},
-        aoeTraps = {},
-    },
-    DebugResults = {},
-    DebugAuras = {},
-    Effects =
-    {
-        AddNameAura = {},
-        AddNameOnBossEngaged = {},
-        AddNameOnEvent = {},
-        AddNoDurationBarHighlight = {},
-        AddStackOnEvent = {},
-        ArtificialEffectOverride = {},
-        AssistantIcons = {},
-        BarHighlightCheckOnFade = {},
-        BarHighlightDestroFix = {},
-        BarHighlightExtraId = {},
-        BarHighlightOverride = {},
-        BarHighlightStack = {},
-        BarIdOverride = {},
-        BlockAndBashCC = {},
-        DebuffDisplayOverrideId = {},
-        DebuffDisplayOverrideIdAlways = {},
-        DebuffDisplayOverrideMajorMinor = {},
-        DebuffDisplayOverrideName = {},
-        DisguiseIcons = {},
-        EffectHideSCT = {},
-        EffectMergeId = {},
-        EffectMergeName = {},
-        EffectOverride = {},
-        EffectOverrideByName = {},
-        EffectPullDuration = {},
-        EffectSourceOverride = {},
-        FakeExternalBuffs = {},
-        FakeExternalDebuffs = {},
-        FakePlayerBuffs = {},
-        FakePlayerDebuffs = {},
-        FakePlayerOfflineAura = {},
-        FakeStagger = {},
-        HasAbilityProc = {},
-        HideGroundMineStacks = {},
-        IsAbilityActiveGlow = {},
-        IsAbilityActiveHighlight = {},
-        IsAbilityICD = {},
-        IsAllianceXPBuff = {},
-        IsBlock = {},
-        IsBloodFrenzy = {},
-        IsBoon = {},
-        IsCyrodiil = {},
-        IsExperienceBuff = {},
-        IsFoodBuff = {},
-        IsGrimFocus = {},
-        IsGroundMineAura = {},
-        IsGroundMineDamage = {},
-        IsGroundMineStack = {},
-        IsLycan = {},
-        IsSetICD = {},
-        IsSoulSummons = {},
-        IsVamp = {},
-        IsVampLycanBite = {},
-        IsVampLycanDisease = {},
-        IsWeaponAttack = {},
-        KeepUpgradeAlliance = {},
-        KeepUpgradeNameFix = {},
-        KeepUpgradeOverride = {},
-        KeepUpgradeTooltip = {},
-        LinkedGroundMine = {},
-        MajorMinor = {},
-        MapDataOverride = {},
-        RemoveAbilityActiveHighlight = {},
-        SynergyNameOverride = {},
-        TooltipUseDefault = {},
-        ZoneBuffs = {},
-        ZoneDataOverride = {},
-    },
-    PetNames =
-    {
-        Assistants = {},
-        Necromancer = {},
-        Sets = {},
-        Sorcerer = {},
-        Warden = {},
-    },
-    --- @class (partial) Quests
-    Quests = {},
-    --- @class (partial) Tooltips
-    Tooltips = {},
-    --- @class (partial) UnitNames
-    UnitNames = {},
-    --- @class (partial) ZoneNames
-    ZoneNames = {},
-    --- @class (partial) ZoneTable
-    ZoneTable = {},
+        Abilities = {},
+        AbilityBlacklistPresets =
+        {
+            MajorBuffs = {},
+            MajorDebuffs = {},
+            MinorBuffs = {},
+            MinorDebuffs = {},
+        },
+        AlertBossNameConvert = {},
+        AlertMapOverride = {},
+        AlertTable = {},
+        AlertZoneOverride = {},
+        CastBarTable = {},
+        CollectibleTables = {},
+        CombatTextBlacklistPresets =
+        {
+            Necromancer = {},
+            Sets = {},
+            Sorcerer = {},
+            Templar = {},
+            Warden = {},
+        },
+        CombatTextConstants = {},
+        CrowdControl =
+        {
+            IgnoreList = {},
+            LavaAlerts = {},
+            ReversedLogic = {},
+            SpecialCC = {},
+            aoeNPCBoss = {},
+            aoeNPCElite = {},
+            aoeNPCNormal = {},
+            aoePlayerNormal = {},
+            aoePlayerSet = {},
+            aoePlayerUltimate = {},
+            aoeTraps = {},
+        },
+        DebugResults = {},
+        DebugAuras = {},
+        Effects =
+        {
+            AddNameAura = {},
+            AddNameOnBossEngaged = {},
+            AddNameOnEvent = {},
+            AddNoDurationBarHighlight = {},
+            AddStackOnEvent = {},
+            ArtificialEffectOverride = {},
+            AssistantIcons = {},
+            BarHighlightCheckOnFade = {},
+            BarHighlightDestroFix = {},
+            BarHighlightExtraId = {},
+            BarHighlightOverride = {},
+            BarHighlightStack = {},
+            BarIdOverride = {},
+            BlockAndBashCC = {},
+            DebuffDisplayOverrideId = {},
+            DebuffDisplayOverrideIdAlways = {},
+            DebuffDisplayOverrideMajorMinor = {},
+            DebuffDisplayOverrideName = {},
+            DisguiseIcons = {},
+            EffectHideSCT = {},
+            EffectMergeId = {},
+            EffectMergeName = {},
+            EffectOverride = {},
+            EffectOverrideByName = {},
+            EffectPullDuration = {},
+            EffectSourceOverride = {},
+            FakeExternalBuffs = {},
+            FakeExternalDebuffs = {},
+            FakePlayerBuffs = {},
+            FakePlayerDebuffs = {},
+            FakePlayerOfflineAura = {},
+            FakeStagger = {},
+            HasAbilityProc = {},
+            HideGroundMineStacks = {},
+            IsAbilityActiveGlow = {},
+            IsAbilityActiveHighlight = {},
+            IsAbilityICD = {},
+            IsAllianceXPBuff = {},
+            IsBlock = {},
+            IsBloodFrenzy = {},
+            IsBoon = {},
+            IsCyrodiil = {},
+            IsExperienceBuff = {},
+            IsFoodBuff = {},
+            IsGrimFocus = {},
+            IsGroundMineAura = {},
+            IsGroundMineDamage = {},
+            IsGroundMineStack = {},
+            IsLycan = {},
+            IsSetICD = {},
+            IsSoulSummons = {},
+            IsVamp = {},
+            IsVampLycanBite = {},
+            IsVampLycanDisease = {},
+            IsWeaponAttack = {},
+            KeepUpgradeAlliance = {},
+            KeepUpgradeNameFix = {},
+            KeepUpgradeOverride = {},
+            KeepUpgradeTooltip = {},
+            LinkedGroundMine = {},
+            MajorMinor = {},
+            MapDataOverride = {},
+            RemoveAbilityActiveHighlight = {},
+            SynergyNameOverride = {},
+            TooltipUseDefault = {},
+            ZoneBuffs = {},
+            ZoneDataOverride = {},
+        },
+        PetNames =
+        {
+            Assistants = {},
+            Necromancer = {},
+            Sets = {},
+            Sorcerer = {},
+            Warden = {},
+        },
+        --- @class (partial) Quests
+        Quests = {},
+        --- @class (partial) Tooltips
+        Tooltips = {},
+        --- @class (partial) UnitNames
+        UnitNames = {},
+        --- @class (partial) ZoneNames
+        ZoneNames = {},
+        --- @class (partial) ZoneTable
+        ZoneTable = {},
+    }
 }

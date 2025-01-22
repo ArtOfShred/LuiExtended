@@ -3,8 +3,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 -- CrowdControl.aoePlayerUltimate
 -- CrowdControl.aoePlayerNormal
@@ -61,4 +61,4 @@ local aoePlayerSet =
 }
 
 --- @class (partial) aoePlayerSet
-LUIE.Data.CrowdControl.aoePlayerSet = aoePlayerSet
+LuiData.Data.CrowdControl.aoePlayerSet = aoePlayerSet

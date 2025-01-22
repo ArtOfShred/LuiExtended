@@ -3,13 +3,13 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
-local Unitnames = LUIE.Data.UnitNames
-local Zonenames = LUIE.Data.ZoneNames
-local Abilities = LUIE.Data.Abilities
-local ZoneTable = LUIE.Data.ZoneTable
+local Unitnames = LuiData.Data.UnitNames
+local Zonenames = LuiData.Data.ZoneNames
+local Abilities = LuiData.Data.Abilities
+local ZoneTable = LuiData.Data.ZoneTable
 
 -- When a certain boss in in range if this id is cast, use the specified name as the source (There are some cases where bosses have uniquely named abilities as other enemies in the dungeon so this is a way to have both show properly).
 --- @class (partial) AlertBossNameConvert
@@ -101,4 +101,4 @@ local AlertBossNameConvert =
 }
 
 --- @class (partial) AlertBossNameConvert
-LUIE.Data.AlertBossNameConvert = AlertBossNameConvert
+LuiData.Data.AlertBossNameConvert = AlertBossNameConvert

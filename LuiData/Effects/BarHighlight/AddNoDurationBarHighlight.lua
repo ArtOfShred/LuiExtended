@@ -3,16 +3,16 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 --- @class (partial) Effects
-local Effects = LUIE.Data.Effects
+local Effects = LuiData.Data.Effects
 
-local Tooltips = LUIE.Data.Tooltips
-local Unitnames = LUIE.Data.UnitNames
-local Zonenames = LUIE.Data.ZoneNames
-local Abilities = LUIE.Data.Abilities
+local Tooltips = LuiData.Data.Tooltips
+local Unitnames = LuiData.Data.UnitNames
+local Zonenames = LuiData.Data.ZoneNames
+local Abilities = LuiData.Data.Abilities
 
 local zo_strformat = zo_strformat
 
@@ -35,4 +35,4 @@ local AddNoDurationBarHighlight =
 }
 
 --- @class (partial) AddNoDurationBarHighlight
-LUIE.Data.Effects.AddNoDurationBarHighlight = AddNoDurationBarHighlight
+LuiData.Data.Effects.AddNoDurationBarHighlight = AddNoDurationBarHighlight

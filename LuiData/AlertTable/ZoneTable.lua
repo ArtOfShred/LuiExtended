@@ -3,12 +3,12 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
-local Unitnames = LUIE.Data.UnitNames
-local Zonenames = LUIE.Data.ZoneNames
-local Abilities = LUIE.Data.Abilities
+local Unitnames = LuiData.Data.UnitNames
+local Zonenames = LuiData.Data.ZoneNames
+local Abilities = LuiData.Data.Abilities
 
 --- @class (partial) ZoneTable
 local ZoneTable =
@@ -20,4 +20,4 @@ local ZoneTable =
 }
 
 --- @class (partial) ZoneTable
-LUIE.Data.ZoneTable = ZoneTable
+LuiData.Data.ZoneTable = ZoneTable

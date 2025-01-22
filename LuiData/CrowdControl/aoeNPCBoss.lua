@@ -3,8 +3,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 -- CrowdControl.aoePlayerUltimate
 -- CrowdControl.aoePlayerNormal
@@ -170,4 +170,4 @@ local aoeNPCBoss =
 }
 
 --- @class (partial) aoeNPCBoss
-LUIE.Data.CrowdControl.aoeNPCBoss = aoeNPCBoss
+LuiData.Data.CrowdControl.aoeNPCBoss = aoeNPCBoss

@@ -3,18 +3,18 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
-local Tooltips = LUIE.Data.Tooltips
-local Unitnames = LUIE.Data.UnitNames
-local Zonenames = LUIE.Data.ZoneNames
-local Abilities = LUIE.Data.Abilities
+local Tooltips = LuiData.Data.Tooltips
+local Unitnames = LuiData.Data.UnitNames
+local Zonenames = LuiData.Data.ZoneNames
+local Abilities = LuiData.Data.Abilities
 
 local zo_strformat = zo_strformat
 
 --------------------------------------------------------------------------------------------------------------------------------
--- LUIE for the most part overwrites default ability tooltips due to the fact they are only exposed for buffs/debuffs that are on the player. In some cases there is no description with scaling or we need to still use the default where possible.
+-- LuiData for the most part overwrites default ability tooltips due to the fact they are only exposed for buffs/debuffs that are on the player. In some cases there is no description with scaling or we need to still use the default where possible.
 -- The most noteworthy case of this is Mundus Boons, where there is a tooltip but no description. We want to display a generic tooltip describing the effect if mousing over another player - but display the default value with accurate number for self.
 --------------------------------------------------------------------------------------------------------------------------------
 --- @class (partial) TooltipUseDefault
@@ -36,4 +36,4 @@ local TooltipUseDefault =
 }
 
 --- @class (partial) TooltipUseDefault
-LUIE.Data.Effects.TooltipUseDefault = TooltipUseDefault
+LuiData.Data.Effects.TooltipUseDefault = TooltipUseDefault

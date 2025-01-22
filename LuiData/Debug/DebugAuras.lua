@@ -4,8 +4,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 -- List of all abilityId's that have been processed so far
 -- These id's don't show up on the debug event for EVENT_COMBAT_EVENT or EVENT_EFFECT_CHANGED
@@ -16969,4 +16969,4 @@ local DebugAuras =
 }
 
 --- @type DebugAuras
-LUIE.Data.DebugAuras = DebugAuras
+LuiData.Data.DebugAuras = DebugAuras

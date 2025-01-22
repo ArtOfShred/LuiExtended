@@ -3,8 +3,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 --- @class (partial) CollectibleTables
 local CollectibleTables =
@@ -79,4 +79,4 @@ for name, table in pairs(CollectibleTables) do
 end
 
 --- @class (partial) CollectibleTables
-LUIE.Data.CollectibleTables = CollectibleTables
+LuiData.Data.CollectibleTables = CollectibleTables

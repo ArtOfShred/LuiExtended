@@ -3,11 +3,11 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
---- @class (partial) BlacklistPresets
-local BlacklistPresets = LUIE.Data.CombatTextBlacklistPresets
+--- @class (partial) CombatTextBlacklistPresets
+local BlacklistPresets = LuiData.Data.CombatTextBlacklistPresets
 
 -- Sets
 BlacklistPresets.Sets =

@@ -3,8 +3,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 --- @class (partial) BlacklistPresets
 --- @field public MinorBuffs table<number, boolean>
@@ -89,4 +89,4 @@ local BlacklistPresets =
 }
 
 --- @class (partial) BlacklistPresets
-LUIE.Data.AbilityBlacklistPresets = BlacklistPresets
+LuiData.Data.AbilityBlacklistPresets = BlacklistPresets

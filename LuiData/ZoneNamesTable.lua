@@ -3,8 +3,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 --- @class (partial) ZoneNames
 local ZoneNames =
@@ -62,4 +62,4 @@ local ZoneNames =
 }
 
 --- @class (partial) ZoneNames
-LUIE.Data.ZoneNames = ZoneNames
+LuiData.Data.ZoneNames = ZoneNames

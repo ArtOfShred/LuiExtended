@@ -4,8 +4,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 -- For debug function - convert result reason codes to string value
 --- @class DebugResults
@@ -138,4 +138,4 @@ local DebugResults =
 }
 
 --- @type DebugResults
-LUIE.Data.DebugResults = DebugResults
+LuiData.Data.DebugResults = DebugResults

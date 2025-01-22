@@ -3,8 +3,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 --- @class (partial) IgnoreList
 local IgnoreList =
@@ -111,4 +111,4 @@ local IgnoreList =
 }
 
 --- @class (partial) IgnoreList
-LUIE.Data.CrowdControl.IgnoreList = IgnoreList
+LuiData.Data.CrowdControl.IgnoreList = IgnoreList

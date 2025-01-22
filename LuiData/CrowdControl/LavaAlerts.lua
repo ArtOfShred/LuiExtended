@@ -3,8 +3,8 @@
 --  Distributed under The MIT License (MIT) (see LICENSE file)                --
 -- -----------------------------------------------------------------------------
 
---- @class (partial) LuiExtended
-local LUIE = LuiData
+--- @class (partial) LuiData
+local LuiData = LuiData
 
 -- List of effects sourced by the player that damage self that should be shown
 --- @class (partial) LavaAlerts
@@ -77,4 +77,4 @@ local LavaAlerts =
 }
 
 --- @class (partial) LavaAlerts
-LUIE.Data.CrowdControl.LavaAlerts = LavaAlerts
+LuiData.Data.CrowdControl.LavaAlerts = LavaAlerts
