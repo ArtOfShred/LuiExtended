@@ -6,9 +6,11 @@
 --- @class (partial) LuiExtended
 local LUIE = LUIE
 
-local FontsList = LUIE.Media.FontList
-local SoundsList = LUIE.Media.SoundList
-local StatusbarTexturesList = LUIE.Media.StatusbarTexturesList
+-- Get fonts
+local FontsList = {}
+for f in pairs(LUIE.Fonts) do
+    table.insert(FontsList, f)
+end
 
 --- @class (partial) LUIE.CombatText
 local CombatText = LUIE.CombatText

@@ -6,9 +6,17 @@
 --- @class (partial) LuiExtended
 local LUIE = LUIE
 
-local FontsList = LUIE.Media.FontList
-local SoundsList = LUIE.Media.SoundList
-local StatusbarTexturesList = LUIE.Media.StatusbarTexturesList
+-- Get fonts
+local FontsList = {}
+for f in pairs(LUIE.Fonts) do
+    table.insert(FontsList, f)
+end
+
+-- Get statusbar textures
+local StatusbarTexturesList = {}
+for key, _ in pairs(LUIE.StatusbarTextures) do
+    table.insert(StatusbarTexturesList, key)
+end
 
 --- @class (partial) UnitFrames
 local UnitFrames = LUIE.UnitFrames

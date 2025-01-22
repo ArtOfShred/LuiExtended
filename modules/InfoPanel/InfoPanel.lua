@@ -45,7 +45,7 @@ InfoPanel.SV = ...
 InfoPanel.panelUnlocked = false
 
 -- UI elements
-local infoPanelFontFace = "$(LUIE_BOLD_FONT)"
+local infoPanelFontFace = "$(BOLD_FONT)"
 local infoPanelFontSize = 16
 local infoPanelFontStyle = "soft-shadow-thin"
 local g_infoPanelFont = string_format("%s|%d|%s", infoPanelFontFace, infoPanelFontSize, infoPanelFontStyle)

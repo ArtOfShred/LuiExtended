@@ -6,9 +6,23 @@
 --- @class (partial) LuiExtended
 local LUIE = LUIE
 
-local FontsList = LUIE.Media.FontList
-local SoundsList = LUIE.Media.SoundList
-local StatusbarTexturesList = LUIE.Media.StatusbarTexturesList
+-- Get fonts
+local FontsList = {}
+for f in pairs(LUIE.Fonts) do
+    table.insert(FontsList, f)
+end
+
+-- Get sounds
+local SoundsList = {}
+for sound, _ in pairs(LUIE.Sounds) do
+    table.insert(SoundsList, sound)
+end
+
+-- Get statusbar textures
+local StatusbarTexturesList = {}
+for key, _ in pairs(LUIE.StatusbarTextures) do
+    table.insert(StatusbarTexturesList, key)
+end
 
 --- @class LUIE.CombatInfo
 local CombatInfo = LUIE.CombatInfo
@@ -342,7 +356,8 @@ function CombatInfo.CreateSettings()
                 type = "dropdown",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_FONT_STYLE)),
                 tooltip = GetString(LUIE_STRING_LAM_CI_SHARED_FONTSTYLE_TP),
-                choices = {
+                choices =
+                {
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_NORMAL) .. "|r",
                     "|cEEEEEE" .. GetString(LUIE_FONT_STYLE_OUTLINE) .. "|r",
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_THICK_OUTLINE) .. "|r",
@@ -350,7 +365,8 @@ function CombatInfo.CreateSettings()
                     "|c666666" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THICK) .. "|r",
                     "|c777777" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THIN) .. "|r",
                 },
-                choicesValues = {
+                choicesValues =
+                {
                     GetString(LUIE_FONT_STYLE_VALUE_NORMAL),
                     GetString(LUIE_FONT_STYLE_VALUE_OUTLINE),
                     GetString(LUIE_FONT_STYLE_VALUE_THICK_OUTLINE),
@@ -590,7 +606,8 @@ function CombatInfo.CreateSettings()
                 type = "dropdown",
                 name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_FONT_STYLE)),
                 tooltip = GetString(LUIE_STRING_LAM_CI_SHARED_FONTSTYLE_TP),
-                choices = {
+                choices =
+                {
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_NORMAL) .. "|r",
                     "|cEEEEEE" .. GetString(LUIE_FONT_STYLE_OUTLINE) .. "|r",
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_THICK_OUTLINE) .. "|r",
@@ -598,7 +615,8 @@ function CombatInfo.CreateSettings()
                     "|c666666" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THICK) .. "|r",
                     "|c777777" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THIN) .. "|r",
                 },
-                choicesValues = {
+                choicesValues =
+                {
                     GetString(LUIE_FONT_STYLE_VALUE_NORMAL),
                     GetString(LUIE_FONT_STYLE_VALUE_OUTLINE),
                     GetString(LUIE_FONT_STYLE_VALUE_THICK_OUTLINE),
@@ -851,7 +869,8 @@ function CombatInfo.CreateSettings()
                 type = "dropdown",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_FONT_STYLE)),
                 tooltip = GetString(LUIE_STRING_LAM_CI_SHARED_FONTSTYLE_TP),
-                choices = {
+                choices =
+                {
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_NORMAL) .. "|r",
                     "|cEEEEEE" .. GetString(LUIE_FONT_STYLE_OUTLINE) .. "|r",
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_THICK_OUTLINE) .. "|r",
@@ -859,7 +878,8 @@ function CombatInfo.CreateSettings()
                     "|c666666" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THICK) .. "|r",
                     "|c777777" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THIN) .. "|r",
                 },
-                choicesValues = {
+                choicesValues =
+                {
                     GetString(LUIE_FONT_STYLE_VALUE_NORMAL),
                     GetString(LUIE_FONT_STYLE_VALUE_OUTLINE),
                     GetString(LUIE_FONT_STYLE_VALUE_THICK_OUTLINE),
@@ -1149,7 +1169,8 @@ function CombatInfo.CreateSettings()
                 type = "dropdown",
                 name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_CI_CASTBAR_FONTSTYLE)),
                 tooltip = GetString(LUIE_STRING_LAM_CI_CASTBAR_FONTSTYLE_TP),
-                choices = {
+                choices =
+                {
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_NORMAL) .. "|r",
                     "|cEEEEEE" .. GetString(LUIE_FONT_STYLE_OUTLINE) .. "|r",
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_THICK_OUTLINE) .. "|r",
@@ -1157,7 +1178,8 @@ function CombatInfo.CreateSettings()
                     "|c666666" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THICK) .. "|r",
                     "|c777777" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THIN) .. "|r",
                 },
-                choicesValues = {
+                choicesValues =
+                {
                     GetString(LUIE_FONT_STYLE_VALUE_NORMAL),
                     GetString(LUIE_FONT_STYLE_VALUE_OUTLINE),
                     GetString(LUIE_FONT_STYLE_VALUE_THICK_OUTLINE),
@@ -1426,7 +1448,8 @@ function CombatInfo.CreateSettings()
                 type = "dropdown",
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(LUIE_STRING_LAM_FONT_STYLE)),
                 tooltip = GetString(LUIE_STRING_LAM_CI_ALERT_FONTSTYLE_TP),
-                choices = {
+                choices =
+                {
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_NORMAL) .. "|r",
                     "|cEEEEEE" .. GetString(LUIE_FONT_STYLE_OUTLINE) .. "|r",
                     "|cFFFFFF" .. GetString(LUIE_FONT_STYLE_THICK_OUTLINE) .. "|r",
@@ -1434,7 +1457,8 @@ function CombatInfo.CreateSettings()
                     "|c666666" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THICK) .. "|r",
                     "|c777777" .. GetString(LUIE_FONT_STYLE_SOFT_SHADOW_THIN) .. "|r",
                 },
-                choicesValues = {
+                choicesValues =
+                {
                     GetString(LUIE_FONT_STYLE_VALUE_NORMAL),
                     GetString(LUIE_FONT_STYLE_VALUE_OUTLINE),
                     GetString(LUIE_FONT_STYLE_VALUE_THICK_OUTLINE),
