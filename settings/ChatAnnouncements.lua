@@ -8952,6 +8952,74 @@ function ChatAnnouncements.CreateSettings()
                     b = Defaults.Notify.DisguiseAlertColor[3],
                 },
             },
+            {
+                -- Timed Activity (ChatAnnouncements)
+                type = "checkbox",
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT), GetString(SI_ACTIVITY_FINDER_CATEGORY_TIMED_ACTIVITIES)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA), GetString(SI_ACTIVITY_FINDER_CATEGORY_TIMED_ACTIVITIES)),
+                getFunc = function ()
+                    return Settings.Notify.TimedActivityCA
+                end,
+                setFunc = function (value)
+                    Settings.Notify.TimedActivityCA = value
+                end,
+                width = "full",
+                disabled = function ()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.Notify.TimedActivityCA,
+            },
+            {
+                -- Timed Activity (Alert)
+                type = "checkbox",
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT), GetString(SI_ACTIVITY_FINDER_CATEGORY_TIMED_ACTIVITIES)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT), GetString(SI_ACTIVITY_FINDER_CATEGORY_TIMED_ACTIVITIES)),
+                getFunc = function ()
+                    return Settings.Notify.TimedActivityAlert
+                end,
+                setFunc = function (value)
+                    Settings.Notify.TimedActivityAlert = value
+                end,
+                width = "full",
+                disabled = function ()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.Notify.TimedActivityAlert,
+            },
+            {
+                -- Promotional Events Activity (ChatAnnouncements)
+                type = "checkbox",
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT), GetString(SI_PROMOTIONAL_EVENT_TRACKER_HEADER)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA), GetString(SI_PROMOTIONAL_EVENT_TRACKER_HEADER)),
+                getFunc = function ()
+                    return Settings.Notify.PromotionalEventsActivityCA
+                end,
+                setFunc = function (value)
+                    Settings.Notify.PromotionalEventsActivityCA = value
+                end,
+                width = "full",
+                disabled = function ()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.Notify.PromotionalEventsActivityCA,
+            },
+            {
+                -- Promotional Events Activity (Alert)
+                type = "checkbox",
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT), GetString(SI_PROMOTIONAL_EVENT_TRACKER_HEADER)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT), GetString(SI_PROMOTIONAL_EVENT_TRACKER_HEADER)),
+                getFunc = function ()
+                    return Settings.Notify.PromotionalEventsActivityAlert
+                end,
+                setFunc = function (value)
+                    Settings.Notify.PromotionalEventsActivityAlert = value
+                end,
+                width = "full",
+                disabled = function ()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.Notify.PromotionalEventsActivityAlert,
+            },
         },
     }
 

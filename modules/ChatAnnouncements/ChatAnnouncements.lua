@@ -402,6 +402,12 @@ function ChatAnnouncements.Initialize(enabled)
     eventManager:RegisterForEvent(moduleName, EVENT_ANTIQUITY_DIGGING_READY_TO_PLAY, ChatAnnouncements.OnDigStart)
     eventManager:RegisterForEvent(moduleName, EVENT_ANTIQUITY_DIGGING_GAME_OVER, ChatAnnouncements.OnDigEnd)
 
+    -- Timed Activity
+    eventManager:RegisterForEvent(moduleName, EVENT_TIMED_ACTIVITY_PROGRESS_UPDATED, ChatAnnouncements.OnTimedActivityProgressUpdated)
+
+    -- Promotional Events Activity
+    eventManager:RegisterForEvent(moduleName, EVENT_PROMOTIONAL_EVENTS_ACTIVITY_PROGRESS_UPDATED, ChatAnnouncements.OnPromotionalEventsActivityProgressUpdated)
+
     ChatAnnouncements.RegisterGuildEvents()
     ChatAnnouncements.RegisterSocialEvents()
     ChatAnnouncements.RegisterDisguiseEvents()
@@ -2824,6 +2830,55 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
 
         if ChatAnnouncements.SV.Achievement.AchievementUpdateAlert then
             local alertMessage = zo_strformat("<<1>>: <<2>>", ChatAnnouncements.SV.Achievement.AchievementProgressMsg, name)
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
+        end
+    end
+end
+
+function ChatAnnouncements.OnTimedActivityProgressUpdated(eventCode, timedActivityIndex, _, currentProgress)
+    if ChatAnnouncements.SV.Notify.TimedActivityCA or ChatAnnouncements.SV.Notify.TimedActivityAlert then
+        local name = GetTimedActivityName(timedActivityIndex)
+        local type = GetTimedActivityType(timedActivityIndex)
+        local maxProgress = GetTimedActivityMaxProgress(timedActivityIndex)
+        local progress = string_format("%i / %i", currentProgress, maxProgress)
+
+        local typeName
+        if type == TIMED_ACTIVITY_TYPE_DAILY then
+        typeName = GetString(SI_TIMEDACTIVITYTYPE0)
+        elseif type == TIMED_ACTIVITY_TYPE_WEEKLY then
+        typeName = GetString(SI_TIMEDACTIVITYTYPE1)
+        end
+
+        message = string_format("[%s] %s: %s", zo_strformat(GetString(LUIE_STRING_CA_DISPLAY_TIMED_ACTIVITIES), typeName), name, progress)
+
+        if ChatAnnouncements.SV.Notify.TimedActivityCA then
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
+        end
+
+        if ChatAnnouncements.SV.Notify.TimedActivityAlert then
+            local alertMessage = zo_strformat(GetString(SI_APPLYOUTFITCHANGESRESULT0), GetString(SI_ACTIVITY_FINDER_CATEGORY_TIMED_ACTIVITIES))
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
+        end
+    end
+end
+
+function ChatAnnouncements.OnPromotionalEventsActivityProgressUpdated(eventCode, campaignKey, activityIndex, _, currentProgress)
+    if ChatAnnouncements.SV.Notify.PromotionalEventsActivityCA or ChatAnnouncements.SV.Notify.PromotionalEventsActivityAlert then
+        local _, name, _, maxProgress = GetPromotionalEventCampaignActivityInfo(campaignKey, activityIndex)
+        local progress = string_format("%i / %i", currentProgress, maxProgress)
+
+        message = string_format("[%s] %s: %s", GetString(SI_PROMOTIONAL_EVENT_TRACKER_HEADER), name, progress)
+
+        if ChatAnnouncements.SV.Notify.PromotionalEventsActivityCA then
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
+        end
+
+        if ChatAnnouncements.SV.Notify.PromotionalEventsActivityAlert then
+            local alertMessage = zo_strformat(GetString(SI_APPLYOUTFITCHANGESRESULT0), GetString(SI_PROMOTIONAL_EVENT_TRACKER_HEADER))
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
         end
     end
