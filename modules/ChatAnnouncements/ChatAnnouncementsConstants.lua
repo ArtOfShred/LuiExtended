@@ -173,6 +173,11 @@ ChatAnnouncements.Defaults =
         StorageBagCA = true,
         StorageBagCSA = true,
         StorageBagAlert = false,
+
+        TimedActivityCA = false,
+        TimedActivityAlert = false,
+        PromotionalEventsActivityCA = false,
+        PromotionalEventsActivityAlert = false,
     },
 
     -- Collectibles
