@@ -2788,17 +2788,28 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
             local _, _, _, icon = GetAchievementInfo(id)
             icon = ChatAnnouncements.SV.Achievement.AchievementIcon and ("|t16:16:" .. icon .. "|t ") or ""
 
-            local stringpart1 = ColorizeColors.AchievementColorize1:Colorize(string_format("%s%s%s %s%s", bracket1[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], ChatAnnouncements.SV.Achievement.AchievementProgressMsg, bracket2[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], icon, link))
+            -- Build string parts without using string_format on pre-formatted strings
+            local stringpart1 = ColorizeColors.AchievementColorize1:Colorize(
+                bracket1[ChatAnnouncements.SV.Achievement.AchievementBracketOptions] ..
+                ChatAnnouncements.SV.Achievement.AchievementProgressMsg ..
+                bracket2[ChatAnnouncements.SV.Achievement.AchievementBracketOptions] .. " " ..
+                icon .. link
+            )
 
-            local stringpart2 = ChatAnnouncements.SV.Achievement.AchievementColorProgress and string_format(" %s|c%s%d%%|r", ColorizeColors.AchievementColorize2:Colorize("("), AchievementPctToColor(totalCmp / totalReq), zo_floor(100 * totalCmp / totalReq)) or ColorizeColors.AchievementColorize2:Colorize(string_format("%d%%", zo_floor(100 * totalCmp / totalReq)))
+            local stringpart2 = ChatAnnouncements.SV.Achievement.AchievementColorProgress and
+                ColorizeColors.AchievementColorize2:Colorize(" (") ..
+                "|c" .. AchievementPctToColor(totalCmp / totalReq) .. zo_floor(100 * totalCmp / totalReq) .. "%|r" ..
+                ColorizeColors.AchievementColorize2:Colorize(")") or
+                ColorizeColors.AchievementColorize2:Colorize(" (" .. zo_floor(100 * totalCmp / totalReq) .. "%)")
 
-            local stringpart3
-            if ChatAnnouncements.SV.Achievement.AchievementCategory and ChatAnnouncements.SV.Achievement.AchievementSubcategory then
-                stringpart3 = ColorizeColors.AchievementColorize2:Colorize(string_format(") %s%s - %s%s", bracket3[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions], catName, subcatName, bracket4[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]))
-            elseif ChatAnnouncements.SV.Achievement.AchievementCategory and not ChatAnnouncements.SV.Achievement.AchievementSubcategory then
-                stringpart3 = ColorizeColors.AchievementColorize2:Colorize(string_format(") %s%s%s", bracket3[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions], catName, bracket4[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]))
-            else
-                stringpart3 = ColorizeColors.AchievementColorize2:Colorize(")")
+            local stringpart3 = ""
+            if ChatAnnouncements.SV.Achievement.AchievementCategory then
+                stringpart3 = ColorizeColors.AchievementColorize2:Colorize(
+                    " " .. bracket3[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions] ..
+                    catName ..
+                    (ChatAnnouncements.SV.Achievement.AchievementSubcategory and (" - " .. subcatName) or "") ..
+                    bracket4[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]
+                )
             end
 
             -- Prepare details information
@@ -2807,22 +2818,32 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
                 -- Skyshards needs separate treatment otherwise text become too long
                 -- We also put this short information for achievements that has too many subitems
                 if topLevelIndex == 9 or #cmpInfo > 12 then
-                    stringpart4 = ChatAnnouncements.SV.Achievement.AchievementColorProgress and string_format(" %s|c%s%d|r%s|c71DE73%d|c87B7CC|r%s", ColorizeColors.AchievementColorize2:Colorize("("), AchievementPctToColor(totalCmp / totalReq), totalCmp, ColorizeColors.AchievementColorize2:Colorize("/"), totalReq, ColorizeColors.AchievementColorize2:Colorize(")")) or ColorizeColors.AchievementColorize2:Colorize(string_format(" (%d/%d)", totalCmp, totalReq))
+                    stringpart4 = ChatAnnouncements.SV.Achievement.AchievementColorProgress and
+                        ColorizeColors.AchievementColorize2:Colorize(" (") ..
+                        "|c" .. AchievementPctToColor(totalCmp / totalReq) .. totalCmp .. "|r" ..
+                        ColorizeColors.AchievementColorize2:Colorize("/") ..
+                        "|c71DE73" .. totalReq .. "|r" ..
+                        ColorizeColors.AchievementColorize2:Colorize(")") or
+                        ColorizeColors.AchievementColorize2:Colorize(" (" .. totalCmp .. "/" .. totalReq .. ")")
                 else
                     for i = 1, #cmpInfo do
-                        -- Boolean achievement stage
                         if cmpInfo[i][3] == 1 then
-                            cmpInfo[i] = ChatAnnouncements.SV.Achievement.AchievementColorProgress and string_format("|c%s%s", AchievementPctToColor(cmpInfo[i][2]), cmpInfo[i][1]) or ColorizeColors.AchievementColorize2:Colorize(string_format("%s%s", cmpInfo[i][2], cmpInfo[i][1]))
-                            -- Others
+                            cmpInfo[i] = "|c" .. AchievementPctToColor(cmpInfo[i][2]) .. cmpInfo[i][1] .. "|r"
                         else
                             local pct = cmpInfo[i][2] / cmpInfo[i][3]
-                            cmpInfo[i] = ChatAnnouncements.SV.Achievement.AchievementColorProgress and string_format("%s %s|c%s%d|r%s|c71DE73%d|r%s", ColorizeColors.AchievementColorize2:Colorize(cmpInfo[i][1]), ColorizeColors.AchievementColorize2:Colorize("("), AchievementPctToColor(pct), cmpInfo[i][2], ColorizeColors.AchievementColorize2:Colorize("/"), cmpInfo[i][3], ColorizeColors.AchievementColorize2:Colorize(")")) or ColorizeColors.AchievementColorize2:Colorize(string_format("%s (%d/%d)", cmpInfo[i][1], cmpInfo[i][2], cmpInfo[i][3]))
+                            cmpInfo[i] = ColorizeColors.AchievementColorize2:Colorize(cmpInfo[i][1] .. " (") ..
+                                "|c" .. AchievementPctToColor(pct) .. cmpInfo[i][2] .. "|r" ..
+                                ColorizeColors.AchievementColorize2:Colorize("/") ..
+                                "|c71DE73" .. cmpInfo[i][3] .. "|r" ..
+                                ColorizeColors.AchievementColorize2:Colorize(")")
                         end
                     end
                     stringpart4 = table_concat(cmpInfo, ColorizeColors.AchievementColorize2:Colorize(", "))
                 end
             end
-            local finalString = string_format("%s%s%s%s", stringpart1, stringpart2, stringpart3, stringpart4)
+
+            -- Concatenate final string without using string_format
+            local finalString = stringpart1 .. stringpart2 .. stringpart3 .. stringpart4
             ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
             ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
@@ -2835,7 +2856,13 @@ function ChatAnnouncements.OnAchievementUpdated(eventCode, id)
     end
 end
 
-function ChatAnnouncements.OnTimedActivityProgressUpdated(eventCode, timedActivityIndex, _, currentProgress)
+--- - *EVENT_TIMED_ACTIVITY_PROGRESS_UPDATED*
+--- @param eventCode integer
+--- @param timedActivityIndex luaindex
+--- @param previousProgress integer
+--- @param currentProgress integer
+--- @param complete boolean
+function ChatAnnouncements.OnTimedActivityProgressUpdated(eventCode, timedActivityIndex, previousProgress, currentProgress, complete)
     if ChatAnnouncements.SV.Notify.TimedActivityCA or ChatAnnouncements.SV.Notify.TimedActivityAlert then
         local name = GetTimedActivityName(timedActivityIndex)
         local type = GetTimedActivityType(timedActivityIndex)
@@ -2852,7 +2879,15 @@ function ChatAnnouncements.OnTimedActivityProgressUpdated(eventCode, timedActivi
         local message = string_format("[%s] %s: %s", zo_strformat(GetString(LUIE_STRING_CA_DISPLAY_TIMED_ACTIVITIES), typeName), name, progress)
 
         if ChatAnnouncements.SV.Notify.TimedActivityCA then
-            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] =
+            {
+                message = message,
+                type = "MESSAGE",
+                activityIndex = timedActivityIndex,
+                previousProgress = previousProgress,
+                currentProgress = currentProgress,
+                complete = complete
+            }
             ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
@@ -2864,15 +2899,29 @@ function ChatAnnouncements.OnTimedActivityProgressUpdated(eventCode, timedActivi
     end
 end
 
-function ChatAnnouncements.OnPromotionalEventsActivityProgressUpdated(eventCode, campaignKey, activityIndex, _, currentProgress)
+--- - *EVENT_PROMOTIONAL_EVENTS_ACTIVITY_PROGRESS_UPDATED*
+--- @param eventCode integer
+--- @param campaignKey id64
+--- @param activityIndex luaindex
+--- @param previousProgress integer
+--- @param newProgress integer
+--- @param rewardFlags PromotionalEventRewardFlags
+function ChatAnnouncements.OnPromotionalEventsActivityProgressUpdated(eventCode, campaignKey, activityIndex, previousProgress, newProgress, rewardFlags)
     if ChatAnnouncements.SV.Notify.PromotionalEventsActivityCA or ChatAnnouncements.SV.Notify.PromotionalEventsActivityAlert then
-        local _, name, _, maxProgress = GetPromotionalEventCampaignActivityInfo(campaignKey, activityIndex)
-        local progress = string_format("%i / %i", currentProgress, maxProgress)
+        local activityId, displayName, description, completionThreshold, rewardId, rewardQuantity = GetPromotionalEventCampaignActivityInfo(campaignKey, activityIndex)
+        local progress = string_format("%i / %i", newProgress, completionThreshold)
 
-        local message = string_format("[%s] %s: %s", GetString(SI_PROMOTIONAL_EVENT_TRACKER_HEADER), name, progress)
+        local message = string_format("[%s] %s: %s", GetString(SI_PROMOTIONAL_EVENT_TRACKER_HEADER), displayName, progress)
 
         if ChatAnnouncements.SV.Notify.PromotionalEventsActivityCA then
-            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] =
+            {
+                message = message,
+                type = "MESSAGE",
+                activityId = activityId,
+                rewardId = rewardId,
+                rewardQuantity = rewardQuantity
+            }
             ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
@@ -7777,6 +7826,40 @@ function ChatAnnouncements.HookFunction()
             return true
         end
 
+        -- Debug for DEVS
+        if LUIE.IsDevDebugEnabled() then
+            LUIE.Debug([[Quest Condition Update:
+            Type: %s (%d)
+            Quest: %s
+            Condition: %s
+            Progress: %d/%d (Previous: %d)
+            State: %s]],
+                LUIE.GetQuestConditionTypeName(conditionType),
+                conditionType,
+                questName,
+                conditionText,
+                newConditionVal,
+                conditionMax,
+                currConditionVal,
+                isConditionComplete and "Complete" or "In Progress"
+            )
+        end
+
+        -- Check WritCreater settings first
+        if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(journalIndex) then
+            if LUIE.IsDevDebugEnabled() then
+                LUIE.Debug([[Writ Quest Condition Suppressed:
+    Quest: %s
+    Index: %d
+    Condition: %s]],
+                    questName,
+                    journalIndex,
+                    conditionText
+                )
+            end
+            return true
+        end
+
         local type             -- This variable represents whether this message is an objective update or failure state message (1 = update, 2 = failure) There are too many conditionals to resolve what we need to print inside them so we do it after setting the formatting.
         local alertMessage     -- Variable for alert message
         local formattedMessage -- Variable for CA Message
@@ -7786,11 +7869,6 @@ function ChatAnnouncements.HookFunction()
         if newConditionVal ~= currConditionVal and not isFailCondition then
             sound = isConditionComplete and SOUNDS.QUEST_OBJECTIVE_COMPLETE or SOUNDS.QUEST_OBJECTIVE_INCREMENT
             messageParams:SetSound(sound)
-        end
-
-        -- Debug for my account - TODO: Remove
-        if LUIE.PlayerDisplayName == "ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
-            d(conditionType)
         end
 
         if isConditionComplete and conditionType == QUEST_CONDITION_TYPE_GIVE_ITEM or conditionType == QUEST_CONDITION_TYPE_TALK_TO then
@@ -8006,7 +8084,17 @@ function ChatAnnouncements.HookFunction()
     local function OnQuestAdvanced(eventId, questIndex, questName, isPushed, isComplete, mainStepChanged, soundOverride)
         -- Check if WritCreater is enabled & then call a copy of a local function from WritCreater to check if this is a Writ Quest
         if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(questIndex) then
-            return
+            if LUIE.IsDevDebugEnabled() then
+                LUIE.Debug([[Writ Quest Condition Suppressed:
+    Quest: %s
+    Index: %d
+    Condition: %s]],
+                    questName,
+                    questIndex,
+                    isComplete and "Complete" or "Not Complete"
+                )
+            end
+            return true
         end
 
         if not mainStepChanged then
@@ -8087,20 +8175,22 @@ function ChatAnnouncements.HookFunction()
 
     -- EVENT_QUEST_ADDED (Registered through CSA_MiscellaneousHandlers)
     local function OnQuestAdded(eventId, questIndex)
-        -- Copied from Writ Creator, abandons a quest if it requires a mat that is disabled in Writ Creator setttings
+        -- Handle WritCrafter integration
         if WritCreater then
+            -- Auto-abandon quests with disallowed materials
             local rejectedMat = rejectQuest(questIndex)
             if rejectedMat then
-                d("Writ Crafter abandoned the " .. GetJournalQuestName(questIndex) .. " because it requires " .. rejectedMat .. " which was disallowed for use in the settings")
+                local questName = GetJournalQuestName(questIndex)
+                printToChat(zo_strformat("Writ Crafter abandoned the <<1>> because it requires <<2>> which was disallowed in settings", questName, rejectedMat), true)
                 zo_callLater(function ()
                     AbandonQuest(questIndex)
                 end, 500)
                 return
             end
-        end
-        -- Check if WritCreater is enabled & then call a copy of a local function from WritCreater to check if this is a Writ Quest
-        if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(questIndex) then
-            return
+            -- Suppress announcements for writ quests if configured
+            if WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(questIndex) then
+                return true
+            end
         end
 
         OnQuestAdvanced(EVENT_QUEST_ADVANCED, questIndex, nil, nil, nil, true, true)
@@ -9320,25 +9410,35 @@ function ChatAnnouncements.HookFunction()
             local _, _, _, icon = GetAchievementInfo(id)
             icon = ChatAnnouncements.SV.Achievement.AchievementIcon and ("|t16:16:" .. icon .. "|t ") or ""
 
-            local stringpart1 = ColorizeColors.AchievementColorize1:Colorize(string_format("%s%s%s %s%s", bracket1[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], ChatAnnouncements.SV.Achievement.AchievementCompleteMsg, bracket2[ChatAnnouncements.SV.Achievement.AchievementBracketOptions], icon, link))
+            -- Build string parts without using string_format on pre-formatted strings
+            local stringpart1 = ColorizeColors.AchievementColorize1:Colorize(
+                bracket1[ChatAnnouncements.SV.Achievement.AchievementBracketOptions] ..
+                ChatAnnouncements.SV.Achievement.AchievementCompleteMsg ..
+                bracket2[ChatAnnouncements.SV.Achievement.AchievementBracketOptions] .. " " ..
+                icon .. link
+            )
 
-            local stringpart2
+            local stringpart2 = ""
             if ChatAnnouncements.SV.Achievement.AchievementCompPercentage then
-                stringpart2 = ChatAnnouncements.SV.Achievement.AchievementColorProgress and string_format(" %s|c71DE73%s|r%s", ColorizeColors.AchievementColorize2:Colorize("("), "100%", ColorizeColors.AchievementColorize2:Colorize(")")) or ColorizeColors.AchievementColorize2:Colorize(" (100%)")
-            else
-                stringpart2 = ""
+                stringpart2 = ChatAnnouncements.SV.Achievement.AchievementColorProgress and
+                    ColorizeColors.AchievementColorize2:Colorize(" (") ..
+                    "|c71DE73100%|r" ..
+                    ColorizeColors.AchievementColorize2:Colorize(")") or
+                    ColorizeColors.AchievementColorize2:Colorize(" (100%)")
             end
 
-            local stringpart3
-            if ChatAnnouncements.SV.Achievement.AchievementCategory and ChatAnnouncements.SV.Achievement.AchievementSubcategory then
-                stringpart3 = ColorizeColors.AchievementColorize2:Colorize(string_format(" %s%s - %s%s", bracket1[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions], catName, subcatName, bracket2[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]))
-            elseif ChatAnnouncements.SV.Achievement.AchievementCategory and not ChatAnnouncements.SV.Achievement.AchievementSubcategory then
-                stringpart3 = ColorizeColors.AchievementColorize2:Colorize(string_format(" %s%s%s", bracket1[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions], catName, bracket2[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]))
-            else
-                stringpart3 = ""
+            local stringpart3 = ""
+            if ChatAnnouncements.SV.Achievement.AchievementCategory then
+                stringpart3 = ColorizeColors.AchievementColorize2:Colorize(
+                    " " .. bracket1[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions] ..
+                    catName ..
+                    (ChatAnnouncements.SV.Achievement.AchievementSubcategory and (" - " .. subcatName) or "") ..
+                    bracket2[ChatAnnouncements.SV.Achievement.AchievementCatBracketOptions]
+                )
             end
 
-            local finalString = string_format("%s%s%s", stringpart1, stringpart2, stringpart3)
+            -- Concatenate final string without using string_format
+            local finalString = stringpart1 .. stringpart2 .. stringpart3
             ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
             ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)

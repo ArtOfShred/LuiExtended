@@ -129,7 +129,6 @@ do
     local EmitMessage
     local EmitTable
     local d
-    local df
 
     EmitMessage = function (text)
         if text == "" then
@@ -176,15 +175,19 @@ do
         end
     end
 
-    df = function (formatter, ...)
-        return d(formatter:format(...))
-    end
-
     --- Adds a system message to the chat.
     --- @param messageOrFormatter string: The message to be printed.
     --- @param ... string: Variable number of arguments to be passed to CHAT_ROUTER:AddSystemMessage.
     local function AddSystemMessage(messageOrFormatter, ...)
-        df(messageOrFormatter, ...)
+        local formattedMessage
+        if select("#", ...) > 0 then
+            -- Escape '%' characters to prevent illegal format specifiers.
+            local safeFormat = zo_strgsub(messageOrFormatter, "%%", "%%%%")
+            formattedMessage = string_format(safeFormat, ...)
+        else
+            formattedMessage = messageOrFormatter
+        end
+        d(formattedMessage)
     end
     LUIE.AddSystemMessage = AddSystemMessage
 end
