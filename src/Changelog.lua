@@ -12,10 +12,15 @@ local table_concat = table.concat
 local changelogMessages =
 {
     -- Version Header
-    "|cFFA500LuiExtended Version 6.8.4|r",
+    "|cFFA500LuiExtended Version 6.8.5|r",
     "",
     -- General Changes
     "|cFFFF00General:|r",
+    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Added chat announcements for Golden Pursuits and Weekly Endeavors, off by Default. Thanks cyberox",
+    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t More illegal string formatting fixes.",
+    -- Previous Changes
+    "|cFFA500LuiExtended Version 6.8.4|r",
+    "",
     "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Blood Craze id update so it will now be tracked on the actionbar. Thanks @ExVault.",
     "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Fix for chat alerts. If you know, you know...",
     "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Code cleanup and improvements.",
