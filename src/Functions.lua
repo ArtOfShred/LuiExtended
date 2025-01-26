@@ -126,19 +126,65 @@ end
 
 -- -----------------------------------------------------------------------------
 do
+    local EmitMessage
+    local EmitTable
+    local d
+    local df
+
+    EmitMessage = function (text)
+        if text == "" then
+            text = "[Empty String]"
+        end
+
+        if CHAT_ROUTER then
+            CHAT_ROUTER:AddSystemMessage(text)
+        end
+    end
+
+    EmitTable = function (t, indent, tableHistory)
+        indent = indent or "."
+        tableHistory = tableHistory or {}
+
+        for k, v in pairs(t)
+        do
+            local vType = type(v)
+
+            EmitMessage(indent .. "(" .. vType .. "): " .. tostring(k) .. " = " .. tostring(v))
+
+            if (vType == "table")
+            then
+                if (tableHistory[v])
+                then
+                    EmitMessage(indent .. "Avoiding cycle on table...")
+                else
+                    tableHistory[v] = true
+                    EmitTable(v, indent .. "  ", tableHistory)
+                end
+            end
+        end
+    end
+
+    d = function (...)
+        for i = 1, select("#", ...) do
+            local value = select(i, ...)
+            if (type(value) == "table")
+            then
+                EmitTable(value)
+            else
+                EmitMessage(tostring(value))
+            end
+        end
+    end
+
+    df = function (formatter, ...)
+        return d(formatter:format(...))
+    end
+
     --- Adds a system message to the chat.
     --- @param messageOrFormatter string: The message to be printed.
     --- @param ... string: Variable number of arguments to be passed to CHAT_ROUTER:AddSystemMessage.
     local function AddSystemMessage(messageOrFormatter, ...)
-        local formattedMessage
-        if select("#", ...) > 0 then
-            -- Escape '%' characters to prevent illegal format specifiers.
-            local safeFormat = zo_strgsub(messageOrFormatter, "%%", "%%%%")
-            formattedMessage = string_format(safeFormat, ...)
-        else
-            formattedMessage = messageOrFormatter
-        end
-        CHAT_ROUTER:AddSystemMessage(formattedMessage)
+        df(messageOrFormatter, ...)
     end
     LUIE.AddSystemMessage = AddSystemMessage
 end
@@ -149,53 +195,48 @@ do
     --- @param msg string: The message to be printed.
     --- @param isSystem? boolean: If true, the message is considered a system message.
     local function PrintToChat(msg, isSystem)
-        local AddSystemMessage = LUIE.AddSystemMessage
-        local FormatMessage = LUIE.FormatMessage
-        if CHAT_SYSTEM.primaryContainer then
-            if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
-                if not LUIE.ChatAnnouncements.SV.ChatBypassFormat and CHAT_SYSTEM.primaryContainer then
-                    -- Add timestamps if bypass is not enabled
-                    local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                    AddSystemMessage(formattedMsg)
-                else
-                    CHAT_ROUTER:AddSystemMessage(msg)
-                end
-            else
-                -- If we have system messages sent to display in all windows then just print to all windows at once, otherwise send messages to individual tabs.
-                if isSystem and LUIE.ChatAnnouncements.SV.ChatSystemAll then
-                    if not LUIE.ChatAnnouncements.SV.ChatBypassFormat then
-                        -- Add timestamps if bypass is not enabled
-                        local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                        AddSystemMessage(formattedMsg)
-                    else
-                        CHAT_ROUTER:AddSystemMessage(msg)
-                    end
-                else
-                    for k, cc in ipairs(CHAT_SYSTEM.containers) do
-                        for i = 1, #cc.windows do
-                            if LUIE.ChatAnnouncements.SV.ChatTab[i] == true then
-                                local chatContainer = cc
-                                if chatContainer then
-                                    local chatWindow = cc.windows[i]
-                                    local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-                                    -- Don't print into the Combat Metrics Log window if CMX is enabled.
-                                    local flagHide = false
-                                    if CMX and CMX.db and CMX.db.chatLog then
-                                        if chatContainer:GetTabName(i) == CMX.db.chatLog.name then
-                                            flagHide = true
-                                        end
-                                    end
-                                    if not flagHide then
-                                        chatContainer:AddEventMessageToWindow(chatWindow, formattedMsg, CHAT_CATEGORY_SYSTEM)
-                                    end
-                                end
-                            end
+        if not CHAT_SYSTEM.primaryContainer then return end
+
+        local function formatMessage(message)
+            if LUIE.ChatAnnouncements.SV.ChatBypassFormat then
+                return message
+            end
+            return LUIE.FormatMessage(message or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+        end
+
+        local function sendToAllWindows(message)
+            LUIE.AddSystemMessage(message)
+        end
+
+        local function sendToSpecificTabs(message)
+            for _, cc in ipairs(CHAT_SYSTEM.containers) do
+                for i = 1, #cc.windows do
+                    if LUIE.ChatAnnouncements.SV.ChatTab[i] then
+                        local chatContainer = cc
+                        local chatWindow = cc.windows[i]
+
+                        -- Skip Combat Metrics Log window if CMX is enabled
+                        if not (CMX and CMX.db and CMX.db.chatLog and chatContainer:GetTabName(i) == CMX.db.chatLog.name) then
+                            chatContainer:AddEventMessageToWindow(chatWindow, message, CHAT_CATEGORY_SYSTEM)
                         end
                     end
                 end
             end
         end
+
+        local formattedMsg = formatMessage(msg)
+
+        if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
+            sendToAllWindows(formattedMsg)
+        else
+            if isSystem and LUIE.ChatAnnouncements.SV.ChatSystemAll then
+                sendToAllWindows(formattedMsg)
+            else
+                sendToSpecificTabs(formattedMsg)
+            end
+        end
     end
+
     LUIE.PrintToChat = PrintToChat
 end
 -- -----------------------------------------------------------------------------
