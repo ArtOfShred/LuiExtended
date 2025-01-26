@@ -2844,12 +2844,12 @@ function ChatAnnouncements.OnTimedActivityProgressUpdated(eventCode, timedActivi
 
         local typeName
         if type == TIMED_ACTIVITY_TYPE_DAILY then
-        typeName = GetString(SI_TIMEDACTIVITYTYPE0)
+            typeName = GetString(SI_TIMEDACTIVITYTYPE0)
         elseif type == TIMED_ACTIVITY_TYPE_WEEKLY then
-        typeName = GetString(SI_TIMEDACTIVITYTYPE1)
+            typeName = GetString(SI_TIMEDACTIVITYTYPE1)
         end
 
-        message = string_format("[%s] %s: %s", zo_strformat(GetString(LUIE_STRING_CA_DISPLAY_TIMED_ACTIVITIES), typeName), name, progress)
+        local message = string_format("[%s] %s: %s", zo_strformat(GetString(LUIE_STRING_CA_DISPLAY_TIMED_ACTIVITIES), typeName), name, progress)
 
         if ChatAnnouncements.SV.Notify.TimedActivityCA then
             ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
@@ -2869,7 +2869,7 @@ function ChatAnnouncements.OnPromotionalEventsActivityProgressUpdated(eventCode,
         local _, name, _, maxProgress = GetPromotionalEventCampaignActivityInfo(campaignKey, activityIndex)
         local progress = string_format("%i / %i", currentProgress, maxProgress)
 
-        message = string_format("[%s] %s: %s", GetString(SI_PROMOTIONAL_EVENT_TRACKER_HEADER), name, progress)
+        local message = string_format("[%s] %s: %s", GetString(SI_PROMOTIONAL_EVENT_TRACKER_HEADER), name, progress)
 
         if ChatAnnouncements.SV.Notify.PromotionalEventsActivityCA then
             ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = message, type = "MESSAGE" }
