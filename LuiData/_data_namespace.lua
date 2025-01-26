@@ -91,7 +91,7 @@
 LuiData =
 {
     __name = "LuiData",
-    version = "6.8.3",
+    version = "6.8.4",
     Data = --- @class (partial) Data
     {
         Abilities = {},
