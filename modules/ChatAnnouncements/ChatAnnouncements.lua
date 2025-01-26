@@ -5724,7 +5724,7 @@ function LUIE.HandleClickEvent(rawLink, mouseButton, linkText, linkStyle, linkTy
 end
 
 -- Used by functions calling bar updates
----@param barParams CenterScreenPlayerProgressBarParams
+--- @param barParams CenterScreenPlayerProgressBarParams
 local function ValidateProgressBarParams(barParams)
     local barType = barParams:GetParams()
     if not (barType and PLAYER_PROGRESS_BAR:GetBarTypeInfoByBarType(barType)) then
@@ -7526,7 +7526,6 @@ function ChatAnnouncements.HookFunction()
         end
     end
 
-    -- Reset functions for quest status
     local function ResetQuestRewardStatus()
         g_itemReceivedIsQuestReward = false
     end
@@ -7537,128 +7536,70 @@ function ChatAnnouncements.HookFunction()
 
     -- EVENT_QUEST_ADDED (CSA Handler)
     local function QuestAddedHook(journalIndex, questName, objectiveName)
-        -- Debug for DEVS
-        if LUIE.IsDevDebugEnabled() then
-            LUIE.Debug([[Quest Added:
-    Name: %s
-    Index: %d
-    Objective: %s]],
-                questName,
-                journalIndex,
-                objectiveName or "nil"
-            )
-        end
-
-        -- Check WritCreater settings first
-        if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(journalIndex) then
-            if LUIE.IsDevDebugEnabled() then
-                LUIE.Debug([[Writ Quest Add Suppressed:
-    Quest: %s
-    Index: %d]],
-                    questName,
-                    journalIndex
-                )
-            end
-            return true
-        end
-
-        -- Clear any buffered XP messages
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
 
-        -- Get quest information
         local questType = GetJournalQuestType(journalIndex)
         local instanceDisplayType = GetJournalInstanceDisplayType(journalIndex)
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
 
-        -- Store quest info in index
+        -- Add quest to index
         g_questIndex[questName] =
         {
             questType = questType,
             instanceDisplayType = instanceDisplayType,
         }
 
-        -- Format messages
-        local function getFormattedStrings(useSmallIcon, includeLongDescription)
-            local iconSize = useSmallIcon and "16, 16" or "75%, 75%"
-            local questNameFormatted
-
-            if includeLongDescription then
-                local stepText = GetJournalQuestStepInfo(journalIndex, 1)
-                questNameFormatted = zo_strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r",
-                    ColorizeColors.QuestColorQuestNameColorize:ToHex(),
-                    questName,
-                    ColorizeColors.QuestColorQuestDescriptionColorize,
-                    stepText
-                )
-            else
-                questNameFormatted = zo_strformat("|c<<1>><<2>>|r",
-                    ColorizeColors.QuestColorQuestNameColorize:ToHex(),
-                    questName
-                )
-            end
-
-            if iconTexture and ChatAnnouncements.SV.Quests.QuestIcon then
-                if useSmallIcon then
-                    return string_format(GetString(LUIE_STRING_CA_QUEST_ACCEPT) ..
-                        zo_iconFormat(iconTexture, iconSize) .. " " ..
-                        questNameFormatted
-                    )
-                else
-                    return zo_strformat(LUIE_STRING_CA_QUEST_ACCEPT_WITH_ICON,
-                        zo_iconFormat(iconTexture, iconSize),
-                        questNameFormatted
-                    )
-                end
-            else
-                if useSmallIcon then
-                    return string_format("%s%s",
-                        GetString(LUIE_STRING_CA_QUEST_ACCEPT),
-                        questNameFormatted
-                    )
-                else
-                    return zo_strformat(SI_NOTIFYTEXT_QUEST_ACCEPT,
-                        questNameFormatted
-                    )
-                end
-            end
-        end
-
-        -- Handle CSA announcement
         if ChatAnnouncements.SV.Quests.QuestAcceptCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_ACCEPTED)
-            messageParams:SetText(getFormattedStrings(false, false))
+            if iconTexture then
+                messageParams:SetText(zo_strformat(LUIE_STRING_CA_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName))
+            else
+                messageParams:SetText(zo_strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questName))
+            end
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_ADDED)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
 
-        -- Handle Alert announcement
         if ChatAnnouncements.SV.Quests.QuestAcceptAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, getFormattedStrings(false, false))
+            local alertString
+            if iconTexture and ChatAnnouncements.SV.Quests.QuestIcon then
+                alertString = zo_strformat(LUIE_STRING_CA_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
+            else
+                alertString = zo_strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questName)
+            end
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertString)
         end
 
-        -- Play sound if CSA is disabled
+        -- If we don't have either CSA or Alert on (then we want to play a sound here)
         if not ChatAnnouncements.SV.Quests.QuestAcceptCSA then
             PlaySound(SOUNDS.QUEST_ACCEPTED)
         end
 
-        -- Handle Chat announcement
         if ChatAnnouncements.SV.Quests.QuestAcceptCA then
-            local formattedString = getFormattedStrings(true, ChatAnnouncements.SV.Quests.QuestLong)
+            local questNameFormatted
+            local stepText = GetJournalQuestStepInfo(journalIndex, 1)
+            local formattedString
 
-            -- Check for duplicate messages
+            if ChatAnnouncements.SV.Quests.QuestLong then
+                questNameFormatted = (zo_strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", ColorizeColors.QuestColorQuestNameColorize:ToHex(), questName, ColorizeColors.QuestColorQuestDescriptionColorize, stepText))
+            else
+                questNameFormatted = (zo_strformat("|c<<1>><<2>>|r", ColorizeColors.QuestColorQuestNameColorize:ToHex(), questName))
+            end
+            if iconTexture and ChatAnnouncements.SV.Quests.QuestIcon then
+                formattedString = string_format(GetString(LUIE_STRING_CA_QUEST_ACCEPT) .. zo_iconFormat(iconTexture, 16, 16) .. " " .. questNameFormatted)
+            else
+                formattedString = string_format("%s%s", GetString(LUIE_STRING_CA_QUEST_ACCEPT), questNameFormatted)
+            end
+
+            -- If this message is duplicated by another addon then don't display twice.
             for i = 1, #ChatAnnouncements.QueuedMessages do
                 if ChatAnnouncements.QueuedMessages[i].message == formattedString then
                     return true
                 end
             end
-
-            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] =
-            {
-                message = formattedString,
-                type = "QUEST"
-            }
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "QUEST" }
             ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
@@ -7668,114 +7609,61 @@ function ChatAnnouncements.HookFunction()
 
     -- EVENT_QUEST_COMPLETE (CSA Handler)
     local function QuestCompleteHook(questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType)
-        -- Debug for DEVS
-        if LUIE.IsDevDebugEnabled() then
-            LUIE.Debug([[Quest Completed:
-    Name: %s
-    Type: %s (%d)
-    Instance: %d
-    Level: %d
-    XP: %d -> %d
-    CP: %d]],
-                questName,
-                LUIE.GetQuestTypeName(questType), questType,
-                instanceDisplayType,
-                level,
-                previousExperience,
-                currentExperience,
-                championPoints
-            )
-        end
-
-        -- Check WritCreater settings first
-        if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements then
-            -- Since we don't have the journal index here, we need to find it
-            local numQuests = GetNumJournalQuests()
-            for questIndex = 1, numQuests do
-                if IsValidQuestIndex(questIndex) then
-                    local currentQuestName = GetJournalQuestName(questIndex)
-                    if currentQuestName == questName and isQuestWritQuest(questIndex) then
-                        if LUIE.IsDevDebugEnabled() then
-                            LUIE.Debug([[Writ Quest Completion Suppressed:
-        Quest: %s
-        Index: %d]],
-                                questName,
-                                questIndex
-                            )
-                        end
-                        return true
-                    end
-                end
-            end
-        end
-
-        -- Clear any buffered XP messages
         eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         ChatAnnouncements.PrintBufferedXP()
 
-        -- Get quest icon
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
 
-        -- Format messages
-        local function getFormattedStrings(useSmallIcon)
-            local iconSize = useSmallIcon and "16, 16" or "75%, 75%"
-            local questNameFormatted = useSmallIcon and zo_strformat("|cFFA500<<1>>|r", questName) or questName
-
-            if iconTexture and ChatAnnouncements.SV.Quests.QuestIcon then
-                return zo_strformat(LUIE_STRING_CA_QUEST_COMPLETE_WITH_ICON,
-                    zo_iconFormat(iconTexture, iconSize),
-                    questNameFormatted
-                )
-            else
-                return zo_strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questNameFormatted)
-            end
-        end
-
-        -- Handle CSA announcement
         if ChatAnnouncements.SV.Quests.QuestCompleteCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_COMPLETED)
-            messageParams:SetText(getFormattedStrings(false))
-
+            if iconTexture then
+                messageParams:SetText(zo_strformat(LUIE_STRING_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName))
+            else
+                messageParams:SetText(zo_strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questName))
+            end
             if not LUIE.SV.HideXPBar then
                 messageParams:SetBarParams(GetRelevantBarParams(level, previousExperience, currentExperience, championPoints, EVENT_QUEST_COMPLETE))
             end
-
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_COMPLETED)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
 
-        -- Handle Alert announcement
         if ChatAnnouncements.SV.Quests.QuestCompleteAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, getFormattedStrings(false))
+            local alertString
+            if iconTexture and ChatAnnouncements.SV.Quests.QuestIcon then
+                alertString = zo_strformat(LUIE_STRING_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
+            else
+                alertString = zo_strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questName)
+            end
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertString)
         end
 
-        -- Handle Chat announcement
         if ChatAnnouncements.SV.Quests.QuestCompleteCA then
-            local formattedString = getFormattedStrings(true)
-
-            -- Check for duplicate messages
+            local questNameFormatted = (zo_strformat("|cFFA500<<1>>|r", questName))
+            local formattedString
+            if iconTexture and ChatAnnouncements.SV.Quests.QuestIcon then
+                formattedString = zo_strformat(LUIE_STRING_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
+            else
+                formattedString = zo_strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questNameFormatted)
+            end
+            -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
             for i = 1, #ChatAnnouncements.QueuedMessages do
                 if ChatAnnouncements.QueuedMessages[i].message == formattedString then
                     return true
                 end
             end
-
-            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] =
-            {
-                message = formattedString,
-                type = "QUEST"
-            }
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedString, type = "QUEST" }
             ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
         end
 
-        -- Play sound if CSA is disabled
+        -- If we don't have either CSA or Alert on (then we want to play a sound here)
         if not ChatAnnouncements.SV.Quests.QuestCompleteCSA then
             PlaySound(SOUNDS.QUEST_COMPLETED)
         end
 
-        -- Handle quest reward status
+        -- We set this variable to true in order to override the [Looted] message syntax that would be applied to a quest reward normally.
         if ChatAnnouncements.SV.Inventory.Loot then
             g_itemReceivedIsQuestReward = true
             zo_callLater(ResetQuestRewardStatus, 500)
@@ -7787,51 +7675,7 @@ function ChatAnnouncements.HookFunction()
     -- EVENT_OBJECTIVE_COMPLETED (CSA Handler)
     -- Note we don't play a sound if the CSA is disabled here because the Quest complete message will already do this.
     local function ObjectiveCompletedHook(zoneIndex, poiIndex, level, previousExperience, currentExperience, championPoints)
-        local name, objectiveLevel, startDescription, finishedDescription = GetPOIInfo(zoneIndex, poiIndex)
-
-        -- Debug initial info
-        if LUIE.IsDevDebugEnabled() then
-            LUIE.Debug([[Objective Completed:
-    POI Name: %s
-    Zone Index: %d
-    POI Index: %d
-    Level: %d
-    Description: %s]],
-                name,
-                zoneIndex,
-                poiIndex,
-                objectiveLevel,
-                finishedDescription or "nil"
-            )
-        end
-
-        -- Check all active quests for writ quests
-        local numQuests = GetNumJournalQuests()
-        for questIndex = 1, numQuests do
-            if IsValidQuestIndex(questIndex) then
-                local questName, _, _, questType, _, _, _, _, _, _ = GetJournalQuestInfo(questIndex)
-
-                if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(questIndex) then
-                    if LUIE.IsDevDebugEnabled() then
-                        LUIE.Debug([[Active Writ Quest Found:
-    Quest: %s
-    Index: %d
-    Type: %s (%d)
-    Is Writ: %s
-    Suppress Active: %s]],
-                            questName,
-                            questIndex,
-                            LUIE.GetQuestTypeName(questType),
-                            questType,
-                            tostring(isQuestWritQuest(questIndex)),
-                            tostring(WritCreater:GetSettings().suppressQuestAnnouncements)
-                        )
-                    end
-                    return true
-                end
-            end
-        end
-
+        local name, _, _, finishedDescription = GetPOIInfo(zoneIndex, poiIndex)
         local nameFormatted
         local formattedText
 
@@ -7874,183 +7718,134 @@ function ChatAnnouncements.HookFunction()
     -- EVENT_QUEST_CONDITION_COUNTER_CHANGED (CSA Handler)
     -- Note: Used for quest failure and updates
     local function ConditionCounterHook(journalIndex, questName, conditionText, conditionType, currConditionVal, newConditionVal, conditionMax, isFailCondition, stepOverrideText, isPushed, isComplete, isConditionComplete, isStepHidden, isConditionCompleteChanged)
-        -- Early exit conditions
         if isStepHidden or (isPushed and isComplete) or (currConditionVal >= newConditionVal) then
             return true
         end
 
-        -- Debug for DEVS
-        if LUIE.IsDevDebugEnabled() then
-            LUIE.Debug([[Quest Condition Update:
-            Type: %s (%d)
-            Quest: %s
-            Condition: %s
-            Progress: %d/%d (Previous: %d)
-            State: %s]],
-                LUIE.GetQuestConditionTypeName(conditionType),
-                conditionType,
-                questName,
-                conditionText,
-                newConditionVal,
-                conditionMax,
-                currConditionVal,
-                isConditionComplete and "Complete" or "In Progress"
-            )
-        end
-
-        -- Check WritCreater settings first
-        if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(journalIndex) then
-            if LUIE.IsDevDebugEnabled() then
-                LUIE.Debug([[Writ Quest Condition Suppressed:
-    Quest: %s
-    Index: %d
-    Condition: %s]],
-                    questName,
-                    journalIndex,
-                    conditionText
-                )
-            end
-            return true
-        end
-
-        -- Initialize message parameters
         local type             -- This variable represents whether this message is an objective update or failure state message (1 = update, 2 = failure) There are too many conditionals to resolve what we need to print inside them so we do it after setting the formatting.
         local alertMessage     -- Variable for alert message
         local formattedMessage -- Variable for CA Message
         local sound            -- Set correct sound based off context
         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
 
-        -- Set sound based on condition state
         if newConditionVal ~= currConditionVal and not isFailCondition then
             sound = isConditionComplete and SOUNDS.QUEST_OBJECTIVE_COMPLETE or SOUNDS.QUEST_OBJECTIVE_INCREMENT
             messageParams:SetSound(sound)
         end
 
-        -- Handle quest reward item conditions
-        if isConditionComplete and (conditionType == QUEST_CONDITION_TYPE_GIVE_ITEM or conditionType == QUEST_CONDITION_TYPE_TALK_TO) then
+        -- Debug for my account - TODO: Remove
+        if LUIE.PlayerDisplayName == "ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS" or LUIE.PlayerDisplayName == "@ArtOfShredLegacy" or LUIE.PlayerDisplayName == "@HammerOfGlory" then
+            d(conditionType)
+        end
+
+        if isConditionComplete and conditionType == QUEST_CONDITION_TYPE_GIVE_ITEM or conditionType == QUEST_CONDITION_TYPE_TALK_TO then
+            -- We set this variable to true in order to override the [Looted] message syntax that would be applied to a quest reward normally.
             if ChatAnnouncements.SV.Inventory.Loot then
                 g_itemReceivedIsQuestReward = true
                 zo_callLater(ResetQuestRewardStatus, 500)
             end
         end
 
-        -- Format messages based on condition type and state
         if isConditionComplete and conditionType == QUEST_CONDITION_TYPE_GIVE_ITEM then
             messageParams:SetText(zo_strformat(SI_TRACKED_QUEST_STEP_DONE, conditionText))
             alertMessage = zo_strformat(SI_TRACKED_QUEST_STEP_DONE, conditionText)
             formattedMessage = zo_strformat(SI_TRACKED_QUEST_STEP_DONE, conditionText)
             type = 1
         elseif stepOverrideText == "" then
-            -- Handle failure and update messages
             if isFailCondition then
                 if conditionMax > 1 then
-                    local formatString = SI_ALERTTEXT_QUEST_CONDITION_FAIL
-                    messageParams:SetText(zo_strformat(formatString, conditionText, newConditionVal, conditionMax))
-                    alertMessage = zo_strformat(formatString, conditionText, newConditionVal, conditionMax)
-                    formattedMessage = zo_strformat(formatString, conditionText, newConditionVal, conditionMax)
+                    messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL, conditionText, newConditionVal, conditionMax))
+                    alertMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL, conditionText, newConditionVal, conditionMax)
+                    formattedMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL, conditionText, newConditionVal, conditionMax)
                 else
-                    local formatString = SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT
-                    messageParams:SetText(zo_strformat(formatString, conditionText))
-                    alertMessage = zo_strformat(formatString, conditionText)
-                    formattedMessage = zo_strformat(formatString, conditionText)
+                    messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, conditionText))
+                    alertMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, conditionText)
+                    formattedMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, conditionText)
                 end
                 type = 2
             else
                 if conditionMax > 1 and newConditionVal < conditionMax then
-                    local formatString = SI_ALERTTEXT_QUEST_CONDITION_UPDATE
-                    messageParams:SetText(zo_strformat(formatString, conditionText, newConditionVal, conditionMax))
-                    alertMessage = zo_strformat(formatString, conditionText, newConditionVal, conditionMax)
-                    formattedMessage = zo_strformat(formatString, conditionText, newConditionVal, conditionMax)
+                    messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE, conditionText, newConditionVal, conditionMax))
+                    alertMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE, conditionText, newConditionVal, conditionMax)
+                    formattedMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE, conditionText, newConditionVal, conditionMax)
                 else
-                    local formatString = SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT
-                    messageParams:SetText(zo_strformat(formatString, conditionText))
-                    alertMessage = zo_strformat(formatString, conditionText)
-                    formattedMessage = zo_strformat(formatString, conditionText)
+                    messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, conditionText))
+                    alertMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, conditionText)
+                    formattedMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, conditionText)
                 end
                 type = 1
             end
         else
-            -- Handle step override text
-            local formatString = isFailCondition and SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT or SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT
-            messageParams:SetText(zo_strformat(formatString, stepOverrideText))
-            alertMessage = zo_strformat(formatString, stepOverrideText)
-            formattedMessage = zo_strformat(formatString, stepOverrideText)
-            type = isFailCondition and 2 or 1
+            if isFailCondition then
+                messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, stepOverrideText))
+                alertMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, stepOverrideText)
+                formattedMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, stepOverrideText)
+                type = 2
+            else
+                messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, stepOverrideText))
+                alertMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, stepOverrideText)
+                formattedMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, stepOverrideText)
+                type = 1
+            end
         end
 
-        -- Apply text overrides if available
+        -- Override text if its listed in the override table.
         if Quests.QuestObjectiveCompleteOverride[formattedMessage] then
-            local overrideText = Quests.QuestObjectiveCompleteOverride[formattedMessage]
-            messageParams:SetText(overrideText)
-            alertMessage = overrideText
-            formattedMessage = overrideText
+            messageParams:SetText(Quests.QuestObjectiveCompleteOverride[formattedMessage])
+            alertMessage = Quests.QuestObjectiveCompleteOverride[formattedMessage]
+            formattedMessage = Quests.QuestObjectiveCompleteOverride[formattedMessage]
         end
 
-        -- Set CSA type based on condition state
-        messageParams:SetCSAType(isConditionComplete and
-            CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_CONDITION_COMPLETED or
-            CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_PROGRESSION_CHANGED)
+        if isConditionComplete then
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_CONDITION_COMPLETED)
+        else
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_PROGRESSION_CHANGED)
+        end
 
-        -- Handle update messages (type == 1)
         if type == 1 then
-            local function processUpdateMessages()
-                if ChatAnnouncements.SV.Quests.QuestObjCompleteCA then
-                    -- Check for duplicate messages
-                    for i = 1, #ChatAnnouncements.QueuedMessages do
-                        if ChatAnnouncements.QueuedMessages[i].message == formattedMessage then
-                            return true
-                        end
+            if ChatAnnouncements.SV.Quests.QuestObjCompleteCA then
+                -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
+                for i = 1, #ChatAnnouncements.QueuedMessages do
+                    if ChatAnnouncements.QueuedMessages[i].message == formattedMessage then
+                        return true
                     end
-                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] =
-                    {
-                        message = formattedMessage,
-                        type = "MESSAGE" -- Set as MESSAGE for quest item progression ordering
-                    }
-                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
-                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
-                if ChatAnnouncements.SV.Quests.QuestObjCompleteCSA then
-                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-                end
-                if ChatAnnouncements.SV.Quests.QuestObjCompleteAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
-                end
-                if not ChatAnnouncements.SV.Quests.QuestObjCompleteCSA then
-                    PlaySound(sound)
-                end
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedMessage, type = "MESSAGE" } -- We set the message type to MESSAGE so if we loot a quest item that progresses the quest this comes after.
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
-            processUpdateMessages()
+            if ChatAnnouncements.SV.Quests.QuestObjCompleteCSA then
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+            if ChatAnnouncements.SV.Quests.QuestObjCompleteAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
+            end
+            if not ChatAnnouncements.SV.Quests.QuestObjCompleteCSA then
+                PlaySound(sound)
+            end
         end
 
-        -- Handle failure messages (type == 2)
         if type == 2 then
-            local function processFailureMessages()
-                if ChatAnnouncements.SV.Quests.QuestFailCA then
-                    -- Check for duplicate messages
-                    for i = 1, #ChatAnnouncements.QueuedMessages do
-                        if ChatAnnouncements.QueuedMessages[i].message == formattedMessage then
-                            return true
-                        end
+            if ChatAnnouncements.SV.Quests.QuestFailCA then
+                -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
+                for i = 1, #ChatAnnouncements.QueuedMessages do
+                    if ChatAnnouncements.QueuedMessages[i].message == formattedMessage then
+                        return true
                     end
-                    ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] =
-                    {
-                        message = formattedMessage,
-                        type = "MESSAGE"
-                    }
-                    ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
-                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
                 end
-                if ChatAnnouncements.SV.Quests.QuestFailCSA then
-                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-                end
-                if ChatAnnouncements.SV.Quests.QuestFailAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
-                end
-                if not ChatAnnouncements.SV.Quests.QuestFailCSA then
-                    PlaySound(sound)
-                end
+                ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] = { message = formattedMessage, type = "MESSAGE" }
+                ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
             end
-            processFailureMessages()
+            if ChatAnnouncements.SV.Quests.QuestFailCSA then
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+            if ChatAnnouncements.SV.Quests.QuestFailAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
+            end
+            if not ChatAnnouncements.SV.Quests.QuestFailCSA then
+                PlaySound(sound)
+            end
         end
 
         return true
@@ -8152,36 +7947,10 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- EVENT_QUEST_ADVANCED (Registered through CSA_MiscellaneousHandlers)
+    -- Note: Quest Advancement displays all the "appropriate" conditions that the player needs to do to advance the current step
     local function OnQuestAdvanced(eventId, questIndex, questName, isPushed, isComplete, mainStepChanged, soundOverride)
-        -- Get quest name if not provided
-        questName = questName or GetJournalQuestName(questIndex)
-
-        -- Debug WritCreater check
-        if LUIE.IsDevDebugEnabled() then
-            LUIE.Debug([[Quest Advanced Check:
-        Quest: %s
-        Index: %d
-        Is Writ: %s
-        Suppress Active: %s
-        Main Step Changed: %s]],
-                questName,
-                questIndex,
-                tostring(WritCreater and isQuestWritQuest(questIndex)),
-                tostring(WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements),
-                tostring(mainStepChanged)
-            )
-        end
-
-        -- Check WritCreater settings first
+        -- Check if WritCreater is enabled & then call a copy of a local function from WritCreater to check if this is a Writ Quest
         if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(questIndex) then
-            if LUIE.IsDevDebugEnabled() then
-                LUIE.Debug([[Writ Quest Advanced Suppressed:
-        Quest: %s
-        Index: %d]],
-                    questName,
-                    questIndex
-                )
-            end
             return
         end
 
@@ -8263,80 +8032,23 @@ function ChatAnnouncements.HookFunction()
 
     -- EVENT_QUEST_ADDED (Registered through CSA_MiscellaneousHandlers)
     local function OnQuestAdded(eventId, questIndex)
-        local questName = GetJournalQuestName(questIndex)
-
-        -- Check WritCreater settings first
+        -- Copied from Writ Creator, abandons a quest if it requires a mat that is disabled in Writ Creator setttings
         if WritCreater then
-            if LUIE.IsDevDebugEnabled() then
-                -- Safely check if the quest is a writ quest
-                local isWrit = false
-                if type(isQuestWritQuest) == "function" then
-                    isWrit = isQuestWritQuest(questIndex) or false
-                end
-
-                LUIE.Debug([[Quest Added WritCreater Check:
-        Quest: %s
-        Index: %d
-        Is Writ: %s
-        Suppress Active: %s]],
-                    questName,
-                    questIndex,
-                    tostring(isWrit),
-                    tostring(WritCreater:GetSettings().suppressQuestAnnouncements)
-                )
-            end
-
-            -- Check for suppressed announcements FIRST
-            -- Safely check if the quest is a writ quest
-            local isWrit = type(isQuestWritQuest) == "function" and isQuestWritQuest(questIndex)
-            if WritCreater:GetSettings().suppressQuestAnnouncements and isWrit then
-                if LUIE.IsDevDebugEnabled() then
-                    LUIE.Debug([[Writ Quest Added Suppressed:
-        Quest: %s
-        Index: %d]],
-                        questName,
-                        questIndex
-                    )
-                end
-                return -- Exit completely, don't process anything else
-            end
-
-            -- Check for rejected materials
-            local rejectedMat
-            if type(rejectQuest) == "function" then
-                rejectedMat = rejectQuest(questIndex)
-            end
-
+            local rejectedMat = rejectQuest(questIndex)
             if rejectedMat then
-                local message = zo_strformat("|cFF0000Writ Auto-Abandon:|r <<1>> (requires <<2>>)", questName, rejectedMat)
-                if LUIE.IsDevDebugEnabled() then
-                    LUIE.Debug([[Writ Quest Rejected:
-        Quest: %s
-        Rejected Material: %s]],
-                        questName,
-                        rejectedMat
-                    )
-                end
-                d(message)
+                d("Writ Crafter abandoned the " .. GetJournalQuestName(questIndex) .. " because it requires " .. rejectedMat .. " which was disallowed for use in the settings")
                 zo_callLater(function ()
                     AbandonQuest(questIndex)
                 end, 500)
                 return
             end
         end
-
-        -- If we get here, process the quest normally
-        if LUIE.IsDevDebugEnabled() then
-            LUIE.Debug([[Processing Quest Added Normally:
-        Quest: %s
-        Index: %d]],
-                questName,
-                questIndex
-            )
+        -- Check if WritCreater is enabled & then call a copy of a local function from WritCreater to check if this is a Writ Quest
+        if WritCreater and WritCreater:GetSettings().suppressQuestAnnouncements and isQuestWritQuest(questIndex) then
+            return
         end
 
-        -- Pass the quest name explicitly
-        OnQuestAdvanced(EVENT_QUEST_ADVANCED, questIndex, questName, nil, nil, true, true)
+        OnQuestAdvanced(EVENT_QUEST_ADVANCED, questIndex, nil, nil, nil, true, true)
     end
 
     -- EVENT_DISCOVERY_EXPERIENCE (CSA Handler)
@@ -9008,7 +8720,7 @@ function ChatAnnouncements.HookFunction()
         -- Display CA
         if ChatAnnouncements.SV.Group.GroupRaidCA then
             local formattedName = zo_strformat("|cFFFFFF<<1>>|r", raidName)
-            local vitalityCounterString = zo_strformat("<<1>> <<2>>/<<3>>", zo_iconFormatInheritColor("/esoui/art/trials/vitalitydepletion.dds", 16, 16), currentCount, maxCount)
+            local vitalityCounterString = zo_strformat("<<1>> <<2>>/<<3>>", zo_iconFormatInheritColor("esoui/art/trials/vitalitydepletion.dds", 16, 16), currentCount, maxCount)
             local finalScore = ZO_DEFAULT_ENABLED_COLOR:Colorize(score)
             vitalityBonus = ZO_DEFAULT_ENABLED_COLOR:Colorize(vitalityBonus)
             if currentCount == 0 then
@@ -9445,27 +9157,17 @@ function ChatAnnouncements.HookFunction()
 
         -- Debug function
         if ChatAnnouncements.SV.DisplayAnnouncements.Debug and not debugDisable then
-            LUIE.Debug([[Display Announcement Debug:
-    Event: EVENT_DISPLAY_ANNOUNCEMENT
-    Primary Text: %s
-    Secondary Text: %s
-    Zone: %d (Current Map Zone)
-    Map: %d (Current Map)
-    Sound ID: %s
-    Category: %s
-    Lifespan: %s ms
-    -----------------------------]],
-                primaryText or "nil",
-                secondaryText or "nil",
-                GetZoneId(GetCurrentMapZoneIndex()),
-                GetCurrentMapId(),
-                tostring(soundId),
-                tostring(category),
-                tostring(lifespanMS)
-            )
-
-            -- Additional context message
-            LUIE.Debug("If you see this message please post a screenshot and context for the event on the LUI Extended ESOUI page.")
+            d("EVENT_DISPLAY_ANNOUNCEMENT: If you see this message please post a screenshot and context for the event on the LUI Extended ESOUI page.")
+            if primaryText then
+                d("Primary Text: " .. primaryText)
+            end
+            if secondaryText then
+                d("Secondary Text: " .. secondaryText)
+            end
+            local zoneid = GetZoneId(GetCurrentMapZoneIndex())
+            d("Zone Id: " .. zoneid)
+            local mapid = GetCurrentMapId()
+            d("Map Id: " .. mapid)
         end
 
         -- Display CA if enabled
@@ -9899,12 +9601,13 @@ function ChatAnnouncements.HookFunction()
         },
     }
 
-    local ALERT_IGNORED_STRING = SI_PLAYER_TO_PLAYER_IGNORED
+    local ALERT_IGNORED_STRING = IsConsoleUI() and SI_PLAYER_TO_PLAYER_BLOCKED or SI_PLAYER_TO_PLAYER_IGNORED
 
     local function AlertIgnored(SendString)
-        printToChat(GetString(SendString), true)
+        local alertString = IsConsoleUI() and SI_PLAYER_TO_PLAYER_BLOCKED or SendString
+        printToChat(GetString(alertString), true)
         if ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, SendString)
+            ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, alertString)
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
     end
@@ -9917,17 +9620,22 @@ function ChatAnnouncements.HookFunction()
         local currentTargetDisplayName = self.currentTargetDisplayName
         local primaryName = ZO_GetPrimaryPlayerName(currentTargetDisplayName, currentTargetCharacterName)
         local primaryNameInternal = ZO_GetPrimaryPlayerName(currentTargetDisplayName, currentTargetCharacterName, USE_INTERNAL_FORMAT)
-        local platformIcons = KEYBOARD_INTERACT_ICONS
+        local platformIcons = IsInGamepadPreferredMode() and GAMEPAD_INTERACT_ICONS or KEYBOARD_INTERACT_ICONS
         local ENABLED = true
         local DISABLED = false
         local ENABLED_IF_NOT_IGNORED = not isIgnored
 
         self:GetRadialMenu():Clear()
+        -- Gamecard--
+        if IsConsoleUI() then
+            self:AddShowGamerCard(currentTargetDisplayName, currentTargetCharacterName)
+        end
 
         -- Whisper--
         if IsChatSystemAvailableForCurrentPlatform() then
+            local nameToUse = IsConsoleUI() and currentTargetDisplayName or primaryNameInternal
             local function WhisperOption()
-                StartChatInput(nil, CHAT_CHANNEL_WHISPER, primaryNameInternal)
+                StartChatInput(nil, CHAT_CHANNEL_WHISPER, nameToUse)
             end
             local function WhisperIgnore()
                 AlertIgnored(LUIE_STRING_IGNORE_ERROR_WHISPER)
@@ -10013,7 +9721,12 @@ function ChatAnnouncements.HookFunction()
             self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_ADD_FRIEND), platformIcons[SI_PLAYER_TO_PLAYER_ADD_FRIEND], DISABLED, AlreadyFriendsWarning)
         else
             local function RequestFriendOption()
-                RequestFriend(currentTargetDisplayName, nil)
+                local isConsoleUI = IsConsoleUI()
+                if isConsoleUI then
+                    ZO_ShowConsoleAddFriendDialog(currentTargetCharacterName)
+                else
+                    RequestFriend(currentTargetDisplayName, nil)
+                end
 
                 local displayNameLink = ZO_LinkHandler_CreateLink(currentTargetDisplayName, nil, DISPLAY_NAME_LINK_TYPE, currentTargetDisplayName)
                 if ChatAnnouncements.SV.BracketOptionCharacter == 1 then
@@ -10113,6 +9826,142 @@ function ChatAnnouncements.HookFunction()
         self.showingPlayerInteractMenu = true
         self.isLastRadialMenuGamepad = IsInGamepadPreferredMode()
     end
+
+    -- Since the Crown Store Gifting functionality was added, hooking these functions seems to cause an insecure code issue when receiving gifts via the Player to Player notification system.
+    -- TODO: Try to securecall some of this or maybe use a message specific filter (hook alerts handling?)
+    --[[
+
+    --local INTERACT_TYPE_TRADE_INVITE = 3
+    local INTERACT_TYPE_GROUP_INVITE = 4
+    local INTERACT_TYPE_QUEST_SHARE = 5
+    local INTERACT_TYPE_FRIEND_REQUEST = 6
+    local INTERACT_TYPE_GUILD_INVITE = 7
+
+    local INCOMING_MESSAGE_TEXT = {
+        --[INTERACT_TYPE_TRADE_INVITE] = GetString(LUIE_STRING_NOTIFICATION_TRADE_INVITE),
+        [INTERACT_TYPE_GROUP_INVITE] = GetString(LUIE_STRING_NOTIFICATION_GROUP_INVITE),
+        [INTERACT_TYPE_QUEST_SHARE] = GetString(LUIE_STRING_NOTIFICATION_SHARE_QUEST_INVITE),
+        [INTERACT_TYPE_FRIEND_REQUEST] = GetString(LUIE_STRING_NOTIFICATION_FRIEND_INVITE),
+        [INTERACT_TYPE_GUILD_INVITE] = GetString(LUIE_STRING_NOTIFICATION_GUILD_INVITE)
+    }
+
+    local function DisplayNotificationMessage(message, data)
+        local typeString = INCOMING_MESSAGE_TEXT[data.incomingType]
+        if typeString then
+            -- Group Invite
+            if data.incomingType == INTERACT_TYPE_GROUP_INVITE then
+                if ChatAnnouncements.SV.Group.GroupCA then
+                    printToChat(zo_strformat(message, typeString), true)
+                end
+                if ChatAnnouncements.SV.Group.GroupAlert then
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+                end
+            -- Guild Invite
+            elseif data.incomingType == INTERACT_TYPE_GUILD_INVITE then
+                if ChatAnnouncements.SV.Social.GuildCA then
+                    printToChat(zo_strformat(message, typeString), true)
+                end
+                if ChatAnnouncements.SV.Social.GuildAlert then
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+                end
+            -- Friend Invite
+            elseif data.incomingType == INTERACT_TYPE_FRIEND_REQUEST then
+                if ChatAnnouncements.SV.Social.FriendIgnoreCA then
+                    printToChat(zo_strformat(message, typeString), true)
+                end
+                if ChatAnnouncements.SV.Social.FriendIgnoreAlert then
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+                end
+            -- Quest Shared
+            elseif data.incomingType == INTERACT_TYPE_QUEST_SHARE then
+                if ChatAnnouncements.SV.Quests.QuestShareCA then
+                    printToChat(zo_strformat(message, typeString), true)
+                end
+                if ChatAnnouncements.SV.Quests.QuestShareAlert then
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+                end
+            else
+                ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+            end
+        end
+    end
+
+    local function NotificationAccepted(data)
+        if not data.dontRemoveOnAccept then
+            data.pendingResponse = false
+        end
+        if data.acceptCallback then
+            data.acceptCallback()
+            if data.uniqueSounds then
+                PlaySound(data.uniqueSounds.accept)
+            else
+                PlaySound(SOUNDS.DIALOG_ACCEPT)
+            end
+            DisplayNotificationMessage(GetString(SI_NOTIFICATION_ACCEPTED), data)
+        end
+    end
+
+    local function NotificationDeclined(data)
+        if not data.dontRemoveOnDecline then
+            data.pendingResponse = false
+        end
+        if data.declineCallback then
+            data.declineCallback()
+            if data.uniqueSounds then
+                PlaySound(data.uniqueSounds.decline)
+            else
+                PlaySound(SOUNDS.DIALOG_DECLINE)
+            end
+            DisplayNotificationMessage(GetString(SI_NOTIFICATION_DECLINED), data)
+        end
+    end
+
+    PLAYER_TO_PLAYER.Accept = function(self, incomingEntry)
+        local index = self:GetIndexFromIncomingQueue(incomingEntry)
+        if index then
+            if not incomingEntry.dontRemoveOnAccept then
+                self:RemoveEntryFromIncomingQueueTable(index)
+            end
+            NotificationAccepted(incomingEntry)
+        else
+            self:OnPromptAccepted()
+        end
+    end
+
+    PLAYER_TO_PLAYER.Decline = function(self, incomingEntry)
+        local index = self:GetIndexFromIncomingQueue(incomingEntry)
+        if index then
+            if not incomingEntry.dontRemoveOnDecline then
+                self:RemoveEntryFromIncomingQueueTable(index)
+            end
+            NotificationDeclined(incomingEntry)
+        else
+            self:OnPromptDeclined()
+        end
+    end
+
+    --With proper timing, both of these events can fire in the same frame, making it possible to be responding but having already cleared the incoming queue
+    PLAYER_TO_PLAYER.OnPromptAccepted = function(self)
+        if self.showingResponsePrompt and #self.incomingQueue > 0 then
+            local incomingEntryToRespondTo = self.incomingQueue[1]
+            if not incomingEntryToRespondTo.dontRemoveOnAccept then
+                self:RemoveEntryFromIncomingQueueTable(1)
+            end
+            NotificationAccepted(incomingEntryToRespondTo)
+        end
+    end
+
+    PLAYER_TO_PLAYER.OnPromptDeclined = function(self)
+        if self.showingResponsePrompt and #self.incomingQueue > 0 then
+            local incomingEntryToRespondTo = self.incomingQueue[1]
+            if not incomingEntryToRespondTo.dontRemoveOnDecline then
+                self:RemoveEntryFromIncomingQueueTable(1)
+            end
+            NotificationDeclined(incomingEntryToRespondTo)
+        end
+    end
+    ]]
+    --
 
     -- Required when hooking ZO_MailSend_Gamepad:IsValid()
     -- Returns whether there is any item attached.
@@ -10281,16 +10130,28 @@ function ChatAnnouncements.HookFunction()
             return
         end
 
-        if IsIgnored(characterOrDisplayName) then
-            printToChat(GetString(LUIE_STRING_IGNORE_ERROR_GROUP), true)
-            if ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, LUIE_STRING_IGNORE_ERROR_GROUP)
-            end
-            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-            return
-        end
+        if IsConsoleUI() then
+            local displayName = characterOrDisplayName
 
-        CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
+            local function GroupInviteCallback(success)
+                if success then
+                    CompleteGroupInvite(displayName, sentFromChat, displayInvitedMessage, isMenu)
+                end
+            end
+
+            ZO_ConsoleAttemptInteractOrError(GroupInviteCallback, displayName, ZO_PLAYER_CONSOLE_INFO_REQUEST_DONT_BLOCK, ZO_CONSOLE_CAN_COMMUNICATE_ERROR_ALERT, ZO_ID_REQUEST_TYPE_DISPLAY_NAME, displayName)
+        else
+            if IsIgnored(characterOrDisplayName) then
+                printToChat(GetString(LUIE_STRING_IGNORE_ERROR_GROUP), true)
+                if ChatAnnouncements.SV.Group.GroupAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, LUIE_STRING_IGNORE_ERROR_GROUP)
+                end
+                PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+                return
+            end
+
+            CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
+        end
     end
 
     -- Hook for EVENT_GUILD_MEMBER_ADDED
@@ -10348,11 +10209,13 @@ function ChatAnnouncements.HookFunction()
 
     -- Hook for Guild Invite function used from Guild Menu
     ZO_TryGuildInvite = function (guildId, displayName)
+        -- TODO: Update when more alerts are added to CA
         if not DoesPlayerHaveGuildPermission(guildId, GUILD_PERMISSION_INVITE) then
             ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_INVITE_PERMISSION)
             return
         end
 
+        -- TODO: Update when more alerts are added to CA
         if GetNumGuildMembers(guildId) == MAX_GUILD_MEMBERS then
             ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_ROOM)
             return
@@ -10364,23 +10227,40 @@ function ChatAnnouncements.HookFunction()
         local guildNameAlliance = ChatAnnouncements.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = ChatAnnouncements.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
-        if IsIgnored(displayName) then
+        if IsConsoleUI() then
+            local function GuildInviteCallback(success)
+                if success then
+                    GuildInvite(guildId, displayName)
+                    if ChatAnnouncements.SV.Social.GuildCA then
+                        printToChat(zo_strformat(LUIE_STRING_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAlliance), true)
+                    end
+                    if ChatAnnouncements.SV.Social.GuildAlert then
+                        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(LUIE_STRING_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAllianceAlert))
+                    end
+                end
+            end
+
+            ZO_ConsoleAttemptInteractOrError(GuildInviteCallback, displayName, ZO_PLAYER_CONSOLE_INFO_REQUEST_DONT_BLOCK, ZO_CONSOLE_CAN_COMMUNICATE_ERROR_ALERT, ZO_ID_REQUEST_TYPE_DISPLAY_NAME, displayName)
+        else
+            -- TODO: This needs fixed in the API so that character names are also factored in here. This check here is just about pointless as it stands.
+            if IsIgnored(displayName) then
+                if ChatAnnouncements.SV.Social.GuildCA then
+                    printToChat(GetString(LUIE_STRING_IGNORE_ERROR_GUILD), true)
+                end
+                if ChatAnnouncements.SV.Social.GuildAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(LUIE_STRING_IGNORE_ERROR_GUILD))
+                end
+                PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+                return
+            end
+
+            GuildInvite(guildId, displayName)
             if ChatAnnouncements.SV.Social.GuildCA then
-                printToChat(GetString(LUIE_STRING_IGNORE_ERROR_GUILD), true)
+                printToChat(zo_strformat(LUIE_STRING_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAlliance), true)
             end
             if ChatAnnouncements.SV.Social.GuildAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(LUIE_STRING_IGNORE_ERROR_GUILD))
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(LUIE_STRING_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAllianceAlert))
             end
-            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-            return
-        end
-
-        GuildInvite(guildId, displayName)
-        if ChatAnnouncements.SV.Social.GuildCA then
-            printToChat(zo_strformat(LUIE_STRING_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAlliance), true)
-        end
-        if ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(LUIE_STRING_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAllianceAlert))
         end
     end
 
