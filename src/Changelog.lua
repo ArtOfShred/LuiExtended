@@ -17,7 +17,7 @@ local changelogMessages =
     -- General Changes
     "|cFFFF00General:|r",
     "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Blood Craze id update so it will now be tracked on the actionbar. Thanks @ExVault.",
-    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Fix for chat alerts.",
+    "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Fix for chat alerts. If you know, you know...",
     "|t12:12:EsoUI/Art/Miscellaneous/bullet.dds|t Code cleanup and improvements.",
     "",
 }
