@@ -315,7 +315,8 @@ local BarHighlightOverride =
 
     [28379] = { newId = 29293 },   -- Twin Slashes --> Twin Slashes Bleed
     [38839] = { newId = 38841 },   -- Rending Slashes --> Rending Slashes Bleed
-    [38845] = { newId = 38852 },   -- Blood Craze
+    -- [38845] = { newId = 38852 },   -- Blood Craze
+    [38845] = { newId = 38848 },   -- Blood Craze
 
     [28591] = { newId = 100474 },  -- Whirlwind --> Chaotic Whirlwind
     [38891] = { newId = 100474 },  -- Whirling Blades --> Chaotic Whirlwind
