@@ -283,16 +283,11 @@ local g_blacklistIDs =
     [140222] = true, -- 200 Transmute Crystals (This is probably just a test item)
 }
 
-local guildAllianceColors =
-{
-    [1] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_ALDMERI_DOMINION)),
-    [2] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_DAGGERFALL_COVENANT)),
-    [3] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_EBONHEART_PACT)),
-}
+
 
 local g_firstLoad = true
 
-local ChatEventHandlersToCustomize =
+local ChatEventFormattersDelete =
 {
     [EVENT_BATTLEGROUND_INACTIVITY_WARNING] = true,
     [EVENT_BROADCAST] = true,
@@ -306,42 +301,16 @@ local ChatEventHandlersToCustomize =
     [EVENT_TRIAL_FEATURE_RESTRICTED] = true,
 }
 
-function ChatAnnouncements.CustomizeChatHandlers()
-    -- Store original handlers in case we need to restore them
-    local originalHandlers = {}
-
-    -- Get all registered formatters first
-    local registeredFormatters = CHAT_ROUTER:GetRegisteredMessageFormatters()
-
+function ChatAnnouncements.SlayChatHandlers()
     -- Unregister ZOS handlers for events we need to modify
-    for eventCode, _ in pairs(ChatEventHandlersToCustomize) do
-        -- Store original handler if it exists
-        if registeredFormatters[eventCode] then
-            originalHandlers[eventCode] = registeredFormatters[eventCode]
-        end
-        eventManager:UnregisterForEvent("ChatRouter", eventCode)
+    for eventCode, _ in pairs(ChatEventFormattersDelete) do
+        EVENT_MANAGER:UnregisterForEvent("ChatRouter", eventCode)
     end
 
-    -- Modify chat event formatters while preserving LibChatMessage functionality
+    -- Slay these events in case LibChatMessage is active and hooks them
     local ChatEventFormatters = ZO_ChatSystem_GetEventHandlers()
-    for eventType, _ in pairs(ChatEventHandlersToCustomize) do
-        -- Store original formatter if it exists
-        if ChatEventFormatters[eventType] then
-            originalHandlers[eventType] = ChatEventFormatters[eventType]
-        end
+    for eventType, _ in pairs(ChatEventFormattersDelete) do
         ChatEventFormatters[eventType] = nil
-    end
-
-    -- Store original handlers for potential restoration
-    ChatAnnouncements.OriginalHandlers = originalHandlers
-end
-
--- Add a function to restore handlers if needed
-function ChatAnnouncements.RestoreChatHandlers()
-    if ChatAnnouncements.OriginalHandlers then
-        for eventCode, handler in pairs(ChatAnnouncements.OriginalHandlers) do
-            CHAT_ROUTER:RegisterMessageFormatter(eventCode, handler)
-        end
     end
 end
 
@@ -419,10 +388,10 @@ function ChatAnnouncements.Initialize(enabled)
     ChatAnnouncements.IndexGroupLoot()
 
     -- Stop other chat handlers from registering, then stop them again a few more times just in case.
-    ChatAnnouncements.CustomizeChatHandlers()
+    ChatAnnouncements.SlayChatHandlers()
     -- Call this again a few times shortly after load just in case.
-    zo_callLater(ChatAnnouncements.CustomizeChatHandlers, 100)
-    zo_callLater(ChatAnnouncements.CustomizeChatHandlers, 5000)
+    zo_callLater(ChatAnnouncements.SlayChatHandlers, 100)
+    zo_callLater(ChatAnnouncements.SlayChatHandlers, 5000)
 end
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -497,7 +466,7 @@ function ChatAnnouncements.RegisterQuestEvents()
         if IsValidQuestIndex(i) then
             local name = GetJournalQuestName(i)
             local questType = GetJournalQuestType(i)
-            local instanceDisplayType = GetJournalInstanceDisplayType(i) -- TODO: Removed in Update 40
+            local instanceDisplayType = GetJournalQuestZoneDisplayType(i)
 
             if name == "" then
                 name = GetString(SI_QUEST_JOURNAL_UNKNOWN_QUEST_NAME)
@@ -5696,7 +5665,7 @@ function ChatAnnouncements.OnPlayerActivated(eventCode)
     end
 
     if g_firstLoad then
-        ChatAnnouncements.CustomizeChatHandlers()
+        ChatAnnouncements.SlayChatHandlers()
         g_firstLoad = false
     end
 
@@ -5816,7 +5785,7 @@ function LUIE.HandleClickEvent(rawLink, mouseButton, linkText, linkStyle, linkTy
         if IsInGamepadPreferredMode() then
             local DONT_PUSH = false
             local antiquityData = ANTIQUITY_DATA_MANAGER:GetAntiquityData(categoryIndex1)
-            internalassert(antiquityData ~= nil)
+            assert(antiquityData ~= nil)
             if antiquityData then
                 ANTIQUITY_LORE_GAMEPAD:ShowAntiquityOrSet(antiquityData, DONT_PUSH)
             end
@@ -5833,7 +5802,7 @@ local function ValidateProgressBarParams(barParams)
     local barType = barParams:GetParams()
     if not (barType and PLAYER_PROGRESS_BAR:GetBarTypeInfoByBarType(barType)) then
         local INVALID_VALUE = -1
-        internalassert(false, string_format("CSAH Bad Bar Params; barType: %d. Triggering Event: %d.", barType or INVALID_VALUE, barParams:GetTriggeringEvent() or INVALID_VALUE))
+        assert(false, string_format("CSAH Bad Bar Params; barType: %d. Triggering Event: %d.", barType or INVALID_VALUE, barParams:GetTriggeringEvent() or INVALID_VALUE))
     end
 end
 
@@ -7492,7 +7461,7 @@ function ChatAnnouncements.HookFunction()
                     messageParams:SetBarParams(barParams)
                     CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 else
-                    internalassert(false, string_format("No Rank Start XP %d %d %d %d %d %d", skillType, skillLineIndex, reason, rank, previousXP, currentXP))
+                    assert(false, string_format("No Rank Start XP %d %d %d %d %d %d", skillType, skillLineIndex, reason, rank, previousXP, currentXP))
                 end
             end
         end
@@ -7644,7 +7613,7 @@ function ChatAnnouncements.HookFunction()
         ChatAnnouncements.PrintBufferedXP()
 
         local questType = GetJournalQuestType(journalIndex)
-        local instanceDisplayType = GetJournalInstanceDisplayType(journalIndex)
+        local instanceDisplayType = GetJournalQuestZoneDisplayType(journalIndex)
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
 

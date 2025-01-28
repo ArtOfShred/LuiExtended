@@ -126,55 +126,6 @@ end
 
 -- -----------------------------------------------------------------------------
 do
-    local EmitMessage
-    local EmitTable
-    local d
-
-    EmitMessage = function (text)
-        if text == "" then
-            text = "[Empty String]"
-        end
-
-        if CHAT_ROUTER then
-            CHAT_ROUTER:AddSystemMessage(text)
-        end
-    end
-
-    EmitTable = function (t, indent, tableHistory)
-        indent = indent or "."
-        tableHistory = tableHistory or {}
-
-        for k, v in pairs(t)
-        do
-            local vType = type(v)
-
-            EmitMessage(indent .. "(" .. vType .. "): " .. tostring(k) .. " = " .. tostring(v))
-
-            if (vType == "table")
-            then
-                if (tableHistory[v])
-                then
-                    EmitMessage(indent .. "Avoiding cycle on table...")
-                else
-                    tableHistory[v] = true
-                    EmitTable(v, indent .. "  ", tableHistory)
-                end
-            end
-        end
-    end
-
-    d = function (...)
-        for i = 1, select("#", ...) do
-            local value = select(i, ...)
-            if (type(value) == "table")
-            then
-                EmitTable(value)
-            else
-                EmitMessage(tostring(value))
-            end
-        end
-    end
-
     --- Adds a system message to the chat.
     --- @param messageOrFormatter string: The message to be printed.
     --- @param ... string: Variable number of arguments to be passed to CHAT_ROUTER:AddSystemMessage.
@@ -187,59 +138,64 @@ do
         else
             formattedMessage = messageOrFormatter
         end
-        d(formattedMessage)
+        CHAT_ROUTER:AddSystemMessage(formattedMessage)
     end
     LUIE.AddSystemMessage = AddSystemMessage
 end
 -- -----------------------------------------------------------------------------
 do
+    local FormatMessage = LUIE.FormatMessage
+    local SystemMessage = LUIE.AddSystemMessage
     --- Easy Print to Chat.
     --- Prints a message to the chat.
     --- @param msg string: The message to be printed.
     --- @param isSystem? boolean: If true, the message is considered a system message.
     local function PrintToChat(msg, isSystem)
-        if not CHAT_SYSTEM.primaryContainer then return end
-
-        local function formatMessage(message)
-            if LUIE.ChatAnnouncements.SV.ChatBypassFormat then
-                return message
-            end
-            return LUIE.FormatMessage(message or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
-        end
-
-        local function sendToAllWindows(message)
-            LUIE.AddSystemMessage(message)
-        end
-
-        local function sendToSpecificTabs(message)
-            for _, cc in ipairs(CHAT_SYSTEM.containers) do
-                for i = 1, #cc.windows do
-                    if LUIE.ChatAnnouncements.SV.ChatTab[i] then
-                        local chatContainer = cc
-                        local chatWindow = cc.windows[i]
-
-                        -- Skip Combat Metrics Log window if CMX is enabled
-                        if not (CMX and CMX.db and CMX.db.chatLog and chatContainer:GetTabName(i) == CMX.db.chatLog.name) then
-                            chatContainer:AddEventMessageToWindow(chatWindow, message, CHAT_CATEGORY_SYSTEM)
+        if CHAT_SYSTEM.primaryContainer then
+            if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
+                if not LUIE.ChatAnnouncements.SV.ChatBypassFormat and CHAT_SYSTEM.primaryContainer then
+                    -- Add timestamps if bypass is not enabled
+                    local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+                    SystemMessage(formattedMsg)
+                else
+                    SystemMessage(msg)
+                end
+            else
+                -- If we have system messages sent to display in all windows then just print to all windows at once, otherwise send messages to individual tabs.
+                if isSystem and LUIE.ChatAnnouncements.SV.ChatSystemAll then
+                    if not LUIE.ChatAnnouncements.SV.ChatBypassFormat then
+                        -- Add timestamps if bypass is not enabled
+                        local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+                        SystemMessage(formattedMsg)
+                    else
+                        SystemMessage(msg)
+                    end
+                else
+                    for k, cc in ipairs(CHAT_SYSTEM.containers) do
+                        for i = 1, #cc.windows do
+                            if LUIE.ChatAnnouncements.SV.ChatTab[i] == true then
+                                local chatContainer = cc
+                                if chatContainer then
+                                    local chatWindow = cc.windows[i]
+                                    local formattedMsg = FormatMessage(msg or "no message", LUIE.ChatAnnouncements.SV.TimeStamp)
+                                    -- Don't print into the Combat Metrics Log window if CMX is enabled.
+                                    local flagHide = false
+                                    if CMX and CMX.db and CMX.db.chatLog then
+                                        if chatContainer:GetTabName(i) == CMX.db.chatLog.name then
+                                            flagHide = true
+                                        end
+                                    end
+                                    if not flagHide then
+                                        chatContainer:AddEventMessageToWindow(chatWindow, formattedMsg, CHAT_CATEGORY_SYSTEM)
+                                    end
+                                end
+                            end
                         end
                     end
                 end
             end
         end
-
-        local formattedMsg = formatMessage(msg)
-
-        if LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" then
-            sendToAllWindows(formattedMsg)
-        else
-            if isSystem and LUIE.ChatAnnouncements.SV.ChatSystemAll then
-                sendToAllWindows(formattedMsg)
-            else
-                sendToSpecificTabs(formattedMsg)
-            end
-        end
     end
-
     LUIE.PrintToChat = PrintToChat
 end
 -- -----------------------------------------------------------------------------
@@ -249,9 +205,9 @@ end
 --- @param comma? boolean Whether to add localized digit separators
 --- @return string|number The formatted number
 function LUIE.AbbreviateNumber(number, shorten, comma)
-    -- Handle shortening for large numbers
     if number > 0 and shorten then
-        local value, suffix
+        local value
+        local suffix
         if number >= 1000000000 then
             value = number / 1000000000
             suffix = "G"
@@ -264,30 +220,29 @@ function LUIE.AbbreviateNumber(number, shorten, comma)
         else
             value = number
         end
-
-        -- Format the value
+        -- If we could not convert even to "G", return full number
         if value >= 1000 then
-            -- Number too large even for G suffix, return full number
-            return comma and ZO_CommaDelimitDecimalNumber(number) or number
-        end
-
-        -- Format with 0 or 1 decimal places based on size
-        local formattedValue
-        if value >= 100 or not suffix then
-            formattedValue = zo_strformat("<<1>>", zo_floor(value))
+            if comma then
+                value = ZO_LocalizeDecimalNumber(number)
+                return value
+            else
+                return number
+            end
+        elseif value >= 100 or suffix == nil then
+            value = string_format("%d", value)
         else
-            formattedValue = zo_strformat("<<f:1>>", value) -- Uses 1 decimal place
+            value = string_format("%.1f", value)
         end
-
-        -- Add suffix if we have one
-        return suffix and (formattedValue .. suffix) or formattedValue
+        if suffix ~= nil then
+            value = value .. suffix
+        end
+        return value
     end
-
-    -- Just add separators if requested
+    -- Add commas if needed
     if comma then
-        return ZO_CommaDelimitDecimalNumber(number)
+        local value = ZO_LocalizeDecimalNumber(number)
+        return value
     end
-
     return number
 end
 

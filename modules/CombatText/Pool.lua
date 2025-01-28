@@ -16,9 +16,11 @@ local poolTypes = LUIE.Data.CombatTextConstants.poolType
 
 local function easeInOutCirc(x)
     if x < 0.5 then
-        return (1 - math.sqrt(1 - math.pow(2 * x, 2))) / 2
+        local t = 2 * x
+        return (1 - zo_sqrt(1 - t * t)) / 2
     else
-        return (math.sqrt(1 - math.pow(-2 * x + 2, 2)) + 1) / 2
+        local t = 2 * (1 - x)
+        return (zo_sqrt(1 - t * t) + 1) / 2
     end
 end
 
@@ -118,12 +120,12 @@ function CombatTextPool:New(poolType)
     end
 
     obj.poolType = poolType
-    
+
     -- Register this pool with the PoolManager
     if LUIE.CombatTextPoolManager then
         LUIE.CombatTextPoolManager:RegisterPool(poolType, obj)
     end
-    
+
     return obj
 end
 

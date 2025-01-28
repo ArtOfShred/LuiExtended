@@ -5050,7 +5050,7 @@ function UnitFrames.DefaultFramesApplyFont(unitTag)
     local __applyFont = function (unitTag)
         if g_DefaultFrames[unitTag] then
             local unitFrame = g_DefaultFrames[unitTag]
-            for _, powerType in pairs({ POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA }) do
+            for _, powerType in pairs({ COMBAT_MECHANIC_FLAGS_HEALTH, COMBAT_MECHANIC_FLAGS_MAGICKA, COMBAT_MECHANIC_FLAGS_STAMINA }) do
                 if unitFrame[powerType] then
                     unitFrame[powerType].label:SetFont(zo_strformat("<<1>>|<<2>>|<<3>>", fontName, fontSize, fontStyle))
                 end
@@ -5139,7 +5139,7 @@ function UnitFrames.CustomFramesApplyFont()
                 if unitFrame.dead then
                     unitFrame.dead:SetFont(__mkFont(sizeBars))
                 end
-                for _, powerType in pairs({ POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA }) do
+                for _, powerType in pairs({ COMBAT_MECHANIC_FLAGS_HEALTH, COMBAT_MECHANIC_FLAGS_MAGICKA, COMBAT_MECHANIC_FLAGS_STAMINA }) do
                     if unitFrame[powerType] then
                         if unitFrame[powerType].label then
                             unitFrame[powerType].label:SetFont(__mkFont(sizeBars))
@@ -5214,7 +5214,7 @@ function UnitFrames.CustomFramesApplyLayoutPlayer(unhide)
         local phb = player[COMBAT_MECHANIC_FLAGS_HEALTH]  -- Not a backdrop
         local pmb = player[COMBAT_MECHANIC_FLAGS_MAGICKA] -- Not a backdrop
         local psb = player[COMBAT_MECHANIC_FLAGS_STAMINA] -- Not a backdrop
-        local alt = player.alternative    -- Not a backdrop
+        local alt = player.alternative                    -- Not a backdrop
 
         if UnitFrames.SV.PlayerFrameOptions == 1 then
             if not UnitFrames.SV.HideBarMagicka and not UnitFrames.SV.HideBarStamina then
