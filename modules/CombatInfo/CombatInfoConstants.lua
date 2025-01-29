@@ -285,6 +285,6 @@ CombatInfo.Defaults =
     },
 }
 
-CombatInfo.SV = ...
+CombatInfo.SV = {}
 CombatInfo.CastBarUnlocked = false
 CombatInfo.AlertFrameUnlocked = false

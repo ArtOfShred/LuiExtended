@@ -116,12 +116,6 @@ function CombatText.CreateSettings()
         return
     end
 
-    -- Load LibMediaProvider with backwards compatibility
-    local LMP = LibMediaProvider
-    if LMP == nil then
-        return
-    end
-
     local Defaults = CombatText.Defaults
     local Settings = CombatText.SV
 

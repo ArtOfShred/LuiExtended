@@ -41,7 +41,7 @@ InfoPanel.Defaults =
     ClockFormat = "HH:m:s",
 	panelScale = 100,
 }
-InfoPanel.SV = ...
+InfoPanel.SV = {}
 InfoPanel.panelUnlocked = false
 
 -- UI elements

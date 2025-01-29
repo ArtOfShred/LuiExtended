@@ -196,7 +196,7 @@ UnitFrames.Defaults =
 }
 
 --- @class (partial) LUIE_UnitFrames_SV
-UnitFrames.SV = ...
+UnitFrames.SV = {}
 
 UnitFrames.CustomFrames = {}
 UnitFrames.CustomFramesMovingState = false

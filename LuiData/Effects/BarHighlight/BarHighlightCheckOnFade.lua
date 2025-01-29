@@ -24,7 +24,16 @@ local zo_strformat = zo_strformat
 -- If durationMod value is set to an ID, this value will be subtracted from the final duration (UNUSED)
 -- Note that any secondary id's for Bar Highlight in the table above will set their id to the original tracked id here
 -- Note all effects will check unitTag unless an id2Tag or id3Tag are specified in which case they will switch unitTags when searching for other ids.
---- @class (partial) BarHighlightCheckOnFade
+
+--- @class BarHighlightOverrideEntry
+--- @field id1 integer Primary ability ID to track
+--- @field id2 integer | nil Secondary ability ID to check
+--- @field id3 integer | nil Tertiary ability ID to check
+--- @field unitTag string Unit tag to filter effects ("player" or "reticleover")
+--- @field duration integer | nil Override duration for the effect (in milliseconds)
+--- @field durationMod integer | nil Duration modifier to subtract from final duration
+
+--- @type table<integer, BarHighlightOverrideEntry>
 local BarHighlightCheckOnFade =
 {
 
@@ -94,5 +103,4 @@ local BarHighlightCheckOnFade =
     [116366] = { duration = 116374, durationMod = 116366, unitTag = "player" }, -- Pariah's Resolve
 }
 
---- @class (partial) BarHighlightCheckOnFade
 LuiData.Data.Effects.BarHighlightCheckOnFade = BarHighlightCheckOnFade

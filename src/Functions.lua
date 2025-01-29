@@ -566,7 +566,7 @@ local DECONSTRUCTIBLE_CRAFTING_TYPES =
 
 -- -----------------------------------------------------------------------------
 --- Get the current crafting mode, accounting for both keyboard and gamepad UI
---- @return number The current crafting mode
+--- @return number @The current crafting mode
 function LUIE.GetMode()
     if SCENE_MANAGER:IsShowingBaseScene() then
         -- Gamepad UI
@@ -580,7 +580,7 @@ end
 -- -----------------------------------------------------------------------------
 --- Checks if an item type is valid for deconstruction in the current crafting context
 --- @param itemType number The item type to check
---- @return boolean Returns true if the item can be deconstructed in current context
+--- @return boolean @Returns true if the item can be deconstructed in current context
 function LUIE.ResolveCraftingUsed(itemType)
     local craftingType = GetCraftingInteractionType()
     local DECONSTRUCTION_MODE = 4
@@ -639,6 +639,7 @@ end
 
 -- -----------------------------------------------------------------------------
 
+--- @type table<integer,string>
 local CLASS_ICONS = {}
 
 for i = 1, GetNumClasses() do
@@ -648,13 +649,16 @@ end
 
 LUIE.CLASS_ICONS = CLASS_ICONS
 
+---
+--- @param classId integer
+--- @return string
 function LUIE.GetClassIcon(classId)
     return CLASS_ICONS[classId]
 end
 
 -- -----------------------------------------------------------------------------
 
---- @param armorType any
+--- @param armorType ArmorType
 --- @return integer counter
 local function GetEquippedArmorPieces(armorType)
     local counter = 0
@@ -749,4 +753,155 @@ local TooltipHandlers =
 function LUIE.DynamicTooltip(abilityId)
     local handler = TooltipHandlers[abilityId]
     return handler and handler()
+end
+
+-- -----------------------------------------------------------------------------
+
+--- @param soundCategory ItemUISoundCategory
+--- @return string
+function LUIE.GetItemSoundCategoryName(soundCategory)
+    local soundCategories =
+    {
+        [0] = "ITEM_SOUND_CATEGORY_DEFAULT",
+        [1] = "ITEM_SOUND_CATEGORY_ONE_HAND_AX",
+        [2] = "ITEM_SOUND_CATEGORY_ONE_HAND_HAMMER",
+        [3] = "ITEM_SOUND_CATEGORY_ONE_HAND_SWORD",
+        [4] = "ITEM_SOUND_CATEGORY_TWO_HAND_AX",
+        [5] = "ITEM_SOUND_CATEGORY_TWO_HAND_HAMMER",
+        [6] = "ITEM_SOUND_CATEGORY_TWO_HAND_SWORD",
+        [7] = "ITEM_SOUND_CATEGORY_UNUSED",
+        [8] = "ITEM_SOUND_CATEGORY_DAGGER",
+        [9] = "ITEM_SOUND_CATEGORY_RING",
+        [10] = "ITEM_SOUND_CATEGORY_HEAVY_ARMOR",
+        [11] = "ITEM_SOUND_CATEGORY_MEDIUM_ARMOR",
+        [12] = "ITEM_SOUND_CATEGORY_LIGHT_ARMOR",
+        [13] = "ITEM_SOUND_CATEGORY_BOW",
+        [14] = "ITEM_SOUND_CATEGORY_NECKLACE",
+        [15] = "ITEM_SOUND_CATEGORY_RUNE",
+        [16] = "ITEM_SOUND_CATEGORY_SHIELD",
+        [17] = "ITEM_SOUND_CATEGORY_STAFF",
+        [18] = "ITEM_SOUND_CATEGORY_FOOD",
+        [19] = "ITEM_SOUND_CATEGORY_DRINK",
+        [20] = "ITEM_SOUND_CATEGORY_POTION",
+        [21] = "ITEM_SOUND_CATEGORY_SCROLL",
+        [22] = "ITEM_SOUND_CATEGORY_TRASH_LOOT",
+        [23] = "ITEM_SOUND_CATEGORY_PLANT_COMPONENT",
+        [24] = "ITEM_SOUND_CATEGORY_MINERAL_COMPONENT",
+        [25] = "ITEM_SOUND_CATEGORY_ANIMAL_COMPONENT",
+        [26] = "ITEM_SOUND_CATEGORY_METAL_COMPONENT",
+        [27] = "ITEM_SOUND_CATEGORY_FOOTLOCKER",
+        [28] = "ITEM_SOUND_CATEGORY_BATTLEFLAG",
+        [29] = "ITEM_SOUND_CATEGORY_CUSTOM_SOUND",
+        [30] = "ITEM_SOUND_CATEGORY_ENCHANTMENT",
+        [31] = "ITEM_SOUND_CATEGORY_NONE",
+        [32] = "ITEM_SOUND_CATEGORY_MEAT",
+        [33] = "ITEM_SOUND_CATEGORY_BREAD",
+        [34] = "ITEM_SOUND_CATEGORY_STEW",
+        [35] = "ITEM_SOUND_CATEGORY_SIEGE",
+        [36] = "ITEM_SOUND_CATEGORY_BOOK",
+        [37] = "ITEM_SOUND_CATEGORY_WOOD_COMPONENT",
+        [38] = "ITEM_SOUND_CATEGORY_INGREDIENT",
+        [39] = "ITEM_SOUND_CATEGORY_LURE",
+        [40] = "ITEM_SOUND_CATEGORY_CLOTH_COMPONENT",
+        [41] = "ITEM_SOUND_CATEGORY_SOUL_GEM",
+        [42] = "ITEM_SOUND_CATEGORY_REPAIR_KIT",
+        [43] = "ITEM_SOUND_CATEGORY_FISH",
+        [44] = "ITEM_SOUND_CATEGORY_BOOSTER",
+        [45] = "ITEM_SOUND_CATEGORY_TABARD",
+        [46] = "ITEM_SOUND_CATEGORY_CRAFTED_ABILITY",
+        [47] = "ITEM_SOUND_CATEGORY_CRAFTED_ABILITY_SCRIPT",
+        [48] = "ITEM_SOUND_CATEGORY_ENCHANTED_MEDALLION",
+    }
+    return soundCategories[soundCategory] or string_format("UNKNOWN_SOUND_CATEGORY_%d", soundCategory)
+end
+
+-- -----------------------------------------------------------------------------
+
+--- @param soundAction ItemUISoundAction
+--- @return string
+function LUIE.GetItemSoundActionName(soundAction)
+    local soundActions =
+    {
+        [0] = "ITEM_SOUND_ACTION_ACQUIRE",
+        [1] = "ITEM_SOUND_ACTION_SLOT", -- Note: EQUIP shares the same value
+        [3] = "ITEM_SOUND_ACTION_DESTROY",
+        [4] = "ITEM_SOUND_ACTION_UNEQUIP",
+        [5] = "ITEM_SOUND_ACTION_USE",
+        [6] = "ITEM_SOUND_ACTION_PICKUP",
+        [7] = "ITEM_SOUND_ACTION_CRAFTED",
+    }
+    return soundActions[soundAction] or string_format("UNKNOWN_SOUND_ACTION_%d", soundAction)
+end
+
+-- -----------------------------------------------------------------------------
+
+--- @param updateReason InventoryUpdateReason
+--- @return string
+function LUIE.GetInventoryUpdateReasonName(updateReason)
+    local updateReasons =
+    {
+        [0] = "INVENTORY_UPDATE_REASON_DEFAULT", -- Also covers MIN_VALUE and ITERATION_BEGIN
+        [1] = "INVENTORY_UPDATE_REASON_DURABILITY_CHANGE",
+        [2] = "INVENTORY_UPDATE_REASON_DYE_CHANGE",
+        [3] = "INVENTORY_UPDATE_REASON_ITEM_CHARGE",
+        [4] = "INVENTORY_UPDATE_REASON_PLAYER_LOCKED",
+        [5] = "INVENTORY_UPDATE_REASON_ARMORY_BUILD_CHANGED", -- Also covers MAX_VALUE and ITERATION_END
+    }
+    return updateReasons[updateReason] or string_format("UNKNOWN_UPDATE_REASON_%d", updateReason)
+end
+
+-- -----------------------------------------------------------------------------
+
+--- @param bag Bag
+--- @return string
+function LUIE.GetBagName(bag)
+    local bagNames =
+    {
+        [0] = "BAG_WORN", -- Also covers ITERATION_BEGIN and MIN_VALUE
+        [1] = "BAG_BACKPACK",
+        [2] = "BAG_BANK",
+        [3] = "BAG_GUILDBANK",
+        [4] = "BAG_BUYBACK",
+        [5] = "BAG_VIRTUAL",
+        [6] = "BAG_SUBSCRIBER_BANK",
+        [7] = "BAG_HOUSE_BANK_ONE",
+        [8] = "BAG_HOUSE_BANK_TWO",
+        [9] = "BAG_HOUSE_BANK_THREE",
+        [10] = "BAG_HOUSE_BANK_FOUR",
+        [11] = "BAG_HOUSE_BANK_FIVE",
+        [12] = "BAG_HOUSE_BANK_SIX",
+        [13] = "BAG_HOUSE_BANK_SEVEN",
+        [14] = "BAG_HOUSE_BANK_EIGHT",
+        [15] = "BAG_HOUSE_BANK_NINE",
+        [16] = "BAG_HOUSE_BANK_TEN",
+        [17] = "BAG_COMPANION_WORN", -- Also covers ITERATION_END
+        [18] = "BAG_MAX_VALUE",
+    }
+    return bagNames[bag] or string_format("UNKNOWN_BAG_%d", bag)
+end
+
+-- -----------------------------------------------------------------------------
+
+--- @param lootType LootItemType
+--- @return string
+function LUIE.GetLootTypeName(lootType)
+    local lootTypes =
+    {
+        [0] = "LOOT_TYPE_ANY",
+        [1] = "LOOT_TYPE_ITEM",
+        [2] = "LOOT_TYPE_QUEST_ITEM",
+        [3] = "LOOT_TYPE_MONEY",
+        [4] = "LOOT_TYPE_COLLECTIBLE",
+        [5] = "LOOT_TYPE_TELVAR_STONES",
+        [6] = "LOOT_TYPE_WRIT_VOUCHERS",
+        [7] = "LOOT_TYPE_CHAOTIC_CREATIA",
+        [8] = "LOOT_TYPE_STYLE_STONES",
+        [10] = "LOOT_TYPE_EVENT_TICKET",
+        [11] = "LOOT_TYPE_UNDAUNTED_KEYS",
+        [12] = "LOOT_TYPE_ANTIQUITY_LEAD",
+        [13] = "LOOT_TYPE_TRIBUTE_CARD_UPGRADE",
+        [14] = "LOOT_TYPE_ARCHIVAL_FORTUNES",
+        [15] = "LOOT_TYPE_IMPERIAL_FRAGMENTS",
+    }
+    return lootTypes[lootType] or string_format("UNKNOWN_LOOT_TYPE_%d", lootType)
 end

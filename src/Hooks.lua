@@ -38,7 +38,7 @@ function LUIE.InitializeHooks()
     -- Check if custom icons are enabled in settings
     -- if LUIE.SV.CustomIcons_Enabled then
     LUIE.InitializeHooksSkillAdvisor()
-	LUIE.InitializeHooksKeepTooltip()
+    LUIE.InitializeHooksKeepTooltip()
 
     local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
     --- Hook for Icon/Name changes.
@@ -439,7 +439,7 @@ function LUIE.InitializeHooks()
 
         -- Handle dynamic tooltip
         if override and override.dynamicTooltip then
-            tooltipText = LUIE.DynamicTooltip(abilityId)
+            tooltipText = LUIE.DynamicTooltip(abilityId) or tooltipText -- Fallback to original tooltipText if nil
         end
 
         -- Clean up tooltip text

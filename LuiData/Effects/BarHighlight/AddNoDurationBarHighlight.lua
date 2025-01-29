@@ -23,7 +23,7 @@ local zo_strformat = zo_strformat
 --------------------------------------------------------------------------------------------------------------------------------
 -- We don't add bar highlights for 0 duration abilities, a few abilities with dynamic durations show as 0 duration so we need this override table.
 --------------------------------------------------------------------------------------------------------------------------------
---- @class (partial) AddNoDurationBarHighlight
+--- @type table<integer, boolean>
 local AddNoDurationBarHighlight =
 {
 
@@ -34,5 +34,4 @@ local AddNoDurationBarHighlight =
     [118814] = true, -- Enduring Undeath
 }
 
---- @class (partial) AddNoDurationBarHighlight
 LuiData.Data.Effects.AddNoDurationBarHighlight = AddNoDurationBarHighlight

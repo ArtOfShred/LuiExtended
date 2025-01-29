@@ -7,6 +7,7 @@
 local LUIE = LUIE
 
 --- @class (partial) LUIE.CombatInfo
+--- @field SV LUIE.CombatInfo.SV
 local CombatInfo = LUIE.CombatInfo
 
 local UI = LUIE.UI
@@ -213,9 +214,15 @@ function CombatInfo.Initialize(enabled)
     -- And buff texture
     uiUltimate.Texture = UI:Texture(AB8, { CENTER, CENTER }, { 160, 160 }, "/esoui/art/crafting/white_burst.dds", DL_BACKGROUND, true)
 
-    -- Create a top level window for backbar butons
-    local tlw = windowManager:CreateControl("LUIE_Backbar", ACTION_BAR, CT_CONTROL)
-    tlw:SetParent(ACTION_BAR)
+    -- Create a top level window for backbar buttons using UI:Control
+    local tlw = UI:Control(
+        ACTION_BAR,    -- parent
+        "fill",        -- anchors
+        "inherit",     -- dims
+        false,         -- hidden
+        "LUIE_Backbar" -- name
+    )
+
 
     for i = BAR_INDEX_START + BACKBAR_INDEX_OFFSET, BACKBAR_INDEX_END + BACKBAR_INDEX_OFFSET do
         local button = ActionButton:New(i, ACTION_BUTTON_TYPE_VISIBLE, tlw, "ZO_ActionButton")
@@ -500,7 +507,14 @@ function CombatInfo.HookGCD()
 end
 
 -- Helper function to get override ability duration.
+---
+--- @param abilityId number
+--- @param overrideRank number?
+--- @param casterUnitTag string?
+--- @return integer  duration
 local function GetUpdatedAbilityDuration(abilityId, overrideRank, casterUnitTag)
+    overrideRank = overrideRank or nil
+    casterUnitTag = casterUnitTag or "player"
     local duration = g_barDurationOverride[abilityId] or LUIE.GetAbilityDuration(abilityId, overrideRank, casterUnitTag) or 0
     return duration
 end
@@ -508,62 +522,48 @@ end
 -- Called on initialization and menu changes
 -- Pull data from Effects.BarHighlightOverride Tables to filter the display of Bar Highlight abilities based off menu settings.
 function CombatInfo.UpdateBarHighlightTables()
-    g_uiProcAnimation = {}
-    g_uiCustomToggle = {}
-    g_triggeredSlotsFront = {}
-    g_triggeredSlotsBack = {}
-    g_triggeredSlotsRemain = {}
-    g_toggledSlotsFront = {}
-    g_toggledSlotsBack = {}
-    g_toggledSlotsRemain = {}
-    g_toggledSlotsStack = {}
-    g_toggledSlotsPlayer = {}
-    g_barOverrideCI = {}
-    g_barFakeAura = {}
-    g_barDurationOverride = {}
-    g_barNoRemove = {}
+    -- Reset all tables using ZO_ClearTable
+    for _, table in ipairs(
+        {
+            g_uiProcAnimation, g_uiCustomToggle, g_triggeredSlotsFront, g_triggeredSlotsBack,
+            g_triggeredSlotsRemain, g_toggledSlotsFront, g_toggledSlotsBack, g_toggledSlotsRemain,
+            g_toggledSlotsStack, g_toggledSlotsPlayer, g_barOverrideCI, g_barFakeAura,
+            g_barDurationOverride, g_barNoRemove
+        }) do
+        ZO_ClearTable(table)
+    end
 
-    if CombatInfo.SV.ShowTriggered or CombatInfo.SV.ShowToggled then
-        -- Grab any aura's from the list that have on EVENT_COMBAT_EVENT AURA support
-        for abilityId, value in pairs(Effects.BarHighlightOverride) do
-            if value.showFakeAura == true then
-                if value.newId then
-                    g_barOverrideCI[value.newId] = true
-                    if value.duration then
-                        g_barDurationOverride[value.newId] = value.duration
-                    end
-                    if value.noRemove then
-                        g_barNoRemove[value.newId] = true
-                    end
-                    g_barFakeAura[value.newId] = true
-                else
-                    g_barOverrideCI[abilityId] = true
-                    if value.duration then
-                        g_barDurationOverride[abilityId] = value.duration
-                    end
-                    if value.noRemove then
-                        g_barNoRemove[abilityId] = true
-                    end
-                    g_barFakeAura[abilityId] = true
-                end
-            else
-                if value.noRemove then
-                    if value.newId then
-                        g_barNoRemove[value.newId] = true
-                    else
-                        g_barNoRemove[abilityId] = true
-                    end
-                end
+    if not (CombatInfo.SV.ShowTriggered or CombatInfo.SV.ShowToggled) then
+        return
+    end
+
+    -- Process BarHighlightOverride entries
+    for abilityId, value in pairs(Effects.BarHighlightOverride) do
+        local targetId = value.newId or abilityId
+
+        -- Handle fake aura entries
+        if value.showFakeAura then
+            g_barOverrideCI[targetId] = true
+            g_barFakeAura[targetId] = true
+
+            if value.duration then
+                g_barDurationOverride[targetId] = value.duration
             end
         end
-        local counter = 0
-        for abilityId, _ in pairs(g_barOverrideCI) do
-            counter = counter + 1
-            local eventName = (moduleName .. "CombatEventBar" .. counter)
-            eventManager:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CombatInfo.OnCombatEventBar)
-            -- Register filter for specific abilityId's in table only, and filter for source = player, no errors
-            eventManager:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false)
+
+        -- Handle noRemove flag
+        if value.noRemove then
+            g_barNoRemove[targetId] = true
         end
+    end
+
+    -- Register combat events for each ability
+    local counter = 0
+    for abilityId in pairs(g_barOverrideCI) do
+        counter = counter + 1
+        local eventName = moduleName .. "CombatEventBar" .. counter
+        eventManager:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CombatInfo.OnCombatEventBar)
+        eventManager:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false)
     end
 end
 

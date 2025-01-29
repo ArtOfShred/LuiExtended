@@ -17,10 +17,14 @@ local zo_strformat = zo_strformat
 -- EFFECTS TABLE FOR BAR HIGHLIGHT RELATED OVERRIDES
 --------------------------------------------------------------------------------------------------------------------------------
 
---------------------------------------------------------------------------------------------------------------------------------
--- Replaces the tracking ID on an ability bar ability with a different id for the purpose of tracking effect duration on Bar Highlight tracker.
---------------------------------------------------------------------------------------------------------------------------------
---- @class (partial) BarHighlightOverride
+--- @class BarHighlightOverrideOptions
+--- @field newId integer | nil The ability ID to track instead of the original
+--- @field showFakeAura boolean | nil Whether to display a fake aura using EVENT_COMBAT_EVENT
+--- @field noRemove boolean | nil Whether to keep the effect active on fading or target change
+--- @field duration integer | nil Override duration for the effect (in milliseconds)
+--- @field hide boolean | nil Whether to hide this bar highlight entirely
+
+--- @type table<integer, BarHighlightOverrideOptions>
 local BarHighlightOverride =
 {
     -- Optional
@@ -558,5 +562,4 @@ local BarHighlightOverride =
     [116095] = { newId = 116366 }, -- Pariah's Resolve
 }
 
---- @class (partial) BarHighlightOverride
 LuiData.Data.Effects.BarHighlightOverride = BarHighlightOverride

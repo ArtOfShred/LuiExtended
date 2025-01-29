@@ -57,7 +57,7 @@ SlashCommands.Defaults =
     SlashCompanion = true,
     SlashCompanionChoice = 1,
 }
-SlashCommands.SV = ...
+SlashCommands.SV = {}
 
 LUIE.LastMementoUsed = 0              -- Set by the SlashCollectible function, passes this value to CA to display the Memento we used if a slash command is used
 LUIE.SlashCollectibleOverride = false -- Set by the SlashCollectible function, flags the CA function to display info on the collectible used even if the CA option are DISABLED.

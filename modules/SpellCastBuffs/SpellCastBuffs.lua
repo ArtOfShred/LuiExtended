@@ -218,7 +218,7 @@ SpellCastBuffs.Defaults =
     ShowSharedEffects = true,
     ShowSharedMajorMinor = true,
 }
-SpellCastBuffs.SV = ...
+SpellCastBuffs.SV = {}
 
 SpellCastBuffs.EffectsList =
 {
@@ -1572,7 +1572,7 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
 
                 -- Dynamic Tooltip if present
                 if Effects.EffectOverride[control.effectId] and Effects.EffectOverride[control.effectId].dynamicTooltip then
-                    tooltipText = LUIE.DynamicTooltip(control.effectId)
+                    tooltipText = LUIE.DynamicTooltip(control.effectId) or tooltipText -- Fallback to original tooltipText if nil
                 end
             else
                 duration = 0
@@ -1639,7 +1639,8 @@ function SpellCastBuffs.Buff_OnMouseEnter(control)
         -- GameTooltip:SetAbilityId(117391)
 
         -- Debug show default Tooltip on my account
-        if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS" --[[or LUIE.PlayerDisplayName == '@dack_janiels']] then
+        -- if LUIE.PlayerDisplayName == "@ArtOfShred" or LUIE.PlayerDisplayName == "@ArtOfShredPTS" --[[or LUIE.PlayerDisplayName == '@dack_janiels']] then
+        if LUIE.IsDevDebugEnabled() then
             GameTooltip:AddLine("Default Tooltip Below:", "", colorText:UnpackRGBA())
 
             local newtooltipText

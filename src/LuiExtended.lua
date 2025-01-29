@@ -7,7 +7,7 @@
 ---
 --- @class (partial) LuiExtended
 --- @field __index LuiExtended
---- @field Data LuiData
+--- @field Data Data
 --- @field Combat LUIE.CombatInfo
 --- @field SpellCastBuffs LUIE.SpellCastBuffs
 --- @field name string The addon name
@@ -31,7 +31,7 @@ LUIE.translation = "https://github.com/ArtOfShred/LuiExtended/tree/translations"
 LUIE.donation = "https://paypal.me/dakjaniels"
 -- -----------------------------------------------------------------------------
 -- Saved variables options
-LUIE.SV = ...
+LUIE.SV = {}
 LUIE.SVVer = 2
 LUIE.SVName = "LUIESV"
 -- -----------------------------------------------------------------------------

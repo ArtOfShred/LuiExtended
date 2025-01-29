@@ -7,6 +7,7 @@
 local LUIE = LUIE
 -- CombatText namespace
 --- @class (partial) LUIE.CombatText
+--- @field SV LUIE.CombatText.SV
 local CombatText = {}
 CombatText.__index = CombatText
 --- @class (partial) LUIE.CombatText
@@ -368,17 +369,37 @@ CombatText.Defaults =
         hotcritical = 200,
     },
 }
-CombatText.SV = ...
+CombatText.SV = {}
 
+---
+--- @param panel userdata
 local function SavePosition(panel)
+    -- Validate panel
+    if not panel or not panel.GetAnchor or not panel.GetDimensions then
+        return
+    end
+
+    -- Get anchor data
     local anchor = { panel:GetAnchor(0) }
+    if not anchor[1] then -- isValidAnchor is false
+        return
+    end
+
+    -- Get dimensions
     local dimensions = { panel:GetDimensions() }
+    if not dimensions[1] or not dimensions[2] then -- Invalid dimensions
+        return
+    end
+
+    -- Save position and dimensions
     local panelSettings = LUIE.CombatText.SV.panels[panel:GetName()]
-    panelSettings.point = anchor[2]
-    panelSettings.relativePoint = anchor[4]
-    panelSettings.offsetX = anchor[5]
-    panelSettings.offsetY = anchor[6]
-    panelSettings.dimensions = dimensions
+    if panelSettings then
+        panelSettings.point = anchor[2]
+        panelSettings.relativePoint = anchor[4]
+        panelSettings.offsetX = anchor[5]
+        panelSettings.offsetY = anchor[6]
+        panelSettings.dimensions = dimensions
+    end
 end
 
 -- Bulk list add from menu buttons

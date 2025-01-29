@@ -21,14 +21,14 @@
 --- @field AddNameAura AddNameAura Table of effects that need name auras added
 --- @field AddNameOnBossEngaged AddNameOnBossEngaged Table of effects that add names when boss is engaged
 --- @field AddNameOnEvent AddNameOnEvent Table of effects that add names on specific events
---- @field AddNoDurationBarHighlight AddNoDurationBarHighlight Table of effects that should highlight without duration
+--- @field AddNoDurationBarHighlight table<integer, boolean> Table of effects that should highlight without duration
 --- @field AddStackOnEvent AddStackOnEvent Table of effects that add stacks on specific events
 --- @field ArtificialEffectOverride ArtificialEffectOverride Table of artificial effect overrides
 --- @field AssistantIcons AssistantIcons Table of assistant icon definitions
---- @field BarHighlightCheckOnFade BarHighlightCheckOnFade Table of effects to check highlight on fade
+--- @field BarHighlightCheckOnFade table<integer, BarHighlightOverrideEntry> Table of effects to check highlight on fade
 --- @field BarHighlightDestroFix BarHighlightDestroFix Table of destruction staff highlight fixes
 --- @field BarHighlightExtraId BarHighlightExtraId Table of additional effect IDs for highlighting
---- @field BarHighlightOverride BarHighlightOverride Table of highlight override definitions
+--- @field BarHighlightOverride table<integer, BarHighlightOverrideOptions> Table of highlight override definitions
 --- @field BarHighlightStack BarHighlightStack Table of stack-based highlight effects
 --- @field BarIdOverride BarIdOverride Table of bar ID overrides
 --- @field DisguiseIcons DisguiseIcons Table of disguise icon definitions
