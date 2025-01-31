@@ -30,6 +30,8 @@ local zo_strformat = zo_strformat
 --- @field id2 integer | nil Secondary ability ID to check
 --- @field id3 integer | nil Tertiary ability ID to check
 --- @field unitTag string Unit tag to filter effects ("player" or "reticleover")
+--- @field id2Tag string Unit tag to filter effects ("player" or "reticleover")
+--- @field id3Tag string Unit tag to filter effects ("player" or "reticleover")
 --- @field duration integer | nil Override duration for the effect (in milliseconds)
 --- @field durationMod integer | nil Duration modifier to subtract from final duration
 
