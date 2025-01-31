@@ -377,6 +377,9 @@ function ChatAnnouncements.Initialize(enabled)
     -- Promotional Events Activity
     eventManager:RegisterForEvent(moduleName, EVENT_PROMOTIONAL_EVENTS_ACTIVITY_PROGRESS_UPDATED, ChatAnnouncements.OnPromotionalEventsActivityProgressUpdated)
 
+    eventManager:RegisterForEvent(moduleName, EVENT_CRAFTED_ABILITY_LOCK_STATE_CHANGED, ChatAnnouncements.OnCraftedAbilityLockStateChanged)
+    eventManager:RegisterForEvent(moduleName, EVENT_CRAFTED_ABILITY_SCRIPT_LOCK_STATE_CHANGED, ChatAnnouncements.OnCraftedAbilityScriptLockStateChanged)
+
     ChatAnnouncements.RegisterGuildEvents()
     ChatAnnouncements.RegisterSocialEvents()
     ChatAnnouncements.RegisterDisguiseEvents()
@@ -2902,6 +2905,89 @@ function ChatAnnouncements.OnPromotionalEventsActivityProgressUpdated(eventCode,
     end
 end
 
+--- - *EVENT_CRAFTED_ABILITY_LOCK_STATE_CHANGED*
+--- @param eventCode integer
+--- @param craftedAbilityDefId integer
+--- @param isUnlocked boolean
+--- @param isFromInit boolean
+function ChatAnnouncements.OnCraftedAbilityLockStateChanged(eventCode, craftedAbilityDefId, isUnlocked, isFromInit)
+    -- Only show messages for new unlocks, not initial loading
+    if isFromInit then return end
+
+    if ChatAnnouncements.SV.Notify.CraftedAbilityCA or ChatAnnouncements.SV.Notify.CraftedAbilityAlert then
+        local abilityName = GetCraftedAbilityDisplayName(craftedAbilityDefId)
+        -- Get the ability icon
+        local icon = GetCraftedAbilityIcon(craftedAbilityDefId)
+        local iconString = icon and ("|t16:16:" .. icon .. "|t ") or ""
+
+        -- Color formatting
+        local nameColor = "FFFF00"  -- Yellow for the name
+        local stateColor = "71DE73" -- Green for unlocked state
+
+        local message = string_format("|c%s%s|r: %s|c%s%s|r",
+            stateColor, GetString(SI_CRAFTED_ABILITY_UNLOCKED_ANNOUNCE_TITLE),
+            iconString,
+            nameColor, abilityName)
+
+        if ChatAnnouncements.SV.Notify.CraftedAbilityCA then
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] =
+            {
+                message = message,
+                type = "SKILL",
+                abilityDefId = craftedAbilityDefId,
+                isUnlocked = isUnlocked
+            }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
+        end
+
+        if ChatAnnouncements.SV.Notify.CraftedAbilityAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+        end
+    end
+end
+
+--- - *EVENT_CRAFTED_ABILITY_SCRIPT_LOCK_STATE_CHANGED*
+--- @param eventCode integer
+--- @param craftedAbilityScriptDefId integer
+--- @param isUnlocked boolean
+function ChatAnnouncements.OnCraftedAbilityScriptLockStateChanged(eventCode, craftedAbilityScriptDefId, isUnlocked)
+    -- For scripts, we should only show messages when they're newly unlocked
+    if not isUnlocked then return end
+
+    if ChatAnnouncements.SV.Notify.CraftedAbilityScriptCA or ChatAnnouncements.SV.Notify.CraftedAbilityScriptAlert then
+        local scriptName = GetCraftedAbilityScriptDisplayName(craftedAbilityScriptDefId)
+        -- Get the script icon
+        local icon = GetCraftedAbilityScriptIcon(craftedAbilityScriptDefId)
+        local iconString = icon and ("|t16:16:" .. icon .. "|t ") or ""
+
+        -- Color formatting
+        local nameColor = "FFFF00"  -- Yellow for the name
+        local stateColor = "71DE73" -- Green for unlocked state
+
+        local message = string_format("|c%s%s|r: %s|c%s%s|r",
+            stateColor, GetString(SI_CRAFTED_ABILITY_SCRIPT_UNLOCKED_ANNOUNCE_TITLE),
+            iconString,
+            nameColor, scriptName)
+
+        if ChatAnnouncements.SV.Notify.CraftedAbilityScriptCA then
+            ChatAnnouncements.QueuedMessages[ChatAnnouncements.QueuedMessagesCounter] =
+            {
+                message = message,
+                type = "SKILL",
+                scriptDefId = craftedAbilityScriptDefId,
+                isUnlocked = isUnlocked
+            }
+            ChatAnnouncements.QueuedMessagesCounter = ChatAnnouncements.QueuedMessagesCounter + 1
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, ChatAnnouncements.PrintQueuedMessages)
+        end
+
+        if ChatAnnouncements.SV.Notify.CraftedAbilityScriptAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+        end
+    end
+end
+
 function ChatAnnouncements.GuildBankItemAdded(eventCode, slotId, addedByLocalPlayer)
     if addedByLocalPlayer then
         zo_callLater(ChatAnnouncements.LogGuildBankChange, 50)
@@ -3711,7 +3797,7 @@ function ChatAnnouncements.ResolveItemMessage(message, formattedRecipient, color
     -- Ensure all parameters have valid values
     message = message or ""
     formattedRecipient = formattedRecipient or ""
-    color = color or "FFFFFF"
+    color = color and (type(color) == "table" and color:IsColorDef() and color or ZO_ColorDef:New(color)) or ZO_ColorDef:New("FFFFFF")
     logPrefix = logPrefix or ""
     totalString = totalString or ""
 
@@ -3721,17 +3807,17 @@ function ChatAnnouncements.ResolveItemMessage(message, formattedRecipient, color
     end
 
     -- Format the message parts with nil checks
-    local formattedMessageP1 = string_format("|r%s|c%s", message, color)
+    local formattedMessageP1 = string_format("|r%s|c%s", message, color:ToHex()) or ""
     local formattedMessageP2 = ChatAnnouncements.FormatContextMessage(
         logPrefix,
         formattedMessageP1,
         formattedRecipient,
-        color,
+        color:ToHex(),
         groupLoot
     ) or ""
 
     -- Construct and output the final message with additional safety checks
-    local finalMessage = string_format("|c%s%s|r%s", color, formattedMessageP2 or "", totalString or "")
+    local finalMessage = string_format("|c%s%s|r%s", color:ToHex(), formattedMessageP2 or "", totalString or "")
     if finalMessage and finalMessage ~= "" then
         printToChat(finalMessage)
     end

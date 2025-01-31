@@ -9020,6 +9020,74 @@ function ChatAnnouncements.CreateSettings()
                 end,
                 default = Defaults.Notify.PromotionalEventsActivityAlert,
             },
+            {
+                -- Crafted Ability Notifications (ChatAnnouncements)
+                type = "checkbox",
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT), GetString(SI_CRAFTED_ABILITY_SUBTITLE)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA), GetString(SI_CRAFTED_ABILITY_SUBTITLE)),
+                getFunc = function ()
+                    return Settings.Notify.CraftedAbilityCA
+                end,
+                setFunc = function (value)
+                    Settings.Notify.CraftedAbilityCA = value
+                end,
+                width = "full",
+                disabled = function ()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.Notify.CraftedAbilityCA,
+            },
+            {
+                -- Crafted Ability Notifications (Alert)
+                type = "checkbox",
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT), GetString(SI_CRAFTED_ABILITY_SUBTITLE)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT), GetString(SI_CRAFTED_ABILITY_SUBTITLE)),
+                getFunc = function ()
+                    return Settings.Notify.CraftedAbilityAlert
+                end,
+                setFunc = function (value)
+                    Settings.Notify.CraftedAbilityAlert = value
+                end,
+                width = "full",
+                disabled = function ()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.Notify.CraftedAbilityAlert,
+            },
+            {
+                -- Crafted Ability Script Notifications (ChatAnnouncements)
+                type = "checkbox",
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS), GetString(LUIE_STRING_LAM_CA_SHARED_CA_SHORT), GetString(SI_CRAFTED_ABILITY_SCRIPT_UNLOCKED_ANNOUNCE_TITLE)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_CA), GetString(SI_CRAFTED_ABILITY_SCRIPT_UNLOCKED_ANNOUNCE_TITLE)),
+                getFunc = function ()
+                    return Settings.Notify.CraftedAbilityScriptCA
+                end,
+                setFunc = function (value)
+                    Settings.Notify.CraftedAbilityScriptCA = value
+                end,
+                width = "full",
+                disabled = function ()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.Notify.CraftedAbilityScriptCA,
+            },
+            {
+                -- Crafted Ability Script Notifications (Alert)
+                type = "checkbox",
+                name = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT_SHORT), GetString(SI_CRAFTED_ABILITY_SCRIPT_UNLOCKED_ANNOUNCE_TITLE)),
+                tooltip = zo_strformat(GetString(LUIE_STRING_LAM_CA_MISC_PROGRESS_TP), GetString(LUIE_STRING_LAM_CA_SHARED_ALERT), GetString(SI_CRAFTED_ABILITY_SCRIPT_UNLOCKED_ANNOUNCE_TITLE)),
+                getFunc = function ()
+                    return Settings.Notify.CraftedAbilityScriptAlert
+                end,
+                setFunc = function (value)
+                    Settings.Notify.CraftedAbilityScriptAlert = value
+                end,
+                width = "full",
+                disabled = function ()
+                    return not LUIE.SV.ChatAnnouncements_Enable
+                end,
+                default = Defaults.Notify.CraftedAbilityScriptAlert,
+            },
         },
     }
 

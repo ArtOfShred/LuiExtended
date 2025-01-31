@@ -178,6 +178,11 @@ ChatAnnouncements.Defaults =
         TimedActivityAlert = false,
         PromotionalEventsActivityCA = false,
         PromotionalEventsActivityAlert = false,
+
+        CraftedAbilityCA = true,
+        CraftedAbilityAlert = false,
+        CraftedAbilityScriptCA = true,
+        CraftedAbilityScriptAlert = false,
     },
 
     -- Collectibles
