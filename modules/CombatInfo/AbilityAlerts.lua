@@ -338,8 +338,6 @@ function AbilityAlerts.GenerateAlertFramePreview(state)
         alert.icon.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false)
         alert.mitigation:SetText("MITGATION TEST")
         alert.timer:SetText(CombatInfo.SV.alerts.toggles.alertTimer and " 1.0" or "")
-        if state then
-        end
         alert:SetHidden(not state)
     end
 
