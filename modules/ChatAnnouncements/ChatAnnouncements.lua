@@ -8175,8 +8175,7 @@ function ChatAnnouncements.HookFunction()
     end
 
     -- EVENT_QUEST_REMOVED (Registered through CSA_MiscellaneousHandlers)
-    -- EVENT_QUEST_REMOVED (Registered through CSA_MiscellaneousHandlers)
-    local function OnQuestRemoved(_, isCompleted, _, questName, _, _)
+    local function OnQuestRemoved(eventId, isCompleted, journalIndex, questName, zoneIndex, poiIndex, questID)
         if isCompleted then
             return
         end
